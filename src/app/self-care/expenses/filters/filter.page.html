@@ -1,0 +1,50 @@
+<ion-header class="main-header shadow">
+  <ion-toolbar>
+    <ion-title class="ion-padding-start">Filter Expenses</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="filter" (ngSubmit)="onSubmit(filter)">
+    <ion-text>Date Filter</ion-text>
+    <ion-grid class="ion-no-padding ion-margin-top ion-margin-bottom">
+      <ion-row>
+        <ion-col class="ion-no-padding" size="6">
+          <div class="date_filter">
+            <!-- <ion-label position="floating">From Date</ion-label> -->
+            <h1>From</h1>
+            <ion-datetime displayFormat="DD MMM, YYYY" [min]="year" [max]='todaydate' formControlName="from_date"></ion-datetime>
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21"><path d="M18.539,1.641h-.984V0H15.914V1.641H5.086V0H3.445V1.641H2.461A2.464,2.464,0,0,0,0,4.1V18.539A2.464,2.464,0,0,0,2.461,21H18.539A2.464,2.464,0,0,0,21,18.539V4.1A2.464,2.464,0,0,0,18.539,1.641Zm.82,16.9a.821.821,0,0,1-.82.82H2.461a.821.821,0,0,1-.82-.82V7.711H19.359Zm0-12.469H1.641V4.1a.821.821,0,0,1,.82-.82h.984V4.922H5.086V3.281H15.914V4.922h1.641V3.281h.984a.821.821,0,0,1,.82.82Z" fill="#ea4e4e"/><g transform="translate(3.117 9.434)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(6.398 9.434)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(9.68 9.434)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(12.961 9.434)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(16.242 9.434)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(3.117 12.715)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(6.398 12.715)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(9.68 12.715)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(12.961 12.715)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(3.117 15.996)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(6.398 15.996)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(9.68 15.996)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(12.961 15.996)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(16.242 12.715)"><rect width="1.641"height="1.641" fill="#ea4e4e"/></g></svg>
+          </div>
+        </ion-col>
+        <ion-col class="ion-no-padding" size="6">
+          <div class="date_filter">
+            <!-- <ion-label position="floating">To Date</ion-label> -->
+            <h1>To</h1>
+            <ion-datetime displayFormat="DD MMM, YYYY" [min]="year" [max]='todaydate' formControlName="end_date"></ion-datetime>
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21"><path d="M18.539,1.641h-.984V0H15.914V1.641H5.086V0H3.445V1.641H2.461A2.464,2.464,0,0,0,0,4.1V18.539A2.464,2.464,0,0,0,2.461,21H18.539A2.464,2.464,0,0,0,21,18.539V4.1A2.464,2.464,0,0,0,18.539,1.641Zm.82,16.9a.821.821,0,0,1-.82.82H2.461a.821.821,0,0,1-.82-.82V7.711H19.359Zm0-12.469H1.641V4.1a.821.821,0,0,1,.82-.82h.984V4.922H5.086V3.281H15.914V4.922h1.641V3.281h.984a.821.821,0,0,1,.82.82Z" fill="#ea4e4e"/><g transform="translate(3.117 9.434)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(6.398 9.434)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(9.68 9.434)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(12.961 9.434)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(16.242 9.434)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(3.117 12.715)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(6.398 12.715)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(9.68 12.715)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(12.961 12.715)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(3.117 15.996)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(6.398 15.996)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(9.68 15.996)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(12.961 15.996)"><rect width="1.641" height="1.641" fill="#ea4e4e"/></g><g transform="translate(16.242 12.715)"><rect width="1.641"height="1.641" fill="#ea4e4e"/></g></svg>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-text>Expense Filter</ion-text>
+    <ion-list class="ion-padding-bottom">
+      <ion-item *ngFor="let key of list_keys">
+        <ion-label>
+          <h3>{{key}}</h3>
+        </ion-label>
+        <ion-checkbox (ionChange)="checkbox($event, key)"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <div class="footer">
+      <ion-button expand="block" (click)="cancel()">
+        Cancel
+      </ion-button>
+      <button type="submit" class="btn_submit">
+        Apply
+      </button>
+    </div>
+    <!-- <ion-button (click)="cancel()" color="primary">Cancel</ion-button>
+    <ion-button type="submit" color="primary">Filter</ion-button> -->
+  </form>
+</ion-content>

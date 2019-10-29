@@ -1,0 +1,524 @@
+@import "../../app.scss";
+
+ion-header {
+  ion-toolbar:not(.no-background) {
+    --background: #60dc68;
+    --color: #ffffff;
+  }
+}
+ion-list-header {
+  --background: #f7f6ff;
+  --color: #2c2c2c;
+  min-height: auto;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  @include font(12px, 600, 0, unset, inherit, inherit, none);
+}
+ion-item-group.expense_card {
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+
+  svg{
+    position: absolute;
+    right: 0;
+    top: 25px;
+  }
+
+  ion-item {
+    --background: transparent;
+    --border-color: transparent;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --inner-padding-end: 0;
+
+    ion-text{
+      @include font(12px, 400, 0, capitalize, right, inherit, #8b9398);
+      display: block;
+    }
+
+    h5 {
+      @include font(1.1rem, 400, 0, capitalize, inherit, inherit, $alert);
+      white-space: pre-wrap;
+      word-break: break-all;
+      padding-right: 25px;
+    }
+
+    h4 {
+      @include font(1.25rem, 400, 0, capitalize, inherit, inherit, $font-color);
+      white-space: pre-wrap;
+      word-break: break-all;
+      padding-right: 25px;
+    }
+    h3 {
+      @include font(1.1rem, 500, 0, capitalize, inherit, inherit, $font-color);
+      padding-right: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+      display: inline-block;
+
+      // &:not(:last-child){
+      //   &::after{
+      //     content: ',';
+      //   }
+      // }
+    }
+
+    p {
+      @include font(14px, 400, 0, unset, inherit, inherit, #8b9398);
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    ion-avatar {
+      margin-right: 10px;
+      background: $alert;
+      white-space: pre-wrap;
+      @include font(12px, 400, 0, unset, center, inherit, #ffffff);
+
+      &:before {
+        content: "";
+        border-left: 1px dashed #ddd;
+        height: 100%;
+        position: absolute;
+        z-index: -1;
+        bottom: 0;
+      }
+
+      // span{
+      //     &:first-child{
+      //         @include font(16px, 500, 0, unset, inherit, inherit, #ffffff);
+      //     }
+      // }
+    }
+  }
+  .trans_btn {
+    @include font(0.75rem, 500, 0, capitalize, inherit, inherit, none);
+    --color: #ea4e4e;
+    --color-activated: #ea4e4e;
+    position: absolute;
+    right: 0;
+    top: 12px;
+    margin: 4px 0;
+    svg {
+      margin: -1px 2px 0 0;
+    }
+  }
+  .expand {
+    height: auto;
+  }
+  .collapse {
+    height: 0;
+    padding: 0;
+  }
+}
+
+ion-list {
+  ion-item {
+    --background: transparent;
+    --border-color: #ececec;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --inner-padding-end: 0;
+
+    &:last-child{
+      --border-color: transparent;
+    }
+    
+    h3 {
+      @include font(1.1rem, 500, 0, capitalize, inherit, inherit, $font-color);
+      padding-right: 75px;
+      margin-bottom: 5px;
+
+      & + ion-chip{
+        margin-left: 0;
+      }
+    }
+
+    p {
+      @include font(14px, 400, 0, unset, inherit, inherit, #8b9398);
+      margin-top: 5px;
+    }
+    ion-chip {
+      @include font(12px, 400, 0, unset, inherit, 1.5, $white);
+      background-color: $alert;
+      height: 25px;
+    }
+  }
+  .trans_btn {
+    @include font(0.75rem, 500, 0, capitalize, inherit, inherit, none);
+    --color: #ea4e4e;
+    --color-activated: #ea4e4e;
+    position: absolute;
+    right: 0;
+    top: 12px;
+    margin: 4px 0;
+    svg {
+      margin: -1px 2px 0 0;
+    }
+  }
+}
+
+form {
+  padding-bottom: 60px;
+  
+  ion-item {
+    --background: transparent;
+    --border-color: #ECECEC;
+    --highlight-color-focused: #483df6;
+    --highlight-color-valid: #483df6;
+    --highlight-color-invalid: #ea4e4e;
+    --padding-start: 0;
+    @include font(1rem, 500, 0, none, left, inherit, $font_color);
+    margin-bottom: 10px;
+
+    ion-label {
+      --color: #bcbbcf;
+    }
+
+    ion-button {
+      position: absolute;
+      top: 16px;
+      right: 0;
+      width: 42px;
+      min-height: 42px;
+      --background: transprent;
+      --border-radius: 50%;
+      --box-shadow: none;
+      --ripple-color: #fa5e61;
+      margin: 0;
+    }
+
+    &.units {
+      --padding-end: 60px;
+      --inner-padding-end: 0;
+      overflow: visible;
+      span {
+        position: absolute;
+        right: -55px;
+        bottom: 10px;
+      }
+
+      div{
+        width: 100%;
+      }
+    }
+  }
+}
+.action_tools {
+  ion-searchbar {
+    & + ion-buttons {
+      @include flex(flex, nowrap, center, flex-end);
+
+      ion-button:not(:last-child){
+          margin: 0 5px;
+      }
+    }
+  }
+}
+
+.category{
+  padding: 16px 16px 0;
+
+  h5{
+    margin-top: 0;
+    @include font(1.1rem, 500, 0, none, left, inherit, $font_color);
+  }
+  p{
+    margin-top:0;
+    @include font(1rem, 400, 0, none, left, inherit, $font_color);
+  }
+
+  & + form{
+    padding-bottom: 16px;
+  }
+}
+
+.previous_list{
+  // padding-bottom: 60px;
+  h4{
+    @include font(1.5rem, 500, 0, none, left, inherit, $font-color);
+    padding: 16px;
+    margin: 0;
+  }
+  ion-item{
+    --border-color: transparent;
+    border-left: 1px dashed #ddd;
+    margin: 0 32px;
+    padding: 16px 0;
+    --inner-padding-end: 16px;
+    overflow: visible;
+
+    ion-button{
+      right: -32px;
+    }
+
+    h5{
+      @include font(1.1rem, 500, 0, none, left, inherit, $alert);
+      margin-top: 10px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    p{
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin: 0;
+    }
+
+    & > span{
+      @include font(12px, 400, 0, none, left, inherit, #B0B0B9);
+      position: absolute;
+      top: 0;
+      left: -32px;
+      z-index: 1;
+      background-color: #fff;
+    }
+  }
+}
+
+
+
+ion-row {
+  h5 {
+    @include font(0.9rem, 500, 0, capitalize, left, inherit, $font_color);
+
+    svg {
+      margin: 5px;
+    }
+  }
+
+  h4 {
+    @include font(1.25rem, 500, 0, capitalize, left, inherit, none);
+  }
+
+  &:not(.projections) {
+    ion-col {
+      &.last {
+        h4 {
+          color: $alert;
+        }
+      }
+
+      &.current {
+        h4 {
+          color: $expense;
+        }
+      }
+
+      &.year {
+        h4 {
+          color: $appointment;
+        }
+      }
+      &.analytics {
+        h5 {
+          @include flex(flex, wrap, center, center);
+        }
+      }
+    }
+  }
+
+  &.projections {
+    border-top: 1px solid #e0e3e5;
+    margin-top: 15px;
+    padding: 10px 11px;
+
+    h5 {
+      color: $font_color;
+      margin: 2px 0;
+    }
+
+    h4 {
+      color: $report;
+      margin: 2px 0;
+    }
+  }
+}
+
+ion-text{
+  @include font(12px, 500, 0, none, left, inherit, #8B9398);
+}
+
+.date_filter{
+  position: relative;
+
+  h1{
+    @include font(1.2rem, 500, 0, none, left, inherit, $font-color);
+    margin: 0;
+  }
+
+  svg {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+  }
+
+  ion-datetime{
+    padding-left: 25px;
+    border-bottom: 1px solid #ddd;
+
+    &:nth-child(even){
+      margin-right: 5px;
+    }
+
+    &:nth-child(odd){
+      margin-left: 5px;
+    }
+  }
+}
+
+.analytics{
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+
+  &:not(:last-child){
+    margin-bottom: 30px;
+  }
+  h3{
+    @include font(1.2rem, 500, 0, none, left, inherit, $font-color);
+    margin: 0;
+    padding: 10px;
+  }
+  ion-button {
+    @include font(0.85rem, 500, 0, capitalize, left, inherit, none);
+    margin: 0;
+    --color: #483df6;
+    --border-radius: 0;
+  }
+  .analytics_table{
+    overflow-y: hidden;
+    overflow-x: auto;
+    max-height: 200px;
+    border-bottom: 1px solid #f1f1f5;
+    
+    table{
+      width: 100%;
+    }
+
+    &.expand {
+      max-height: unset;
+    }
+    &.collapse {
+      max-height: 200px;
+    }
+
+    th{
+      @include font(0.9rem, 500, 0, none, left, inherit, $font-color);
+      white-space: nowrap;
+      padding: 0.75rem 0.25rem;
+      background-color: #f1f1f5;
+      border-right: 1px solid #ddd;
+      text-align: center;
+    }
+    td{
+      @include font(0.85rem, 400, 0, none, left, inherit, $font-color);
+      padding: 0.75rem 0.25rem;
+      text-align: center;
+    }
+    thead{
+      tr{
+        th{
+          &:first-child{
+            position: sticky;
+            left: 0;
+            background-color: #e5e5ec;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    tbody{
+      tr{
+        td{
+          border-right: 1px solid #ddd;
+
+          // &:empty{
+          //   text-align: center;
+          //   &:after{
+          //     content: '-';
+          //   }
+          // }
+          p{
+            @include font(0.85rem, 400, 0, none, left, inherit, $font-color);
+            margin: 0;
+            &:empty{
+              text-align: center;
+              display: none;
+              &:not(:first-child){
+                display: none;
+              }
+              &:after{
+                content: '-';
+              }
+            }
+            span{
+              white-space: nowrap;
+            }
+          }
+          &:first-child{
+            position: sticky;
+            left: 0;
+            background-color: #e5e5ec;
+            white-space: nowrap;
+            @include font(0.85rem, 500, 0, none, center, inherit, $font-color);
+          }
+        }
+        &:nth-child(even){
+          background-color: #f1f1f5;
+          // td:first-child{
+          //   background-color: #dddddd;
+          // }
+        }
+      }
+    }
+  }
+}
+
+.action_tools{
+  .trans_btn{
+    @include font(0.9rem, 500, 0, none, left, inherit, $font-color);
+    margin: 4px 0 0;
+    --padding-start: 0;
+    --padding-start: 0;
+    --border-radius: 0;
+    svg{
+      margin-right: 5px;
+      margin-top: -4px;
+    }
+  }
+}
+ion-buttons ion-button.btn:not(:last-child) {
+  margin-right: 16px;
+}
+
+.date_filter{
+  position: relative;
+
+  h1{
+    @include font(1.2rem, 500, 0, none, left, inherit, $font-color);
+    margin: 0;
+  }
+
+  svg {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+  }
+
+  ion-datetime{
+    padding-left: 25px;
+    border-bottom: 0px solid #ddd;
+
+    &:nth-child(even){
+      margin-right: 5px;
+    }
+
+    &:nth-child(odd){
+      margin-left: 5px;
+    }
+  }
+}
+
+::ng-deep .alert-radio-group.sc-ion-alert-md{
+  max-height: 300px !important ;
+}

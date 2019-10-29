@@ -1,0 +1,37 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-title class="ion-padding-start">Add Emergency About</ion-title>
+	</ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form class="footerform" [formGroup]="update" (ngSubmit)="updateValues(update.value)">
+    <ion-item>
+      <ion-label position="floating">Blood group</ion-label>
+      <ion-input type="text" maxLength="11" formControlName="blood_group" #bloodgroup></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Age</ion-label>
+      <ion-input maxLength="3" type="tel" formControlName="age" (keypress)="_keyPress($event)"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Mediclaim Policy#</ion-label>
+      <ion-input type="text" formControlName="mediclaim_policy"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Policy Issuer#</ion-label>
+      <ion-input type="text" formControlName="policy_issuer"></ion-input>
+    </ion-item>
+
+    <div class="footer">
+      <ion-button expand="block" (click)="close()">
+        Cancel
+      </ion-button>
+      <button type="submit" class="btn_submit">
+        Save
+      </button>
+    </div>
+  </form>
+</ion-content>

@@ -1,0 +1,22 @@
+<ion-content class="ion-padding-top ion-padding-start ion-padding-end">
+  <form class="footerform" [formGroup]="uploadform" *ngIf=uploadform (ngSubmit)="uploadfunc(uploadform.value)">
+    <ion-item
+      [ngClass]="{'ion-invalid': submitted && f.event_name.invalid,'ion-touched': submitted && f.event_name.invalid }">
+      <ion-label position="floating">Doctor Name</ion-label>
+      <ion-input type="text" formControlName="event_name"></ion-input>
+    </ion-item>
+    <ion-item
+      [ngClass]="{'ion-invalid': submitted && f.description.invalid,'ion-touched': submitted && f.description.invalid }">
+      <ion-label position="floating">Description</ion-label>
+      <ion-input type="text" formControlName="description"></ion-input>
+    </ion-item>
+    <div class="bottom_action">
+      <button type="submit" class="button btn_submit">
+        Save
+      </button>
+      <ion-button expand="block" (click)="cancel()">
+        Cancel
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

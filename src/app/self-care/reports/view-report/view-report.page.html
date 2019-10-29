@@ -1,0 +1,72 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>view-patient-prescription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-item>
+	<ion-label>{{data?.doc_name}}</ion-label>
+</ion-item>
+<ion-item>
+	<ion-label>{{data?.prescription_date}}</ion-label>
+</ion-item>
+<ion-item>
+	<ion-label>{{data?.description}}</ion-label>
+</ion-item>
+</ion-content> -->
+<ion-header class="main-header shadow">
+  <ion-toolbar>
+    <!-- <ion-back-button slot="start"></ion-back-button> -->
+    <ion-back-button slot="start" defaultHref="self-care-tabs/tabs/tab1/reports"></ion-back-button>
+    <ion-title>Reports</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <!-- <ion-toolbar class="action_tools" *ngIf="false">
+    <ion-skeleton-text slot="end" animated style="width: 20%"></ion-skeleton-text>
+  </ion-toolbar> -->
+
+  <ion-toolbar class="action_tools">
+    <ion-button slot="end" class="trans_btn edit" (click)="editDetails()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><g transform="translate(-5.6 -6.9)"><g transform="translate(5.6 6.9)"><path d="M16.3,114.3H6.083a.385.385,0,0,0-.383.383.391.391,0,0,0,.383.383H16.308a.385.385,0,0,0,.383-.383A.393.393,0,0,0,16.3,114.3Z" transform="translate(-5.691 -104.271)" fill="#483df6"/><path d="M5.609,13.539,5.6,15.36a.4.4,0,0,0,.112.28.374.374,0,0,0,.271.112l1.812-.009a.374.374,0,0,0,.271-.112l6.256-6.256a.4.4,0,0,0,0-.551L12.529,7.012a.4.4,0,0,0-.551,0L10.726,8.273l-5.005,5A.416.416,0,0,0,5.609,13.539Zm6.649-5.705,1.261,1.261-.71.71L11.548,8.543l.71-.71ZM6.384,13.707,11,9.094l1.261,1.261-4.613,4.6-1.27.009Z" transform="translate(-5.6 -6.9)" fill="#483df6"/></g></g></svg>
+      edit
+    </ion-button>
+  </ion-toolbar>
+
+  <!-- <div class="pres_detail" *ngIf="false">
+    <h4>
+      <span><ion-skeleton-text animated style="width: 40%"></ion-skeleton-text></span>
+      <span><ion-skeleton-text animated style="width: 20%"></ion-skeleton-text></span>
+    </h4>
+    <h4>
+      <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+    </h4>
+    <p>
+      <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+    </p>
+  </div> -->
+
+  <div class="pres_detail">
+    <h4><span>{{data?.event_category}}</span><span>{{data?.event_datetime | date:"dd MMM,y" }}</span></h4>
+    <h4>{{data?.event_name}}</h4>
+    <p>{{data?.description}}</p>
+  </div>
+
+  <!-- <ion-slides *ngIf="false" class="ion-padding-start ion-padding-end">
+    <ion-slide>
+        <ion-skeleton-text animated style="width: 100%; height:calc(100vh - 250px)"></ion-skeleton-text>
+    </ion-slide>
+  </ion-slides> -->
+
+  <ion-slides class="ion-padding-start ion-padding-end" [options]="slideOptions" pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)">
+      <ion-slide *ngFor="let img of view_all_image">
+        <ion-img *ngIf="!isNetwork && !img.delete || img.globalURI==null && !img.delete" [src]="webview.convertFileSrc(img.localURI)" (click)="viewImage(img.localURI)"></ion-img>
+			  <ion-img *ngIf="isNetwork && !img.delete && img.globalURI!=null" [src]="img.globalURI" (click)="viewImage(img.globalURI)"></ion-img>
+      </ion-slide>
+  </ion-slides>
+  
+  
+</ion-content>

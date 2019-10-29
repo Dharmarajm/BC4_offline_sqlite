@@ -1,0 +1,83 @@
+@import "../../app.scss";
+
+ion-grid {
+  --ion-grid-padding: 10px;
+  ion-row{
+    ion-col{
+      ion-card {
+        --background: #ffffff;
+        margin: 0;
+        box-shadow: none;
+        border: 1px solid #dddddd;
+        height: 100%;
+
+        ion-buttons{
+          justify-content: center;
+        }
+
+        ion-avatar {
+          display: inline-flex;
+          @include font(1.2rem, 400, 0, capitalize, center, inherit, #72708b);
+          width: 70px;
+          height: 70px;
+        }
+
+        h3{
+          @include font(1rem, 500, 0, capitalize, center, inherit, $font-color);
+          padding: 0 10px;
+          margin: 10px 0 0;
+        }
+
+        .trans_btn {
+          @include font(0.75rem, 500, 0, capitalize, inherit, inherit, none);
+          --color: #ea4e4e;
+          --color-activated: #ea4e4e;
+          --border-radius: 20px;
+          svg {
+            margin: -2px 2px 0 0;
+          }
+        }
+      }
+      &:first-child{
+        ion-card {
+          --color: #b9b9b9;
+          border: 2px dotted #dddddd;
+          @include flex(flex, nowrap, center, center);
+        }
+      }
+    }
+  }
+}
+// ion-list{
+//   ion-item {
+//     --background: transparent;
+//     --border-color: #ececec;
+//     --padding-start: 16px;
+//     --padding-end: 16px;
+//     --inner-padding-end: 0;
+
+//     ion-label {
+//       @include font(1.1rem, 400, 0, capitalize, inherit, inherit, $font-color);
+//     }
+//     &:last-child{
+//         --border-color: transparent;
+//     }
+//   } 
+// }
+
+form {
+  ion-item {
+    --background: transparent;
+    --border-color: #bcbbcf;
+    --highlight-color-focused: #483df6;
+    --highlight-color-valid: #483df6;
+    --highlight-color-invalid: #ea4e4e;
+    --padding-start: 0;
+    @include font(1rem, 500, 0, none, left, inherit, $font_color);
+    margin-bottom: 10px;
+
+    ion-label {
+      --color: #bcbbcf;
+    }
+  }
+}

@@ -1,0 +1,277 @@
+@import "../../app.scss";
+
+ion-header {
+  ion-toolbar:not(.no-background) {
+    --background: #ffd32c;
+    --color: #ffffff;
+  }
+}
+
+.btn:not(:last-child) {
+  margin-right: 16px;
+}
+
+ion-list {
+  ion-item {
+    --background: transparent;
+    --border-color: #ececec;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --inner-padding-end: 0;
+
+    h3 {
+      @include font(1.1rem, 500, 0, capitalize, inherit, inherit, $font-color);
+      padding-right: 75px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+ion-card {
+  height: 100%;
+  margin: 0;
+  border-radius: 5px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.16);
+  @include flex(flex, nowrap, center, center);
+
+  ion-card-content {
+    width: 100%;
+  }
+}
+
+ion-row {
+  h5 {
+    @include font(0.9rem, 500, 0, capitalize, left, inherit, $font_color);
+
+    svg {
+      margin: 5px;
+    }
+  }
+
+  h4 {
+    @include font(1.25rem, 500, 0, capitalize, left, inherit, none);
+  }
+
+  &:not(.projections) {
+    ion-col {
+      &.last {
+        h4 {
+          color: $alert;
+        }
+      }
+
+      &.current {
+        h4 {
+          color: $expense;
+        }
+      }
+
+      &.year {
+        h4 {
+          color: $appointment;
+        }
+      }
+      &.analytics {
+        h5 {
+          @include flex(flex, wrap, center, center);
+        }
+      }
+    }
+  }
+
+  &.projections {
+    border-top: 1px solid #e0e3e5;
+    margin-top: 15px;
+    padding: 10px 11px;
+
+    h5 {
+      color: $font_color;
+      margin: 2px 0;
+    }
+
+    h4 {
+      color: $report;
+      margin: 2px 0;
+    }
+  }
+}
+
+ion-item-group {
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+
+  & > .expense_card{
+    svg{
+      position: absolute;
+      right: 0;
+      top: 25px;
+    }
+  }
+
+  ion-item {
+    --background: transparent;
+    --border-color: transparent;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --inner-padding-end: 0;
+
+    ion-text{
+      @include font(12px, 400, 0, capitalize, right, inherit, #8b9398);
+      display: block;
+    }
+
+    h5 {
+      @include font(1.1rem, 400, 0, capitalize, inherit, inherit, $alert);
+      white-space: pre-wrap;
+      word-break: break-all;
+      padding-right: 25px;
+    }
+
+    h4 {
+      @include font(1.25rem, 400, 0, capitalize, inherit, inherit, $font-color);
+      white-space: pre-wrap;
+      word-break: break-all;
+      padding-right: 25px;
+    }
+    h3 {
+      @include font(1.1rem, 500, 0, capitalize, inherit, inherit, $font-color);
+      padding-right: 75px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    p {
+      @include font(14px, 400, 0, unset, inherit, inherit, #8b9398);
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    ion-avatar {
+      margin-right: 10px;
+      background: $alert;
+      white-space: pre-wrap;
+      @include font(12px, 400, 0, unset, center, inherit, #ffffff);
+
+      &:before {
+        content: "";
+        border-left: 1px dashed #ddd;
+        height: 100%;
+        position: absolute;
+        z-index: -1;
+        bottom: 0;
+      }
+
+      // span{
+      //     &:first-child{
+      //         @include font(16px, 500, 0, unset, inherit, inherit, #ffffff);
+      //     }
+      // }
+    }
+  }
+  .trans_btn {
+    @include font(0.75rem, 500, 0, capitalize, inherit, inherit, none);
+    --color: #ea4e4e;
+    --color-activated: #ea4e4e;
+    position: absolute;
+    right: 0;
+    top: 12px;
+    margin: 4px 0;
+    svg {
+      margin: -1px 2px 0 0;
+    }
+  }
+}
+
+.expand {
+  height: auto;
+}
+.collapse {
+  height: 0;
+  padding: 0;
+}
+
+form {
+  ion-item {
+    --background: transparent;
+    --border-color: #bcbbcf;
+    --highlight-color-focused: #483df6;
+    --highlight-color-valid: #483df6;
+    --highlight-color-invalid: #ea4e4e;
+    --padding-start: 0;
+    @include font(1rem, 500, 0, none, left, inherit, $font_color);
+    margin-bottom: 10px;
+
+    ion-label {
+      --color: #bcbbcf;
+    }
+
+    ion-button {
+      position: absolute;
+      top: 16px;
+      right: 0;
+      width: 42px;
+      min-height: 42px;
+      --background: transprent;
+      --border-radius: 50%;
+      --box-shadow: none;
+      --ripple-color: #fa5e61;
+      margin: 0;
+    }
+  }
+}
+
+ion-text {
+  @include font(0.75rem, 500, 0, none, left, inherit, #8b9398);
+}
+
+.date_filter{
+  position: relative;
+
+  h1{
+    @include font(1.2rem, 500, 0, none, left, inherit, $font-color);
+    margin: 0;
+  }
+
+  svg {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+  }
+
+  ion-datetime{
+    padding-left: 25px;
+    border-bottom: 1px solid #ddd;
+
+    &:nth-child(even){
+      margin-right: 5px;
+    }
+
+    &:nth-child(odd){
+      margin-left: 5px;
+    }
+  }
+}
+
+.action_tools{
+  .trans_btn{
+    @include font(0.9rem, 500, 0, none, left, inherit, $font-color);
+    margin: 4px 0 0;
+    --padding-start: 0;
+    --padding-start: 0;
+    --border-radius: 0;
+    svg{
+      margin-right: 5px;
+      margin-top: -4px;
+    }
+  }
+}
+
+ion-note {
+  @include font(0.9rem, 500, 0, none, left, inherit, $dark_grey);
+  display: block;
+
+  span{
+    color: $font_color;
+  }
+}

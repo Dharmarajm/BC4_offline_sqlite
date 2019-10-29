@@ -1,0 +1,134 @@
+<ion-header class="main-header shadow">
+  <ion-toolbar>
+    <ion-title class="ion-padding-start">Edit Appointment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-progress-bar color="tertiary" type="indeterminate" *ngIf="Progress"></ion-progress-bar>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="editform" *ngIf="editform" (ngSubmit)="editDetails(editform.value)">
+    <ion-grid class="date_grid">
+      <ion-row>
+        <ion-col size="6">
+          <ion-datetime display-format="HH:mm" formControlName="event_time"></ion-datetime>
+          <svg xmlns="http://www.w3.org/2000/svg" width="25.643" height="26.128" viewBox="0 0 25.643 26.128">
+            <g transform="translate(0.25 0.25)">
+              <path
+                d="M56.966,85.208a.485.485,0,0,0,.663-.174,8.526,8.526,0,0,1,.91-1.273.485.485,0,1,0-.734-.634,9.49,9.49,0,0,0-1.014,1.419.485.485,0,0,0,.174.663Zm0,0"
+                transform="translate(-52.729 -77.067)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+              <path
+                d="M116.172,103.294a.484.484,0,0,0,.343-.142l3.58-3.58a.484.484,0,0,0,.142-.343V94.114a.485.485,0,0,0-.97,0v4.914l-3.438,3.438a.485.485,0,0,0,.343.827Zm0,0"
+                transform="translate(-107.504 -86.98)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+              <path
+                d="M23.836,17.338a12.123,12.123,0,0,0,1.11-5.09,12.249,12.249,0,1,0-7.8,11.412,4.65,4.65,0,1,0,6.691-6.323ZM12.7,23.527A11.279,11.279,0,1,1,23.976,12.248a11.16,11.16,0,0,1-.966,4.564,4.617,4.617,0,0,0-1.776-.478A9.468,9.468,0,0,0,7.8,4.143a.485.485,0,0,0,.5.829A8.5,8.5,0,0,1,20.119,16.4a4.661,4.661,0,0,0-3.7,3.5l-.011,0A8.5,8.5,0,0,1,4.253,11.26a.485.485,0,1,0-.963-.113A9.472,9.472,0,0,0,11.6,21.656a9.545,9.545,0,0,0,1.109.065,9.436,9.436,0,0,0,3.581-.707,4.622,4.622,0,0,0,.376,1.795,11.21,11.21,0,0,1-3.965.718Zm8.241,1.132a3.685,3.685,0,1,1,3.684-3.685A3.689,3.689,0,0,1,20.939,24.659Zm0,0"
+                transform="translate(-0.45 0)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+              <path
+                d="M257.717,258.145l-.325-.379a1.726,1.726,0,0,1-.416-1.123v-.264a1.962,1.962,0,0,0-1.727-1.966,1.913,1.913,0,0,0-2.1,1.9v.434a1.715,1.715,0,0,1-.321,1l-.3.423a.485.485,0,0,0,.394.766h1.656v.308a.485.485,0,0,0,.969,0v-.308h1.8a.485.485,0,0,0,.368-.8Zm-3.89-.169a2.677,2.677,0,0,0,.293-1.223v-.434a.947.947,0,0,1,.309-.7.933.933,0,0,1,.729-.24.985.985,0,0,1,.849,1v.264a2.7,2.7,0,0,0,.353,1.333Zm0,0"
+                transform="translate(-234.543 -236.34)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+            </g>
+          </svg>
+        </ion-col>
+        <ion-col size="6">
+          <ion-datetime display-format="DD MMM YYYY" [min]="todaydate" formControlName="event_datetime"></ion-datetime>
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+            <path
+              d="M18.539,1.641h-.984V0H15.914V1.641H5.086V0H3.445V1.641H2.461A2.464,2.464,0,0,0,0,4.1V18.539A2.464,2.464,0,0,0,2.461,21H18.539A2.464,2.464,0,0,0,21,18.539V4.1A2.464,2.464,0,0,0,18.539,1.641Zm.82,16.9a.821.821,0,0,1-.82.82H2.461a.821.821,0,0,1-.82-.82V7.711H19.359Zm0-12.469H1.641V4.1a.821.821,0,0,1,.82-.82h.984V4.922H5.086V3.281H15.914V4.922h1.641V3.281h.984a.821.821,0,0,1,.82.82Z"
+              fill="#ea4e4e" />
+            <g transform="translate(3.117 9.434)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(6.398 9.434)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(9.68 9.434)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(12.961 9.434)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(16.242 9.434)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(3.117 12.715)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(6.398 12.715)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(9.68 12.715)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(12.961 12.715)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(3.117 15.996)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(6.398 15.996)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(9.68 15.996)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(12.961 15.996)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+            <g transform="translate(16.242 12.715)">
+              <rect width="1.641" height="1.641" fill="#ea4e4e" />
+            </g>
+          </svg>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item [ngClass]="{ 'ion-invalid': submitted && f.event_category.invalid,'ion-touched': submitted && f.event_category.invalid }">
+      <ion-label position="floating">Appointment with</ion-label>
+      <ion-select okText="Ok" cancelText="cancel" formControlName="event_category">
+        <ion-select-option *ngFor="let drop of dropdown" [value]="drop">{{drop}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item [ngClass]="{ 'ion-invalid': submitted && f.event_name.invalid,'ion-touched': submitted && f.event_name.invalid }">
+      <ion-label position="floating">Name of</ion-label>
+      <ion-input type="text" formControlName="event_name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-input type="text" formControlName="description"></ion-input>
+    </ion-item>
+    <ion-item button class="reminder">
+      <ion-checkbox [checked]="reminder" formControlName="reminder"></ion-checkbox>
+      <ion-label>Set remainder to fix appointment</ion-label>
+    </ion-item>
+    <ion-item button class="reminder">
+      <ion-checkbox [checked]="fixed_appointment" formControlName="appointment_fixed"></ion-checkbox>
+      <ion-label>Appointment fixed</ion-label>
+    </ion-item>
+    <!-- <ion-label>
+      <ion-checkbox [checked]="reminder" formControlName="reminder"></ion-checkbox>
+      Set Reminder
+    </ion-label> -->
+    <!-- class="footer" -->
+    <!-- <div> 
+                <ion-button expand="block" color="secondary" (click)="cancel()"> 
+                  Cancel
+                </ion-button>
+                <ion-button type="submit" color="secondary" expand="block">
+                  Save
+                </ion-button>
+              </div> -->
+    <div class="footer">
+      <ion-button expand="block" (click)="cancel()" [disabled]="Progress">
+        Cancel
+      </ion-button>
+      <button type="submit" class="btn_submit" [disabled]="Progress">
+        Save
+      </button>
+    </div>
+  </form>
+
+
+
+
+</ion-content>
+
+<ion-backdrop *ngIf="Progress"></ion-backdrop>

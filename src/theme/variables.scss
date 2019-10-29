@@ -1,0 +1,141 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+/** Ionic CSS Variables **/
+
+@font-face {
+  font-family: "Muli";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../assets/fonts/Muli-Light.ttf");
+}
+
+@font-face {
+  font-family: "Muli";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/fonts/Muli-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Muli";
+  font-style: italic;
+  font-weight: 400;
+  src: url("../assets/fonts/Muli-Italic.ttf");
+}
+
+@font-face {
+  font-family: "Muli";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../assets/fonts/Muli-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Muli";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../assets/fonts/Muli-Bold.ttf");
+}
+
+:root {
+  /** font-family **/
+  --ion-font-family: "Muli";
+
+  /** primary **/
+  --ion-color-primary: #483df6;
+  --ion-color-primary-rgb: 72, 61, 246;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #4137e5;
+  --ion-color-primary-tint: #5c53f6;
+
+  /** secondary **/
+  --ion-color-secondary: #60dc68;
+  --ion-color-secondary-rgb: 96, 220, 104;
+  --ion-color-secondary-contrast: #2c2c2c;
+  --ion-color-secondary-contrast-rgb: 44, 44, 44;
+  --ion-color-secondary-shade: #4cc554;
+  --ion-color-secondary-tint: #6ddc74;
+
+  /** tertiary **/
+  --ion-color-tertiary: #ea4e4e;
+  --ion-color-tertiary-rgb: 234, 78, 78;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #d54747;
+  --ion-color-tertiary-tint: #eb5d5d;
+
+  /** success **/
+  --ion-color-success: #10dc60;
+  --ion-color-success-rgb: 16, 220, 96;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #0ec254;
+  --ion-color-success-tint: #28e070;
+
+  /** warning **/
+  --ion-color-warning: #FFD32C;
+  --ion-color-warning-rgb: 255, 211, 44;
+  --ion-color-warning-contrast: #2c2c2c;
+  --ion-color-warning-contrast-rgb: 44, 44, 44;
+  --ion-color-warning-shade: #ebbf23;
+  --ion-color-warning-tint: #ffd53e;
+
+  // /** danger **/
+  // --ion-color-danger: #f04141;
+  // --ion-color-danger-rgb: 245, 61, 61;
+  // --ion-color-danger-contrast: #ffffff;
+  // --ion-color-danger-contrast-rgb: 255, 255, 255;
+  // --ion-color-danger-shade: #d33939;
+  // --ion-color-danger-tint: #f25454;
+
+  // /** dark **/
+  // --ion-color-dark: #222428;
+  // --ion-color-dark-rgb: 34, 34, 34;
+  // --ion-color-dark-contrast: #ffffff;
+  // --ion-color-dark-contrast-rgb: 255, 255, 255;
+  // --ion-color-dark-shade: #1e2023;
+  // --ion-color-dark-tint: #383a3e;
+
+    /** danger **/
+    --ion-color-danger: #FFD32C;
+    --ion-color-danger-rgb: 255, 211, 44;
+    --ion-color-danger-contrast: #2c2c2c;
+    --ion-color-danger-contrast-rgb: 44, 44, 44;
+    --ion-color-danger-shade: #ebbf23;
+    --ion-color-danger-tint: #ffd53e;
+  
+    /** dark **/
+    --ion-color-dark: #5EE4A2;
+    --ion-color-dark-rgb: 94, 228, 162;
+    --ion-color-dark-contrast: #2c2c2c;
+    --ion-color-dark-contrast-rgb: 44, 44, 44;
+    --ion-color-dark-shade: #50D190;
+    --ion-color-dark-tint: #6be4ac;
+
+  /** medium **/
+  --ion-color-medium: #989aa2;
+  --ion-color-medium-rgb: 152, 154, 162;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #86888f;
+  --ion-color-medium-tint: #a2a4ab;
+
+  /** light **/
+  // --ion-color-light: #f4f5f8;
+  // --ion-color-light-rgb: 244, 244, 244;
+  // --ion-color-light-contrast: #000000;
+  // --ion-color-light-contrast-rgb: 0, 0, 0;
+  // --ion-color-light-shade: #d7d8da;
+  // --ion-color-light-tint: #f5f6f9;
+
+  /** light **/
+  --ion-color-light: rgba(255, 255, 255, 0.25);
+  --ion-color-light-rgb: 255, 255, 255, 0.25;
+  --ion-color-light-contrast: #ffffff;
+  --ion-color-light-contrast-rgb: 255, 255, 255;
+  --ion-color-light-shade: #ffffff;
+  --ion-color-light-tint: #ffffff;
+
+}

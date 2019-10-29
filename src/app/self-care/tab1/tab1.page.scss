@@ -1,0 +1,242 @@
+@import "../../app.scss";
+
+ion-content {
+  &::before{
+    content: "";
+    // background-image: url("../../assets/img/Login-logo.png") no-repeat right bottom;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1; 
+  }
+}
+
+.sliders{
+  height: 70px;
+  background-color: $primary;
+  margin-bottom: 66px;
+  // padding: 16px;
+  position: relative;
+
+  ion-slides{
+    padding: 0 14px;
+  }
+
+  .swiper-pagination.swiper-pagination-bullets{
+    bottom: -4px;
+  }
+
+  ion-slide{
+    height: 140px;
+  }
+
+  ion-card {
+    --background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.16);
+    position: relative;
+    margin: 0px 4px 15px;
+    width: 100%;
+
+    ion-item {
+      --border-width: 0px;
+      --border-style: none;
+      --padding-start: 0px;
+      --inner-padding-end: 0px;
+      @include flex(flex,nowrap,center,unset);
+
+      svg{
+        margin-right: 15px;
+      }
+
+      h5{
+        @include font(1.1rem, 500, 0, capitalize, left, inherit, $font-color);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      p{
+        @include font(0.85rem, 500, 0, unset, left, inherit, $font-color);
+      }
+    }
+  }
+}
+
+.trans_btn {
+  @include font(11px, 400, 0, unset, center, inherit, none);
+  position: absolute;
+  bottom: -66px;
+  right: 16px;
+  height: auto;
+  margin: 0px;
+  z-index: 1;
+}
+
+ion-grid {
+  padding: 0px 16px 30px;
+
+  ion-row{
+ 
+    ion-col{
+      padding: 0;
+
+      ion-card{
+        --background: #ffffff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        // border-width: 2px;
+        // border-style: solid;
+  
+        ion-card-content{
+          @include font(0.9rem, 600, 0, capitalize, left, inherit, $font-color);
+          @include flex(flex,nowrap,center,unset);
+          padding: 0;
+  
+          label{
+            display: inline-block;
+            padding: 12px 8px;
+            height: 60px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            @include border(2px 0 2px 2px, solid, inherit);
+          }
+  
+          span{
+            word-break: break-word;
+            @include flex(flex,nowrap,center,unset);
+            @include border(2px 2px 2px 0, solid, inherit);
+            height: 60px;
+            width: 100%;
+            padding: 0 2px 0 5px;
+            margin-left: -1px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            overflow: hidden;
+
+          }
+        }
+      }
+  
+      &:nth-child(odd){
+        ion-card{
+          margin: 25px 5px 0 0;
+        }
+      }
+  
+      &:nth-child(even){
+        ion-card{
+          margin: 25px 0 0 5px;
+        }
+      }
+  
+      &:first-child{
+        ion-card{  
+          ion-card-content{
+            label{
+              background-color: $alert;
+              border-color: $alert;
+            }
+            span{
+              border-color: $alert;
+            }
+          }
+        }
+      }
+      &:nth-child(2){
+        ion-card{
+          ion-card-content{
+            label{
+              background-color: $vitals;
+              border-color: $vitals;
+            }
+            span{
+              border-color: $vitals;
+            }
+          }
+        }
+      }
+      &:nth-child(3){
+        ion-card{
+          ion-card-content{
+            label{
+              background-color: $health;
+              border-color: $health;
+            }
+            span{
+              border-color: $health;
+            }
+          }
+        }
+      }
+      &:nth-child(4){
+        ion-card{
+          ion-card-content{
+            label{
+              background-color: $appointment;
+              border-color: $appointment;
+            }
+            span{
+              border-color: $appointment;
+            }
+          }
+        }
+      }
+      &:nth-child(5){
+        ion-card{
+          ion-card-content{
+            label{
+              background-color: $doc_visit;
+              border-color: $doc_visit;
+            }
+            span{
+              border-color: $doc_visit;
+            }
+          }
+        }
+      }
+      &:nth-child(6){
+        ion-card{
+          ion-card-content{
+            label{
+              background-color: $prescription;
+              border-color: $prescription;
+            }
+            span{
+              border-color: $prescription;
+            }
+          }
+        }
+      }
+      &:nth-child(7){
+        ion-card{
+          ion-card-content{
+            label{
+              background-color: $report;
+              border-color: $report;
+            }
+            span{
+              border-color: $report;
+            }
+          }
+        }
+      }
+      &:last-child{
+        ion-card{
+          ion-card-content{
+            label{
+              background-color: $expense;
+              border-color: $expense;
+            }
+            span{
+              border-color: $expense;
+            }
+          }
+        }
+      }
+    }
+  }
+}

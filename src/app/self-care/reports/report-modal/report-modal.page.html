@@ -1,0 +1,19 @@
+<ion-content [forceOverscroll]="false" fullscreen="true" class="preview_img">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{image_details?.event_datetime | date:"dd MMMM,y"}}</ion-title>
+  </ion-toolbar>
+  <ion-slides [options]="slideOpts">
+    <ion-slide>
+      <div class="swiper-zoom-container"><img [src]="image" /></div>
+    </ion-slide>
+  </ion-slides>
+  <div class="img_details">
+    <h3>{{ image_details?.event_name }}</h3>
+    <p>{{ image_details?.description }}</p>
+  </div>
+</ion-content>

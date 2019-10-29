@@ -1,0 +1,196 @@
+@import "../../app.scss";
+
+ion-header {
+  ion-toolbar:not(.no-background) {
+    --background: #c7a254;
+    --color: #ffffff;
+  }
+}
+
+ion-list-header {
+  --background: #f7f6ff;
+  --color: #2c2c2c;
+  min-height: auto;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  @include font(12px, 600, 0, unset, inherit, inherit, none);
+}
+
+ion-list {
+  ion-item {
+    --background: transparent;
+    --border-color: #ececec;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --inner-padding-end: 0;
+
+    h3 {
+      @include font(1.2rem, 500, 0, capitalize, inherit, inherit, $font-color);
+    }
+
+    h4 {
+      @include font(1.1rem, 400, 0, capitalize, inherit, inherit, $font-color);
+    }
+
+    p {
+      @include font(12px, 400, 0, unset, inherit, inherit, #8b9398);
+      margin-top: 5px;
+    }
+    &:last-child{
+      --border-color: transparent;
+    }
+  }
+  .trans_btn {
+    @include font(0.75rem, 500, 0, capitalize, inherit, inherit, none);
+    --color: #ea4e4e;
+    --color-activated: #ea4e4e;
+    position: absolute;
+    right: 0;
+    top: 12px;
+    margin: 4px 0;
+    svg {
+      margin: -1px 2px 0 0;
+    }
+  }
+}
+
+form {
+  padding-bottom: 60px;
+  
+  ion-item {
+    --background: transparent;
+    --border-color: #ECECEC;
+    --highlight-color-focused: #483df6;
+    --highlight-color-valid: #483df6;
+    --highlight-color-invalid: #ea4e4e;
+    --padding-start: 0;
+    @include font(1rem, 500, 0, none, left, inherit, $font_color);
+    margin-bottom: 10px;
+
+    ion-label {
+      --color: #bcbbcf;
+    }
+
+    &.reminder{
+      --border-color: transparent;
+      ion-label {
+        --color: #2c2c2c;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+ion-card {
+  box-shadow: none;
+  border: 1px solid #d8dbde;
+  max-height: 120px;
+  min-height: 120px;
+  height: 100%;
+
+  &:not(.ion-no-margin){
+    margin: 0;
+  }
+
+  &:not(.has_image) {
+    --background: transparent;
+    border: 1px dashed #9e9fa0;
+    display: flex;
+    align-items: center;
+    p {
+      @include font(12px, 400, 0, unset, inherit, inherit, #8b9398);
+    }
+  }
+
+  ion-card-content {
+    padding: 0;
+    height: 100%;
+
+    img{
+      height: 100%;
+      object-fit: cover;
+      background-color: #d8dbde;
+    }
+  }
+
+  ion-button {
+    --padding-end: 0;
+    --padding-start: 0;
+    --border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+  }
+}
+
+.edit {
+  @include font(0.9rem, 400, 0, unset, center, inherit, $primary);
+  margin: 0;
+  height: auto;
+
+  svg {
+    margin: 1px 2px 0 0;
+  }
+}
+
+.pres_detail{
+  padding: 0 16px;
+
+  h4{
+    @include font(1rem, 400, 0, unset, unset, inherit, $font-color);
+    @include flex(flex, wrap, center, space-between);
+    span:last-child{
+      font-size: 12px;
+    }
+    margin: 0;
+  }
+
+  p{
+    @include font(12px, 400, 0, unset, inherit, inherit, #8b9398);
+    margin-top: 4px;
+  }
+}
+ion-slides{
+  --bullet-background: #484848;
+  
+  ion-img {
+    height: calc(100vh - 235px);
+    object-fit: cover;
+    margin-bottom: 40px;
+    width: 100%;
+    background-color: #dddddd;
+  }
+}
+
+.date_filter{
+  position: relative;
+
+  h1{
+    @include font(1.2rem, 500, 0, none, left, inherit, $font-color);
+    margin: 0;
+  }
+
+  svg {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+  }
+
+  ion-datetime{
+    padding-left: 25px;
+    // border-bottom: 1px solid #ddd;
+
+    &:nth-child(even){
+      margin-right: 5px;
+    }
+
+    &:nth-child(odd){
+      margin-left: 5px;
+      
+    }
+  }
+}
+

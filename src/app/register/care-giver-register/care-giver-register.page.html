@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registration</ion-title>
+    <ion-img slot="end" src="../../../assets/img/ico.png"></ion-img>
+  </ion-toolbar>
+  <ion-progress-bar color="tertiary" type="indeterminate" *ngIf="registerProgress"></ion-progress-bar>
+</ion-header>
+
+<ion-content  class="ion-padding">
+
+<form [formGroup]="giverForm" (ngSubmit) = "CareGiverDetail(giverForm.value)">
+	
+     <ion-item [ngClass]="{ 'ion-invalid': submitted && f.name.invalid,'ion-touched': submitted && f.name.invalid }">
+       <ion-label position= "floating">{{'uid' | translate}}</ion-label>
+	   <ion-input  type= "text"  formControlName="user_uid" (change)="care_giverId()" #unique_id></ion-input>
+     </ion-item>
+     <ion-item [ngClass]="{ 'ion-invalid': submitted && f.name.invalid,'ion-touched': submitted && f.name.invalid }">
+      <ion-label position= "floating">{{'mobile' | translate}}</ion-label>
+      <ion-input type= "tel" formControlName="mobile_no" (keypress)="_keyPress($event)"></ion-input>
+    </ion-item>
+    <ion-item [ngClass]="{ 'ion-invalid': submitted && f.name.invalid,'ion-touched': submitted && f.name.invalid }">
+      <ion-label position= "floating">{{'name' | translate}}</ion-label>
+      <ion-input type= "text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item [ngClass]="{ 'ion-invalid': submitted && f.name.invalid,'ion-touched': submitted && f.name.invalid }">
+      <ion-label position= "floating">{{'email' | translate}}</ion-label>
+      <ion-input type= "email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item [ngClass]="{ 'ion-invalid': submitted && f.name.invalid,'ion-touched': submitted && f.name.invalid }">
+      <ion-label position= "floating">{{'set_pwd' | translate}}</ion-label>
+      <ion-input type="password" formControlName="password">
+      <!-- <ion-icon  [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon> -->
+      </ion-input>
+    </ion-item>   
+
+    <ion-item [ngClass]="{ 'ion-invalid': submitted && f.name.invalid,'ion-touched': submitted && f.name.invalid }">
+      <ion-label position= "floating">{{'confirm_pwd' | translate}}</ion-label>
+      <ion-input type="password" formControlName="password1">
+      <!-- <ion-icon  [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon> -->
+      </ion-input>
+    </ion-item>   
+
+    <ion-note><span>{{'note' | translate}}:</span><br>UID is mandatory, for details click on info icon which is in the field right corner</ion-note>
+
+    <label>
+      <ion-checkbox [checked]="checkStatus" formControlName="checkStatus"></ion-checkbox>
+      {{'agree' | translate}} &nbsp;<a color="primary" (click)="goToterms()">{{'terms_conditions' | translate}}</a>
+    </label>
+    <button class="btn_submit btn_login" type="submit" [disabled]="registerProgress">{{'care_submit' | translate}}</button>
+
+     <!-- <ion-item class="ion-float-right">
+      <ion-button type= "submit">{{'login' | translate}}<ion-icon name="arrow-forward"></ion-icon></ion-button>
+    </ion-item> -->
+</form>
+
+</ion-content>
+
+
+

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+ <ion-title>Apply Coupon</ion-title>
+ <ion-img slot="end" src="../../../assets/img/ico.png"></ion-img>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <ion-list *ngFor="let offer of offer_list">
+        <ion-item (click)="select(offer)">
+          <ion-label>
+            <h2>{{offer.name}}</h2>
+            <p>{{offer.percentage}}</p>
+            <p>{{offer.price}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+</ion-content>

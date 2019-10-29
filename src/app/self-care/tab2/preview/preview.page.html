@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Emergency Preview</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-avatar slot="start"  class="profile">
+        <span *ngIf="profile_image == null">{{initialLogo}}</span>
+        <img *ngIf="profile_image != null" [src]="profile_image">
+    </ion-avatar>
+    <ion-label>
+      <h3>{{user?.name}}</h3>
+      <h6>Blood Group:&nbsp;{{user?.blood_group || '-'}}</h6>
+      <h6>Age:&nbsp;{{user?.age || '-'}}</h6>
+    </ion-label>
+  </ion-item>
+
+  <ion-list class="policy">
+    <ion-list-header>
+      <ion-label>Policies</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>
+        <h4>Mediclaim Policy#</h4>
+        <h2>{{policyDetail?.attribute_name_value.mediclaim_policy || 'Having no Mediclaim Policy'}}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h4>Policy Issuer#</h4>
+        <h2>{{policyDetail?.attribute_name_value.policy_issuer || 'Having no Policy Issuer'}}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list class="contact" *ngIf="doctor == true || care_giver == true || emergency == true">
+    <ion-list-header>
+      <ion-label>Contacts</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let i of Contactinfo[0]?.doctor">
+      <ion-avatar slot="start">
+        <span>{{i?.firstleter}}</span>
+      </ion-avatar>
+      <ion-label>
+        <h3>{{i?.contact_name | uppercase}}</h3>
+        <p>{{i?.emergency_no}} | <span *ngIf="doctor == true">Doctor</span></p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngFor="let i of Contactinfo[0]?.care_giver">
+      <ion-avatar slot="start">
+        <span>{{i?.firstleter | uppercase}}</span>
+      </ion-avatar>
+      <ion-label>
+        <h3>{{i?.contact_name}}</h3>
+        <p>{{i?.emergency_no}} | <span *ngIf="care_giver == true">Care Giver</span></p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngFor="let i of Contactinfo[0]?.emergency">
+      <ion-avatar slot="start">
+        <span>{{i?.firstleter | uppercase }}</span>
+      </ion-avatar>
+      <ion-label>
+        <h3>{{i?.contact_name}}</h3>
+        <p>{{i?.emergency_no}} | <span *ngIf="emergency == true">Emergency</span></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list class="health">
+    <ion-list-header>
+      <ion-label>Health</ion-label>
+    </ion-list-header>
+
+    <ion-item-group class="ion-padding alergies">
+      <ion-item-divider>
+        <ion-label>Alergies</ion-label>
+      </ion-item-divider>
+      <ion-chip *ngFor="let alergy of alergiesList; let i=index">
+        <ion-label>{{alergy}}</ion-label>
+      </ion-chip>
+      <ion-chip *ngIf="alergiesList.length==0">
+        <ion-label>No Alergies</ion-label>
+      </ion-chip>
+    </ion-item-group>
+
+    <ion-item-group class="ion-padding pre_conditon">
+      <ion-item-divider>
+        <ion-label>Pre-existing Conditions</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label>Heart Conditions</ion-label>
+        <ion-label><span>{{ healthDetails?.attribute_name_value.heart_condition || 'No' }}</span></ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Diabetes</ion-label>
+        <ion-label><span>{{ healthDetails?.attribute_name_value.diabetes || 'No' }}</span></ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Blood Pressure</ion-label>
+        <ion-label><span>{{ healthDetails?.attribute_name_value.blood_pressure || 'Normal' }}</span></ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Implants</ion-label>
+        <ion-label><span>{{healthDetails?.attribute_name_value.implants || '-' }}</span></ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cancer</ion-label>
+        <ion-label><span>{{ healthDetails?.attribute_name_value.cancer || 'No' }}</span></ion-label>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group class="ion-padding medication">
+      <ion-item-divider>
+        <ion-label>Current Medications</ion-label>
+      </ion-item-divider>
+      <ion-chip *ngFor="let medication of currentMedicationList; let i=index">
+        <ion-label>{{medication}}</ion-label>
+      </ion-chip>
+      <ion-chip *ngIf="currentMedicationList.length==0">
+        <ion-label>No current Medications</ion-label>
+      </ion-chip>
+    </ion-item-group>
+
+    <ion-item-group class="ion-padding recent">
+      <ion-item-divider>
+        <ion-label>Recent Surgeries</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label class="ion-no-margin" text-wrap>{{healthDetails?.attribute_name_value.recent_surgeries || 'No'}}</ion-label>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

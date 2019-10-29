@@ -1,0 +1,111 @@
+<ion-header class="main-header shadow">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-padding-start">Update Health Data</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  
+  <form class="footerform" [formGroup]="health" *ngIf="health" (ngSubmit)="save(health.value)">
+    <ion-list>
+      <ion-item-group class="alergies">
+        <ion-item>
+          <ion-label position="floating">Allergies</ion-label>
+          <ion-input formControlName="allergies" type="text" #alergy_name (keyup)="Input_alergy($event.target.value)"></ion-input> 
+          <!-- #alergy (keyup)="Input_alergy(alergy.value)" -->
+        </ion-item>
+        <ion-item button class="autocomplete" (click)="alergyselect(data1)" *ngIf="autopopulate && data1!=''">
+          <ion-label color="primary" class="select">{{data1}}</ion-label>
+          <ion-note color="primary" slot="end">Select</ion-note>
+        </ion-item>
+        
+        <ion-chip #chip1 mode="md" *ngFor="let ship of alergyChiptest; let i=index">
+          <ion-label>{{ship}}</ion-label>
+          <ion-icon name="close" (click)="deleteAlergyChip(i)"></ion-icon>
+        </ion-chip>
+      </ion-item-group>
+      <ion-item>
+        <ion-label position="floating">Heart Condition</ion-label>
+        <ion-select formControlName="heart_conditions">
+          <ion-select-option value='Yes'>Yes</ion-select-option>
+          <ion-select-option value='No'>No</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="health.value['heart_conditions']=='Yes'">
+      <ion-label position="floating">PaceMacker</ion-label>
+      <ion-select formControlName="pacemaker">
+        <ion-select-option value='Yes'>Yes</ion-select-option>
+        <ion-select-option value='No'>No</ion-select-option>
+      </ion-select>
+    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Diabetes</ion-label>
+        <ion-select formControlName="diabetes">
+          <ion-select-option value='Yes'>Yes</ion-select-option>
+          <ion-select-option value='No'>No</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="health.value['diabetes']=='Yes'">
+        <ion-label position="floating">Diabetes Medication through</ion-label>
+        <ion-select formControlName="diabetes_medication">
+          <ion-select-option *ngFor="let diabetes of diabetes_medications" [value]="diabetes">{{diabetes}}</ion-select-option>
+          
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Blood Pressure</ion-label>
+        <ion-select formControlName="bloodpressure">
+          <ion-select-option value='High'>High</ion-select-option>
+          <ion-select-option value='Normal'>Normal</ion-select-option>
+          <ion-select-option value='Low'>Low</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Implant</ion-label>
+        <ion-input maxlength="25" formControlName="implant" type="text" #alergy></ion-input>
+      </ion-item>
+      <p>{{'Only 25 characters allowed' | translate}}</p>
+      <ion-item>
+        <ion-label position="floating">Cancer</ion-label>
+        <ion-select formControlName="cancer">
+          <ion-select-option value='Yes'>Yes</ion-select-option>
+          <ion-select-option value='No'>No</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item-group class="medication">
+        <ion-item>
+          <ion-label position="floating">Current Medication</ion-label>
+          <ion-input formControlName="curent_medication" type="text" #medication
+            (keyup)="Input_medication(medication.value)"></ion-input>
+        </ion-item>
+        <ion-item button class="autocomplete" (click)="medication_select(medication_name)" *ngIf="autopopulate2 && medication_name!=''">
+          <ion-label color="primary" class="select">{{medication_name}}</ion-label>
+          <ion-note color="primary" slot="end">Select</ion-note>
+        </ion-item>
+        <ion-chip #chip mode="md" *ngFor="let medication of medicationChiptest; let i=index">
+          <ion-label>{{medication}}</ion-label>
+          <ion-icon name="close" (click)="deleteMedicationChip(i)"></ion-icon>
+        </ion-chip>
+      </ion-item-group>
+      <ion-item>
+        <ion-label position="floating">Recent Surgeries</ion-label>
+        <ion-textarea formControlName="recent_surgeries"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <div class="footer">
+      <ion-button expand="block" (click)="close()">
+        Cancel
+      </ion-button>
+      <button color="secondary" class="btn_submit">
+        Save
+      </button>
+    </div>
+  </form>
+</ion-content>
+
+
+
+<!-- <ion-footer>
+    <ion-button>Cancel</ion-button>
+    <ion-button (click)="save()">Save</ion-button>
+  </ion-toolbar>
+</ion-footer> -->

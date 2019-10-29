@@ -1,0 +1,25 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Forgot Password</ion-title>
+		<ion-img slot="end" src="../../../assets/img/ico.png"></ion-img>
+	</ion-toolbar>
+	<ion-progress-bar color="tertiary" type="indeterminate" *ngIf="registerProgress"></ion-progress-bar>
+</ion-header>
+
+<ion-content class="ion-padding">
+	<form [formGroup]="user" (ngSubmit)="updatePassword(user.value)">
+		<ion-item [ngClass]="{ 'ion-invalid': submitted && f.password.invalid,'ion-touched': submitted && f.password.invalid }">
+			<ion-label position="floating">New Password</ion-label>
+			<ion-input type="password" formControlName="password" #pwd></ion-input>
+		</ion-item>
+		<ion-item [ngClass]="{ 'ion-invalid': submitted && f.re_password.invalid,'ion-touched': submitted && f.re_password.invalid }">
+			<ion-label position="floating">Re-enter the New Password</ion-label>
+			<ion-input type="password" formControlName="re_password"></ion-input>
+		</ion-item>
+		<ion-note><span>Note:</span><br>Please provide the new password to login again</ion-note>
+		<button type="submit" color="secondary" expand="block">Update Password</button>
+	</form>
+</ion-content>
