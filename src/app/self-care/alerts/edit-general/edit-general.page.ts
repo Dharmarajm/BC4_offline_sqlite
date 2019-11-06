@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { ToastController, AlertController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DatabaseProvider } from '../../../sqlite-database/database';
 
 @Component({
   selector: 'app-edit-general',
@@ -16,7 +17,6 @@ import { Toast } from '@ionic-native/toast/ngx';
 })
 export class EditOthersPage implements OnInit {
   todaydate:any;
-  vital_options:any;
   other_alert_edit_form:FormGroup;
   submitted:boolean = false;
   tabBar:any;
@@ -34,7 +34,7 @@ export class EditOthersPage implements OnInit {
   Originalvalue:any[]=[];
   add_alert: HTMLIonAlertElement;
 
-  constructor(private toast: Toast,public localNotifications:LocalNotifications,public alertController: AlertController, public toastController: ToastController, public datepipe: DatePipe, public service: settingsService, private fb: FormBuilder, public route: ActivatedRoute, public router: Router, private statusBar: StatusBar) {
+  constructor(private toast: Toast,public localNotifications:LocalNotifications,public alertController: AlertController, public toastController: ToastController, public datepipe: DatePipe, public service: settingsService, private fb: FormBuilder, public route: ActivatedRoute, public router: Router, private statusBar: StatusBar,private database: DatabaseProvider) {
     this.route.queryParams.subscribe(params => {      
       if (params && params.general_alertData) {
         this.getAllDatas = JSON.parse(params.general_alertData);
@@ -77,9 +77,9 @@ export class EditOthersPage implements OnInit {
         this.statusBar.backgroundColorByHexString('#0e9bff');
         this.tabBar = document.getElementById('myTabBar');
         this.tabBar.style.display = 'none';
-        this.service.vitalReading().subscribe(res => {
-        this.vital_options = res['enum_masters'];
-  })
+        // this.service.vitalReading().subscribe(res => {
+        // this.vital_options = res['enum_masters'];
+        // })
 
         this.other_alert_edit_form = this.fb.group({
           event_datetime: [this.getAllDatas['event_datetime'], [Validators.required]],
@@ -104,10 +104,18 @@ export class EditOthersPage implements OnInit {
         if(this.other_alert_edit_form.invalid){
           return;
         }else{
-          let date=this.datepipe.transform(form.event_datetime,"dd MMM yyyy")
+          let new1 = new Date(form.event_time);
+          let gethours = new1.getHours();
+          let getMinutes = new1.getMinutes();
+
+          let new2 = new Date(form.event_datetime);
+          new2.setHours(gethours)
+          new2.setMinutes(getMinutes)
+          let event_dateTime = new2.toJSON();
+
           let data = {
             event_name: form.event_name,
-            event_datetime: date +" "+ form.event_time,
+            event_datetime: event_dateTime,
             event_type: form.event_type,
             event_options: 
               {
@@ -137,9 +145,36 @@ export class EditOthersPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             this.Progress=true;
-            this.service.commonUpdatePost(this.getAllDatas['id'],data).subscribe(res=>{
+            //   this.service.commonUpdatePost(this.getAllDatas['id'],data).subscribe(res=>{
+            //     let getData:any=res;
+            //     let getEventId:any=this.getAllDatas['id']
+            //     console.log(this.repeatValue.length,this.Originalvalue.length)
+      
+            //     console.log(this.NotifyRepeat==true , this.repeatValue.length<this.Originalvalue.length)
+            //     if(this.NotifyRepeat==true && this.repeatValue.length<this.Originalvalue.length){
+            //       let cancelArray=[];  
+            //       console.log(cancelArray)
+            //       for(var i in this.Originalvalue){
+            //         if(+i>this.repeatValue.length-1){
+            //           let ID:any=getEventId+''+Number(+i+1);
+            //           cancelArray.push(ID)
+            //         }
+            //       }
+            //       console.log(cancelArray)
+            //         this.assignOrCancelNotifications(cancelArray,form,getEventId);
+                
+            //     }else{
+            //       console.log(getData)
+            //       this.assignSchedule(form,getEventId);
+            //     }
+                
+            // },error=>{
+            //   this.Progress=false;
+            // });
+
+            this.database.updateAnEvent(this.getAllDatas['event_id'],data).then((res)=>{
               let getData:any=res;
-              let getEventId:any=this.getAllDatas['id']
+              let getEventId:any=this.getAllDatas['event_id']
               console.log(this.repeatValue.length,this.Originalvalue.length)
     
               console.log(this.NotifyRepeat==true , this.repeatValue.length<this.Originalvalue.length)
@@ -154,15 +189,15 @@ export class EditOthersPage implements OnInit {
                 }
                 console.log(cancelArray)
                   this.assignOrCancelNotifications(cancelArray,form,getEventId);
-               
+              
               }else{
                 console.log(getData)
                 this.assignSchedule(form,getEventId);
-              }
-              
-          },error=>{
-            this.Progress=false;
-          });
+              }   
+            }).catch(error=>{ 
+              console.log(error); 
+              this.Progress=false;
+            });
           }
         }
       ]

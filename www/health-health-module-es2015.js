@@ -210,8 +210,10 @@ let HealthPage = class HealthPage {
             diabetes = "No";
         }
         let id = null;
+        let created_at = null;
         if (this.getAllIds != null) {
             id = this.getAllIds['id'];
+            created_at = this.getAllIds['created_at'];
         }
         let data = {
             "id": id,
@@ -225,7 +227,8 @@ let HealthPage = class HealthPage {
                 "current_medication": this.medicationChiptest,
                 "recent_surgeries": val["recent_surgeries"]
             },
-            "name": "health"
+            "name": "health",
+            "created_at": created_at
         };
         this.addconfirmation(data);
     }

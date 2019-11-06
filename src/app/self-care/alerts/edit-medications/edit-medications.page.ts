@@ -15,6 +15,9 @@ import { Validators, FormBuilder, FormGroup  } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DatabaseProvider } from '../../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
+import { NetworkService } from '../../../network-connectivity/network-service';
 
 @Component({
   selector: 'app-edit-medications',
@@ -30,6 +33,7 @@ export class EditMedicationPage implements OnInit {
   editform:FormGroup
   todaydate:any;
   edit_details:any;
+  edit_options:any;
   meals_option:any;
   dossage_option:any[]=['0.5 tablet','1 tablet','1.5 tablet','2 tablet','1 tsp','1.5 tsp','Others' ]
   medicine_option:any[]=['Tablet','Syrup','Injection']
@@ -57,15 +61,19 @@ export class EditMedicationPage implements OnInit {
   Originalvalue:any[]=[];
   getEventId: any;
   add_alert: HTMLIonAlertElement;
+  localFilePath:any;
+  isNetwork:boolean;
+
 
   constructor(private toast: Toast,private camera: Camera, public actionSheetController: ActionSheetController,public localNotifications:LocalNotifications,public alertController:AlertController,public toastController: ToastController,
     private router: Router, public route:ActivatedRoute,public service: settingsService,
     public datepipe: DatePipe, private file: File, public fb:FormBuilder, private transfer: FileTransfer, 
-    private imagePicker: ImagePicker, private webview: WebView, public sanitizer: DomSanitizer,private statusBar: StatusBar) {
+    private imagePicker: ImagePicker, private webview: WebView, public sanitizer: DomSanitizer,private statusBar: StatusBar,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider,private networkProvider: NetworkService) {
       this.environment = environment.ImageUrl;
       this.route.queryParams.subscribe(params => {
         if (params && params.medi_alertData) {
-          this.edit_details= JSON.parse(params.medi_alertData); 
+          this.edit_details= JSON.parse(params.medi_alertData);
+          this.edit_options=this.edit_details 
           let duplicateData = JSON.parse(params.medi_alertData);
           if(this.edit_details['event_options']['remainder_repeat']==true){
             this.repeatType=this.edit_details['event_options']['repeat_category'];
@@ -130,17 +138,44 @@ export class EditMedicationPage implements OnInit {
       
       this.initialValidator(this.edit_details['event_options']['medicine_type'],getIndex);
 
+      // this.edit_all_image=[];
+      // this.originalArray=[];
+      // this.fileuri=[];
+      // this.spliceIndexArray=[];
+      // let assets = this.edit_details.event_assets;
+      //   console.log(this.edit_all_image)
+      //   for(var i in assets){
+      //     let mapUrl=this.environment+assets[i]["url"]
+      //     this.edit_all_image.push({"uri":mapUrl});
+      //     this.originalArray.push({"uri":mapUrl})   
+      // }
       this.edit_all_image=[];
       this.originalArray=[];
       this.fileuri=[];
       this.spliceIndexArray=[];
-      let assets = this.edit_details.event_assets;
-        console.log(this.edit_all_image)
-        for(var i in assets){
-          let mapUrl=this.environment+assets[i]["url"]
-          this.edit_all_image.push({"uri":mapUrl});
-          this.originalArray.push({"uri":mapUrl})   
+      let localAssets = this.edit_details["event_options"];
+    
+      let globalassets = this.edit_details["event_assets"];
+      if(this.networkProvider.isNetworkOnline){
+        this.isNetwork = true;
+      }else{
+        this.isNetwork = false;
       }
+      
+      for(let i in localAssets["localImagePath"]){
+          let mapUrl = { "localURI": localAssets["localImagePath"][i]["localURI"],"globalURI": null,"cdvFilePath":localAssets["localImagePath"][i]["cdvFilePath"],"fileName":localAssets["localImagePath"][i]["fileName"],"delete":localAssets["localImagePath"][i]["delete"] };
+          if(globalassets!=null){
+            if(globalassets.length>i){
+              let globeURL = this.environment+globalassets[i]["url"];
+              mapUrl["globalURI"] = this.sanitizer.bypassSecurityTrustResourceUrl(globeURL);
+            }
+          }
+        console.log(mapUrl) 
+        this.edit_all_image.push(mapUrl);
+        this.originalArray.push(mapUrl);
+      }
+      console.log(this.edit_all_image)
+
       this.statusBar.backgroundColorByHexString('#0e9bff');
       this.tabBar = document.getElementById('myTabBar');
       this.tabBar.style.display = 'none';
@@ -213,10 +248,17 @@ export class EditMedicationPage implements OnInit {
               val.dossage=val.unit
               console.log(val.dossage)
           }
-      let date=this.datepipe.transform(val.event_datetime,"dd MMM yyyy")
+          let new1 = new Date(val.event_time);
+          let gethours = new1.getHours();
+          let getMinutes = new1.getMinutes();
+     
+          let new2 = new Date(val.event_datetime);
+          new2.setHours(gethours)
+          new2.setMinutes(getMinutes)
+          let event_dateTime = new2.toJSON();
       let medi_details:any= {
         event_name: val.event_name,
-        event_datetime: date + ' '+ val.event_time,
+        event_datetime: event_dateTime,
         value: Number(val.quantity) + Number(this.edit_details['value']),
         description: val.description,
         event_type: "alert_medication",
@@ -248,9 +290,27 @@ export class EditMedicationPage implements OnInit {
         cssClass: 'secondary',
         handler: () => {
           this.Progress=true;
-          this.service.commonUpdatePost(this.edit_details['id'],medi_details).subscribe(res=>{
+          // this.service.commonUpdatePost(this.edit_details['id'],medi_details).subscribe(res=>{
+          //   let getData:any=res;
+          //  this.getEventId=this.edit_details['id'];
+          //   if(this.NotifyRepeat==true && this.repeatValue.length<this.Originalvalue.length){            
+          //     let cancelArray=[];  
+          //     for(var i in this.Originalvalue){
+          //       if(+i>this.repeatValue.length-1){
+          //         let ID:any=this.getEventId+''+Number(+i+1);
+          //         cancelArray.push(ID)
+          //       }
+          //     }
+          //       this.assignOrCancelNotifications(cancelArray,val,this.getEventId);           
+          //   }else{
+          //     this.assignSchedule(val);
+          //   }               
+          // },error=>{
+          // })
+
+          this.database.updateAnEvent(this.edit_details['event_id'],medi_details).then((res)=>{
             let getData:any=res;
-           this.getEventId=this.edit_details['id'];
+            this.getEventId=this.edit_details['event_id'];
             if(this.NotifyRepeat==true && this.repeatValue.length<this.Originalvalue.length){            
               let cancelArray=[];  
               for(var i in this.Originalvalue){
@@ -259,12 +319,14 @@ export class EditMedicationPage implements OnInit {
                   cancelArray.push(ID)
                 }
               }
-                this.assignOrCancelNotifications(cancelArray,val,this.getEventId);           
+                this.assignOrCancelNotifications(cancelArray,val,this.getEventId,medi_details);           
             }else{
-              this.assignSchedule(val);
-            }               
-          },error=>{
-          })
+              this.assignSchedule(val,medi_details);
+            }                
+          }).catch(error=>{ 
+            console.log(error); 
+            this.Progress=false;
+          });
         }
       }
     ]
@@ -272,7 +334,7 @@ export class EditMedicationPage implements OnInit {
   await this.add_alert.present();
 }
 
- assignSchedule(val){
+ assignSchedule(val,medi_details?){
           let repeatAlarmValue=[];
           let getDate = new Date(val.event_datetime)
           let getTime:any = new Date(val.event_time)
@@ -305,17 +367,20 @@ export class EditMedicationPage implements OnInit {
                   priority: 2,
                   foreground: true,
                   sound: null
-                })
+                });
               })
-               if(this.spliceIndexArray.length>0){ 
-                this.deleteImage();
-              }else if(this.fileuri.length >0){ 
-              let event_id:any=this.edit_details['id'];
-                this.sample(event_id); 
-              }else{
-                this.Progress=false;
-                this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
-              }
+              // if(this.spliceIndexArray.length>0){ 
+              //   console.log('delete')
+              //   this.deleteImage(medi_details);
+              // }else if(this.fileuri.length >0){ 
+              //   console.log('fileuri')
+              //   let event_id=this.getEventId;
+              //   this.sample(event_id,medi_details); 
+              // }else{
+              //   this.Progress=false;
+              //   this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+              // }
+                this.deleteImage(medi_details);
               //this.scheduleNotifications(repeatAlarmValue,getEventId);
               
             }
@@ -341,16 +406,20 @@ export class EditMedicationPage implements OnInit {
                     priority: 2,
                     foreground: true,
                     sound: null
-                  })
-                  if(this.spliceIndexArray.length>0){ 
-                    this.deleteImage();
-                  }else if(this.fileuri.length >0){ 
-                  let event_id:any=this.edit_details['id'];
-                    this.sample(event_id); 
-                  }else{
-                    this.Progress=false;
-                    this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
-                  }
+                  });
+
+                  this.deleteImage(medi_details);
+                  // if(this.spliceIndexArray.length>0){ 
+                  //   console.log('delete')
+                  //   this.deleteImage(medi_details);
+                  // }else if(this.fileuri.length >0){ 
+                  //   console.log('fileuri')
+                  //   let event_id=this.getEventId;
+                  //   this.sample(event_id,medi_details); 
+                  // }else{
+                  //   this.Progress=false;
+                  //   this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+                  // }
                  // this.scheduleNotifications(repeatAlarmValue,getEventId);
 
 
@@ -370,16 +439,20 @@ export class EditMedicationPage implements OnInit {
                     priority: 2,
                     foreground: true,
                     sound: null
-                  })
-                  if(this.spliceIndexArray.length>0){ 
-                    this.deleteImage();
-                  }else if(this.fileuri.length >0){ 
-                  let event_id:any=this.edit_details['id'];
-                    this.sample(event_id); 
-                  }else{
-                    this.Progress=false;
-                    this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
-                  }
+                  });
+
+                  this.deleteImage(medi_details);
+                  // if(this.spliceIndexArray.length>0){ 
+                  //   console.log('delete')
+                  //   this.deleteImage(medi_details);
+                  // }else if(this.fileuri.length >0){
+                  //   console.log('fileuri') 
+                  //   let event_id=this.getEventId;
+                  //   this.sample(event_id,medi_details); 
+                  // }else{
+                  //   this.Progress=false;
+                  //   this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+                  // }
                  // this.scheduleNotifications(repeatAlarmValue,getEventId);
 
               }
@@ -403,63 +476,66 @@ export class EditMedicationPage implements OnInit {
                             priority: 2,
                             foreground: true,
                             sound: null
-                          })
-                          if(this.spliceIndexArray.length>0){ 
-                            this.deleteImage();
-                          }else if(this.fileuri.length >0){ 
-                          let event_id:any=this.edit_details['id'];
-                            this.sample(event_id); 
-                          }else{
-                            this.Progress=false;
-                            this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
-                          }
+                          });
+                          // if(this.spliceIndexArray.length>0){
+                          //   console.log('delete') 
+                          //   this.deleteImage(medi_details);
+                          // }else if(this.fileuri.length >0){ 
+                          //   console.log('fileuri') 
+                          //   let event_id=this.getEventId;
+                          //   this.sample(event_id,medi_details); 
+                          // }else{
+                          //   this.Progress=false;
+                          //   this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+                          // }
+                          this.deleteImage(medi_details);
           //  this.scheduleNotifications(repeatAlarmValue,getEventId); 
           }
 }
 
-scheduleNotifications(data,getEventId){
-  if(data!='test'){
-    this.localNotifications.schedule(data);
-  }
-  if(this.spliceIndexArray.length>0){ 
-    this.deleteImage();
-  }else if(this.fileuri.length >0){ 
-  let event_id:any=this.edit_details['id'];
-    this.sample(event_id); 
-  }else{
-    this.Progress=false;
-    this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
-  }
-}
+// scheduleNotifications(data,getEventId){
+//   if(data!='test'){
+//     this.localNotifications.schedule(data);
+//   }
+//   if(this.spliceIndexArray.length>0){ 
+//     this.deleteImage();
+//   }else if(this.fileuri.length >0){ 
+//   let event_id:any=this.edit_details['id'];
+//     this.sample(event_id); 
+//   }else{
+//     this.Progress=false;
+//     this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+//   }
+// }
 
-assignOrCancelNotifications(cancelArray,val,getEventId){
-  this.localNotifications.cancel(cancelArray).then((res)=>{
-    console.log(res);
-    this.assignSchedule(val);
-  });
-}
-  
- otherCheck(event){
-  if(event.detail.value=='Others'){
-    const validators = [ Validators.required ];
-    this.editform.controls['unit'].setValidators(validators);
-    this.editform.updateValueAndValidity();
-    this.editform.controls['unit'].updateValueAndValidity();
-  }else{
-    this.editform.controls['unit'].clearValidators();
-    this.editform.updateValueAndValidity();
-    this.editform.controls['unit'].updateValueAndValidity(); 
+  assignOrCancelNotifications(cancelArray,val,getEventId,medi_details?){
+    this.localNotifications.cancel(cancelArray).then((res)=>{
+      console.log(res);
+      this.assignSchedule(val,medi_details);
+    });
   }
-}
-
- checkValue(event){
-  console.log(event)
-  this.repeatValue=[];
-  this.repeatValue.push(event.detail.value)
   
-  this.defaultMonth= event.detail.value;
-  console.log(this.repeatValue)
-}
+  otherCheck(event){
+    if(event.detail.value=='Others'){
+      const validators = [ Validators.required ];
+      this.editform.controls['unit'].setValidators(validators);
+      this.editform.updateValueAndValidity();
+      this.editform.controls['unit'].updateValueAndValidity();
+    }else{
+      this.editform.controls['unit'].clearValidators();
+      this.editform.updateValueAndValidity();
+      this.editform.controls['unit'].updateValueAndValidity(); 
+    }
+  }
+
+  checkValue(event){
+    console.log(event)
+    this.repeatValue=[];
+    this.repeatValue.push(event.detail.value)
+    
+    this.defaultMonth= event.detail.value;
+    console.log(this.repeatValue)
+  }
 
 repeatCategChange(event){
  this.repeatValue=[];
@@ -498,7 +574,7 @@ repeatDayCheck(day,checked){
 repeatCheck(event){
  //this.defaultMonth= '1 mo.';
  this.status = event.detail.checked;
- console.log()
+
  if(this.editform['value']['event_category']!=undefined && this.editform['value']['event_category']!=null && this.editform['value']['event_category']!=''){
     this.repeatType=this.editform['value']['event_category'];
     // if(this.status==true && this.vital_alert_form['value']['repeat_category']=='others'){
@@ -512,32 +588,45 @@ repeatCheck(event){
 }
 
  
- sample(event_id){
-  const fileTransfer: FileTransferObject = this.transfer.create();
-  let data={id:event_id}
-   for(var i=0;i<this.fileuri.length;i++){
-  let options: FileUploadOptions = {
-   fileKey: 'event_assets',
-   fileName: this.fileuri[i].fileName,
-   mimeType: 'multipart/form-data',
-   params:data,
-   chunkedMode: false,
-   headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
-  }
-    fileTransfer.upload(this.fileuri[i].uri,environment.apiUrl+'events/update_image',options).then(res=>{
+ sample(event_id,medi_details?){
+  // const fileTransfer: FileTransferObject = this.transfer.create();
+  // let data={id:event_id}
+  //  for(var i=0;i<this.fileuri.length;i++){
+  // let options: FileUploadOptions = {
+  //  fileKey: 'event_assets',
+  //  fileName: this.fileuri[i].fileName,
+  //  mimeType: 'multipart/form-data',
+  //  params:data,
+  //  chunkedMode: false,
+  //  headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
+  // }
+  //   fileTransfer.upload(this.fileuri[i].uri,environment.apiUrl+'events/update_image',options).then(res=>{
     
-     if(this.fileuri.length-i ==0){
-      this.Progress=false;
-       this.presentToast('Prescription added successfully');
-       this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],{skipLocationChange: true });
-     }else{
+  //    if(this.fileuri.length-i ==0){
+  //     this.Progress=false;
+  //      this.presentToast('Prescription added successfully');
+  //      this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],{skipLocationChange: true });
+  //    }else{
 
-     }
-    },error=>{
+  //    }
+  //   },error=>{
+  //     this.Progress=false;
+  //   console.log(error)
+  //   })  
+  //   }
+
+  let data = medi_details;
+  data['event_options']['localImagePath'] = this.edit_all_image;
+  console.log(event_id,data)
+  this.database.updateAnEventImage(event_id,data).then((res)=>{
+      console.log(res);  
       this.Progress=false;
-    console.log(error)
-    })  
-    }
+      this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],{skipLocationChange: true });
+  })
+  .catch(error=>{ 
+    this.Progress=false;
+    console.log(error) 
+  });
 }
 
 
@@ -552,9 +641,9 @@ selectimage(){
   this.imagePicker.getPictures(options).then((results) => {
     for (var i = 0; i < results.length; i++) {
       console.log('Image URI: ' + results[i]);
-          this.edit_all_image.push({"uri":this.webview.convertFileSrc(results[i])});
-          console.log(this.edit_all_image,'webviewuri')
-
+          //this.edit_all_image.push({"uri":this.webview.convertFileSrc(results[i])});
+         
+          this.localFilePath = results[i]; 
           this.file.resolveLocalFilesystemUrl(results[i]).then((fileEntry: FileEntry) => {
             return new Promise((resolve, reject) => {
               fileEntry.file(meta => resolve(meta), error => reject(error));
@@ -563,7 +652,8 @@ selectimage(){
               console.log(fileMeta)
               this.audioFileName= fileMeta.name;
               this.cdvFilePath = fileMeta['localURL'];
-              this.fileuri.push({"uri":this.cdvFilePath,"fileName":this.audioFileName})  
+              this.edit_all_image.push({"localURI": this.localFilePath,"globalURI": null,"cdvFilePath":this.cdvFilePath,"fileName":this.audioFileName,"delete":false})
+              this.fileuri.push({"uri":this.cdvFilePath,"fileName":this.audioFileName})
               console.log(this.fileuri,'fileuri')               
           }) 
     }
@@ -571,6 +661,7 @@ selectimage(){
     console.log(error) 
   });
 }
+
 async AddImage() {
   const actionSheet = await this.actionSheetController.create({
     header: 'Albums',
@@ -604,9 +695,9 @@ var options: CameraOptions = {
 this.camera.getPicture(options).then((imageData) => {
 // imageData is either a base64 encoded string or a file URI
 // If it's base64 (DATA_URL):
-this.edit_all_image.push({"uri":this.webview.convertFileSrc(imageData)});
+//this.edit_all_image.push({"uri":this.webview.convertFileSrc(imageData)});
           console.log(this.edit_all_image,'webviewuri')
-
+          this.localFilePath = imageData;  
           this.file.resolveLocalFilesystemUrl(imageData).then((fileEntry: FileEntry) => {
             return new Promise((resolve, reject) => {
               fileEntry.file(meta => resolve(meta), error => reject(error));
@@ -615,6 +706,7 @@ this.edit_all_image.push({"uri":this.webview.convertFileSrc(imageData)});
               console.log(fileMeta)
               this.audioFileName= fileMeta.name;
               this.cdvFilePath = fileMeta['localURL'];
+              this.edit_all_image.push({"localURI": this.localFilePath,"globalURI": null,"cdvFilePath":this.cdvFilePath,"fileName":this.audioFileName,"delete":false})
               this.fileuri.push({"uri":this.cdvFilePath,"fileName":this.audioFileName})  
               console.log(this.fileuri,'fileuri')               
           }) 
@@ -636,49 +728,78 @@ async presentToast(message: string) {
    }
 
   
-   deleteImage(){
+   deleteImage(medi_details){
     
-    let delete_detail={"index":this.spliceIndexArray,"id":this.edit_details["id"]};
+    // let delete_detail={"index":this.spliceIndexArray,"id":this.edit_details["id"]};
     
-    this.service.deleteImage(delete_detail).subscribe(res=>{
-        console.log(res)    
-        if(this.fileuri.length >0){ 
-          let event_id:any=this.edit_details['id'];
-           this.sample(event_id); 
-        }else{
-         this.Progress=false;
-         this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
-        }   
-    })
+    // this.service.deleteImage(delete_detail).subscribe(res=>{
+    //     console.log(res)    
+    //     if(this.fileuri.length >0){ 
+    //       
+    //        this.sample(event_id); 
+    //     }else{
+    //      this.Progress=false;
+    //      this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+    //     }   
+    // })
+    let event_id=this.getEventId;
+    console.log(event_id,'deleteImage')
+    this.sample(event_id,medi_details); 
   }
 
   removeImg(index,image,originalArray){
-    let result = originalArray.some(el=>el.uri === image.uri);
+    // let result = originalArray.some(el=>el.uri === image.uri);
     
-    if(result==true){
+    // if(result==true){
      
-        var index1 = this.originalArray.findIndex(p => p.uri == image.uri)
+    //     var index1 = this.originalArray.findIndex(p => p.uri == image.uri)
        
        
+    //     this.spliceIndexArray.push(index1);
+        
+    //     this.edit_all_image.splice(index,1);
+      
+    // }else{
+      
+    //   this.edit_all_image.splice(index,1);
+      
+    //   let fileResult = this.fileuri.some(el=>el.uri === image.uri);
+    //   if(fileResult==true){
+       
+    //    var index1 = this.fileuri.findIndex(p => p.uri == image.uri)
+       
+    //     this.fileuri.splice(index1,1);
+    //   }
+      
+    // }
+
+    let result = originalArray.some(el=>el.localURI === image.localURI);
+
+    //let result1 = originalArray.some(el=>el.globalURI === image.globalURI);
+
+    if(result==true && image.globalURI!=null){
+     
+        var index1 = this.originalArray.findIndex(p => p.localURI == image.localURI && p.globalURI == image.globalURI )
+        
         this.spliceIndexArray.push(index1);
         
-        this.edit_all_image.splice(index,1);
+        this.edit_all_image[index1]["delete"]=true;
       
     }else{
       
       this.edit_all_image.splice(index,1);
       
-      let fileResult = this.fileuri.some(el=>el.uri === image.uri);
+      let fileResult = this.fileuri.some(el=>el.localURI === image.localURI);
       if(fileResult==true){
-       
-       var index1 = this.fileuri.findIndex(p => p.uri == image.uri)
-       
+        
+        var index1 = this.fileuri.findIndex(p => p.localURI == image.localURI)
+        
         this.fileuri.splice(index1,1);
       }
       
     }
-
-    
+    console.log(this.edit_all_image);
+    console.log(this.fileuri);
   }
 
   _keyPress(event: any) {

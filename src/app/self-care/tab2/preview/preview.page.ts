@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { settingsService } from '../../self-common-service/settings/settings.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { DomSanitizer} from '@angular/platform-browser';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
+import { NetworkService } from '../../../network-connectivity/network-service';
 
 @Component({
   selector: 'app-preview',
@@ -26,7 +29,9 @@ export class previewPage implements OnInit {
   tabBar:any;
   initialLogo:any;
   profile_image:any;
-  constructor(public modalController: ModalController,public service: settingsService,private changeRef: ChangeDetectorRef,private databaseSummary: DataBaseSummaryProvider) { 
+  isNetwork:boolean;
+
+  constructor(public sanitizer: DomSanitizer,private webview: WebView,public modalController: ModalController,public service: settingsService,private changeRef: ChangeDetectorRef,private databaseSummary: DataBaseSummaryProvider,private networkProvider: NetworkService) { 
     this.tabBar = document.getElementById('myTabBar');
     this.tabBar.style.display = 'none';
   }
@@ -98,8 +103,27 @@ export class previewPage implements OnInit {
         this.previewData=res;
         console.log(this.previewData)
        this.initialLogo=this.previewData['user'].name.charAt(0);
-       this.profile_image=this.previewData['profile_picture']
-      
+       //this.profile_image=this.previewData['profile_picture']
+       
+       let globalURL=null;
+       let localURL=null;
+       if(this.previewData['user']['user_picture']['url'] != null){
+         let source = this.previewData['user']['user_picture']['url'];
+         globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);  
+       }else{
+         let source = this.webview.convertFileSrc(this.previewData['user']['user_picture']['localURL']); 
+         localURL = source;
+       }
+       
+       if(this.networkProvider.isNetworkOnline){
+         this.isNetwork = true;
+         this.profile_image = globalURL!=null ? globalURL : localURL 
+       }else{
+         this.isNetwork = false;
+         this.profile_image = localURL || null; 
+       }
+
+
        this.healthDetails=this.previewData['health_detail'];
        
        if(this.healthDetails!=null){

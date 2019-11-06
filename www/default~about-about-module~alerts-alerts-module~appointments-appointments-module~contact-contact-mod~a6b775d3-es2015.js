@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3"],{
 
 /***/ "./src/app/self-care/self-common-service/settings/settings.service.ts":
 /*!****************************************************************************!*\
@@ -209,13 +209,11 @@ settingsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatabaseProvider", function() { return DatabaseProvider; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _database_interface__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./database.interface */ "./src/app/sqlite-database/database.interface.ts");
-/* harmony import */ var _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/sqlite/ngx */ "./node_modules/@ionic-native/sqlite/ngx/index.js");
-/* harmony import */ var _sync_sync__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../sync/sync */ "./src/app/sync/sync.ts");
-
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _database_interface__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./database.interface */ "./src/app/sqlite-database/database.interface.ts");
+/* harmony import */ var _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/sqlite/ngx */ "./node_modules/@ionic-native/sqlite/ngx/index.js");
+/* harmony import */ var _sync_sync__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../sync/sync */ "./src/app/sync/sync.ts");
 
 
 
@@ -229,7 +227,7 @@ __webpack_require__.r(__webpack_exports__);
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-const DATA_BASE_NAME = 'vCare4U.db';
+const DATA_BASE_NAME = 'BCared4.db';
 var user_type;
 (function (user_type) {
     user_type[user_type["Emergency"] = 1] = "Emergency";
@@ -237,8 +235,7 @@ var user_type;
     user_type[user_type["Care Giver"] = 3] = "Care Giver";
 })(user_type || (user_type = {}));
 let DatabaseProvider = class DatabaseProvider {
-    constructor(http, sqlite, platform, syncProvide) {
-        this.http = http;
+    constructor(sqlite, platform, syncProvide) {
         this.sqlite = sqlite;
         this.platform = platform;
         this.syncProvide = syncProvide;
@@ -257,13 +254,13 @@ let DatabaseProvider = class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            let sqlTable1 = `CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME)`;
+            let sqlTable1 = `CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)`;
             yield db.executeSql(sqlTable1, []);
             let sqlTable2 = `CREATE TABLE IF NOT EXISTS enum_masters(id INTEGER,name TEXT,category_name TEXT,created_at DATETIME,updated_at DATETIME)`;
             yield db.executeSql(sqlTable2, []);
             let sqlTable4 = `CREATE TABLE IF NOT EXISTS health_details(id INTEGER,health_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,attribute_name_value TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME)`;
             yield db.executeSql(sqlTable4, []);
-            let sqlTable5 = `CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME)`; //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
+            let sqlTable5 = `CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)`; //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
             yield db.executeSql(sqlTable5, []);
             let sqlTable6 = `CREATE TABLE IF NOT EXISTS user_associations(id INTEGER,patient_id INTEGER,caregiver_id INTEGER,nick_name TEXT DEFAULT NULL,created_at DATETIME,updated_at DATETIME)`;
             yield db.executeSql(sqlTable6, []);
@@ -371,10 +368,12 @@ let DatabaseProvider = class DatabaseProvider {
     }
     updateUserAndPolicyData(data) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            console.log(data);
             let user_id = yield this.getuserID();
             let user_data = data['user'];
             let policy_data = data['policy'];
             policy_data["name"] = "policy";
+            console.log(policy_data);
             return this.sqlite.create({
                 name: DATA_BASE_NAME,
                 location: 'default'
@@ -382,16 +381,57 @@ let DatabaseProvider = class DatabaseProvider {
                 let sql = `UPDATE users SET age = ?, blood_group = ? WHERE id = ? AND role_id = ?`;
                 let updateUserData = [user_data['age'], user_data['blood_group'], user_id, 1];
                 yield db.executeSql(sql, updateUserData);
-                db.executeSql(`SELECT * FROM health_details WHERE name='${policy_data['name']}'`).then((data) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                yield db.executeSql(`SELECT * FROM health_details WHERE name='${policy_data['name']}'`, []).then((data) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                    console.log(data);
                     if (data.rows.length > 0) {
                         let id = data.rows.item(0).health_id;
+                        console.log(policy_data, id);
                         this.updateHealthData(policy_data, id);
                     }
                     else {
+                        console.log(policy_data);
                         this.updateHealthData(policy_data);
                     }
-                }));
+                }), error => {
+                    console.log(error);
+                });
+            }), error => {
+                console.log(error);
+            });
+        });
+    }
+    updateUserData(data) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let user_id = yield this.getuserID();
+            return this.sqlite.create({
+                name: DATA_BASE_NAME,
+                location: 'default'
+            }).then((db) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                let sql = `UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ? AND role_id = ?`;
+                let updateUserData = [data['name'], data['email'], data['mobile_no'], user_id, 1];
+                yield db.executeSql(sql, updateUserData).then((row) => {
+                    return { event_id: row.insertId };
+                }).catch(res => {
+                    return res;
+                });
             }));
+        });
+    }
+    updateUserImage(data) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let user_id = yield this.getuserID();
+            return this.sqlite.create({
+                name: DATA_BASE_NAME,
+                location: 'default'
+            }).then((db) => {
+                let sql = `UPDATE users SET user_picture = ? WHERE id = ?`;
+                let updateEventImageData = [JSON.stringify(data), user_id];
+                return db.executeSql(sql, updateEventImageData).then((row) => {
+                    return { event_id: row.insertId };
+                }).catch(res => {
+                    return res;
+                });
+            });
         });
     }
     createEmergencyContacts(data) {
@@ -401,8 +441,8 @@ let DatabaseProvider = class DatabaseProvider {
                 name: DATA_BASE_NAME,
                 location: 'default'
             }).then((db) => {
-                let sql = `INSERT INTO emergency_details VALUES (NULL,NULL,?,?,?,?,?,?)`;
-                let createEventData = [data["contact_name"], data["emergency_no"], user_type[data["user_type"]], user_id, new Date().toJSON(), new Date().toJSON()];
+                let sql = `INSERT INTO emergency_details VALUES (NULL,NULL,?,?,?,?,?,?,?)`;
+                let createEventData = [data["contact_name"], data["emergency_no"], user_type[data["user_type"]], user_id, new Date().toJSON(), new Date().toJSON(), false];
                 return db.executeSql(sql, createEventData).then((row) => {
                     return { event_id: row.insertId };
                 }).catch(res => {
@@ -424,6 +464,19 @@ let DatabaseProvider = class DatabaseProvider {
             });
         });
     }
+    deleteCaregiverContact(id) {
+        return this.sqlite.create({
+            name: DATA_BASE_NAME,
+            location: 'default'
+        }).then((db) => {
+            let sql = `UPDATE users SET delete = ? WHERE id = ?`;
+            return db.executeSql(sql, [true, id]).then((row) => {
+                return { event_id: row.insertId };
+            }).catch(res => {
+                return res;
+            });
+        });
+    }
     updateHealthData(data, id) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let user_id = yield this.getuserID();
@@ -431,10 +484,11 @@ let DatabaseProvider = class DatabaseProvider {
                 name: DATA_BASE_NAME,
                 location: 'default'
             }).then((db) => {
-                return db.executeSql(`SELECT * FROM health_details WHERE name='${data['name']}'`).then((data) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                return db.executeSql(`SELECT * FROM health_details WHERE name='${data['name']}'`, []).then((getData) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                     let sqlQuery;
                     let healthData;
-                    if (data.rows.length > 0) {
+                    console.log(data);
+                    if (getData.rows.length > 0) {
                         sqlQuery = `UPDATE health_details SET id = ?, name = ?, attribute_name_value = ?, user_id = ?, created_at = ?, updated_at = ? WHERE health_id = ?`;
                         healthData = [data["id"], data["name"], JSON.stringify(data["attribute_name_value"]), user_id, data["created_at"], new Date().toJSON(), id];
                     }
@@ -442,12 +496,17 @@ let DatabaseProvider = class DatabaseProvider {
                         sqlQuery = `INSERT INTO health_details VALUES (NULL,NULL,?,?,?,?,?)`;
                         healthData = [data["name"], JSON.stringify(data["attribute_name_value"]), user_id, new Date().toJSON(), new Date().toJSON()];
                     }
+                    console.log(sqlQuery);
+                    console.log(healthData);
                     return db.executeSql(sqlQuery, healthData).then((row) => {
+                        console.log(row);
                         return { event_id: row.insertId };
                     }).catch(res => {
+                        console.log(res);
                         return res;
                     });
                 })).catch(res => {
+                    console.log(res);
                     return res;
                 });
             });
@@ -458,8 +517,8 @@ let DatabaseProvider = class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db) => {
-            for (let i in _database_interface__WEBPACK_IMPORTED_MODULE_4__["SQL_TABLES"]) {
-                let sql = `DELETE FROM ${_database_interface__WEBPACK_IMPORTED_MODULE_4__["SQL_TABLES"][i]}`;
+            for (let i in _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_TABLES"]) {
+                let sql = `DELETE FROM ${_database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_TABLES"][i]}`;
                 db.executeSql(sql, []);
             }
         });
@@ -474,14 +533,13 @@ let DatabaseProvider = class DatabaseProvider {
     }
 };
 DatabaseProvider.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
-    { type: _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_5__["SQLite"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
-    { type: _sync_sync__WEBPACK_IMPORTED_MODULE_6__["syncProvider"] }
+    { type: _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_4__["SQLite"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
+    { type: _sync_sync__WEBPACK_IMPORTED_MODULE_5__["syncProvider"] }
 ];
 DatabaseProvider = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({ providedIn: 'root' }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_5__["SQLite"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _sync_sync__WEBPACK_IMPORTED_MODULE_6__["syncProvider"]])
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: 'root' }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_4__["SQLite"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _sync_sync__WEBPACK_IMPORTED_MODULE_5__["syncProvider"]])
 ], DatabaseProvider);
 
 
@@ -489,4 +547,4 @@ DatabaseProvider = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /***/ })
 
 }]);
-//# sourceMappingURL=default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1-es2015.js.map
+//# sourceMappingURL=default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3-es2015.js.map

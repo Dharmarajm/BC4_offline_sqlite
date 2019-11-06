@@ -122,12 +122,14 @@ let AboutPage = class AboutPage {
             this.getUpdateData = this.update_details['user_info'];
             if (this.update_details['policies'].length != 0) {
                 this.getPolicyData = this.update_details['policies'][0]['attribute_name_value'];
+                this.created_at = this.update_details['policies'][0]['created_at'];
                 this.mediClaim = this.getPolicyData['mediclaim_policy'];
                 this.policyIssuer = this.getPolicyData['policy_issuer'];
             }
             else {
                 this.mediClaim = "";
                 this.policyIssuer = "";
+                this.created_at = null;
             }
         });
         this.tabBar = document.getElementById('myTabBar');
@@ -146,11 +148,17 @@ let AboutPage = class AboutPage {
     }
     updateValues(update) {
         if (this.update.valid) {
-            let data = { "user": { "blood_group": update.blood_group, "age": update.age },
-                "policy": { "attribute_name_value": {
+            let data = { "user": {
+                    "blood_group": update.blood_group, "age": update.age
+                },
+                "policy": {
+                    "attribute_name_value": {
                         "mediclaim_policy": update.mediclaim_policy,
                         "policy_issuer": update.policy_issuer
-                    } } };
+                    },
+                    "created_at": this.created_at
+                }
+            };
             this.addconfirmation(data);
         }
         else {

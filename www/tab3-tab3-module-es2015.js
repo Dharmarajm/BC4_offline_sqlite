@@ -18,7 +18,7 @@ module.exports = "<ion-header>\n\t<ion-toolbar color=\"primary\">\n\t\t<ion-titl
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header class=\"main-header shadow\">\n   <ion-toolbar color=\"primary\">\n      <ion-title class=\"ion-padding-start\">Settings</ion-title>\n      <ion-buttons slot=\"end\">\n         <ion-button>\n         <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22.888\" height=\"22.888\" viewBox=\"0 0 22.888 22.888\"><g transform=\"translate(0.25 0.25)\"><path d=\"M11.194,0A11.194,11.194,0,1,0,22.388,11.194,11.206,11.206,0,0,0,11.194,0Zm0,21.527A10.333,10.333,0,1,1,21.527,11.194,10.345,10.345,0,0,1,11.194,21.527Z\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M25.431,37a.43.43,0,0,0-.431.431v.861a.431.431,0,1,0,.861,0v-.861A.43.43,0,0,0,25.431,37Z\" transform=\"translate(-14.236 -21.07)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M21.493,9h-.05A3.445,3.445,0,0,0,18,12.444a.431.431,0,1,0,.861,0,2.583,2.583,0,0,1,2.62-2.583,2.632,2.632,0,0,1,2.546,2.546,2.571,2.571,0,0,1-1.184,2.21,4.107,4.107,0,0,0-1.829,3.493v1.224a.431.431,0,1,0,.861,0V18.109a3.293,3.293,0,0,1,1.435-2.769A3.427,3.427,0,0,0,24.888,12.4,3.468,3.468,0,0,0,21.493,9Z\" transform=\"translate(-10.25 -5.125)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n         </ion-button>\n         <ion-button>\n         <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"26.711\" height=\"22.342\" viewBox=\"0 0 26.711 22.342\"><g transform=\"translate(0.25 0.25)\"><path d=\"M22.268,12.074A7.48,7.48,0,0,0,14.889,5,7.7,7.7,0,0,0,8.8,8.061c-.033-.017-.068-.029-.1-.045-.086-.042-.172-.081-.261-.116-.052-.021-.1-.039-.156-.057-.086-.03-.173-.057-.262-.081-.052-.014-.1-.028-.157-.041-.1-.022-.194-.038-.293-.053-.046-.007-.091-.016-.138-.021a3.849,3.849,0,0,0-.44-.027,3.936,3.936,0,0,0-3.932,3.932c0,.056,0,.111.007.166A6.04,6.04,0,0,0,0,16.862a5.618,5.618,0,0,0,5.611,5.612H7.863a.437.437,0,1,0,0-.874H5.611A4.743,4.743,0,0,1,.874,16.862a5.193,5.193,0,0,1,2.81-4.479l.248-.118v-.275c0-.054,0-.109.007-.164l0-.076-.005-.088c0-.036-.005-.073-.005-.109A3.037,3.037,0,0,1,7.39,8.524l.1.016a3.07,3.07,0,0,1,.345.077l.046.012a3.048,3.048,0,0,1,.365.14l.091.044a3.019,3.019,0,0,1,.308.174,3.057,3.057,0,0,1,1.4,2.566.437.437,0,0,0,.874,0,3.923,3.923,0,0,0-1.4-3,6.919,6.919,0,0,1,5.366-2.677,6.6,6.6,0,0,1,6.486,6.066,8.343,8.343,0,0,0-1.784.054.437.437,0,0,0,.065.869.429.429,0,0,0,.066-.005,8.054,8.054,0,0,1,2.046,0,4.478,4.478,0,0,1,3.567,4.362A4.386,4.386,0,0,1,20.956,21.6H19.221a.437.437,0,0,0,0,.874h1.735a5.26,5.26,0,0,0,5.254-5.254A5.376,5.376,0,0,0,22.268,12.074Z\" transform=\"translate(0 -5)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M29.174,36.242a.437.437,0,0,0-.437.437,3.932,3.932,0,1,1-3.932-3.932A3.789,3.789,0,0,1,28,34.495H25.242a.437.437,0,1,0,0,.874h3.5a.455.455,0,0,0,.092-.018.471.471,0,0,0,.079-.017h0a.393.393,0,0,0,.038-.027.276.276,0,0,0,.145-.137.432.432,0,0,0,.046-.073.451.451,0,0,0,.024-.116.476.476,0,0,0,.01-.048v0h0V31.437a.437.437,0,0,0-.874,0v2.009a4.633,4.633,0,0,0-3.495-1.573,4.805,4.805,0,1,0,4.805,4.805A.437.437,0,0,0,29.174,36.242Z\" transform=\"translate(-11.263 -19.642)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n         </ion-button>\n         <ion-button>\n         <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19.708\" height=\"22.342\" viewBox=\"0 0 19.708 22.342\"><g transform=\"translate(0.255 0.25)\"><path d=\"M22.41,17.986a8.877,8.877,0,0,1-2.789-6.47V7.945A5.779,5.779,0,0,0,16.234,2.7a7.984,7.984,0,0,0-1.388-.483V1.986a1.986,1.986,0,0,0-3.971,0v.263A7.863,7.863,0,0,0,9.625,2.7,6.008,6.008,0,0,0,6.109,7.943v3.574a8.811,8.811,0,0,1-2.663,6.47.4.4,0,0,0,.212.673l3.769.651c.7.121,1.349.22,1.964.3a3.926,3.926,0,0,0,7.082,0c.613-.081,1.256-.18,1.954-.3l3.769-.651a.4.4,0,0,0,.213-.673Zm-10.741-16a1.191,1.191,0,1,1,2.383,0v.072a7.9,7.9,0,0,0-2.383.019Zm1.264,19.062a3.183,3.183,0,0,1-2.548-1.316,24.6,24.6,0,0,0,2.544.137,24.462,24.462,0,0,0,2.554-.139A3.184,3.184,0,0,1,12.933,21.048Zm5.36-2.521c-.762.131-1.461.238-2.121.322h0c-.291.037-.573.069-.85.1h-.009c-.253.025-.5.046-.745.064l-.139.01c-.212.014-.422.025-.63.033l-.129.005c-.494.017-.981.017-1.475,0l-.132-.006q-.309-.012-.622-.033l-.148-.01c-.238-.017-.479-.037-.726-.062l-.025,0c-.275-.027-.556-.06-.844-.1h0c-.662-.084-1.363-.191-2.129-.323L4.52,18A9.558,9.558,0,0,0,6.9,11.517V7.945A5.2,5.2,0,0,1,9.957,3.421a7.1,7.1,0,0,1,1.389-.47h.012a7.22,7.22,0,0,1,3.01-.027c.005,0,.01,0,.015,0a7.182,7.182,0,0,1,1.519.5,5.041,5.041,0,0,1,2.923,4.524v3.574A9.663,9.663,0,0,0,21.334,18Z\" transform=\"translate(-3.329)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n         </ion-button>\n      </ion-buttons>\n   </ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n   <ion-item>\n      <ion-avatar slot=\"start\">\n         <span *ngIf=\"pic?.profile_pic == null\">{{initialLogo}}</span>\n         <img *ngIf=\"pic?.profile_pic != null\" [src]=\"img\">\n      </ion-avatar>\n      <ion-label>\n         <h3>{{pic?.user_info.name}}</h3>\n         <!-- <h6>{{pic?.user_info.email}}</h6> -->\n         <ion-button class=\"trans_btn copy_btn\"  (click)=\"copyText(pic.user_info.user_uid)\">\n            UID: {{pic?.user_info.user_uid}}\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12.652\" height=\"15.8\" viewBox=\"0 0 12.652 15.8\"><g transform=\"translate(-48.65)\"><g transform=\"translate(48.65)\"><path d=\"M57.244,85.4H49.9a1.25,1.25,0,0,0-1.249,1.249V97.188A1.25,1.25,0,0,0,49.9,98.437h7.345a1.25,1.25,0,0,0,1.249-1.249V86.649A1.254,1.254,0,0,0,57.244,85.4Zm.372,11.785a.376.376,0,0,1-.375.375H49.9a.376.376,0,0,1-.375-.375V86.649a.376.376,0,0,1,.375-.375h7.345a.376.376,0,0,1,.375.375Z\" transform=\"translate(-48.65 -82.637)\" fill=\"#483df6\"/><path d=\"M144.044,0H136.7a1.25,1.25,0,0,0-1.249,1.249.437.437,0,1,0,.874,0A.376.376,0,0,1,136.7.874h7.345a.376.376,0,0,1,.375.375V11.788a.376.376,0,0,1-.375.375.437.437,0,0,0,0,.874,1.25,1.25,0,0,0,1.249-1.249V1.249A1.25,1.25,0,0,0,144.044,0Z\" transform=\"translate(-132.641)\" fill=\"#483df6\"/></g></g></svg>\n         </ion-button>\n         <ion-button class=\"trans_btn\" (click)=\"edit()\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\"><g transform=\"translate(-5.6 -6.9)\"><g transform=\"translate(5.6 6.9)\"><path d=\"M16.3,114.3H6.083a.385.385,0,0,0-.383.383.391.391,0,0,0,.383.383H16.308a.385.385,0,0,0,.383-.383A.393.393,0,0,0,16.3,114.3Z\" transform=\"translate(-5.691 -104.271)\" fill=\"#483df6\"/><path d=\"M5.609,13.539,5.6,15.36a.4.4,0,0,0,.112.28.374.374,0,0,0,.271.112l1.812-.009a.374.374,0,0,0,.271-.112l6.256-6.256a.4.4,0,0,0,0-.551L12.529,7.012a.4.4,0,0,0-.551,0L10.726,8.273l-5.005,5A.416.416,0,0,0,5.609,13.539Zm6.649-5.705,1.261,1.261-.71.71L11.548,8.543l.71-.71ZM6.384,13.707,11,9.094l1.261,1.261-4.613,4.6-1.27.009Z\" transform=\"translate(-5.6 -6.9)\" fill=\"#483df6\"/></g></g></svg>\n            edit\n         </ion-button>\n      </ion-label>\n   </ion-item>\n   <!-- <ion-row class=\"ion-padding\">\n      <ion-col size=\"4\" class=\"ion-align-self-center\">\n         <ion-avatar>\n            <img [src]=\"img\">\n         </ion-avatar>\n      </ion-col>\n      <ion-col>\n         <ion-text color=\"dark\">\n            <h1>{{pic?.user_info.name}}</h1>\n            <h6>{{pic?.user_info.email}}</h6>\n            <h6>ID : {{pic?.user_info.user_uid}}</h6>\n         </ion-text>\n         <ion-icon name=\"create\" size=\"large\" (click)=\"edit()\" class=\"ion-float-right\"></ion-icon>\n      </ion-col>\n\n   </ion-row> -->\n   <ion-list>\n      <ion-item button (click)=\"alertToneSetting()\">\n         <ion-label>\n           <h4>Alert Tone</h4>\n           <p>Set your alert tone</p>\n           <h2>{{this.alertFileName}}</h2>\n         </ion-label>\n      </ion-item>\n\n      <ion-item button (click)=\"remainderToneSetting()\">\n         <ion-label>\n            <h4>Reminder Tone</h4>\n            <p>Set your reminder tone</p>\n            <h2>{{this.remainderFileName}}</h2>\n         </ion-label>\n      </ion-item>\n\n      <!-- <ion-item button (click)=\"careGiverName()\">\n         <ion-label>\n            <h4>Care Giver</h4>\n            <p>Choose your carer giver</p>\n            <h2>{{data1}}</h2>\n         </ion-label>\n      </ion-item> -->\n\n\n      <ion-item button (click)=\"reorderDuration()\">\n         <ion-label>\n            <h4>Medication Reorder Quantity</h4>\n            <p>Set your medication recorder quantity</p>\n            <h2>{{reOrderUnit}}</h2>\n         </ion-label>\n      </ion-item>\n\n\n      <ion-item button (click)=\"autoUpdateDuration()\">\n         <ion-label>\n            <h4>Auto Update</h4>\n            <p>which sync your app data to the cloud storage</p>\n            <h2>{{autoUpdateDays}}</h2>\n         </ion-label>\n      </ion-item>\n\n      <ion-item button (click)=\"goToAbout()\">\n         <ion-label>\n            <h4>About</h4>\n            <p>Know about us</p>\n         </ion-label>\n      </ion-item>\n\n      <ion-item button (click)=\"goToterms()\">\n         <ion-label>\n            <h4>Terms & Conditions</h4>\n            <p>Read to know the terms & conditions of us</p>\n         </ion-label>\n      </ion-item>\n\n      <ion-item button (click)=\"logout()\">\n         <ion-label>\n            <h4>Logout</h4>\n            <p>You will be logout from the application</p>\n         </ion-label>\n      </ion-item>\n\n   </ion-list>\n\n</ion-content>\n"
+module.exports = "<ion-header class=\"main-header shadow\">\n   <ion-toolbar color=\"primary\">\n      <ion-title class=\"ion-padding-start\">Settings</ion-title>\n      <ion-buttons slot=\"end\">\n         <ion-button>\n         <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22.888\" height=\"22.888\" viewBox=\"0 0 22.888 22.888\"><g transform=\"translate(0.25 0.25)\"><path d=\"M11.194,0A11.194,11.194,0,1,0,22.388,11.194,11.206,11.206,0,0,0,11.194,0Zm0,21.527A10.333,10.333,0,1,1,21.527,11.194,10.345,10.345,0,0,1,11.194,21.527Z\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M25.431,37a.43.43,0,0,0-.431.431v.861a.431.431,0,1,0,.861,0v-.861A.43.43,0,0,0,25.431,37Z\" transform=\"translate(-14.236 -21.07)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M21.493,9h-.05A3.445,3.445,0,0,0,18,12.444a.431.431,0,1,0,.861,0,2.583,2.583,0,0,1,2.62-2.583,2.632,2.632,0,0,1,2.546,2.546,2.571,2.571,0,0,1-1.184,2.21,4.107,4.107,0,0,0-1.829,3.493v1.224a.431.431,0,1,0,.861,0V18.109a3.293,3.293,0,0,1,1.435-2.769A3.427,3.427,0,0,0,24.888,12.4,3.468,3.468,0,0,0,21.493,9Z\" transform=\"translate(-10.25 -5.125)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n         </ion-button>\n         <ion-button>\n         <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"26.711\" height=\"22.342\" viewBox=\"0 0 26.711 22.342\"><g transform=\"translate(0.25 0.25)\"><path d=\"M22.268,12.074A7.48,7.48,0,0,0,14.889,5,7.7,7.7,0,0,0,8.8,8.061c-.033-.017-.068-.029-.1-.045-.086-.042-.172-.081-.261-.116-.052-.021-.1-.039-.156-.057-.086-.03-.173-.057-.262-.081-.052-.014-.1-.028-.157-.041-.1-.022-.194-.038-.293-.053-.046-.007-.091-.016-.138-.021a3.849,3.849,0,0,0-.44-.027,3.936,3.936,0,0,0-3.932,3.932c0,.056,0,.111.007.166A6.04,6.04,0,0,0,0,16.862a5.618,5.618,0,0,0,5.611,5.612H7.863a.437.437,0,1,0,0-.874H5.611A4.743,4.743,0,0,1,.874,16.862a5.193,5.193,0,0,1,2.81-4.479l.248-.118v-.275c0-.054,0-.109.007-.164l0-.076-.005-.088c0-.036-.005-.073-.005-.109A3.037,3.037,0,0,1,7.39,8.524l.1.016a3.07,3.07,0,0,1,.345.077l.046.012a3.048,3.048,0,0,1,.365.14l.091.044a3.019,3.019,0,0,1,.308.174,3.057,3.057,0,0,1,1.4,2.566.437.437,0,0,0,.874,0,3.923,3.923,0,0,0-1.4-3,6.919,6.919,0,0,1,5.366-2.677,6.6,6.6,0,0,1,6.486,6.066,8.343,8.343,0,0,0-1.784.054.437.437,0,0,0,.065.869.429.429,0,0,0,.066-.005,8.054,8.054,0,0,1,2.046,0,4.478,4.478,0,0,1,3.567,4.362A4.386,4.386,0,0,1,20.956,21.6H19.221a.437.437,0,0,0,0,.874h1.735a5.26,5.26,0,0,0,5.254-5.254A5.376,5.376,0,0,0,22.268,12.074Z\" transform=\"translate(0 -5)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M29.174,36.242a.437.437,0,0,0-.437.437,3.932,3.932,0,1,1-3.932-3.932A3.789,3.789,0,0,1,28,34.495H25.242a.437.437,0,1,0,0,.874h3.5a.455.455,0,0,0,.092-.018.471.471,0,0,0,.079-.017h0a.393.393,0,0,0,.038-.027.276.276,0,0,0,.145-.137.432.432,0,0,0,.046-.073.451.451,0,0,0,.024-.116.476.476,0,0,0,.01-.048v0h0V31.437a.437.437,0,0,0-.874,0v2.009a4.633,4.633,0,0,0-3.495-1.573,4.805,4.805,0,1,0,4.805,4.805A.437.437,0,0,0,29.174,36.242Z\" transform=\"translate(-11.263 -19.642)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n         </ion-button>\n         <ion-button>\n         <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19.708\" height=\"22.342\" viewBox=\"0 0 19.708 22.342\"><g transform=\"translate(0.255 0.25)\"><path d=\"M22.41,17.986a8.877,8.877,0,0,1-2.789-6.47V7.945A5.779,5.779,0,0,0,16.234,2.7a7.984,7.984,0,0,0-1.388-.483V1.986a1.986,1.986,0,0,0-3.971,0v.263A7.863,7.863,0,0,0,9.625,2.7,6.008,6.008,0,0,0,6.109,7.943v3.574a8.811,8.811,0,0,1-2.663,6.47.4.4,0,0,0,.212.673l3.769.651c.7.121,1.349.22,1.964.3a3.926,3.926,0,0,0,7.082,0c.613-.081,1.256-.18,1.954-.3l3.769-.651a.4.4,0,0,0,.213-.673Zm-10.741-16a1.191,1.191,0,1,1,2.383,0v.072a7.9,7.9,0,0,0-2.383.019Zm1.264,19.062a3.183,3.183,0,0,1-2.548-1.316,24.6,24.6,0,0,0,2.544.137,24.462,24.462,0,0,0,2.554-.139A3.184,3.184,0,0,1,12.933,21.048Zm5.36-2.521c-.762.131-1.461.238-2.121.322h0c-.291.037-.573.069-.85.1h-.009c-.253.025-.5.046-.745.064l-.139.01c-.212.014-.422.025-.63.033l-.129.005c-.494.017-.981.017-1.475,0l-.132-.006q-.309-.012-.622-.033l-.148-.01c-.238-.017-.479-.037-.726-.062l-.025,0c-.275-.027-.556-.06-.844-.1h0c-.662-.084-1.363-.191-2.129-.323L4.52,18A9.558,9.558,0,0,0,6.9,11.517V7.945A5.2,5.2,0,0,1,9.957,3.421a7.1,7.1,0,0,1,1.389-.47h.012a7.22,7.22,0,0,1,3.01-.027c.005,0,.01,0,.015,0a7.182,7.182,0,0,1,1.519.5,5.041,5.041,0,0,1,2.923,4.524v3.574A9.663,9.663,0,0,0,21.334,18Z\" transform=\"translate(-3.329)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n         </ion-button>\n      </ion-buttons>\n   </ion-toolbar>\n</ion-header>\n<ion-content class=\"ion-padding\">\n   <ion-item>\n      <ion-avatar slot=\"start\">\n         <span *ngIf=\"img == null\">{{initialLogo}}</span>\n         <img *ngIf=\"img != null\" [src]=\"img\">\n      </ion-avatar>\n      <ion-label>\n         <h3>{{pic?.user_info.name}}</h3>\n         <!-- <h6>{{pic?.user_info.email}}</h6> -->\n         <ion-button class=\"trans_btn copy_btn\"  (click)=\"copyText(pic.user_info.user_uid)\">\n            UID: {{pic?.user_info.user_uid}}\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12.652\" height=\"15.8\" viewBox=\"0 0 12.652 15.8\"><g transform=\"translate(-48.65)\"><g transform=\"translate(48.65)\"><path d=\"M57.244,85.4H49.9a1.25,1.25,0,0,0-1.249,1.249V97.188A1.25,1.25,0,0,0,49.9,98.437h7.345a1.25,1.25,0,0,0,1.249-1.249V86.649A1.254,1.254,0,0,0,57.244,85.4Zm.372,11.785a.376.376,0,0,1-.375.375H49.9a.376.376,0,0,1-.375-.375V86.649a.376.376,0,0,1,.375-.375h7.345a.376.376,0,0,1,.375.375Z\" transform=\"translate(-48.65 -82.637)\" fill=\"#483df6\"/><path d=\"M144.044,0H136.7a1.25,1.25,0,0,0-1.249,1.249.437.437,0,1,0,.874,0A.376.376,0,0,1,136.7.874h7.345a.376.376,0,0,1,.375.375V11.788a.376.376,0,0,1-.375.375.437.437,0,0,0,0,.874,1.25,1.25,0,0,0,1.249-1.249V1.249A1.25,1.25,0,0,0,144.044,0Z\" transform=\"translate(-132.641)\" fill=\"#483df6\"/></g></g></svg>\n         </ion-button>\n         <ion-button class=\"trans_btn\" (click)=\"edit()\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\"><g transform=\"translate(-5.6 -6.9)\"><g transform=\"translate(5.6 6.9)\"><path d=\"M16.3,114.3H6.083a.385.385,0,0,0-.383.383.391.391,0,0,0,.383.383H16.308a.385.385,0,0,0,.383-.383A.393.393,0,0,0,16.3,114.3Z\" transform=\"translate(-5.691 -104.271)\" fill=\"#483df6\"/><path d=\"M5.609,13.539,5.6,15.36a.4.4,0,0,0,.112.28.374.374,0,0,0,.271.112l1.812-.009a.374.374,0,0,0,.271-.112l6.256-6.256a.4.4,0,0,0,0-.551L12.529,7.012a.4.4,0,0,0-.551,0L10.726,8.273l-5.005,5A.416.416,0,0,0,5.609,13.539Zm6.649-5.705,1.261,1.261-.71.71L11.548,8.543l.71-.71ZM6.384,13.707,11,9.094l1.261,1.261-4.613,4.6-1.27.009Z\" transform=\"translate(-5.6 -6.9)\" fill=\"#483df6\"/></g></g></svg>\n            edit\n         </ion-button>\n      </ion-label>\n   </ion-item>\n   <!-- <ion-row class=\"ion-padding\">\n      <ion-col size=\"4\" class=\"ion-align-self-center\">\n         <ion-avatar>\n            <img [src]=\"img\">\n         </ion-avatar>\n      </ion-col>\n      <ion-col>\n         <ion-text color=\"dark\">\n            <h1>{{pic?.user_info.name}}</h1>\n            <h6>{{pic?.user_info.email}}</h6>\n            <h6>ID : {{pic?.user_info.user_uid}}</h6>\n         </ion-text>\n         <ion-icon name=\"create\" size=\"large\" (click)=\"edit()\" class=\"ion-float-right\"></ion-icon>\n      </ion-col>\n\n   </ion-row> -->\n   <ion-list>\n      <ion-item button (click)=\"alertToneSetting()\">\n         <ion-label>\n           <h4>Alert Tone</h4>\n           <p>Set your alert tone</p>\n           <h2>{{this.alertFileName}}</h2>\n         </ion-label>\n      </ion-item>\n\n      <ion-item button (click)=\"remainderToneSetting()\">\n         <ion-label>\n            <h4>Reminder Tone</h4>\n            <p>Set your reminder tone</p>\n            <h2>{{this.remainderFileName}}</h2>\n         </ion-label>\n      </ion-item>\n\n      <!-- <ion-item button (click)=\"careGiverName()\">\n         <ion-label>\n            <h4>Care Giver</h4>\n            <p>Choose your carer giver</p>\n            <h2>{{data1}}</h2>\n         </ion-label>\n      </ion-item> -->\n\n\n      <ion-item button (click)=\"reorderDuration()\">\n         <ion-label>\n            <h4>Medication Reorder Quantity</h4>\n            <p>Set your medication recorder quantity</p>\n            <h2>{{reOrderUnit}}</h2>\n         </ion-label>\n      </ion-item>\n\n\n      <ion-item button (click)=\"autoUpdateDuration()\">\n         <ion-label>\n            <h4>Auto Update</h4>\n            <p>which sync your app data to the cloud storage</p>\n            <h2>{{autoUpdateDays}}</h2>\n         </ion-label>\n      </ion-item>\n\n      <ion-item button (click)=\"goToAbout()\">\n         <ion-label>\n            <h4>About</h4>\n            <p>Know about us</p>\n         </ion-label>\n      </ion-item>\n\n      <ion-item button (click)=\"goToterms()\">\n         <ion-label>\n            <h4>Terms & Conditions</h4>\n            <p>Read to know the terms & conditions of us</p>\n         </ion-label>\n      </ion-item>\n\n      <ion-item button (click)=\"logout()\">\n         <ion-label>\n            <h4>Logout</h4>\n            <p>You will be logout from the application</p>\n         </ion-label>\n      </ion-item>\n\n   </ion-list>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -55,10 +55,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../self-common-service/settings/settings.service */ "./src/app/self-care/self-common-service/settings/settings.service.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
-
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
 
 
 
@@ -76,8 +76,10 @@ __webpack_require__.r(__webpack_exports__);
 
 // import { Clipboard } from '@ionic-native/clipboard/ngx';
 
+
+
 let EditProfilePage = class EditProfilePage {
-    constructor(toast, actionSheetController, fb, sanitizer, route, file, transfer, camera, imagePicker, webview, crop, serv, navParams, modalController, toastController) {
+    constructor(toast, actionSheetController, fb, sanitizer, route, file, transfer, camera, imagePicker, webview, crop, serv, navParams, modalController, toastController, networkProvider, database) {
         // this.route.queryParams.subscribe(params => {
         //     if (params && params.special) {
         //       console.log(params)
@@ -109,14 +111,29 @@ let EditProfilePage = class EditProfilePage {
         this.navParams = navParams;
         this.modalController = modalController;
         this.toastController = toastController;
+        this.networkProvider = networkProvider;
+        this.database = database;
         this.cdvFilePath = null;
         this.editprofile = this.navParams.get('pics');
-        if (this.editprofile.profile_pic != null) {
-            let source = this.editprofile['profile_pic'];
-            this.cdvFilePath1 = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+        let globalURL = null;
+        let localURL = null;
+        if (this.editprofile['user_info']['user_picture']['url'] != null) {
+            let source = this.editprofile['user_info']['user_picture']['url'];
+            globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+            //this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
         }
         else {
-            this.cdvFilePath1 = null;
+            //this.cdvFilePath1= null;
+            let source = this.webview.convertFileSrc(this.editprofile['user_info']['user_picture']['localURL']);
+            localURL = source;
+        }
+        if (this.networkProvider.isNetworkOnline) {
+            this.isNetwork = true;
+            this.cdvFilePath1 = globalURL != null ? globalURL : localURL;
+        }
+        else {
+            this.isNetwork = false;
+            this.cdvFilePath1 = localURL;
         }
         // this.cdvFilePath1=this.editprofile['profile_pic']
         this.initialLogo = this.editprofile.user_info.name.charAt(0);
@@ -137,21 +154,28 @@ let EditProfilePage = class EditProfilePage {
     ionViewDidEnter() {
         this.namefocus.setFocus();
     }
-    sample() {
-        const fileTransfer = this.transfer.create();
-        let data = {};
-        let options = {
-            fileKey: 'user_picture',
-            fileName: this.audioFileName,
-            mimeType: 'multipart/form-data',
-            params: data,
-            chunkedMode: false,
-            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
-        };
-        fileTransfer.upload(this.cdvFilePath, _environments_environment__WEBPACK_IMPORTED_MODULE_12__["environment"].apiUrl + 'users/profile_picture', options).then(res => {
+    sample(data) {
+        // const fileTransfer: FileTransferObject = this.transfer.create();
+        // let data={}
+        // let options: FileUploadOptions = {
+        //  fileKey: 'user_picture',
+        //  fileName: this.audioFileName,
+        //  mimeType: 'multipart/form-data',
+        //  params:data,
+        //  chunkedMode: false,
+        //  headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
+        // }
+        // fileTransfer.upload(this.cdvFilePath,environment.apiUrl+'users/profile_picture',options).then(res=>{
+        //   this.presentToast('Profile updated successfully');
+        //   console.log(res,'res');
+        // }).catch();
+        this.database.updateUserImage(data).then(res => {
+            console.log(res);
             this.presentToast('Profile updated successfully');
-            console.log(res, 'res');
-        }).catch();
+        }).catch(error => {
+            this.presentToast('Failed to update the profile');
+            console.log(error);
+        });
     }
     selectimage() {
         let options = {
@@ -175,7 +199,13 @@ let EditProfilePage = class EditProfilePage {
                     this.audioFileName = fileMeta.name;
                     this.cdvFilePath = fileMeta['localURL'];
                     console.log(this.cdvFilePath, 'filepath');
-                    this.sample();
+                    let source = this.editprofile['user_info']['user_picture']['url'];
+                    let userPicturedata = {
+                        url: source,
+                        localURL: newImage,
+                        cdvFilePath: this.cdvFilePath
+                    };
+                    this.sample(userPicturedata);
                 });
             }, error => console.error('Error cropping image', error));
         }, (err) => {
@@ -230,7 +260,13 @@ let EditProfilePage = class EditProfilePage {
                     this.audioFileName = fileMeta.name;
                     this.cdvFilePath = fileMeta['localURL'];
                     console.log(this.cdvFilePath, 'filepath');
-                    this.sample();
+                    let source = this.editprofile['user_info']['user_picture']['url'];
+                    let userPicturedata = {
+                        url: source,
+                        localURL: newImage,
+                        cdvFilePath: this.cdvFilePath
+                    };
+                    this.sample(userPicturedata);
                 });
             }, error => console.error('Error cropping image', error));
         }, (err) => {
@@ -247,11 +283,17 @@ let EditProfilePage = class EditProfilePage {
                 email: this.useremailupdate,
                 mobile_no: this.userphoneupdate
             };
-            this.serv.editprofile(data, this.editprofile.user_info.id).subscribe(res => {
+            //  this.serv.editprofile(data, this.editprofile.user_info.id).subscribe(res=>{
+            //   this.presentToast('Profile updated successfully');
+            //   this.modalController.dismiss();
+            //  },error=>{
+            //  })
+            this.database.updateUserData(data).then(res => {
+                console.log(res);
                 this.presentToast('Profile updated successfully');
                 this.modalController.dismiss();
-            }, error => {
-                //alert("Update Failed...")
+            }).catch(err => {
+                console.log(err);
             });
         }
         else {
@@ -280,8 +322,8 @@ let EditProfilePage = class EditProfilePage {
     }
 };
 EditProfilePage.ctorParameters = () => [
-    { type: _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_14__["Toast"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_13__["ActionSheetController"] },
+    { type: _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_13__["Toast"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_12__["ActionSheetController"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormBuilder"] },
     { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__["DomSanitizer"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["ActivatedRoute"] },
@@ -292,9 +334,11 @@ EditProfilePage.ctorParameters = () => [
     { type: _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_8__["WebView"] },
     { type: _ionic_native_crop_ngx__WEBPACK_IMPORTED_MODULE_3__["Crop"] },
     { type: _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_10__["settingsService"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_13__["NavParams"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_13__["ModalController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_13__["ToastController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_12__["NavParams"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_12__["ModalController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_12__["ToastController"] },
+    { type: _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_15__["NetworkService"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_14__["DatabaseProvider"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('name', { static: true }),
@@ -306,7 +350,7 @@ EditProfilePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./edit-profile.page.html */ "./node_modules/raw-loader/index.js!./src/app/self-care/tab3/edit-profile/edit-profile.page.html"),
         styles: [__webpack_require__(/*! ./edit-profile.page.scss */ "./src/app/self-care/tab3/edit-profile/edit-profile.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_14__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_13__["ActionSheetController"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormBuilder"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__["DomSanitizer"], _angular_router__WEBPACK_IMPORTED_MODULE_9__["ActivatedRoute"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_6__["File"], _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_5__["FileTransfer"], _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_4__["Camera"], _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_2__["ImagePicker"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_8__["WebView"], _ionic_native_crop_ngx__WEBPACK_IMPORTED_MODULE_3__["Crop"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_10__["settingsService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_13__["NavParams"], _ionic_angular__WEBPACK_IMPORTED_MODULE_13__["ModalController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_13__["ToastController"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_13__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_12__["ActionSheetController"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormBuilder"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__["DomSanitizer"], _angular_router__WEBPACK_IMPORTED_MODULE_9__["ActivatedRoute"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_6__["File"], _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_5__["FileTransfer"], _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_4__["Camera"], _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_2__["ImagePicker"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_8__["WebView"], _ionic_native_crop_ngx__WEBPACK_IMPORTED_MODULE_3__["Crop"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_10__["settingsService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_12__["NavParams"], _ionic_angular__WEBPACK_IMPORTED_MODULE_12__["ModalController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_12__["ToastController"], _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_15__["NetworkService"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_14__["DatabaseProvider"]])
 ], EditProfilePage);
 
 
@@ -343,6 +387,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit_profile_edit_profile_page__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./edit-profile/edit-profile.page */ "./src/app/self-care/tab3/edit-profile/edit-profile.page.ts");
 /* harmony import */ var _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @ionic-native/clipboard/ngx */ "./node_modules/@ionic-native/clipboard/ngx/index.js");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
 
 
 
@@ -363,6 +408,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 //import { Base64 } from '@ionic-native/base64/ngx';
+
 
 
 
@@ -392,7 +438,8 @@ Tab3PageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _ionic_native_file_chooser_ngx__WEBPACK_IMPORTED_MODULE_13__["FileChooser"],
             _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_14__["LocalNotifications"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"],
-            _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_19__["Toast"]
+            _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_19__["Toast"],
+            _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_20__["DataBaseSummaryProvider"]
         ],
     })
 ], Tab3PageModule);
@@ -431,12 +478,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit_profile_edit_profile_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./edit-profile/edit-profile.page */ "./src/app/self-care/tab3/edit-profile/edit-profile.page.ts");
 /* harmony import */ var _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/clipboard/ngx */ "./node_modules/@ionic-native/clipboard/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
-/* harmony import */ var _ionic_native_file_chooser_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/file-chooser/ngx */ "./node_modules/@ionic-native/file-chooser/ngx/index.js");
-/* harmony import */ var _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/file-path/ngx */ "./node_modules/@ionic-native/file-path/ngx/index.js");
-/* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
-/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
-/* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
-/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/ionic-webview/ngx */ "./node_modules/@ionic-native/ionic-webview/ngx/index.js");
+/* harmony import */ var _ionic_native_file_chooser_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/file-chooser/ngx */ "./node_modules/@ionic-native/file-chooser/ngx/index.js");
+/* harmony import */ var _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/file-path/ngx */ "./node_modules/@ionic-native/file-path/ngx/index.js");
+/* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
+/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
+/* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+/* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
+
+
+
 
 
 
@@ -455,7 +508,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let Tab3Page = class Tab3Page {
-    constructor(toast, toastController, localNotifications, file, FilePath, fileChooser, statusBar, modalController, sanitizer, serv, actionSheetController, router, alertController, clipboard, database) {
+    constructor(toast, toastController, localNotifications, file, FilePath, fileChooser, statusBar, modalController, sanitizer, serv, actionSheetController, router, alertController, clipboard, database, databaseSummary, networkProvider, webview) {
         this.toast = toast;
         this.toastController = toastController;
         this.localNotifications = localNotifications;
@@ -471,6 +524,9 @@ let Tab3Page = class Tab3Page {
         this.alertController = alertController;
         this.clipboard = clipboard;
         this.database = database;
+        this.databaseSummary = databaseSummary;
+        this.networkProvider = networkProvider;
+        this.webview = webview;
         this.data1 = "-";
         // playaudio:any;
         // playaudio1:any;
@@ -498,7 +554,23 @@ let Tab3Page = class Tab3Page {
         this.remainderFileName = localStorage.getItem("remainderAlertName") || 'Default';
     }
     ionViewWillEnter() {
-        this.serv.setting().subscribe(res => {
+        // this.serv.setting().subscribe(res => {
+        //   this.pic = res;
+        //   console.log(this.pic)   
+        //   this.initialLogo=this.pic.user_info.name.charAt(0);
+        //   this.caregiver = this.pic.caregiver;
+        //   this.caregive_option=this.pic['caregiver'].map(data=>({
+        //       name: 'radio1',
+        //       type: 'radio',
+        //       label: data.name,
+        //       value: data.name,
+        //   }));
+        //   if(this.pic.profile_pic != null){
+        //     let source=this.pic['profile_pic'];
+        //     this.img= this.sanitizer.bypassSecurityTrustResourceUrl(source);
+        //   }  
+        // })
+        this.databaseSummary.getPicture_Show().then(res => {
             this.pic = res;
             console.log(this.pic);
             this.initialLogo = this.pic.user_info.name.charAt(0);
@@ -509,19 +581,29 @@ let Tab3Page = class Tab3Page {
                 label: data.name,
                 value: data.name,
             }));
-            console.log(this.caregive_option);
-            // if(this.pic.profile_pic == null)
-            // {  
-            //    this.img="../../../assets/img/contact.png"
-            // }else{
-            //   this.linkSource = this.pic.profile_pic;
-            //   this.img= this.sanitizer.bypassSecurityTrustResourceUrl(this.linkSource)
-            //   console.log(this.img)
+            // if(this.pic.profile_pic != null){
+            //   let source=this.pic['profile_pic'];
+            //   this.img= this.sanitizer.bypassSecurityTrustResourceUrl(source);
             // }
-            if (this.pic.profile_pic != null) {
-                let source = this.pic['profile_pic'];
-                this.img = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+            let globalURL = null;
+            let localURL = null;
+            if (this.pic['user_info']['user_picture']['url'] != null) {
+                let source = this.pic['user_info']['user_picture']['url'];
+                globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
             }
+            else {
+                let source = this.webview.convertFileSrc(this.pic['user_info']['user_picture']['localURL']);
+                localURL = source;
+            }
+            if (this.networkProvider.isNetworkOnline) {
+                this.isNetwork = true;
+                this.img = globalURL != null ? globalURL : localURL;
+            }
+            else {
+                this.isNetwork = false;
+                this.img = localURL || null;
+            }
+            console.log(this.img);
         });
         this.statusBar.backgroundColorByHexString('#483df6');
         this.reOrderUnit = localStorage.getItem("reOrderQuantity") || "5 Units";
@@ -558,7 +640,6 @@ let Tab3Page = class Tab3Page {
     careGiverName() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             console.log(this.caregive_option);
-            console.log();
             const alert = yield this.alertController.create({
                 header: 'CareGiver',
                 backdropDismiss: false,
@@ -774,12 +855,12 @@ let Tab3Page = class Tab3Page {
     }
 };
 Tab3Page.ctorParameters = () => [
-    { type: _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_13__["Toast"] },
+    { type: _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_14__["Toast"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
-    { type: _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_12__["LocalNotifications"] },
-    { type: _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_11__["File"] },
-    { type: _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_10__["FilePath"] },
-    { type: _ionic_native_file_chooser_ngx__WEBPACK_IMPORTED_MODULE_9__["FileChooser"] },
+    { type: _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_13__["LocalNotifications"] },
+    { type: _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_12__["File"] },
+    { type: _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_11__["FilePath"] },
+    { type: _ionic_native_file_chooser_ngx__WEBPACK_IMPORTED_MODULE_10__["FileChooser"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
     { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"] },
@@ -788,7 +869,10 @@ Tab3Page.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
     { type: _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_7__["Clipboard"] },
-    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_14__["DatabaseProvider"] }
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_15__["DatabaseProvider"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_16__["DataBaseSummaryProvider"] },
+    { type: _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_17__["NetworkService"] },
+    { type: _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_9__["WebView"] }
 ];
 Tab3Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -796,7 +880,7 @@ Tab3Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./tab3.page.html */ "./node_modules/raw-loader/index.js!./src/app/self-care/tab3/tab3.page.html"),
         styles: [__webpack_require__(/*! ./tab3.page.scss */ "./src/app/self-care/tab3/tab3.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_13__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_12__["LocalNotifications"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_11__["File"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_10__["FilePath"], _ionic_native_file_chooser_ngx__WEBPACK_IMPORTED_MODULE_9__["FileChooser"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_5__["settingsService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ActionSheetController"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"], _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_7__["Clipboard"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_14__["DatabaseProvider"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_14__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_13__["LocalNotifications"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_12__["File"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_11__["FilePath"], _ionic_native_file_chooser_ngx__WEBPACK_IMPORTED_MODULE_10__["FileChooser"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_5__["settingsService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ActionSheetController"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"], _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_7__["Clipboard"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_15__["DatabaseProvider"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_16__["DataBaseSummaryProvider"], _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_17__["NetworkService"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_9__["WebView"]])
 ], Tab3Page);
 
 

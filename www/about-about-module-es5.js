@@ -126,12 +126,14 @@ var AboutPage = /** @class */ (function () {
             _this.getUpdateData = _this.update_details['user_info'];
             if (_this.update_details['policies'].length != 0) {
                 _this.getPolicyData = _this.update_details['policies'][0]['attribute_name_value'];
+                _this.created_at = _this.update_details['policies'][0]['created_at'];
                 _this.mediClaim = _this.getPolicyData['mediclaim_policy'];
                 _this.policyIssuer = _this.getPolicyData['policy_issuer'];
             }
             else {
                 _this.mediClaim = "";
                 _this.policyIssuer = "";
+                _this.created_at = null;
             }
         });
         this.tabBar = document.getElementById('myTabBar');
@@ -150,11 +152,17 @@ var AboutPage = /** @class */ (function () {
     };
     AboutPage.prototype.updateValues = function (update) {
         if (this.update.valid) {
-            var data = { "user": { "blood_group": update.blood_group, "age": update.age },
-                "policy": { "attribute_name_value": {
+            var data = { "user": {
+                    "blood_group": update.blood_group, "age": update.age
+                },
+                "policy": {
+                    "attribute_name_value": {
                         "mediclaim_policy": update.mediclaim_policy,
                         "policy_issuer": update.policy_issuer
-                    } } };
+                    },
+                    "created_at": this.created_at
+                }
+            };
             this.addconfirmation(data);
         }
         else {

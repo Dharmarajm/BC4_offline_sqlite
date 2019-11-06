@@ -189,6 +189,7 @@ export class DataBaseSummaryProvider {
 
     async getAboutData(): Promise<any>{
         let user_id = await this.databaseService.getuserID(); 
+        let getQRcode = await this.setQRcode();
         let sqlHealthQuery = SQL_SELECT_ALL_HEALTH_DETAILS+` WHERE name='policy'`;
         let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id=${user_id} AND role_id=1`;
         return this.databaseService.getDatabase().then(async(database) => {
@@ -233,12 +234,13 @@ export class DataBaseSummaryProvider {
                     active_status: data2.rows.item(i).active_status,
                     role_id: data2.rows.item(i).role_id,
                     created_at: data2.rows.item(i).created_at,
-                    updated_at: data2.rows.item(i).updated_at
+                    updated_at: data2.rows.item(i).updated_at,
+                    delete: data2.rows.item(i).delete
                 })  
               }
             })
 
-            return { policies: healthData, user_info: userData[0], qrcode_image: null };
+            return { policies: healthData, user_info: userData[0], qrcode_image: getQRcode };
 
         })    
 
@@ -274,7 +276,7 @@ export class DataBaseSummaryProvider {
 
     getEmergencyDeatails(): Promise<any> {
        let sqlEmergeQuery = SQL_SELECT_ALL_EMERGENCY_DATA;
-       let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE role_id=2`;
+       let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE role_id=2 AND delete=false`;
        return this.databaseService.getDatabase().then(async(database) => {
         let emergencyContacts = []; 
         let careGiverData=[];
@@ -289,6 +291,7 @@ export class DataBaseSummaryProvider {
                 user_id: data.rows.item(i).user_id,
                 created_at: data.rows.item(i).created_at,
                 updated_at: data.rows.item(i).updated_at,
+                delete: data.rows.item(i).delete
                 });
             } 
          })
@@ -312,7 +315,8 @@ export class DataBaseSummaryProvider {
                     active_status: data1.rows.item(i).active_status,
                     role_id: data1.rows.item(i).role_id,
                     created_at: data1.rows.item(i).created_at,
-                    updated_at: data1.rows.item(i).updated_at
+                    updated_at: data1.rows.item(i).updated_at,
+                    delete: data1.rows.item(i).delete
                 });
               } 
             } 
@@ -340,6 +344,92 @@ export class DataBaseSummaryProvider {
        }  
        return { caregiver_contact: emergency_data['caregivers'], contacts: emergency_data['emergency_detail'], health_detail: healthDetailData, policy_details: policyDetail,user: aboutData['user_info']}
 
+    }
+
+    async getPatients(){
+        let user_id = await this.databaseService.getuserID();
+        let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id=${user_id} AND role_id=1`;
+        return this.databaseService.getDatabase().then(async(database) => {
+          let userData=[];   
+          await database.executeSql(sqlUserQuery, []).then((data2) => {
+            for (let i = 0; i < data2.rows.length; i++) {
+              let attribute_json = JSON.parse(data2.rows.item(i).user_picture);  
+              userData.push({ 
+                  id: data2.rows.item(i).id,
+                  name: data2.rows.item(i).name,
+                  email: data2.rows.item(i).email,
+                  password: data2.rows.item(i).password,
+                  mobile_no: data2.rows.item(i).mobile_no,
+                  address: data2.rows.item(i).address,
+                  country: data2.rows.item(i).country,
+                  blood_group: data2.rows.item(i).blood_group,
+                  age: data2.rows.item(i).age,
+                  user_uid: data2.rows.item(i).user_uid,
+                  forgot_password_code: data2.rows.item(i).forgot_password_code,
+                  user_picture: attribute_json,
+                  active_status: data2.rows.item(i).active_status,
+                  role_id: data2.rows.item(i).role_id,
+                  created_at: data2.rows.item(i).created_at,
+                  updated_at: data2.rows.item(i).updated_at,
+                  delete: data2.rows.item(i).delete
+              })  
+            }
+          })
+          return { patients: userData };
+        })  
+    }
+
+    async getPicture_Show(){
+       
+        let emergency_data = await this.getEmergencyDeatails();
+        let aboutData = await this.getAboutData();
+        let getAllPatients = await this.getPatients();
+
+        return { caregiver: emergency_data['caregivers'],patient: getAllPatients['patients'],profile_pic: null,user_info: aboutData['user_info'] };
+ 
+    }
+
+    async getRecentAppointments(event){
+        let eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now')) ORDER BY event_datetime ASC LIMIT 4 OFFSET 0`      
+        let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+eventQuery;
+        
+        return this.databaseService.getDatabase().then(database => {
+            return database.executeSql(sqlSearchEventQuery, []).then((data) => {
+                let events: events[] = [];
+                
+                for (let i = 0; i < data.rows.length; i++) {
+                    let event_json:any = null;
+                    if (data.rows.item(i).skills != '') {
+                        event_json = JSON.parse(data.rows.item(i).event_options);
+                    }
+                    events.push({
+                        id: data.rows.item(i).id,
+                        event_id: data.rows.item(i).event_id,
+                        event_name: data.rows.item(i).event_name,
+                        description: data.rows.item(i).description,
+                        value: data.rows.item(i).value,
+                        event_datetime: data.rows.item(i).event_datetime,
+                        event_type: data.rows.item(i).event_type,
+                        event_category: data.rows.item(i).event_category,
+                        event_assets: data.rows.item(i).event_assets,
+                        event_options: event_json,
+                        user_id: data.rows.item(i).user_id,
+                        sync: data.rows.item(i).sync,
+                        created_at: data.rows.item(i).created_at,
+                        updated_at: data.rows.item(i).updated_at
+                    });  
+                };
+                return { appointment_list:events };
+            })
+        })
+    }
+
+    setQRcode(){
+        let setQRcode = null;
+        if(localStorage.getItem("qrcode")!=undefined){
+            setQRcode = localStorage.getItem("qrcode");
+        }
+        return setQRcode;
     }
 
 }

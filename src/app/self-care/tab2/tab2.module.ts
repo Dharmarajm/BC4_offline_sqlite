@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { contactListPage } from './contact-list/contact-list.page';
 import { previewPage } from './preview/preview.page';
 import { Toast } from '@ionic-native/toast/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 const routes: Routes=[
@@ -45,6 +46,6 @@ const routes: Routes=[
     RouterModule.forChild(routes)
   ],
   declarations: [Tab2Page,contactListPage,previewPage],
-  providers:[Toast,DataBaseSummaryProvider]
+  providers:[Toast,DataBaseSummaryProvider,WebView]
 })
 export class Tab2PageModule {}

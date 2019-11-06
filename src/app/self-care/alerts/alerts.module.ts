@@ -25,6 +25,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 const routes: Routes = [
   {
@@ -77,8 +78,8 @@ component: EditOthersPage,
     EditVitalsAlertPage,AddOthersPage,EditOthersPage],
   providers:[
     DatePipe, ImagePicker, FileTransfer, File, WebView,Toast,Camera,
-    LocalNotifications
-    
+    LocalNotifications,
+    DataBaseSummaryProvider
   ]
 })
 export class AlertPageModule {}

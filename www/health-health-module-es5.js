@@ -214,8 +214,10 @@ var HealthPage = /** @class */ (function () {
             diabetes = "No";
         }
         var id = null;
+        var created_at = null;
         if (this.getAllIds != null) {
             id = this.getAllIds['id'];
+            created_at = this.getAllIds['created_at'];
         }
         var data = {
             "id": id,
@@ -229,7 +231,8 @@ var HealthPage = /** @class */ (function () {
                 "current_medication": this.medicationChiptest,
                 "recent_surgeries": val["recent_surgeries"]
             },
-            "name": "health"
+            "name": "health",
+            "created_at": created_at
         };
         this.addconfirmation(data);
     };

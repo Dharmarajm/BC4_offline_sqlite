@@ -10,12 +10,15 @@ import { AboutPage } from '../../login/about/about.page';
 import { EditProfilePage } from './edit-profile/edit-profile.page'
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { File,FileEntry, IFile } from '@ionic-native/file/ngx';
 import { LocalNotifications, ELocalNotificationTriggerUnit, ILocalNotificationActionType, ILocalNotification  } from '@ionic-native/local-notifications/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { DatabaseProvider } from '../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
+import { NetworkService } from '../../network-connectivity/network-service';
 
 @Component({
   selector: 'app-tab3',
@@ -56,8 +59,9 @@ export class Tab3Page {
                           ];                       
   reOrderUnit:any="5 Units";
   autoUpdateDays:any="Never";
+  isNetwork:boolean;
 
-  constructor(private toast: Toast,public toastController: ToastController, private localNotifications: LocalNotifications, private file: File,private FilePath: FilePath,private fileChooser: FileChooser,private statusBar: StatusBar,public modalController: ModalController, public sanitizer: DomSanitizer, public serv: settingsService, public actionSheetController: ActionSheetController, public router:Router, public alertController: AlertController,private clipboard: Clipboard,public database:DatabaseProvider) { }
+  constructor(private toast: Toast,public toastController: ToastController, private localNotifications: LocalNotifications, private file: File,private FilePath: FilePath,private fileChooser: FileChooser,private statusBar: StatusBar,public modalController: ModalController, public sanitizer: DomSanitizer, public serv: settingsService, public actionSheetController: ActionSheetController, public router:Router, public alertController: AlertController,private clipboard: Clipboard,public database:DatabaseProvider,private databaseSummary:DataBaseSummaryProvider,private networkProvider: NetworkService,private webview: WebView) { }
 
   ngOnInit() {
   
@@ -68,7 +72,25 @@ export class Tab3Page {
 
 
   ionViewWillEnter(){
-    this.serv.setting().subscribe(res => {
+    // this.serv.setting().subscribe(res => {
+    //   this.pic = res;
+    //   console.log(this.pic)   
+    //   this.initialLogo=this.pic.user_info.name.charAt(0);
+    //   this.caregiver = this.pic.caregiver;
+      
+    //   this.caregive_option=this.pic['caregiver'].map(data=>({
+    //       name: 'radio1',
+    //       type: 'radio',
+    //       label: data.name,
+    //       value: data.name,
+    //   }));
+    //   if(this.pic.profile_pic != null){
+    //     let source=this.pic['profile_pic'];
+    //     this.img= this.sanitizer.bypassSecurityTrustResourceUrl(source);
+    //   }  
+    // })
+
+    this.databaseSummary.getPicture_Show().then(res=>{
       this.pic = res;
       console.log(this.pic)   
       this.initialLogo=this.pic.user_info.name.charAt(0);
@@ -80,31 +102,39 @@ export class Tab3Page {
           label: data.name,
           value: data.name,
       }));
-      console.log(this.caregive_option)
-      // if(this.pic.profile_pic == null)
-      // {  
-      //    this.img="../../../assets/img/contact.png"
-        
-      // }else{
-      //   this.linkSource = this.pic.profile_pic;
-      //   this.img= this.sanitizer.bypassSecurityTrustResourceUrl(this.linkSource)
-      //   console.log(this.img)
+      // if(this.pic.profile_pic != null){
+      //   let source=this.pic['profile_pic'];
+      //   this.img= this.sanitizer.bypassSecurityTrustResourceUrl(source);
       // }
-      if(this.pic.profile_pic != null){
-        let source=this.pic['profile_pic'];
-        this.img= this.sanitizer.bypassSecurityTrustResourceUrl(source);
+      
+      let globalURL=null;
+      let localURL=null;
+      if(this.pic['user_info']['user_picture']['url'] != null){
+        let source = this.pic['user_info']['user_picture']['url'];
+        globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);  
+      }else{
+        let source = this.webview.convertFileSrc(this.pic['user_info']['user_picture']['localURL']); 
+        localURL = source;
       }
       
-      
+      if(this.networkProvider.isNetworkOnline){
+        this.isNetwork = true;
+        this.img = globalURL!=null ? globalURL : localURL 
+      }else{
+        this.isNetwork = false;
+        this.img = localURL || null; 
+      }
+      console.log(this.img)
     })
+
     this.statusBar.backgroundColorByHexString('#483df6');
-    this.reOrderUnit=localStorage.getItem("reOrderQuantity")  || "5 Units";
-    this.autoUpdateDays=localStorage.getItem("autoUpdateDays")  || "Never";
+    this.reOrderUnit = localStorage.getItem("reOrderQuantity")  || "5 Units";
+    this.autoUpdateDays = localStorage.getItem("autoUpdateDays")  || "Never";
     this.updateReOrderTriggers();
     this.updateAutoTriggers();
   }
 
- async edit(){
+  async edit(){
     
     let data={ 
         pics: this.pic
@@ -133,10 +163,9 @@ export class Tab3Page {
     // this.router.navigate(['self-care-tabs/tabs/tab3/edit-profile'], navigationExtras)
     //this.navCtrl.navigate(['/self-care-tabs/tabs/tab3/editprofile']);
   }
- async careGiverName(){
 
+  async careGiverName(){
      console.log(this.caregive_option)
-     console.log()
      const alert = await this.alertController.create({
       header: 'CareGiver',
       backdropDismiss: false,

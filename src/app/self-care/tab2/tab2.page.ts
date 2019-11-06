@@ -313,7 +313,8 @@ async RemoveCaregiver(id){
             //      this.presentToast(' Your have removed Care Giver ');
             // })
 
-            this.database.deleteEmergencyContact(id).then(res=>{
+            this.database.deleteCaregiverContact(id).then(res=>{
+              console.log(res)
               this.presentToast(' Your have removed your Care Giver ');
               this.ionViewWillEnter();
             }).catch(err=>{console.log(err)})

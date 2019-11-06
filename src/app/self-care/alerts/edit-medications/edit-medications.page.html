@@ -19,7 +19,8 @@
     <ion-col size="4" *ngFor="let img of edit_all_image; let i=index">
       <ion-card class="has_image">
         <ion-card-content>
-          <img [src]="img.uri">
+          <img *ngIf="!isNetwork && !img.delete || img.globalURI==null && !img.delete" [src]="webview.convertFileSrc(img.localURI)">
+          <img *ngIf="isNetwork && !img.delete && img.globalURI!=null" [src]="img.globalURI">
         </ion-card-content>
         <ion-button color="tertiary" (click)="removeImg(i,img,originalArray)">
           <ion-icon slot="icon-only" name="remove"></ion-icon>

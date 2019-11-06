@@ -8,6 +8,8 @@ import { DatePipe } from '@angular/common';
 import { ToastController, AlertController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DatabaseProvider } from '../../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
 
 @Component({
   selector: 'app-add-vitals-alert',
@@ -27,10 +29,10 @@ export class AddVitalsAlertPage implements OnInit {
   repeatOrder=[{'days':[{day:'Mon',dayCode: 1,checked:false}, {day:'Tue',dayCode: 2,checked:false}, {day:'Wed',dayCode: 3,checked:false},{day: 'Thu',dayCode: 4,checked:false},{ day:'Fri',dayCode: 5,checked:false},{day:'Sat',dayCode: 6,checked:false},{day:'Sun',dayCode: 0,checked:false}],
   'others':[{day:'1 mo.',dayCode: 1,checked:false},{day:'3 mo.',dayCode: 3,checked:false},{day:'6 mo.',dayCode: 6,checked:false},{day:'12 mo.',dayCode: 12,checked:false}]}];
   repeatValue:any[]=[];
-  defaultMonth= '1 mo.' 
+  defaultMonth= '1 mo.'; 
   add_alert: HTMLIonAlertElement;
 
-  constructor(private toast: Toast,public localNotifications:LocalNotifications,public alertController: AlertController, public datepipe: DatePipe, public service: settingsService, private fb: FormBuilder, public route: ActivatedRoute, public router: Router, private statusBar: StatusBar) { }
+  constructor(private toast: Toast,public localNotifications:LocalNotifications,public alertController: AlertController, public datepipe: DatePipe, public service: settingsService, private fb: FormBuilder, public route: ActivatedRoute, public router: Router, private statusBar: StatusBar,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) { }
 
   ngOnInit() {
  }
@@ -50,9 +52,14 @@ export class AddVitalsAlertPage implements OnInit {
     repeat_category:[this.repeatType]
   });
 
-  this.service.vitalReading().subscribe(res => {
+  // this.service.vitalReading().subscribe(res => {
+  //   this.vital_options = res['enum_masters'];
+  // })
+
+  this.databaseSummary.getEnumMasters('vital').then((res)=>{
     this.vital_options = res['enum_masters'];
   })
+  .catch(error=>{ console.log(error) });
  }
 
  get f(){return this.vital_alert_form.controls }
@@ -68,10 +75,17 @@ export class AddVitalsAlertPage implements OnInit {
       return;
     }else{
       let repeatOrder = this.repeatOrder[0];
-      let date=this.datepipe.transform(form.event_datetime,"dd MMM yyyy")
+      let new1 = new Date(form.event_time);
+      let gethours = new1.getHours();
+      let getMinutes = new1.getMinutes();
+
+      let new2 = new Date(form.event_datetime);
+      new2.setHours(gethours)
+      new2.setMinutes(getMinutes)
+      let event_dateTime = new2.toJSON();
       let data = {
         event_name: form.event_name,
-        event_datetime: date +" "+ form.event_time,
+        event_datetime: event_dateTime,
         event_type: form.event_type,
         event_options: 
            {
@@ -104,92 +118,141 @@ export class AddVitalsAlertPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             this.Progress=true;
-            this.service.commonPost(data).subscribe(res=>{
-              let getData:any=res;
-              let getEventId:any=res['event']['id'];
+          //   this.service.commonPost(data).subscribe(res=>{
+          //     let getData:any=res;
+          //     let getEventId:any=res['event']['id'];
               
               
-              console.log(this.repeatValue)
-              let repeatAlarmValue=[];
-              let getDate = new Date(form.event_datetime)
-              let getTime:any = new Date(form.event_time)
+          //     console.log(this.repeatValue)
+          //     let repeatAlarmValue=[];
+          //     let getDate = new Date(form.event_datetime)
+          //     let getTime:any = new Date(form.event_time)
               
-              let getHours = getTime.getHours();
-              let gettMinutes = getTime.getMinutes();
-              let getSeconds = getTime.getSeconds();
-              let getMilliseconds = getTime.getMilliseconds();
-              getDate.setHours(getHours, gettMinutes, getSeconds, getMilliseconds);
-              let repeatHours = getDate.getHours();
-              let repeatMinutes = getDate.getMinutes();
+          //     let getHours = getTime.getHours();
+          //     let gettMinutes = getTime.getMinutes();
+          //     let getSeconds = getTime.getSeconds();
+          //     let getMilliseconds = getTime.getMilliseconds();
+          //     getDate.setHours(getHours, gettMinutes, getSeconds, getMilliseconds);
+          //     let repeatHours = getDate.getHours();
+          //     let repeatMinutes = getDate.getMinutes();
     
-              if(form.remainder_repeat==true){
+          //     if(form.remainder_repeat==true){
                 
-                if(form.repeat_category=='days'){
-                    repeatAlarmValue=this.repeatValue.map((res,index)=>{
-                      let ID:any=getEventId+''+Number(index+1);
-                this.localNotifications.schedule({
-                      id: ID,
-                      title: form.event_name,
-                      text: 'Vital Alert',
-                      trigger: {
-                        count: 1,
-                        every:{ weekday: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
-                      },
-                      data: { secret:getEventId },
-                      lockscreen:true,
-                      vibrate: true,
-                      priority: 2,
-                      foreground: true,
-                      sound: null
-                    })
-                  })
-                        this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
-                  //this.scheduleNotifications(repeatAlarmValue,true);
+          //       if(form.repeat_category=='days'){
+          //           repeatAlarmValue=this.repeatValue.map((res,index)=>{
+          //             let ID:any=getEventId+''+Number(index+1);
+          //       this.localNotifications.schedule({
+          //             id: ID,
+          //             title: form.event_name,
+          //             text: 'Vital Alert',
+          //             trigger: {
+          //               count: 1,
+          //               every:{ weekday: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
+          //             },
+          //             data: { secret:getEventId },
+          //             lockscreen:true,
+          //             vibrate: true,
+          //             priority: 2,
+          //             foreground: true,
+          //             sound: null
+          //           })
+          //         })
+          //               this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
+                 
                   
-                }else if(form.repeat_category=='others'){
-                  this.Progress=false;
-                  this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
-                  // let monthValue=Number(this.repeatValue[0].charAt(0));
-                  // let uniqueTime = new Date().getDate()+new Date().getMonth()+new Date().getFullYear()+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds();
-                  // repeatAlarmValue.push(
-                  //   {
-                  //     id: uniqueTime,
-                  //     title: form.event_name,
-                  //     text: 'You just got notified :)',
-                  //     lockscreen:true,
-                  //     trigger: {
-                  //       count: 1,
-                  //       every:{ week: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
-                  //     },
-                  //     data: { secret:getEventId },
-                  //     foreground: true,
-                  //     //autoClear: true, 
-                  //     sound: null,             
-                  //     //vibrate: true,
-                  //   }
-                  // )
-                }
+          //       }else if(form.repeat_category=='others'){
+          //         this.Progress=false;
+          //         this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
+                 
+          //       }
                 
-              }else{
-                let ID:any=getEventId+''+1;
-                this.localNotifications.schedule({
-                                id: ID,
-                                title: form.event_name,
-                                text: 'Vital Alert',
-                                trigger: {at: new Date(getDate.getTime())},
-                                data: { secret:getEventId },
-                                lockscreen:true,
-                                vibrate: true,
-                                priority: 2,
-                                foreground: true,
-                                sound: null
-                              })
-                    this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
-                //this.scheduleNotifications(repeatAlarmValue,false); 
+          //     }else{
+          //       let ID:any=getEventId+''+1;
+          //       this.localNotifications.schedule({
+          //                       id: ID,
+          //                       title: form.event_name,
+          //                       text: 'Vital Alert',
+          //                       trigger: {at: new Date(getDate.getTime())},
+          //                       data: { secret:getEventId },
+          //                       lockscreen:true,
+          //                       vibrate: true,
+          //                       priority: 2,
+          //                       foreground: true,
+          //                       sound: null
+          //                     })
+          //           this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
+                
+          //     }
+          // },error=>{
+          //   this.Progress=false;
+          // });
+          this.database.createAnEvent(data).then((res)=>{
+            let getData:any=res;
+            let getEventId:any=res['event_id'];
+            
+            
+            console.log(this.repeatValue)
+            let repeatAlarmValue=[];
+            let getDate = new Date(form.event_datetime)
+            let getTime:any = new Date(form.event_time)
+            
+            let getHours = getTime.getHours();
+            let gettMinutes = getTime.getMinutes();
+            let getSeconds = getTime.getSeconds();
+            let getMilliseconds = getTime.getMilliseconds();
+            getDate.setHours(getHours, gettMinutes, getSeconds, getMilliseconds);
+            let repeatHours = getDate.getHours();
+            let repeatMinutes = getDate.getMinutes();
+  
+            if(form.remainder_repeat==true){
+              
+              if(form.repeat_category=='days'){
+                  repeatAlarmValue=this.repeatValue.map((res,index)=>{
+                    let ID:any=getEventId+''+Number(index+1);
+              this.localNotifications.schedule({
+                    id: ID,
+                    title: form.event_name,
+                    text: 'Vital Alert',
+                    trigger: {
+                      count: 1,
+                      every:{ weekday: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
+                    },
+                    data: { secret:getEventId },
+                    lockscreen:true,
+                    vibrate: true,
+                    priority: 2,
+                    foreground: true,
+                    sound: null
+                  })
+                })
+                      this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
+                
+                
+              }else if(form.repeat_category=='others'){
+                this.Progress=false;
+                this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
+                
               }
-          },error=>{
-            this.Progress=false;
-          });
+              
+            }else{
+              let ID:any=getEventId+''+1;
+              this.localNotifications.schedule({
+                              id: ID,
+                              title: form.event_name,
+                              text: 'Vital Alert',
+                              trigger: {at: new Date(getDate.getTime())},
+                              data: { secret:getEventId },
+                              lockscreen:true,
+                              vibrate: true,
+                              priority: 2,
+                              foreground: true,
+                              sound: null
+                            })
+                  this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
+              
+            }
+          }).catch(error=>{ console.log(error) });
+
           }
         }
       ]

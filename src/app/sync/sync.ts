@@ -2,10 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { NetworkService } from '../network-connectivity/network-service';
-import { SQL_TABLES,SQL_SELECT_ALL_ENUMS } from '../sqlite-database/database.interface';
+import { SQL_SELECT_ALL_ENUMS } from '../sqlite-database/database.interface';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { from, Observable, forkJoin  } from 'rxjs';
-import { async } from 'q';
 
 /*
   Generated class for the SettingProvider provider.
@@ -14,80 +13,122 @@ import { async } from 'q';
   and Angular DI.
 */
 
-const DATA_BASE_NAME = 'vCare4U.db';
+const DATA_BASE_NAME = 'BCared4.db';
 
 @Injectable()
 export class syncProvider {
   ready: Promise<void>;
+  enumResponseData:any[];
   responseData1:any[];
   responseData2:any[];
   responseData3:any[];
   responseData4:any[];
+  responseData5:any
   isNetworkOnline:boolean;
     constructor(public http: HttpClient,public sqlite: SQLite, private platform: Platform,public network: NetworkService) {
       console.log('Hello SettingProvider Provider');
+      //this.initiateSync();
     }
 
-    initiateSync(){
-       this.ready = this.platform.ready()
+    async initiateSync() {
+      
+      this.ready = this.platform.ready()
             .then(() => this.getTotalEnumMasters())
-            .then(() => this.awaitAllUsersTableData()) 
+            .then(() => this.awaitAllUsersTableData())
     }
 
     async getTotalEnumMasters(){
-      alert('test');
-        
-            console.log(this.network.isNetworkOnline)
+          
             this.isNetworkOnline = true
-            console.log(this.isNetworkOnline)
             
-            if(this.isNetworkOnline == true){
-              let db = await this.getDatabase();
-                await this.http.get(`enum_masters`).subscribe(async(res)=>{
-                    let EnumData = res["enum_masters"];
-                    let length = await db.executeSql(SQL_SELECT_ALL_ENUMS,[]).then(data=>{
-                      return data.rows.length
-                    })
-                    if(EnumData.length!=length){ //&& status==true
-                        let sql1 = `DELETE FROM enum_masters`;
-                        
-                        db.executeSql(sql1,[]);
-                        for (let i in  EnumData) {
-                            console.log(EnumData[i])
-                            let sql2 = `INSERT INTO enum_masters VALUES (?,?,?,?,?)`;
-                            db.executeSql(sql2,[
-                                EnumData[i]["id"],
-                                EnumData[i]["name"],
-                                EnumData[i]["category_name"],
-                                EnumData[i]["created_at"],
-                                EnumData[i]["updated_at"]
-                            ]);  
-                        };
-                              
+            //if(this.isNetworkOnline == true){
+            
+              this.getDatabase().then((database)=>{
+                
+                let length = database.executeSql(SQL_SELECT_ALL_ENUMS,[]).then(data=>{
+                  return data.rows.length
+                });
+                
+                this.requestDataFromEnumMasters().subscribe(async (responseList) => {
+                  
+                  this.enumResponseData = responseList[0]["enum_masters"];
+                  if (this.enumResponseData.length != await length) {
+                    let sql1 = `DELETE FROM enum_masters`;
+                    database.executeSql(sql1, []);
+                    for (let i in this.enumResponseData) {
+                      console.log(this.enumResponseData[i]);
+                      let sql2 = `INSERT INTO enum_masters VALUES (?,?,?,?,?)`;
+                      database.executeSql(sql2, [
+                        this.enumResponseData[i]["id"],
+                        this.enumResponseData[i]["name"],
+                        this.enumResponseData[i]["category_name"],
+                        this.enumResponseData[i]["created_at"],
+                        this.enumResponseData[i]["updated_at"]
+                      ]).then(res => {
+                        console.log(res, 'enum');
+                      }, error => {
+                        console.log(error, 'errorenum');
+                      });
                     }
-                },error=>{
-                   console.log(error)
-                }) 
-            }
+                    ;
+                  }
+                })
+              })
+              
+      
+              
+              // await this.http.get(`enum_masters`).subscribe((res)=>{
+              //       let EnumData = res["enum_masters"];
+              //       console.log(EnumData)
+                    
+              //       console.log(length)
+              //       console.log(EnumData.length!=length)
+              //       if(EnumData.length!=length) {
+              //           let sql1 = `DELETE FROM enum_masters`;
+                        
+              //           await db.executeSql(sql1,[]);
+              //           for (let i in  EnumData) {
+              //               console.log(EnumData[i])
+              //               let sql2 = `INSERT INTO enum_masters VALUES (?,?,?,?,?)`;
+              //               await db.executeSql(sql2,[
+              //                   EnumData[i]["id"],
+              //                   EnumData[i]["name"],
+              //                   EnumData[i]["category_name"],
+              //                   EnumData[i]["created_at"],
+              //                   EnumData[i]["updated_at"]
+              //               ]).then(res=>{
+              //                 console.log(res,'enum');
+              //               },error=>{
+              //                 console.log(error,'errorenum');
+              //               });  
+              //           };
+                              
+              //       }
+              //   },error=>{
+              //      console.log(error)
+              //   }) 
+           // }
     }
 
     async awaitAllUsersTableData(){
-      console.log(this.network.isNetworkOnline)
+      
       this.isNetworkOnline = true
-      console.log(this.isNetworkOnline)
-        if(this.isNetworkOnline == true){  
+     
+        //if(this.isNetworkOnline == true){  
+          
+           this.getDatabase().then((database)=>{
             
-            await this.requestDataFromMultipleSources().subscribe(async(responseList)=>{
-                
+            this.requestDataFromMultipleSources().subscribe((responseList)=>{
+              
                 this.responseData1 = responseList[0]["emergency_contacts"]
                 this.responseData2 = responseList[1]["health_detail"];
                 this.responseData3 = responseList[2]["users"]; 
                 this.responseData4 = responseList[3]["user_associations"];
-                
+                this.responseData5 = responseList[4]["qrcode_image"];
                 console.log(responseList)
-                let db = await this.getDatabase();
-
-                db.executeSql(`SELECT * FROM emergency_details`, []).then(async(data) => {
+                
+                localStorage.setItem("qrcode",this.responseData5);     
+                database.executeSql(`SELECT * FROM emergency_details`, []).then(async(data) => {
                   let length = data.rows.length;
                   console.log(length)
                   if(length>0){
@@ -101,15 +142,18 @@ export class syncProvider {
                         user_id: data.rows.item(i).user_id,
                         created_at: data.rows.item(i).created_at,
                         updated_at: data.rows.item(i).updated_at,
+                        delete: data.rows.item(i).delete
                       });
                     }
                     //await this.getEmergencyContacts(emergencyContacts); 
                   }else{
-                    this.getEmergencyContacts(this.responseData1);
+                    await this.getEmergencyContacts(this.responseData1);
                   }
+                },error=>{
+                  console.log(error,'emergencyerror')
                 })
 
-                db.executeSql(`SELECT * FROM health_details`, []).then(async(data) => {
+                database.executeSql(`SELECT * FROM health_details`, []).then(async(data) => {
                   let length = data.rows.length;
                   console.log(length)
                   if(length>0){
@@ -129,111 +173,127 @@ export class syncProvider {
                     }
                     //await this.getHealthDetails(healthData);      
                   }else{
-                    this.getHealthDetails(this.responseData2); 
+                    await this.getHealthDetails(this.responseData2); 
                   }
+                },error=>{
+                  console.log(error,'healtherror')
                 })
                 
-                db.executeSql(`SELECT * FROM users`, []).then(async(data) => {
+                database.executeSql(`SELECT * FROM users`, []).then(async(data) => {
                   let length = data.rows.length;
                   console.log(length)
-                  if(length>0 && data.rows.item(0).updated_at>this.responseData3['updated_at']){
+                  
+                  if(length>0){
                     
                       
                   }else {
                     
-                    this.getUsersData(this.responseData3); 
+                    await this.getUsersData(this.responseData3); 
                   }
+                },error=>{
+                  console.log(error,'userserror')
                 })
 
                 if(this.responseData4.length!=0){
                     let sql4 = `DELETE FROM user_associations`;
-                    db.executeSql(sql4,[]);
+                    database.executeSql(sql4,[]);
                     let data4 = [this.responseData4[0]["id"],this.responseData4[0]["patient_id"],this.responseData4[0]["caregiver_id"],this.responseData4[0]["nick_name"],this.responseData4[0]["created_at"],this.responseData4[0]["updated_at"]]
                     let sqlData4 = `INSERT INTO user_associations VALUES (?,?,?,?,?,?)`;
-                    db.executeSql(sqlData4,data4); 
+                    database.executeSql(sqlData4,data4).then(res=>{
+                     console.log(res,'user_associate')
+                    },error=>{
+                     console.log(error,'userassociateerror')
+                    }); 
                 }
 
             })
-        }   
+           })
+            
+        //}   
     }
 
     async getEmergencyContacts(response){
-      let db = await this.getDatabase();
-      let sql1 = `DELETE FROM emergency_details`;
-      await db.executeSql(sql1,[]);
-      for(let i in response){
-          let data1 = [
+      this.getDatabase().then((database)=>{
+        let sql1 = `DELETE FROM emergency_details`;
+        database.executeSql(sql1,[]);
+        for(let i in response){
+            let data1 = [
+                response[i]["id"],
+                response[i]["emergency_id"],
+                response[i]["contact_name"],
+                response[i]["emergency_no"],
+                response[i]["user_type"],
+                response[i]["user_id"],
+                response[i]["created_at"],
+                response[i]["updated_at"],
+                false
+            ]
+            let sqlData1 = `INSERT INTO emergency_details VALUES (?,NULL,?,?,?,?,?,?,?)`;
+            database.executeSql(sqlData1,data1).then(res=>{
+              console.log(res)
+            });  
+        } 
+      })
+      
+    }
+
+    async getHealthDetails(response){
+      this.getDatabase().then((database)=>{
+        let sql2 = `DELETE FROM health_details`;
+        database.executeSql(sql2,[]);
+
+        for(let i in response){
+          let attribute_json = JSON.stringify(response[i]["attribute_name_value"]);
+          let data2 = [
               response[i]["id"],
-              response[i]["emergency_id"],
-              response[i]["contact_name"],
-              response[i]["emergency_no"],
-              response[i]["user_type"],
+              response[i]["name"],
+              attribute_json,
               response[i]["user_id"],
               response[i]["created_at"],
               response[i]["updated_at"]
           ]
-          let sqlData1 = `INSERT INTO emergency_details VALUES (?,NULL,?,?,?,?,?,?)`;
-          await db.executeSql(sqlData1,data1).then(res=>{
+          let sqlData2 = `INSERT INTO health_details VALUES (?,NULL,?,?,?,?,?)`;
+          database.executeSql(sqlData2,data2).then(res=>{
             console.log(res)
-          });  
-      }
-    }
-
-    async getHealthDetails(response){
-      let db = await this.getDatabase();
+          });
+        }
+      })
       
-      let sql2 = `DELETE FROM health_details`;
-      await db.executeSql(sql2,[]);
-
-      for(let i in response){
-        let attribute_json = JSON.stringify(response[i]["attribute_name_value"]);
-        let data2 = [
-            response[i]["id"],
-            response[i]["name"],
-            attribute_json,
-            response[i]["user_id"],
-            response[i]["created_at"],
-            response[i]["updated_at"]
-        ]
-        let sqlData2 = `INSERT INTO health_details VALUES (?,NULL,?,?,?,?,?)`;
-        await db.executeSql(sqlData2,data2).then(res=>{
-          console.log(res)
-        });
-      }
+      
     }
 
     async getUsersData(response){
-
-      let db = await this.getDatabase();
-      
-      let sql3 = `DELETE FROM users`;
-      await db.executeSql(sql3,[]);
-      
-      for (let i in response) {
-        let attribute_json = JSON.stringify(response[i]["user_picture"]);
-        let data3 = [
-          response[i]["id"],
-          response[i]["name"],
-          response[i]["email"],
-          response[i]["password"],
-          response[i]["mobile_no"],
-          response[i]["address"],
-          response[i]["country"],
-          response[i]["blood_group"],
-          response[i]["age"],
-          response[i]["user_uid"],
-          response[i]["forgot_password_code"],
-          attribute_json,
-          response[i]["active_status"],
-          response[i]["role_id"],
-          response[i]["created_at"],
-          response[i]["updated_at"]
-        ];
-        let sqlData3 = `INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-        await db.executeSql(sqlData3,data3).then(res=>{
-          console.log(res);
-        }); 
-      }
+      this.getDatabase().then((database)=>{
+        let sql3 = `DELETE FROM users`;
+        database.executeSql(sql3,[]);
+        
+        for (let i in response) {
+          let attribute_json = JSON.stringify(response[i]["user_picture"]);
+          let data3 = [
+            response[i]["id"],
+            response[i]["name"],
+            response[i]["email"],
+            response[i]["password"],
+            response[i]["mobile_no"],
+            response[i]["address"],
+            response[i]["country"],
+            response[i]["blood_group"],
+            response[i]["age"],
+            response[i]["user_uid"],
+            response[i]["forgot_password_code"],
+            attribute_json,
+            response[i]["active_status"],
+            response[i]["role_id"],
+            response[i]["created_at"],
+            response[i]["updated_at"],
+            false
+          ];
+          let sqlData3 = `INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+          database.executeSql(sqlData3,data3).then(res=>{
+            console.log(res);
+          }); 
+        } 
+      })
     }
 
     getDatabase() {
@@ -264,9 +324,17 @@ export class syncProvider {
         let response2 = this.http.get(`health_details`);
         let response3 = this.http.get(`users/user_data`);
         let response4 = this.http.get(`users/user_associations`);
+        let response5 = this.http.get(`health_details/about`);
        
         // Observable.forkJoin (RxJS 5) changes to just forkJoin() in RxJS 6
-        return forkJoin([response1, response2, response3,response4]);
+        return forkJoin([response1, response2, response3, response4, response5]);
     }
+    
+    public requestDataFromEnumMasters(): Observable<any[]> {
+      
+      let response1 = this.http.get(`enum_masters`);
 
+      // Observable.forkJoin (RxJS 5) changes to just forkJoin() in RxJS 6
+      return forkJoin([response1]);
+    }
 }

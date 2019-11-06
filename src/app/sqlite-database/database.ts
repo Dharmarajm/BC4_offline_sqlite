@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
@@ -15,7 +14,7 @@ import { async } from 'q';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-const DATA_BASE_NAME = 'vCare4U.db';
+const DATA_BASE_NAME = 'BCared4.db';
 
 enum user_type {
     "Emergency" = 1,
@@ -34,7 +33,7 @@ export class DatabaseProvider {
   responseData3:any[];
   responseData4:any[]; 
   
-    constructor(public http: HttpClient,public sqlite: SQLite, private platform: Platform,public syncProvide:syncProvider) {
+    constructor(public sqlite: SQLite, private platform: Platform,public syncProvide:syncProvider) {
         this.Oninit();   
     }
 
@@ -52,14 +51,14 @@ export class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then(async (db: SQLiteObject) => {
-           let sqlTable1 = `CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME)`;
+           let sqlTable1 = `CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)`;
            await db.executeSql(sqlTable1, []);
            let sqlTable2 = `CREATE TABLE IF NOT EXISTS enum_masters(id INTEGER,name TEXT,category_name TEXT,created_at DATETIME,updated_at DATETIME)`;
            await db.executeSql(sqlTable2, []);
            
            let sqlTable4 = `CREATE TABLE IF NOT EXISTS health_details(id INTEGER,health_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,attribute_name_value TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME)`;
            await db.executeSql(sqlTable4, []);
-           let sqlTable5 = `CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME)`;  //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
+           let sqlTable5 = `CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)`;  //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
            await db.executeSql(sqlTable5, []);
            let sqlTable6 = `CREATE TABLE IF NOT EXISTS user_associations(id INTEGER,patient_id INTEGER,caregiver_id INTEGER,nick_name TEXT DEFAULT NULL,created_at DATETIME,updated_at DATETIME)`;
            await db.executeSql(sqlTable6, []);
@@ -168,10 +167,12 @@ export class DatabaseProvider {
     }
 
     async updateUserAndPolicyData(data){
+      console.log(data)
       let user_id = await this.getuserID();
       let user_data = data['user'];
       let policy_data = data['policy'];
       policy_data["name"]="policy";
+      console.log(policy_data)
       return this.sqlite.create({
         name: DATA_BASE_NAME,
         location: 'default'
@@ -180,15 +181,55 @@ export class DatabaseProvider {
          let sql = `UPDATE users SET age = ?, blood_group = ? WHERE id = ? AND role_id = ?`;
          let updateUserData = [user_data['age'],user_data['blood_group'],user_id,1];
          await db.executeSql(sql,updateUserData);
-         db.executeSql(`SELECT * FROM health_details WHERE name='${policy_data['name']}'`).then(async(data)=>{
-           if(data.rows.length>0){
+         await db.executeSql(`SELECT * FROM health_details WHERE name='${policy_data['name']}'`,[]).then(async(data)=>{
+           console.log(data)
+            if(data.rows.length>0){
              let id = data.rows.item(0).health_id;
+             console.log(policy_data,id)
              this.updateHealthData(policy_data,id);
            }else{
+            console.log(policy_data)
              this.updateHealthData(policy_data);
            } 
+         },error=>{
+             console.log(error)
          })
+      },error=>{
+          console.log(error)
       })     
+    }
+
+    async updateUserData(data){
+        let user_id = await this.getuserID();
+        return this.sqlite.create({
+            name: DATA_BASE_NAME,
+            location: 'default'
+        }).then(async(db: SQLiteObject) => {
+            let sql = `UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ? AND role_id = ?`;
+            let updateUserData = [data['name'],data['email'],data['mobile_no'],user_id,1];
+            await db.executeSql(sql,updateUserData).then((row: any)=>{
+                return { event_id:row.insertId }
+             }).catch(res=>{
+                return res;
+             });
+        })
+    }
+
+    async updateUserImage(data) {
+        let user_id = await this.getuserID();
+        return this.sqlite.create({
+            name: DATA_BASE_NAME,
+            location: 'default'
+        }).then((db: SQLiteObject) => {
+            let sql = `UPDATE users SET user_picture = ? WHERE id = ?`;
+            let updateEventImageData = [JSON.stringify(data),user_id]
+            
+            return db.executeSql(sql,updateEventImageData).then((row: any)=>{
+                return { event_id:row.insertId }
+            }).catch(res=>{
+                return res;
+            })
+        })
     }
 
     async createEmergencyContacts(data) {
@@ -197,8 +238,8 @@ export class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db: SQLiteObject) => {
-            let sql = `INSERT INTO emergency_details VALUES (NULL,NULL,?,?,?,?,?,?)`;
-            let createEventData = [data["contact_name"],data["emergency_no"],user_type[data["user_type"]],user_id,new Date().toJSON(),new Date().toJSON()]
+            let sql = `INSERT INTO emergency_details VALUES (NULL,NULL,?,?,?,?,?,?,?)`;
+            let createEventData = [data["contact_name"],data["emergency_no"],user_type[data["user_type"]],user_id,new Date().toJSON(),new Date().toJSON(),false]
             return db.executeSql(sql,createEventData).then((row: any)=>{  
                 return { event_id:row.insertId }
             }).catch(res=>{
@@ -221,30 +262,48 @@ export class DatabaseProvider {
         })
     }
 
+    deleteCaregiverContact(id){
+        return this.sqlite.create({
+             name: DATA_BASE_NAME,
+             location: 'default'
+         }).then((db: SQLiteObject) => { 
+           let sql = `UPDATE users SET delete = ? WHERE id = ?`;
+           return db.executeSql(sql,[true,id]).then((row: any)=>{
+             return { event_id:row.insertId }
+          }).catch(res=>{
+             return res;
+          });
+         })
+     }
+
     async updateHealthData(data?,id?) {
         let user_id = await this.getuserID();
         return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db: SQLiteObject) => {
-            return db.executeSql(`SELECT * FROM health_details WHERE name='${data['name']}'`).then(async(data)=>{
+            return db.executeSql(`SELECT * FROM health_details WHERE name='${data['name']}'`,[]).then(async(getData)=>{
               let sqlQuery:any;
               let healthData:any;
-
-              if(data.rows.length>0){
+              console.log(data)
+              if(getData.rows.length>0){
                 sqlQuery = `UPDATE health_details SET id = ?, name = ?, attribute_name_value = ?, user_id = ?, created_at = ?, updated_at = ? WHERE health_id = ?`;
                 healthData = [data["id"],data["name"],JSON.stringify(data["attribute_name_value"]),user_id,data["created_at"],new Date().toJSON(),id]    
               }else{
                 sqlQuery = `INSERT INTO health_details VALUES (NULL,NULL,?,?,?,?,?)`;
                 healthData = [data["name"],JSON.stringify(data["attribute_name_value"]),user_id,new Date().toJSON(),new Date().toJSON()];
               }
-              
+              console.log(sqlQuery);
+              console.log(healthData)
               return db.executeSql(sqlQuery,healthData).then((row: any)=>{
-                    return { event_id:row.insertId }
+                console.log(row)   
+                return { event_id:row.insertId }
               }).catch(res=>{
+                    console.log(res)  
                     return res;
               })
             }).catch(res=>{
+                console.log(res);
                 return res;
             })
         })

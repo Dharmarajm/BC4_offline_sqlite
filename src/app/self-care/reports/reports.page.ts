@@ -53,7 +53,7 @@ export class ReportsPage implements OnInit {
       let data:any = res['event_list'];
       this.data_details=res['event_list'];
       this.groupBy(data);
-   }).catch(err=>{console.log(err)})
+    }).catch(err=>{console.log(err)})
   }
   
   groupBy(data){

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~appointments-appointments-module~doc-visits-doc-visits-module~health-diary-health-diary-modu~5524b6e2"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004"],{
 
 /***/ "./src/app/sqlite-database/database_provider.ts":
 /*!******************************************************!*\
@@ -211,13 +211,16 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     };
     DataBaseSummaryProvider.prototype.getAboutData = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var user_id, sqlHealthQuery, sqlUserQuery;
+            var user_id, getQRcode, sqlHealthQuery, sqlUserQuery;
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.databaseService.getuserID()];
                     case 1:
                         user_id = _a.sent();
+                        return [4 /*yield*/, this.setQRcode()];
+                    case 2:
+                        getQRcode = _a.sent();
                         sqlHealthQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_HEALTH_DETAILS"] + " WHERE name='policy'";
                         sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE id=" + user_id + " AND role_id=1");
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
@@ -265,13 +268,14 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                                             active_status: data2.rows.item(i).active_status,
                                                             role_id: data2.rows.item(i).role_id,
                                                             created_at: data2.rows.item(i).created_at,
-                                                            updated_at: data2.rows.item(i).updated_at
+                                                            updated_at: data2.rows.item(i).updated_at,
+                                                            delete: data2.rows.item(i).delete
                                                         });
                                                     }
                                                 })];
                                         case 2:
                                             _a.sent();
-                                            return [2 /*return*/, { policies: healthData, user_info: userData[0], qrcode_image: null }];
+                                            return [2 /*return*/, { policies: healthData, user_info: userData[0], qrcode_image: getQRcode }];
                                     }
                                 });
                             }); })];
@@ -314,7 +318,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     DataBaseSummaryProvider.prototype.getEmergencyDeatails = function () {
         var _this = this;
         var sqlEmergeQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EMERGENCY_DATA"];
-        var sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + " WHERE role_id=2";
+        var sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + " WHERE role_id=2 AND delete=false";
         return this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
             var emergencyContacts, careGiverData;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
@@ -333,6 +337,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                         user_id: data.rows.item(i).user_id,
                                         created_at: data.rows.item(i).created_at,
                                         updated_at: data.rows.item(i).updated_at,
+                                        delete: data.rows.item(i).delete
                                     });
                                 }
                             })];
@@ -358,7 +363,8 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                             active_status: data1.rows.item(i).active_status,
                                             role_id: data1.rows.item(i).role_id,
                                             created_at: data1.rows.item(i).created_at,
-                                            updated_at: data1.rows.item(i).updated_at
+                                            updated_at: data1.rows.item(i).updated_at,
+                                            delete: data1.rows.item(i).delete
                                         });
                                     }
                                 }
@@ -401,6 +407,120 @@ var DataBaseSummaryProvider = /** @class */ (function () {
             });
         });
     };
+    DataBaseSummaryProvider.prototype.getPatients = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var user_id, sqlUserQuery;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.databaseService.getuserID()];
+                    case 1:
+                        user_id = _a.sent();
+                        sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE id=" + user_id + " AND role_id=1");
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var userData;
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            userData = [];
+                                            return [4 /*yield*/, database.executeSql(sqlUserQuery, []).then(function (data2) {
+                                                    for (var i = 0; i < data2.rows.length; i++) {
+                                                        var attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                                        userData.push({
+                                                            id: data2.rows.item(i).id,
+                                                            name: data2.rows.item(i).name,
+                                                            email: data2.rows.item(i).email,
+                                                            password: data2.rows.item(i).password,
+                                                            mobile_no: data2.rows.item(i).mobile_no,
+                                                            address: data2.rows.item(i).address,
+                                                            country: data2.rows.item(i).country,
+                                                            blood_group: data2.rows.item(i).blood_group,
+                                                            age: data2.rows.item(i).age,
+                                                            user_uid: data2.rows.item(i).user_uid,
+                                                            forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                                            user_picture: attribute_json,
+                                                            active_status: data2.rows.item(i).active_status,
+                                                            role_id: data2.rows.item(i).role_id,
+                                                            created_at: data2.rows.item(i).created_at,
+                                                            updated_at: data2.rows.item(i).updated_at,
+                                                            delete: data2.rows.item(i).delete
+                                                        });
+                                                    }
+                                                })];
+                                        case 1:
+                                            _a.sent();
+                                            return [2 /*return*/, { patients: userData }];
+                                    }
+                                });
+                            }); })];
+                }
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.getPicture_Show = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var emergency_data, aboutData, getAllPatients;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getEmergencyDeatails()];
+                    case 1:
+                        emergency_data = _a.sent();
+                        return [4 /*yield*/, this.getAboutData()];
+                    case 2:
+                        aboutData = _a.sent();
+                        return [4 /*yield*/, this.getPatients()];
+                    case 3:
+                        getAllPatients = _a.sent();
+                        return [2 /*return*/, { caregiver: emergency_data['caregivers'], patient: getAllPatients['patients'], profile_pic: null, user_info: aboutData['user_info'] }];
+                }
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.getRecentAppointments = function (event) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var eventQuery, sqlSearchEventQuery;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now')) ORDER BY event_datetime ASC LIMIT 4 OFFSET 0";
+                sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + eventQuery;
+                return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
+                        return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
+                            var events = [];
+                            for (var i = 0; i < data.rows.length; i++) {
+                                var event_json = null;
+                                if (data.rows.item(i).skills != '') {
+                                    event_json = JSON.parse(data.rows.item(i).event_options);
+                                }
+                                events.push({
+                                    id: data.rows.item(i).id,
+                                    event_id: data.rows.item(i).event_id,
+                                    event_name: data.rows.item(i).event_name,
+                                    description: data.rows.item(i).description,
+                                    value: data.rows.item(i).value,
+                                    event_datetime: data.rows.item(i).event_datetime,
+                                    event_type: data.rows.item(i).event_type,
+                                    event_category: data.rows.item(i).event_category,
+                                    event_assets: data.rows.item(i).event_assets,
+                                    event_options: event_json,
+                                    user_id: data.rows.item(i).user_id,
+                                    sync: data.rows.item(i).sync,
+                                    created_at: data.rows.item(i).created_at,
+                                    updated_at: data.rows.item(i).updated_at
+                                });
+                            }
+                            ;
+                            return { appointment_list: events };
+                        });
+                    })];
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.setQRcode = function () {
+        var setQRcode = null;
+        if (localStorage.getItem("qrcode") != undefined) {
+            setQRcode = localStorage.getItem("qrcode");
+        }
+        return setQRcode;
+    };
     DataBaseSummaryProvider.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
         { type: _database__WEBPACK_IMPORTED_MODULE_4__["DatabaseProvider"] }
@@ -417,4 +537,4 @@ var DataBaseSummaryProvider = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=default~appointments-appointments-module~doc-visits-doc-visits-module~health-diary-health-diary-modu~5524b6e2-es5.js.map
+//# sourceMappingURL=default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004-es5.js.map

@@ -40,7 +40,7 @@ module.exports = "<ion-header class=\"main-header shadow\">\r\n  <ion-toolbar>\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header class=\"main-header\">\n\t<ion-toolbar>\n\t <!--  <ion-back-button slot=\"start\"></ion-back-button> -->\n\t  <ion-back-button slot=\"start\" defaultHref=\"self-care-tabs/tabs/tab1\"></ion-back-button>\n\t  <ion-title>Alerts</ion-title>\n\t  <ion-buttons slot=\"end\">\n\t\t<ion-button>\n\t\t  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22.888\" height=\"22.888\" viewBox=\"0 0 22.888 22.888\"><g transform=\"translate(0.25 0.25)\"><path d=\"M11.194,0A11.194,11.194,0,1,0,22.388,11.194,11.206,11.206,0,0,0,11.194,0Zm0,21.527A10.333,10.333,0,1,1,21.527,11.194,10.345,10.345,0,0,1,11.194,21.527Z\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M25.431,37a.43.43,0,0,0-.431.431v.861a.431.431,0,1,0,.861,0v-.861A.43.43,0,0,0,25.431,37Z\" transform=\"translate(-14.236 -21.07)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M21.493,9h-.05A3.445,3.445,0,0,0,18,12.444a.431.431,0,1,0,.861,0,2.583,2.583,0,0,1,2.62-2.583,2.632,2.632,0,0,1,2.546,2.546,2.571,2.571,0,0,1-1.184,2.21,4.107,4.107,0,0,0-1.829,3.493v1.224a.431.431,0,1,0,.861,0V18.109a3.293,3.293,0,0,1,1.435-2.769A3.427,3.427,0,0,0,24.888,12.4,3.468,3.468,0,0,0,21.493,9Z\" transform=\"translate(-10.25 -5.125)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n\t\t</ion-button>\n\t\t<ion-button>\n\t\t  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"26.711\" height=\"22.342\" viewBox=\"0 0 26.711 22.342\"><g transform=\"translate(0.25 0.25)\"><path d=\"M22.268,12.074A7.48,7.48,0,0,0,14.889,5,7.7,7.7,0,0,0,8.8,8.061c-.033-.017-.068-.029-.1-.045-.086-.042-.172-.081-.261-.116-.052-.021-.1-.039-.156-.057-.086-.03-.173-.057-.262-.081-.052-.014-.1-.028-.157-.041-.1-.022-.194-.038-.293-.053-.046-.007-.091-.016-.138-.021a3.849,3.849,0,0,0-.44-.027,3.936,3.936,0,0,0-3.932,3.932c0,.056,0,.111.007.166A6.04,6.04,0,0,0,0,16.862a5.618,5.618,0,0,0,5.611,5.612H7.863a.437.437,0,1,0,0-.874H5.611A4.743,4.743,0,0,1,.874,16.862a5.193,5.193,0,0,1,2.81-4.479l.248-.118v-.275c0-.054,0-.109.007-.164l0-.076-.005-.088c0-.036-.005-.073-.005-.109A3.037,3.037,0,0,1,7.39,8.524l.1.016a3.07,3.07,0,0,1,.345.077l.046.012a3.048,3.048,0,0,1,.365.14l.091.044a3.019,3.019,0,0,1,.308.174,3.057,3.057,0,0,1,1.4,2.566.437.437,0,0,0,.874,0,3.923,3.923,0,0,0-1.4-3,6.919,6.919,0,0,1,5.366-2.677,6.6,6.6,0,0,1,6.486,6.066,8.343,8.343,0,0,0-1.784.054.437.437,0,0,0,.065.869.429.429,0,0,0,.066-.005,8.054,8.054,0,0,1,2.046,0,4.478,4.478,0,0,1,3.567,4.362A4.386,4.386,0,0,1,20.956,21.6H19.221a.437.437,0,0,0,0,.874h1.735a5.26,5.26,0,0,0,5.254-5.254A5.376,5.376,0,0,0,22.268,12.074Z\" transform=\"translate(0 -5)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M29.174,36.242a.437.437,0,0,0-.437.437,3.932,3.932,0,1,1-3.932-3.932A3.789,3.789,0,0,1,28,34.495H25.242a.437.437,0,1,0,0,.874h3.5a.455.455,0,0,0,.092-.018.471.471,0,0,0,.079-.017h0a.393.393,0,0,0,.038-.027.276.276,0,0,0,.145-.137.432.432,0,0,0,.046-.073.451.451,0,0,0,.024-.116.476.476,0,0,0,.01-.048v0h0V31.437a.437.437,0,0,0-.874,0v2.009a4.633,4.633,0,0,0-3.495-1.573,4.805,4.805,0,1,0,4.805,4.805A.437.437,0,0,0,29.174,36.242Z\" transform=\"translate(-11.263 -19.642)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n\t\t</ion-button>\n\t\t<ion-button>\n\t\t  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19.708\" height=\"22.342\" viewBox=\"0 0 19.708 22.342\"><g transform=\"translate(0.255 0.25)\"><path d=\"M22.41,17.986a8.877,8.877,0,0,1-2.789-6.47V7.945A5.779,5.779,0,0,0,16.234,2.7a7.984,7.984,0,0,0-1.388-.483V1.986a1.986,1.986,0,0,0-3.971,0v.263A7.863,7.863,0,0,0,9.625,2.7,6.008,6.008,0,0,0,6.109,7.943v3.574a8.811,8.811,0,0,1-2.663,6.47.4.4,0,0,0,.212.673l3.769.651c.7.121,1.349.22,1.964.3a3.926,3.926,0,0,0,7.082,0c.613-.081,1.256-.18,1.954-.3l3.769-.651a.4.4,0,0,0,.213-.673Zm-10.741-16a1.191,1.191,0,1,1,2.383,0v.072a7.9,7.9,0,0,0-2.383.019Zm1.264,19.062a3.183,3.183,0,0,1-2.548-1.316,24.6,24.6,0,0,0,2.544.137,24.462,24.462,0,0,0,2.554-.139A3.184,3.184,0,0,1,12.933,21.048Zm5.36-2.521c-.762.131-1.461.238-2.121.322h0c-.291.037-.573.069-.85.1h-.009c-.253.025-.5.046-.745.064l-.139.01c-.212.014-.422.025-.63.033l-.129.005c-.494.017-.981.017-1.475,0l-.132-.006q-.309-.012-.622-.033l-.148-.01c-.238-.017-.479-.037-.726-.062l-.025,0c-.275-.027-.556-.06-.844-.1h0c-.662-.084-1.363-.191-2.129-.323L4.52,18A9.558,9.558,0,0,0,6.9,11.517V7.945A5.2,5.2,0,0,1,9.957,3.421a7.1,7.1,0,0,1,1.389-.47h.012a7.22,7.22,0,0,1,3.01-.027c.005,0,.01,0,.015,0a7.182,7.182,0,0,1,1.519.5,5.041,5.041,0,0,1,2.923,4.524v3.574A9.663,9.663,0,0,0,21.334,18Z\" transform=\"translate(-3.329)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n\t\t</ion-button>\n\t  </ion-buttons>\n\t</ion-toolbar>\n  </ion-header>                     \n\n<ion-content>\n\n\t<ion-segment [(ngModel)]=\"selectedSegment\" (ionChange)=\"segmentChanged(selectedSegment)\">\n\t\t<ion-segment-button value=\"first\">\n\t\t  Medications\n\t\t</ion-segment-button>\n\t\t<ion-segment-button value=\"second\"  (click)=\"vital()\">\n\t\t  Vitals\n\t\t</ion-segment-button>\n\t\t<ion-segment-button value=\"third\" (click)=\"general()\">\n\t\t  General\n\t\t</ion-segment-button>\n\t  </ion-segment>\n\n\n\t  <ng-container *ngIf=\"selectedSegment=='first'\">\n\n\t\t<ion-toolbar class=\"action_tools\" *ngIf=\"medi_loader\">\n\t\t\t\t<ion-skeleton-text slot=\"start\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t<ion-skeleton-text slot=\"end\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t</ion-toolbar>\n\n\t    <ion-toolbar class=\"action_tools\" *ngIf=\"!medi_loader\">\n\t\t\t<ion-searchbar (ionChange)=\"SearchItem('alert_medication',$event)\" slot=\"start\" [(ngModel)]=\"alertMedInput\" placeholder=\"Search\" [debounce]=\"250\" mode=\"ios\"></ion-searchbar>\n\t\t\t<ion-buttons slot=\"end\" color=\"secondary\">\n\t\t\t\t<ion-button class=\"btn\" (click)=\"addMedication()\">\n\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11.965\" height=\"11.965\" viewBox=\"0 0 11.965 11.965\"><g transform=\"translate(-291.035 -86.035)\"><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(296.322 86.035)\" fill=\"#2c2c2c\"/><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(291.035 92.713) rotate(-90)\" fill=\"#2c2c2c\"/></g></svg>\n\t\t\t\tAdd\n\t\t\t\t</ion-button>\n\t\t\t</ion-buttons>\n\t\t</ion-toolbar>\n\t\t<div *ngIf=\"!medi_loader && alert_med_list.length != 0\">\n\t\t\t<ion-list>\n\t\t\t\t<!-- <ion-list-header>\n\t\t\t\t\t<ion-label>{{event.event_name}}</ion-label>\n\t\t\t\t\t<span>Last modified {{event.updated_at | date:\"dd-MM-yyyy\" }}</span>\n\t\t\t\t</ion-list-header> -->\n\t\t\t\t<ion-item button *ngFor=\"let event of alert_med_list;let i=index\">\n\t\t\t\t\t<ion-label>\n\t\t\t\t\t\t<h4 (click)=\"editMedication(event)\">{{event?.event_name}}</h4>\n\t\t\t\t\t\t<ion-note color=\"primary\" *ngIf=\"event['event_options']['medicine_type']=='Tablet'\" (click)=\"editMedication(event)\">{{event?.value}} units</ion-note>\n\t\t\t\t\t\t<p (click)=\"editMedication(event)\"><small>Last modified {{event?.updated_at | date:\"dd-MM-yyyy\" }}</small></p>\n\t\t\t\t\t</ion-label>\n\t\t\t\t<ion-label text-wrap>\n\t\t\t\t\t<h3 (click)=\"editMedication(event)\">{{event?.event_datetime | date:\"HH:mm\"}}</h3>\n\t\t\t\t\t<p (click)=\"editMedication(event)\" *ngIf=\"event?.event_options['remainder_repeat']==true\">\n\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t<span *ngFor=\"let day of repeatOrder[0][event.event_options['repeat_category']]\">\n\t\t\t\t\t\t\t\t<span *ngIf=\"getDays(event['event_options']['repeat_value']).includes(day.day)\" [ngStyle]=\"{'color':'blue'}\">{{day.day}}</span>\n\t\t\t\t\t\t\t\t<span *ngIf=\"!getDays(event['event_options']['repeat_value']).includes(day.day)\">{{day.day}}</span>\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t</small>\n\t\t\t\t\t</p>\n\t\t\t\t\t<p (click)=\"editMedication(event)\" *ngIf=\"event?.event_options['remainder_repeat']==false\">\n\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t{{event?.event_datetime | date:\"dd MMM, yyyy\"}}\n\t\t\t\t\t\t</small>\n\t\t\t\t\t</p>\n\t\t\t\t\t<ion-button class=\"trans_btn\" (click)=\"deleteItem(event.id,i,'alert_medication',event['event_options']['medicine_type'])\">\n\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10.873\" height=\"13.398\" viewBox=\"0 0 10.873 13.398\"><g transform=\"translate(0.1 0.1)\"><g transform=\"translate(0)\"><path d=\"M55.32,1.581H53.266a1.786,1.786,0,0,0-3.548,0H47.663a1.51,1.51,0,0,0-1.508,1.508v.077a1.509,1.509,0,0,0,.953,1.4V11.69A1.51,1.51,0,0,0,48.616,13.2h5.752a1.51,1.51,0,0,0,1.508-1.508V4.567a1.509,1.509,0,0,0,.953-1.4V3.089A1.51,1.51,0,0,0,55.32,1.581ZM51.491.715a1.073,1.073,0,0,1,1.052.866h-2.1A1.073,1.073,0,0,1,51.491.715ZM55.16,11.69a.794.794,0,0,1-.793.793H48.616a.794.794,0,0,1-.793-.793V4.674H55.16Zm.953-8.524a.794.794,0,0,1-.793.793H47.663a.794.794,0,0,1-.793-.793V3.089a.794.794,0,0,1,.793-.793H55.32a.794.794,0,0,1,.793.793v.077Z\" transform=\"translate(-46.155)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M158.433,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,158.433,254.312Z\" transform=\"translate(-155.013 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M228.5,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,228.5,254.312Z\" transform=\"translate(-223.166 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M298.572,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,298.572,254.312Z\" transform=\"translate(-291.318 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/></g></g></svg>\n\t\t\t\t\tDelete\n\t\t\t\t\t</ion-button>\n\t\t\t\t</ion-label>\n\t\t\t\t</ion-item>\n\t\t\t</ion-list>\n\t\t\t<ion-infinite-scroll threshold=\"100px\"  (ionInfinite)=\"loadData1($event)\" *ngIf=\"med_per_page *10 == alert_med_list.length\">\n\t\t\t\t<ion-infinite-scroll-content\n\t\t\t\tloadingSpinner=\"bubbles\"\n\t\t\t\tloadingText=\"Loading more data...\">\n\t\t\t\t</ion-infinite-scroll-content>\n\t\t\t</ion-infinite-scroll>\n\t\t</div>\n\t\t  <div *ngIf=\"alert_med_list.length == 0 && !medi_loader\" class=\"no_record\">\n\t\t\t <div>\n\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"102.83\" height=\"97.896\" viewBox=\"0 0 102.83 97.896\"><defs><linearGradient id=\"a\" x1=\"0.509\" y1=\"0.997\" x2=\"0.509\" y2=\"-0.003\" gradientUnits=\"objectBoundingBox\"><stop offset=\"0\" stop-color=\"gray\" stop-opacity=\"0.251\"/><stop offset=\"0.54\" stop-color=\"gray\" stop-opacity=\"0.122\"/><stop offset=\"1\" stop-color=\"gray\" stop-opacity=\"0.102\"/></linearGradient><linearGradient id=\"b\" x1=\"0.813\" y1=\"0.841\" x2=\"0.813\" y2=\"-0.159\" xlink:href=\"#a\"/><linearGradient id=\"c\" x1=\"1.78\" y1=\"0.849\" x2=\"1.78\" y2=\"-0.151\" xlink:href=\"#a\"/><linearGradient id=\"d\" x1=\"0.5\" y1=\"1\" x2=\"0.5\" y2=\"0\" xlink:href=\"#a\"/><linearGradient id=\"f\" x1=\"0.5\" y1=\"0.999\" x2=\"0.5\" y2=\"-0.001\" xlink:href=\"#a\"/></defs><g transform=\"translate(0 0)\"><rect width=\"54.792\" height=\"75.705\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 8.666, 16.987)\" fill=\"#e0e0e0\"/><g transform=\"translate(9.841 6.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 0, 11.106)\" fill=\"url(#a)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 10.612, 18.43)\" fill=\"#fafafa\"/><rect width=\"25.594\" height=\"6.2\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.737, 12.656)\" fill=\"url(#b)\"/><path d=\"M441.3,91.351a3.664,3.664,0,1,0,4.263,2.831A3.621,3.621,0,0,0,441.3,91.351Zm1.212,5.654a2.114,2.114,0,1,1,1.575-2.508,2.089,2.089,0,0,1-1.575,2.508Z\" transform=\"translate(-407.323 -87.3)\" fill=\"url(#c)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.945, 12.34)\" fill=\"#0e9bff\"/><path d=\"M441.623,91.351a3.5,3.5,0,1,0,4.159,2.689A3.5,3.5,0,0,0,441.623,91.351Zm1.158,5.4a2.021,2.021,0,1,1,1.552-2.4,2.021,2.021,0,0,1-1.552,2.4Z\" transform=\"translate(-407.645 -87.3)\" fill=\"#0e9bff\"/><rect width=\"54.792\" height=\"75.705\" transform=\"translate(32.333 14.658)\" fill=\"#e0e0e0\"/><g transform=\"translate(33.26 15.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" fill=\"url(#d)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"translate(33.933 16.477)\" fill=\"#fff\"/><rect width=\"25.594\" height=\"6.2\" transform=\"translate(47 13.375)\" fill=\"url(#d)\"/><path d=\"M641.9,118a3.665,3.665,0,1,0,3.578,3.664A3.622,3.622,0,0,0,641.9,118Zm0,5.777a2.114,2.114,0,1,1,2.064-2.114,2.089,2.089,0,0,1-2.064,2.1Z\" transform=\"translate(-582.101 -110.677)\" fill=\"url(#f)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"translate(47.269 13.109)\" fill=\"#0e9bff\"/><path d=\"M642.432,118a3.5,3.5,0,1,0,3.5,3.5A3.5,3.5,0,0,0,642.432,118Zm0,5.523a2.023,2.023,0,1,0,0-.006Z\" transform=\"translate(-582.635 -110.677)\" fill=\"#0e9bff\"/><g transform=\"translate(0.814 92.409)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.102) rotate(90)\" fill=\"#47e6b1\"/></g><g transform=\"translate(55.505)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.101) rotate(90)\" fill=\"#47e6b1\"/></g><path d=\"M947.523,824.69a.578.578,0,0,1-.322-.7.282.282,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.272.272,0,0,0-.033.056.578.578,0,0,1-.7.322.279.279,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.277.277,0,0,0,.056.033.578.578,0,0,1,.322.7.273.273,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.272.272,0,0,0,.033-.056.578.578,0,0,1,.7-.322.279.279,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.274.274,0,0,0,947.523,824.69Z\" transform=\"translate(-850.847 -727.829)\" fill=\"#4d8af0\" opacity=\"0.5\"/><path d=\"M313.113,619.63a.578.578,0,0,1-.322-.7.279.279,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.28.28,0,0,0-.033.056.578.578,0,0,1-.7.322.269.269,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.279.279,0,0,0,.056.033.578.578,0,0,1,.322.7.277.277,0,0,0-.013.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.28.28,0,0,0,313.113,619.63Z\" transform=\"translate(-295.978 -548.479)\" fill=\"#fdd835\" opacity=\"0.5\"/><path d=\"M841.523,120.31a.578.578,0,0,1-.322-.7.285.285,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.274.274,0,0,0-.033.056.578.578,0,0,1-.7.322.28.28,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.275.275,0,0,0,.056.033.578.578,0,0,1,.322.7.278.278,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.275.275,0,0,0,841.523,120.31Z\" transform=\"translate(-758.137 -111.762)\" fill=\"#fdd835\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(100.942 38.483)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(27.984 92.668)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(91.247 58.889)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(9.981 11.136)\" fill=\"#4d8af0\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(0 36.89)\" fill=\"#47e6b1\" opacity=\"0.5\"/></g></svg>\n\t\t\t\t<h3>No Record Found</h3>\n\t\t     </div>\n\t\t  </div>\n\t\t  \n\t\t  <ion-list *ngIf=\"medi_loader\">\n\t\t\t\t<ion-list-header>\n\t\t\t\t  <ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t</ion-list-header>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t  </ion-list>\n\t  </ng-container>\n\n\n\n\t  <ng-container *ngIf=\"selectedSegment=='second'\">\n\n\t\t<ion-toolbar class=\"action_tools\" *ngIf=\"vital_loader\">\n\t\t\t\t<ion-skeleton-text slot=\"start\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t<ion-skeleton-text slot=\"end\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t</ion-toolbar>\n\t\t<ion-toolbar class=\"action_tools\" *ngIf=\"!vital_loader\">\n\t\t\t<ion-searchbar (ionChange)=\"SearchItem('alert_vital',$event)\" slot=\"start\" [(ngModel)]=\"alertVitalInput\" placeholder=\"Search\" [debounce]=\"250\" mode=\"ios\"></ion-searchbar>\n\t\t\t<ion-buttons slot=\"end\" color=\"secondary\">\n\t\t\t\t<ion-button class=\"btn\" (click)=\"addVitals()\">\n\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11.965\" height=\"11.965\" viewBox=\"0 0 11.965 11.965\"><g transform=\"translate(-291.035 -86.035)\"><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(296.322 86.035)\" fill=\"#2c2c2c\"/><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(291.035 92.713) rotate(-90)\" fill=\"#2c2c2c\"/></g></svg>\n\t\t\t\tAdd\n\t\t\t\t</ion-button>\n\t\t\t</ion-buttons>\n\t\t</ion-toolbar>\n\t\t<div *ngIf=\"!vital_loader && alert_vital_list.length != 0\">\n\t\t\t<ion-list>\n\t\t\t\t<!-- <ion-list-header>\n\t\t\t\t<ion-label>{{event.event_name}}</ion-label>\n\t\t\t\t<span>Last modified {{event.updated_at | date:\"dd-MM-yyyy\" }}</span>\n\t\t\t\t</ion-list-header> -->\n\t\t\t\t<ion-item button *ngFor=\"let event of alert_vital_list;let i=index\">\n\t\t\t\t\t<ion-label>\n\t\t\t\t\t\t<h4 (click)=\"editVital(event)\">{{event?.event_name}}</h4>\n\t\t\t\t\t\t<p (click)=\"editVital(event)\"><small>Last modified {{event?.updated_at | date:\"dd-MM-yyyy\" }}</small></p>\n\t\t\t\t\t</ion-label>\n\t\t\t\t\t<ion-label text-wrap>\n\t\t\t\t\t\t<h3 (click)=\"editVital(event)\">{{event?.event_datetime | date:\"HH:mm\"}}</h3>\n\t\t\t\t\t\t<p (click)=\"editVital(event)\" *ngIf=\"event?.event_options['remainder_repeat']==true\">\n\t\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t\t<span *ngFor=\"let day of repeatOrder[0][event.event_options['repeat_category']]\">\n\t\t\t\t\t\t\t\t\t<span *ngIf=\"getDays(event['event_options']['repeat_value']).includes(day.day)\" [ngStyle]=\"{'color':'blue'}\">{{day.day}}</span>\n\t\t\t\t\t\t\t\t\t<span *ngIf=\"!getDays(event['event_options']['repeat_value']).includes(day.day)\">{{day.day}}</span>\n\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t</small>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t\t<p (click)=\"editVital(event)\" *ngIf=\"event?.event_options['remainder_repeat']==false\">\n\t\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t {{event?.event_datetime | date:\"dd MMM, yyyy\"}}\n\t\t\t\t\t\t\t</small>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t\t<ion-button class=\"trans_btn\" (click)=\"deleteItem(event.id,i,'alert_vital',event.event_name)\">\n\t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10.873\" height=\"13.398\" viewBox=\"0 0 10.873 13.398\"><g transform=\"translate(0.1 0.1)\"><g transform=\"translate(0)\"><path d=\"M55.32,1.581H53.266a1.786,1.786,0,0,0-3.548,0H47.663a1.51,1.51,0,0,0-1.508,1.508v.077a1.509,1.509,0,0,0,.953,1.4V11.69A1.51,1.51,0,0,0,48.616,13.2h5.752a1.51,1.51,0,0,0,1.508-1.508V4.567a1.509,1.509,0,0,0,.953-1.4V3.089A1.51,1.51,0,0,0,55.32,1.581ZM51.491.715a1.073,1.073,0,0,1,1.052.866h-2.1A1.073,1.073,0,0,1,51.491.715ZM55.16,11.69a.794.794,0,0,1-.793.793H48.616a.794.794,0,0,1-.793-.793V4.674H55.16Zm.953-8.524a.794.794,0,0,1-.793.793H47.663a.794.794,0,0,1-.793-.793V3.089a.794.794,0,0,1,.793-.793H55.32a.794.794,0,0,1,.793.793v.077Z\" transform=\"translate(-46.155)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M158.433,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,158.433,254.312Z\" transform=\"translate(-155.013 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M228.5,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,228.5,254.312Z\" transform=\"translate(-223.166 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M298.572,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,298.572,254.312Z\" transform=\"translate(-291.318 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/></g></g></svg>\n\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t</ion-button>\n\t\t\t\t\t</ion-label>\n\t\t\t\t</ion-item>\n\t\t\t</ion-list>\n\t\t\t<ion-infinite-scroll threshold=\"100px\"  (ionInfinite)=\"loadData2($event)\" *ngIf=\"vital_per_page *10 == alert_vital_list.length\">\n\t\t\t\t<ion-infinite-scroll-content\n\t\t\t\tloadingSpinner=\"bubbles\"\n\t\t\t\tloadingText=\"Loading more data...\">\n\t\t\t\t</ion-infinite-scroll-content>\n\t\t\t</ion-infinite-scroll>\n\t\t</div>\n\t\t<div *ngIf=\"alert_vital_list.length == 0 && !vital_loader\" class=\"no_record\">\n\t\t\t<div>\n\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"102.83\" height=\"97.896\" viewBox=\"0 0 102.83 97.896\"><defs><linearGradient id=\"a\" x1=\"0.509\" y1=\"0.997\" x2=\"0.509\" y2=\"-0.003\" gradientUnits=\"objectBoundingBox\"><stop offset=\"0\" stop-color=\"gray\" stop-opacity=\"0.251\"/><stop offset=\"0.54\" stop-color=\"gray\" stop-opacity=\"0.122\"/><stop offset=\"1\" stop-color=\"gray\" stop-opacity=\"0.102\"/></linearGradient><linearGradient id=\"b\" x1=\"0.813\" y1=\"0.841\" x2=\"0.813\" y2=\"-0.159\" xlink:href=\"#a\"/><linearGradient id=\"c\" x1=\"1.78\" y1=\"0.849\" x2=\"1.78\" y2=\"-0.151\" xlink:href=\"#a\"/><linearGradient id=\"d\" x1=\"0.5\" y1=\"1\" x2=\"0.5\" y2=\"0\" xlink:href=\"#a\"/><linearGradient id=\"f\" x1=\"0.5\" y1=\"0.999\" x2=\"0.5\" y2=\"-0.001\" xlink:href=\"#a\"/></defs><g transform=\"translate(0 0)\"><rect width=\"54.792\" height=\"75.705\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 8.666, 16.987)\" fill=\"#e0e0e0\"/><g transform=\"translate(9.841 6.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 0, 11.106)\" fill=\"url(#a)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 10.612, 18.43)\" fill=\"#fafafa\"/><rect width=\"25.594\" height=\"6.2\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.737, 12.656)\" fill=\"url(#b)\"/><path d=\"M441.3,91.351a3.664,3.664,0,1,0,4.263,2.831A3.621,3.621,0,0,0,441.3,91.351Zm1.212,5.654a2.114,2.114,0,1,1,1.575-2.508,2.089,2.089,0,0,1-1.575,2.508Z\" transform=\"translate(-407.323 -87.3)\" fill=\"url(#c)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.945, 12.34)\" fill=\"#0e9bff\"/><path d=\"M441.623,91.351a3.5,3.5,0,1,0,4.159,2.689A3.5,3.5,0,0,0,441.623,91.351Zm1.158,5.4a2.021,2.021,0,1,1,1.552-2.4,2.021,2.021,0,0,1-1.552,2.4Z\" transform=\"translate(-407.645 -87.3)\" fill=\"#0e9bff\"/><rect width=\"54.792\" height=\"75.705\" transform=\"translate(32.333 14.658)\" fill=\"#e0e0e0\"/><g transform=\"translate(33.26 15.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" fill=\"url(#d)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"translate(33.933 16.477)\" fill=\"#fff\"/><rect width=\"25.594\" height=\"6.2\" transform=\"translate(47 13.375)\" fill=\"url(#d)\"/><path d=\"M641.9,118a3.665,3.665,0,1,0,3.578,3.664A3.622,3.622,0,0,0,641.9,118Zm0,5.777a2.114,2.114,0,1,1,2.064-2.114,2.089,2.089,0,0,1-2.064,2.1Z\" transform=\"translate(-582.101 -110.677)\" fill=\"url(#f)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"translate(47.269 13.109)\" fill=\"#0e9bff\"/><path d=\"M642.432,118a3.5,3.5,0,1,0,3.5,3.5A3.5,3.5,0,0,0,642.432,118Zm0,5.523a2.023,2.023,0,1,0,0-.006Z\" transform=\"translate(-582.635 -110.677)\" fill=\"#0e9bff\"/><g transform=\"translate(0.814 92.409)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.102) rotate(90)\" fill=\"#47e6b1\"/></g><g transform=\"translate(55.505)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.101) rotate(90)\" fill=\"#47e6b1\"/></g><path d=\"M947.523,824.69a.578.578,0,0,1-.322-.7.282.282,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.272.272,0,0,0-.033.056.578.578,0,0,1-.7.322.279.279,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.277.277,0,0,0,.056.033.578.578,0,0,1,.322.7.273.273,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.272.272,0,0,0,.033-.056.578.578,0,0,1,.7-.322.279.279,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.274.274,0,0,0,947.523,824.69Z\" transform=\"translate(-850.847 -727.829)\" fill=\"#4d8af0\" opacity=\"0.5\"/><path d=\"M313.113,619.63a.578.578,0,0,1-.322-.7.279.279,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.28.28,0,0,0-.033.056.578.578,0,0,1-.7.322.269.269,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.279.279,0,0,0,.056.033.578.578,0,0,1,.322.7.277.277,0,0,0-.013.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.28.28,0,0,0,313.113,619.63Z\" transform=\"translate(-295.978 -548.479)\" fill=\"#fdd835\" opacity=\"0.5\"/><path d=\"M841.523,120.31a.578.578,0,0,1-.322-.7.285.285,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.274.274,0,0,0-.033.056.578.578,0,0,1-.7.322.28.28,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.275.275,0,0,0,.056.033.578.578,0,0,1,.322.7.278.278,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.275.275,0,0,0,841.523,120.31Z\" transform=\"translate(-758.137 -111.762)\" fill=\"#fdd835\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(100.942 38.483)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(27.984 92.668)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(91.247 58.889)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(9.981 11.136)\" fill=\"#4d8af0\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(0 36.89)\" fill=\"#47e6b1\" opacity=\"0.5\"/></g></svg>\n\t\t\t<h3>No Record Found</h3>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<ion-list *ngIf=\"vital_loader\">\n\t\t\t<ion-list-header>\n\t\t\t\t<ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t</ion-list-header>\n\t\t\t<ion-item>\n\t\t\t\t<ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t</ion-label>\n\t\t\t</ion-item>\n\t\t\t<ion-item>\n\t\t\t\t<ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t</ion-label>\n\t\t\t</ion-item>\n\t\t\t<ion-item>\n\t\t\t\t<ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t</ion-label>\n\t\t\t</ion-item>\n\t\t\t<ion-item>\n\t\t\t\t<ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t</ion-label>\n\t\t\t</ion-item>\n\t\t</ion-list>\n\t  </ng-container>\n\t  \n\t \n\t  \n\n\t  <ng-container *ngIf=\"selectedSegment=='third'\">\n\n\t\t<ion-toolbar class=\"action_tools\" *ngIf=\"general_loader\">\n\t\t\t\t<ion-skeleton-text slot=\"start\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t<ion-skeleton-text slot=\"end\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t</ion-toolbar>\n\t\t<ion-toolbar class=\"action_tools\" *ngIf=\"!general_loader\">\n\t\t\t<ion-searchbar (ionChange)=\"SearchItem('alert_general',$event)\" slot=\"start\" [(ngModel)]=\"alertGenInput\" placeholder=\"Search\" [debounce]=\"250\" mode=\"ios\"></ion-searchbar>\n\t\t\t<ion-buttons slot=\"end\" color=\"secondary\">\n\t\t\t\t<ion-button class=\"btn\" (click)=\"addGeneral()\">\n\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11.965\" height=\"11.965\" viewBox=\"0 0 11.965 11.965\"><g transform=\"translate(-291.035 -86.035)\"><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(296.322 86.035)\" fill=\"#2c2c2c\"/><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(291.035 92.713) rotate(-90)\" fill=\"#2c2c2c\"/></g></svg>\n\t\t\t\tAdd\n\t\t\t\t</ion-button>\n\t\t\t</ion-buttons>\n\t\t</ion-toolbar>\n\t\t<div  *ngIf=\"!general_loader && alert_general_list.length != 0\">\n\t\t\t<ion-list>\n\t\t\t\t<!-- <ion-list-header>\n\t\t\t\t\t<ion-label>{{event.event_name}}</ion-label>\n\t\t\t\t\t<span>Last modified {{event.updated_at | date:\"dd-MM-yyyy\" }}</span>\n\t\t\t\t</ion-list-header> -->\n\t\t\t\t<ion-item button *ngFor=\"let event of alert_general_list;let i=index\">\n\t\t\t\t\t<ion-label>\n\t\t\t\t\t\t<h4 (click)=\"editGeneral(event)\">{{event?.event_name}}</h4>\n\t\t\t\t\t\t<p (click)=\"editGeneral(event)\"><small>Last modified {{event?.updated_at | date:\"dd-MM-yyyy\" }}</small></p>\n\t\t\t\t\t</ion-label>\n\t\t\t\t\t<ion-label text-wrap>\n\t\t\t\t\t\t<h3 (click)=\"editGeneral(event)\">{{event?.event_datetime | date:\"HH:mm\"}}</h3>\n\t\t\t\t\t\t<p (click)=\"editGeneral(event)\" *ngIf=\"event?.event_options['remainder_repeat']==true\">\n\t\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t\t<span *ngFor=\"let day of repeatOrder[0][event.event_options['repeat_category']]\">\n\t\t\t\t\t\t\t\t<span *ngIf=\"getDays(event['event_options']['repeat_value']).includes(day.day)\" [ngStyle]=\"{'color':'blue'}\">{{day.day}}</span>\n\t\t\t\t\t\t\t\t<span *ngIf=\"!getDays(event['event_options']['repeat_value']).includes(day.day)\">{{day.day}}</span>\n\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t</small>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t\t<p (click)=\"editGeneral(event)\" *ngIf=\"event?.event_options['remainder_repeat']==false\">\n\t\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t  {{event?.event_datetime | date:\"dd MMM, yyyy\"}}\n\t\t\t\t\t\t\t</small>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t\t<ion-button class=\"trans_btn\" (click)=\"deleteItem(event.id,i,'alert_general',event.event_name)\">\n\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10.873\" height=\"13.398\" viewBox=\"0 0 10.873 13.398\"><g transform=\"translate(0.1 0.1)\"><g transform=\"translate(0)\"><path d=\"M55.32,1.581H53.266a1.786,1.786,0,0,0-3.548,0H47.663a1.51,1.51,0,0,0-1.508,1.508v.077a1.509,1.509,0,0,0,.953,1.4V11.69A1.51,1.51,0,0,0,48.616,13.2h5.752a1.51,1.51,0,0,0,1.508-1.508V4.567a1.509,1.509,0,0,0,.953-1.4V3.089A1.51,1.51,0,0,0,55.32,1.581ZM51.491.715a1.073,1.073,0,0,1,1.052.866h-2.1A1.073,1.073,0,0,1,51.491.715ZM55.16,11.69a.794.794,0,0,1-.793.793H48.616a.794.794,0,0,1-.793-.793V4.674H55.16Zm.953-8.524a.794.794,0,0,1-.793.793H47.663a.794.794,0,0,1-.793-.793V3.089a.794.794,0,0,1,.793-.793H55.32a.794.794,0,0,1,.793.793v.077Z\" transform=\"translate(-46.155)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M158.433,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,158.433,254.312Z\" transform=\"translate(-155.013 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M228.5,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,228.5,254.312Z\" transform=\"translate(-223.166 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M298.572,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,298.572,254.312Z\" transform=\"translate(-291.318 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/></g></g></svg>\n\t\t\t\t\t\tDelete\n\t\t\t\t\t\t</ion-button>\n\t\t\t\t\t</ion-label>\n\t\t\t\t</ion-item>\n\t\t\t</ion-list>\n\t\t\t<ion-infinite-scroll threshold=\"100px\"  (ionInfinite)=\"loadData3($event)\" *ngIf=\"general_per_page *10 == alert_general_list.length\">\n\t\t\t\t<ion-infinite-scroll-content\n\t\t\t\tloadingSpinner=\"bubbles\"\n\t\t\t\tloadingText=\"Loading more data...\">\n\t\t\t\t</ion-infinite-scroll-content>\n\t\t\t</ion-infinite-scroll>\n\t\t</div>\n\t\t  <div *ngIf=\"alert_general_list.length == 0 && !general_loader\" class=\"no_record\">\n\t\t\t <div>\n\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"102.83\" height=\"97.896\" viewBox=\"0 0 102.83 97.896\"><defs><linearGradient id=\"a\" x1=\"0.509\" y1=\"0.997\" x2=\"0.509\" y2=\"-0.003\" gradientUnits=\"objectBoundingBox\"><stop offset=\"0\" stop-color=\"gray\" stop-opacity=\"0.251\"/><stop offset=\"0.54\" stop-color=\"gray\" stop-opacity=\"0.122\"/><stop offset=\"1\" stop-color=\"gray\" stop-opacity=\"0.102\"/></linearGradient><linearGradient id=\"b\" x1=\"0.813\" y1=\"0.841\" x2=\"0.813\" y2=\"-0.159\" xlink:href=\"#a\"/><linearGradient id=\"c\" x1=\"1.78\" y1=\"0.849\" x2=\"1.78\" y2=\"-0.151\" xlink:href=\"#a\"/><linearGradient id=\"d\" x1=\"0.5\" y1=\"1\" x2=\"0.5\" y2=\"0\" xlink:href=\"#a\"/><linearGradient id=\"f\" x1=\"0.5\" y1=\"0.999\" x2=\"0.5\" y2=\"-0.001\" xlink:href=\"#a\"/></defs><g transform=\"translate(0 0)\"><rect width=\"54.792\" height=\"75.705\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 8.666, 16.987)\" fill=\"#e0e0e0\"/><g transform=\"translate(9.841 6.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 0, 11.106)\" fill=\"url(#a)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 10.612, 18.43)\" fill=\"#fafafa\"/><rect width=\"25.594\" height=\"6.2\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.737, 12.656)\" fill=\"url(#b)\"/><path d=\"M441.3,91.351a3.664,3.664,0,1,0,4.263,2.831A3.621,3.621,0,0,0,441.3,91.351Zm1.212,5.654a2.114,2.114,0,1,1,1.575-2.508,2.089,2.089,0,0,1-1.575,2.508Z\" transform=\"translate(-407.323 -87.3)\" fill=\"url(#c)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.945, 12.34)\" fill=\"#0e9bff\"/><path d=\"M441.623,91.351a3.5,3.5,0,1,0,4.159,2.689A3.5,3.5,0,0,0,441.623,91.351Zm1.158,5.4a2.021,2.021,0,1,1,1.552-2.4,2.021,2.021,0,0,1-1.552,2.4Z\" transform=\"translate(-407.645 -87.3)\" fill=\"#0e9bff\"/><rect width=\"54.792\" height=\"75.705\" transform=\"translate(32.333 14.658)\" fill=\"#e0e0e0\"/><g transform=\"translate(33.26 15.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" fill=\"url(#d)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"translate(33.933 16.477)\" fill=\"#fff\"/><rect width=\"25.594\" height=\"6.2\" transform=\"translate(47 13.375)\" fill=\"url(#d)\"/><path d=\"M641.9,118a3.665,3.665,0,1,0,3.578,3.664A3.622,3.622,0,0,0,641.9,118Zm0,5.777a2.114,2.114,0,1,1,2.064-2.114,2.089,2.089,0,0,1-2.064,2.1Z\" transform=\"translate(-582.101 -110.677)\" fill=\"url(#f)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"translate(47.269 13.109)\" fill=\"#0e9bff\"/><path d=\"M642.432,118a3.5,3.5,0,1,0,3.5,3.5A3.5,3.5,0,0,0,642.432,118Zm0,5.523a2.023,2.023,0,1,0,0-.006Z\" transform=\"translate(-582.635 -110.677)\" fill=\"#0e9bff\"/><g transform=\"translate(0.814 92.409)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.102) rotate(90)\" fill=\"#47e6b1\"/></g><g transform=\"translate(55.505)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.101) rotate(90)\" fill=\"#47e6b1\"/></g><path d=\"M947.523,824.69a.578.578,0,0,1-.322-.7.282.282,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.272.272,0,0,0-.033.056.578.578,0,0,1-.7.322.279.279,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.277.277,0,0,0,.056.033.578.578,0,0,1,.322.7.273.273,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.272.272,0,0,0,.033-.056.578.578,0,0,1,.7-.322.279.279,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.274.274,0,0,0,947.523,824.69Z\" transform=\"translate(-850.847 -727.829)\" fill=\"#4d8af0\" opacity=\"0.5\"/><path d=\"M313.113,619.63a.578.578,0,0,1-.322-.7.279.279,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.28.28,0,0,0-.033.056.578.578,0,0,1-.7.322.269.269,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.279.279,0,0,0,.056.033.578.578,0,0,1,.322.7.277.277,0,0,0-.013.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.28.28,0,0,0,313.113,619.63Z\" transform=\"translate(-295.978 -548.479)\" fill=\"#fdd835\" opacity=\"0.5\"/><path d=\"M841.523,120.31a.578.578,0,0,1-.322-.7.285.285,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.274.274,0,0,0-.033.056.578.578,0,0,1-.7.322.28.28,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.275.275,0,0,0,.056.033.578.578,0,0,1,.322.7.278.278,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.275.275,0,0,0,841.523,120.31Z\" transform=\"translate(-758.137 -111.762)\" fill=\"#fdd835\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(100.942 38.483)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(27.984 92.668)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(91.247 58.889)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(9.981 11.136)\" fill=\"#4d8af0\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(0 36.89)\" fill=\"#47e6b1\" opacity=\"0.5\"/></g></svg>\n\t\t\t\t<h3>No Record Found</h3>\n\t\t     </div>\n\t\t  </div>\n\t\t  <ion-list *ngIf=\"general_loader\">\n\t\t\t\t<ion-list-header>\n\t\t\t\t  <ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t</ion-list-header>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t  </ion-list>\n\t  </ng-container>\n\n\n\n</ion-content>\n"
+module.exports = "<ion-header class=\"main-header\">\n\t<ion-toolbar>\n\t <!--  <ion-back-button slot=\"start\"></ion-back-button> -->\n\t  <ion-back-button slot=\"start\" defaultHref=\"self-care-tabs/tabs/tab1\"></ion-back-button>\n\t  <ion-title>Alerts</ion-title>\n\t  <ion-buttons slot=\"end\">\n\t\t<ion-button>\n\t\t  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22.888\" height=\"22.888\" viewBox=\"0 0 22.888 22.888\"><g transform=\"translate(0.25 0.25)\"><path d=\"M11.194,0A11.194,11.194,0,1,0,22.388,11.194,11.206,11.206,0,0,0,11.194,0Zm0,21.527A10.333,10.333,0,1,1,21.527,11.194,10.345,10.345,0,0,1,11.194,21.527Z\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M25.431,37a.43.43,0,0,0-.431.431v.861a.431.431,0,1,0,.861,0v-.861A.43.43,0,0,0,25.431,37Z\" transform=\"translate(-14.236 -21.07)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M21.493,9h-.05A3.445,3.445,0,0,0,18,12.444a.431.431,0,1,0,.861,0,2.583,2.583,0,0,1,2.62-2.583,2.632,2.632,0,0,1,2.546,2.546,2.571,2.571,0,0,1-1.184,2.21,4.107,4.107,0,0,0-1.829,3.493v1.224a.431.431,0,1,0,.861,0V18.109a3.293,3.293,0,0,1,1.435-2.769A3.427,3.427,0,0,0,24.888,12.4,3.468,3.468,0,0,0,21.493,9Z\" transform=\"translate(-10.25 -5.125)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n\t\t</ion-button>\n\t\t<ion-button>\n\t\t  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"26.711\" height=\"22.342\" viewBox=\"0 0 26.711 22.342\"><g transform=\"translate(0.25 0.25)\"><path d=\"M22.268,12.074A7.48,7.48,0,0,0,14.889,5,7.7,7.7,0,0,0,8.8,8.061c-.033-.017-.068-.029-.1-.045-.086-.042-.172-.081-.261-.116-.052-.021-.1-.039-.156-.057-.086-.03-.173-.057-.262-.081-.052-.014-.1-.028-.157-.041-.1-.022-.194-.038-.293-.053-.046-.007-.091-.016-.138-.021a3.849,3.849,0,0,0-.44-.027,3.936,3.936,0,0,0-3.932,3.932c0,.056,0,.111.007.166A6.04,6.04,0,0,0,0,16.862a5.618,5.618,0,0,0,5.611,5.612H7.863a.437.437,0,1,0,0-.874H5.611A4.743,4.743,0,0,1,.874,16.862a5.193,5.193,0,0,1,2.81-4.479l.248-.118v-.275c0-.054,0-.109.007-.164l0-.076-.005-.088c0-.036-.005-.073-.005-.109A3.037,3.037,0,0,1,7.39,8.524l.1.016a3.07,3.07,0,0,1,.345.077l.046.012a3.048,3.048,0,0,1,.365.14l.091.044a3.019,3.019,0,0,1,.308.174,3.057,3.057,0,0,1,1.4,2.566.437.437,0,0,0,.874,0,3.923,3.923,0,0,0-1.4-3,6.919,6.919,0,0,1,5.366-2.677,6.6,6.6,0,0,1,6.486,6.066,8.343,8.343,0,0,0-1.784.054.437.437,0,0,0,.065.869.429.429,0,0,0,.066-.005,8.054,8.054,0,0,1,2.046,0,4.478,4.478,0,0,1,3.567,4.362A4.386,4.386,0,0,1,20.956,21.6H19.221a.437.437,0,0,0,0,.874h1.735a5.26,5.26,0,0,0,5.254-5.254A5.376,5.376,0,0,0,22.268,12.074Z\" transform=\"translate(0 -5)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M29.174,36.242a.437.437,0,0,0-.437.437,3.932,3.932,0,1,1-3.932-3.932A3.789,3.789,0,0,1,28,34.495H25.242a.437.437,0,1,0,0,.874h3.5a.455.455,0,0,0,.092-.018.471.471,0,0,0,.079-.017h0a.393.393,0,0,0,.038-.027.276.276,0,0,0,.145-.137.432.432,0,0,0,.046-.073.451.451,0,0,0,.024-.116.476.476,0,0,0,.01-.048v0h0V31.437a.437.437,0,0,0-.874,0v2.009a4.633,4.633,0,0,0-3.495-1.573,4.805,4.805,0,1,0,4.805,4.805A.437.437,0,0,0,29.174,36.242Z\" transform=\"translate(-11.263 -19.642)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n\t\t</ion-button>\n\t\t<ion-button>\n\t\t  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19.708\" height=\"22.342\" viewBox=\"0 0 19.708 22.342\"><g transform=\"translate(0.255 0.25)\"><path d=\"M22.41,17.986a8.877,8.877,0,0,1-2.789-6.47V7.945A5.779,5.779,0,0,0,16.234,2.7a7.984,7.984,0,0,0-1.388-.483V1.986a1.986,1.986,0,0,0-3.971,0v.263A7.863,7.863,0,0,0,9.625,2.7,6.008,6.008,0,0,0,6.109,7.943v3.574a8.811,8.811,0,0,1-2.663,6.47.4.4,0,0,0,.212.673l3.769.651c.7.121,1.349.22,1.964.3a3.926,3.926,0,0,0,7.082,0c.613-.081,1.256-.18,1.954-.3l3.769-.651a.4.4,0,0,0,.213-.673Zm-10.741-16a1.191,1.191,0,1,1,2.383,0v.072a7.9,7.9,0,0,0-2.383.019Zm1.264,19.062a3.183,3.183,0,0,1-2.548-1.316,24.6,24.6,0,0,0,2.544.137,24.462,24.462,0,0,0,2.554-.139A3.184,3.184,0,0,1,12.933,21.048Zm5.36-2.521c-.762.131-1.461.238-2.121.322h0c-.291.037-.573.069-.85.1h-.009c-.253.025-.5.046-.745.064l-.139.01c-.212.014-.422.025-.63.033l-.129.005c-.494.017-.981.017-1.475,0l-.132-.006q-.309-.012-.622-.033l-.148-.01c-.238-.017-.479-.037-.726-.062l-.025,0c-.275-.027-.556-.06-.844-.1h0c-.662-.084-1.363-.191-2.129-.323L4.52,18A9.558,9.558,0,0,0,6.9,11.517V7.945A5.2,5.2,0,0,1,9.957,3.421a7.1,7.1,0,0,1,1.389-.47h.012a7.22,7.22,0,0,1,3.01-.027c.005,0,.01,0,.015,0a7.182,7.182,0,0,1,1.519.5,5.041,5.041,0,0,1,2.923,4.524v3.574A9.663,9.663,0,0,0,21.334,18Z\" transform=\"translate(-3.329)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n\t\t</ion-button>\n\t  </ion-buttons>\n\t</ion-toolbar>\n  </ion-header>                     \n\n<ion-content>\n\n\t<ion-segment [(ngModel)]=\"selectedSegment\" (ionChange)=\"segmentChanged(selectedSegment)\">\n\t\t<ion-segment-button value=\"first\">\n\t\t  Medications\n\t\t</ion-segment-button>\n\t\t<ion-segment-button value=\"second\"  (click)=\"vital()\">\n\t\t  Vitals\n\t\t</ion-segment-button>\n\t\t<ion-segment-button value=\"third\" (click)=\"general()\">\n\t\t  General\n\t\t</ion-segment-button>\n\t  </ion-segment>\n\n\n\t  <ng-container *ngIf=\"selectedSegment=='first'\">\n\n\t\t<ion-toolbar class=\"action_tools\" *ngIf=\"medi_loader\">\n\t\t\t\t<ion-skeleton-text slot=\"start\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t<ion-skeleton-text slot=\"end\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t</ion-toolbar>\n\n\t    <ion-toolbar class=\"action_tools\" *ngIf=\"!medi_loader\">\n\t\t\t<ion-searchbar (ionChange)=\"SearchItem('alert_medication',$event)\" slot=\"start\" [(ngModel)]=\"alertMedInput\" placeholder=\"Search\" [debounce]=\"250\" mode=\"ios\"></ion-searchbar>\n\t\t\t<ion-buttons slot=\"end\" color=\"secondary\">\n\t\t\t\t<ion-button class=\"btn\" (click)=\"addMedication()\">\n\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11.965\" height=\"11.965\" viewBox=\"0 0 11.965 11.965\"><g transform=\"translate(-291.035 -86.035)\"><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(296.322 86.035)\" fill=\"#2c2c2c\"/><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(291.035 92.713) rotate(-90)\" fill=\"#2c2c2c\"/></g></svg>\n\t\t\t\tAdd\n\t\t\t\t</ion-button>\n\t\t\t</ion-buttons>\n\t\t</ion-toolbar>\n\t\t<div *ngIf=\"!medi_loader && alert_med_list.length != 0\">\n\t\t\t<ion-list>\n\t\t\t\t<!-- <ion-list-header>\n\t\t\t\t\t<ion-label>{{event.event_name}}</ion-label>\n\t\t\t\t\t<span>Last modified {{event.updated_at | date:\"dd-MM-yyyy\" }}</span>\n\t\t\t\t</ion-list-header> -->\n\t\t\t\t<ion-item button *ngFor=\"let event of alert_med_list;let i=index\">\n\t\t\t\t\t<ion-label>\n\t\t\t\t\t\t<h4 (click)=\"editMedication(event)\">{{event?.event_name}}</h4>\n\t\t\t\t\t\t<ion-note color=\"primary\" *ngIf=\"event['event_options']['medicine_type']=='Tablet'\" (click)=\"editMedication(event)\">{{event?.value}} units</ion-note>\n\t\t\t\t\t\t<p (click)=\"editMedication(event)\"><small>Last modified {{event?.updated_at | date:\"dd-MM-yyyy\" }}</small></p>\n\t\t\t\t\t</ion-label>\n\t\t\t\t<ion-label text-wrap>\n\t\t\t\t\t<h3 (click)=\"editMedication(event)\">{{event?.event_datetime | date:\"HH:mm\"}}</h3>\n\t\t\t\t\t<p (click)=\"editMedication(event)\" *ngIf=\"event?.event_options['remainder_repeat']==true\">\n\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t<span *ngFor=\"let day of repeatOrder[0][event.event_options['repeat_category']]\">\n\t\t\t\t\t\t\t\t<span *ngIf=\"getDays(event['event_options']['repeat_value']).includes(day.day)\" [ngStyle]=\"{'color':'blue'}\">{{day.day}}</span>\n\t\t\t\t\t\t\t\t<span *ngIf=\"!getDays(event['event_options']['repeat_value']).includes(day.day)\">{{day.day}}</span>\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t</small>\n\t\t\t\t\t</p>\n\t\t\t\t\t<p (click)=\"editMedication(event)\" *ngIf=\"event?.event_options['remainder_repeat']==false\">\n\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t{{event?.event_datetime | date:\"dd MMM, yyyy\"}}\n\t\t\t\t\t\t</small>\n\t\t\t\t\t</p>\n\t\t\t\t\t<ion-button class=\"trans_btn\" (click)=\"deleteItem(event.event_id,i,'alert_medication',event['event_options']['medicine_type'])\">\n\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10.873\" height=\"13.398\" viewBox=\"0 0 10.873 13.398\"><g transform=\"translate(0.1 0.1)\"><g transform=\"translate(0)\"><path d=\"M55.32,1.581H53.266a1.786,1.786,0,0,0-3.548,0H47.663a1.51,1.51,0,0,0-1.508,1.508v.077a1.509,1.509,0,0,0,.953,1.4V11.69A1.51,1.51,0,0,0,48.616,13.2h5.752a1.51,1.51,0,0,0,1.508-1.508V4.567a1.509,1.509,0,0,0,.953-1.4V3.089A1.51,1.51,0,0,0,55.32,1.581ZM51.491.715a1.073,1.073,0,0,1,1.052.866h-2.1A1.073,1.073,0,0,1,51.491.715ZM55.16,11.69a.794.794,0,0,1-.793.793H48.616a.794.794,0,0,1-.793-.793V4.674H55.16Zm.953-8.524a.794.794,0,0,1-.793.793H47.663a.794.794,0,0,1-.793-.793V3.089a.794.794,0,0,1,.793-.793H55.32a.794.794,0,0,1,.793.793v.077Z\" transform=\"translate(-46.155)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M158.433,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,158.433,254.312Z\" transform=\"translate(-155.013 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M228.5,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,228.5,254.312Z\" transform=\"translate(-223.166 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M298.572,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,298.572,254.312Z\" transform=\"translate(-291.318 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/></g></g></svg>\n\t\t\t\t\tDelete\n\t\t\t\t\t</ion-button>\n\t\t\t\t</ion-label>\n\t\t\t\t</ion-item>\n\t\t\t</ion-list>\n\t\t\t<ion-infinite-scroll threshold=\"100px\"  (ionInfinite)=\"loadData1($event)\" *ngIf=\"med_per_page *10 == alert_med_list.length\">\n\t\t\t\t<ion-infinite-scroll-content\n\t\t\t\tloadingSpinner=\"bubbles\"\n\t\t\t\tloadingText=\"Loading more data...\">\n\t\t\t\t</ion-infinite-scroll-content>\n\t\t\t</ion-infinite-scroll>\n\t\t</div>\n\t\t  <div *ngIf=\"alert_med_list.length == 0 && !medi_loader\" class=\"no_record\">\n\t\t\t <div>\n\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"102.83\" height=\"97.896\" viewBox=\"0 0 102.83 97.896\"><defs><linearGradient id=\"a\" x1=\"0.509\" y1=\"0.997\" x2=\"0.509\" y2=\"-0.003\" gradientUnits=\"objectBoundingBox\"><stop offset=\"0\" stop-color=\"gray\" stop-opacity=\"0.251\"/><stop offset=\"0.54\" stop-color=\"gray\" stop-opacity=\"0.122\"/><stop offset=\"1\" stop-color=\"gray\" stop-opacity=\"0.102\"/></linearGradient><linearGradient id=\"b\" x1=\"0.813\" y1=\"0.841\" x2=\"0.813\" y2=\"-0.159\" xlink:href=\"#a\"/><linearGradient id=\"c\" x1=\"1.78\" y1=\"0.849\" x2=\"1.78\" y2=\"-0.151\" xlink:href=\"#a\"/><linearGradient id=\"d\" x1=\"0.5\" y1=\"1\" x2=\"0.5\" y2=\"0\" xlink:href=\"#a\"/><linearGradient id=\"f\" x1=\"0.5\" y1=\"0.999\" x2=\"0.5\" y2=\"-0.001\" xlink:href=\"#a\"/></defs><g transform=\"translate(0 0)\"><rect width=\"54.792\" height=\"75.705\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 8.666, 16.987)\" fill=\"#e0e0e0\"/><g transform=\"translate(9.841 6.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 0, 11.106)\" fill=\"url(#a)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 10.612, 18.43)\" fill=\"#fafafa\"/><rect width=\"25.594\" height=\"6.2\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.737, 12.656)\" fill=\"url(#b)\"/><path d=\"M441.3,91.351a3.664,3.664,0,1,0,4.263,2.831A3.621,3.621,0,0,0,441.3,91.351Zm1.212,5.654a2.114,2.114,0,1,1,1.575-2.508,2.089,2.089,0,0,1-1.575,2.508Z\" transform=\"translate(-407.323 -87.3)\" fill=\"url(#c)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.945, 12.34)\" fill=\"#0e9bff\"/><path d=\"M441.623,91.351a3.5,3.5,0,1,0,4.159,2.689A3.5,3.5,0,0,0,441.623,91.351Zm1.158,5.4a2.021,2.021,0,1,1,1.552-2.4,2.021,2.021,0,0,1-1.552,2.4Z\" transform=\"translate(-407.645 -87.3)\" fill=\"#0e9bff\"/><rect width=\"54.792\" height=\"75.705\" transform=\"translate(32.333 14.658)\" fill=\"#e0e0e0\"/><g transform=\"translate(33.26 15.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" fill=\"url(#d)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"translate(33.933 16.477)\" fill=\"#fff\"/><rect width=\"25.594\" height=\"6.2\" transform=\"translate(47 13.375)\" fill=\"url(#d)\"/><path d=\"M641.9,118a3.665,3.665,0,1,0,3.578,3.664A3.622,3.622,0,0,0,641.9,118Zm0,5.777a2.114,2.114,0,1,1,2.064-2.114,2.089,2.089,0,0,1-2.064,2.1Z\" transform=\"translate(-582.101 -110.677)\" fill=\"url(#f)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"translate(47.269 13.109)\" fill=\"#0e9bff\"/><path d=\"M642.432,118a3.5,3.5,0,1,0,3.5,3.5A3.5,3.5,0,0,0,642.432,118Zm0,5.523a2.023,2.023,0,1,0,0-.006Z\" transform=\"translate(-582.635 -110.677)\" fill=\"#0e9bff\"/><g transform=\"translate(0.814 92.409)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.102) rotate(90)\" fill=\"#47e6b1\"/></g><g transform=\"translate(55.505)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.101) rotate(90)\" fill=\"#47e6b1\"/></g><path d=\"M947.523,824.69a.578.578,0,0,1-.322-.7.282.282,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.272.272,0,0,0-.033.056.578.578,0,0,1-.7.322.279.279,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.277.277,0,0,0,.056.033.578.578,0,0,1,.322.7.273.273,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.272.272,0,0,0,.033-.056.578.578,0,0,1,.7-.322.279.279,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.274.274,0,0,0,947.523,824.69Z\" transform=\"translate(-850.847 -727.829)\" fill=\"#4d8af0\" opacity=\"0.5\"/><path d=\"M313.113,619.63a.578.578,0,0,1-.322-.7.279.279,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.28.28,0,0,0-.033.056.578.578,0,0,1-.7.322.269.269,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.279.279,0,0,0,.056.033.578.578,0,0,1,.322.7.277.277,0,0,0-.013.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.28.28,0,0,0,313.113,619.63Z\" transform=\"translate(-295.978 -548.479)\" fill=\"#fdd835\" opacity=\"0.5\"/><path d=\"M841.523,120.31a.578.578,0,0,1-.322-.7.285.285,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.274.274,0,0,0-.033.056.578.578,0,0,1-.7.322.28.28,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.275.275,0,0,0,.056.033.578.578,0,0,1,.322.7.278.278,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.275.275,0,0,0,841.523,120.31Z\" transform=\"translate(-758.137 -111.762)\" fill=\"#fdd835\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(100.942 38.483)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(27.984 92.668)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(91.247 58.889)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(9.981 11.136)\" fill=\"#4d8af0\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(0 36.89)\" fill=\"#47e6b1\" opacity=\"0.5\"/></g></svg>\n\t\t\t\t<h3>No Record Found</h3>\n\t\t     </div>\n\t\t  </div>\n\t\t  \n\t\t  <ion-list *ngIf=\"medi_loader\">\n\t\t\t\t<ion-list-header>\n\t\t\t\t  <ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t</ion-list-header>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t  </ion-list>\n\t  </ng-container>\n\n\n\n\t  <ng-container *ngIf=\"selectedSegment=='second'\">\n\n\t\t<ion-toolbar class=\"action_tools\" *ngIf=\"vital_loader\">\n\t\t\t\t<ion-skeleton-text slot=\"start\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t<ion-skeleton-text slot=\"end\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t</ion-toolbar>\n\t\t<ion-toolbar class=\"action_tools\" *ngIf=\"!vital_loader\">\n\t\t\t<ion-searchbar (ionChange)=\"SearchItem('alert_vital',$event)\" slot=\"start\" [(ngModel)]=\"alertVitalInput\" placeholder=\"Search\" [debounce]=\"250\" mode=\"ios\"></ion-searchbar>\n\t\t\t<ion-buttons slot=\"end\" color=\"secondary\">\n\t\t\t\t<ion-button class=\"btn\" (click)=\"addVitals()\">\n\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11.965\" height=\"11.965\" viewBox=\"0 0 11.965 11.965\"><g transform=\"translate(-291.035 -86.035)\"><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(296.322 86.035)\" fill=\"#2c2c2c\"/><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(291.035 92.713) rotate(-90)\" fill=\"#2c2c2c\"/></g></svg>\n\t\t\t\tAdd\n\t\t\t\t</ion-button>\n\t\t\t</ion-buttons>\n\t\t</ion-toolbar>\n\t\t<div *ngIf=\"!vital_loader && alert_vital_list.length != 0\">\n\t\t\t<ion-list>\n\t\t\t\t<!-- <ion-list-header>\n\t\t\t\t<ion-label>{{event.event_name}}</ion-label>\n\t\t\t\t<span>Last modified {{event.updated_at | date:\"dd-MM-yyyy\" }}</span>\n\t\t\t\t</ion-list-header> -->\n\t\t\t\t<ion-item button *ngFor=\"let event of alert_vital_list;let i=index\">\n\t\t\t\t\t<ion-label>\n\t\t\t\t\t\t<h4 (click)=\"editVital(event)\">{{event?.event_name}}</h4>\n\t\t\t\t\t\t<p (click)=\"editVital(event)\"><small>Last modified {{event?.updated_at | date:\"dd-MM-yyyy\" }}</small></p>\n\t\t\t\t\t</ion-label>\n\t\t\t\t\t<ion-label text-wrap>\n\t\t\t\t\t\t<h3 (click)=\"editVital(event)\">{{event?.event_datetime | date:\"HH:mm\"}}</h3>\n\t\t\t\t\t\t<p (click)=\"editVital(event)\" *ngIf=\"event?.event_options['remainder_repeat']==true\">\n\t\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t\t<span *ngFor=\"let day of repeatOrder[0][event.event_options['repeat_category']]\">\n\t\t\t\t\t\t\t\t\t<span *ngIf=\"getDays(event['event_options']['repeat_value']).includes(day.day)\" [ngStyle]=\"{'color':'blue'}\">{{day.day}}</span>\n\t\t\t\t\t\t\t\t\t<span *ngIf=\"!getDays(event['event_options']['repeat_value']).includes(day.day)\">{{day.day}}</span>\n\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t</small>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t\t<p (click)=\"editVital(event)\" *ngIf=\"event?.event_options['remainder_repeat']==false\">\n\t\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t {{event?.event_datetime | date:\"dd MMM, yyyy\"}}\n\t\t\t\t\t\t\t</small>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t\t<ion-button class=\"trans_btn\" (click)=\"deleteItem(event.event_id,i,'alert_vital',event.event_name)\">\n\t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10.873\" height=\"13.398\" viewBox=\"0 0 10.873 13.398\"><g transform=\"translate(0.1 0.1)\"><g transform=\"translate(0)\"><path d=\"M55.32,1.581H53.266a1.786,1.786,0,0,0-3.548,0H47.663a1.51,1.51,0,0,0-1.508,1.508v.077a1.509,1.509,0,0,0,.953,1.4V11.69A1.51,1.51,0,0,0,48.616,13.2h5.752a1.51,1.51,0,0,0,1.508-1.508V4.567a1.509,1.509,0,0,0,.953-1.4V3.089A1.51,1.51,0,0,0,55.32,1.581ZM51.491.715a1.073,1.073,0,0,1,1.052.866h-2.1A1.073,1.073,0,0,1,51.491.715ZM55.16,11.69a.794.794,0,0,1-.793.793H48.616a.794.794,0,0,1-.793-.793V4.674H55.16Zm.953-8.524a.794.794,0,0,1-.793.793H47.663a.794.794,0,0,1-.793-.793V3.089a.794.794,0,0,1,.793-.793H55.32a.794.794,0,0,1,.793.793v.077Z\" transform=\"translate(-46.155)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M158.433,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,158.433,254.312Z\" transform=\"translate(-155.013 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M228.5,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,228.5,254.312Z\" transform=\"translate(-223.166 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M298.572,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,298.572,254.312Z\" transform=\"translate(-291.318 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/></g></g></svg>\n\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t</ion-button>\n\t\t\t\t\t</ion-label>\n\t\t\t\t</ion-item>\n\t\t\t</ion-list>\n\t\t\t<ion-infinite-scroll threshold=\"100px\"  (ionInfinite)=\"loadData2($event)\" *ngIf=\"vital_per_page *10 == alert_vital_list.length\">\n\t\t\t\t<ion-infinite-scroll-content\n\t\t\t\tloadingSpinner=\"bubbles\"\n\t\t\t\tloadingText=\"Loading more data...\">\n\t\t\t\t</ion-infinite-scroll-content>\n\t\t\t</ion-infinite-scroll>\n\t\t</div>\n\t\t<div *ngIf=\"alert_vital_list.length == 0 && !vital_loader\" class=\"no_record\">\n\t\t\t<div>\n\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"102.83\" height=\"97.896\" viewBox=\"0 0 102.83 97.896\"><defs><linearGradient id=\"a\" x1=\"0.509\" y1=\"0.997\" x2=\"0.509\" y2=\"-0.003\" gradientUnits=\"objectBoundingBox\"><stop offset=\"0\" stop-color=\"gray\" stop-opacity=\"0.251\"/><stop offset=\"0.54\" stop-color=\"gray\" stop-opacity=\"0.122\"/><stop offset=\"1\" stop-color=\"gray\" stop-opacity=\"0.102\"/></linearGradient><linearGradient id=\"b\" x1=\"0.813\" y1=\"0.841\" x2=\"0.813\" y2=\"-0.159\" xlink:href=\"#a\"/><linearGradient id=\"c\" x1=\"1.78\" y1=\"0.849\" x2=\"1.78\" y2=\"-0.151\" xlink:href=\"#a\"/><linearGradient id=\"d\" x1=\"0.5\" y1=\"1\" x2=\"0.5\" y2=\"0\" xlink:href=\"#a\"/><linearGradient id=\"f\" x1=\"0.5\" y1=\"0.999\" x2=\"0.5\" y2=\"-0.001\" xlink:href=\"#a\"/></defs><g transform=\"translate(0 0)\"><rect width=\"54.792\" height=\"75.705\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 8.666, 16.987)\" fill=\"#e0e0e0\"/><g transform=\"translate(9.841 6.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 0, 11.106)\" fill=\"url(#a)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 10.612, 18.43)\" fill=\"#fafafa\"/><rect width=\"25.594\" height=\"6.2\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.737, 12.656)\" fill=\"url(#b)\"/><path d=\"M441.3,91.351a3.664,3.664,0,1,0,4.263,2.831A3.621,3.621,0,0,0,441.3,91.351Zm1.212,5.654a2.114,2.114,0,1,1,1.575-2.508,2.089,2.089,0,0,1-1.575,2.508Z\" transform=\"translate(-407.323 -87.3)\" fill=\"url(#c)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.945, 12.34)\" fill=\"#0e9bff\"/><path d=\"M441.623,91.351a3.5,3.5,0,1,0,4.159,2.689A3.5,3.5,0,0,0,441.623,91.351Zm1.158,5.4a2.021,2.021,0,1,1,1.552-2.4,2.021,2.021,0,0,1-1.552,2.4Z\" transform=\"translate(-407.645 -87.3)\" fill=\"#0e9bff\"/><rect width=\"54.792\" height=\"75.705\" transform=\"translate(32.333 14.658)\" fill=\"#e0e0e0\"/><g transform=\"translate(33.26 15.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" fill=\"url(#d)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"translate(33.933 16.477)\" fill=\"#fff\"/><rect width=\"25.594\" height=\"6.2\" transform=\"translate(47 13.375)\" fill=\"url(#d)\"/><path d=\"M641.9,118a3.665,3.665,0,1,0,3.578,3.664A3.622,3.622,0,0,0,641.9,118Zm0,5.777a2.114,2.114,0,1,1,2.064-2.114,2.089,2.089,0,0,1-2.064,2.1Z\" transform=\"translate(-582.101 -110.677)\" fill=\"url(#f)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"translate(47.269 13.109)\" fill=\"#0e9bff\"/><path d=\"M642.432,118a3.5,3.5,0,1,0,3.5,3.5A3.5,3.5,0,0,0,642.432,118Zm0,5.523a2.023,2.023,0,1,0,0-.006Z\" transform=\"translate(-582.635 -110.677)\" fill=\"#0e9bff\"/><g transform=\"translate(0.814 92.409)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.102) rotate(90)\" fill=\"#47e6b1\"/></g><g transform=\"translate(55.505)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.101) rotate(90)\" fill=\"#47e6b1\"/></g><path d=\"M947.523,824.69a.578.578,0,0,1-.322-.7.282.282,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.272.272,0,0,0-.033.056.578.578,0,0,1-.7.322.279.279,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.277.277,0,0,0,.056.033.578.578,0,0,1,.322.7.273.273,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.272.272,0,0,0,.033-.056.578.578,0,0,1,.7-.322.279.279,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.274.274,0,0,0,947.523,824.69Z\" transform=\"translate(-850.847 -727.829)\" fill=\"#4d8af0\" opacity=\"0.5\"/><path d=\"M313.113,619.63a.578.578,0,0,1-.322-.7.279.279,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.28.28,0,0,0-.033.056.578.578,0,0,1-.7.322.269.269,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.279.279,0,0,0,.056.033.578.578,0,0,1,.322.7.277.277,0,0,0-.013.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.28.28,0,0,0,313.113,619.63Z\" transform=\"translate(-295.978 -548.479)\" fill=\"#fdd835\" opacity=\"0.5\"/><path d=\"M841.523,120.31a.578.578,0,0,1-.322-.7.285.285,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.274.274,0,0,0-.033.056.578.578,0,0,1-.7.322.28.28,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.275.275,0,0,0,.056.033.578.578,0,0,1,.322.7.278.278,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.275.275,0,0,0,841.523,120.31Z\" transform=\"translate(-758.137 -111.762)\" fill=\"#fdd835\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(100.942 38.483)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(27.984 92.668)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(91.247 58.889)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(9.981 11.136)\" fill=\"#4d8af0\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(0 36.89)\" fill=\"#47e6b1\" opacity=\"0.5\"/></g></svg>\n\t\t\t<h3>No Record Found</h3>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<ion-list *ngIf=\"vital_loader\">\n\t\t\t<ion-list-header>\n\t\t\t\t<ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t</ion-list-header>\n\t\t\t<ion-item>\n\t\t\t\t<ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t</ion-label>\n\t\t\t</ion-item>\n\t\t\t<ion-item>\n\t\t\t\t<ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t</ion-label>\n\t\t\t</ion-item>\n\t\t\t<ion-item>\n\t\t\t\t<ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t</ion-label>\n\t\t\t</ion-item>\n\t\t\t<ion-item>\n\t\t\t\t<ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t\t<ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t</ion-label>\n\t\t\t</ion-item>\n\t\t</ion-list>\n\t  </ng-container>\n\t  \n\t \n\t  \n\n\t  <ng-container *ngIf=\"selectedSegment=='third'\">\n\n\t\t<ion-toolbar class=\"action_tools\" *ngIf=\"general_loader\">\n\t\t\t\t<ion-skeleton-text slot=\"start\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t<ion-skeleton-text slot=\"end\" animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t</ion-toolbar>\n\t\t<ion-toolbar class=\"action_tools\" *ngIf=\"!general_loader\">\n\t\t\t<ion-searchbar (ionChange)=\"SearchItem('alert_general',$event)\" slot=\"start\" [(ngModel)]=\"alertGenInput\" placeholder=\"Search\" [debounce]=\"250\" mode=\"ios\"></ion-searchbar>\n\t\t\t<ion-buttons slot=\"end\" color=\"secondary\">\n\t\t\t\t<ion-button class=\"btn\" (click)=\"addGeneral()\">\n\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11.965\" height=\"11.965\" viewBox=\"0 0 11.965 11.965\"><g transform=\"translate(-291.035 -86.035)\"><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(296.322 86.035)\" fill=\"#2c2c2c\"/><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(291.035 92.713) rotate(-90)\" fill=\"#2c2c2c\"/></g></svg>\n\t\t\t\tAdd\n\t\t\t\t</ion-button>\n\t\t\t</ion-buttons>\n\t\t</ion-toolbar>\n\t\t<div  *ngIf=\"!general_loader && alert_general_list.length != 0\">\n\t\t\t<ion-list>\n\t\t\t\t<!-- <ion-list-header>\n\t\t\t\t\t<ion-label>{{event.event_name}}</ion-label>\n\t\t\t\t\t<span>Last modified {{event.updated_at | date:\"dd-MM-yyyy\" }}</span>\n\t\t\t\t</ion-list-header> -->\n\t\t\t\t<ion-item button *ngFor=\"let event of alert_general_list;let i=index\">\n\t\t\t\t\t<ion-label>\n\t\t\t\t\t\t<h4 (click)=\"editGeneral(event)\">{{event?.event_name}}</h4>\n\t\t\t\t\t\t<p (click)=\"editGeneral(event)\"><small>Last modified {{event?.updated_at | date:\"dd-MM-yyyy\" }}</small></p>\n\t\t\t\t\t</ion-label>\n\t\t\t\t\t<ion-label text-wrap>\n\t\t\t\t\t\t<h3 (click)=\"editGeneral(event)\">{{event?.event_datetime | date:\"HH:mm\"}}</h3>\n\t\t\t\t\t\t<p (click)=\"editGeneral(event)\" *ngIf=\"event?.event_options['remainder_repeat']==true\">\n\t\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t\t<span *ngFor=\"let day of repeatOrder[0][event.event_options['repeat_category']]\">\n\t\t\t\t\t\t\t\t<span *ngIf=\"getDays(event['event_options']['repeat_value']).includes(day.day)\" [ngStyle]=\"{'color':'blue'}\">{{day.day}}</span>\n\t\t\t\t\t\t\t\t<span *ngIf=\"!getDays(event['event_options']['repeat_value']).includes(day.day)\">{{day.day}}</span>\n\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t</small>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t\t<p (click)=\"editGeneral(event)\" *ngIf=\"event?.event_options['remainder_repeat']==false\">\n\t\t\t\t\t\t\t<small>\n\t\t\t\t\t\t\t  {{event?.event_datetime | date:\"dd MMM, yyyy\"}}\n\t\t\t\t\t\t\t</small>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t\t<ion-button class=\"trans_btn\" (click)=\"deleteItem(event.event_id,i,'alert_general',event.event_name)\">\n\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"10.873\" height=\"13.398\" viewBox=\"0 0 10.873 13.398\"><g transform=\"translate(0.1 0.1)\"><g transform=\"translate(0)\"><path d=\"M55.32,1.581H53.266a1.786,1.786,0,0,0-3.548,0H47.663a1.51,1.51,0,0,0-1.508,1.508v.077a1.509,1.509,0,0,0,.953,1.4V11.69A1.51,1.51,0,0,0,48.616,13.2h5.752a1.51,1.51,0,0,0,1.508-1.508V4.567a1.509,1.509,0,0,0,.953-1.4V3.089A1.51,1.51,0,0,0,55.32,1.581ZM51.491.715a1.073,1.073,0,0,1,1.052.866h-2.1A1.073,1.073,0,0,1,51.491.715ZM55.16,11.69a.794.794,0,0,1-.793.793H48.616a.794.794,0,0,1-.793-.793V4.674H55.16Zm.953-8.524a.794.794,0,0,1-.793.793H47.663a.794.794,0,0,1-.793-.793V3.089a.794.794,0,0,1,.793-.793H55.32a.794.794,0,0,1,.793.793v.077Z\" transform=\"translate(-46.155)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M158.433,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,158.433,254.312Z\" transform=\"translate(-155.013 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M228.5,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,228.5,254.312Z\" transform=\"translate(-223.166 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/><path d=\"M298.572,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,298.572,254.312Z\" transform=\"translate(-291.318 -242.743)\" fill=\"#fa5457\" stroke=\"#fa5457\" stroke-width=\"0.2\"/></g></g></svg>\n\t\t\t\t\t\tDelete\n\t\t\t\t\t\t</ion-button>\n\t\t\t\t\t</ion-label>\n\t\t\t\t</ion-item>\n\t\t\t</ion-list>\n\t\t\t<ion-infinite-scroll threshold=\"100px\"  (ionInfinite)=\"loadData3($event)\" *ngIf=\"general_per_page *10 == alert_general_list.length\">\n\t\t\t\t<ion-infinite-scroll-content\n\t\t\t\tloadingSpinner=\"bubbles\"\n\t\t\t\tloadingText=\"Loading more data...\">\n\t\t\t\t</ion-infinite-scroll-content>\n\t\t\t</ion-infinite-scroll>\n\t\t</div>\n\t\t  <div *ngIf=\"alert_general_list.length == 0 && !general_loader\" class=\"no_record\">\n\t\t\t <div>\n\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"102.83\" height=\"97.896\" viewBox=\"0 0 102.83 97.896\"><defs><linearGradient id=\"a\" x1=\"0.509\" y1=\"0.997\" x2=\"0.509\" y2=\"-0.003\" gradientUnits=\"objectBoundingBox\"><stop offset=\"0\" stop-color=\"gray\" stop-opacity=\"0.251\"/><stop offset=\"0.54\" stop-color=\"gray\" stop-opacity=\"0.122\"/><stop offset=\"1\" stop-color=\"gray\" stop-opacity=\"0.102\"/></linearGradient><linearGradient id=\"b\" x1=\"0.813\" y1=\"0.841\" x2=\"0.813\" y2=\"-0.159\" xlink:href=\"#a\"/><linearGradient id=\"c\" x1=\"1.78\" y1=\"0.849\" x2=\"1.78\" y2=\"-0.151\" xlink:href=\"#a\"/><linearGradient id=\"d\" x1=\"0.5\" y1=\"1\" x2=\"0.5\" y2=\"0\" xlink:href=\"#a\"/><linearGradient id=\"f\" x1=\"0.5\" y1=\"0.999\" x2=\"0.5\" y2=\"-0.001\" xlink:href=\"#a\"/></defs><g transform=\"translate(0 0)\"><rect width=\"54.792\" height=\"75.705\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 8.666, 16.987)\" fill=\"#e0e0e0\"/><g transform=\"translate(9.841 6.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 0, 11.106)\" fill=\"url(#a)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 10.612, 18.43)\" fill=\"#fafafa\"/><rect width=\"25.594\" height=\"6.2\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.737, 12.656)\" fill=\"url(#b)\"/><path d=\"M441.3,91.351a3.664,3.664,0,1,0,4.263,2.831A3.621,3.621,0,0,0,441.3,91.351Zm1.212,5.654a2.114,2.114,0,1,1,1.575-2.508,2.089,2.089,0,0,1-1.575,2.508Z\" transform=\"translate(-407.323 -87.3)\" fill=\"url(#c)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.945, 12.34)\" fill=\"#0e9bff\"/><path d=\"M441.623,91.351a3.5,3.5,0,1,0,4.159,2.689A3.5,3.5,0,0,0,441.623,91.351Zm1.158,5.4a2.021,2.021,0,1,1,1.552-2.4,2.021,2.021,0,0,1-1.552,2.4Z\" transform=\"translate(-407.645 -87.3)\" fill=\"#0e9bff\"/><rect width=\"54.792\" height=\"75.705\" transform=\"translate(32.333 14.658)\" fill=\"#e0e0e0\"/><g transform=\"translate(33.26 15.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" fill=\"url(#d)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"translate(33.933 16.477)\" fill=\"#fff\"/><rect width=\"25.594\" height=\"6.2\" transform=\"translate(47 13.375)\" fill=\"url(#d)\"/><path d=\"M641.9,118a3.665,3.665,0,1,0,3.578,3.664A3.622,3.622,0,0,0,641.9,118Zm0,5.777a2.114,2.114,0,1,1,2.064-2.114,2.089,2.089,0,0,1-2.064,2.1Z\" transform=\"translate(-582.101 -110.677)\" fill=\"url(#f)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"translate(47.269 13.109)\" fill=\"#0e9bff\"/><path d=\"M642.432,118a3.5,3.5,0,1,0,3.5,3.5A3.5,3.5,0,0,0,642.432,118Zm0,5.523a2.023,2.023,0,1,0,0-.006Z\" transform=\"translate(-582.635 -110.677)\" fill=\"#0e9bff\"/><g transform=\"translate(0.814 92.409)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.102) rotate(90)\" fill=\"#47e6b1\"/></g><g transform=\"translate(55.505)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.101) rotate(90)\" fill=\"#47e6b1\"/></g><path d=\"M947.523,824.69a.578.578,0,0,1-.322-.7.282.282,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.272.272,0,0,0-.033.056.578.578,0,0,1-.7.322.279.279,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.277.277,0,0,0,.056.033.578.578,0,0,1,.322.7.273.273,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.272.272,0,0,0,.033-.056.578.578,0,0,1,.7-.322.279.279,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.274.274,0,0,0,947.523,824.69Z\" transform=\"translate(-850.847 -727.829)\" fill=\"#4d8af0\" opacity=\"0.5\"/><path d=\"M313.113,619.63a.578.578,0,0,1-.322-.7.279.279,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.28.28,0,0,0-.033.056.578.578,0,0,1-.7.322.269.269,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.279.279,0,0,0,.056.033.578.578,0,0,1,.322.7.277.277,0,0,0-.013.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.28.28,0,0,0,313.113,619.63Z\" transform=\"translate(-295.978 -548.479)\" fill=\"#fdd835\" opacity=\"0.5\"/><path d=\"M841.523,120.31a.578.578,0,0,1-.322-.7.285.285,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.274.274,0,0,0-.033.056.578.578,0,0,1-.7.322.28.28,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.275.275,0,0,0,.056.033.578.578,0,0,1,.322.7.278.278,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.275.275,0,0,0,841.523,120.31Z\" transform=\"translate(-758.137 -111.762)\" fill=\"#fdd835\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(100.942 38.483)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(27.984 92.668)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(91.247 58.889)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(9.981 11.136)\" fill=\"#4d8af0\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(0 36.89)\" fill=\"#47e6b1\" opacity=\"0.5\"/></g></svg>\n\t\t\t\t<h3>No Record Found</h3>\n\t\t     </div>\n\t\t  </div>\n\t\t  <ion-list *ngIf=\"general_loader\">\n\t\t\t\t<ion-list-header>\n\t\t\t\t  <ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n\t\t\t\t</ion-list-header>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t\t<ion-item>\n\t\t\t\t  <ion-label>\n\t\t\t\t\t<h3>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</h3>\n\t\t\t\t\t<p>\n\t\t\t\t\t  <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n\t\t\t\t\t</p>\n\t\t\t\t  </ion-label>\n\t\t\t\t</ion-item>\n\t\t\t  </ion-list>\n\t  </ng-container>\n\n\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -62,7 +62,7 @@ module.exports = "<ion-header class=\"main-header shadow\">\r\n    <ion-toolbar>
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header class=\"main-header shadow\">\r\n    <ion-toolbar>\r\n      <ion-title class=\"ion-padding-start\">Edit Medication Alert</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-progress-bar color=\"tertiary\" type=\"indeterminate\" *ngIf=\"Progress\"></ion-progress-bar>\r\n\r\n<ion-content class=\"ion-padding\">\r\n<form class=\"footerform\" [formGroup]=\"editform\" *ngIf=\"editform && renderForm\" (ngSubmit)=\"editDeatils(editform.value)\">\r\n    <ion-card button (click)=\"AddImage()\" *ngIf=\"edit_all_image.length==0\" class=\"medic_img ion-no-margin ion-margin-top ion-margin-bottom\">\r\n        <ion-card-content class=\"ion-text-center\">\r\n          <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"28.652\" height=\"22.931\" viewBox=\"0 0 28.652 22.931\"><g transform=\"translate(0.5 -5.5)\"><path d=\"M26.045,10H1.607A1.609,1.609,0,0,0,0,11.607V28.417a1.609,1.609,0,0,0,1.607,1.607H26.045a1.609,1.609,0,0,0,1.607-1.607V11.607A1.609,1.609,0,0,0,26.045,10ZM26.7,28.417a.654.654,0,0,1-.653.653H1.607a.654.654,0,0,1-.653-.653V11.607a.654.654,0,0,1,.653-.653H26.045a.654.654,0,0,1,.653.653V28.417Z\" transform=\"translate(0 -2.093)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\"/><path d=\"M21.1,14a8.1,8.1,0,1,0,8.1,8.1A8.114,8.114,0,0,0,21.1,14Zm0,15.256A7.151,7.151,0,1,1,28.256,22.1,7.16,7.16,0,0,1,21.1,29.256Z\" transform=\"translate(-6.802 -4.186)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\"/><path d=\"M19.477,6.954h9.058a.477.477,0,0,0,0-.954H19.477a.477.477,0,1,0,0,.954Z\" transform=\"translate(-9.942 0)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\"/></g></svg>\r\n          <p>Add Medication Photos</p>\r\n        </ion-card-content>\r\n    </ion-card>\r\n\r\n<ion-grid class=\"ion-no-padding ion-margin-top ion-margin-bottom medic_img\" *ngIf=\"edit_all_image.length!=0\">\r\n  <ion-row>\r\n    <ion-col size=\"4\" *ngFor=\"let img of edit_all_image; let i=index\">\r\n      <ion-card class=\"has_image\">\r\n        <ion-card-content>\r\n          <img [src]=\"img.uri\">\r\n        </ion-card-content>\r\n        <ion-button color=\"tertiary\" (click)=\"removeImg(i,img,originalArray)\">\r\n          <ion-icon slot=\"icon-only\" name=\"remove\"></ion-icon>\r\n        </ion-button>\r\n      </ion-card>\r\n    </ion-col>\r\n    <ion-col size=\"4\">\r\n        <ion-card button (click)=\"AddImage()\">\r\n            <ion-card-content class=\"ion-text-center\">\r\n              <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"28.652\" height=\"22.931\" viewBox=\"0 0 28.652 22.931\">\r\n                <g transform=\"translate(0.5 -5.5)\">\r\n                  <path\r\n                    d=\"M26.045,10H1.607A1.609,1.609,0,0,0,0,11.607V28.417a1.609,1.609,0,0,0,1.607,1.607H26.045a1.609,1.609,0,0,0,1.607-1.607V11.607A1.609,1.609,0,0,0,26.045,10ZM26.7,28.417a.654.654,0,0,1-.653.653H1.607a.654.654,0,0,1-.653-.653V11.607a.654.654,0,0,1,.653-.653H26.045a.654.654,0,0,1,.653.653V28.417Z\"\r\n                    transform=\"translate(0 -2.093)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\" />\r\n                  <path\r\n                    d=\"M21.1,14a8.1,8.1,0,1,0,8.1,8.1A8.114,8.114,0,0,0,21.1,14Zm0,15.256A7.151,7.151,0,1,1,28.256,22.1,7.16,7.16,0,0,1,21.1,29.256Z\"\r\n                    transform=\"translate(-6.802 -4.186)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\" />\r\n                  <path d=\"M19.477,6.954h9.058a.477.477,0,0,0,0-.954H19.477a.477.477,0,1,0,0,.954Z\"\r\n                    transform=\"translate(-9.942 0)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\" />\r\n                </g>\r\n              </svg>\r\n              <p>Add More</p>\r\n            </ion-card-content>\r\n        </ion-card>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-grid>\r\n<ion-grid class=\"date_grid\">\r\n        <ion-row>\r\n            <ion-col size=\"6\">\r\n                <ion-datetime display-format=\"HH:mm\" formControlName=\"event_time\"></ion-datetime>\r\n                <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25.643\" height=\"26.128\" viewBox=\"0 0 25.643 26.128\">\r\n                  <g transform=\"translate(0.25 0.25)\">\r\n                    <path\r\n                      d=\"M56.966,85.208a.485.485,0,0,0,.663-.174,8.526,8.526,0,0,1,.91-1.273.485.485,0,1,0-.734-.634,9.49,9.49,0,0,0-1.014,1.419.485.485,0,0,0,.174.663Zm0,0\"\r\n                      transform=\"translate(-52.729 -77.067)\" fill=\"#ea4e4e\" stroke=\"#ea4e4e\" stroke-width=\"0.5\" />\r\n                    <path\r\n                      d=\"M116.172,103.294a.484.484,0,0,0,.343-.142l3.58-3.58a.484.484,0,0,0,.142-.343V94.114a.485.485,0,0,0-.97,0v4.914l-3.438,3.438a.485.485,0,0,0,.343.827Zm0,0\"\r\n                      transform=\"translate(-107.504 -86.98)\" fill=\"#ea4e4e\" stroke=\"#ea4e4e\" stroke-width=\"0.5\" />\r\n                    <path\r\n                      d=\"M23.836,17.338a12.123,12.123,0,0,0,1.11-5.09,12.249,12.249,0,1,0-7.8,11.412,4.65,4.65,0,1,0,6.691-6.323ZM12.7,23.527A11.279,11.279,0,1,1,23.976,12.248a11.16,11.16,0,0,1-.966,4.564,4.617,4.617,0,0,0-1.776-.478A9.468,9.468,0,0,0,7.8,4.143a.485.485,0,0,0,.5.829A8.5,8.5,0,0,1,20.119,16.4a4.661,4.661,0,0,0-3.7,3.5l-.011,0A8.5,8.5,0,0,1,4.253,11.26a.485.485,0,1,0-.963-.113A9.472,9.472,0,0,0,11.6,21.656a9.545,9.545,0,0,0,1.109.065,9.436,9.436,0,0,0,3.581-.707,4.622,4.622,0,0,0,.376,1.795,11.21,11.21,0,0,1-3.965.718Zm8.241,1.132a3.685,3.685,0,1,1,3.684-3.685A3.689,3.689,0,0,1,20.939,24.659Zm0,0\"\r\n                      transform=\"translate(-0.45 0)\" fill=\"#ea4e4e\" stroke=\"#ea4e4e\" stroke-width=\"0.5\" />\r\n                    <path\r\n                      d=\"M257.717,258.145l-.325-.379a1.726,1.726,0,0,1-.416-1.123v-.264a1.962,1.962,0,0,0-1.727-1.966,1.913,1.913,0,0,0-2.1,1.9v.434a1.715,1.715,0,0,1-.321,1l-.3.423a.485.485,0,0,0,.394.766h1.656v.308a.485.485,0,0,0,.969,0v-.308h1.8a.485.485,0,0,0,.368-.8Zm-3.89-.169a2.677,2.677,0,0,0,.293-1.223v-.434a.947.947,0,0,1,.309-.7.933.933,0,0,1,.729-.24.985.985,0,0,1,.849,1v.264a2.7,2.7,0,0,0,.353,1.333Zm0,0\"\r\n                      transform=\"translate(-234.543 -236.34)\" fill=\"#ea4e4e\" stroke=\"#ea4e4e\" stroke-width=\"0.5\" />\r\n                  </g>\r\n                </svg>\r\n              </ion-col>\r\n              <ion-col size=\"6\">\r\n                  <ion-datetime display-format=\"DD MMM YYYY\" [min]=\"todaydate\" formControlName=\"event_datetime\"></ion-datetime>\r\n                  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" viewBox=\"0 0 21 21\">\r\n                    <path\r\n                      d=\"M18.539,1.641h-.984V0H15.914V1.641H5.086V0H3.445V1.641H2.461A2.464,2.464,0,0,0,0,4.1V18.539A2.464,2.464,0,0,0,2.461,21H18.539A2.464,2.464,0,0,0,21,18.539V4.1A2.464,2.464,0,0,0,18.539,1.641Zm.82,16.9a.821.821,0,0,1-.82.82H2.461a.821.821,0,0,1-.82-.82V7.711H19.359Zm0-12.469H1.641V4.1a.821.821,0,0,1,.82-.82h.984V4.922H5.086V3.281H15.914V4.922h1.641V3.281h.984a.821.821,0,0,1,.82.82Z\"\r\n                      fill=\"#ea4e4e\" />\r\n                    <g transform=\"translate(3.117 9.434)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(6.398 9.434)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(9.68 9.434)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(12.961 9.434)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(16.242 9.434)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(3.117 12.715)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(6.398 12.715)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(9.68 12.715)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(12.961 12.715)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(3.117 15.996)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(6.398 15.996)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(9.68 15.996)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(12.961 15.996)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(16.242 12.715)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                  </svg>\r\n                </ion-col>\r\n          <!-- <ion-col size=\"6\">\r\n            <ion-datetime display-format=\"DD MMM YYYY\"  [min]=\"todaydate\"  formControlName=\"event_datetime\"></ion-datetime>\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" viewBox=\"0 0 21 21\"><path d=\"M18.539,1.641h-.984V0H15.914V1.641H5.086V0H3.445V1.641H2.461A2.464,2.464,0,0,0,0,4.1V18.539A2.464,2.464,0,0,0,2.461,21H18.539A2.464,2.464,0,0,0,21,18.539V4.1A2.464,2.464,0,0,0,18.539,1.641Zm.82,16.9a.821.821,0,0,1-.82.82H2.461a.821.821,0,0,1-.82-.82V7.711H19.359Zm0-12.469H1.641V4.1a.821.821,0,0,1,.82-.82h.984V4.922H5.086V3.281H15.914V4.922h1.641V3.281h.984a.821.821,0,0,1,.82.82Z\" fill=\"#ea4e4e\"/><g transform=\"translate(3.117 9.434)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(6.398 9.434)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(9.68 9.434)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(12.961 9.434)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(16.242 9.434)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(3.117 12.715)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(6.398 12.715)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(9.68 12.715)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(12.961 12.715)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(3.117 15.996)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(6.398 15.996)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(9.68 15.996)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(12.961 15.996)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(16.242 12.715)\"><rect width=\"1.641\"height=\"1.641\" fill=\"#ea4e4e\"/></g></svg>\r\n          </ion-col> -->\r\n        </ion-row>\r\n</ion-grid>\r\n\r\n<ion-grid>\r\n    <ion-row class=\"repeat\">\r\n      <ion-col size=\"6\">\r\n        <ion-item button>\r\n          <ion-checkbox [checked]=\"status\" formControlName=\"remainder_repeat\" (ionChange)=\"repeatCheck($event)\"></ion-checkbox>\r\n          <ion-label>Repeat</ion-label>\r\n        </ion-item>\r\n      </ion-col>\r\n      <ion-col size=\"4\" offset=\"2\" *ngIf=\"editform.value.remainder_repeat==true\">\r\n        <ion-item>\r\n          <ion-label>Choose Repeat</ion-label>\r\n          <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"event_category\"\r\n            (ionChange)='repeatCategChange($event)' [value]=\"repeatType\">\r\n            <ion-select-option value=\"days\">Days</ion-select-option>\r\n            <ion-select-option value=\"others\">Others</ion-select-option>\r\n          </ion-select>\r\n        </ion-item>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"repeat_days\" *ngIf=\"editform.value.event_category=='days' && editform.value.remainder_repeat==true\">\r\n      <ion-col *ngFor=\"let days of repeatOrder[0][editform.value.event_category]\">\r\n        <ion-item button>\r\n          <ion-checkbox name=\"{{days.day}}\" [checked]=\"days.checked\" [(ngModel)]=\"days.checked\" [ngModelOptions]=\"{standalone: true}\" (ionChange)='repeatDayCheck(days,days.checked)'></ion-checkbox>\r\n          <ion-label>{{days.day}}</ion-label>\r\n        </ion-item>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"repeat_others\" *ngIf=\"editform.value.event_category=='others' && editform.value.remainder_repeat==true\">\r\n      <ion-col *ngFor=\"let others of repeatOrder[0][editform.value.event_category]\">\r\n        <ion-radio-group (ionChange)=\"checkValue($event)\" [value]=\"defaultMonth\">\r\n          <ion-item button>\r\n            <ion-radio type=\"radio\" slot=\"start\" name=\"month\" [value]=\"others.day\"></ion-radio>\r\n            <ion-label>{{others.day}}</ion-label>\r\n          </ion-item>\r\n        </ion-radio-group>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n\r\n  <ion-radio-group formControlName=\"meals\" [value]=\"initialMeal\">\r\n      <ion-item>\r\n        <ion-radio type=\"radio\" value=\"before_meal\"></ion-radio>\r\n        <ion-label>Before Meal</ion-label>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-radio type=\"radio\" value=\"after_meal\"></ion-radio>\r\n        <ion-label>After Meal</ion-label>\r\n      </ion-item>\r\n    </ion-radio-group>\r\n\r\n    <ion-item\r\n      [ngClass]=\"{ 'ion-invalid': submitted && f.medicine_type.invalid,'ion-touched': submitted && f.medicine_type.invalid }\">\r\n      <ion-label position=\"floating\">Tablet/Syrup/Injection</ion-label>\r\n      <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"medicine_type\" (ionChange)=\"valueSet($event)\">\r\n        <ion-select-option *ngFor=\"let medicine of medicine_option\" [value]=\"medicine\">{{medicine}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item\r\n      [ngClass]=\"{ 'ion-invalid': submitted && f.event_name.invalid,'ion-touched': submitted && f.event_name.invalid }\">\r\n      <ion-label position=\"floating\">Name</ion-label>\r\n      <ion-input type=\"text\" formControlName=\"event_name\"></ion-input>\r\n    </ion-item>\r\n    <ion-item *ngIf=\"editform.value.medicine_type=='Tablet'\"\r\n      [ngClass]=\"{ 'ion-invalid': submitted && f.quantity.invalid,'ion-touched': submitted && f.quantity.invalid }\">\r\n      <ion-label position=\"floating\">Add Quantity</ion-label>\r\n      <ion-input type=\"text\" formControlName=\"quantity\" (keypress)=\"_keyPress($event)\"></ion-input>\r\n    </ion-item>\r\n    <p *ngIf=\"editform.value.medicine_type=='Tablet'\">Total quantity: {{edit_details?.value || '0'}}</p>\r\n    <ion-item\r\n      [ngClass]=\"{ 'ion-invalid': submitted && f.dossage.invalid,'ion-touched': submitted && f.dossage.invalid }\">\r\n      <ion-label position=\"floating\">Dossage</ion-label>\r\n      <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"dossage\" (ionChange)=\"otherCheck($event)\">\r\n        <ion-select-option *ngFor=\"let doss of dossage_option\" [value]=\"doss\">{{doss}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item *ngIf=\"editform.value.dossage=='Others'\"\r\n      [ngClass]=\"{ 'ion-invalid': submitted && f.unit.invalid,'ion-touched': submitted && f.unit.invalid }\">\r\n      <ion-label position=\"floating\">Other Dossage</ion-label>\r\n      <ion-input type=\"text\" formControlName=\"unit\"></ion-input>\r\n    </ion-item>\r\n\r\n    <ion-item>\r\n      <ion-label position=\"floating\">Description</ion-label>\r\n      <ion-input type=\"text\" formControlName=\"description\"></ion-input>\r\n    </ion-item>\r\n\r\n    <div class=\"footer\">\r\n      <ion-button expand=\"block\" (click)=\"cancel()\" [disabled]=\"Progress\">\r\n        Cancel\r\n      </ion-button>\r\n      <button type=\"submit\" class=\"btn_submit\" [disabled]=\"Progress\">\r\n        Save\r\n      </button>\r\n    </div>\r\n\r\n\r\n<!-- <label>\r\n    <ion-checkbox [checked]=\"status\" formControlName=\"remainder_repeat\" (ionChange)=\"repeatCheck($event)\"></ion-checkbox>\r\n    Repeat\r\n</label> \r\n  <ion-item *ngIf=\"editform.value.remainder_repeat==true\">\r\n      <ion-label position=\"floating\">Choose Repeat</ion-label>\r\n      <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"event_category\" (ionChange)='repeatCategChange($event)' [value]=\"repeatType\">\r\n          <ion-select-option  value=\"days\">Days</ion-select-option>\r\n          <ion-select-option  value=\"others\">Others</ion-select-option>\r\n      </ion-select>\r\n    </ion-item> \r\n    <label *ngIf=\"editform.value.event_category=='days' && editform.value.remainder_repeat==true\">\r\n        <p *ngFor=\"let days of repeatOrder[0][editform.value.event_category]\">\r\n        {{days.day}}\r\n        <ion-checkbox name=\"{{days.day}}\" [checked]=\"days.checked\" [(ngModel)]=\"days.checked\" [ngModelOptions]=\"{standalone: true}\" (ionChange)='repeatDayCheck(days,days.checked)'></ion-checkbox>\r\n        &nbsp;</p>\r\n    </label>\r\n    <label *ngIf=\"editform.value.event_category=='others' && editform.value.remainder_repeat==true\">        \r\n          \r\n          <ion-radio-group (ionChange)=\"checkValue($event)\" [value]=\"defaultMonth\">\r\n            <ion-item *ngFor=\"let others of repeatOrder[0][editform.value.event_category]\">\r\n              <ion-label>{{others.day}}</ion-label>\r\n              <ion-radio type=\"radio\" slot=\"start\" name=\"month\" [value]=\"others.day\"></ion-radio>\r\n            </ion-item>\r\n          </ion-radio-group>\r\n    </label>\r\n    <ion-radio-group formControlName=\"meals\" [value]=\"initialMeal\">\r\n      <ion-label>Before Meal</ion-label>\r\n      <ion-radio type=\"radio\" value=\"before_meal\"></ion-radio>\r\n      <ion-label>After Meal</ion-label>\r\n      <ion-radio type=\"radio\" value=\"after_meal\"></ion-radio>\r\n    </ion-radio-group>\r\n  \r\n  <ion-item [ngClass]=\"{ 'ion-invalid': submitted && f.medicine_type.invalid,'ion-touched': submitted && f.medicine_type.invalid }\">\r\n        <ion-label position=\"floating\">Tablet/Syrup/injection</ion-label>\r\n      <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"medicine_type\" (ionChange)=\"valueSet($event)\">\r\n          <ion-select-option *ngFor=\"let medicine of medicine_option\" [value]=\"medicine\">{{medicine}}</ion-select-option>\r\n      </ion-select>\r\n  </ion-item>\r\n  <ion-item [ngClass]=\"{ 'ion-invalid': submitted && f.event_name.invalid,'ion-touched': submitted && f.event_name.invalid }\">\r\n        <ion-label position=\"floating\">Name</ion-label>\r\n        <ion-input type=\"text\" formControlName=\"event_name\"></ion-input>\r\n  </ion-item>\r\n  <ion-item *ngIf=\"editform.value.medicine_type=='Tablet'\" [ngClass]=\"{ 'ion-invalid': submitted && f.quantity.invalid,'ion-touched': submitted && f.quantity.invalid }\">\r\n        <ion-label position=\"floating\">Add Quantity</ion-label>\r\n        <ion-input type=\"text\" formControlName=\"quantity\" (keypress)=\"_keyPress($event)\"></ion-input>\r\n  </ion-item>\r\n  <div>Total quantity:{{edit_details?.value}}</div>\r\n  <ion-item [ngClass]=\"{ 'ion-invalid': submitted && f.dossage.invalid,'ion-touched': submitted && f.dossage.invalid }\">\r\n        <ion-label position=\"floating\">Dossage</ion-label>\r\n        <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"dossage\" (ionChange)=\"otherCheck($event)\">\r\n            <ion-select-option *ngFor=\"let doss of dossage_option\" [value]=\"doss\">{{doss}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n    <ion-item *ngIf=\"editform.value.dossage=='Others'\" [ngClass]=\"{ 'ion-invalid': submitted && f.unit.invalid,'ion-touched': submitted && f.unit.invalid }\">\r\n            <ion-label position=\"floating\">Other Dossage</ion-label>\r\n            <ion-input type=\"text\" formControlName=\"unit\"></ion-input>\r\n      </ion-item>\r\n\r\n  <ion-item>\r\n        <ion-label position=\"floating\">Description</ion-label>\r\n        <ion-input type=\"text\" formControlName=\"description\"></ion-input>\r\n  </ion-item>\r\n\r\n  <div> \r\n        <ion-button expand=\"block\" color=\"secondary\" (click)=\"cancel()\" [disabled]=Progress> \r\n          Cancel\r\n        </ion-button>\r\n        <ion-button type=\"submit\" color=\"secondary\" expand=\"block\" [disabled]=Progress>\r\n          Save\r\n        </ion-button>\r\n      </div> -->\r\n</form>\r\n</ion-content>\r\n<ion-backdrop *ngIf=\"Progress\"></ion-backdrop>"
+module.exports = "<ion-header class=\"main-header shadow\">\r\n    <ion-toolbar>\r\n      <ion-title class=\"ion-padding-start\">Edit Medication Alert</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-progress-bar color=\"tertiary\" type=\"indeterminate\" *ngIf=\"Progress\"></ion-progress-bar>\r\n\r\n<ion-content class=\"ion-padding\">\r\n<form class=\"footerform\" [formGroup]=\"editform\" *ngIf=\"editform && renderForm\" (ngSubmit)=\"editDeatils(editform.value)\">\r\n    <ion-card button (click)=\"AddImage()\" *ngIf=\"edit_all_image.length==0\" class=\"medic_img ion-no-margin ion-margin-top ion-margin-bottom\">\r\n        <ion-card-content class=\"ion-text-center\">\r\n          <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"28.652\" height=\"22.931\" viewBox=\"0 0 28.652 22.931\"><g transform=\"translate(0.5 -5.5)\"><path d=\"M26.045,10H1.607A1.609,1.609,0,0,0,0,11.607V28.417a1.609,1.609,0,0,0,1.607,1.607H26.045a1.609,1.609,0,0,0,1.607-1.607V11.607A1.609,1.609,0,0,0,26.045,10ZM26.7,28.417a.654.654,0,0,1-.653.653H1.607a.654.654,0,0,1-.653-.653V11.607a.654.654,0,0,1,.653-.653H26.045a.654.654,0,0,1,.653.653V28.417Z\" transform=\"translate(0 -2.093)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\"/><path d=\"M21.1,14a8.1,8.1,0,1,0,8.1,8.1A8.114,8.114,0,0,0,21.1,14Zm0,15.256A7.151,7.151,0,1,1,28.256,22.1,7.16,7.16,0,0,1,21.1,29.256Z\" transform=\"translate(-6.802 -4.186)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\"/><path d=\"M19.477,6.954h9.058a.477.477,0,0,0,0-.954H19.477a.477.477,0,1,0,0,.954Z\" transform=\"translate(-9.942 0)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\"/></g></svg>\r\n          <p>Add Medication Photos</p>\r\n        </ion-card-content>\r\n    </ion-card>\r\n\r\n<ion-grid class=\"ion-no-padding ion-margin-top ion-margin-bottom medic_img\" *ngIf=\"edit_all_image.length!=0\">\r\n  <ion-row>\r\n    <ion-col size=\"4\" *ngFor=\"let img of edit_all_image; let i=index\">\r\n      <ion-card class=\"has_image\">\r\n        <ion-card-content>\r\n          <img *ngIf=\"!isNetwork && !img.delete || img.globalURI==null && !img.delete\" [src]=\"webview.convertFileSrc(img.localURI)\">\r\n          <img *ngIf=\"isNetwork && !img.delete && img.globalURI!=null\" [src]=\"img.globalURI\">\r\n        </ion-card-content>\r\n        <ion-button color=\"tertiary\" (click)=\"removeImg(i,img,originalArray)\">\r\n          <ion-icon slot=\"icon-only\" name=\"remove\"></ion-icon>\r\n        </ion-button>\r\n      </ion-card>\r\n    </ion-col>\r\n    <ion-col size=\"4\">\r\n        <ion-card button (click)=\"AddImage()\">\r\n            <ion-card-content class=\"ion-text-center\">\r\n              <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"28.652\" height=\"22.931\" viewBox=\"0 0 28.652 22.931\">\r\n                <g transform=\"translate(0.5 -5.5)\">\r\n                  <path\r\n                    d=\"M26.045,10H1.607A1.609,1.609,0,0,0,0,11.607V28.417a1.609,1.609,0,0,0,1.607,1.607H26.045a1.609,1.609,0,0,0,1.607-1.607V11.607A1.609,1.609,0,0,0,26.045,10ZM26.7,28.417a.654.654,0,0,1-.653.653H1.607a.654.654,0,0,1-.653-.653V11.607a.654.654,0,0,1,.653-.653H26.045a.654.654,0,0,1,.653.653V28.417Z\"\r\n                    transform=\"translate(0 -2.093)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\" />\r\n                  <path\r\n                    d=\"M21.1,14a8.1,8.1,0,1,0,8.1,8.1A8.114,8.114,0,0,0,21.1,14Zm0,15.256A7.151,7.151,0,1,1,28.256,22.1,7.16,7.16,0,0,1,21.1,29.256Z\"\r\n                    transform=\"translate(-6.802 -4.186)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\" />\r\n                  <path d=\"M19.477,6.954h9.058a.477.477,0,0,0,0-.954H19.477a.477.477,0,1,0,0,.954Z\"\r\n                    transform=\"translate(-9.942 0)\" fill=\"#c3c5c8\" stroke=\"#c3c5c8\" stroke-width=\"1\" />\r\n                </g>\r\n              </svg>\r\n              <p>Add More</p>\r\n            </ion-card-content>\r\n        </ion-card>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-grid>\r\n<ion-grid class=\"date_grid\">\r\n        <ion-row>\r\n            <ion-col size=\"6\">\r\n                <ion-datetime display-format=\"HH:mm\" formControlName=\"event_time\"></ion-datetime>\r\n                <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25.643\" height=\"26.128\" viewBox=\"0 0 25.643 26.128\">\r\n                  <g transform=\"translate(0.25 0.25)\">\r\n                    <path\r\n                      d=\"M56.966,85.208a.485.485,0,0,0,.663-.174,8.526,8.526,0,0,1,.91-1.273.485.485,0,1,0-.734-.634,9.49,9.49,0,0,0-1.014,1.419.485.485,0,0,0,.174.663Zm0,0\"\r\n                      transform=\"translate(-52.729 -77.067)\" fill=\"#ea4e4e\" stroke=\"#ea4e4e\" stroke-width=\"0.5\" />\r\n                    <path\r\n                      d=\"M116.172,103.294a.484.484,0,0,0,.343-.142l3.58-3.58a.484.484,0,0,0,.142-.343V94.114a.485.485,0,0,0-.97,0v4.914l-3.438,3.438a.485.485,0,0,0,.343.827Zm0,0\"\r\n                      transform=\"translate(-107.504 -86.98)\" fill=\"#ea4e4e\" stroke=\"#ea4e4e\" stroke-width=\"0.5\" />\r\n                    <path\r\n                      d=\"M23.836,17.338a12.123,12.123,0,0,0,1.11-5.09,12.249,12.249,0,1,0-7.8,11.412,4.65,4.65,0,1,0,6.691-6.323ZM12.7,23.527A11.279,11.279,0,1,1,23.976,12.248a11.16,11.16,0,0,1-.966,4.564,4.617,4.617,0,0,0-1.776-.478A9.468,9.468,0,0,0,7.8,4.143a.485.485,0,0,0,.5.829A8.5,8.5,0,0,1,20.119,16.4a4.661,4.661,0,0,0-3.7,3.5l-.011,0A8.5,8.5,0,0,1,4.253,11.26a.485.485,0,1,0-.963-.113A9.472,9.472,0,0,0,11.6,21.656a9.545,9.545,0,0,0,1.109.065,9.436,9.436,0,0,0,3.581-.707,4.622,4.622,0,0,0,.376,1.795,11.21,11.21,0,0,1-3.965.718Zm8.241,1.132a3.685,3.685,0,1,1,3.684-3.685A3.689,3.689,0,0,1,20.939,24.659Zm0,0\"\r\n                      transform=\"translate(-0.45 0)\" fill=\"#ea4e4e\" stroke=\"#ea4e4e\" stroke-width=\"0.5\" />\r\n                    <path\r\n                      d=\"M257.717,258.145l-.325-.379a1.726,1.726,0,0,1-.416-1.123v-.264a1.962,1.962,0,0,0-1.727-1.966,1.913,1.913,0,0,0-2.1,1.9v.434a1.715,1.715,0,0,1-.321,1l-.3.423a.485.485,0,0,0,.394.766h1.656v.308a.485.485,0,0,0,.969,0v-.308h1.8a.485.485,0,0,0,.368-.8Zm-3.89-.169a2.677,2.677,0,0,0,.293-1.223v-.434a.947.947,0,0,1,.309-.7.933.933,0,0,1,.729-.24.985.985,0,0,1,.849,1v.264a2.7,2.7,0,0,0,.353,1.333Zm0,0\"\r\n                      transform=\"translate(-234.543 -236.34)\" fill=\"#ea4e4e\" stroke=\"#ea4e4e\" stroke-width=\"0.5\" />\r\n                  </g>\r\n                </svg>\r\n              </ion-col>\r\n              <ion-col size=\"6\">\r\n                  <ion-datetime display-format=\"DD MMM YYYY\" [min]=\"todaydate\" formControlName=\"event_datetime\"></ion-datetime>\r\n                  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" viewBox=\"0 0 21 21\">\r\n                    <path\r\n                      d=\"M18.539,1.641h-.984V0H15.914V1.641H5.086V0H3.445V1.641H2.461A2.464,2.464,0,0,0,0,4.1V18.539A2.464,2.464,0,0,0,2.461,21H18.539A2.464,2.464,0,0,0,21,18.539V4.1A2.464,2.464,0,0,0,18.539,1.641Zm.82,16.9a.821.821,0,0,1-.82.82H2.461a.821.821,0,0,1-.82-.82V7.711H19.359Zm0-12.469H1.641V4.1a.821.821,0,0,1,.82-.82h.984V4.922H5.086V3.281H15.914V4.922h1.641V3.281h.984a.821.821,0,0,1,.82.82Z\"\r\n                      fill=\"#ea4e4e\" />\r\n                    <g transform=\"translate(3.117 9.434)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(6.398 9.434)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(9.68 9.434)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(12.961 9.434)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(16.242 9.434)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(3.117 12.715)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(6.398 12.715)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(9.68 12.715)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(12.961 12.715)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(3.117 15.996)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(6.398 15.996)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(9.68 15.996)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(12.961 15.996)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                    <g transform=\"translate(16.242 12.715)\">\r\n                      <rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\" />\r\n                    </g>\r\n                  </svg>\r\n                </ion-col>\r\n          <!-- <ion-col size=\"6\">\r\n            <ion-datetime display-format=\"DD MMM YYYY\"  [min]=\"todaydate\"  formControlName=\"event_datetime\"></ion-datetime>\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"21\" height=\"21\" viewBox=\"0 0 21 21\"><path d=\"M18.539,1.641h-.984V0H15.914V1.641H5.086V0H3.445V1.641H2.461A2.464,2.464,0,0,0,0,4.1V18.539A2.464,2.464,0,0,0,2.461,21H18.539A2.464,2.464,0,0,0,21,18.539V4.1A2.464,2.464,0,0,0,18.539,1.641Zm.82,16.9a.821.821,0,0,1-.82.82H2.461a.821.821,0,0,1-.82-.82V7.711H19.359Zm0-12.469H1.641V4.1a.821.821,0,0,1,.82-.82h.984V4.922H5.086V3.281H15.914V4.922h1.641V3.281h.984a.821.821,0,0,1,.82.82Z\" fill=\"#ea4e4e\"/><g transform=\"translate(3.117 9.434)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(6.398 9.434)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(9.68 9.434)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(12.961 9.434)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(16.242 9.434)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(3.117 12.715)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(6.398 12.715)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(9.68 12.715)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(12.961 12.715)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(3.117 15.996)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(6.398 15.996)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(9.68 15.996)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(12.961 15.996)\"><rect width=\"1.641\" height=\"1.641\" fill=\"#ea4e4e\"/></g><g transform=\"translate(16.242 12.715)\"><rect width=\"1.641\"height=\"1.641\" fill=\"#ea4e4e\"/></g></svg>\r\n          </ion-col> -->\r\n        </ion-row>\r\n</ion-grid>\r\n\r\n<ion-grid>\r\n    <ion-row class=\"repeat\">\r\n      <ion-col size=\"6\">\r\n        <ion-item button>\r\n          <ion-checkbox [checked]=\"status\" formControlName=\"remainder_repeat\" (ionChange)=\"repeatCheck($event)\"></ion-checkbox>\r\n          <ion-label>Repeat</ion-label>\r\n        </ion-item>\r\n      </ion-col>\r\n      <ion-col size=\"4\" offset=\"2\" *ngIf=\"editform.value.remainder_repeat==true\">\r\n        <ion-item>\r\n          <ion-label>Choose Repeat</ion-label>\r\n          <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"event_category\"\r\n            (ionChange)='repeatCategChange($event)' [value]=\"repeatType\">\r\n            <ion-select-option value=\"days\">Days</ion-select-option>\r\n            <ion-select-option value=\"others\">Others</ion-select-option>\r\n          </ion-select>\r\n        </ion-item>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"repeat_days\" *ngIf=\"editform.value.event_category=='days' && editform.value.remainder_repeat==true\">\r\n      <ion-col *ngFor=\"let days of repeatOrder[0][editform.value.event_category]\">\r\n        <ion-item button>\r\n          <ion-checkbox name=\"{{days.day}}\" [checked]=\"days.checked\" [(ngModel)]=\"days.checked\" [ngModelOptions]=\"{standalone: true}\" (ionChange)='repeatDayCheck(days,days.checked)'></ion-checkbox>\r\n          <ion-label>{{days.day}}</ion-label>\r\n        </ion-item>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"repeat_others\" *ngIf=\"editform.value.event_category=='others' && editform.value.remainder_repeat==true\">\r\n      <ion-col *ngFor=\"let others of repeatOrder[0][editform.value.event_category]\">\r\n        <ion-radio-group (ionChange)=\"checkValue($event)\" [value]=\"defaultMonth\">\r\n          <ion-item button>\r\n            <ion-radio type=\"radio\" slot=\"start\" name=\"month\" [value]=\"others.day\"></ion-radio>\r\n            <ion-label>{{others.day}}</ion-label>\r\n          </ion-item>\r\n        </ion-radio-group>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n\r\n  <ion-radio-group formControlName=\"meals\" [value]=\"initialMeal\">\r\n      <ion-item>\r\n        <ion-radio type=\"radio\" value=\"before_meal\"></ion-radio>\r\n        <ion-label>Before Meal</ion-label>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-radio type=\"radio\" value=\"after_meal\"></ion-radio>\r\n        <ion-label>After Meal</ion-label>\r\n      </ion-item>\r\n    </ion-radio-group>\r\n\r\n    <ion-item\r\n      [ngClass]=\"{ 'ion-invalid': submitted && f.medicine_type.invalid,'ion-touched': submitted && f.medicine_type.invalid }\">\r\n      <ion-label position=\"floating\">Tablet/Syrup/Injection</ion-label>\r\n      <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"medicine_type\" (ionChange)=\"valueSet($event)\">\r\n        <ion-select-option *ngFor=\"let medicine of medicine_option\" [value]=\"medicine\">{{medicine}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item\r\n      [ngClass]=\"{ 'ion-invalid': submitted && f.event_name.invalid,'ion-touched': submitted && f.event_name.invalid }\">\r\n      <ion-label position=\"floating\">Name</ion-label>\r\n      <ion-input type=\"text\" formControlName=\"event_name\"></ion-input>\r\n    </ion-item>\r\n    <ion-item *ngIf=\"editform.value.medicine_type=='Tablet'\"\r\n      [ngClass]=\"{ 'ion-invalid': submitted && f.quantity.invalid,'ion-touched': submitted && f.quantity.invalid }\">\r\n      <ion-label position=\"floating\">Add Quantity</ion-label>\r\n      <ion-input type=\"text\" formControlName=\"quantity\" (keypress)=\"_keyPress($event)\"></ion-input>\r\n    </ion-item>\r\n    <p *ngIf=\"editform.value.medicine_type=='Tablet'\">Total quantity: {{edit_details?.value || '0'}}</p>\r\n    <ion-item\r\n      [ngClass]=\"{ 'ion-invalid': submitted && f.dossage.invalid,'ion-touched': submitted && f.dossage.invalid }\">\r\n      <ion-label position=\"floating\">Dossage</ion-label>\r\n      <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"dossage\" (ionChange)=\"otherCheck($event)\">\r\n        <ion-select-option *ngFor=\"let doss of dossage_option\" [value]=\"doss\">{{doss}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item *ngIf=\"editform.value.dossage=='Others'\"\r\n      [ngClass]=\"{ 'ion-invalid': submitted && f.unit.invalid,'ion-touched': submitted && f.unit.invalid }\">\r\n      <ion-label position=\"floating\">Other Dossage</ion-label>\r\n      <ion-input type=\"text\" formControlName=\"unit\"></ion-input>\r\n    </ion-item>\r\n\r\n    <ion-item>\r\n      <ion-label position=\"floating\">Description</ion-label>\r\n      <ion-input type=\"text\" formControlName=\"description\"></ion-input>\r\n    </ion-item>\r\n\r\n    <div class=\"footer\">\r\n      <ion-button expand=\"block\" (click)=\"cancel()\" [disabled]=\"Progress\">\r\n        Cancel\r\n      </ion-button>\r\n      <button type=\"submit\" class=\"btn_submit\" [disabled]=\"Progress\">\r\n        Save\r\n      </button>\r\n    </div>\r\n\r\n\r\n<!-- <label>\r\n    <ion-checkbox [checked]=\"status\" formControlName=\"remainder_repeat\" (ionChange)=\"repeatCheck($event)\"></ion-checkbox>\r\n    Repeat\r\n</label> \r\n  <ion-item *ngIf=\"editform.value.remainder_repeat==true\">\r\n      <ion-label position=\"floating\">Choose Repeat</ion-label>\r\n      <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"event_category\" (ionChange)='repeatCategChange($event)' [value]=\"repeatType\">\r\n          <ion-select-option  value=\"days\">Days</ion-select-option>\r\n          <ion-select-option  value=\"others\">Others</ion-select-option>\r\n      </ion-select>\r\n    </ion-item> \r\n    <label *ngIf=\"editform.value.event_category=='days' && editform.value.remainder_repeat==true\">\r\n        <p *ngFor=\"let days of repeatOrder[0][editform.value.event_category]\">\r\n        {{days.day}}\r\n        <ion-checkbox name=\"{{days.day}}\" [checked]=\"days.checked\" [(ngModel)]=\"days.checked\" [ngModelOptions]=\"{standalone: true}\" (ionChange)='repeatDayCheck(days,days.checked)'></ion-checkbox>\r\n        &nbsp;</p>\r\n    </label>\r\n    <label *ngIf=\"editform.value.event_category=='others' && editform.value.remainder_repeat==true\">        \r\n          \r\n          <ion-radio-group (ionChange)=\"checkValue($event)\" [value]=\"defaultMonth\">\r\n            <ion-item *ngFor=\"let others of repeatOrder[0][editform.value.event_category]\">\r\n              <ion-label>{{others.day}}</ion-label>\r\n              <ion-radio type=\"radio\" slot=\"start\" name=\"month\" [value]=\"others.day\"></ion-radio>\r\n            </ion-item>\r\n          </ion-radio-group>\r\n    </label>\r\n    <ion-radio-group formControlName=\"meals\" [value]=\"initialMeal\">\r\n      <ion-label>Before Meal</ion-label>\r\n      <ion-radio type=\"radio\" value=\"before_meal\"></ion-radio>\r\n      <ion-label>After Meal</ion-label>\r\n      <ion-radio type=\"radio\" value=\"after_meal\"></ion-radio>\r\n    </ion-radio-group>\r\n  \r\n  <ion-item [ngClass]=\"{ 'ion-invalid': submitted && f.medicine_type.invalid,'ion-touched': submitted && f.medicine_type.invalid }\">\r\n        <ion-label position=\"floating\">Tablet/Syrup/injection</ion-label>\r\n      <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"medicine_type\" (ionChange)=\"valueSet($event)\">\r\n          <ion-select-option *ngFor=\"let medicine of medicine_option\" [value]=\"medicine\">{{medicine}}</ion-select-option>\r\n      </ion-select>\r\n  </ion-item>\r\n  <ion-item [ngClass]=\"{ 'ion-invalid': submitted && f.event_name.invalid,'ion-touched': submitted && f.event_name.invalid }\">\r\n        <ion-label position=\"floating\">Name</ion-label>\r\n        <ion-input type=\"text\" formControlName=\"event_name\"></ion-input>\r\n  </ion-item>\r\n  <ion-item *ngIf=\"editform.value.medicine_type=='Tablet'\" [ngClass]=\"{ 'ion-invalid': submitted && f.quantity.invalid,'ion-touched': submitted && f.quantity.invalid }\">\r\n        <ion-label position=\"floating\">Add Quantity</ion-label>\r\n        <ion-input type=\"text\" formControlName=\"quantity\" (keypress)=\"_keyPress($event)\"></ion-input>\r\n  </ion-item>\r\n  <div>Total quantity:{{edit_details?.value}}</div>\r\n  <ion-item [ngClass]=\"{ 'ion-invalid': submitted && f.dossage.invalid,'ion-touched': submitted && f.dossage.invalid }\">\r\n        <ion-label position=\"floating\">Dossage</ion-label>\r\n        <ion-select okText=\"Set\" cancelText=\"cancel\" formControlName=\"dossage\" (ionChange)=\"otherCheck($event)\">\r\n            <ion-select-option *ngFor=\"let doss of dossage_option\" [value]=\"doss\">{{doss}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n    <ion-item *ngIf=\"editform.value.dossage=='Others'\" [ngClass]=\"{ 'ion-invalid': submitted && f.unit.invalid,'ion-touched': submitted && f.unit.invalid }\">\r\n            <ion-label position=\"floating\">Other Dossage</ion-label>\r\n            <ion-input type=\"text\" formControlName=\"unit\"></ion-input>\r\n      </ion-item>\r\n\r\n  <ion-item>\r\n        <ion-label position=\"floating\">Description</ion-label>\r\n        <ion-input type=\"text\" formControlName=\"description\"></ion-input>\r\n  </ion-item>\r\n\r\n  <div> \r\n        <ion-button expand=\"block\" color=\"secondary\" (click)=\"cancel()\" [disabled]=Progress> \r\n          Cancel\r\n        </ion-button>\r\n        <ion-button type=\"submit\" color=\"secondary\" expand=\"block\" [disabled]=Progress>\r\n          Save\r\n        </ion-button>\r\n      </div> -->\r\n</form>\r\n</ion-content>\r\n<ion-backdrop *ngIf=\"Progress\"></ion-backdrop>"
 
 /***/ }),
 
@@ -97,6 +97,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+
 
 
 
@@ -108,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AddOthersPage = class AddOthersPage {
-    constructor(platform, toast, localNotifications, alertController, datepipe, service, fb, route, router, statusBar) {
+    constructor(platform, toast, localNotifications, alertController, datepipe, service, fb, route, router, statusBar, database) {
         this.platform = platform;
         this.toast = toast;
         this.localNotifications = localNotifications;
@@ -119,6 +121,7 @@ let AddOthersPage = class AddOthersPage {
         this.route = route;
         this.router = router;
         this.statusBar = statusBar;
+        this.database = database;
         this.submitted = false;
         this.Progress = false;
         this.status = false;
@@ -158,10 +161,16 @@ let AddOthersPage = class AddOthersPage {
             return;
         }
         else {
-            let date = this.datepipe.transform(form.event_datetime, "dd MMM yyyy");
+            let new1 = new Date(form.event_time);
+            let gethours = new1.getHours();
+            let getMinutes = new1.getMinutes();
+            let new2 = new Date(form.event_datetime);
+            new2.setHours(gethours);
+            new2.setMinutes(getMinutes);
+            let event_dateTime = new2.toJSON();
             let data = {
                 event_name: form.event_name,
-                event_datetime: date + " " + form.event_time,
+                event_datetime: event_dateTime,
                 event_type: form.event_type,
                 event_options: {
                     meal: form.meal,
@@ -191,9 +200,71 @@ let AddOthersPage = class AddOthersPage {
                         cssClass: 'secondary',
                         handler: () => {
                             this.Progress = true;
-                            this.service.commonPost(data).subscribe(res => {
+                            // this.service.commonPost(data).subscribe(res=>{
+                            //   let getData:any=res;
+                            //   let getEventId:any=res['event']['id'];
+                            //   console.log(this.repeatValue)
+                            //   let repeatAlarmValue=[];
+                            //   let getDate = new Date(form.event_datetime)
+                            //   let getTime:any = new Date(form.event_time)
+                            //   let getHours = getTime.getHours();
+                            //   let getMinutes = getTime.getMinutes();
+                            //   let getSeconds = getTime.getSeconds();
+                            //   let getMilliseconds = getTime.getMilliseconds();
+                            //   getDate.setHours(getHours, getMinutes, getSeconds, getMilliseconds);
+                            //   let repeatHours = getDate.getHours();
+                            //   console.log(repeatHours)
+                            //   let repeatMinutes = getDate.getMinutes();
+                            //   console.log(repeatMinutes)
+                            //   if(form.remainder_repeat==true){
+                            //     if(form.repeat_category=='days'){
+                            //         repeatAlarmValue=this.repeatValue.map((res,index)=>{
+                            //           let ID:any=getEventId+''+Number(index+1);
+                            //           console.log(ID)
+                            //           this.localNotifications.schedule({
+                            //             id: ID,
+                            //             title: form.event_name,
+                            //             text: 'General Alert',
+                            //             trigger: {
+                            //               count: 1,
+                            //               every:{ weekday: res.dayCode, hour: repeatHours, minute: repeatMinutes  } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
+                            //             },
+                            //             data: { secret:getEventId },
+                            //             lockscreen:true,
+                            //             vibrate: true,
+                            //             priority: 2,
+                            //             foreground: true,
+                            //             sound: null       
+                            //           })
+                            //           this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);       
+                            //         })
+                            //     }else if(form.repeat_category=='others'){
+                            //        this.Progress=false;
+                            //        this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
+                            //     }
+                            //     console.log(repeatAlarmValue)
+                            //   }else{
+                            //     let ID:any=getEventId+''+1;
+                            //     this.localNotifications.schedule({
+                            //                     id: ID,
+                            //                     title: form.event_name,
+                            //                     text: 'General Alert',
+                            //                     trigger: {at: new Date(getDate.getTime())},
+                            //                     data: { secret:getEventId },
+                            //                     lockscreen:true,
+                            //                     vibrate: true,
+                            //                     priority: 2,
+                            //                     foreground: true,
+                            //                     sound: null    
+                            //                   })
+                            //                   this.router.navigate(['self-care-tabs/tabs/tab1/alerts']); 
+                            //   }
+                            // },error=>{
+                            //   this.Progress=false;
+                            // });
+                            this.database.createAnEvent(data).then((res) => {
                                 let getData = res;
-                                let getEventId = res['event']['id'];
+                                let getEventId = res['event_id'];
                                 console.log(this.repeatValue);
                                 let repeatAlarmValue = [];
                                 let getDate = new Date(form.event_datetime);
@@ -229,46 +300,10 @@ let AddOthersPage = class AddOthersPage {
                                             });
                                             this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
                                         });
-                                        // this.scheduleNotifications(repeatAlarmValue,true);
                                     }
                                     else if (form.repeat_category == 'others') {
                                         this.Progress = false;
                                         this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
-                                        //  let ID:any=getEventId+''+1;
-                                        //  let monthValue=Number(this.repeatValue[0].charAt(0));
-                                        //  let triggerData:any = {
-                                        //   count: 1,
-                                        //    every:{ quarter: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
-                                        //  }
-                                        //  if(monthValue==1){
-                                        //   triggerData = {
-                                        //     count: 1,
-                                        //      every:{ month: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
-                                        //    }
-                                        //  }else if(monthValue==12){
-                                        //   triggerData = {
-                                        //     count: 1,
-                                        //      every:{ quarter: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
-                                        //    }  
-                                        //  }else{
-                                        //   triggerData = {
-                                        //     count: 1,
-                                        //      every:{ quarter: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
-                                        //    }
-                                        //  }
-                                        // let repeatAlarmValue = {
-                                        //     id: ID,
-                                        //     title: form.event_name,
-                                        //     text: 'You just got notified :)',
-                                        //     lockscreen:true,
-                                        //     trigger: triggerData,
-                                        //     data: { secret:getEventId },
-                                        //     foreground: true,
-                                        //     //autoClear: true, 
-                                        //     sound: null,             
-                                        //     //vibrate: true,
-                                        //   }
-                                        // this.scheduleNotifications(repeatAlarmValue,true);
                                     }
                                     console.log(repeatAlarmValue);
                                 }
@@ -288,7 +323,7 @@ let AddOthersPage = class AddOthersPage {
                                     });
                                     this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
                                 }
-                            }, error => {
+                            }).catch(error => {
                                 this.Progress = false;
                             });
                         }
@@ -397,7 +432,8 @@ AddOthersPage.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"] }
 ];
 AddOthersPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -405,7 +441,7 @@ AddOthersPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./add-general.page.html */ "./node_modules/raw-loader/index.js!./src/app/self-care/alerts/add-general/add-general.page.html"),
         styles: [__webpack_require__(/*! ../alerts.page.scss */ "./src/app/self-care/alerts/alerts.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_7__["Platform"], _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__["Toast"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__["LocalNotifications"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_7__["Platform"], _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__["Toast"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__["LocalNotifications"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"]])
 ], AddOthersPage);
 
 
@@ -434,11 +470,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
 /* harmony import */ var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/ionic-webview/ngx */ "./node_modules/@ionic-native/ionic-webview/ngx/index.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
-/* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
-/* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
 
 
 
@@ -458,7 +496,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AddMedicationPage = class AddMedicationPage {
-    constructor(camera, actionSheetController, toast, localNotifications, file, fb, transfer, imagePicker, webview, sanitizer, alertController, router, route, service, datepipe, statusBar) {
+    constructor(camera, actionSheetController, toast, localNotifications, file, fb, transfer, imagePicker, webview, sanitizer, alertController, router, route, service, datepipe, statusBar, database, databaseSummary) {
         this.camera = camera;
         this.actionSheetController = actionSheetController;
         this.toast = toast;
@@ -475,6 +513,8 @@ let AddMedicationPage = class AddMedicationPage {
         this.service = service;
         this.datepipe = datepipe;
         this.statusBar = statusBar;
+        this.database = database;
+        this.databaseSummary = databaseSummary;
         this.store_photos = [];
         this.fileuri = [];
         this.status = false;
@@ -501,16 +541,16 @@ let AddMedicationPage = class AddMedicationPage {
         this.medicine_option = ['Tablet', 'Syrup', 'Injection'];
         this.todaydate = new Date().toISOString();
         this.addform = this.fb.group({
-            event_time: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_13__["Validators"].required]],
-            event_datetime: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_13__["Validators"].required]],
-            event_category: [this.repeatType, [_angular_forms__WEBPACK_IMPORTED_MODULE_13__["Validators"].required]],
+            event_time: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]],
+            event_datetime: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]],
+            event_category: [this.repeatType, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]],
             remainder_repeat: [this.status],
-            medicine_type: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_13__["Validators"].required]],
-            dossage: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_13__["Validators"].required]],
+            medicine_type: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]],
+            dossage: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]],
             quantity: [''],
-            event_name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_13__["Validators"].required]],
+            event_name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]],
             description: [],
-            meals: [this.initialMeal, [_angular_forms__WEBPACK_IMPORTED_MODULE_13__["Validators"].required]],
+            meals: [this.initialMeal, [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required]],
             unit: ['']
         });
     }
@@ -520,7 +560,7 @@ let AddMedicationPage = class AddMedicationPage {
         if (data.detail.value == "Tablet") {
             this.addform.controls['dossage'].reset();
             this.addform.controls['event_name'].reset();
-            const validators = [_angular_forms__WEBPACK_IMPORTED_MODULE_13__["Validators"].required];
+            const validators = [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required];
             this.addform.controls['quantity'].setValidators(validators);
             this.addform.updateValueAndValidity();
             this.addform.controls['quantity'].updateValueAndValidity();
@@ -561,9 +601,15 @@ let AddMedicationPage = class AddMedicationPage {
                 val.dossage = val.unit;
                 console.log(val.dossage);
             }
-            let date = this.datepipe.transform(val.event_datetime, "dd MMM yyyy");
+            let new1 = new Date(val.event_time);
+            let gethours = new1.getHours();
+            let getMinutes = new1.getMinutes();
+            let new2 = new Date(val.event_datetime);
+            new2.setHours(gethours);
+            new2.setMinutes(getMinutes);
+            let event_dateTime = new2.toJSON();
             let medi_details = {
-                event_name: val.event_name, event_datetime: date + ' ' + val.event_time, value: val.quantity, description: val.description, event_type: "alert_medication",
+                event_name: val.event_name, event_datetime: event_dateTime, value: val.quantity, description: val.description, event_type: "alert_medication",
                 event_options: {
                     meal: val.meals, remainder_repeat: val.remainder_repeat, repeat_category: val.event_category, repeat_value: this.repeatValue, medicine_type: val.medicine_type, dossage: val.dossage
                 }
@@ -588,10 +634,19 @@ let AddMedicationPage = class AddMedicationPage {
                         cssClass: 'secondary',
                         handler: () => {
                             this.Progress = true;
-                            this.service.commonPost(medi_details).subscribe(res => {
+                            // this.service.commonPost(medi_details).subscribe(res=>{
+                            //   let getData:any=res;
+                            //   this.getEventId=res['event']['id'];
+                            //   this.assignSchedule(val)
+                            // })
+                            console.log(medi_details);
+                            this.database.createAnEvent(medi_details).then((res) => {
                                 let getData = res;
-                                this.getEventId = res['event']['id'];
-                                this.assignSchedule(val);
+                                this.getEventId = res['event_id'];
+                                this.assignSchedule(val, medi_details);
+                            }).catch(error => {
+                                console.log(error);
+                                this.Progress = false;
                             });
                         }
                     }
@@ -600,7 +655,7 @@ let AddMedicationPage = class AddMedicationPage {
             yield this.add_alert.present();
         });
     }
-    assignSchedule(val) {
+    assignSchedule(val, medi_data) {
         let repeatAlarmValue = [];
         let getDate = new Date(val.event_datetime);
         let getTime = new Date(val.event_time);
@@ -638,7 +693,7 @@ let AddMedicationPage = class AddMedicationPage {
                     });
                 });
                 if (this.fileuri.length > 0) {
-                    this.sample(this.getEventId);
+                    this.sample(this.getEventId, medi_data);
                 }
                 else {
                     this.Progress = false;
@@ -719,7 +774,7 @@ let AddMedicationPage = class AddMedicationPage {
                 sound: null
             });
             if (this.fileuri.length > 0) {
-                this.sample(this.getEventId);
+                this.sample(this.getEventId, medi_data);
             }
             else {
                 this.Progress = false;
@@ -741,7 +796,7 @@ let AddMedicationPage = class AddMedicationPage {
     }
     otherCheck(event) {
         if (event.detail.value == 'Others') {
-            const validators = [_angular_forms__WEBPACK_IMPORTED_MODULE_13__["Validators"].required];
+            const validators = [_angular_forms__WEBPACK_IMPORTED_MODULE_12__["Validators"].required];
             this.addform.controls['unit'].setValidators(validators);
             this.addform.updateValueAndValidity();
             this.addform.controls['unit'].updateValueAndValidity();
@@ -808,36 +863,46 @@ let AddMedicationPage = class AddMedicationPage {
         console.log(this.repeatValue);
     }
     //}
-    sample(event_id) {
-        const fileTransfer = this.transfer.create();
-        let data = { id: event_id };
-        for (var i = 0; i < this.fileuri.length; i++) {
-            console.log("inside loop test");
-            let options = {
-                fileKey: 'event_assets',
-                fileName: this.fileuri[i].fileName,
-                mimeType: 'multipart/form-data',
-                params: data,
-                chunkedMode: false,
-                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
-            };
-            fileTransfer.upload(this.fileuri[i].uri, _environments_environment__WEBPACK_IMPORTED_MODULE_12__["environment"].apiUrl + 'events/update_image', options).then(res => {
-                console.log(i);
-                console.log(this.fileuri.length - i);
-                console.log(this.fileuri.length);
-                if (this.fileuri.length - i == 0) {
-                    this.Progress = false;
-                    this.presentToast('Medication added successfully');
-                    this.router.navigate(['self-care-tabs/tabs/tab1/alerts'], { skipLocationChange: true });
-                }
-                else {
-                }
-            }, error => {
-                this.Progress = false;
-                this.presentToast("File upload doesn't completed succesfully");
-                console.log(error);
-            });
-        }
+    sample(event_id, medi_data) {
+        // const fileTransfer: FileTransferObject = this.transfer.create();
+        // let data={id:event_id}
+        //  for(var i=0;i<this.fileuri.length;i++){
+        // console.log("inside loop test");
+        // let options: FileUploadOptions = {
+        //  fileKey: 'event_assets',
+        //  fileName: this.fileuri[i].fileName,
+        //  mimeType: 'multipart/form-data',
+        //  params:data,
+        //  chunkedMode: false,
+        //  headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
+        // }
+        //   fileTransfer.upload(this.fileuri[i].uri,environment.apiUrl+'events/update_image',options).then(res=>{
+        //     console.log(i)
+        //     console.log(this.fileuri.length-i)
+        //     console.log(this.fileuri.length)
+        //     if(this.fileuri.length-i ==0){
+        //       this.Progress=false;
+        //      this.presentToast('Medication added successfully');
+        //      this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],{skipLocationChange: true });
+        //    }else{
+        //    }
+        //   },error=>{
+        //     this.Progress=false;
+        //     this.presentToast("File upload doesn't completed succesfully")
+        //     console.log(error)
+        //   })   
+        //  }
+        let data = medi_data;
+        data['event_options']['localImagePath'] = this.fileuri;
+        this.database.updateAnEventImage(event_id, data).then((res) => {
+            console.log(res);
+            this.Progress = false;
+            this.router.navigate(['self-care-tabs/tabs/tab1/alerts'], { skipLocationChange: true });
+        })
+            .catch(error => {
+            this.Progress = false;
+            console.log(error);
+        });
     }
     selectimage() {
         let options = {
@@ -853,6 +918,7 @@ let AddMedicationPage = class AddMedicationPage {
                 this.notify_image = results[0];
                 this.store_photos.push(this.webview.convertFileSrc(results[i]));
                 console.log(this.store_photos, 'webviewuri');
+                this.localFilePath = results[i];
                 this.file.resolveLocalFilesystemUrl(results[i]).then((fileEntry) => {
                     return new Promise((resolve, reject) => {
                         fileEntry.file(meta => resolve(meta), error => reject(error));
@@ -861,7 +927,7 @@ let AddMedicationPage = class AddMedicationPage {
                     console.log(fileMeta);
                     this.audioFileName = fileMeta.name;
                     this.cdvFilePath = fileMeta['localURL'];
-                    this.fileuri.push({ "uri": this.cdvFilePath, "fileName": this.audioFileName });
+                    this.fileuri.push({ "localURI": this.localFilePath, "globalURI": null, "cdvFilePath": this.cdvFilePath, "fileName": this.audioFileName, "delete": false });
                     console.log(this.fileuri, 'fileuri');
                 });
             }
@@ -904,6 +970,7 @@ let AddMedicationPage = class AddMedicationPage {
             // If it's base64 (DATA_URL):
             this.store_photos.push(this.webview.convertFileSrc(imageData));
             console.log(this.store_photos, 'webviewuri');
+            this.localFilePath = imageData;
             this.file.resolveLocalFilesystemUrl(imageData).then((fileEntry) => {
                 return new Promise((resolve, reject) => {
                     fileEntry.file(meta => resolve(meta), error => reject(error));
@@ -912,7 +979,7 @@ let AddMedicationPage = class AddMedicationPage {
                 console.log(fileMeta);
                 this.audioFileName = fileMeta.name;
                 this.cdvFilePath = fileMeta['localURL'];
-                this.fileuri.push({ "uri": this.cdvFilePath, "fileName": this.audioFileName });
+                this.fileuri.push({ "localURI": this.localFilePath, "globalURI": null, "cdvFilePath": this.cdvFilePath, "fileName": this.audioFileName, "delete": false });
                 console.log(this.fileuri, 'fileuri');
             });
         }, (err) => {
@@ -928,8 +995,9 @@ let AddMedicationPage = class AddMedicationPage {
     }
     removeImage(i) {
         this.store_photos.splice(i, 1);
-        if (this.store_photos.length == 0) {
-        }
+        // if(this.store_photos.length==0){
+        //   this.active=false;
+        //   }
     }
     cancel() {
         this.addform.reset();
@@ -951,12 +1019,12 @@ let AddMedicationPage = class AddMedicationPage {
     }
 };
 AddMedicationPage.ctorParameters = () => [
-    { type: _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_16__["Camera"] },
+    { type: _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_15__["Camera"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__["ActionSheetController"] },
-    { type: _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_15__["Toast"] },
+    { type: _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_14__["Toast"] },
     { type: _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_7__["LocalNotifications"] },
     { type: _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_8__["File"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormBuilder"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormBuilder"] },
     { type: _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_6__["FileTransfer"] },
     { type: _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_5__["ImagePicker"] },
     { type: _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_10__["WebView"] },
@@ -966,7 +1034,9 @@ AddMedicationPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
     { type: _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_3__["settingsService"] },
     { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_14__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_13__["StatusBar"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_16__["DatabaseProvider"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_17__["DataBaseSummaryProvider"] }
 ];
 AddMedicationPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -974,11 +1044,11 @@ AddMedicationPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./add-medications.page.html */ "./node_modules/raw-loader/index.js!./src/app/self-care/alerts/add-medications/add-medications.page.html"),
         styles: [__webpack_require__(/*! ../alerts.page.scss */ "./src/app/self-care/alerts/alerts.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_16__["Camera"], _ionic_angular__WEBPACK_IMPORTED_MODULE_11__["ActionSheetController"], _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_15__["Toast"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_7__["LocalNotifications"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_8__["File"], _angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormBuilder"], _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_6__["FileTransfer"], _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_5__["ImagePicker"],
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_15__["Camera"], _ionic_angular__WEBPACK_IMPORTED_MODULE_11__["ActionSheetController"], _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_14__["Toast"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_7__["LocalNotifications"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_8__["File"], _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormBuilder"], _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_6__["FileTransfer"], _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_5__["ImagePicker"],
         _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_10__["WebView"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__["DomSanitizer"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_11__["AlertController"],
         _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_3__["settingsService"],
-        _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_14__["StatusBar"]])
+        _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_13__["StatusBar"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_16__["DatabaseProvider"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_17__["DataBaseSummaryProvider"]])
 ], AddMedicationPage);
 
 
@@ -1005,6 +1075,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
+
 
 
 
@@ -1016,7 +1090,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AddVitalsAlertPage = class AddVitalsAlertPage {
-    constructor(toast, localNotifications, alertController, datepipe, service, fb, route, router, statusBar) {
+    constructor(toast, localNotifications, alertController, datepipe, service, fb, route, router, statusBar, database, databaseSummary) {
         this.toast = toast;
         this.localNotifications = localNotifications;
         this.alertController = alertController;
@@ -1026,6 +1100,8 @@ let AddVitalsAlertPage = class AddVitalsAlertPage {
         this.route = route;
         this.router = router;
         this.statusBar = statusBar;
+        this.database = database;
+        this.databaseSummary = databaseSummary;
         this.submitted = false;
         this.Progress = false;
         this.status = false;
@@ -1052,9 +1128,13 @@ let AddVitalsAlertPage = class AddVitalsAlertPage {
             remainder_repeat: [this.status],
             repeat_category: [this.repeatType]
         });
-        this.service.vitalReading().subscribe(res => {
+        // this.service.vitalReading().subscribe(res => {
+        //   this.vital_options = res['enum_masters'];
+        // })
+        this.databaseSummary.getEnumMasters('vital').then((res) => {
             this.vital_options = res['enum_masters'];
-        });
+        })
+            .catch(error => { console.log(error); });
     }
     get f() { return this.vital_alert_form.controls; }
     validateBeforeSubmit(form) {
@@ -1069,10 +1149,16 @@ let AddVitalsAlertPage = class AddVitalsAlertPage {
         }
         else {
             let repeatOrder = this.repeatOrder[0];
-            let date = this.datepipe.transform(form.event_datetime, "dd MMM yyyy");
+            let new1 = new Date(form.event_time);
+            let gethours = new1.getHours();
+            let getMinutes = new1.getMinutes();
+            let new2 = new Date(form.event_datetime);
+            new2.setHours(gethours);
+            new2.setMinutes(getMinutes);
+            let event_dateTime = new2.toJSON();
             let data = {
                 event_name: form.event_name,
-                event_datetime: date + " " + form.event_time,
+                event_datetime: event_dateTime,
                 event_type: form.event_type,
                 event_options: {
                     meal: form.meal,
@@ -1102,9 +1188,67 @@ let AddVitalsAlertPage = class AddVitalsAlertPage {
                         cssClass: 'secondary',
                         handler: () => {
                             this.Progress = true;
-                            this.service.commonPost(data).subscribe(res => {
+                            //   this.service.commonPost(data).subscribe(res=>{
+                            //     let getData:any=res;
+                            //     let getEventId:any=res['event']['id'];
+                            //     console.log(this.repeatValue)
+                            //     let repeatAlarmValue=[];
+                            //     let getDate = new Date(form.event_datetime)
+                            //     let getTime:any = new Date(form.event_time)
+                            //     let getHours = getTime.getHours();
+                            //     let gettMinutes = getTime.getMinutes();
+                            //     let getSeconds = getTime.getSeconds();
+                            //     let getMilliseconds = getTime.getMilliseconds();
+                            //     getDate.setHours(getHours, gettMinutes, getSeconds, getMilliseconds);
+                            //     let repeatHours = getDate.getHours();
+                            //     let repeatMinutes = getDate.getMinutes();
+                            //     if(form.remainder_repeat==true){
+                            //       if(form.repeat_category=='days'){
+                            //           repeatAlarmValue=this.repeatValue.map((res,index)=>{
+                            //             let ID:any=getEventId+''+Number(index+1);
+                            //       this.localNotifications.schedule({
+                            //             id: ID,
+                            //             title: form.event_name,
+                            //             text: 'Vital Alert',
+                            //             trigger: {
+                            //               count: 1,
+                            //               every:{ weekday: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
+                            //             },
+                            //             data: { secret:getEventId },
+                            //             lockscreen:true,
+                            //             vibrate: true,
+                            //             priority: 2,
+                            //             foreground: true,
+                            //             sound: null
+                            //           })
+                            //         })
+                            //               this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
+                            //       }else if(form.repeat_category=='others'){
+                            //         this.Progress=false;
+                            //         this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
+                            //       }
+                            //     }else{
+                            //       let ID:any=getEventId+''+1;
+                            //       this.localNotifications.schedule({
+                            //                       id: ID,
+                            //                       title: form.event_name,
+                            //                       text: 'Vital Alert',
+                            //                       trigger: {at: new Date(getDate.getTime())},
+                            //                       data: { secret:getEventId },
+                            //                       lockscreen:true,
+                            //                       vibrate: true,
+                            //                       priority: 2,
+                            //                       foreground: true,
+                            //                       sound: null
+                            //                     })
+                            //           this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
+                            //     }
+                            // },error=>{
+                            //   this.Progress=false;
+                            // });
+                            this.database.createAnEvent(data).then((res) => {
                                 let getData = res;
-                                let getEventId = res['event']['id'];
+                                let getEventId = res['event_id'];
                                 console.log(this.repeatValue);
                                 let repeatAlarmValue = [];
                                 let getDate = new Date(form.event_datetime);
@@ -1137,30 +1281,10 @@ let AddVitalsAlertPage = class AddVitalsAlertPage {
                                             });
                                         });
                                         this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
-                                        //this.scheduleNotifications(repeatAlarmValue,true);
                                     }
                                     else if (form.repeat_category == 'others') {
                                         this.Progress = false;
                                         this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
-                                        // let monthValue=Number(this.repeatValue[0].charAt(0));
-                                        // let uniqueTime = new Date().getDate()+new Date().getMonth()+new Date().getFullYear()+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds();
-                                        // repeatAlarmValue.push(
-                                        //   {
-                                        //     id: uniqueTime,
-                                        //     title: form.event_name,
-                                        //     text: 'You just got notified :)',
-                                        //     lockscreen:true,
-                                        //     trigger: {
-                                        //       count: 1,
-                                        //       every:{ week: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
-                                        //     },
-                                        //     data: { secret:getEventId },
-                                        //     foreground: true,
-                                        //     //autoClear: true, 
-                                        //     sound: null,             
-                                        //     //vibrate: true,
-                                        //   }
-                                        // )
                                     }
                                 }
                                 else {
@@ -1178,11 +1302,8 @@ let AddVitalsAlertPage = class AddVitalsAlertPage {
                                         sound: null
                                     });
                                     this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
-                                    //this.scheduleNotifications(repeatAlarmValue,false); 
                                 }
-                            }, error => {
-                                this.Progress = false;
-                            });
+                            }).catch(error => { console.log(error); });
                         }
                     }
                 ]
@@ -1270,7 +1391,9 @@ AddVitalsAlertPage.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_11__["DataBaseSummaryProvider"] }
 ];
 AddVitalsAlertPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1278,7 +1401,7 @@ AddVitalsAlertPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./add-vitals-alert.page.html */ "./node_modules/raw-loader/index.js!./src/app/self-care/alerts/add-vitals-alert/add-vitals-alert.page.html"),
         styles: [__webpack_require__(/*! ../alerts.page.scss */ "./src/app/self-care/alerts/alerts.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__["Toast"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__["LocalNotifications"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__["Toast"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__["LocalNotifications"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_11__["DataBaseSummaryProvider"]])
 ], AddVitalsAlertPage);
 
 
@@ -1316,6 +1439,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
 /* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
 
 
 
@@ -1385,7 +1510,8 @@ AlertPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _edit_vitals_alert_edit_vitals_alert_page__WEBPACK_IMPORTED_MODULE_11__["EditVitalsAlertPage"], _add_general_add_general_page__WEBPACK_IMPORTED_MODULE_12__["AddOthersPage"], _edit_general_edit_general_page__WEBPACK_IMPORTED_MODULE_13__["EditOthersPage"]],
         providers: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"], _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_14__["ImagePicker"], _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_15__["FileTransfer"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_16__["File"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_17__["WebView"], _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_19__["Toast"], _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_20__["Camera"],
-            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_18__["LocalNotifications"]
+            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_18__["LocalNotifications"],
+            _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_21__["DataBaseSummaryProvider"]
         ]
     })
 ], AlertPageModule);
@@ -1420,8 +1546,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../self-common-service/settings/settings.service */ "./src/app/self-care/self-common-service/settings/settings.service.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+
+
 
 
 
@@ -1431,7 +1561,7 @@ __webpack_require__.r(__webpack_exports__);
 
 let AlertPage = class AlertPage {
     // {day:'6 mo.',checked:false},{day:'12 mo.',checked:false},,{day:'2 mo.',checked:false},
-    constructor(alertController, toastController, router, route, settingService, datepipe, statusBar) {
+    constructor(alertController, toastController, router, route, settingService, datepipe, statusBar, databaseSummary, database) {
         this.alertController = alertController;
         this.toastController = toastController;
         this.router = router;
@@ -1439,6 +1569,8 @@ let AlertPage = class AlertPage {
         this.settingService = settingService;
         this.datepipe = datepipe;
         this.statusBar = statusBar;
+        this.databaseSummary = databaseSummary;
+        this.database = database;
         this.selectedSegment = 'first';
         this.alert_med_list = [];
         this.alert_vital_list = [];
@@ -1462,29 +1594,45 @@ let AlertPage = class AlertPage {
     vital() {
         //Vitals List api
         this.vital_per_page = 1;
+        this.vital_per_page_offset = 0;
         this.vital_loader = true;
-        this.settingService.commonDateEventList('alert_vital', this.vital_per_page).subscribe(res => {
+        //  this.settingService.commonDateEventList('alert_vital',this.vital_per_page).subscribe(res=>{
+        //  this.vital_loader=false;
+        //  this.alert_vital_list=res['event_list']; 
+        // })
+        this.databaseSummary.getAllEvents('alert_vital', 'New', this.vital_per_page_offset).then(res => {
             this.vital_loader = false;
             this.alert_vital_list = res['event_list'];
-        });
+        }).catch(err => { console.log(err); });
     }
     general() {
         // general List api
         this.general_per_page = 1;
+        this.general_per_page_offset = 0;
         this.general_loader = true;
-        this.settingService.commonDateEventList('alert_general', this.general_per_page).subscribe(res => {
+        // this.settingService.commonDateEventList('alert_general',this.general_per_page).subscribe(res=>{
+        // this.general_loader=false;
+        // this.alert_general_list=res['event_list']; 
+        // })
+        this.databaseSummary.getAllEvents('alert_general', 'New', this.general_per_page_offset).then(res => {
             this.general_loader = false;
             this.alert_general_list = res['event_list'];
-        });
+        }).catch(err => { console.log(err); });
     }
     medication() {
         this.medi_loader = true;
         this.med_per_page = 1;
-        this.settingService.commonDateEventList('alert_medication', this.med_per_page).subscribe(res => {
+        this.med_per_page_offset = 0;
+        // this.settingService.commonDateEventList('alert_medication',this.med_per_page).subscribe(res=>{
+        // this.medi_loader=false;
+        // this.alert_med_list=res['event_list']; 
+        // console.log(this.alert_med_list)
+        // })
+        this.databaseSummary.getAllEvents('alert_medication', 'New', this.med_per_page_offset).then(res => {
             this.medi_loader = false;
             this.alert_med_list = res['event_list'];
             console.log(this.alert_med_list);
-        });
+        }).catch(err => { console.log(err); });
     }
     segmentChanged(event) {
         this.selectedSegment = event;
@@ -1524,8 +1672,20 @@ let AlertPage = class AlertPage {
                     {
                         text: 'Confirm',
                         handler: () => {
-                            this.settingService.commonDeleteEvent(id).subscribe(res => {
-                                console.log(res);
+                            // this.settingService.commonDeleteEvent(id).subscribe(res => {
+                            //   console.log(res)
+                            //   if(event_type=='alert_medication'){
+                            //     this.alert_med_list.splice(index,1)
+                            //   }else if(event_type=='alert_vital'){
+                            //     this.alert_vital_list.splice(index,1)
+                            //   }else if(event_type=='alert_general'){
+                            //     this.alert_general_list.splice(index,1)
+                            //   }
+                            //   this.presentToast("Record Deleted Successfully");
+                            // }, error => {
+                            //   console.log(error)
+                            // })
+                            this.database.deleteAnEvent(id).then(res => {
                                 if (event_type == 'alert_medication') {
                                     this.alert_med_list.splice(index, 1);
                                 }
@@ -1536,9 +1696,7 @@ let AlertPage = class AlertPage {
                                     this.alert_general_list.splice(index, 1);
                                 }
                                 this.presentToast("Record Deleted Successfully");
-                            }, error => {
-                                console.log(error);
-                            });
+                            }).catch(err => { console.log(err); });
                         }
                     },
                     {
@@ -1556,23 +1714,39 @@ let AlertPage = class AlertPage {
     }
     SearchItem(event_type, event) {
         let search = event.detail.value;
-        this.settingService.commonDateEventSearchList(event_type, search).subscribe(res => {
-            console.log(res);
+        // this.settingService.commonDateEventSearchList(event_type,search).subscribe(res=>{
+        //   console.log(res)
+        //   if(event_type=='alert_medication'){
+        //     this.med_per_page=1;
+        //     this.alert_med_list=res['event_list'];  
+        //   }else if(event_type=='alert_vital'){
+        //     this.vital_per_page=1;
+        //     this.alert_vital_list=res['event_list']; 
+        //   }else{
+        //     this.general_per_page=1;
+        //     this.alert_general_list=res['event_list']; 
+        //   }
+        // }, error=>{
+        //      this.presentToast("Server slow, Please try again")
+        // })
+        let offset = 0;
+        this.databaseSummary.getAllEventsSearchList(event_type, search, 'New', offset).then(res => {
             if (event_type == 'alert_medication') {
                 this.med_per_page = 1;
+                this.med_per_page_offset = 0;
                 this.alert_med_list = res['event_list'];
             }
             else if (event_type == 'alert_vital') {
                 this.vital_per_page = 1;
+                this.vital_per_page_offset = 0;
                 this.alert_vital_list = res['event_list'];
             }
             else {
                 this.general_per_page = 1;
+                this.general_per_page_offset = 0;
                 this.alert_general_list = res['event_list'];
             }
-        }, error => {
-            this.presentToast("Server slow, Please try again");
-        });
+        }).catch(err => { console.log(err); });
     }
     presentToast(message) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
@@ -1586,14 +1760,26 @@ let AlertPage = class AlertPage {
     loadData1(event) {
         setTimeout(() => {
             this.med_per_page += 1;
-            this.settingService.commonDateEventList("alert_medication", this.med_per_page).subscribe(res => {
+            this.med_per_page_offset = this.med_per_page * 10 - 10;
+            //  this.settingService.commonDateEventList("alert_medication",this.med_per_page).subscribe(res => {
+            //      this.alert_med_scoll=res['event_list'];
+            //      this.alert_med_scoll.map(item => this.alert_med_list.push(item));
+            //      event.target.complete();
+            //      if (this.med_per_page *10 !=this.alert_med_list.length){
+            //         event.target.disabled = true;
+            //      }
+            //  },error=>{
+            //     event.target.disabled = true;
+            //  })
+            this.databaseSummary.getAllEvents('alert_medication', 'New', this.med_per_page_offset).then((res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                 this.alert_med_scoll = res['event_list'];
                 this.alert_med_scoll.map(item => this.alert_med_list.push(item));
                 event.target.complete();
                 if (this.med_per_page * 10 != this.alert_med_list.length) {
                     event.target.disabled = true;
                 }
-            }, error => {
+            })).catch(err => {
+                console.log(err);
                 event.target.disabled = true;
             });
         }, 500);
@@ -1601,14 +1787,26 @@ let AlertPage = class AlertPage {
     loadData2(event) {
         setTimeout(() => {
             this.vital_per_page += 1;
-            this.settingService.commonDateEventList("alert_vital", this.vital_per_page).subscribe(res => {
+            this.vital_per_page_offset = this.vital_per_page * 10 - 10;
+            //  this.settingService.commonDateEventList("alert_vital",this.vital_per_page).subscribe(res => {
+            //      this.alert_vital_scoll=res['event_list']; 
+            //      this.alert_vital_scoll.map(item => this.alert_vital_list.push(item));
+            //      event.target.complete();
+            //      if (this.vital_per_page *10 !=this.alert_vital_list.length){
+            //         event.target.disabled = true;
+            //      }
+            //  },error=>{
+            //     event.target.disabled = true;
+            //  })
+            this.databaseSummary.getAllEvents('alert_vital', 'New', this.vital_per_page_offset).then((res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                 this.alert_vital_scoll = res['event_list'];
                 this.alert_vital_scoll.map(item => this.alert_vital_list.push(item));
                 event.target.complete();
                 if (this.vital_per_page * 10 != this.alert_vital_list.length) {
                     event.target.disabled = true;
                 }
-            }, error => {
+            })).catch(err => {
+                console.log(err);
                 event.target.disabled = true;
             });
         }, 500);
@@ -1616,14 +1814,26 @@ let AlertPage = class AlertPage {
     loadData3(event) {
         setTimeout(() => {
             this.general_per_page += 1;
-            this.settingService.commonDateEventList("alert_general", this.general_per_page).subscribe(res => {
+            this.general_per_page_offset = this.general_per_page * 10 - 10;
+            //  this.settingService.commonDateEventList("alert_general",this.general_per_page).subscribe(res => {
+            //      this.alert_general_scoll=res['event_list']; 
+            //      this.alert_general_scoll.map(item => this.alert_general_list.push(item));
+            //      event.target.complete();
+            //      if (this.general_per_page *10 !=this.alert_general_list.length){
+            //         event.target.disabled = true;
+            //      }
+            //  },error=>{
+            //     event.target.disabled = true;
+            //  })
+            this.databaseSummary.getAllEvents('alert_general', 'New', this.general_per_page_offset).then((res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                 this.alert_general_scoll = res['event_list'];
                 this.alert_general_scoll.map(item => this.alert_general_list.push(item));
                 event.target.complete();
                 if (this.general_per_page * 10 != this.alert_general_list.length) {
                     event.target.disabled = true;
                 }
-            }, error => {
+            })).catch(err => {
+                console.log(err);
                 event.target.disabled = true;
             });
         }, 500);
@@ -1667,13 +1877,15 @@ let AlertPage = class AlertPage {
     }
 };
 AlertPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ToastController"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
     { type: _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_3__["settingsService"] },
     { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_6__["DataBaseSummaryProvider"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_5__["DatabaseProvider"] }
 ];
 AlertPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1681,7 +1893,7 @@ AlertPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./alerts.page.html */ "./node_modules/raw-loader/index.js!./src/app/self-care/alerts/alerts.page.html"),
         styles: [__webpack_require__(/*! ./alerts.page.scss */ "./src/app/self-care/alerts/alerts.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_3__["settingsService"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ToastController"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_3__["settingsService"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_6__["DataBaseSummaryProvider"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_5__["DatabaseProvider"]])
 ], AlertPage);
 
 
@@ -1708,6 +1920,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+
 
 
 
@@ -1719,7 +1933,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let EditOthersPage = class EditOthersPage {
-    constructor(toast, localNotifications, alertController, toastController, datepipe, service, fb, route, router, statusBar) {
+    constructor(toast, localNotifications, alertController, toastController, datepipe, service, fb, route, router, statusBar, database) {
         this.toast = toast;
         this.localNotifications = localNotifications;
         this.alertController = alertController;
@@ -1730,6 +1944,7 @@ let EditOthersPage = class EditOthersPage {
         this.route = route;
         this.router = router;
         this.statusBar = statusBar;
+        this.database = database;
         this.submitted = false;
         this.Progress = false;
         this.status = false;
@@ -1781,9 +1996,9 @@ let EditOthersPage = class EditOthersPage {
         this.statusBar.backgroundColorByHexString('#0e9bff');
         this.tabBar = document.getElementById('myTabBar');
         this.tabBar.style.display = 'none';
-        this.service.vitalReading().subscribe(res => {
-            this.vital_options = res['enum_masters'];
-        });
+        // this.service.vitalReading().subscribe(res => {
+        // this.vital_options = res['enum_masters'];
+        // })
         this.other_alert_edit_form = this.fb.group({
             event_datetime: [this.getAllDatas['event_datetime'], [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]],
             event_time: [this.getAllDatas['event_datetime'], [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]],
@@ -1806,10 +2021,16 @@ let EditOthersPage = class EditOthersPage {
             return;
         }
         else {
-            let date = this.datepipe.transform(form.event_datetime, "dd MMM yyyy");
+            let new1 = new Date(form.event_time);
+            let gethours = new1.getHours();
+            let getMinutes = new1.getMinutes();
+            let new2 = new Date(form.event_datetime);
+            new2.setHours(gethours);
+            new2.setMinutes(getMinutes);
+            let event_dateTime = new2.toJSON();
             let data = {
                 event_name: form.event_name,
-                event_datetime: date + " " + form.event_time,
+                event_datetime: event_dateTime,
                 event_type: form.event_type,
                 event_options: {
                     meal: form.meal,
@@ -1838,9 +2059,32 @@ let EditOthersPage = class EditOthersPage {
                         cssClass: 'secondary',
                         handler: () => {
                             this.Progress = true;
-                            this.service.commonUpdatePost(this.getAllDatas['id'], data).subscribe(res => {
+                            //   this.service.commonUpdatePost(this.getAllDatas['id'],data).subscribe(res=>{
+                            //     let getData:any=res;
+                            //     let getEventId:any=this.getAllDatas['id']
+                            //     console.log(this.repeatValue.length,this.Originalvalue.length)
+                            //     console.log(this.NotifyRepeat==true , this.repeatValue.length<this.Originalvalue.length)
+                            //     if(this.NotifyRepeat==true && this.repeatValue.length<this.Originalvalue.length){
+                            //       let cancelArray=[];  
+                            //       console.log(cancelArray)
+                            //       for(var i in this.Originalvalue){
+                            //         if(+i>this.repeatValue.length-1){
+                            //           let ID:any=getEventId+''+Number(+i+1);
+                            //           cancelArray.push(ID)
+                            //         }
+                            //       }
+                            //       console.log(cancelArray)
+                            //         this.assignOrCancelNotifications(cancelArray,form,getEventId);
+                            //     }else{
+                            //       console.log(getData)
+                            //       this.assignSchedule(form,getEventId);
+                            //     }
+                            // },error=>{
+                            //   this.Progress=false;
+                            // });
+                            this.database.updateAnEvent(this.getAllDatas['event_id'], data).then((res) => {
                                 let getData = res;
-                                let getEventId = this.getAllDatas['id'];
+                                let getEventId = this.getAllDatas['event_id'];
                                 console.log(this.repeatValue.length, this.Originalvalue.length);
                                 console.log(this.NotifyRepeat == true, this.repeatValue.length < this.Originalvalue.length);
                                 if (this.NotifyRepeat == true && this.repeatValue.length < this.Originalvalue.length) {
@@ -1859,7 +2103,8 @@ let EditOthersPage = class EditOthersPage {
                                     console.log(getData);
                                     this.assignSchedule(form, getEventId);
                                 }
-                            }, error => {
+                            }).catch(error => {
+                                console.log(error);
                                 this.Progress = false;
                             });
                         }
@@ -2037,7 +2282,8 @@ EditOthersPage.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"] }
 ];
 EditOthersPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -2045,7 +2291,7 @@ EditOthersPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./edit-general.page.html */ "./node_modules/raw-loader/index.js!./src/app/self-care/alerts/edit-general/edit-general.page.html"),
         styles: [__webpack_require__(/*! ../alerts.page.scss */ "./src/app/self-care/alerts/alerts.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__["Toast"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__["LocalNotifications"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ToastController"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__["Toast"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__["LocalNotifications"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ToastController"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"]])
 ], EditOthersPage);
 
 
@@ -2079,6 +2325,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+/* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
+
+
+
 
 
 
@@ -2098,7 +2350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let EditMedicationPage = class EditMedicationPage {
-    constructor(toast, camera, actionSheetController, localNotifications, alertController, toastController, router, route, service, datepipe, file, fb, transfer, imagePicker, webview, sanitizer, statusBar) {
+    constructor(toast, camera, actionSheetController, localNotifications, alertController, toastController, router, route, service, datepipe, file, fb, transfer, imagePicker, webview, sanitizer, statusBar, database, databaseSummary, networkProvider) {
         this.toast = toast;
         this.camera = camera;
         this.actionSheetController = actionSheetController;
@@ -2116,6 +2368,9 @@ let EditMedicationPage = class EditMedicationPage {
         this.webview = webview;
         this.sanitizer = sanitizer;
         this.statusBar = statusBar;
+        this.database = database;
+        this.databaseSummary = databaseSummary;
+        this.networkProvider = networkProvider;
         this.store_photos = [];
         this.fileuri = [];
         this.dossage_option = ['0.5 tablet', '1 tablet', '1.5 tablet', '2 tablet', '1 tsp', '1.5 tsp', 'Others'];
@@ -2138,6 +2393,7 @@ let EditMedicationPage = class EditMedicationPage {
         this.route.queryParams.subscribe(params => {
             if (params && params.medi_alertData) {
                 this.edit_details = JSON.parse(params.medi_alertData);
+                this.edit_options = this.edit_details;
                 let duplicateData = JSON.parse(params.medi_alertData);
                 if (this.edit_details['event_options']['remainder_repeat'] == true) {
                     this.repeatType = this.edit_details['event_options']['repeat_category'];
@@ -2195,17 +2451,42 @@ let EditMedicationPage = class EditMedicationPage {
             unit: [this.unitValue]
         });
         this.initialValidator(this.edit_details['event_options']['medicine_type'], getIndex);
+        // this.edit_all_image=[];
+        // this.originalArray=[];
+        // this.fileuri=[];
+        // this.spliceIndexArray=[];
+        // let assets = this.edit_details.event_assets;
+        //   console.log(this.edit_all_image)
+        //   for(var i in assets){
+        //     let mapUrl=this.environment+assets[i]["url"]
+        //     this.edit_all_image.push({"uri":mapUrl});
+        //     this.originalArray.push({"uri":mapUrl})   
+        // }
         this.edit_all_image = [];
         this.originalArray = [];
         this.fileuri = [];
         this.spliceIndexArray = [];
-        let assets = this.edit_details.event_assets;
-        console.log(this.edit_all_image);
-        for (var i in assets) {
-            let mapUrl = this.environment + assets[i]["url"];
-            this.edit_all_image.push({ "uri": mapUrl });
-            this.originalArray.push({ "uri": mapUrl });
+        let localAssets = this.edit_details["event_options"];
+        let globalassets = this.edit_details["event_assets"];
+        if (this.networkProvider.isNetworkOnline) {
+            this.isNetwork = true;
         }
+        else {
+            this.isNetwork = false;
+        }
+        for (let i in localAssets["localImagePath"]) {
+            let mapUrl = { "localURI": localAssets["localImagePath"][i]["localURI"], "globalURI": null, "cdvFilePath": localAssets["localImagePath"][i]["cdvFilePath"], "fileName": localAssets["localImagePath"][i]["fileName"], "delete": localAssets["localImagePath"][i]["delete"] };
+            if (globalassets != null) {
+                if (globalassets.length > i) {
+                    let globeURL = this.environment + globalassets[i]["url"];
+                    mapUrl["globalURI"] = this.sanitizer.bypassSecurityTrustResourceUrl(globeURL);
+                }
+            }
+            console.log(mapUrl);
+            this.edit_all_image.push(mapUrl);
+            this.originalArray.push(mapUrl);
+        }
+        console.log(this.edit_all_image);
         this.statusBar.backgroundColorByHexString('#0e9bff');
         this.tabBar = document.getElementById('myTabBar');
         this.tabBar.style.display = 'none';
@@ -2267,10 +2548,16 @@ let EditMedicationPage = class EditMedicationPage {
                 val.dossage = val.unit;
                 console.log(val.dossage);
             }
-            let date = this.datepipe.transform(val.event_datetime, "dd MMM yyyy");
+            let new1 = new Date(val.event_time);
+            let gethours = new1.getHours();
+            let getMinutes = new1.getMinutes();
+            let new2 = new Date(val.event_datetime);
+            new2.setHours(gethours);
+            new2.setMinutes(getMinutes);
+            let event_dateTime = new2.toJSON();
             let medi_details = {
                 event_name: val.event_name,
-                event_datetime: date + ' ' + val.event_time,
+                event_datetime: event_dateTime,
                 value: Number(val.quantity) + Number(this.edit_details['value']),
                 description: val.description,
                 event_type: "alert_medication",
@@ -2303,9 +2590,26 @@ let EditMedicationPage = class EditMedicationPage {
                         cssClass: 'secondary',
                         handler: () => {
                             this.Progress = true;
-                            this.service.commonUpdatePost(this.edit_details['id'], medi_details).subscribe(res => {
+                            // this.service.commonUpdatePost(this.edit_details['id'],medi_details).subscribe(res=>{
+                            //   let getData:any=res;
+                            //  this.getEventId=this.edit_details['id'];
+                            //   if(this.NotifyRepeat==true && this.repeatValue.length<this.Originalvalue.length){            
+                            //     let cancelArray=[];  
+                            //     for(var i in this.Originalvalue){
+                            //       if(+i>this.repeatValue.length-1){
+                            //         let ID:any=this.getEventId+''+Number(+i+1);
+                            //         cancelArray.push(ID)
+                            //       }
+                            //     }
+                            //       this.assignOrCancelNotifications(cancelArray,val,this.getEventId);           
+                            //   }else{
+                            //     this.assignSchedule(val);
+                            //   }               
+                            // },error=>{
+                            // })
+                            this.database.updateAnEvent(this.edit_details['event_id'], medi_details).then((res) => {
                                 let getData = res;
-                                this.getEventId = this.edit_details['id'];
+                                this.getEventId = this.edit_details['event_id'];
                                 if (this.NotifyRepeat == true && this.repeatValue.length < this.Originalvalue.length) {
                                     let cancelArray = [];
                                     for (var i in this.Originalvalue) {
@@ -2314,12 +2618,14 @@ let EditMedicationPage = class EditMedicationPage {
                                             cancelArray.push(ID);
                                         }
                                     }
-                                    this.assignOrCancelNotifications(cancelArray, val, this.getEventId);
+                                    this.assignOrCancelNotifications(cancelArray, val, this.getEventId, medi_details);
                                 }
                                 else {
-                                    this.assignSchedule(val);
+                                    this.assignSchedule(val, medi_details);
                                 }
-                            }, error => {
+                            }).catch(error => {
+                                console.log(error);
+                                this.Progress = false;
                             });
                         }
                     }
@@ -2328,7 +2634,7 @@ let EditMedicationPage = class EditMedicationPage {
             yield this.add_alert.present();
         });
     }
-    assignSchedule(val) {
+    assignSchedule(val, medi_details) {
         let repeatAlarmValue = [];
         let getDate = new Date(val.event_datetime);
         let getTime = new Date(val.event_time);
@@ -2361,17 +2667,18 @@ let EditMedicationPage = class EditMedicationPage {
                         sound: null
                     });
                 });
-                if (this.spliceIndexArray.length > 0) {
-                    this.deleteImage();
-                }
-                else if (this.fileuri.length > 0) {
-                    let event_id = this.edit_details['id'];
-                    this.sample(event_id);
-                }
-                else {
-                    this.Progress = false;
-                    this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
-                }
+                // if(this.spliceIndexArray.length>0){ 
+                //   console.log('delete')
+                //   this.deleteImage(medi_details);
+                // }else if(this.fileuri.length >0){ 
+                //   console.log('fileuri')
+                //   let event_id=this.getEventId;
+                //   this.sample(event_id,medi_details); 
+                // }else{
+                //   this.Progress=false;
+                //   this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+                // }
+                this.deleteImage(medi_details);
                 //this.scheduleNotifications(repeatAlarmValue,getEventId);
             }
             else if (val.event_category == 'others') {
@@ -2397,17 +2704,18 @@ let EditMedicationPage = class EditMedicationPage {
                         foreground: true,
                         sound: null
                     });
-                    if (this.spliceIndexArray.length > 0) {
-                        this.deleteImage();
-                    }
-                    else if (this.fileuri.length > 0) {
-                        let event_id = this.edit_details['id'];
-                        this.sample(event_id);
-                    }
-                    else {
-                        this.Progress = false;
-                        this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
-                    }
+                    this.deleteImage(medi_details);
+                    // if(this.spliceIndexArray.length>0){ 
+                    //   console.log('delete')
+                    //   this.deleteImage(medi_details);
+                    // }else if(this.fileuri.length >0){ 
+                    //   console.log('fileuri')
+                    //   let event_id=this.getEventId;
+                    //   this.sample(event_id,medi_details); 
+                    // }else{
+                    //   this.Progress=false;
+                    //   this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+                    // }
                     // this.scheduleNotifications(repeatAlarmValue,getEventId);
                 }
                 else if (monthValue == 1) {
@@ -2427,17 +2735,18 @@ let EditMedicationPage = class EditMedicationPage {
                         foreground: true,
                         sound: null
                     });
-                    if (this.spliceIndexArray.length > 0) {
-                        this.deleteImage();
-                    }
-                    else if (this.fileuri.length > 0) {
-                        let event_id = this.edit_details['id'];
-                        this.sample(event_id);
-                    }
-                    else {
-                        this.Progress = false;
-                        this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
-                    }
+                    this.deleteImage(medi_details);
+                    // if(this.spliceIndexArray.length>0){ 
+                    //   console.log('delete')
+                    //   this.deleteImage(medi_details);
+                    // }else if(this.fileuri.length >0){
+                    //   console.log('fileuri') 
+                    //   let event_id=this.getEventId;
+                    //   this.sample(event_id,medi_details); 
+                    // }else{
+                    //   this.Progress=false;
+                    //   this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+                    // }
                     // this.scheduleNotifications(repeatAlarmValue,getEventId);
                 }
             }
@@ -2459,40 +2768,39 @@ let EditMedicationPage = class EditMedicationPage {
                 foreground: true,
                 sound: null
             });
-            if (this.spliceIndexArray.length > 0) {
-                this.deleteImage();
-            }
-            else if (this.fileuri.length > 0) {
-                let event_id = this.edit_details['id'];
-                this.sample(event_id);
-            }
-            else {
-                this.Progress = false;
-                this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
-            }
+            // if(this.spliceIndexArray.length>0){
+            //   console.log('delete') 
+            //   this.deleteImage(medi_details);
+            // }else if(this.fileuri.length >0){ 
+            //   console.log('fileuri') 
+            //   let event_id=this.getEventId;
+            //   this.sample(event_id,medi_details); 
+            // }else{
+            //   this.Progress=false;
+            //   this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+            // }
+            this.deleteImage(medi_details);
             //  this.scheduleNotifications(repeatAlarmValue,getEventId); 
         }
     }
-    scheduleNotifications(data, getEventId) {
-        if (data != 'test') {
-            this.localNotifications.schedule(data);
-        }
-        if (this.spliceIndexArray.length > 0) {
-            this.deleteImage();
-        }
-        else if (this.fileuri.length > 0) {
-            let event_id = this.edit_details['id'];
-            this.sample(event_id);
-        }
-        else {
-            this.Progress = false;
-            this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
-        }
-    }
-    assignOrCancelNotifications(cancelArray, val, getEventId) {
+    // scheduleNotifications(data,getEventId){
+    //   if(data!='test'){
+    //     this.localNotifications.schedule(data);
+    //   }
+    //   if(this.spliceIndexArray.length>0){ 
+    //     this.deleteImage();
+    //   }else if(this.fileuri.length >0){ 
+    //   let event_id:any=this.edit_details['id'];
+    //     this.sample(event_id); 
+    //   }else{
+    //     this.Progress=false;
+    //     this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+    //   }
+    // }
+    assignOrCancelNotifications(cancelArray, val, getEventId, medi_details) {
         this.localNotifications.cancel(cancelArray).then((res) => {
             console.log(res);
-            this.assignSchedule(val);
+            this.assignSchedule(val, medi_details);
         });
     }
     otherCheck(event) {
@@ -2551,7 +2859,6 @@ let EditMedicationPage = class EditMedicationPage {
     repeatCheck(event) {
         //this.defaultMonth= '1 mo.';
         this.status = event.detail.checked;
-        console.log();
         if (this.editform['value']['event_category'] != undefined && this.editform['value']['event_category'] != null && this.editform['value']['event_category'] != '') {
             this.repeatType = this.editform['value']['event_category'];
             // if(this.status==true && this.vital_alert_form['value']['repeat_category']=='others'){
@@ -2564,31 +2871,42 @@ let EditMedicationPage = class EditMedicationPage {
         }
         console.log(this.repeatValue);
     }
-    sample(event_id) {
-        const fileTransfer = this.transfer.create();
-        let data = { id: event_id };
-        for (var i = 0; i < this.fileuri.length; i++) {
-            let options = {
-                fileKey: 'event_assets',
-                fileName: this.fileuri[i].fileName,
-                mimeType: 'multipart/form-data',
-                params: data,
-                chunkedMode: false,
-                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
-            };
-            fileTransfer.upload(this.fileuri[i].uri, _environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].apiUrl + 'events/update_image', options).then(res => {
-                if (this.fileuri.length - i == 0) {
-                    this.Progress = false;
-                    this.presentToast('Prescription added successfully');
-                    this.router.navigate(['self-care-tabs/tabs/tab1/alerts'], { skipLocationChange: true });
-                }
-                else {
-                }
-            }, error => {
-                this.Progress = false;
-                console.log(error);
-            });
-        }
+    sample(event_id, medi_details) {
+        // const fileTransfer: FileTransferObject = this.transfer.create();
+        // let data={id:event_id}
+        //  for(var i=0;i<this.fileuri.length;i++){
+        // let options: FileUploadOptions = {
+        //  fileKey: 'event_assets',
+        //  fileName: this.fileuri[i].fileName,
+        //  mimeType: 'multipart/form-data',
+        //  params:data,
+        //  chunkedMode: false,
+        //  headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
+        // }
+        //   fileTransfer.upload(this.fileuri[i].uri,environment.apiUrl+'events/update_image',options).then(res=>{
+        //    if(this.fileuri.length-i ==0){
+        //     this.Progress=false;
+        //      this.presentToast('Prescription added successfully');
+        //      this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],{skipLocationChange: true });
+        //    }else{
+        //    }
+        //   },error=>{
+        //     this.Progress=false;
+        //   console.log(error)
+        //   })  
+        //   }
+        let data = medi_details;
+        data['event_options']['localImagePath'] = this.edit_all_image;
+        console.log(event_id, data);
+        this.database.updateAnEventImage(event_id, data).then((res) => {
+            console.log(res);
+            this.Progress = false;
+            this.router.navigate(['self-care-tabs/tabs/tab1/alerts'], { skipLocationChange: true });
+        })
+            .catch(error => {
+            this.Progress = false;
+            console.log(error);
+        });
     }
     selectimage() {
         let options = {
@@ -2601,8 +2919,8 @@ let EditMedicationPage = class EditMedicationPage {
         this.imagePicker.getPictures(options).then((results) => {
             for (var i = 0; i < results.length; i++) {
                 console.log('Image URI: ' + results[i]);
-                this.edit_all_image.push({ "uri": this.webview.convertFileSrc(results[i]) });
-                console.log(this.edit_all_image, 'webviewuri');
+                //this.edit_all_image.push({"uri":this.webview.convertFileSrc(results[i])});
+                this.localFilePath = results[i];
                 this.file.resolveLocalFilesystemUrl(results[i]).then((fileEntry) => {
                     return new Promise((resolve, reject) => {
                         fileEntry.file(meta => resolve(meta), error => reject(error));
@@ -2611,6 +2929,7 @@ let EditMedicationPage = class EditMedicationPage {
                     console.log(fileMeta);
                     this.audioFileName = fileMeta.name;
                     this.cdvFilePath = fileMeta['localURL'];
+                    this.edit_all_image.push({ "localURI": this.localFilePath, "globalURI": null, "cdvFilePath": this.cdvFilePath, "fileName": this.audioFileName, "delete": false });
                     this.fileuri.push({ "uri": this.cdvFilePath, "fileName": this.audioFileName });
                     console.log(this.fileuri, 'fileuri');
                 });
@@ -2652,8 +2971,9 @@ let EditMedicationPage = class EditMedicationPage {
         this.camera.getPicture(options).then((imageData) => {
             // imageData is either a base64 encoded string or a file URI
             // If it's base64 (DATA_URL):
-            this.edit_all_image.push({ "uri": this.webview.convertFileSrc(imageData) });
+            //this.edit_all_image.push({"uri":this.webview.convertFileSrc(imageData)});
             console.log(this.edit_all_image, 'webviewuri');
+            this.localFilePath = imageData;
             this.file.resolveLocalFilesystemUrl(imageData).then((fileEntry) => {
                 return new Promise((resolve, reject) => {
                     fileEntry.file(meta => resolve(meta), error => reject(error));
@@ -2662,6 +2982,7 @@ let EditMedicationPage = class EditMedicationPage {
                 console.log(fileMeta);
                 this.audioFileName = fileMeta.name;
                 this.cdvFilePath = fileMeta['localURL'];
+                this.edit_all_image.push({ "localURI": this.localFilePath, "globalURI": null, "cdvFilePath": this.cdvFilePath, "fileName": this.audioFileName, "delete": false });
                 this.fileuri.push({ "uri": this.cdvFilePath, "fileName": this.audioFileName });
                 console.log(this.fileuri, 'fileuri');
             });
@@ -2679,35 +3000,53 @@ let EditMedicationPage = class EditMedicationPage {
     cancel() {
         this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
     }
-    deleteImage() {
-        let delete_detail = { "index": this.spliceIndexArray, "id": this.edit_details["id"] };
-        this.service.deleteImage(delete_detail).subscribe(res => {
-            console.log(res);
-            if (this.fileuri.length > 0) {
-                let event_id = this.edit_details['id'];
-                this.sample(event_id);
-            }
-            else {
-                this.Progress = false;
-                this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
-            }
-        });
+    deleteImage(medi_details) {
+        // let delete_detail={"index":this.spliceIndexArray,"id":this.edit_details["id"]};
+        // this.service.deleteImage(delete_detail).subscribe(res=>{
+        //     console.log(res)    
+        //     if(this.fileuri.length >0){ 
+        //       
+        //        this.sample(event_id); 
+        //     }else{
+        //      this.Progress=false;
+        //      this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],);
+        //     }   
+        // })
+        let event_id = this.getEventId;
+        console.log(event_id, 'deleteImage');
+        this.sample(event_id, medi_details);
     }
     removeImg(index, image, originalArray) {
-        let result = originalArray.some(el => el.uri === image.uri);
-        if (result == true) {
-            var index1 = this.originalArray.findIndex(p => p.uri == image.uri);
+        // let result = originalArray.some(el=>el.uri === image.uri);
+        // if(result==true){
+        //     var index1 = this.originalArray.findIndex(p => p.uri == image.uri)
+        //     this.spliceIndexArray.push(index1);
+        //     this.edit_all_image.splice(index,1);
+        // }else{
+        //   this.edit_all_image.splice(index,1);
+        //   let fileResult = this.fileuri.some(el=>el.uri === image.uri);
+        //   if(fileResult==true){
+        //    var index1 = this.fileuri.findIndex(p => p.uri == image.uri)
+        //     this.fileuri.splice(index1,1);
+        //   }
+        // }
+        let result = originalArray.some(el => el.localURI === image.localURI);
+        //let result1 = originalArray.some(el=>el.globalURI === image.globalURI);
+        if (result == true && image.globalURI != null) {
+            var index1 = this.originalArray.findIndex(p => p.localURI == image.localURI && p.globalURI == image.globalURI);
             this.spliceIndexArray.push(index1);
-            this.edit_all_image.splice(index, 1);
+            this.edit_all_image[index1]["delete"] = true;
         }
         else {
             this.edit_all_image.splice(index, 1);
-            let fileResult = this.fileuri.some(el => el.uri === image.uri);
+            let fileResult = this.fileuri.some(el => el.localURI === image.localURI);
             if (fileResult == true) {
-                var index1 = this.fileuri.findIndex(p => p.uri == image.uri);
+                var index1 = this.fileuri.findIndex(p => p.localURI == image.localURI);
                 this.fileuri.splice(index1, 1);
             }
         }
+        console.log(this.edit_all_image);
+        console.log(this.fileuri);
     }
     _keyPress(event) {
         const pattern = /([\d]+)/;
@@ -2741,7 +3080,10 @@ EditMedicationPage.ctorParameters = () => [
     { type: _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_7__["ImagePicker"] },
     { type: _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_11__["WebView"] },
     { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__["DomSanitizer"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_17__["DatabaseProvider"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_18__["DataBaseSummaryProvider"] },
+    { type: _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_19__["NetworkService"] }
 ];
 EditMedicationPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -2752,7 +3094,7 @@ EditMedicationPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_16__["Toast"], _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_15__["Camera"], _ionic_angular__WEBPACK_IMPORTED_MODULE_12__["ActionSheetController"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_6__["LocalNotifications"], _ionic_angular__WEBPACK_IMPORTED_MODULE_12__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_12__["ToastController"],
         _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_3__["settingsService"],
         _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__["File"], _angular_forms__WEBPACK_IMPORTED_MODULE_14__["FormBuilder"], _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_8__["FileTransfer"],
-        _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_7__["ImagePicker"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_11__["WebView"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__["DomSanitizer"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"]])
+        _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_7__["ImagePicker"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_11__["WebView"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__["DomSanitizer"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_17__["DatabaseProvider"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_18__["DataBaseSummaryProvider"], _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_19__["NetworkService"]])
 ], EditMedicationPage);
 
 
@@ -2779,6 +3121,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
+
 
 
 
@@ -2790,7 +3136,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let EditVitalsAlertPage = class EditVitalsAlertPage {
-    constructor(toast, localNotifications, alertController, toastController, datepipe, service, fb, route, router, statusBar) {
+    constructor(toast, localNotifications, alertController, toastController, datepipe, service, fb, route, router, statusBar, database, databaseSummary) {
         this.toast = toast;
         this.localNotifications = localNotifications;
         this.alertController = alertController;
@@ -2801,6 +3147,8 @@ let EditVitalsAlertPage = class EditVitalsAlertPage {
         this.route = route;
         this.router = router;
         this.statusBar = statusBar;
+        this.database = database;
+        this.databaseSummary = databaseSummary;
         this.submitted = false;
         this.Progress = false;
         this.repeatType = 'days';
@@ -2848,9 +3196,13 @@ let EditVitalsAlertPage = class EditVitalsAlertPage {
         this.statusBar.backgroundColorByHexString('#0e9bff');
         this.tabBar = document.getElementById('myTabBar');
         this.tabBar.style.display = 'none';
-        this.service.vitalReading().subscribe(res => {
+        // this.service.vitalReading().subscribe(res => {
+        //   this.vital_options = res['enum_masters'];
+        // })
+        this.databaseSummary.getEnumMasters('vital').then((res) => {
             this.vital_options = res['enum_masters'];
-        });
+        })
+            .catch(error => { console.log(error); });
         this.vital_edit_form = this.fb.group({
             event_datetime: [this.getAllDatas['event_datetime'], [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]],
             event_time: [this.getAllDatas['event_datetime'], [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]],
@@ -2872,10 +3224,16 @@ let EditVitalsAlertPage = class EditVitalsAlertPage {
             return;
         }
         else {
-            let date = this.datepipe.transform(form.event_datetime, "dd MMM yyyy");
+            let new1 = new Date(form.event_time);
+            let gethours = new1.getHours();
+            let getMinutes = new1.getMinutes();
+            let new2 = new Date(form.event_datetime);
+            new2.setHours(gethours);
+            new2.setMinutes(getMinutes);
+            let event_dateTime = new2.toJSON();
             let data = {
                 event_name: form.event_name,
-                event_datetime: date + " " + form.event_time,
+                event_datetime: event_dateTime,
                 event_type: form.event_type,
                 event_options: {
                     meal: form.meal,
@@ -2904,9 +3262,27 @@ let EditVitalsAlertPage = class EditVitalsAlertPage {
                         cssClass: 'secondary',
                         handler: () => {
                             this.Progress = true;
-                            this.service.commonUpdatePost(this.getAllDatas['id'], data).subscribe(res => {
+                            //   this.service.commonUpdatePost(this.getAllDatas['id'],data).subscribe(res=>{
+                            //     let getData:any=res;
+                            //     let getEventId:any=this.getAllDatas['id']           
+                            //     if(this.NotifyRepeat==true && this.repeatValue.length<this.Originalvalue.length){
+                            //       let cancelArray=[];  
+                            //       for(var i in this.Originalvalue){
+                            //         if(+i>this.repeatValue.length-1){
+                            //           let ID:any=getEventId+''+Number(+i+1);
+                            //           cancelArray.push(ID)
+                            //         }
+                            //       }
+                            //         this.assignOrCancelNotifications(cancelArray,form,getEventId);             
+                            //     }else{
+                            //       this.assignSchedule(form,getEventId);
+                            //     }          
+                            // },error=>{
+                            //   this.Progress=false;
+                            // });
+                            this.database.updateAnEvent(this.getAllDatas['event_id'], data).then((res) => {
                                 let getData = res;
-                                let getEventId = this.getAllDatas['id'];
+                                let getEventId = this.getAllDatas['event_id'];
                                 if (this.NotifyRepeat == true && this.repeatValue.length < this.Originalvalue.length) {
                                     let cancelArray = [];
                                     for (var i in this.Originalvalue) {
@@ -2920,7 +3296,8 @@ let EditVitalsAlertPage = class EditVitalsAlertPage {
                                 else {
                                     this.assignSchedule(form, getEventId);
                                 }
-                            }, error => {
+                            }).catch(error => {
+                                console.log(error);
                                 this.Progress = false;
                             });
                         }
@@ -3098,7 +3475,9 @@ EditVitalsAlertPage.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_11__["DataBaseSummaryProvider"] }
 ];
 EditVitalsAlertPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -3106,206 +3485,8 @@ EditVitalsAlertPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./edit-vitals-alert.page.html */ "./node_modules/raw-loader/index.js!./src/app/self-care/alerts/edit-vitals-alert/edit-vitals-alert.page.html"),
         styles: [__webpack_require__(/*! ../alerts.page.scss */ "./src/app/self-care/alerts/alerts.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__["Toast"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__["LocalNotifications"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ToastController"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__["Toast"], _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_5__["LocalNotifications"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ToastController"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_11__["DataBaseSummaryProvider"]])
 ], EditVitalsAlertPage);
-
-
-
-/***/ }),
-
-/***/ "./src/app/self-care/self-common-service/settings/settings.service.ts":
-/*!****************************************************************************!*\
-  !*** ./src/app/self-care/self-common-service/settings/settings.service.ts ***!
-  \****************************************************************************/
-/*! exports provided: settingsService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settingsService", function() { return settingsService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-
-
-
-let settingsService = class settingsService {
-    constructor(http) {
-        this.http = http;
-    }
-    relatedto() {
-        return this.http.get("enum_masters?category_name=health_diary");
-    }
-    aboutUpdate(detail) {
-        return this.http.post("health_details/about_update", detail);
-    }
-    aboutDetail() {
-        return this.http.get("health_details/about");
-    }
-    getPreview(id) {
-        return this.http.get("users/user_details?user_uid=" + id);
-    }
-    setting() {
-        return this.http.get("users/picture_show");
-    }
-    editprofile(val, id) {
-        return this.http.put("users/" + id, val);
-    }
-    sendimage(val) {
-        return this.http.post("users/profile_picture", val);
-    }
-    contactDetails() {
-        return this.http.get("emergency_details");
-    }
-    addContacts(user_details) {
-        return this.http.post("emergency_details", user_details);
-    }
-    deleteData(id) {
-        return this.http.delete("emergency_details/" + id);
-    }
-    deleteCaregiver(id) {
-        return this.http.get("emergency_details/caregiver_delete?cg_id=" + id);
-    }
-    commonEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=created_at&&per_page=10&&page=" + page);
-    }
-    commonDateEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    commonAppointmentDateEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=ASC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    commonEventSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=created_at");
-    }
-    commonDateEventSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=event_datetime");
-    }
-    commonAppointmentSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=ASC&&sort=event_datetime");
-    }
-    commonVitalList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    commonVitalSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=event_datetime");
-    }
-    commonDeleteEvent(id) {
-        return this.http.delete("events/" + id);
-    }
-    commonPost(record) {
-        return this.http.post("events", record);
-    }
-    vitalCommonPost(record) {
-        return this.http.post("events/vital_update", record);
-    }
-    commonUpdatePost(id, record) {
-        return this.http.put("events/" + id, record);
-    }
-    myEmergencyHealthDetail() {
-        return this.http.get("health_details");
-    }
-    myEmergencyHealthUpdate(data) {
-        return this.http.post("health_details", data);
-    }
-    myEmergencyPreview() {
-        return this.http.get("users/preview");
-    }
-    reportType() {
-        return this.http.get("enum_masters?category_name=report");
-    }
-    deleteImage(data) {
-        return this.http.post("events/delete_image", data);
-    }
-    vitaldelete(data) {
-        return this.http.put("events/vital_delete", data);
-    }
-    vitalReading() {
-        return this.http.get("enum_masters?category_name=vital");
-    }
-    vitalFoodTime() {
-        return this.http.get("enum_masters?category_name=food_time");
-    }
-    view_expenses(id) {
-        return this.http.get("events/expense_list?user_id=" + id);
-    }
-    event_view_delete(id) {
-        return this.http.delete("events/" + id);
-    }
-    event_add_option() {
-        return this.http.get("enum_masters?category_name=spent_place");
-    }
-    event_add(value) {
-        return this.http.post("events", value);
-    }
-    view_expenses_cal(id) {
-        return this.http.get("events/expense_calculation?user_id=" + id);
-    }
-    chartrepeat(id) {
-        return this.http.get("events/expense_chart?user_id=" + id);
-    }
-    main_chart(id) {
-        return this.http.get("events/expense_cals_chart?user_id=" + id);
-    }
-    filterChart(id, data) {
-        return this.http.post("events/expense_chart_filter?user_id=" + id, data);
-    }
-    filterAmount(from, to, id) {
-        return this.http.get("events/expense_list?from_date=" + from + "&&end_date=" + to + "&&user_id=" + id);
-    }
-    Appointmentdropdown() {
-        return this.http.get("enum_masters?category_name=appointment");
-    }
-    appointmentDetails(data) {
-        return this.http.post("events", data);
-    }
-    EditDetails(id, data) {
-        return this.http.put("events/" + id, data);
-    }
-    recentAppointment(id) {
-        return this.http.get("events/appointment_list?user_id=" + id);
-    }
-    record_filter(data) {
-        console.log(data);
-        return this.http.post("events/diary_recording?", data);
-    }
-    completedAppointmentEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&tab=history&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    completedAppointmentSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&tab=history&&order=DESC&&sort=event_datetime");
-    }
-    vitalFoodTime1() {
-        return this.http.get("enum_masters?category_name=food_time_1");
-    }
-    vitalFoodTime2() {
-        return this.http.get("enum_masters?category_name=food_time_2");
-    }
-    vitalEventListNew(id) {
-        return this.http.get("events/vitals_list1?user_id=" + id);
-    }
-    reading_history(event, id, page, count) {
-        return this.http.get("events/vital_history?event_name=" + event + "&&user_id=" + id + "&&page=" + page + "&&per_page=" + count);
-    }
-    filterReading(event, id, page, count, from, end) {
-        return this.http.get("events/vital_history?event_name=" + event + "&&user_id=" + id + "&&page=" + page + "&&per_page=" + count + "&&from_date=" + from + "&&end_date=" + end);
-    }
-    vitalEventList(id) {
-        return this.http.get("events/vital_names_list?user_id=" + id);
-    }
-    vitalfilter(id, data) {
-        return this.http.post("events/vitals_list1?user_id=" + id, data);
-    }
-};
-settingsService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-];
-settingsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
-], settingsService);
 
 
 

@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { AlertController,Platform  } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DatabaseProvider } from '../../../sqlite-database/database';
 
 @Component({
   selector: 'app-add-general',
@@ -16,7 +17,6 @@ import { Toast } from '@ionic-native/toast/ngx';
 })
 export class AddOthersPage implements OnInit {
   todaydate:any;
-  vital_options:any;
   other_alert_form:FormGroup;
   submitted:boolean = false;
   tabBar:any;
@@ -30,7 +30,7 @@ export class AddOthersPage implements OnInit {
   defaultMonth= '1 mo.';
   add_alert: any;
 
-  constructor(public platform: Platform,private toast: Toast, public localNotifications:LocalNotifications,public alertController: AlertController, public datepipe: DatePipe, public service: settingsService, private fb: FormBuilder, public route: ActivatedRoute, public router: Router, private statusBar: StatusBar) { }
+  constructor(public platform: Platform,private toast: Toast, public localNotifications:LocalNotifications,public alertController: AlertController, public datepipe: DatePipe, public service: settingsService, private fb: FormBuilder, public route: ActivatedRoute, public router: Router, private statusBar: StatusBar,private database: DatabaseProvider) { }
 
   ngOnInit() {
     
@@ -66,10 +66,17 @@ export class AddOthersPage implements OnInit {
       if(this.other_alert_form.invalid){
         return;
       }else{
-        let date=this.datepipe.transform(form.event_datetime,"dd MMM yyyy");
+        let new1 = new Date(form.event_time);
+        let gethours = new1.getHours();
+        let getMinutes = new1.getMinutes();
+
+        let new2 = new Date(form.event_datetime);
+        new2.setHours(gethours)
+        new2.setMinutes(getMinutes)
+        let event_dateTime = new2.toJSON();
         let data = {
           event_name: form.event_name,
-          event_datetime: date +" "+ form.event_time,
+          event_datetime: event_dateTime,
           event_type: form.event_type,
           event_options: 
              {
@@ -102,9 +109,83 @@ export class AddOthersPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             this.Progress=true;
-            this.service.commonPost(data).subscribe(res=>{
+            // this.service.commonPost(data).subscribe(res=>{
+            //   let getData:any=res;
+            //   let getEventId:any=res['event']['id'];
+              
+              
+            //   console.log(this.repeatValue)
+            //   let repeatAlarmValue=[];
+            //   let getDate = new Date(form.event_datetime)
+            //   let getTime:any = new Date(form.event_time)
+              
+            //   let getHours = getTime.getHours();
+            //   let getMinutes = getTime.getMinutes();
+            //   let getSeconds = getTime.getSeconds();
+            //   let getMilliseconds = getTime.getMilliseconds();
+            //   getDate.setHours(getHours, getMinutes, getSeconds, getMilliseconds);
+            //   let repeatHours = getDate.getHours();
+            //   console.log(repeatHours)
+            //   let repeatMinutes = getDate.getMinutes();
+            //   console.log(repeatMinutes)
+            //   if(form.remainder_repeat==true){
+                
+            //     if(form.repeat_category=='days'){
+            //         repeatAlarmValue=this.repeatValue.map((res,index)=>{
+            //           let ID:any=getEventId+''+Number(index+1);
+            //           console.log(ID)
+            //           this.localNotifications.schedule({
+            //             id: ID,
+            //             title: form.event_name,
+            //             text: 'General Alert',
+            //             trigger: {
+            //               count: 1,
+            //               every:{ weekday: res.dayCode, hour: repeatHours, minute: repeatMinutes  } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
+            //             },
+            //             data: { secret:getEventId },
+            //             lockscreen:true,
+            //             vibrate: true,
+            //             priority: 2,
+            //             foreground: true,
+            //             sound: null       
+            //           })
+                     
+            //           this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);       
+            //         })
+                  
+                
+                  
+            //     }else if(form.repeat_category=='others'){
+            //        this.Progress=false;
+            //        this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
+            //     }
+                
+            //     console.log(repeatAlarmValue)
+            //   }else{
+            //     let ID:any=getEventId+''+1;
+            //     this.localNotifications.schedule({
+            //                     id: ID,
+            //                     title: form.event_name,
+            //                     text: 'General Alert',
+            //                     trigger: {at: new Date(getDate.getTime())},
+            //                     data: { secret:getEventId },
+            //                     lockscreen:true,
+            //                     vibrate: true,
+            //                     priority: 2,
+            //                     foreground: true,
+            //                     sound: null    
+            //                   })
+            //                   this.router.navigate(['self-care-tabs/tabs/tab1/alerts']); 
+     
+            //   }
+               
+            // },error=>{
+            //   this.Progress=false;
+            // });
+
+            this.database.createAnEvent(data).then((res)=>{
               let getData:any=res;
-              let getEventId:any=res['event']['id'];
+              let getEventId:any=res['event_id'];
               
               
               console.log(this.repeatValue)
@@ -143,51 +224,14 @@ export class AddOthersPage implements OnInit {
                         sound: null       
                       })
                      
-                      this.router.navigate(['self-care-tabs/tabs/tab1/alerts'])       
+                      this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);       
                     })
                   
-                 // this.scheduleNotifications(repeatAlarmValue,true);
+                
                   
                 }else if(form.repeat_category=='others'){
                    this.Progress=false;
-                   this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
-                  //  let ID:any=getEventId+''+1;
-                  //  let monthValue=Number(this.repeatValue[0].charAt(0));
-                  //  let triggerData:any = {
-                  //   count: 1,
-                  //    every:{ quarter: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
-                  //  }
-                  //  if(monthValue==1){
-                  //   triggerData = {
-                  //     count: 1,
-                  //      every:{ month: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
-                  //    }
-                  //  }else if(monthValue==12){
-                  //   triggerData = {
-                  //     count: 1,
-                  //      every:{ quarter: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
-                  //    }  
-                  //  }else{
-                  //   triggerData = {
-                  //     count: 1,
-                  //      every:{ quarter: res.dayCode, hour: repeatHours, minute: repeatMinutes } //{ every: { month: 4, day: 24, hour: 9, minute: 0 } }
-                  //    }
-                  //  }
-                  
-                  // let repeatAlarmValue = {
-                  //     id: ID,
-                  //     title: form.event_name,
-                  //     text: 'You just got notified :)',
-                  //     lockscreen:true,
-                  //     trigger: triggerData,
-                  //     data: { secret:getEventId },
-                  //     foreground: true,
-                  //     //autoClear: true, 
-                  //     sound: null,             
-                  //     //vibrate: true,
-                  //   }
-    
-                  // this.scheduleNotifications(repeatAlarmValue,true);
+                   this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
                 }
                 
                 console.log(repeatAlarmValue)
@@ -205,11 +249,10 @@ export class AddOthersPage implements OnInit {
                                 foreground: true,
                                 sound: null    
                               })
-                              this.router.navigate(['self-care-tabs/tabs/tab1/alerts']) 
+                              this.router.navigate(['self-care-tabs/tabs/tab1/alerts']); 
      
               }
-               
-            },error=>{
+            }).catch(error=>{ 
               this.Progress=false;
             });
           }

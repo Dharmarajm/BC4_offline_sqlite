@@ -15,6 +15,8 @@ import { NavParams, ModalController, ToastController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 // import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DatabaseProvider } from '../../../sqlite-database/database';
+import { NetworkService } from '../../../network-connectivity/network-service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -42,8 +44,9 @@ export class EditProfilePage implements OnInit {
   cdvFilePath:any = null;
   audioFileName:any;
   cdvFilePath1:any;
+  isNetwork:any;
 
-  constructor(private toast: Toast,public actionSheetController: ActionSheetController,private fb: FormBuilder,public sanitizer: DomSanitizer, public route:ActivatedRoute, private file: File, private transfer: FileTransfer, private camera: Camera, private imagePicker: ImagePicker, private webview: WebView, private crop: Crop, public serv:settingsService,public navParams: NavParams,public modalController: ModalController,public toastController: ToastController) { 
+  constructor(private toast: Toast,public actionSheetController: ActionSheetController,private fb: FormBuilder,public sanitizer: DomSanitizer, public route:ActivatedRoute, private file: File, private transfer: FileTransfer, private camera: Camera, private imagePicker: ImagePicker, private webview: WebView, private crop: Crop, public serv:settingsService,public navParams: NavParams,public modalController: ModalController,public toastController: ToastController,private networkProvider: NetworkService,public database:DatabaseProvider) { 
 
   // this.route.queryParams.subscribe(params => {
   //     if (params && params.special) {
@@ -63,11 +66,24 @@ export class EditProfilePage implements OnInit {
   //   });
 
    this.editprofile=this.navParams.get('pics');
-   if(this.editprofile.profile_pic != null){
-    let source=this.editprofile['profile_pic'];
-    this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
+   let globalURL:any=null;
+   let localURL:any=null;
+   if(this.editprofile['user_info']['user_picture']['url'] != null){
+    let source = this.editprofile['user_info']['user_picture']['url']
+    globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);  
+    //this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
    }else{
-    this.cdvFilePath1= null;  
+    //this.cdvFilePath1= null;
+    let source = this.webview.convertFileSrc(this.editprofile['user_info']['user_picture']['localURL']); 
+    localURL = source;  
+   }
+
+   if(this.networkProvider.isNetworkOnline){
+    this.isNetwork = true;
+    this.cdvFilePath1 = globalURL!=null ? globalURL : localURL 
+   }else{
+    this.isNetwork = false;
+    this.cdvFilePath1 = localURL; 
    }
   // this.cdvFilePath1=this.editprofile['profile_pic']
    this.initialLogo = this.editprofile.user_info.name.charAt(0);
@@ -96,33 +112,38 @@ export class EditProfilePage implements OnInit {
      
 
   }
+
   ionViewDidEnter(){
     this.namefocus.setFocus();
-
-
   }
 
-  sample(){
-    const fileTransfer: FileTransferObject = this.transfer.create();
+  sample(data){
+    // const fileTransfer: FileTransferObject = this.transfer.create();
     
-    let data={}
+    // let data={}
 
-    let options: FileUploadOptions = {
-     fileKey: 'user_picture',
-     fileName: this.audioFileName,
-     mimeType: 'multipart/form-data',
-     params:data,
-     chunkedMode: false,
-     headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
-    }
+    // let options: FileUploadOptions = {
+    //  fileKey: 'user_picture',
+    //  fileName: this.audioFileName,
+    //  mimeType: 'multipart/form-data',
+    //  params:data,
+    //  chunkedMode: false,
+    //  headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
+    // }
 
-    fileTransfer.upload(this.cdvFilePath,environment.apiUrl+'users/profile_picture',options).then(res=>{
+    // fileTransfer.upload(this.cdvFilePath,environment.apiUrl+'users/profile_picture',options).then(res=>{
+    //   this.presentToast('Profile updated successfully');
+    //   console.log(res,'res');
+
+
+    // }).catch();
+    this.database.updateUserImage(data).then(res=>{
+      console.log(res);
       this.presentToast('Profile updated successfully');
-      console.log(res,'res');
-
-
-    }).catch();
-
+    }).catch(error=>{
+      this.presentToast('Failed to update the profile');
+      console.log(error);
+    }) 
   }
 
   selectimage(){
@@ -148,13 +169,20 @@ export class EditProfilePage implements OnInit {
               this.audioFileName = fileMeta.name;
               this.cdvFilePath = fileMeta['localURL'];
               console.log(this.cdvFilePath,'filepath')
-              this.sample();   
+              let source =  this.editprofile['user_info']['user_picture']['url'];
+              let userPicturedata = {
+                url: source,
+                localURL: newImage,
+                cdvFilePath: this.cdvFilePath
+              }
+              this.sample(userPicturedata);   
           })
          },error => console.error('Error cropping image', error));
       },(err) => { 
         console.log(err)
       });
   }
+
   async openImagePicker() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Albums',
@@ -178,37 +206,44 @@ export class EditProfilePage implements OnInit {
     });
     await actionSheet.present();
   }
+
   takePicture(){
     var options: CameraOptions = {
       quality: 100,
       saveToPhotoAlbum: true,
       correctOrientation: true
-  };
-  this.camera.getPicture(options).then((results) => {
-    // imageData is either a base64 encoded string or a file URI
-    // If it's base64 (DATA_URL):
-    this.img=results.toString();
-         this.crop.crop(this.img, { quality: 100 })
-          .then(newImage => {
-            console.log(newImage)
-          this.cdvFilePath1=this.webview.convertFileSrc(newImage);
+    };
+    this.camera.getPicture(options).then((results) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      this.img=results.toString();
+      this.crop.crop(this.img, { quality: 100 })
+        .then(newImage => {
+          console.log(newImage)
+        this.cdvFilePath1=this.webview.convertFileSrc(newImage);
 
-          //this.reduceImages(results).then(() => {});
-          this.file.resolveLocalFilesystemUrl(newImage).then((fileEntry: FileEntry) => {
-            return new Promise((resolve, reject) => {
-              fileEntry.file(meta => resolve(meta), error => reject(error));
-            });
-          }).then((fileMeta: IFile) => {
-              console.log(fileMeta)
-              this.audioFileName = fileMeta.name;
-              this.cdvFilePath = fileMeta['localURL'];
-              console.log(this.cdvFilePath,'filepath')
-              this.sample();   
-          })
-         },error => console.error('Error cropping image', error));
-        }, (err) => {
-          // Handle error
-         });
+        //this.reduceImages(results).then(() => {});
+        this.file.resolveLocalFilesystemUrl(newImage).then((fileEntry: FileEntry) => {
+          return new Promise((resolve, reject) => {
+            fileEntry.file(meta => resolve(meta), error => reject(error));
+          });
+        }).then((fileMeta: IFile) => {
+            console.log(fileMeta)
+            this.audioFileName = fileMeta.name;
+            this.cdvFilePath = fileMeta['localURL'];
+            console.log(this.cdvFilePath,'filepath')
+            let source =  this.editprofile['user_info']['user_picture']['url'];
+            let userPicturedata = {
+              url: source,
+              localURL: newImage,
+              cdvFilePath: this.cdvFilePath
+            }
+            this.sample(userPicturedata);   
+        })
+      },error => console.error('Error cropping image', error));
+    }, (err) => {
+            // Handle error
+    });
   }
    
   sendEditProfile(val){
@@ -222,14 +257,22 @@ export class EditProfilePage implements OnInit {
                       email:this.useremailupdate, 
                       mobile_no:this.userphoneupdate
                   }
-       
-       this.serv.editprofile(data, this.editprofile.user_info.id).subscribe(res=>{
         
+      //  this.serv.editprofile(data, this.editprofile.user_info.id).subscribe(res=>{
+        
+      //   this.presentToast('Profile updated successfully');
+      //   this.modalController.dismiss();
+      //  },error=>{
+        
+      //  })
+      this.database.updateUserData(data).then(res=>{
+        console.log(res);
         this.presentToast('Profile updated successfully');
         this.modalController.dismiss();
-       },error=>{
-        //alert("Update Failed...")
-       })
+      }).catch(err=>{
+        console.log(err);
+      })
+
     }else{
         this.presentToast('Please enter all the fields'); 
     }
@@ -240,24 +283,24 @@ export class EditProfilePage implements OnInit {
     this.modalController.dismiss();
   }
 
-    async presentToast(message) {
-      this.toast.show(message, '2000', 'bottom').subscribe(
-        toast => { 
-          console.log(toast); 
-        });
-    }
+  async presentToast(message) {
+    this.toast.show(message, '2000', 'bottom').subscribe(
+      toast => { 
+        console.log(toast); 
+      });
+  }
 
 
-    _keyPress(event: any) {
-      const pattern = /[0-9]/;
-      let inputChar = String.fromCharCode(event.charCode);
-      
-      if(event.charCode!=0){
-        if (!pattern.test(inputChar)) {
-        // invalid character, prevent input
-        event.preventDefault();
-        }
+  _keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    
+    if(event.charCode!=0){
+      if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
       }
     }
+  }
 
 }

@@ -66,12 +66,14 @@ export class AppComponent {
       this.network.onConnect().subscribe(async() => {
         //this.database.isNetworkOnline=true;
         this.networkProvider.isNetworkOnline=true;
+        alert(this.networkProvider.isNetworkOnline)
         //await this.synchronize.initiateSync();
       });
 
       this.network.onDisconnect().subscribe(async() => {       
         //this.database.isNetworkOnline=false;
         this.networkProvider.isNetworkOnline=false;
+        alert(this.networkProvider.isNetworkOnline)
       });
 
       this.localNotifications.on('click').subscribe(notification => {

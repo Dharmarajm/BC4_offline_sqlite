@@ -12,6 +12,8 @@ var map = {
 		"./src/app/self-care/alerts/alerts.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
+		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
 		"alerts-alerts-module"
@@ -19,8 +21,8 @@ var map = {
 	"../appointments/appointments.module": [
 		"./src/app/self-care/appointments/appointments.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1",
-		"default~appointments-appointments-module~doc-visits-doc-visits-module~health-diary-health-diary-modu~5524b6e2",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
+		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"appointments-appointments-module"
 	],
 	"../cgalerts/cgalerts.module": [
@@ -89,9 +91,9 @@ var map = {
 		"./src/app/self-care/doc-visits/doc-visits.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
+		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~cgdoc-visit-cgdoc-visit-module~cgexpenses-cgexpenses-module~cgvitals-cgvitals-module~doc-vis~b671623b",
-		"default~appointments-appointments-module~doc-visits-doc-visits-module~health-diary-health-diary-modu~5524b6e2",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~f1348979",
 		"common",
@@ -108,8 +110,8 @@ var map = {
 		"./src/app/self-care/health-diary/health-diary.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1",
-		"default~appointments-appointments-module~doc-visits-doc-visits-module~health-diary-health-diary-modu~5524b6e2",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
+		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~f1348979",
 		"common",
@@ -119,9 +121,9 @@ var map = {
 		"./src/app/self-care/prescriptions/prescriptions.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
+		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
-		"default~appointments-appointments-module~doc-visits-doc-visits-module~health-diary-health-diary-modu~5524b6e2",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
 		"prescriptions-prescriptions-module"
 	],
@@ -129,16 +131,17 @@ var map = {
 		"./src/app/self-care/reports/reports.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
+		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
-		"default~appointments-appointments-module~doc-visits-doc-visits-module~health-diary-health-diary-modu~5524b6e2",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
 		"reports-reports-module"
 	],
 	"../tab1/tab1.module": [
 		"./src/app/self-care/tab1/tab1.module.ts",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
+		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"tab1-tab1-module"
 	],
@@ -152,8 +155,8 @@ var map = {
 	"../tab2/tab2.module": [
 		"./src/app/self-care/tab2/tab2.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1",
-		"default~appointments-appointments-module~doc-visits-doc-visits-module~health-diary-health-diary-modu~5524b6e2",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
+		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"common",
 		"tab2-tab2-module"
 	],
@@ -167,7 +170,8 @@ var map = {
 		"./src/app/self-care/tab3/tab3.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
+		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
 		"default~tab3-tab3-module~tab3cg-tab3cg-module",
@@ -192,7 +196,7 @@ var map = {
 	"./about/about.module": [
 		"./src/app/self-care/tab2/about/about.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
 		"about-about-module"
 	],
 	"./care-giver/tabscg/tabscg.module": [
@@ -202,7 +206,7 @@ var map = {
 	"./contact/contact.module": [
 		"./src/app/self-care/tab2/contact/contact.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
 		"common",
 		"contact-contact-module"
 	],
@@ -225,7 +229,7 @@ var map = {
 	"./health/health.module": [
 		"./src/app/self-care/tab2/health/health.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
 		"health-health-module"
 	],
 	"./login/login.module": [
@@ -853,6 +857,7 @@ var AppComponent = /** @class */ (function () {
                 return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                     //this.database.isNetworkOnline=true;
                     this.networkProvider.isNetworkOnline = true;
+                    alert(this.networkProvider.isNetworkOnline);
                     return [2 /*return*/];
                 });
             }); });
@@ -860,6 +865,7 @@ var AppComponent = /** @class */ (function () {
                 return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                     //this.database.isNetworkOnline=false;
                     this.networkProvider.isNetworkOnline = false;
+                    alert(this.networkProvider.isNetworkOnline);
                     return [2 /*return*/];
                 });
             }); });
@@ -1592,7 +1598,7 @@ __webpack_require__.r(__webpack_exports__);
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-var DATA_BASE_NAME = 'vCare4U.db';
+var DATA_BASE_NAME = 'BCared4.db';
 var syncProvider = /** @class */ (function () {
     function syncProvider(http, sqlite, platform, network) {
         this.http = http;
@@ -1600,66 +1606,64 @@ var syncProvider = /** @class */ (function () {
         this.platform = platform;
         this.network = network;
         console.log('Hello SettingProvider Provider');
+        //this.initiateSync();
     }
     syncProvider.prototype.initiateSync = function () {
-        var _this = this;
-        this.ready = this.platform.ready()
-            .then(function () { return _this.getTotalEnumMasters(); })
-            .then(function () { return _this.awaitAllUsersTableData(); });
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.ready = this.platform.ready()
+                    .then(function () { return _this.getTotalEnumMasters(); })
+                    .then(function () { return _this.awaitAllUsersTableData(); });
+                return [2 /*return*/];
+            });
+        });
     };
     syncProvider.prototype.getTotalEnumMasters = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var db_1;
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        alert('test');
-                        console.log(this.network.isNetworkOnline);
-                        this.isNetworkOnline = true;
-                        console.log(this.isNetworkOnline);
-                        if (!(this.isNetworkOnline == true)) return [3 /*break*/, 3];
-                        return [4 /*yield*/, this.getDatabase()];
-                    case 1:
-                        db_1 = _a.sent();
-                        return [4 /*yield*/, this.http.get("enum_masters").subscribe(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var EnumData, length, sql1, i, sql2;
-                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0:
-                                            EnumData = res["enum_masters"];
-                                            return [4 /*yield*/, db_1.executeSql(_sqlite_database_database_interface__WEBPACK_IMPORTED_MODULE_5__["SQL_SELECT_ALL_ENUMS"], []).then(function (data) {
-                                                    return data.rows.length;
-                                                })];
-                                        case 1:
-                                            length = _a.sent();
-                                            if (EnumData.length != length) { //&& status==true
-                                                sql1 = "DELETE FROM enum_masters";
-                                                db_1.executeSql(sql1, []);
-                                                for (i in EnumData) {
-                                                    console.log(EnumData[i]);
-                                                    sql2 = "INSERT INTO enum_masters VALUES (?,?,?,?,?)";
-                                                    db_1.executeSql(sql2, [
-                                                        EnumData[i]["id"],
-                                                        EnumData[i]["name"],
-                                                        EnumData[i]["category_name"],
-                                                        EnumData[i]["created_at"],
-                                                        EnumData[i]["updated_at"]
-                                                    ]);
-                                                }
-                                                ;
-                                            }
-                                            return [2 /*return*/];
+                this.isNetworkOnline = true;
+                //if(this.isNetworkOnline == true){
+                this.getDatabase().then(function (database) {
+                    var length = database.executeSql(_sqlite_database_database_interface__WEBPACK_IMPORTED_MODULE_5__["SQL_SELECT_ALL_ENUMS"], []).then(function (data) {
+                        return data.rows.length;
+                    });
+                    _this.requestDataFromEnumMasters().subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                        var _a, sql1, i, sql2;
+                        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                            switch (_b.label) {
+                                case 0:
+                                    this.enumResponseData = responseList[0]["enum_masters"];
+                                    _a = this.enumResponseData.length;
+                                    return [4 /*yield*/, length];
+                                case 1:
+                                    if (_a != (_b.sent())) {
+                                        sql1 = "DELETE FROM enum_masters";
+                                        database.executeSql(sql1, []);
+                                        for (i in this.enumResponseData) {
+                                            console.log(this.enumResponseData[i]);
+                                            sql2 = "INSERT INTO enum_masters VALUES (?,?,?,?,?)";
+                                            database.executeSql(sql2, [
+                                                this.enumResponseData[i]["id"],
+                                                this.enumResponseData[i]["name"],
+                                                this.enumResponseData[i]["category_name"],
+                                                this.enumResponseData[i]["created_at"],
+                                                this.enumResponseData[i]["updated_at"]
+                                            ]).then(function (res) {
+                                                console.log(res, 'enum');
+                                            }, function (error) {
+                                                console.log(error, 'errorenum');
+                                            });
+                                        }
+                                        ;
                                     }
-                                });
-                            }); }, function (error) {
-                                console.log(error);
-                            })];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
-                }
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); });
+                });
+                return [2 /*return*/];
             });
         });
     };
@@ -1667,132 +1671,125 @@ var syncProvider = /** @class */ (function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        console.log(this.network.isNetworkOnline);
-                        this.isNetworkOnline = true;
-                        console.log(this.isNetworkOnline);
-                        if (!(this.isNetworkOnline == true)) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.requestDataFromMultipleSources().subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var db, sql4, data4, sqlData4;
-                                var _this = this;
-                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0:
-                                            this.responseData1 = responseList[0]["emergency_contacts"];
-                                            this.responseData2 = responseList[1]["health_detail"];
-                                            this.responseData3 = responseList[2]["users"];
-                                            this.responseData4 = responseList[3]["user_associations"];
-                                            console.log(responseList);
-                                            return [4 /*yield*/, this.getDatabase()];
-                                        case 1:
-                                            db = _a.sent();
-                                            db.executeSql("SELECT * FROM emergency_details", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                                var length, emergencyContacts, i;
-                                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                                    length = data.rows.length;
-                                                    console.log(length);
-                                                    if (length > 0) {
-                                                        emergencyContacts = [];
-                                                        for (i = 0; i < data.rows.length; i++) {
-                                                            emergencyContacts.push({
-                                                                id: data.rows.item(i).id,
-                                                                contact_name: data.rows.item(i).contact_name,
-                                                                emergency_no: data.rows.item(i).emergency_no,
-                                                                user_type: data.rows.item(i).user_type,
-                                                                user_id: data.rows.item(i).user_id,
-                                                                created_at: data.rows.item(i).created_at,
-                                                                updated_at: data.rows.item(i).updated_at,
-                                                            });
-                                                        }
-                                                        //await this.getEmergencyContacts(emergencyContacts); 
-                                                    }
-                                                    else {
-                                                        this.getEmergencyContacts(this.responseData1);
-                                                    }
-                                                    return [2 /*return*/];
-                                                });
-                                            }); });
-                                            db.executeSql("SELECT * FROM health_details", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                                var length, healthData, i, attribute_json;
-                                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                                    length = data.rows.length;
-                                                    console.log(length);
-                                                    if (length > 0) {
-                                                        healthData = [];
-                                                        for (i = 0; i < data.rows.length; i++) {
-                                                            attribute_json = JSON.parse(data.rows.item(i).attribute_name_value);
-                                                            healthData.push({
-                                                                id: data.rows.item(i).id,
-                                                                health_id: data.rows.item(i).health_id,
-                                                                name: data.rows.item(i).name,
-                                                                attribute_name_value: attribute_json,
-                                                                user_id: data.rows.item(i).user_id,
-                                                                created_at: data.rows.item(i).created_at,
-                                                                updated_at: data.rows.item(i).updated_at,
-                                                            });
-                                                        }
-                                                        //await this.getHealthDetails(healthData);      
-                                                    }
-                                                    else {
-                                                        this.getHealthDetails(this.responseData2);
-                                                    }
-                                                    return [2 /*return*/];
-                                                });
-                                            }); });
-                                            db.executeSql("SELECT * FROM users", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                                var length;
-                                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                                    length = data.rows.length;
-                                                    console.log(length);
-                                                    if (length > 0 && data.rows.item(0).updated_at > this.responseData3['updated_at']) {
-                                                    }
-                                                    else {
-                                                        this.getUsersData(this.responseData3);
-                                                    }
-                                                    return [2 /*return*/];
-                                                });
-                                            }); });
-                                            if (this.responseData4.length != 0) {
-                                                sql4 = "DELETE FROM user_associations";
-                                                db.executeSql(sql4, []);
-                                                data4 = [this.responseData4[0]["id"], this.responseData4[0]["patient_id"], this.responseData4[0]["caregiver_id"], this.responseData4[0]["nick_name"], this.responseData4[0]["created_at"], this.responseData4[0]["updated_at"]];
-                                                sqlData4 = "INSERT INTO user_associations VALUES (?,?,?,?,?,?)";
-                                                db.executeSql(sqlData4, data4);
-                                            }
-                                            return [2 /*return*/];
-                                    }
-                                });
-                            }); })];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2 /*return*/];
-                }
+                this.isNetworkOnline = true;
+                //if(this.isNetworkOnline == true){  
+                this.getDatabase().then(function (database) {
+                    _this.requestDataFromMultipleSources().subscribe(function (responseList) {
+                        _this.responseData1 = responseList[0]["emergency_contacts"];
+                        _this.responseData2 = responseList[1]["health_detail"];
+                        _this.responseData3 = responseList[2]["users"];
+                        _this.responseData4 = responseList[3]["user_associations"];
+                        _this.responseData5 = responseList[4]["qrcode_image"];
+                        console.log(responseList);
+                        localStorage.setItem("qrcode", _this.responseData5);
+                        database.executeSql("SELECT * FROM emergency_details", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                            var length, emergencyContacts, i;
+                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        length = data.rows.length;
+                                        console.log(length);
+                                        if (!(length > 0)) return [3 /*break*/, 1];
+                                        emergencyContacts = [];
+                                        for (i = 0; i < data.rows.length; i++) {
+                                            emergencyContacts.push({
+                                                id: data.rows.item(i).id,
+                                                contact_name: data.rows.item(i).contact_name,
+                                                emergency_no: data.rows.item(i).emergency_no,
+                                                user_type: data.rows.item(i).user_type,
+                                                user_id: data.rows.item(i).user_id,
+                                                created_at: data.rows.item(i).created_at,
+                                                updated_at: data.rows.item(i).updated_at,
+                                                delete: data.rows.item(i).delete
+                                            });
+                                        }
+                                        return [3 /*break*/, 3];
+                                    case 1: return [4 /*yield*/, this.getEmergencyContacts(this.responseData1)];
+                                    case 2:
+                                        _a.sent();
+                                        _a.label = 3;
+                                    case 3: return [2 /*return*/];
+                                }
+                            });
+                        }); }, function (error) {
+                            console.log(error, 'emergencyerror');
+                        });
+                        database.executeSql("SELECT * FROM health_details", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                            var length, healthData, i, attribute_json;
+                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        length = data.rows.length;
+                                        console.log(length);
+                                        if (!(length > 0)) return [3 /*break*/, 1];
+                                        healthData = [];
+                                        for (i = 0; i < data.rows.length; i++) {
+                                            attribute_json = JSON.parse(data.rows.item(i).attribute_name_value);
+                                            healthData.push({
+                                                id: data.rows.item(i).id,
+                                                health_id: data.rows.item(i).health_id,
+                                                name: data.rows.item(i).name,
+                                                attribute_name_value: attribute_json,
+                                                user_id: data.rows.item(i).user_id,
+                                                created_at: data.rows.item(i).created_at,
+                                                updated_at: data.rows.item(i).updated_at,
+                                            });
+                                        }
+                                        return [3 /*break*/, 3];
+                                    case 1: return [4 /*yield*/, this.getHealthDetails(this.responseData2)];
+                                    case 2:
+                                        _a.sent();
+                                        _a.label = 3;
+                                    case 3: return [2 /*return*/];
+                                }
+                            });
+                        }); }, function (error) {
+                            console.log(error, 'healtherror');
+                        });
+                        database.executeSql("SELECT * FROM users", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                            var length;
+                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        length = data.rows.length;
+                                        console.log(length);
+                                        if (!(length > 0)) return [3 /*break*/, 1];
+                                        return [3 /*break*/, 3];
+                                    case 1: return [4 /*yield*/, this.getUsersData(this.responseData3)];
+                                    case 2:
+                                        _a.sent();
+                                        _a.label = 3;
+                                    case 3: return [2 /*return*/];
+                                }
+                            });
+                        }); }, function (error) {
+                            console.log(error, 'userserror');
+                        });
+                        if (_this.responseData4.length != 0) {
+                            var sql4 = "DELETE FROM user_associations";
+                            database.executeSql(sql4, []);
+                            var data4 = [_this.responseData4[0]["id"], _this.responseData4[0]["patient_id"], _this.responseData4[0]["caregiver_id"], _this.responseData4[0]["nick_name"], _this.responseData4[0]["created_at"], _this.responseData4[0]["updated_at"]];
+                            var sqlData4 = "INSERT INTO user_associations VALUES (?,?,?,?,?,?)";
+                            database.executeSql(sqlData4, data4).then(function (res) {
+                                console.log(res, 'user_associate');
+                            }, function (error) {
+                                console.log(error, 'userassociateerror');
+                            });
+                        }
+                    });
+                });
+                return [2 /*return*/];
             });
         });
     };
     syncProvider.prototype.getEmergencyContacts = function (response) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var db, sql1, _a, _b, _i, i, data1, sqlData1;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
-                switch (_c.label) {
-                    case 0: return [4 /*yield*/, this.getDatabase()];
-                    case 1:
-                        db = _c.sent();
-                        sql1 = "DELETE FROM emergency_details";
-                        return [4 /*yield*/, db.executeSql(sql1, [])];
-                    case 2:
-                        _c.sent();
-                        _a = [];
-                        for (_b in response)
-                            _a.push(_b);
-                        _i = 0;
-                        _c.label = 3;
-                    case 3:
-                        if (!(_i < _a.length)) return [3 /*break*/, 6];
-                        i = _a[_i];
-                        data1 = [
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.getDatabase().then(function (database) {
+                    var sql1 = "DELETE FROM emergency_details";
+                    database.executeSql(sql1, []);
+                    for (var i in response) {
+                        var data1 = [
                             response[i]["id"],
                             response[i]["emergency_id"],
                             response[i]["contact_name"],
@@ -1800,45 +1797,28 @@ var syncProvider = /** @class */ (function () {
                             response[i]["user_type"],
                             response[i]["user_id"],
                             response[i]["created_at"],
-                            response[i]["updated_at"]
+                            response[i]["updated_at"],
+                            false
                         ];
-                        sqlData1 = "INSERT INTO emergency_details VALUES (?,NULL,?,?,?,?,?,?)";
-                        return [4 /*yield*/, db.executeSql(sqlData1, data1).then(function (res) {
-                                console.log(res);
-                            })];
-                    case 4:
-                        _c.sent();
-                        _c.label = 5;
-                    case 5:
-                        _i++;
-                        return [3 /*break*/, 3];
-                    case 6: return [2 /*return*/];
-                }
+                        var sqlData1 = "INSERT INTO emergency_details VALUES (?,NULL,?,?,?,?,?,?,?)";
+                        database.executeSql(sqlData1, data1).then(function (res) {
+                            console.log(res);
+                        });
+                    }
+                });
+                return [2 /*return*/];
             });
         });
     };
     syncProvider.prototype.getHealthDetails = function (response) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var db, sql2, _a, _b, _i, i, attribute_json, data2, sqlData2;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
-                switch (_c.label) {
-                    case 0: return [4 /*yield*/, this.getDatabase()];
-                    case 1:
-                        db = _c.sent();
-                        sql2 = "DELETE FROM health_details";
-                        return [4 /*yield*/, db.executeSql(sql2, [])];
-                    case 2:
-                        _c.sent();
-                        _a = [];
-                        for (_b in response)
-                            _a.push(_b);
-                        _i = 0;
-                        _c.label = 3;
-                    case 3:
-                        if (!(_i < _a.length)) return [3 /*break*/, 6];
-                        i = _a[_i];
-                        attribute_json = JSON.stringify(response[i]["attribute_name_value"]);
-                        data2 = [
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.getDatabase().then(function (database) {
+                    var sql2 = "DELETE FROM health_details";
+                    database.executeSql(sql2, []);
+                    for (var i in response) {
+                        var attribute_json = JSON.stringify(response[i]["attribute_name_value"]);
+                        var data2 = [
                             response[i]["id"],
                             response[i]["name"],
                             attribute_json,
@@ -1846,43 +1826,25 @@ var syncProvider = /** @class */ (function () {
                             response[i]["created_at"],
                             response[i]["updated_at"]
                         ];
-                        sqlData2 = "INSERT INTO health_details VALUES (?,NULL,?,?,?,?,?)";
-                        return [4 /*yield*/, db.executeSql(sqlData2, data2).then(function (res) {
-                                console.log(res);
-                            })];
-                    case 4:
-                        _c.sent();
-                        _c.label = 5;
-                    case 5:
-                        _i++;
-                        return [3 /*break*/, 3];
-                    case 6: return [2 /*return*/];
-                }
+                        var sqlData2 = "INSERT INTO health_details VALUES (?,NULL,?,?,?,?,?)";
+                        database.executeSql(sqlData2, data2).then(function (res) {
+                            console.log(res);
+                        });
+                    }
+                });
+                return [2 /*return*/];
             });
         });
     };
     syncProvider.prototype.getUsersData = function (response) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var db, sql3, _a, _b, _i, i, attribute_json, data3, sqlData3;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
-                switch (_c.label) {
-                    case 0: return [4 /*yield*/, this.getDatabase()];
-                    case 1:
-                        db = _c.sent();
-                        sql3 = "DELETE FROM users";
-                        return [4 /*yield*/, db.executeSql(sql3, [])];
-                    case 2:
-                        _c.sent();
-                        _a = [];
-                        for (_b in response)
-                            _a.push(_b);
-                        _i = 0;
-                        _c.label = 3;
-                    case 3:
-                        if (!(_i < _a.length)) return [3 /*break*/, 6];
-                        i = _a[_i];
-                        attribute_json = JSON.stringify(response[i]["user_picture"]);
-                        data3 = [
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.getDatabase().then(function (database) {
+                    var sql3 = "DELETE FROM users";
+                    database.executeSql(sql3, []);
+                    for (var i in response) {
+                        var attribute_json = JSON.stringify(response[i]["user_picture"]);
+                        var data3 = [
                             response[i]["id"],
                             response[i]["name"],
                             response[i]["email"],
@@ -1898,20 +1860,16 @@ var syncProvider = /** @class */ (function () {
                             response[i]["active_status"],
                             response[i]["role_id"],
                             response[i]["created_at"],
-                            response[i]["updated_at"]
+                            response[i]["updated_at"],
+                            false
                         ];
-                        sqlData3 = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                        return [4 /*yield*/, db.executeSql(sqlData3, data3).then(function (res) {
-                                console.log(res);
-                            })];
-                    case 4:
-                        _c.sent();
-                        _c.label = 5;
-                    case 5:
-                        _i++;
-                        return [3 /*break*/, 3];
-                    case 6: return [2 /*return*/];
-                }
+                        var sqlData3 = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        database.executeSql(sqlData3, data3).then(function (res) {
+                            console.log(res);
+                        });
+                    }
+                });
+                return [2 /*return*/];
             });
         });
     };
@@ -1940,8 +1898,14 @@ var syncProvider = /** @class */ (function () {
         var response2 = this.http.get("health_details");
         var response3 = this.http.get("users/user_data");
         var response4 = this.http.get("users/user_associations");
+        var response5 = this.http.get("health_details/about");
         // Observable.forkJoin (RxJS 5) changes to just forkJoin() in RxJS 6
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1, response2, response3, response4]);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1, response2, response3, response4, response5]);
+    };
+    syncProvider.prototype.requestDataFromEnumMasters = function () {
+        var response1 = this.http.get("enum_masters");
+        // Observable.forkJoin (RxJS 5) changes to just forkJoin() in RxJS 6
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
     };
     syncProvider.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },

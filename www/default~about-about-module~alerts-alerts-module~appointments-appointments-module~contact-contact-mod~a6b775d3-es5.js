@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3"],{
 
 /***/ "./src/app/self-care/self-common-service/settings/settings.service.ts":
 /*!****************************************************************************!*\
@@ -210,13 +210,11 @@ var settingsService = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatabaseProvider", function() { return DatabaseProvider; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _database_interface__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./database.interface */ "./src/app/sqlite-database/database.interface.ts");
-/* harmony import */ var _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/sqlite/ngx */ "./node_modules/@ionic-native/sqlite/ngx/index.js");
-/* harmony import */ var _sync_sync__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../sync/sync */ "./src/app/sync/sync.ts");
-
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _database_interface__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./database.interface */ "./src/app/sqlite-database/database.interface.ts");
+/* harmony import */ var _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/sqlite/ngx */ "./node_modules/@ionic-native/sqlite/ngx/index.js");
+/* harmony import */ var _sync_sync__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../sync/sync */ "./src/app/sync/sync.ts");
 
 
 
@@ -230,7 +228,7 @@ __webpack_require__.r(__webpack_exports__);
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-var DATA_BASE_NAME = 'vCare4U.db';
+var DATA_BASE_NAME = 'BCared4.db';
 var user_type;
 (function (user_type) {
     user_type[user_type["Emergency"] = 1] = "Emergency";
@@ -238,8 +236,7 @@ var user_type;
     user_type[user_type["Care Giver"] = 3] = "Care Giver";
 })(user_type || (user_type = {}));
 var DatabaseProvider = /** @class */ (function () {
-    function DatabaseProvider(http, sqlite, platform, syncProvide) {
-        this.http = http;
+    function DatabaseProvider(sqlite, platform, syncProvide) {
         this.sqlite = sqlite;
         this.platform = platform;
         this.syncProvide = syncProvide;
@@ -265,7 +262,7 @@ var DatabaseProvider = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sqlTable1 = "CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME)";
+                        sqlTable1 = "CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)";
                         return [4 /*yield*/, db.executeSql(sqlTable1, [])];
                     case 1:
                         _a.sent();
@@ -277,7 +274,7 @@ var DatabaseProvider = /** @class */ (function () {
                         return [4 /*yield*/, db.executeSql(sqlTable4, [])];
                     case 3:
                         _a.sent();
-                        sqlTable5 = "CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME)";
+                        sqlTable5 = "CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)";
                         return [4 /*yield*/, db.executeSql(sqlTable5, [])];
                     case 4:
                         _a.sent();
@@ -442,12 +439,15 @@ var DatabaseProvider = /** @class */ (function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getuserID()];
+                    case 0:
+                        console.log(data);
+                        return [4 /*yield*/, this.getuserID()];
                     case 1:
                         user_id = _a.sent();
                         user_data = data['user'];
                         policy_data = data['policy'];
                         policy_data["name"] = "policy";
+                        console.log(policy_data);
                         return [2 /*return*/, this.sqlite.create({
                                 name: DATA_BASE_NAME,
                                 location: 'default'
@@ -462,23 +462,90 @@ var DatabaseProvider = /** @class */ (function () {
                                             return [4 /*yield*/, db.executeSql(sql, updateUserData)];
                                         case 1:
                                             _a.sent();
-                                            db.executeSql("SELECT * FROM health_details WHERE name='" + policy_data['name'] + "'").then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                                var id;
-                                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                                    if (data.rows.length > 0) {
-                                                        id = data.rows.item(0).health_id;
-                                                        this.updateHealthData(policy_data, id);
-                                                    }
-                                                    else {
-                                                        this.updateHealthData(policy_data);
-                                                    }
-                                                    return [2 /*return*/];
-                                                });
-                                            }); });
+                                            return [4 /*yield*/, db.executeSql("SELECT * FROM health_details WHERE name='" + policy_data['name'] + "'", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                                    var id;
+                                                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                        console.log(data);
+                                                        if (data.rows.length > 0) {
+                                                            id = data.rows.item(0).health_id;
+                                                            console.log(policy_data, id);
+                                                            this.updateHealthData(policy_data, id);
+                                                        }
+                                                        else {
+                                                            console.log(policy_data);
+                                                            this.updateHealthData(policy_data);
+                                                        }
+                                                        return [2 /*return*/];
+                                                    });
+                                                }); }, function (error) {
+                                                    console.log(error);
+                                                })];
+                                        case 2:
+                                            _a.sent();
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            }); }, function (error) {
+                                console.log(error);
+                            })];
+                }
+            });
+        });
+    };
+    DatabaseProvider.prototype.updateUserData = function (data) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var user_id;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getuserID()];
+                    case 1:
+                        user_id = _a.sent();
+                        return [2 /*return*/, this.sqlite.create({
+                                name: DATA_BASE_NAME,
+                                location: 'default'
+                            }).then(function (db) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var sql, updateUserData;
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            sql = "UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ? AND role_id = ?";
+                                            updateUserData = [data['name'], data['email'], data['mobile_no'], user_id, 1];
+                                            return [4 /*yield*/, db.executeSql(sql, updateUserData).then(function (row) {
+                                                    return { event_id: row.insertId };
+                                                }).catch(function (res) {
+                                                    return res;
+                                                })];
+                                        case 1:
+                                            _a.sent();
                                             return [2 /*return*/];
                                     }
                                 });
                             }); })];
+                }
+            });
+        });
+    };
+    DatabaseProvider.prototype.updateUserImage = function (data) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var user_id;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getuserID()];
+                    case 1:
+                        user_id = _a.sent();
+                        return [2 /*return*/, this.sqlite.create({
+                                name: DATA_BASE_NAME,
+                                location: 'default'
+                            }).then(function (db) {
+                                var sql = "UPDATE users SET user_picture = ? WHERE id = ?";
+                                var updateEventImageData = [JSON.stringify(data), user_id];
+                                return db.executeSql(sql, updateEventImageData).then(function (row) {
+                                    return { event_id: row.insertId };
+                                }).catch(function (res) {
+                                    return res;
+                                });
+                            })];
                 }
             });
         });
@@ -495,8 +562,8 @@ var DatabaseProvider = /** @class */ (function () {
                                 name: DATA_BASE_NAME,
                                 location: 'default'
                             }).then(function (db) {
-                                var sql = "INSERT INTO emergency_details VALUES (NULL,NULL,?,?,?,?,?,?)";
-                                var createEventData = [data["contact_name"], data["emergency_no"], user_type[data["user_type"]], user_id, new Date().toJSON(), new Date().toJSON()];
+                                var sql = "INSERT INTO emergency_details VALUES (NULL,NULL,?,?,?,?,?,?,?)";
+                                var createEventData = [data["contact_name"], data["emergency_no"], user_type[data["user_type"]], user_id, new Date().toJSON(), new Date().toJSON(), false];
                                 return db.executeSql(sql, createEventData).then(function (row) {
                                     return { event_id: row.insertId };
                                 }).catch(function (res) {
@@ -520,6 +587,19 @@ var DatabaseProvider = /** @class */ (function () {
             });
         });
     };
+    DatabaseProvider.prototype.deleteCaregiverContact = function (id) {
+        return this.sqlite.create({
+            name: DATA_BASE_NAME,
+            location: 'default'
+        }).then(function (db) {
+            var sql = "UPDATE users SET delete = ? WHERE id = ?";
+            return db.executeSql(sql, [true, id]).then(function (row) {
+                return { event_id: row.insertId };
+            }).catch(function (res) {
+                return res;
+            });
+        });
+    };
     DatabaseProvider.prototype.updateHealthData = function (data, id) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var user_id;
@@ -533,10 +613,11 @@ var DatabaseProvider = /** @class */ (function () {
                                 name: DATA_BASE_NAME,
                                 location: 'default'
                             }).then(function (db) {
-                                return db.executeSql("SELECT * FROM health_details WHERE name='" + data['name'] + "'").then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                return db.executeSql("SELECT * FROM health_details WHERE name='" + data['name'] + "'", []).then(function (getData) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
                                     var sqlQuery, healthData;
                                     return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                        if (data.rows.length > 0) {
+                                        console.log(data);
+                                        if (getData.rows.length > 0) {
                                             sqlQuery = "UPDATE health_details SET id = ?, name = ?, attribute_name_value = ?, user_id = ?, created_at = ?, updated_at = ? WHERE health_id = ?";
                                             healthData = [data["id"], data["name"], JSON.stringify(data["attribute_name_value"]), user_id, data["created_at"], new Date().toJSON(), id];
                                         }
@@ -544,13 +625,18 @@ var DatabaseProvider = /** @class */ (function () {
                                             sqlQuery = "INSERT INTO health_details VALUES (NULL,NULL,?,?,?,?,?)";
                                             healthData = [data["name"], JSON.stringify(data["attribute_name_value"]), user_id, new Date().toJSON(), new Date().toJSON()];
                                         }
+                                        console.log(sqlQuery);
+                                        console.log(healthData);
                                         return [2 /*return*/, db.executeSql(sqlQuery, healthData).then(function (row) {
+                                                console.log(row);
                                                 return { event_id: row.insertId };
                                             }).catch(function (res) {
+                                                console.log(res);
                                                 return res;
                                             })];
                                     });
                                 }); }).catch(function (res) {
+                                    console.log(res);
                                     return res;
                                 });
                             })];
@@ -563,8 +649,8 @@ var DatabaseProvider = /** @class */ (function () {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then(function (db) {
-            for (var i in _database_interface__WEBPACK_IMPORTED_MODULE_4__["SQL_TABLES"]) {
-                var sql = "DELETE FROM " + _database_interface__WEBPACK_IMPORTED_MODULE_4__["SQL_TABLES"][i];
+            for (var i in _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_TABLES"]) {
+                var sql = "DELETE FROM " + _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_TABLES"][i];
                 db.executeSql(sql, []);
             }
         });
@@ -578,14 +664,13 @@ var DatabaseProvider = /** @class */ (function () {
         return user_id;
     };
     DatabaseProvider.ctorParameters = function () { return [
-        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
-        { type: _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_5__["SQLite"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
-        { type: _sync_sync__WEBPACK_IMPORTED_MODULE_6__["syncProvider"] }
+        { type: _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_4__["SQLite"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
+        { type: _sync_sync__WEBPACK_IMPORTED_MODULE_5__["syncProvider"] }
     ]; };
     DatabaseProvider = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({ providedIn: 'root' }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_5__["SQLite"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _sync_sync__WEBPACK_IMPORTED_MODULE_6__["syncProvider"]])
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: 'root' }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_4__["SQLite"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _sync_sync__WEBPACK_IMPORTED_MODULE_5__["syncProvider"]])
     ], DatabaseProvider);
     return DatabaseProvider;
 }());
@@ -595,4 +680,4 @@ var DatabaseProvider = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=default~about-about-module~appointments-appointments-module~contact-contact-module~doc-visits-doc-vi~af85d6a1-es5.js.map
+//# sourceMappingURL=default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3-es5.js.map

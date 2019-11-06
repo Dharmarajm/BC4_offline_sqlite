@@ -104,7 +104,7 @@ export class AddReportPage implements OnInit {
             this.store_photos.push(this.webview.convertFileSrc(results[i]))
             console.log(this.store_photos,'webviewuri')
                   this.active=true;
-            this.localFilePath = results[i]
+            this.localFilePath = results[i];
             this.file.resolveLocalFilesystemUrl(results[i]).then((fileEntry: FileEntry) => {
               return new Promise((resolve, reject) => {
                 fileEntry.file(meta => resolve(meta), error => reject(error));

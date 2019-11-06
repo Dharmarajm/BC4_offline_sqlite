@@ -120,10 +120,11 @@ export class HealthPage implements OnInit {
         diabetes="No"; 
       }
       
-      let id:any=null;
-    
+      let id:any = null;
+      let created_at:any = null;
       if(this.getAllIds!=null){
-        id=this.getAllIds['id'];
+        id = this.getAllIds['id'];
+        created_at = this.getAllIds['created_at'];
       }
 
       let data={
@@ -138,7 +139,8 @@ export class HealthPage implements OnInit {
                     "current_medication":this.medicationChiptest,
                     "recent_surgeries":val["recent_surgeries"]   
          },
-         "name":"health" 
+         "name":"health",
+         "created_at": created_at
       }; 
        this.addconfirmation(data);
      

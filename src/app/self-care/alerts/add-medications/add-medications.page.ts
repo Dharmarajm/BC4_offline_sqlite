@@ -15,6 +15,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ActionSheetController } from '@ionic/angular';
+import { DatabaseProvider } from '../../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
+
 @Component({
   selector: 'app-add-medications',
   templateUrl: './add-medications.page.html',
@@ -49,12 +52,14 @@ export class AddMedicationPage implements OnInit {
   getEventId: any;
   add_alert: any;
   notify_image:any;
+  localFilePath:any;
+
 
   constructor(private camera: Camera, public actionSheetController: ActionSheetController, private toast: Toast, public localNotifications:LocalNotifications,private file: File, public fb:FormBuilder, private transfer: FileTransfer, private imagePicker: ImagePicker,
     private webview: WebView, public sanitizer: DomSanitizer,
     public alertController:AlertController,
     private router: Router, public route:ActivatedRoute,public service: settingsService,
-    public datepipe: DatePipe, private statusBar: StatusBar) { }
+    public datepipe: DatePipe, private statusBar: StatusBar,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) { }
 
   ngOnInit() {}
  ionViewWillEnter(){
@@ -133,9 +138,16 @@ export class AddMedicationPage implements OnInit {
         val.dossage=val.unit
         console.log(val.dossage)
      }
-    let date=this.datepipe.transform(val.event_datetime,"dd MMM yyyy")
+     let new1 = new Date(val.event_time);
+     let gethours = new1.getHours();
+     let getMinutes = new1.getMinutes();
+
+     let new2 = new Date(val.event_datetime);
+     new2.setHours(gethours)
+     new2.setMinutes(getMinutes)
+     let event_dateTime = new2.toJSON();
     let medi_details:any= {
-     event_name: val.event_name, event_datetime: date + ' '+ val.event_time, value: val.quantity, description: val.description, event_type: "alert_medication",
+     event_name: val.event_name, event_datetime: event_dateTime, value: val.quantity, description: val.description, event_type: "alert_medication",
      event_options: {
           meal: val.meals, remainder_repeat:val.remainder_repeat, repeat_category: val.event_category, repeat_value:this.repeatValue, medicine_type: val.medicine_type, dossage: val.dossage
      } }
@@ -160,11 +172,20 @@ async addconfirmation(val,medi_details){
         cssClass: 'secondary',
         handler: () => {
           this.Progress=true;
-          this.service.commonPost(medi_details).subscribe(res=>{
+          // this.service.commonPost(medi_details).subscribe(res=>{
+          //   let getData:any=res;
+          //   this.getEventId=res['event']['id'];
+          //   this.assignSchedule(val)
+          // })
+          console.log(medi_details)
+          this.database.createAnEvent(medi_details).then((res)=>{
             let getData:any=res;
-            this.getEventId=res['event']['id'];
-            this.assignSchedule(val)
-          })
+            this.getEventId=res['event_id'];
+            this.assignSchedule(val,medi_details)
+          }).catch(error=>{
+            console.log(error)
+            this.Progress=false;
+          });
         }
       }
     ]
@@ -172,7 +193,7 @@ async addconfirmation(val,medi_details){
   await this.add_alert.present();
 }
 
-assignSchedule(val){
+assignSchedule(val,medi_data){
           let repeatAlarmValue=[];
           let getDate = new Date(val.event_datetime)
           let getTime:any = new Date(val.event_time)
@@ -212,7 +233,7 @@ assignSchedule(val){
                 })
               })
                   if(this.fileuri.length >0){
-                this.sample(this.getEventId);
+                this.sample(this.getEventId,medi_data);
                }else{
                 this.Progress=false;
                 this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
@@ -299,7 +320,7 @@ assignSchedule(val){
                             sound: null
                           })
                           if(this.fileuri.length >0){
-                            this.sample(this.getEventId);
+                            this.sample(this.getEventId,medi_data);
                            }else{
                             this.Progress=false;
                             this.router.navigate(['self-care-tabs/tabs/tab1/alerts']);
@@ -394,38 +415,50 @@ repeatCheck(event){
 
  //}
 
- sample(event_id){
-  const fileTransfer: FileTransferObject = this.transfer.create();
+ sample(event_id,medi_data?){
+  // const fileTransfer: FileTransferObject = this.transfer.create();
   
-  let data={id:event_id}
-   for(var i=0;i<this.fileuri.length;i++){
-  console.log("inside loop test");
-  let options: FileUploadOptions = {
-   fileKey: 'event_assets',
-   fileName: this.fileuri[i].fileName,
-   mimeType: 'multipart/form-data',
-   params:data,
-   chunkedMode: false,
-   headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
-  }
+  // let data={id:event_id}
+  //  for(var i=0;i<this.fileuri.length;i++){
+  // console.log("inside loop test");
+  // let options: FileUploadOptions = {
+  //  fileKey: 'event_assets',
+  //  fileName: this.fileuri[i].fileName,
+  //  mimeType: 'multipart/form-data',
+  //  params:data,
+  //  chunkedMode: false,
+  //  headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
+  // }
    
-    fileTransfer.upload(this.fileuri[i].uri,environment.apiUrl+'events/update_image',options).then(res=>{
-      console.log(i)
-      console.log(this.fileuri.length-i)
-      console.log(this.fileuri.length)
-      if(this.fileuri.length-i ==0){
-        this.Progress=false;
-       this.presentToast('Medication added successfully');
-       this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],{skipLocationChange: true });
-     }else{
-     }
-    },error=>{
-      this.Progress=false;
+  //   fileTransfer.upload(this.fileuri[i].uri,environment.apiUrl+'events/update_image',options).then(res=>{
+  //     console.log(i)
+  //     console.log(this.fileuri.length-i)
+  //     console.log(this.fileuri.length)
+  //     if(this.fileuri.length-i ==0){
+  //       this.Progress=false;
+  //      this.presentToast('Medication added successfully');
+  //      this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],{skipLocationChange: true });
+  //    }else{
+  //    }
+  //   },error=>{
+  //     this.Progress=false;
 
-      this.presentToast("File upload doesn't completed succesfully")
-      console.log(error)
-    })   
-   }
+  //     this.presentToast("File upload doesn't completed succesfully")
+  //     console.log(error)
+  //   })   
+  //  }
+  let data= medi_data;
+  data['event_options']['localImagePath'] = this.fileuri;
+  this.database.updateAnEventImage(event_id,data).then((res)=>{
+      console.log(res);  
+      this.Progress=false;
+      this.router.navigate(['self-care-tabs/tabs/tab1/alerts'],{skipLocationChange: true });
+  })
+  .catch(error=>{ 
+    this.Progress=false;
+    console.log(error) 
+  });
+
 
 }
 
@@ -444,7 +477,7 @@ selectimage(){
            this.notify_image=results[0];
           this.store_photos.push(this.webview.convertFileSrc(results[i]))
           console.log(this.store_photos,'webviewuri')
-
+          this.localFilePath = results[i]; 
           this.file.resolveLocalFilesystemUrl(results[i]).then((fileEntry: FileEntry) => {
             return new Promise((resolve, reject) => {
               fileEntry.file(meta => resolve(meta), error => reject(error));
@@ -453,7 +486,7 @@ selectimage(){
               console.log(fileMeta)
               this.audioFileName= fileMeta.name;
               this.cdvFilePath = fileMeta['localURL'];
-              this.fileuri.push({"uri":this.cdvFilePath,"fileName":this.audioFileName})  
+              this.fileuri.push({"localURI": this.localFilePath,"globalURI": null,"cdvFilePath":this.cdvFilePath,"fileName":this.audioFileName,"delete":false})  
               console.log(this.fileuri,'fileuri')               
           })
     }
@@ -461,6 +494,7 @@ selectimage(){
     console.log(error) 
   });
 }
+
 async AddImage() {
   const actionSheet = await this.actionSheetController.create({
     header: 'Albums',
@@ -484,32 +518,33 @@ async AddImage() {
   });
   await actionSheet.present();
 }
+
 takePicture(){
   var options: CameraOptions = {
-    quality: 100,
-    saveToPhotoAlbum: true,
-    correctOrientation: true
-};
-this.camera.getPicture(options).then((imageData) => {
-  // imageData is either a base64 encoded string or a file URI
-  // If it's base64 (DATA_URL):
-  this.store_photos.push(this.webview.convertFileSrc(imageData))
-  console.log(this.store_photos,'webviewuri')
-
-  this.file.resolveLocalFilesystemUrl(imageData).then((fileEntry: FileEntry) => {
-    return new Promise((resolve, reject) => {
-      fileEntry.file(meta => resolve(meta), error => reject(error));
-    });
-  }).then((fileMeta: IFile) => {
-      console.log(fileMeta)
-      this.audioFileName= fileMeta.name;
-      this.cdvFilePath = fileMeta['localURL'];
-      this.fileuri.push({"uri":this.cdvFilePath,"fileName":this.audioFileName})  
-      console.log(this.fileuri,'fileuri')               
-  })
-}, (err) => {
-  // Handle error
- });
+      quality: 100,
+      saveToPhotoAlbum: true,
+      correctOrientation: true
+  };
+  this.camera.getPicture(options).then((imageData) => {
+    // imageData is either a base64 encoded string or a file URI
+    // If it's base64 (DATA_URL):
+    this.store_photos.push(this.webview.convertFileSrc(imageData))
+    console.log(this.store_photos,'webviewuri')
+    this.localFilePath = imageData; 
+    this.file.resolveLocalFilesystemUrl(imageData).then((fileEntry: FileEntry) => {
+      return new Promise((resolve, reject) => {
+        fileEntry.file(meta => resolve(meta), error => reject(error));
+      });
+    }).then((fileMeta: IFile) => {
+        console.log(fileMeta)
+        this.audioFileName= fileMeta.name;
+        this.cdvFilePath = fileMeta['localURL'];
+        this.fileuri.push({"localURI": this.localFilePath,"globalURI": null,"cdvFilePath":this.cdvFilePath,"fileName":this.audioFileName,"delete":false})  
+        console.log(this.fileuri,'fileuri')               
+    })
+  }, (err) => {
+    // Handle error
+  });
 }
 
 async presentToast(message: string) {
@@ -522,10 +557,11 @@ async presentToast(message: string) {
 
 
 removeImage(i){
-   this.store_photos.splice(i, 1);
-   if(this.store_photos.length==0){
-     }
-   }
+  this.store_photos.splice(i, 1);
+  // if(this.store_photos.length==0){
+  //   this.active=false;
+  //   }
+  }
 
    cancel(){
      this.addform.reset();

@@ -20,6 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditProfilePage } from './edit-profile/edit-profile.page';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
+
 
 @NgModule({
   imports: [
@@ -44,7 +46,8 @@ import { Toast } from '@ionic-native/toast/ngx';
   FileChooser,
   LocalNotifications,
   AlertController,
-  Toast
+  Toast,
+  DataBaseSummaryProvider
   ],
 
 })
