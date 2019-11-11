@@ -9,6 +9,7 @@ import { TermsConditionsPage } from '../../login/terms-conditions/terms-conditio
 import { AboutPage } from '../../login/about/about.page';
 import { EditProfilePage } from './edit-profile/edit-profile.page'
 import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { environment } from '../../../environments/environment'
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
@@ -30,7 +31,7 @@ export class Tab3Page {
   linkSource:any;
   img:any;
   caregiver:any;
-  
+  environment:any;
   data1:any = "-";
   initialLogo:any;
   caregive_option:any;
@@ -61,7 +62,9 @@ export class Tab3Page {
   autoUpdateDays:any="Never";
   isNetwork:boolean;
 
-  constructor(private toast: Toast,public toastController: ToastController, private localNotifications: LocalNotifications, private file: File,private FilePath: FilePath,private fileChooser: FileChooser,private statusBar: StatusBar,public modalController: ModalController, public sanitizer: DomSanitizer, public serv: settingsService, public actionSheetController: ActionSheetController, public router:Router, public alertController: AlertController,private clipboard: Clipboard,public database:DatabaseProvider,private databaseSummary:DataBaseSummaryProvider,private networkProvider: NetworkService,private webview: WebView) { }
+  constructor(private toast: Toast,public toastController: ToastController, private localNotifications: LocalNotifications, private file: File,private FilePath: FilePath,private fileChooser: FileChooser,private statusBar: StatusBar,public modalController: ModalController, public sanitizer: DomSanitizer, public serv: settingsService, public actionSheetController: ActionSheetController, public router:Router, public alertController: AlertController,private clipboard: Clipboard,public database:DatabaseProvider,private databaseSummary:DataBaseSummaryProvider,private networkProvider: NetworkService,private webview: WebView) {
+    this.environment = environment.ImageUrl;
+   }
 
   ngOnInit() {
   
@@ -111,7 +114,13 @@ export class Tab3Page {
       let localURL=null;
       if(this.pic['user_info']['user_picture']['url'] != null){
         let source = this.pic['user_info']['user_picture']['url'];
-        globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);  
+        let gurl = source.includes("file:///");
+        if(gurl==true){
+          globalURL = this.webview.convertFileSrc(source);
+        }else{
+          let byPassURL = this.environment+source;
+          globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);  
+        }
       }else{
         let source = this.webview.convertFileSrc(this.pic['user_info']['user_picture']['localURL']); 
         localURL = source;

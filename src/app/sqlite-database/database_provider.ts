@@ -187,7 +187,7 @@ export class DataBaseSummaryProvider {
         })     
     }
 
-    async getAboutData(): Promise<any>{
+    async getAboutData(): Promise<any> {
         let user_id = await this.databaseService.getuserID(); 
         let getQRcode = await this.setQRcode();
         let sqlHealthQuery = SQL_SELECT_ALL_HEALTH_DETAILS+` WHERE name='policy'`;
@@ -235,16 +235,14 @@ export class DataBaseSummaryProvider {
                     role_id: data2.rows.item(i).role_id,
                     created_at: data2.rows.item(i).created_at,
                     updated_at: data2.rows.item(i).updated_at,
-                    delete: data2.rows.item(i).delete
+                    delete1: data2.rows.item(i).delete1
                 })  
               }
             })
 
             return { policies: healthData, user_info: userData[0], qrcode_image: getQRcode };
 
-        })    
-
-
+        })
     }
 
     async getHealthDeatails(): Promise<any> {
@@ -267,16 +265,17 @@ export class DataBaseSummaryProvider {
                     created_at: data.rows.item(i).created_at, 
                     updated_at: data.rows.item(i).updated_at 
                 })  
-              }
+            }
 
-              return { health_detail: healthData };
+            return { health_detail: healthData };
          })  
        })
     }
 
     getEmergencyDeatails(): Promise<any> {
        let sqlEmergeQuery = SQL_SELECT_ALL_EMERGENCY_DATA;
-       let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE role_id=2 AND delete=false`;
+       let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE (role_id=2 AND delete1='false')`;
+       console.log(sqlUsersQuery)
        return this.databaseService.getDatabase().then(async(database) => {
         let emergencyContacts = []; 
         let careGiverData=[];
@@ -291,7 +290,7 @@ export class DataBaseSummaryProvider {
                 user_id: data.rows.item(i).user_id,
                 created_at: data.rows.item(i).created_at,
                 updated_at: data.rows.item(i).updated_at,
-                delete: data.rows.item(i).delete
+                delete1: data.rows.item(i).delete1
                 });
             } 
          })
@@ -316,12 +315,13 @@ export class DataBaseSummaryProvider {
                     role_id: data1.rows.item(i).role_id,
                     created_at: data1.rows.item(i).created_at,
                     updated_at: data1.rows.item(i).updated_at,
-                    delete: data1.rows.item(i).delete
+                    delete1: data1.rows.item(i).delete1
                 });
               } 
             } 
          })
-         return { caregiver_count: careGiverData.length ,caregivers: careGiverData,emergency_contact_count: emergencyContacts.length,emergency_detail: emergencyContacts};  
+         
+         return { caregiver_count: careGiverData.length ,caregivers: careGiverData,emergency_contact_count: emergencyContacts.length,emergency_detail: emergencyContacts };  
        })
     }
 
@@ -371,7 +371,7 @@ export class DataBaseSummaryProvider {
                   role_id: data2.rows.item(i).role_id,
                   created_at: data2.rows.item(i).created_at,
                   updated_at: data2.rows.item(i).updated_at,
-                  delete: data2.rows.item(i).delete
+                  delete1: data2.rows.item(i).delete1
               })  
             }
           })

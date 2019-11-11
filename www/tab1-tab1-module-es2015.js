@@ -642,7 +642,13 @@ let Tab1Page = class Tab1Page {
             let localURL = null;
             if (this.pic['user_info']['user_picture']['url'] != null) {
                 let source = this.pic['user_info']['user_picture']['url'];
-                globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                let gurl = source.includes("file:///");
+                if (gurl == true) {
+                    globalURL = this.webview.convertFileSrc(source);
+                }
+                else {
+                    globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                }
             }
             else {
                 let source = this.webview.convertFileSrc(this.pic['user_info']['user_picture']['localURL']);

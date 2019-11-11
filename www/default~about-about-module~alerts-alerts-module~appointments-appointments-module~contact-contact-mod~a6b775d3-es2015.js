@@ -254,13 +254,16 @@ let DatabaseProvider = class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            let sqlTable1 = `CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)`;
+            let sqlTable1 = `CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`;
             yield db.executeSql(sqlTable1, []);
+            // .then((res)=>{
+            //    console.log(res,'emergencysuccess')
+            // }).catch(err=>{console.log(err,'emergencyerror')});
             let sqlTable2 = `CREATE TABLE IF NOT EXISTS enum_masters(id INTEGER,name TEXT,category_name TEXT,created_at DATETIME,updated_at DATETIME)`;
             yield db.executeSql(sqlTable2, []);
             let sqlTable4 = `CREATE TABLE IF NOT EXISTS health_details(id INTEGER,health_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,attribute_name_value TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME)`;
             yield db.executeSql(sqlTable4, []);
-            let sqlTable5 = `CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)`; //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
+            let sqlTable5 = `CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`; //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
             yield db.executeSql(sqlTable5, []);
             let sqlTable6 = `CREATE TABLE IF NOT EXISTS user_associations(id INTEGER,patient_id INTEGER,caregiver_id INTEGER,nick_name TEXT DEFAULT NULL,created_at DATETIME,updated_at DATETIME)`;
             yield db.executeSql(sqlTable6, []);
@@ -469,7 +472,7 @@ let DatabaseProvider = class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db) => {
-            let sql = `UPDATE users SET delete = ? WHERE id = ?`;
+            let sql = `UPDATE users SET delete1 = ? WHERE id = ?`;
             return db.executeSql(sql, [true, id]).then((row) => {
                 return { event_id: row.insertId };
             }).catch(res => {

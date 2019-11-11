@@ -6,6 +6,7 @@ import { DomSanitizer} from '@angular/platform-browser';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
 import { NetworkService } from '../../../network-connectivity/network-service';
+import { environment } from '../../../../environments/environment'
 
 @Component({
   selector: 'app-preview',
@@ -16,7 +17,7 @@ export class previewPage implements OnInit {
   previewData:any;
   user_uid:any;
   Contactinfo:any=[{'doctor':[],'emergency':[],'care_giver':[]}];
-
+  environment:any;
   emergency:boolean=false;
   care_giver:boolean=false;
   doctor:boolean=false;
@@ -34,6 +35,7 @@ export class previewPage implements OnInit {
   constructor(public sanitizer: DomSanitizer,private webview: WebView,public modalController: ModalController,public service: settingsService,private changeRef: ChangeDetectorRef,private databaseSummary: DataBaseSummaryProvider,private networkProvider: NetworkService) { 
     this.tabBar = document.getElementById('myTabBar');
     this.tabBar.style.display = 'none';
+    this.environment = environment.ImageUrl;
   }
   
   ngOnInit(){
@@ -109,7 +111,13 @@ export class previewPage implements OnInit {
        let localURL=null;
        if(this.previewData['user']['user_picture']['url'] != null){
          let source = this.previewData['user']['user_picture']['url'];
-         globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);  
+         let gurl = source.includes("file:///");
+         if(gurl==true){
+           globalURL = this.webview.convertFileSrc(source);
+         }else{
+           let byPassURL = this.environment+source;
+           globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);  
+         }
        }else{
          let source = this.webview.convertFileSrc(this.previewData['user']['user_picture']['localURL']); 
          localURL = source;

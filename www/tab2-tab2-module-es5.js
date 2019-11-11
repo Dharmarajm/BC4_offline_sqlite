@@ -185,7 +185,13 @@ var previewPage = /** @class */ (function () {
             var localURL = null;
             if (_this.previewData['user']['user_picture']['url'] != null) {
                 var source = _this.previewData['user']['user_picture']['url'];
-                globalURL = _this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                var gurl = source.includes("file:///");
+                if (gurl == true) {
+                    globalURL = _this.webview.convertFileSrc(source);
+                }
+                else {
+                    globalURL = _this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                }
             }
             else {
                 var source = _this.webview.convertFileSrc(_this.previewData['user']['user_picture']['localURL']);

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute,Router,NavigationExtras } from '@angular/router';
 import { settingsService } from '../self-common-service/settings/settings.service';
+import { environment } from '../../../environments/environment'
 import { IonSlides } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -23,6 +24,7 @@ export class Tab1Page {
   profile_pic:any;
   tabBar:any;
   user_id:any;
+  environment:any;
   loader:boolean=true;
   show_details:any[]=[];
   JSON:any;
@@ -30,6 +32,7 @@ export class Tab1Page {
 
   constructor( public service: settingsService,private router: Router,private statusBar: StatusBar,public sanitizer: DomSanitizer,private database: DatabaseProvider,private databaseSummary:DataBaseSummaryProvider,private networkProvider: NetworkService,private webview: WebView) {
     this.JSON = JSON;
+    this.environment = environment.ImageUrl;
   }
     ionViewWillEnter(){
       this.loader=true;
@@ -53,7 +56,13 @@ export class Tab1Page {
         let localURL=null;
         if(this.pic['user_info']['user_picture']['url'] != null){
           let source = this.pic['user_info']['user_picture']['url']
-          globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);  
+          let gurl = source.includes("file:///");
+          if(gurl==true){
+           globalURL = this.webview.convertFileSrc(source);
+          }else{
+           let byPassURL = this.environment+source;
+           globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);  
+          }  
         }else{
           let source = this.webview.convertFileSrc(this.pic['user_info']['user_picture']['localURL']); 
           localURL = source;

@@ -269,7 +269,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                                             role_id: data2.rows.item(i).role_id,
                                                             created_at: data2.rows.item(i).created_at,
                                                             updated_at: data2.rows.item(i).updated_at,
-                                                            delete: data2.rows.item(i).delete
+                                                            delete1: data2.rows.item(i).delete1
                                                         });
                                                     }
                                                 })];
@@ -318,7 +318,8 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     DataBaseSummaryProvider.prototype.getEmergencyDeatails = function () {
         var _this = this;
         var sqlEmergeQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EMERGENCY_DATA"];
-        var sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + " WHERE role_id=2 AND delete=false";
+        var sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + " WHERE (role_id=2 AND delete1='false')";
+        console.log(sqlUsersQuery);
         return this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
             var emergencyContacts, careGiverData;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
@@ -337,7 +338,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                         user_id: data.rows.item(i).user_id,
                                         created_at: data.rows.item(i).created_at,
                                         updated_at: data.rows.item(i).updated_at,
-                                        delete: data.rows.item(i).delete
+                                        delete1: data.rows.item(i).delete1
                                     });
                                 }
                             })];
@@ -364,7 +365,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                             role_id: data1.rows.item(i).role_id,
                                             created_at: data1.rows.item(i).created_at,
                                             updated_at: data1.rows.item(i).updated_at,
-                                            delete: data1.rows.item(i).delete
+                                            delete1: data1.rows.item(i).delete1
                                         });
                                     }
                                 }
@@ -443,7 +444,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                                             role_id: data2.rows.item(i).role_id,
                                                             created_at: data2.rows.item(i).created_at,
                                                             updated_at: data2.rows.item(i).updated_at,
-                                                            delete: data2.rows.item(i).delete
+                                                            delete1: data2.rows.item(i).delete1
                                                         });
                                                     }
                                                 })];

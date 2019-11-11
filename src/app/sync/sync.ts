@@ -49,7 +49,7 @@ export class syncProvider {
                   return data.rows.length
                 });
                 
-                this.requestDataFromEnumMasters().subscribe(async (responseList) => {
+                this.requestDataFromEnumMasters().subscribe(async(responseList) => {
                   
                   this.enumResponseData = responseList[0]["enum_masters"];
                   if (this.enumResponseData.length != await length) {
@@ -142,7 +142,7 @@ export class syncProvider {
                         user_id: data.rows.item(i).user_id,
                         created_at: data.rows.item(i).created_at,
                         updated_at: data.rows.item(i).updated_at,
-                        delete: data.rows.item(i).delete
+                        delete1: data.rows.item(i).delete1
                       });
                     }
                     //await this.getEmergencyContacts(emergencyContacts); 
@@ -176,7 +176,7 @@ export class syncProvider {
                     await this.getHealthDetails(this.responseData2); 
                   }
                 },error=>{
-                  console.log(error,'healtherror')
+                  console.log(error,'healtherror');
                 })
                 
                 database.executeSql(`SELECT * FROM users`, []).then(async(data) => {
@@ -213,13 +213,12 @@ export class syncProvider {
     }
 
     async getEmergencyContacts(response){
-      this.getDatabase().then((database)=>{
+      this.getDatabase().then((database)=> {
         let sql1 = `DELETE FROM emergency_details`;
         database.executeSql(sql1,[]);
         for(let i in response){
             let data1 = [
                 response[i]["id"],
-                response[i]["emergency_id"],
                 response[i]["contact_name"],
                 response[i]["emergency_no"],
                 response[i]["user_type"],

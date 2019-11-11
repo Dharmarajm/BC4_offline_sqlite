@@ -1664,7 +1664,7 @@ let syncProvider = class syncProvider {
                                     user_id: data.rows.item(i).user_id,
                                     created_at: data.rows.item(i).created_at,
                                     updated_at: data.rows.item(i).updated_at,
-                                    delete: data.rows.item(i).delete
+                                    delete1: data.rows.item(i).delete1
                                 });
                             }
                             //await this.getEmergencyContacts(emergencyContacts); 
@@ -1735,7 +1735,6 @@ let syncProvider = class syncProvider {
                 for (let i in response) {
                     let data1 = [
                         response[i]["id"],
-                        response[i]["emergency_id"],
                         response[i]["contact_name"],
                         response[i]["emergency_no"],
                         response[i]["user_type"],

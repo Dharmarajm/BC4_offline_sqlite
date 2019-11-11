@@ -70,7 +70,12 @@ export class EditProfilePage implements OnInit {
    let localURL:any=null;
    if(this.editprofile['user_info']['user_picture']['url'] != null){
     let source = this.editprofile['user_info']['user_picture']['url']
-    globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);  
+    let gurl = source.includes("file:///");
+    if(gurl==true){
+      globalURL = this.webview.convertFileSrc(source);
+    }else{
+      globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);  
+    }
     //this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
    }else{
     //this.cdvFilePath1= null;
@@ -157,7 +162,7 @@ export class EditProfilePage implements OnInit {
          this.crop.crop(this.img, { quality: 100 })
           .then(newImage => {
             console.log(newImage)
-          this.cdvFilePath1=this.webview.convertFileSrc(newImage);
+          this.cdvFilePath1 = this.webview.convertFileSrc(newImage);
 
           //this.reduceImages(results).then(() => {});
           this.file.resolveLocalFilesystemUrl(newImage).then((fileEntry: FileEntry) => {
@@ -170,10 +175,19 @@ export class EditProfilePage implements OnInit {
               this.cdvFilePath = fileMeta['localURL'];
               console.log(this.cdvFilePath,'filepath')
               let source =  this.editprofile['user_info']['user_picture']['url'];
-              let userPicturedata = {
-                url: source,
-                localURL: newImage,
-                cdvFilePath: this.cdvFilePath
+              let userPicturedata:any;
+              if(source==null){
+                userPicturedata = {
+                  url: source,
+                  localURL: newImage,
+                  cdvFilePath: this.cdvFilePath
+                }
+              }else{
+                userPicturedata = {
+                  url: newImage,
+                  localURL: newImage,
+                  cdvFilePath: this.cdvFilePath
+                }
               }
               this.sample(userPicturedata);   
           })

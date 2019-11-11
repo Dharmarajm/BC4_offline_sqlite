@@ -184,7 +184,13 @@ let previewPage = class previewPage {
             let localURL = null;
             if (this.previewData['user']['user_picture']['url'] != null) {
                 let source = this.previewData['user']['user_picture']['url'];
-                globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                let gurl = source.includes("file:///");
+                if (gurl == true) {
+                    globalURL = this.webview.convertFileSrc(source);
+                }
+                else {
+                    globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                }
             }
             else {
                 let source = this.webview.convertFileSrc(this.previewData['user']['user_picture']['localURL']);

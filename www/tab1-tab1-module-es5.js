@@ -659,7 +659,13 @@ var Tab1Page = /** @class */ (function () {
             var localURL = null;
             if (_this.pic['user_info']['user_picture']['url'] != null) {
                 var source = _this.pic['user_info']['user_picture']['url'];
-                globalURL = _this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                var gurl = source.includes("file:///");
+                if (gurl == true) {
+                    globalURL = _this.webview.convertFileSrc(source);
+                }
+                else {
+                    globalURL = _this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                }
             }
             else {
                 var source = _this.webview.convertFileSrc(_this.pic['user_info']['user_picture']['localURL']);

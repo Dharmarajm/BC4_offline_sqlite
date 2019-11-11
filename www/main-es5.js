@@ -1700,7 +1700,7 @@ var syncProvider = /** @class */ (function () {
                                                 user_id: data.rows.item(i).user_id,
                                                 created_at: data.rows.item(i).created_at,
                                                 updated_at: data.rows.item(i).updated_at,
-                                                delete: data.rows.item(i).delete
+                                                delete1: data.rows.item(i).delete1
                                             });
                                         }
                                         return [3 /*break*/, 3];
@@ -1791,7 +1791,6 @@ var syncProvider = /** @class */ (function () {
                     for (var i in response) {
                         var data1 = [
                             response[i]["id"],
-                            response[i]["emergency_id"],
                             response[i]["contact_name"],
                             response[i]["emergency_no"],
                             response[i]["user_type"],

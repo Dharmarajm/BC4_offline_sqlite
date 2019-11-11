@@ -119,7 +119,13 @@ let EditProfilePage = class EditProfilePage {
         let localURL = null;
         if (this.editprofile['user_info']['user_picture']['url'] != null) {
             let source = this.editprofile['user_info']['user_picture']['url'];
-            globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+            let gurl = source.includes("file:///");
+            if (gurl == true) {
+                globalURL = this.webview.convertFileSrc(source);
+            }
+            else {
+                globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+            }
             //this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
         }
         else {
@@ -200,11 +206,21 @@ let EditProfilePage = class EditProfilePage {
                     this.cdvFilePath = fileMeta['localURL'];
                     console.log(this.cdvFilePath, 'filepath');
                     let source = this.editprofile['user_info']['user_picture']['url'];
-                    let userPicturedata = {
-                        url: source,
-                        localURL: newImage,
-                        cdvFilePath: this.cdvFilePath
-                    };
+                    let userPicturedata;
+                    if (source == null) {
+                        userPicturedata = {
+                            url: source,
+                            localURL: newImage,
+                            cdvFilePath: this.cdvFilePath
+                        };
+                    }
+                    else {
+                        userPicturedata = {
+                            url: newImage,
+                            localURL: newImage,
+                            cdvFilePath: this.cdvFilePath
+                        };
+                    }
                     this.sample(userPicturedata);
                 });
             }, error => console.error('Error cropping image', error));
@@ -589,7 +605,13 @@ let Tab3Page = class Tab3Page {
             let localURL = null;
             if (this.pic['user_info']['user_picture']['url'] != null) {
                 let source = this.pic['user_info']['user_picture']['url'];
-                globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                let gurl = source.includes("file:///");
+                if (gurl == true) {
+                    globalURL = this.webview.convertFileSrc(source);
+                }
+                else {
+                    globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                }
             }
             else {
                 let source = this.webview.convertFileSrc(this.pic['user_info']['user_picture']['localURL']);

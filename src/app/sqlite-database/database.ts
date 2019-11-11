@@ -51,14 +51,17 @@ export class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then(async (db: SQLiteObject) => {
-           let sqlTable1 = `CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)`;
+           let sqlTable1 = `CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`;
            await db.executeSql(sqlTable1, []);
+            // .then((res)=>{
+            //    console.log(res,'emergencysuccess')
+            // }).catch(err=>{console.log(err,'emergencyerror')});
            let sqlTable2 = `CREATE TABLE IF NOT EXISTS enum_masters(id INTEGER,name TEXT,category_name TEXT,created_at DATETIME,updated_at DATETIME)`;
            await db.executeSql(sqlTable2, []);
            
            let sqlTable4 = `CREATE TABLE IF NOT EXISTS health_details(id INTEGER,health_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,attribute_name_value TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME)`;
            await db.executeSql(sqlTable4, []);
-           let sqlTable5 = `CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)`;  //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
+           let sqlTable5 = `CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`;  //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
            await db.executeSql(sqlTable5, []);
            let sqlTable6 = `CREATE TABLE IF NOT EXISTS user_associations(id INTEGER,patient_id INTEGER,caregiver_id INTEGER,nick_name TEXT DEFAULT NULL,created_at DATETIME,updated_at DATETIME)`;
            await db.executeSql(sqlTable6, []);
@@ -68,11 +71,10 @@ export class DatabaseProvider {
              let sqlTableIndex = `CREATE INDEX IF NOT EXISTS event_index on events(event_type, event_datetime, created_at)`;
              await db.executeSql(sqlTableIndex, []);  
            });
-
         })
     }
 
-   async bootstrapTables(){
+    async bootstrapTables(){
         console.log('bootstrap')
         return this.sqlite.create({
             name: DATA_BASE_NAME,
@@ -249,7 +251,7 @@ export class DatabaseProvider {
     }
 
     deleteEmergencyContact(id){
-       return this.sqlite.create({
+        return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db: SQLiteObject) => { 
@@ -266,14 +268,14 @@ export class DatabaseProvider {
         return this.sqlite.create({
              name: DATA_BASE_NAME,
              location: 'default'
-         }).then((db: SQLiteObject) => { 
-           let sql = `UPDATE users SET delete = ? WHERE id = ?`;
+        }).then((db: SQLiteObject) => {
+           let sql = `UPDATE users SET delete1 = ? WHERE id = ?`;
            return db.executeSql(sql,[true,id]).then((row: any)=>{
-             return { event_id:row.insertId }
-          }).catch(res=>{
-             return res;
-          });
-         })
+            return { event_id:row.insertId }
+           }).catch(res=>{
+            return res;
+           });
+        })
      }
 
     async updateHealthData(data?,id?) {

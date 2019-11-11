@@ -119,7 +119,13 @@ var EditProfilePage = /** @class */ (function () {
         var localURL = null;
         if (this.editprofile['user_info']['user_picture']['url'] != null) {
             var source = this.editprofile['user_info']['user_picture']['url'];
-            globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+            var gurl = source.includes("file:///");
+            if (gurl == true) {
+                globalURL = this.webview.convertFileSrc(source);
+            }
+            else {
+                globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+            }
             //this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
         }
         else {
@@ -202,11 +208,21 @@ var EditProfilePage = /** @class */ (function () {
                     _this.cdvFilePath = fileMeta['localURL'];
                     console.log(_this.cdvFilePath, 'filepath');
                     var source = _this.editprofile['user_info']['user_picture']['url'];
-                    var userPicturedata = {
-                        url: source,
-                        localURL: newImage,
-                        cdvFilePath: _this.cdvFilePath
-                    };
+                    var userPicturedata;
+                    if (source == null) {
+                        userPicturedata = {
+                            url: source,
+                            localURL: newImage,
+                            cdvFilePath: _this.cdvFilePath
+                        };
+                    }
+                    else {
+                        userPicturedata = {
+                            url: newImage,
+                            localURL: newImage,
+                            cdvFilePath: _this.cdvFilePath
+                        };
+                    }
                     _this.sample(userPicturedata);
                 });
             }, function (error) { return console.error('Error cropping image', error); });
@@ -612,7 +628,13 @@ var Tab3Page = /** @class */ (function () {
             var localURL = null;
             if (_this.pic['user_info']['user_picture']['url'] != null) {
                 var source = _this.pic['user_info']['user_picture']['url'];
-                globalURL = _this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                var gurl = source.includes("file:///");
+                if (gurl == true) {
+                    globalURL = _this.webview.convertFileSrc(source);
+                }
+                else {
+                    globalURL = _this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                }
             }
             else {
                 var source = _this.webview.convertFileSrc(_this.pic['user_info']['user_picture']['localURL']);

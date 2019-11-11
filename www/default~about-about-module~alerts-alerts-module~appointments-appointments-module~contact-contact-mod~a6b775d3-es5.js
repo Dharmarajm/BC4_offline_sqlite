@@ -262,7 +262,7 @@ var DatabaseProvider = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sqlTable1 = "CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)";
+                        sqlTable1 = "CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)";
                         return [4 /*yield*/, db.executeSql(sqlTable1, [])];
                     case 1:
                         _a.sent();
@@ -274,7 +274,7 @@ var DatabaseProvider = /** @class */ (function () {
                         return [4 /*yield*/, db.executeSql(sqlTable4, [])];
                     case 3:
                         _a.sent();
-                        sqlTable5 = "CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete BOOLEAN)";
+                        sqlTable5 = "CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)";
                         return [4 /*yield*/, db.executeSql(sqlTable5, [])];
                     case 4:
                         _a.sent();
@@ -592,7 +592,7 @@ var DatabaseProvider = /** @class */ (function () {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then(function (db) {
-            var sql = "UPDATE users SET delete = ? WHERE id = ?";
+            var sql = "UPDATE users SET delete1 = ? WHERE id = ?";
             return db.executeSql(sql, [true, id]).then(function (row) {
                 return { event_id: row.insertId };
             }).catch(function (res) {
