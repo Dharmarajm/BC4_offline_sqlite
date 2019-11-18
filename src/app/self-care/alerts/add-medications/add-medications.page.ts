@@ -9,7 +9,6 @@ import { File, FileEntry, IFile } from '@ionic-native/file/ngx';
 import { DomSanitizer} from '@angular/platform-browser';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { AlertController } from '@ionic/angular';
-import { environment } from '../../../../environments/environment'
 import { Validators, FormBuilder, FormGroup, FormControl  } from '@angular/forms';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';

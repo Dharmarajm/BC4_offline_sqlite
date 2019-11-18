@@ -203,7 +203,8 @@ sample(event_id){
          }
       },error=>{
         console.log('alert')
-      })    }
+      })    
+    }
 
   }
   

@@ -12,6 +12,8 @@ import { Network } from '@ionic-native/network/ngx';
 // import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { NetworkService } from './network-connectivity/network-service';
+import { from, Observable, forkJoin  } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,7 @@ export class AppComponent {
   public counter = 0;
   routesubscribe:any;
     constructor(
+    public http: HttpClient,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
@@ -43,6 +46,11 @@ export class AppComponent {
   } 
 
   ngOnInit() {
+    let id = localStorage.getItem("user_id");
+    let getUsersID = { "user_id": [id,23] }
+    this.getAllEventsList(getUsersID).subscribe((responseList)=>{
+      console.log(responseList)
+     })
   }
 
   initializeApp() {
@@ -122,6 +130,11 @@ export class AppComponent {
  }
 
   ngOnDestroy() {
+ }
+
+ getAllEventsList(getUsersID){
+  let response1 = this.http.get(`events/event_list?user_id=`+getUsersID["user_id"]);
+  return forkJoin([response1]);
  }
 
 

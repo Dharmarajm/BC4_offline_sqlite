@@ -29,6 +29,7 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { NetworkService } from './network-connectivity/network-service';
 import { syncProvider } from './sync/sync';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 //import { SwapDirectivesModule } from './swap.directive.module';
 //import { SwapDirective } from './swap.directive';
 //import * as Hammer from 'hammerjs';
@@ -78,6 +79,7 @@ import { syncProvider } from './sync/sync';
     Network,
     NetworkService,
     SQLite,
+    FileTransfer,
     syncProvider,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     // {provide: highchartsModules,

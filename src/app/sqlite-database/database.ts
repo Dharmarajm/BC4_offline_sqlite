@@ -65,7 +65,7 @@ export class DatabaseProvider {
            await db.executeSql(sqlTable5, []);
            let sqlTable6 = `CREATE TABLE IF NOT EXISTS user_associations(id INTEGER,patient_id INTEGER,caregiver_id INTEGER,nick_name TEXT DEFAULT NULL,created_at DATETIME,updated_at DATETIME)`;
            await db.executeSql(sqlTable6, []);
-           let sqlTable3 = `CREATE TABLE IF NOT EXISTS events(id INTEGER,event_id INTEGER PRIMARY KEY AUTOINCREMENT,event_name TEXT,description TEXT,value TEXT DEFAULT NULL,event_datetime INTEGER,event_type TEXT,event_category TEXT,event_assets TEXT DEFAULT NULL,event_options TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME,sync BOOLEAN)`;
+           let sqlTable3 = `CREATE TABLE IF NOT EXISTS events(id INTEGER,event_id INTEGER PRIMARY KEY AUTOINCREMENT,event_name TEXT,description TEXT,value TEXT DEFAULT NULL,event_datetime INTEGER,event_type TEXT,event_category TEXT,event_assets TEXT DEFAULT NULL,event_options TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`;
            await db.executeSql(sqlTable3, [])
            .then(async() =>{
              let sqlTableIndex = `CREATE INDEX IF NOT EXISTS event_index on events(event_type, event_datetime, created_at)`;
@@ -127,7 +127,7 @@ export class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db: SQLiteObject) => {
-            let sql = `UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, sync = ? WHERE event_id = ?`;
+            let sql = `UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?`;
             let updateEventData = [data["id"],data["event_name"],data["description"],data["value"],data["event_datetime"],data["event_type"],data["event_category"],data["event_assets"],JSON.stringify(data["event_options"]),user_id,data["created_at"],new Date().toJSON(),false,id]
             
             return db.executeSql(sql,updateEventData).then((row: any)=>{
@@ -154,17 +154,27 @@ export class DatabaseProvider {
         })
     }
 
-    deleteAnEvent(id){
+    deleteAnEvent(event){
        return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
-        }).then((db: SQLiteObject) => { 
-          let sql = `DELETE FROM events WHERE event_id = ?`;
-          return db.executeSql(sql,[id]).then((row: any)=>{
-            return { event_id:row.insertId }
-         }).catch(res=>{
-            return res;
-         });
+        }).then((db: SQLiteObject) => {
+          if(event["id"]==null){
+            let sql = `DELETE FROM events WHERE event_id = ?`;
+            return db.executeSql(sql,[event["event_id"]]).then((row: any)=>{
+              return { event_id:row.insertId }
+            }).catch(res=>{
+                return res;
+            });
+          }else{
+            let sql = `UPDATE events SET delete1 = ? WHERE event_id = ?`;
+            return db.executeSql(sql,[true,event["event_id"]]).then((row: any)=>{
+              return { event_id:row.insertId }
+            }).catch(res=>{
+                return res;
+            }); 
+          }   
+          
         })
     }
 

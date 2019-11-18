@@ -70,7 +70,7 @@ export interface events {
     event_assets:any;
     event_options:any;
     user_id:number;
-    sync: boolean;
+    delete1: boolean;
     created_at: Date;
     updated_at: Date;
 };

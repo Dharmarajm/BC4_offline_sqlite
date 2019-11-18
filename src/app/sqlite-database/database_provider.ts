@@ -57,7 +57,7 @@ export class DataBaseSummaryProvider {
                         event_assets:data.rows.item(i).event_assets,
                         event_options: event_json,
                         user_id:data.rows.item(i).user_id,
-                        sync:data.rows.item(i).sync,
+                        delete1:data.rows.item(i).delete1,
                         created_at: data.rows.item(i).created_at,
                         updated_at: data.rows.item(i).updated_at
                     });  
@@ -92,7 +92,7 @@ export class DataBaseSummaryProvider {
                         event_assets: data.rows.item(i).event_assets,
                         event_options: event_json,
                         user_id: data.rows.item(i).user_id,
-                        sync: data.rows.item(i).sync,
+                        delete1: data.rows.item(i).delete1,
                         created_at: data.rows.item(i).created_at,
                         updated_at: data.rows.item(i).updated_at
                     });  
@@ -177,7 +177,7 @@ export class DataBaseSummaryProvider {
                         event_assets: data.rows.item(i).event_assets,
                         event_options: event_json,
                         user_id: data.rows.item(i).user_id,
-                        sync: data.rows.item(i).sync,
+                        delete1: data.rows.item(i).delete1,
                         created_at: data.rows.item(i).created_at,
                         updated_at: data.rows.item(i).updated_at
                     });  
@@ -414,7 +414,7 @@ export class DataBaseSummaryProvider {
                         event_assets: data.rows.item(i).event_assets,
                         event_options: event_json,
                         user_id: data.rows.item(i).user_id,
-                        sync: data.rows.item(i).sync,
+                        delete1: data.rows.item(i).delete1,
                         created_at: data.rows.item(i).created_at,
                         updated_at: data.rows.item(i).updated_at
                     });  
