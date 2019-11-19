@@ -816,8 +816,12 @@ __webpack_require__.r(__webpack_exports__);
 // import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 
+//import { from, Observable, forkJoin  } from 'rxjs';
+//import { HttpClient } from '@angular/common/http';
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar, router, toastController, location, androidPermissions, 
+    function AppComponent(
+    //public http: HttpClient,
+    platform, splashScreen, statusBar, router, toastController, location, androidPermissions, 
     // private autostart: Autostart,
     screenOrientation, network, networkProvider, localNotifications
     // private keyboard: Keyboard
@@ -840,6 +844,11 @@ var AppComponent = /** @class */ (function () {
         this.statusBar.backgroundColorByHexString('#483df6');
     }
     AppComponent.prototype.ngOnInit = function () {
+        // let id = localStorage.getItem("user_id");
+        // let getUsersID = { "user_id": [id,23] }
+        // this.getAllEventsList(getUsersID).subscribe((responseList)=>{
+        //   console.log(responseList)
+        //  })
     };
     AppComponent.prototype.initializeApp = function () {
         var _this = this;
@@ -925,6 +934,10 @@ var AppComponent = /** @class */ (function () {
     };
     AppComponent.prototype.ngOnDestroy = function () {
     };
+    //  getAllEventsList(getUsersID){
+    //   let response1 = this.http.get(`events/event_list?user_id=`+getUsersID["user_id"]);
+    //   return forkJoin([response1]);
+    //  }
     AppComponent.prototype.initializeBackButtonCustomHandler = function () {
         var _this = this;
         this.platform.ready().then(function () {
@@ -1016,6 +1029,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
 /* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
 /* harmony import */ var _sync_sync__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./sync/sync */ "./src/app/sync/sync.ts");
+/* harmony import */ var _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @ionic-native/file-transfer/ngx */ "./node_modules/@ionic-native/file-transfer/ngx/index.js");
 
 
 
@@ -1033,6 +1047,7 @@ __webpack_require__.r(__webpack_exports__);
 //import * as drilldown from 'highcharts/modules/drilldown.src.js'
 // import more from 'highcharts/highcharts-more.src';
 // import exporting from 'highcharts/modules/exporting.src.js';
+
 
 
 
@@ -1093,6 +1108,7 @@ var AppModule = /** @class */ (function () {
                 _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_20__["Network"],
                 _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_21__["NetworkService"],
                 _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_19__["SQLite"],
+                _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_23__["FileTransfer"],
                 _sync_sync__WEBPACK_IMPORTED_MODULE_22__["syncProvider"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicRouteStrategy"] }
                 // {provide: highchartsModules,
@@ -1584,6 +1600,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sqlite_database_database_interface__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../sqlite-database/database.interface */ "./src/app/sqlite-database/database.interface.ts");
 /* harmony import */ var _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/sqlite/ngx */ "./node_modules/@ionic-native/sqlite/ngx/index.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/file-transfer/ngx */ "./node_modules/@ionic-native/file-transfer/ngx/index.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+
+
+
 
 
 
@@ -1600,7 +1622,9 @@ __webpack_require__.r(__webpack_exports__);
 */
 var DATA_BASE_NAME = 'BCared4.db';
 var syncProvider = /** @class */ (function () {
-    function syncProvider(http, sqlite, platform, network) {
+    function syncProvider(sanitizer, transfer, http, sqlite, platform, network) {
+        this.sanitizer = sanitizer;
+        this.transfer = transfer;
         this.http = http;
         this.sqlite = sqlite;
         this.platform = platform;
@@ -1613,8 +1637,91 @@ var syncProvider = /** @class */ (function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 this.ready = this.platform.ready()
-                    .then(function () { return _this.getTotalEnumMasters(); })
-                    .then(function () { return _this.awaitAllUsersTableData(); });
+                    // .then(() => this.getTotalEnumMasters())
+                    // .then(() => this.awaitAllUsersTableData())
+                    .then(function () { return _this.updateImageDeletion(); })
+                    .then(function () {
+                    _this.getTotalEnumMasters();
+                    _this.getAllEvents();
+                    _this.awaitAllUsersTableData();
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
+    syncProvider.prototype.updateImageDeletion = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var sqlEventQuery;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                sqlEventQuery = "SELECT * FROM events WHERE (event_type='alert_medication' AND event_type='report' AND event_type='prescription' AND delete1='false')";
+                this.getDatabase().then(function (database) {
+                    database.executeSql(sqlEventQuery, []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                        var _loop_1, this_1, i;
+                        var _this = this;
+                        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    _loop_1 = function (i) {
+                                        var event_json, eventAssetsJson, index, i_1, event_id, user_id, params;
+                                        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                            switch (_a.label) {
+                                                case 0:
+                                                    event_json = null;
+                                                    eventAssetsJson = null;
+                                                    if (data.rows.item(i).skills != '') {
+                                                        event_json = JSON.parse(data.rows.item(i).event_options);
+                                                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                                                    }
+                                                    index = [];
+                                                    for (i_1 in event_json['localImagePath']) {
+                                                        if (event_json['localImagePath'][i_1]['delete'] == 'true') {
+                                                            index.push(i_1);
+                                                        }
+                                                    }
+                                                    event_id = data.rows.item(i).event_id;
+                                                    if (!(index.length > 0)) return [3 /*break*/, 2];
+                                                    return [4 /*yield*/, this_1.getuserID()];
+                                                case 1:
+                                                    user_id = _a.sent();
+                                                    params = { "index": index, "id": user_id };
+                                                    this_1.deleteEventImages(params).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                                        var j, sql, createEventData;
+                                                        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                            console.log(responseList);
+                                                            for (j in index) {
+                                                                event_json['localImagePath'].splice(index[i], 1);
+                                                                eventAssetsJson.splice(index[i], 1);
+                                                            }
+                                                            sql = "UPDATE events SET event_options = ?, event_assets = ? WHERE event_id = ?";
+                                                            createEventData = [JSON.stringify(event_json), JSON.stringify(eventAssetsJson), event_id];
+                                                            this.commonUpdateAndDeleteEvent(sql, createEventData);
+                                                            return [2 /*return*/];
+                                                        });
+                                                    }); }, function (err) {
+                                                    });
+                                                    _a.label = 2;
+                                                case 2: return [2 /*return*/];
+                                            }
+                                        });
+                                    };
+                                    this_1 = this;
+                                    i = 0;
+                                    _a.label = 1;
+                                case 1:
+                                    if (!(i < data.rows.length)) return [3 /*break*/, 4];
+                                    return [5 /*yield**/, _loop_1(i)];
+                                case 2:
+                                    _a.sent();
+                                    _a.label = 3;
+                                case 3:
+                                    i++;
+                                    return [3 /*break*/, 1];
+                                case 4: return [2 /*return*/];
+                            }
+                        });
+                    }); });
+                });
                 return [2 /*return*/];
             });
         });
@@ -1667,6 +1774,115 @@ var syncProvider = /** @class */ (function () {
             });
         });
     };
+    syncProvider.prototype.getAllEvents = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var getUserIds;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getUserIdForEvents()];
+                    case 1:
+                        getUserIds = _a.sent();
+                        this.getDatabase().then(function (database) {
+                            _this.getAllEventsList(getUserIds).subscribe(function (responseList) {
+                                console.log(responseList);
+                                _this.allEvents = responseList[0]['events'];
+                                database.executeSql("SELECT * FROM events", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                    var length, _loop_2, this_2, i, sql, _a, _b, _i, i, event_optionsURI, event_assets_URI, setGlobalURI, createEventData;
+                                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
+                                        switch (_c.label) {
+                                            case 0:
+                                                length = data.rows.length;
+                                                if (!(length > 0)) return [3 /*break*/, 1];
+                                                console.log('if');
+                                                _loop_2 = function (i) {
+                                                    var rowData = data.rows.item(i);
+                                                    if (data.rows.item(i).id == null) {
+                                                        this_2.createSingleEventData(rowData);
+                                                    }
+                                                    else {
+                                                        if (data.rows.item(i).delete1 == 'true') {
+                                                            this_2.deleteSingleEventData(rowData);
+                                                        }
+                                                        else {
+                                                            var findindex = this_2.allEvents.indexOf(function (res) { return res.id == data.rows.item(i).id; });
+                                                            var sql = "UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?";
+                                                            if (findindex != -1 && this_2.allEvents[findindex]['updated_at'] > data.rows.item(i).updated_at) {
+                                                                var createEventData = [this_2.allEvents[findindex]["id"], this_2.allEvents[findindex]["event_name"], this_2.allEvents[findindex]["description"], this_2.allEvents[findindex]["value"], this_2.allEvents[findindex]["event_datetime"], this_2.allEvents[findindex]["event_type"], this_2.allEvents[findindex]["event_category"], JSON.stringify(this_2.allEvents[findindex]["event_assets"]), JSON.stringify(this_2.allEvents[findindex]["event_options"]), this_2.allEvents[findindex]["user_id"], this_2.allEvents[findindex]["created_at"], this_2.allEvents[findindex]["updated_at"], false, rowData['event_id']];
+                                                                //database.executeSql(sql, createEventData)
+                                                                this_2.commonUpdateAndDeleteEvent(sql, createEventData);
+                                                            }
+                                                            else if (findindex != -1 && this_2.allEvents[findindex]['updated_at'] < data.rows.item(i).updated_at) {
+                                                                this_2.updateSingleEventData(rowData);
+                                                            }
+                                                        }
+                                                    }
+                                                };
+                                                this_2 = this;
+                                                for (i = 0; i < data.rows.length; i++) {
+                                                    _loop_2(i);
+                                                }
+                                                return [3 /*break*/, 5];
+                                            case 1:
+                                                console.log('else');
+                                                sql = "INSERT INTO events VALUES (?,NULL,?,?,?,?,?,?,?,?,?,?,?,?)";
+                                                _a = [];
+                                                for (_b in this.allEvents)
+                                                    _a.push(_b);
+                                                _i = 0;
+                                                _c.label = 2;
+                                            case 2:
+                                                if (!(_i < _a.length)) return [3 /*break*/, 5];
+                                                i = _a[_i];
+                                                console.log(this.allEvents[i]);
+                                                event_optionsURI = this.allEvents[i]["event_options"];
+                                                event_assets_URI = this.allEvents[i]["event_assets"];
+                                                return [4 /*yield*/, this.getLocalAssets(event_optionsURI, event_assets_URI)];
+                                            case 3:
+                                                setGlobalURI = _c.sent();
+                                                if (setGlobalURI.length > 0) {
+                                                    event_optionsURI["localImagePath"] = setGlobalURI;
+                                                }
+                                                createEventData = [this.allEvents[i]["id"], this.allEvents[i]["event_name"], this.allEvents[i]["description"], this.allEvents[i]["value"], this.allEvents[i]["event_datetime"], this.allEvents[i]["event_type"], this.allEvents[i]["event_category"], JSON.stringify(this.allEvents[i]["event_assets"]), JSON.stringify(event_optionsURI), this.allEvents[i]["user_id"], this.allEvents[i]["created_at"], this.allEvents[i]["updated_at"], false];
+                                                //database.executeSql(sql, createEventData)
+                                                this.commonUpdateAndDeleteEvent(sql, createEventData);
+                                                _c.label = 4;
+                                            case 4:
+                                                _i++;
+                                                return [3 /*break*/, 2];
+                                            case 5: return [2 /*return*/];
+                                        }
+                                    });
+                                }); });
+                            });
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    syncProvider.prototype.getLocalAssets = function (events_options, events_assets) {
+        var localAssets = events_options;
+        console.log(localAssets);
+        var globalassets = events_assets;
+        console.log(globalassets);
+        var getGlobalURIs = [];
+        console.log(globalassets.length > 0);
+        if (globalassets.length > 0 && localAssets != null) {
+            for (var i in localAssets["localImagePath"]) {
+                var mapUrl = { "localURI": localAssets["localImagePath"][i]["localURI"], "globalURI": null, "cdvFilePath": localAssets["localImagePath"][i]["cdvFilePath"], "fileName": localAssets["localImagePath"][i]["fileName"], "delete": localAssets["localImagePath"][i]["delete"] };
+                if (globalassets != null) {
+                    if (globalassets.length > i) {
+                        var globeURL = this.environment + globalassets[i]["url"];
+                        mapUrl["globalURI"] = this.sanitizer.bypassSecurityTrustResourceUrl(globeURL);
+                    }
+                }
+                getGlobalURIs.push(mapUrl);
+            }
+            return getGlobalURIs;
+        }
+        return getGlobalURIs;
+    };
     syncProvider.prototype.awaitAllUsersTableData = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
@@ -1683,65 +1899,88 @@ var syncProvider = /** @class */ (function () {
                         console.log(responseList);
                         localStorage.setItem("qrcode", _this.responseData5);
                         database.executeSql("SELECT * FROM emergency_details", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                            var length, emergencyContacts, i;
+                            var length, i, rowData;
                             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        length = data.rows.length;
-                                        console.log(length);
-                                        if (!(length > 0)) return [3 /*break*/, 1];
-                                        emergencyContacts = [];
-                                        for (i = 0; i < data.rows.length; i++) {
-                                            emergencyContacts.push({
-                                                id: data.rows.item(i).id,
-                                                contact_name: data.rows.item(i).contact_name,
-                                                emergency_no: data.rows.item(i).emergency_no,
-                                                user_type: data.rows.item(i).user_type,
-                                                user_id: data.rows.item(i).user_id,
-                                                created_at: data.rows.item(i).created_at,
-                                                updated_at: data.rows.item(i).updated_at,
-                                                delete1: data.rows.item(i).delete1
-                                            });
+                                length = data.rows.length;
+                                console.log(length);
+                                if (length > 0) {
+                                    //let emergencyContacts = [];
+                                    for (i = 0; i < data.rows.length; i++) {
+                                        rowData = data.rows.item(i);
+                                        if (data.rows.item(i).id == null) {
+                                            this.updateSingleEmergencyDetail(rowData);
                                         }
-                                        return [3 /*break*/, 3];
-                                    case 1: return [4 /*yield*/, this.getEmergencyContacts(this.responseData1)];
-                                    case 2:
-                                        _a.sent();
-                                        _a.label = 3;
-                                    case 3: return [2 /*return*/];
+                                        else {
+                                            if (data.rows.item(i).delete1 == 'true') {
+                                                this.deleteSingleEmergencyDetail(rowData);
+                                            }
+                                            else {
+                                                // let index = this.responseData1.findIndex(res=>res.id==data.rows.item(i).id);
+                                                // console.log(index);
+                                                // if(data.rows.item(i).updated_at>this.responseData1[index]['updated_at']){
+                                                // }   
+                                            }
+                                        }
+                                        // emergencyContacts.push({
+                                        //   id: data.rows.item(i).id,
+                                        //   contact_name: data.rows.item(i).contact_name,
+                                        //   emergency_no: data.rows.item(i).emergency_no,
+                                        //   user_type: data.rows.item(i).user_type,
+                                        //   user_id: data.rows.item(i).user_id,
+                                        //   created_at: data.rows.item(i).created_at,
+                                        //   updated_at: data.rows.item(i).updated_at,
+                                        //   delete1: data.rows.item(i).delete1
+                                        // });
+                                    }
+                                    //await this.getEmergencyContacts(emergencyContacts); 
                                 }
+                                else {
+                                    this.getEmergencyContacts(this.responseData1);
+                                }
+                                return [2 /*return*/];
                             });
                         }); }, function (error) {
                             console.log(error, 'emergencyerror');
                         });
                         database.executeSql("SELECT * FROM health_details", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                            var length, healthData, i, attribute_json;
+                            var length, healthData, _loop_3, this_3, i;
                             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        length = data.rows.length;
-                                        console.log(length);
-                                        if (!(length > 0)) return [3 /*break*/, 1];
-                                        healthData = [];
-                                        for (i = 0; i < data.rows.length; i++) {
-                                            attribute_json = JSON.parse(data.rows.item(i).attribute_name_value);
-                                            healthData.push({
-                                                id: data.rows.item(i).id,
-                                                health_id: data.rows.item(i).health_id,
-                                                name: data.rows.item(i).name,
-                                                attribute_name_value: attribute_json,
-                                                user_id: data.rows.item(i).user_id,
-                                                created_at: data.rows.item(i).created_at,
-                                                updated_at: data.rows.item(i).updated_at,
-                                            });
+                                length = data.rows.length;
+                                console.log(length);
+                                if (length > 0) {
+                                    healthData = [];
+                                    _loop_3 = function (i) {
+                                        var rowData = data.rows.item(i);
+                                        // let attribute_json = JSON.parse(data.rows.item(i).attribute_name_value);
+                                        // healthData.push({
+                                        //   id: data.rows.item(i).id,
+                                        //   health_id: data.rows.item(i).health_id,
+                                        //   name: data.rows.item(i).name,
+                                        //   attribute_name_value: attribute_json,
+                                        //   user_id: data.rows.item(i).user_id,
+                                        //   created_at: data.rows.item(i).created_at,
+                                        //   updated_at: data.rows.item(i).updated_at,
+                                        // });
+                                        if (data.rows.item(i).id == null) {
+                                            this_3.updateSingleHealthDetail(rowData);
                                         }
-                                        return [3 /*break*/, 3];
-                                    case 1: return [4 /*yield*/, this.getHealthDetails(this.responseData2)];
-                                    case 2:
-                                        _a.sent();
-                                        _a.label = 3;
-                                    case 3: return [2 /*return*/];
+                                        else {
+                                            var index = this_3.responseData2.findIndex(function (res) { return res.id == data.rows.item(i).id; });
+                                            console.log(index);
+                                            if (data.rows.item(i).updated_at > this_3.responseData2[index]['updated_at']) {
+                                            }
+                                        }
+                                    };
+                                    this_3 = this;
+                                    for (i = 0; i < data.rows.length; i++) {
+                                        _loop_3(i);
+                                    }
+                                    //await this.getHealthDetails(healthData);      
                                 }
+                                else {
+                                    this.getHealthDetails(this.responseData2);
+                                }
+                                return [2 /*return*/];
                             });
                         }); }, function (error) {
                             console.log(error, 'healtherror');
@@ -1749,18 +1988,14 @@ var syncProvider = /** @class */ (function () {
                         database.executeSql("SELECT * FROM users", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
                             var length;
                             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        length = data.rows.length;
-                                        console.log(length);
-                                        if (!(length > 0)) return [3 /*break*/, 1];
-                                        return [3 /*break*/, 3];
-                                    case 1: return [4 /*yield*/, this.getUsersData(this.responseData3)];
-                                    case 2:
-                                        _a.sent();
-                                        _a.label = 3;
-                                    case 3: return [2 /*return*/];
+                                length = data.rows.length;
+                                console.log(length);
+                                if (length > 0) {
                                 }
+                                else {
+                                    this.getUsersData(this.responseData3);
+                                }
+                                return [2 /*return*/];
                             });
                         }); }, function (error) {
                             console.log(error, 'userserror');
@@ -1906,7 +2141,249 @@ var syncProvider = /** @class */ (function () {
         // Observable.forkJoin (RxJS 5) changes to just forkJoin() in RxJS 6
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
     };
+    syncProvider.prototype.updateSingleEmergencyDetail = function (rowData) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var data;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                data = { "contact_name": rowData["contact_name"], "emergency_no": rowData["emergency_no"], "user_type": rowData["user_type"] };
+                this.insertEmergencyData(data).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var response, sql, createEventData;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        response = responseList[0];
+                        sql = "UPDATE emergency_details SET id = ?, created_at = ?, updated_at = ? WHERE emergency_id = ?";
+                        createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["emergency_id"]];
+                        this.commonUpdateAndDeleteEvent(sql, createEventData);
+                        return [2 /*return*/];
+                    });
+                }); });
+                return [2 /*return*/];
+            });
+        });
+    };
+    syncProvider.prototype.deleteSingleEmergencyDetail = function (rowData) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.deleteEmergencyData(rowData["id"]).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var sql, createEventData;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        sql = "DELETE FROM emergency_details WHERE emergency_id = ?";
+                        createEventData = [rowData["emergency_id"]];
+                        this.commonUpdateAndDeleteEvent(sql, createEventData);
+                        return [2 /*return*/];
+                    });
+                }); });
+                return [2 /*return*/];
+            });
+        });
+    };
+    syncProvider.prototype.insertEmergencyData = function (data) {
+        var response1 = this.http.post("emergency_details", data);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+    };
+    syncProvider.prototype.deleteEmergencyData = function (id) {
+        var response1 = this.http.delete("emergency_details/" + id);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+    };
+    syncProvider.prototype.updateSingleHealthDetail = function (rowData) {
+        var _this = this;
+        var data = { "contact_name": rowData["contact_name"], "emergency_no": rowData["emergency_no"], "user_type": rowData["user_type"] };
+        this.insertEmergencyData(data).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+            var response, sql, createEventData;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                response = responseList[0];
+                sql = "UPDATE emergency_details SET id = ?, created_at = ?, updated_at = ? WHERE emergency_id = ?";
+                createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["emergency_id"]];
+                this.commonUpdateAndDeleteEvent(sql, createEventData);
+                return [2 /*return*/];
+            });
+        }); });
+    };
+    syncProvider.prototype.commonUpdateAndDeleteEvent = function (sql, updateEventData) {
+        return this.sqlite.create({
+            name: DATA_BASE_NAME,
+            location: 'default'
+        }).then(function (db) {
+            return db.executeSql(sql, updateEventData).then(function (row) {
+                return { event_id: row.insertId };
+            }).catch(function (res) {
+                return res;
+            });
+        });
+    };
+    syncProvider.prototype.createSingleEventData = function (rowData) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var data;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"] };
+                this.insertEventData(data).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var response, sql, createEventData;
+                    var _this = this;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        response = responseList[0]['event'];
+                        sql = "UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?";
+                        createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["event_id"]];
+                        this.commonUpdateAndDeleteEvent(sql, createEventData).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                            var localImagePath, _a, _b, _i, i, uploadStatus, updateEventOptions, sql_1, createEventData_1;
+                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
+                                switch (_c.label) {
+                                    case 0:
+                                        console.log(rowData["event_options"]);
+                                        if (!(res["event_id"] != undefined && rowData["event_options"]["localImagePath"] != undefined && rowData["event_options"]["localImagePath"] != null)) return [3 /*break*/, 4];
+                                        localImagePath = rowData["event_options"]["localImagePath"];
+                                        _a = [];
+                                        for (_b in localImagePath)
+                                            _a.push(_b);
+                                        _i = 0;
+                                        _c.label = 1;
+                                    case 1:
+                                        if (!(_i < _a.length)) return [3 /*break*/, 4];
+                                        i = _a[_i];
+                                        if (!(localImagePath[i]["globalURI"] != null)) return [3 /*break*/, 3];
+                                        return [4 /*yield*/, this.uploadImage(localImagePath[i], response["id"])];
+                                    case 2:
+                                        uploadStatus = _c.sent();
+                                        if (uploadStatus["status"] == true) {
+                                            updateEventOptions = rowData["event_options"];
+                                            updateEventOptions["localImagePath"][i]["globalURI"] = uploadStatus["url"];
+                                            sql_1 = "UPDATE events SET event_options = ? WHERE event_id = ?";
+                                            createEventData_1 = [sql_1, [JSON.stringify(updateEventOptions), res["event_id"]]];
+                                            this.commonUpdateAndDeleteEvent(sql_1, createEventData_1);
+                                        }
+                                        _c.label = 3;
+                                    case 3:
+                                        _i++;
+                                        return [3 /*break*/, 1];
+                                    case 4: return [2 /*return*/];
+                                }
+                            });
+                        }); });
+                        return [2 /*return*/];
+                    });
+                }); });
+                return [2 /*return*/];
+            });
+        });
+    };
+    syncProvider.prototype.updateSingleEventData = function (rowData) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var data;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"] };
+                this.updateEventData(rowData["id"], data).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var response, sql, createEventData;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        response = responseList[0]['event'];
+                        sql = "UPDATE events SET created_at = ?, updated_at = ? WHERE event_id = ?";
+                        createEventData = [response["created_at"], response["updated_at"], rowData["event_id"]];
+                        this.commonUpdateAndDeleteEvent(sql, createEventData);
+                        return [2 /*return*/];
+                    });
+                }); });
+                return [2 /*return*/];
+            });
+        });
+    };
+    syncProvider.prototype.deleteSingleEventData = function (rowData) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.deleteEventData(rowData["id"]).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var sql, createEventData;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        sql = "DELETE FROM events WHERE event_id = ?";
+                        createEventData = [rowData["event_id"]];
+                        this.commonUpdateAndDeleteEvent(sql, createEventData);
+                        return [2 /*return*/];
+                    });
+                }); });
+                return [2 /*return*/];
+            });
+        });
+    };
+    syncProvider.prototype.insertEventData = function (data) {
+        var response1 = this.http.post("events", data);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+    };
+    syncProvider.prototype.updateEventData = function (id, record) {
+        var response1 = this.http.put("events/" + id, record);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+    };
+    syncProvider.prototype.deleteEventData = function (id) {
+        var response1 = this.http.delete("events/" + id);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+    };
+    syncProvider.prototype.uploadImage = function (localfile, event_id) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var fileTransfer, data, options, getUrl;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                fileTransfer = this.transfer.create();
+                data = { "id": event_id };
+                options = {
+                    fileKey: 'event_assets',
+                    fileName: localfile["fileName"],
+                    mimeType: 'multipart/form-data',
+                    params: data,
+                    chunkedMode: false,
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
+                };
+                fileTransfer.upload(localfile["cdvFilePath"], _environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl + 'events/update_image', options).then(function (res) {
+                    getUrl = res["response"];
+                    return { url: getUrl, status: true };
+                }, function (error) {
+                    return { url: getUrl, status: false };
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
+    syncProvider.prototype.getAllEventsList = function (Ids) {
+        var response1 = this.http.get("events/event_list?user_id=" + Ids);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+    };
+    syncProvider.prototype.getPatientsList = function () {
+        var response1 = this.http.get("users/patient_list");
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+    };
+    syncProvider.prototype.deleteEventImages = function (data) {
+        var response1 = this.http.post("events/delete_image", data);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+    };
+    syncProvider.prototype.getUserIdForEvents = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var user_id;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        user_id = null;
+                        if (!(localStorage.getItem("role_id") == '1')) return [3 /*break*/, 1];
+                        user_id = localStorage.getItem("user_id");
+                        return [2 /*return*/, user_id];
+                    case 1: return [4 /*yield*/, this.getUserIdFromCareGiver()];
+                    case 2:
+                        user_id = _a.sent();
+                        return [2 /*return*/, user_id];
+                }
+            });
+        });
+    };
+    syncProvider.prototype.getUserIdFromCareGiver = function () {
+        var _this = this;
+        return this.getPatientsList().subscribe(function (responseList) {
+            _this.patientList = responseList;
+            var userIds = [];
+            for (var i in _this.patientList['patient']) {
+                userIds.push(_this.patientList['patient'][i]['id']);
+            }
+            return userIds;
+        });
+    };
     syncProvider.ctorParameters = function () { return [
+        { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__["DomSanitizer"] },
+        { type: _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_8__["FileTransfer"] },
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
         { type: _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_6__["SQLite"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
@@ -1914,7 +2391,7 @@ var syncProvider = /** @class */ (function () {
     ]; };
     syncProvider = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_6__["SQLite"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_4__["NetworkService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__["DomSanitizer"], _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_8__["FileTransfer"], _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_6__["SQLite"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_4__["NetworkService"]])
     ], syncProvider);
     return syncProvider;
 }());

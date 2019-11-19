@@ -50,26 +50,26 @@ export class DatabaseProvider {
         return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
-        }).then(async (db: SQLiteObject) => {
+        }).then((db: SQLiteObject) => {
            let sqlTable1 = `CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`;
-           await db.executeSql(sqlTable1, []);
+           db.executeSql(sqlTable1, []);
             // .then((res)=>{
             //    console.log(res,'emergencysuccess')
             // }).catch(err=>{console.log(err,'emergencyerror')});
            let sqlTable2 = `CREATE TABLE IF NOT EXISTS enum_masters(id INTEGER,name TEXT,category_name TEXT,created_at DATETIME,updated_at DATETIME)`;
-           await db.executeSql(sqlTable2, []);
+           db.executeSql(sqlTable2, []);
            
            let sqlTable4 = `CREATE TABLE IF NOT EXISTS health_details(id INTEGER,health_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,attribute_name_value TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME)`;
-           await db.executeSql(sqlTable4, []);
+           db.executeSql(sqlTable4, []);
            let sqlTable5 = `CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`;  //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
-           await db.executeSql(sqlTable5, []);
+           db.executeSql(sqlTable5, []);
            let sqlTable6 = `CREATE TABLE IF NOT EXISTS user_associations(id INTEGER,patient_id INTEGER,caregiver_id INTEGER,nick_name TEXT DEFAULT NULL,created_at DATETIME,updated_at DATETIME)`;
-           await db.executeSql(sqlTable6, []);
+           db.executeSql(sqlTable6, []);
            let sqlTable3 = `CREATE TABLE IF NOT EXISTS events(id INTEGER,event_id INTEGER PRIMARY KEY AUTOINCREMENT,event_name TEXT,description TEXT,value TEXT DEFAULT NULL,event_datetime INTEGER,event_type TEXT,event_category TEXT,event_assets TEXT DEFAULT NULL,event_options TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`;
-           await db.executeSql(sqlTable3, [])
-           .then(async() =>{
+           db.executeSql(sqlTable3, [])
+           .then(() =>{
              let sqlTableIndex = `CREATE INDEX IF NOT EXISTS event_index on events(event_type, event_datetime, created_at)`;
-             await db.executeSql(sqlTableIndex, []);  
+             db.executeSql(sqlTableIndex, []);  
            });
         })
     }
@@ -193,7 +193,7 @@ export class DatabaseProvider {
          let sql = `UPDATE users SET age = ?, blood_group = ? WHERE id = ? AND role_id = ?`;
          let updateUserData = [user_data['age'],user_data['blood_group'],user_id,1];
          await db.executeSql(sql,updateUserData);
-         await db.executeSql(`SELECT * FROM health_details WHERE name='${policy_data['name']}'`,[]).then(async(data)=>{
+         await db.executeSql(`SELECT * FROM health_details WHERE name='${policy_data['name']}'`,[]).then((data)=>{
            console.log(data)
             if(data.rows.length>0){
              let id = data.rows.item(0).health_id;
@@ -216,10 +216,10 @@ export class DatabaseProvider {
         return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
-        }).then(async(db: SQLiteObject) => {
+        }).then((db: SQLiteObject) => {
             let sql = `UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ? AND role_id = ?`;
             let updateUserData = [data['name'],data['email'],data['mobile_no'],user_id,1];
-            await db.executeSql(sql,updateUserData).then((row: any)=>{
+            db.executeSql(sql,updateUserData).then((row: any)=>{
                 return { event_id:row.insertId }
              }).catch(res=>{
                 return res;
@@ -294,7 +294,7 @@ export class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db: SQLiteObject) => {
-            return db.executeSql(`SELECT * FROM health_details WHERE name='${data['name']}'`,[]).then(async(getData)=>{
+            return db.executeSql(`SELECT * FROM health_details WHERE name='${data['name']}'`,[]).then((getData)=>{
               let sqlQuery:any;
               let healthData:any;
               console.log(data)

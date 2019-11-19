@@ -38,7 +38,7 @@ export class ViewReportPage implements OnInit {
    console.log(this.environment);
    this.route.queryParams.subscribe(params => {
    
-      this.view_all_image=[];
+      
       // if (params && params.viewReport) {
       //   this.data = JSON.parse(params.viewReport);
       //   this.view_all_image = this.data.event_assets;
@@ -46,6 +46,7 @@ export class ViewReportPage implements OnInit {
       // }
 
       if (params && params.viewReport) {
+        this.view_all_image=[];
         this.data = JSON.parse(params.viewReport);
         let localAssets = this.data["event_options"];
         let globalassets = this.data["event_assets"];

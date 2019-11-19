@@ -62,8 +62,12 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                     var events = [];
                                     for (var i = 0; i < data.rows.length; i++) {
                                         var event_json = null;
-                                        if (data.rows.item(i).skills != '') {
+                                        var eventAssetsJson = null;
+                                        if (data.rows.item(i).event_options != null) {
                                             event_json = JSON.parse(data.rows.item(i).event_options);
+                                        }
+                                        if (data.rows.item(i).event_assets != null) {
+                                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                                         }
                                         events.push({
                                             id: data.rows.item(i).id,
@@ -74,10 +78,10 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                             event_datetime: data.rows.item(i).event_datetime,
                                             event_type: data.rows.item(i).event_type,
                                             event_category: data.rows.item(i).event_category,
-                                            event_assets: data.rows.item(i).event_assets,
+                                            event_assets: eventAssetsJson,
                                             event_options: event_json,
                                             user_id: data.rows.item(i).user_id,
-                                            sync: data.rows.item(i).sync,
+                                            delete1: data.rows.item(i).delete1,
                                             created_at: data.rows.item(i).created_at,
                                             updated_at: data.rows.item(i).updated_at
                                         });
@@ -104,8 +108,12 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                     var events = [];
                                     for (var i = 0; i < data.rows.length; i++) {
                                         var event_json = null;
-                                        if (data.rows.item(i).skills != '') {
+                                        var eventAssetsJson = null;
+                                        if (data.rows.item(i).event_options != null) {
                                             event_json = JSON.parse(data.rows.item(i).event_options);
+                                        }
+                                        if (data.rows.item(i).event_assets != null) {
+                                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                                         }
                                         events.push({
                                             id: data.rows.item(i).id,
@@ -116,10 +124,10 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                             event_datetime: data.rows.item(i).event_datetime,
                                             event_type: data.rows.item(i).event_type,
                                             event_category: data.rows.item(i).event_category,
-                                            event_assets: data.rows.item(i).event_assets,
+                                            event_assets: eventAssetsJson,
                                             event_options: event_json,
                                             user_id: data.rows.item(i).user_id,
-                                            sync: data.rows.item(i).sync,
+                                            delete1: data.rows.item(i).delete1,
                                             created_at: data.rows.item(i).created_at,
                                             updated_at: data.rows.item(i).updated_at
                                         });
@@ -136,32 +144,32 @@ var DataBaseSummaryProvider = /** @class */ (function () {
         var eventQuery;
         //let nowDate = new Date().toJSON()
         if (event == 'appointment' && tab == 'New') {
-            return eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
+            return eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
         }
         else if (event == 'appointment' && tab == 'history') {
-            return eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)<DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
+            return eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
         }
         else if (event == 'health_diary' || event == 'doc_visit') {
-            return eventQuery = " WHERE event_type='" + event + "' ORDER BY created_at DESC LIMIT 10 OFFSET " + offset;
+            return eventQuery = " WHERE (event_type='" + event + "' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET " + offset;
         }
         else {
-            return eventQuery = " WHERE event_type='" + event + "' ORDER BY event_datetime DESC LIMIT 10 OFFSET " + offset;
+            return eventQuery = " WHERE (event_type='" + event + "' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET " + offset;
         }
     };
     DataBaseSummaryProvider.prototype.checkEventTypeSearch = function (event, search, type, offset) {
         var eventSearchQuery;
         //let nowDate = new Date().toJSON()
         if (event == 'appointment' && type == 'New') {
-            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
+            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
         }
         else if (event == 'appointment' && type == 'history') {
-            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND DATETIME(event_datetime)<DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
+            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
         }
         else if (event == 'health_diary' || event == 'doc_visit') {
-            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND event_type='" + event + "' ORDER BY created_at DESC LIMIT 10 OFFSET " + offset;
+            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET " + offset;
         }
         else {
-            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND event_type='" + event + "' ORDER BY event_datetime DESC LIMIT 10 OFFSET " + offset;
+            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET " + offset;
         }
     };
     DataBaseSummaryProvider.prototype.getEnumMasters = function (name) {
@@ -178,14 +186,18 @@ var DataBaseSummaryProvider = /** @class */ (function () {
         });
     };
     DataBaseSummaryProvider.prototype.diaryRecordFilter = function (data) {
-        var sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + (" WHERE (created_at BETWEEN DATE('" + data["from_date"] + "') AND DATE('" + data["end_date"] + "','+1 DAY')) AND event_type='" + data["event_type"] + "' ORDER BY created_at DESC LIMIT 10 OFFSET 0");
+        var sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + (" WHERE (created_at BETWEEN DATE('" + data["from_date"] + "') AND DATE('" + data["end_date"] + "','+1 DAY')) AND (event_type='" + data["event_type"] + "' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET 0");
         return this.databaseService.getDatabase().then(function (database) {
             return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
                 var events = [];
+                var eventAssetsJson = null;
                 for (var i = 0; i < data.rows.length; i++) {
                     var event_json = null;
-                    if (data.rows.item(i).skills != '') {
+                    if (data.rows.item(i).event_options != null) {
                         event_json = JSON.parse(data.rows.item(i).event_options);
+                    }
+                    if (data.rows.item(i).event_assets != null) {
+                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                     }
                     events.push({
                         id: data.rows.item(i).id,
@@ -196,10 +208,10 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                         event_datetime: data.rows.item(i).event_datetime,
                         event_type: data.rows.item(i).event_type,
                         event_category: data.rows.item(i).event_category,
-                        event_assets: data.rows.item(i).event_assets,
+                        event_assets: eventAssetsJson,
                         event_options: event_json,
                         user_id: data.rows.item(i).user_id,
-                        sync: data.rows.item(i).sync,
+                        delete1: data.rows.item(i).delete1,
                         created_at: data.rows.item(i).created_at,
                         updated_at: data.rows.item(i).updated_at
                     });
@@ -212,7 +224,6 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     DataBaseSummaryProvider.prototype.getAboutData = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var user_id, getQRcode, sqlHealthQuery, sqlUserQuery;
-            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.databaseService.getuserID()];
@@ -223,62 +234,52 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                         getQRcode = _a.sent();
                         sqlHealthQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_HEALTH_DETAILS"] + " WHERE name='policy'";
                         sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE id=" + user_id + " AND role_id=1");
-                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var healthData, userData;
-                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0:
-                                            healthData = [];
-                                            userData = [];
-                                            return [4 /*yield*/, database.executeSql(sqlHealthQuery, []).then(function (data1) {
-                                                    for (var i = 0; i < data1.rows.length; i++) {
-                                                        var event_json = null;
-                                                        if (data1.rows.item(i).attribute_name_value != '') {
-                                                            event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
-                                                        }
-                                                        healthData.push({
-                                                            id: data1.rows.item(i).id,
-                                                            health_id: data1.rows.item(i).health_id,
-                                                            name: data1.rows.item(i).name,
-                                                            attribute_name_value: event_json,
-                                                            user_id: data1.rows.item(i).user_id,
-                                                            created_at: data1.rows.item(i).created_at,
-                                                            updated_at: data1.rows.item(i).updated_at
-                                                        });
-                                                    }
-                                                })];
-                                        case 1:
-                                            _a.sent();
-                                            return [4 /*yield*/, database.executeSql(sqlUserQuery, []).then(function (data2) {
-                                                    for (var i = 0; i < data2.rows.length; i++) {
-                                                        var attribute_json = JSON.parse(data2.rows.item(i).user_picture);
-                                                        userData.push({
-                                                            id: data2.rows.item(i).id,
-                                                            name: data2.rows.item(i).name,
-                                                            email: data2.rows.item(i).email,
-                                                            password: data2.rows.item(i).password,
-                                                            mobile_no: data2.rows.item(i).mobile_no,
-                                                            address: data2.rows.item(i).address,
-                                                            country: data2.rows.item(i).country,
-                                                            blood_group: data2.rows.item(i).blood_group,
-                                                            age: data2.rows.item(i).age,
-                                                            user_uid: data2.rows.item(i).user_uid,
-                                                            forgot_password_code: data2.rows.item(i).forgot_password_code,
-                                                            user_picture: attribute_json,
-                                                            active_status: data2.rows.item(i).active_status,
-                                                            role_id: data2.rows.item(i).role_id,
-                                                            created_at: data2.rows.item(i).created_at,
-                                                            updated_at: data2.rows.item(i).updated_at,
-                                                            delete1: data2.rows.item(i).delete1
-                                                        });
-                                                    }
-                                                })];
-                                        case 2:
-                                            _a.sent();
-                                            return [2 /*return*/, { policies: healthData, user_info: userData[0], qrcode_image: getQRcode }];
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
+                                var healthData = [];
+                                var userData = [];
+                                database.executeSql(sqlHealthQuery, []).then(function (data1) {
+                                    for (var i = 0; i < data1.rows.length; i++) {
+                                        var event_json = null;
+                                        if (data1.rows.item(i).attribute_name_value != '') {
+                                            event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
+                                        }
+                                        healthData.push({
+                                            id: data1.rows.item(i).id,
+                                            health_id: data1.rows.item(i).health_id,
+                                            name: data1.rows.item(i).name,
+                                            attribute_name_value: event_json,
+                                            user_id: data1.rows.item(i).user_id,
+                                            created_at: data1.rows.item(i).created_at,
+                                            updated_at: data1.rows.item(i).updated_at
+                                        });
                                     }
                                 });
-                            }); })];
+                                database.executeSql(sqlUserQuery, []).then(function (data2) {
+                                    for (var i = 0; i < data2.rows.length; i++) {
+                                        var attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                        userData.push({
+                                            id: data2.rows.item(i).id,
+                                            name: data2.rows.item(i).name,
+                                            email: data2.rows.item(i).email,
+                                            password: data2.rows.item(i).password,
+                                            mobile_no: data2.rows.item(i).mobile_no,
+                                            address: data2.rows.item(i).address,
+                                            country: data2.rows.item(i).country,
+                                            blood_group: data2.rows.item(i).blood_group,
+                                            age: data2.rows.item(i).age,
+                                            user_uid: data2.rows.item(i).user_uid,
+                                            forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                            user_picture: attribute_json,
+                                            active_status: data2.rows.item(i).active_status,
+                                            role_id: data2.rows.item(i).role_id,
+                                            created_at: data2.rows.item(i).created_at,
+                                            updated_at: data2.rows.item(i).updated_at,
+                                            delete1: data2.rows.item(i).delete1
+                                        });
+                                    }
+                                });
+                                return { policies: healthData, user_info: userData[0], qrcode_image: getQRcode };
+                            })];
                 }
             });
         });
@@ -286,96 +287,82 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     DataBaseSummaryProvider.prototype.getHealthDeatails = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var sqlHealthQuery;
-            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 sqlHealthQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_HEALTH_DETAILS"] + " WHERE name='health'";
-                return [2 /*return*/, this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                            return [2 /*return*/, database.executeSql(sqlHealthQuery, []).then(function (data) {
-                                    var healthData = [];
-                                    for (var i = 0; i < data.rows.length; i++) {
-                                        var event_json = null;
-                                        if (data.rows.item(i).attribute_name_value != '') {
-                                            event_json = JSON.parse(data.rows.item(i).attribute_name_value);
-                                        }
-                                        healthData.push({
-                                            id: data.rows.item(i).id,
-                                            health_id: data.rows.item(i).health_id,
-                                            name: data.rows.item(i).name,
-                                            attribute_name_value: event_json,
-                                            user_id: data.rows.item(i).user_id,
-                                            created_at: data.rows.item(i).created_at,
-                                            updated_at: data.rows.item(i).updated_at
-                                        });
-                                    }
-                                    return { health_detail: healthData };
-                                })];
+                return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
+                        return database.executeSql(sqlHealthQuery, []).then(function (data) {
+                            var healthData = [];
+                            for (var i = 0; i < data.rows.length; i++) {
+                                var event_json = null;
+                                if (data.rows.item(i).attribute_name_value != '') {
+                                    event_json = JSON.parse(data.rows.item(i).attribute_name_value);
+                                }
+                                healthData.push({
+                                    id: data.rows.item(i).id,
+                                    health_id: data.rows.item(i).health_id,
+                                    name: data.rows.item(i).name,
+                                    attribute_name_value: event_json,
+                                    user_id: data.rows.item(i).user_id,
+                                    created_at: data.rows.item(i).created_at,
+                                    updated_at: data.rows.item(i).updated_at
+                                });
+                            }
+                            return { health_detail: healthData };
                         });
-                    }); })];
+                    })];
             });
         });
     };
     DataBaseSummaryProvider.prototype.getEmergencyDeatails = function () {
-        var _this = this;
         var sqlEmergeQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EMERGENCY_DATA"];
         var sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + " WHERE (role_id=2 AND delete1='false')";
         console.log(sqlUsersQuery);
-        return this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-            var emergencyContacts, careGiverData;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        emergencyContacts = [];
-                        careGiverData = [];
-                        return [4 /*yield*/, database.executeSql(sqlEmergeQuery, []).then(function (data) {
-                                for (var i = 0; i < data.rows.length; i++) {
-                                    emergencyContacts.push({
-                                        id: data.rows.item(i).id,
-                                        emergency_id: data.rows.item(i).emergency_id,
-                                        contact_name: data.rows.item(i).contact_name,
-                                        emergency_no: data.rows.item(i).emergency_no,
-                                        user_type: data.rows.item(i).user_type,
-                                        user_id: data.rows.item(i).user_id,
-                                        created_at: data.rows.item(i).created_at,
-                                        updated_at: data.rows.item(i).updated_at,
-                                        delete1: data.rows.item(i).delete1
-                                    });
-                                }
-                            })];
-                    case 1:
-                        _a.sent();
-                        return [4 /*yield*/, database.executeSql(sqlUsersQuery, []).then(function (data1) {
-                                for (var i = 0; i < data1.rows.length; i++) {
-                                    if (data1.rows.item(i).email != null) {
-                                        var attribute_json = JSON.parse(data1.rows.item(i).user_picture);
-                                        careGiverData.push({
-                                            id: data1.rows.item(i).id,
-                                            name: data1.rows.item(i).name,
-                                            email: data1.rows.item(i).email,
-                                            password: data1.rows.item(i).password,
-                                            mobile_no: data1.rows.item(i).mobile_no,
-                                            address: data1.rows.item(i).address,
-                                            country: data1.rows.item(i).country,
-                                            blood_group: data1.rows.item(i).blood_group,
-                                            age: data1.rows.item(i).age,
-                                            user_uid: data1.rows.item(i).user_uid,
-                                            forgot_password_code: data1.rows.item(i).forgot_password_code,
-                                            user_picture: attribute_json,
-                                            active_status: data1.rows.item(i).active_status,
-                                            role_id: data1.rows.item(i).role_id,
-                                            created_at: data1.rows.item(i).created_at,
-                                            updated_at: data1.rows.item(i).updated_at,
-                                            delete1: data1.rows.item(i).delete1
-                                        });
-                                    }
-                                }
-                            })];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/, { caregiver_count: careGiverData.length, caregivers: careGiverData, emergency_contact_count: emergencyContacts.length, emergency_detail: emergencyContacts }];
+        return this.databaseService.getDatabase().then(function (database) {
+            var emergencyContacts = [];
+            var careGiverData = [];
+            database.executeSql(sqlEmergeQuery, []).then(function (data) {
+                for (var i = 0; i < data.rows.length; i++) {
+                    emergencyContacts.push({
+                        id: data.rows.item(i).id,
+                        emergency_id: data.rows.item(i).emergency_id,
+                        contact_name: data.rows.item(i).contact_name,
+                        emergency_no: data.rows.item(i).emergency_no,
+                        user_type: data.rows.item(i).user_type,
+                        user_id: data.rows.item(i).user_id,
+                        created_at: data.rows.item(i).created_at,
+                        updated_at: data.rows.item(i).updated_at,
+                        delete1: data.rows.item(i).delete1
+                    });
                 }
             });
-        }); });
+            database.executeSql(sqlUsersQuery, []).then(function (data1) {
+                for (var i = 0; i < data1.rows.length; i++) {
+                    if (data1.rows.item(i).email != null) {
+                        var attribute_json = JSON.parse(data1.rows.item(i).user_picture);
+                        careGiverData.push({
+                            id: data1.rows.item(i).id,
+                            name: data1.rows.item(i).name,
+                            email: data1.rows.item(i).email,
+                            password: data1.rows.item(i).password,
+                            mobile_no: data1.rows.item(i).mobile_no,
+                            address: data1.rows.item(i).address,
+                            country: data1.rows.item(i).country,
+                            blood_group: data1.rows.item(i).blood_group,
+                            age: data1.rows.item(i).age,
+                            user_uid: data1.rows.item(i).user_uid,
+                            forgot_password_code: data1.rows.item(i).forgot_password_code,
+                            user_picture: attribute_json,
+                            active_status: data1.rows.item(i).active_status,
+                            role_id: data1.rows.item(i).role_id,
+                            created_at: data1.rows.item(i).created_at,
+                            updated_at: data1.rows.item(i).updated_at,
+                            delete1: data1.rows.item(i).delete1
+                        });
+                    }
+                }
+            });
+            return { caregiver_count: careGiverData.length, caregivers: careGiverData, emergency_contact_count: emergencyContacts.length, emergency_detail: emergencyContacts };
+        });
     };
     DataBaseSummaryProvider.prototype.getAllUserPreviewData = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -411,49 +398,40 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     DataBaseSummaryProvider.prototype.getPatients = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var user_id, sqlUserQuery;
-            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.databaseService.getuserID()];
                     case 1:
                         user_id = _a.sent();
                         sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE id=" + user_id + " AND role_id=1");
-                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var userData;
-                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0:
-                                            userData = [];
-                                            return [4 /*yield*/, database.executeSql(sqlUserQuery, []).then(function (data2) {
-                                                    for (var i = 0; i < data2.rows.length; i++) {
-                                                        var attribute_json = JSON.parse(data2.rows.item(i).user_picture);
-                                                        userData.push({
-                                                            id: data2.rows.item(i).id,
-                                                            name: data2.rows.item(i).name,
-                                                            email: data2.rows.item(i).email,
-                                                            password: data2.rows.item(i).password,
-                                                            mobile_no: data2.rows.item(i).mobile_no,
-                                                            address: data2.rows.item(i).address,
-                                                            country: data2.rows.item(i).country,
-                                                            blood_group: data2.rows.item(i).blood_group,
-                                                            age: data2.rows.item(i).age,
-                                                            user_uid: data2.rows.item(i).user_uid,
-                                                            forgot_password_code: data2.rows.item(i).forgot_password_code,
-                                                            user_picture: attribute_json,
-                                                            active_status: data2.rows.item(i).active_status,
-                                                            role_id: data2.rows.item(i).role_id,
-                                                            created_at: data2.rows.item(i).created_at,
-                                                            updated_at: data2.rows.item(i).updated_at,
-                                                            delete1: data2.rows.item(i).delete1
-                                                        });
-                                                    }
-                                                })];
-                                        case 1:
-                                            _a.sent();
-                                            return [2 /*return*/, { patients: userData }];
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
+                                var userData = [];
+                                database.executeSql(sqlUserQuery, []).then(function (data2) {
+                                    for (var i = 0; i < data2.rows.length; i++) {
+                                        var attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                        userData.push({
+                                            id: data2.rows.item(i).id,
+                                            name: data2.rows.item(i).name,
+                                            email: data2.rows.item(i).email,
+                                            password: data2.rows.item(i).password,
+                                            mobile_no: data2.rows.item(i).mobile_no,
+                                            address: data2.rows.item(i).address,
+                                            country: data2.rows.item(i).country,
+                                            blood_group: data2.rows.item(i).blood_group,
+                                            age: data2.rows.item(i).age,
+                                            user_uid: data2.rows.item(i).user_uid,
+                                            forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                            user_picture: attribute_json,
+                                            active_status: data2.rows.item(i).active_status,
+                                            role_id: data2.rows.item(i).role_id,
+                                            created_at: data2.rows.item(i).created_at,
+                                            updated_at: data2.rows.item(i).updated_at,
+                                            delete1: data2.rows.item(i).delete1
+                                        });
                                     }
                                 });
-                            }); })];
+                                return { patients: userData };
+                            })];
                 }
             });
         });
@@ -481,15 +459,19 @@ var DataBaseSummaryProvider = /** @class */ (function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var eventQuery, sqlSearchEventQuery;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now')) ORDER BY event_datetime ASC LIMIT 4 OFFSET 0";
+                eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 4 OFFSET 0";
                 sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + eventQuery;
                 return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
                         return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
                             var events = [];
                             for (var i = 0; i < data.rows.length; i++) {
                                 var event_json = null;
-                                if (data.rows.item(i).skills != '') {
+                                var eventAssetsJson = null;
+                                if (data.rows.item(i).event_options != null) {
                                     event_json = JSON.parse(data.rows.item(i).event_options);
+                                }
+                                if (data.rows.item(i).event_assets != null) {
+                                    eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                                 }
                                 events.push({
                                     id: data.rows.item(i).id,
@@ -500,10 +482,10 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                     event_datetime: data.rows.item(i).event_datetime,
                                     event_type: data.rows.item(i).event_type,
                                     event_category: data.rows.item(i).event_category,
-                                    event_assets: data.rows.item(i).event_assets,
+                                    event_assets: eventAssetsJson,
                                     event_options: event_json,
                                     user_id: data.rows.item(i).user_id,
-                                    sync: data.rows.item(i).sync,
+                                    delete1: data.rows.item(i).delete1,
                                     created_at: data.rows.item(i).created_at,
                                     updated_at: data.rows.item(i).updated_at
                                 });

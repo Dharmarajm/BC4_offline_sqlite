@@ -255,24 +255,24 @@ let DatabaseProvider = class DatabaseProvider {
             location: 'default'
         }).then((db) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let sqlTable1 = `CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`;
-            yield db.executeSql(sqlTable1, []);
+            db.executeSql(sqlTable1, []);
             // .then((res)=>{
             //    console.log(res,'emergencysuccess')
             // }).catch(err=>{console.log(err,'emergencyerror')});
             let sqlTable2 = `CREATE TABLE IF NOT EXISTS enum_masters(id INTEGER,name TEXT,category_name TEXT,created_at DATETIME,updated_at DATETIME)`;
-            yield db.executeSql(sqlTable2, []);
+            db.executeSql(sqlTable2, []);
             let sqlTable4 = `CREATE TABLE IF NOT EXISTS health_details(id INTEGER,health_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,attribute_name_value TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME)`;
-            yield db.executeSql(sqlTable4, []);
+            db.executeSql(sqlTable4, []);
             let sqlTable5 = `CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`; //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
-            yield db.executeSql(sqlTable5, []);
+            db.executeSql(sqlTable5, []);
             let sqlTable6 = `CREATE TABLE IF NOT EXISTS user_associations(id INTEGER,patient_id INTEGER,caregiver_id INTEGER,nick_name TEXT DEFAULT NULL,created_at DATETIME,updated_at DATETIME)`;
-            yield db.executeSql(sqlTable6, []);
-            let sqlTable3 = `CREATE TABLE IF NOT EXISTS events(id INTEGER,event_id INTEGER PRIMARY KEY AUTOINCREMENT,event_name TEXT,description TEXT,value TEXT DEFAULT NULL,event_datetime INTEGER,event_type TEXT,event_category TEXT,event_assets TEXT DEFAULT NULL,event_options TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME,sync BOOLEAN)`;
-            yield db.executeSql(sqlTable3, [])
-                .then(() => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            db.executeSql(sqlTable6, []);
+            let sqlTable3 = `CREATE TABLE IF NOT EXISTS events(id INTEGER,event_id INTEGER PRIMARY KEY AUTOINCREMENT,event_name TEXT,description TEXT,value TEXT DEFAULT NULL,event_datetime INTEGER,event_type TEXT,event_category TEXT,event_assets TEXT DEFAULT NULL,event_options TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`;
+            db.executeSql(sqlTable3, [])
+                .then(() => {
                 let sqlTableIndex = `CREATE INDEX IF NOT EXISTS event_index on events(event_type, event_datetime, created_at)`;
-                yield db.executeSql(sqlTableIndex, []);
-            }));
+                db.executeSql(sqlTableIndex, []);
+            });
         }));
     }
     bootstrapTables() {
@@ -330,7 +330,7 @@ let DatabaseProvider = class DatabaseProvider {
                 name: DATA_BASE_NAME,
                 location: 'default'
             }).then((db) => {
-                let sql = `UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, sync = ? WHERE event_id = ?`;
+                let sql = `UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?`;
                 let updateEventData = [data["id"], data["event_name"], data["description"], data["value"], data["event_datetime"], data["event_type"], data["event_category"], data["event_assets"], JSON.stringify(data["event_options"]), user_id, data["created_at"], new Date().toJSON(), false, id];
                 return db.executeSql(sql, updateEventData).then((row) => {
                     return { event_id: row.insertId };
@@ -356,17 +356,27 @@ let DatabaseProvider = class DatabaseProvider {
             });
         });
     }
-    deleteAnEvent(id) {
+    deleteAnEvent(event) {
         return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db) => {
-            let sql = `DELETE FROM events WHERE event_id = ?`;
-            return db.executeSql(sql, [id]).then((row) => {
-                return { event_id: row.insertId };
-            }).catch(res => {
-                return res;
-            });
+            if (event["id"] == null) {
+                let sql = `DELETE FROM events WHERE event_id = ?`;
+                return db.executeSql(sql, [event["event_id"]]).then((row) => {
+                    return { event_id: row.insertId };
+                }).catch(res => {
+                    return res;
+                });
+            }
+            else {
+                let sql = `UPDATE events SET delete1 = ? WHERE event_id = ?`;
+                return db.executeSql(sql, [true, event["event_id"]]).then((row) => {
+                    return { event_id: row.insertId };
+                }).catch(res => {
+                    return res;
+                });
+            }
         });
     }
     updateUserAndPolicyData(data) {
@@ -412,7 +422,7 @@ let DatabaseProvider = class DatabaseProvider {
             }).then((db) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                 let sql = `UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ? AND role_id = ?`;
                 let updateUserData = [data['name'], data['email'], data['mobile_no'], user_id, 1];
-                yield db.executeSql(sql, updateUserData).then((row) => {
+                db.executeSql(sql, updateUserData).then((row) => {
                     return { event_id: row.insertId };
                 }).catch(res => {
                     return res;

@@ -57,8 +57,12 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     let events = [];
                     for (let i = 0; i < data.rows.length; i++) {
                         let event_json = null;
-                        if (data.rows.item(i).skills != '') {
+                        let eventAssetsJson = null;
+                        if (data.rows.item(i).event_options != null) {
                             event_json = JSON.parse(data.rows.item(i).event_options);
+                        }
+                        if (data.rows.item(i).event_assets != null) {
+                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                         }
                         events.push({
                             id: data.rows.item(i).id,
@@ -69,10 +73,10 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                             event_datetime: data.rows.item(i).event_datetime,
                             event_type: data.rows.item(i).event_type,
                             event_category: data.rows.item(i).event_category,
-                            event_assets: data.rows.item(i).event_assets,
+                            event_assets: eventAssetsJson,
                             event_options: event_json,
                             user_id: data.rows.item(i).user_id,
-                            sync: data.rows.item(i).sync,
+                            delete1: data.rows.item(i).delete1,
                             created_at: data.rows.item(i).created_at,
                             updated_at: data.rows.item(i).updated_at
                         });
@@ -92,8 +96,12 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     let events = [];
                     for (let i = 0; i < data.rows.length; i++) {
                         let event_json = null;
-                        if (data.rows.item(i).skills != '') {
+                        let eventAssetsJson = null;
+                        if (data.rows.item(i).event_options != null) {
                             event_json = JSON.parse(data.rows.item(i).event_options);
+                        }
+                        if (data.rows.item(i).event_assets != null) {
+                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                         }
                         events.push({
                             id: data.rows.item(i).id,
@@ -104,10 +112,10 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                             event_datetime: data.rows.item(i).event_datetime,
                             event_type: data.rows.item(i).event_type,
                             event_category: data.rows.item(i).event_category,
-                            event_assets: data.rows.item(i).event_assets,
+                            event_assets: eventAssetsJson,
                             event_options: event_json,
                             user_id: data.rows.item(i).user_id,
-                            sync: data.rows.item(i).sync,
+                            delete1: data.rows.item(i).delete1,
                             created_at: data.rows.item(i).created_at,
                             updated_at: data.rows.item(i).updated_at
                         });
@@ -122,32 +130,32 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         let eventQuery;
         //let nowDate = new Date().toJSON()
         if (event == 'appointment' && tab == 'New') {
-            return eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
+            return eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
         }
         else if (event == 'appointment' && tab == 'history') {
-            return eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
+            return eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
         }
         else if (event == 'health_diary' || event == 'doc_visit') {
-            return eventQuery = ` WHERE event_type='${event}' ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`;
+            return eventQuery = ` WHERE (event_type='${event}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`;
         }
         else {
-            return eventQuery = ` WHERE event_type='${event}' ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`;
+            return eventQuery = ` WHERE (event_type='${event}' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`;
         }
     }
     checkEventTypeSearch(event, search, type, offset) {
         let eventSearchQuery;
         //let nowDate = new Date().toJSON()
         if (event == 'appointment' && type == 'New') {
-            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
+            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
         }
         else if (event == 'appointment' && type == 'history') {
-            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
+            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
         }
         else if (event == 'health_diary' || event == 'doc_visit') {
-            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND event_type='${event}' ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`;
+            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`;
         }
         else {
-            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND event_type='${event}' ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`;
+            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`;
         }
     }
     getEnumMasters(name) {
@@ -164,14 +172,18 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         });
     }
     diaryRecordFilter(data) {
-        let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (created_at BETWEEN DATE('${data["from_date"]}') AND DATE('${data["end_date"]}','+1 DAY')) AND event_type='${data["event_type"]}' ORDER BY created_at DESC LIMIT 10 OFFSET 0`;
+        let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (created_at BETWEEN DATE('${data["from_date"]}') AND DATE('${data["end_date"]}','+1 DAY')) AND (event_type='${data["event_type"]}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET 0`;
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
                 let events = [];
+                let eventAssetsJson = null;
                 for (let i = 0; i < data.rows.length; i++) {
                     let event_json = null;
-                    if (data.rows.item(i).skills != '') {
+                    if (data.rows.item(i).event_options != null) {
                         event_json = JSON.parse(data.rows.item(i).event_options);
+                    }
+                    if (data.rows.item(i).event_assets != null) {
+                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                     }
                     events.push({
                         id: data.rows.item(i).id,
@@ -182,10 +194,10 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                         event_datetime: data.rows.item(i).event_datetime,
                         event_type: data.rows.item(i).event_type,
                         event_category: data.rows.item(i).event_category,
-                        event_assets: data.rows.item(i).event_assets,
+                        event_assets: eventAssetsJson,
                         event_options: event_json,
                         user_id: data.rows.item(i).user_id,
-                        sync: data.rows.item(i).sync,
+                        delete1: data.rows.item(i).delete1,
                         created_at: data.rows.item(i).created_at,
                         updated_at: data.rows.item(i).updated_at
                     });
@@ -204,7 +216,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                 let healthData = [];
                 let userData = [];
-                yield database.executeSql(sqlHealthQuery, []).then((data1) => {
+                database.executeSql(sqlHealthQuery, []).then((data1) => {
                     for (let i = 0; i < data1.rows.length; i++) {
                         let event_json = null;
                         if (data1.rows.item(i).attribute_name_value != '') {
@@ -221,7 +233,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                         });
                     }
                 });
-                yield database.executeSql(sqlUserQuery, []).then((data2) => {
+                database.executeSql(sqlUserQuery, []).then((data2) => {
                     for (let i = 0; i < data2.rows.length; i++) {
                         let attribute_json = JSON.parse(data2.rows.item(i).user_picture);
                         userData.push({
@@ -283,7 +295,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let emergencyContacts = [];
             let careGiverData = [];
-            yield database.executeSql(sqlEmergeQuery, []).then((data) => {
+            database.executeSql(sqlEmergeQuery, []).then((data) => {
                 for (let i = 0; i < data.rows.length; i++) {
                     emergencyContacts.push({
                         id: data.rows.item(i).id,
@@ -298,7 +310,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     });
                 }
             });
-            yield database.executeSql(sqlUsersQuery, []).then((data1) => {
+            database.executeSql(sqlUsersQuery, []).then((data1) => {
                 for (let i = 0; i < data1.rows.length; i++) {
                     if (data1.rows.item(i).email != null) {
                         let attribute_json = JSON.parse(data1.rows.item(i).user_picture);
@@ -355,7 +367,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             let sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE id=${user_id} AND role_id=1`;
             return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                 let userData = [];
-                yield database.executeSql(sqlUserQuery, []).then((data2) => {
+                database.executeSql(sqlUserQuery, []).then((data2) => {
                     for (let i = 0; i < data2.rows.length; i++) {
                         let attribute_json = JSON.parse(data2.rows.item(i).user_picture);
                         userData.push({
@@ -393,15 +405,19 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     }
     getRecentAppointments(event) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            let eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now')) ORDER BY event_datetime ASC LIMIT 4 OFFSET 0`;
+            let eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 4 OFFSET 0`;
             let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + eventQuery;
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {
                     let events = [];
                     for (let i = 0; i < data.rows.length; i++) {
                         let event_json = null;
-                        if (data.rows.item(i).skills != '') {
+                        let eventAssetsJson = null;
+                        if (data.rows.item(i).event_options != null) {
                             event_json = JSON.parse(data.rows.item(i).event_options);
+                        }
+                        if (data.rows.item(i).event_assets != null) {
+                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                         }
                         events.push({
                             id: data.rows.item(i).id,
@@ -412,10 +428,10 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                             event_datetime: data.rows.item(i).event_datetime,
                             event_type: data.rows.item(i).event_type,
                             event_category: data.rows.item(i).event_category,
-                            event_assets: data.rows.item(i).event_assets,
+                            event_assets: eventAssetsJson,
                             event_options: event_json,
                             user_id: data.rows.item(i).user_id,
-                            sync: data.rows.item(i).sync,
+                            delete1: data.rows.item(i).delete1,
                             created_at: data.rows.item(i).created_at,
                             updated_at: data.rows.item(i).updated_at
                         });

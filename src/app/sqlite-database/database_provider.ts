@@ -42,8 +42,12 @@ export class DataBaseSummaryProvider {
                 
                 for (let i = 0; i < data.rows.length; i++) {
                     let event_json:any = null;
-                    if (data.rows.item(i).skills != '') {
+                    let eventAssetsJson:any = null;
+                    if (data.rows.item(i).event_options != null) {
                         event_json = JSON.parse(data.rows.item(i).event_options);
+                    }
+                    if (data.rows.item(i).event_assets != null) {
+                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                     }
                     events.push({
                         id: data.rows.item(i).id,
@@ -54,7 +58,7 @@ export class DataBaseSummaryProvider {
                         event_datetime: data.rows.item(i).event_datetime,
                         event_type: data.rows.item(i).event_type,
                         event_category: data.rows.item(i).event_category,
-                        event_assets:data.rows.item(i).event_assets,
+                        event_assets: eventAssetsJson,
                         event_options: event_json,
                         user_id:data.rows.item(i).user_id,
                         delete1:data.rows.item(i).delete1,
@@ -77,8 +81,12 @@ export class DataBaseSummaryProvider {
                 
                 for (let i = 0; i < data.rows.length; i++) {
                     let event_json:any = null;
-                    if (data.rows.item(i).skills != '') {
+                    let eventAssetsJson:any = null;
+                    if (data.rows.item(i).event_options != null) {
                         event_json = JSON.parse(data.rows.item(i).event_options);
+                    }
+                    if (data.rows.item(i).event_assets != null) {
+                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                     }
                     events.push({
                         id: data.rows.item(i).id,
@@ -89,7 +97,7 @@ export class DataBaseSummaryProvider {
                         event_datetime: data.rows.item(i).event_datetime,
                         event_type: data.rows.item(i).event_type,
                         event_category: data.rows.item(i).event_category,
-                        event_assets: data.rows.item(i).event_assets,
+                        event_assets: eventAssetsJson,
                         event_options: event_json,
                         user_id: data.rows.item(i).user_id,
                         delete1: data.rows.item(i).delete1,
@@ -107,13 +115,13 @@ export class DataBaseSummaryProvider {
         let eventQuery:any;
         //let nowDate = new Date().toJSON()
         if(event=='appointment' && tab=='New'){
-            return eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`      
+            return eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`      
         }else if(event=='appointment' && tab=='history'){
-            return eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
+            return eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
         }else if(event=='health_diary' || event=='doc_visit'){
-            return eventQuery= ` WHERE event_type='${event}' ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`
+            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`
         }else{
-            return eventQuery= ` WHERE event_type='${event}' ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
+            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
         }
         
     }
@@ -123,15 +131,15 @@ export class DataBaseSummaryProvider {
         //let nowDate = new Date().toJSON()
         if(event=='appointment' && type=='New'){
             
-            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
+            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
             
         }else if(event=='appointment' && type=='history'){
             
-            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now')) ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
+            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
         }else if(event=='health_diary' || event=='doc_visit'){
-            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND event_type='${event}' ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`
+            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`
         }else{
-            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND event_type='${event}' ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
+            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
         }
         
     }
@@ -154,17 +162,22 @@ export class DataBaseSummaryProvider {
     }
 
     diaryRecordFilter(data): Promise<any> {
-      let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (created_at BETWEEN DATE('${data["from_date"]}') AND DATE('${data["end_date"]}','+1 DAY')) AND event_type='${data["event_type"]}' ORDER BY created_at DESC LIMIT 10 OFFSET 0`;
+      let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (created_at BETWEEN DATE('${data["from_date"]}') AND DATE('${data["end_date"]}','+1 DAY')) AND (event_type='${data["event_type"]}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET 0`;
         
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
                 let events: events[] = [];
-                
+                let eventAssetsJson:any = null;
+
                 for (let i = 0; i < data.rows.length; i++) {
                     let event_json:any = null;
-                    if (data.rows.item(i).skills != '') {
+                    if (data.rows.item(i).event_options != null) {
                         event_json = JSON.parse(data.rows.item(i).event_options);
                     }
+                    if (data.rows.item(i).event_assets != null) {
+                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                    }
+
                     events.push({
                         id: data.rows.item(i).id,
                         event_id: data.rows.item(i).event_id,
@@ -174,7 +187,7 @@ export class DataBaseSummaryProvider {
                         event_datetime: data.rows.item(i).event_datetime,
                         event_type: data.rows.item(i).event_type,
                         event_category: data.rows.item(i).event_category,
-                        event_assets: data.rows.item(i).event_assets,
+                        event_assets: eventAssetsJson,
                         event_options: event_json,
                         user_id: data.rows.item(i).user_id,
                         delete1: data.rows.item(i).delete1,
@@ -192,12 +205,12 @@ export class DataBaseSummaryProvider {
         let getQRcode = await this.setQRcode();
         let sqlHealthQuery = SQL_SELECT_ALL_HEALTH_DETAILS+` WHERE name='policy'`;
         let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id=${user_id} AND role_id=1`;
-        return this.databaseService.getDatabase().then(async(database) => {
+        return this.databaseService.getDatabase().then((database) => {
             
             let healthData=[];
             let userData=[];
 
-            await database.executeSql(sqlHealthQuery, []).then((data1) => {
+            database.executeSql(sqlHealthQuery, []).then((data1) => {
               for (let i = 0; i < data1.rows.length; i++) {
                 let event_json:any = null;
                 if (data1.rows.item(i).attribute_name_value != '') {
@@ -215,7 +228,7 @@ export class DataBaseSummaryProvider {
               }
             })
            
-            await database.executeSql(sqlUserQuery, []).then((data2) => {
+            database.executeSql(sqlUserQuery, []).then((data2) => {
               for (let i = 0; i < data2.rows.length; i++) {
                 let attribute_json = JSON.parse(data2.rows.item(i).user_picture);  
                 userData.push({ 
@@ -248,7 +261,7 @@ export class DataBaseSummaryProvider {
     async getHealthDeatails(): Promise<any> {
        //let user_id = await this.databaseService.getuserID(); 
        let sqlHealthQuery = SQL_SELECT_ALL_HEALTH_DETAILS+` WHERE name='health'`;
-       return this.databaseService.getDatabase().then(async(database) => {
+       return this.databaseService.getDatabase().then((database) => {
          return database.executeSql(sqlHealthQuery, []).then((data) => {
             let healthData=[];
             for (let i = 0; i < data.rows.length; i++) {
@@ -276,10 +289,10 @@ export class DataBaseSummaryProvider {
        let sqlEmergeQuery = SQL_SELECT_ALL_EMERGENCY_DATA;
        let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE (role_id=2 AND delete1='false')`;
        console.log(sqlUsersQuery)
-       return this.databaseService.getDatabase().then(async(database) => {
+       return this.databaseService.getDatabase().then((database) => {
         let emergencyContacts = []; 
         let careGiverData=[];
-        await database.executeSql(sqlEmergeQuery, []).then((data) => {
+        database.executeSql(sqlEmergeQuery, []).then((data) => {
             for (let i = 0; i < data.rows.length; i++) {
                 emergencyContacts.push({
                 id: data.rows.item(i).id,
@@ -294,7 +307,7 @@ export class DataBaseSummaryProvider {
                 });
             } 
          })
-         await database.executeSql(sqlUsersQuery, []).then((data1) => {
+         database.executeSql(sqlUsersQuery, []).then((data1) => {
             for (let i = 0; i < data1.rows.length; i++) {
               if(data1.rows.item(i).email!=null){ 
                 let attribute_json = JSON.parse(data1.rows.item(i).user_picture);
@@ -349,9 +362,9 @@ export class DataBaseSummaryProvider {
     async getPatients(){
         let user_id = await this.databaseService.getuserID();
         let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id=${user_id} AND role_id=1`;
-        return this.databaseService.getDatabase().then(async(database) => {
+        return this.databaseService.getDatabase().then((database) => {
           let userData=[];   
-          await database.executeSql(sqlUserQuery, []).then((data2) => {
+          database.executeSql(sqlUserQuery, []).then((data2) => {
             for (let i = 0; i < data2.rows.length; i++) {
               let attribute_json = JSON.parse(data2.rows.item(i).user_picture);  
               userData.push({ 
@@ -390,7 +403,7 @@ export class DataBaseSummaryProvider {
     }
 
     async getRecentAppointments(event){
-        let eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now')) ORDER BY event_datetime ASC LIMIT 4 OFFSET 0`      
+        let eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 4 OFFSET 0`      
         let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+eventQuery;
         
         return this.databaseService.getDatabase().then(database => {
@@ -399,8 +412,12 @@ export class DataBaseSummaryProvider {
                 
                 for (let i = 0; i < data.rows.length; i++) {
                     let event_json:any = null;
-                    if (data.rows.item(i).skills != '') {
+                    let eventAssetsJson:any = null;
+                    if (data.rows.item(i).event_options != null) {
                         event_json = JSON.parse(data.rows.item(i).event_options);
+                    }
+                    if (data.rows.item(i).event_assets != null) {
+                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                     }
                     events.push({
                         id: data.rows.item(i).id,
@@ -411,7 +428,7 @@ export class DataBaseSummaryProvider {
                         event_datetime: data.rows.item(i).event_datetime,
                         event_type: data.rows.item(i).event_type,
                         event_category: data.rows.item(i).event_category,
-                        event_assets: data.rows.item(i).event_assets,
+                        event_assets: eventAssetsJson,
                         event_options: event_json,
                         user_id: data.rows.item(i).user_id,
                         delete1: data.rows.item(i).delete1,

@@ -100,6 +100,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/ionic-webview/ngx */ "./node_modules/@ionic-native/ionic-webview/ngx/index.js");
 /* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
 /* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../environments/environment */ "./src/environments/environment.ts");
+
 
 
 
@@ -126,6 +128,7 @@ let previewPage = class previewPage {
         this.currentMedicationList = [];
         this.tabBar = document.getElementById('myTabBar');
         this.tabBar.style.display = 'none';
+        this.environment = _environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].ImageUrl;
     }
     ngOnInit() {
         this.changeRef.detectChanges();
@@ -189,7 +192,8 @@ let previewPage = class previewPage {
                     globalURL = this.webview.convertFileSrc(source);
                 }
                 else {
-                    globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);
+                    let byPassURL = this.environment + source;
+                    globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);
                 }
             }
             else {

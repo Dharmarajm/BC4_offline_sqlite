@@ -251,58 +251,31 @@ var DatabaseProvider = /** @class */ (function () {
             .then(function () { return _this.bootstrapTables(); });
     };
     DatabaseProvider.prototype.initializeDatabase = function () {
-        var _this = this;
         console.log('initialize');
         return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
-        }).then(function (db) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-            var sqlTable1, sqlTable2, sqlTable4, sqlTable5, sqlTable6, sqlTable3;
-            var _this = this;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        sqlTable1 = "CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)";
-                        return [4 /*yield*/, db.executeSql(sqlTable1, [])];
-                    case 1:
-                        _a.sent();
-                        sqlTable2 = "CREATE TABLE IF NOT EXISTS enum_masters(id INTEGER,name TEXT,category_name TEXT,created_at DATETIME,updated_at DATETIME)";
-                        return [4 /*yield*/, db.executeSql(sqlTable2, [])];
-                    case 2:
-                        _a.sent();
-                        sqlTable4 = "CREATE TABLE IF NOT EXISTS health_details(id INTEGER,health_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,attribute_name_value TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME)";
-                        return [4 /*yield*/, db.executeSql(sqlTable4, [])];
-                    case 3:
-                        _a.sent();
-                        sqlTable5 = "CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)";
-                        return [4 /*yield*/, db.executeSql(sqlTable5, [])];
-                    case 4:
-                        _a.sent();
-                        sqlTable6 = "CREATE TABLE IF NOT EXISTS user_associations(id INTEGER,patient_id INTEGER,caregiver_id INTEGER,nick_name TEXT DEFAULT NULL,created_at DATETIME,updated_at DATETIME)";
-                        return [4 /*yield*/, db.executeSql(sqlTable6, [])];
-                    case 5:
-                        _a.sent();
-                        sqlTable3 = "CREATE TABLE IF NOT EXISTS events(id INTEGER,event_id INTEGER PRIMARY KEY AUTOINCREMENT,event_name TEXT,description TEXT,value TEXT DEFAULT NULL,event_datetime INTEGER,event_type TEXT,event_category TEXT,event_assets TEXT DEFAULT NULL,event_options TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME,sync BOOLEAN)";
-                        return [4 /*yield*/, db.executeSql(sqlTable3, [])
-                                .then(function () { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var sqlTableIndex;
-                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0:
-                                            sqlTableIndex = "CREATE INDEX IF NOT EXISTS event_index on events(event_type, event_datetime, created_at)";
-                                            return [4 /*yield*/, db.executeSql(sqlTableIndex, [])];
-                                        case 1:
-                                            _a.sent();
-                                            return [2 /*return*/];
-                                    }
-                                });
-                            }); })];
-                    case 6:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
+        }).then(function (db) {
+            var sqlTable1 = "CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)";
+            db.executeSql(sqlTable1, []);
+            // .then((res)=>{
+            //    console.log(res,'emergencysuccess')
+            // }).catch(err=>{console.log(err,'emergencyerror')});
+            var sqlTable2 = "CREATE TABLE IF NOT EXISTS enum_masters(id INTEGER,name TEXT,category_name TEXT,created_at DATETIME,updated_at DATETIME)";
+            db.executeSql(sqlTable2, []);
+            var sqlTable4 = "CREATE TABLE IF NOT EXISTS health_details(id INTEGER,health_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,attribute_name_value TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME)";
+            db.executeSql(sqlTable4, []);
+            var sqlTable5 = "CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)"; //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
+            db.executeSql(sqlTable5, []);
+            var sqlTable6 = "CREATE TABLE IF NOT EXISTS user_associations(id INTEGER,patient_id INTEGER,caregiver_id INTEGER,nick_name TEXT DEFAULT NULL,created_at DATETIME,updated_at DATETIME)";
+            db.executeSql(sqlTable6, []);
+            var sqlTable3 = "CREATE TABLE IF NOT EXISTS events(id INTEGER,event_id INTEGER PRIMARY KEY AUTOINCREMENT,event_name TEXT,description TEXT,value TEXT DEFAULT NULL,event_datetime INTEGER,event_type TEXT,event_category TEXT,event_assets TEXT DEFAULT NULL,event_options TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)";
+            db.executeSql(sqlTable3, [])
+                .then(function () {
+                var sqlTableIndex = "CREATE INDEX IF NOT EXISTS event_index on events(event_type, event_datetime, created_at)";
+                db.executeSql(sqlTableIndex, []);
             });
-        }); });
+        });
     };
     DatabaseProvider.prototype.bootstrapTables = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -390,7 +363,7 @@ var DatabaseProvider = /** @class */ (function () {
                                 name: DATA_BASE_NAME,
                                 location: 'default'
                             }).then(function (db) {
-                                var sql = "UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, sync = ? WHERE event_id = ?";
+                                var sql = "UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?";
                                 var updateEventData = [data["id"], data["event_name"], data["description"], data["value"], data["event_datetime"], data["event_type"], data["event_category"], data["event_assets"], JSON.stringify(data["event_options"]), user_id, data["created_at"], new Date().toJSON(), false, id];
                                 return db.executeSql(sql, updateEventData).then(function (row) {
                                     return { event_id: row.insertId };
@@ -420,17 +393,27 @@ var DatabaseProvider = /** @class */ (function () {
             });
         });
     };
-    DatabaseProvider.prototype.deleteAnEvent = function (id) {
+    DatabaseProvider.prototype.deleteAnEvent = function (event) {
         return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
         }).then(function (db) {
-            var sql = "DELETE FROM events WHERE event_id = ?";
-            return db.executeSql(sql, [id]).then(function (row) {
-                return { event_id: row.insertId };
-            }).catch(function (res) {
-                return res;
-            });
+            if (event["id"] == null) {
+                var sql = "DELETE FROM events WHERE event_id = ?";
+                return db.executeSql(sql, [event["event_id"]]).then(function (row) {
+                    return { event_id: row.insertId };
+                }).catch(function (res) {
+                    return res;
+                });
+            }
+            else {
+                var sql = "UPDATE events SET delete1 = ? WHERE event_id = ?";
+                return db.executeSql(sql, [true, event["event_id"]]).then(function (row) {
+                    return { event_id: row.insertId };
+                }).catch(function (res) {
+                    return res;
+                });
+            }
         });
     };
     DatabaseProvider.prototype.updateUserAndPolicyData = function (data) {
@@ -462,22 +445,18 @@ var DatabaseProvider = /** @class */ (function () {
                                             return [4 /*yield*/, db.executeSql(sql, updateUserData)];
                                         case 1:
                                             _a.sent();
-                                            return [4 /*yield*/, db.executeSql("SELECT * FROM health_details WHERE name='" + policy_data['name'] + "'", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                                    var id;
-                                                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                                        console.log(data);
-                                                        if (data.rows.length > 0) {
-                                                            id = data.rows.item(0).health_id;
-                                                            console.log(policy_data, id);
-                                                            this.updateHealthData(policy_data, id);
-                                                        }
-                                                        else {
-                                                            console.log(policy_data);
-                                                            this.updateHealthData(policy_data);
-                                                        }
-                                                        return [2 /*return*/];
-                                                    });
-                                                }); }, function (error) {
+                                            return [4 /*yield*/, db.executeSql("SELECT * FROM health_details WHERE name='" + policy_data['name'] + "'", []).then(function (data) {
+                                                    console.log(data);
+                                                    if (data.rows.length > 0) {
+                                                        var id = data.rows.item(0).health_id;
+                                                        console.log(policy_data, id);
+                                                        _this.updateHealthData(policy_data, id);
+                                                    }
+                                                    else {
+                                                        console.log(policy_data);
+                                                        _this.updateHealthData(policy_data);
+                                                    }
+                                                }, function (error) {
                                                     console.log(error);
                                                 })];
                                         case 2:
@@ -495,7 +474,6 @@ var DatabaseProvider = /** @class */ (function () {
     DatabaseProvider.prototype.updateUserData = function (data) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var user_id;
-            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.getuserID()];
@@ -504,24 +482,15 @@ var DatabaseProvider = /** @class */ (function () {
                         return [2 /*return*/, this.sqlite.create({
                                 name: DATA_BASE_NAME,
                                 location: 'default'
-                            }).then(function (db) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var sql, updateUserData;
-                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0:
-                                            sql = "UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ? AND role_id = ?";
-                                            updateUserData = [data['name'], data['email'], data['mobile_no'], user_id, 1];
-                                            return [4 /*yield*/, db.executeSql(sql, updateUserData).then(function (row) {
-                                                    return { event_id: row.insertId };
-                                                }).catch(function (res) {
-                                                    return res;
-                                                })];
-                                        case 1:
-                                            _a.sent();
-                                            return [2 /*return*/];
-                                    }
+                            }).then(function (db) {
+                                var sql = "UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ? AND role_id = ?";
+                                var updateUserData = [data['name'], data['email'], data['mobile_no'], user_id, 1];
+                                db.executeSql(sql, updateUserData).then(function (row) {
+                                    return { event_id: row.insertId };
+                                }).catch(function (res) {
+                                    return res;
                                 });
-                            }); })];
+                            })];
                 }
             });
         });
@@ -603,7 +572,6 @@ var DatabaseProvider = /** @class */ (function () {
     DatabaseProvider.prototype.updateHealthData = function (data, id) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var user_id;
-            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.getuserID()];
@@ -613,29 +581,28 @@ var DatabaseProvider = /** @class */ (function () {
                                 name: DATA_BASE_NAME,
                                 location: 'default'
                             }).then(function (db) {
-                                return db.executeSql("SELECT * FROM health_details WHERE name='" + data['name'] + "'", []).then(function (getData) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                    var sqlQuery, healthData;
-                                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                        console.log(data);
-                                        if (getData.rows.length > 0) {
-                                            sqlQuery = "UPDATE health_details SET id = ?, name = ?, attribute_name_value = ?, user_id = ?, created_at = ?, updated_at = ? WHERE health_id = ?";
-                                            healthData = [data["id"], data["name"], JSON.stringify(data["attribute_name_value"]), user_id, data["created_at"], new Date().toJSON(), id];
-                                        }
-                                        else {
-                                            sqlQuery = "INSERT INTO health_details VALUES (NULL,NULL,?,?,?,?,?)";
-                                            healthData = [data["name"], JSON.stringify(data["attribute_name_value"]), user_id, new Date().toJSON(), new Date().toJSON()];
-                                        }
-                                        console.log(sqlQuery);
-                                        console.log(healthData);
-                                        return [2 /*return*/, db.executeSql(sqlQuery, healthData).then(function (row) {
-                                                console.log(row);
-                                                return { event_id: row.insertId };
-                                            }).catch(function (res) {
-                                                console.log(res);
-                                                return res;
-                                            })];
+                                return db.executeSql("SELECT * FROM health_details WHERE name='" + data['name'] + "'", []).then(function (getData) {
+                                    var sqlQuery;
+                                    var healthData;
+                                    console.log(data);
+                                    if (getData.rows.length > 0) {
+                                        sqlQuery = "UPDATE health_details SET id = ?, name = ?, attribute_name_value = ?, user_id = ?, created_at = ?, updated_at = ? WHERE health_id = ?";
+                                        healthData = [data["id"], data["name"], JSON.stringify(data["attribute_name_value"]), user_id, data["created_at"], new Date().toJSON(), id];
+                                    }
+                                    else {
+                                        sqlQuery = "INSERT INTO health_details VALUES (NULL,NULL,?,?,?,?,?)";
+                                        healthData = [data["name"], JSON.stringify(data["attribute_name_value"]), user_id, new Date().toJSON(), new Date().toJSON()];
+                                    }
+                                    console.log(sqlQuery);
+                                    console.log(healthData);
+                                    return db.executeSql(sqlQuery, healthData).then(function (row) {
+                                        console.log(row);
+                                        return { event_id: row.insertId };
+                                    }).catch(function (res) {
+                                        console.log(res);
+                                        return res;
                                     });
-                                }); }).catch(function (res) {
+                                }).catch(function (res) {
                                     console.log(res);
                                     return res;
                                 });
