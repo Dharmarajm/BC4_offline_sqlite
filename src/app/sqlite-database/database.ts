@@ -190,8 +190,8 @@ export class DatabaseProvider {
         location: 'default'
       }).then(async(db: SQLiteObject) => {
            
-         let sql = `UPDATE users SET age = ?, blood_group = ? WHERE id = ? AND role_id = ?`;
-         let updateUserData = [user_data['age'],user_data['blood_group'],user_id,1];
+         let sql = `UPDATE users SET age = ?, blood_group = ?, updated_at = ?  WHERE id = ? AND role_id = ?`;
+         let updateUserData = [user_data['age'],user_data['blood_group'],new Date().toJSON(),user_id,1];
          await db.executeSql(sql,updateUserData);
          await db.executeSql(`SELECT * FROM health_details WHERE name='${policy_data['name']}'`,[]).then((data)=>{
            console.log(data)
@@ -217,8 +217,8 @@ export class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db: SQLiteObject) => {
-            let sql = `UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ? AND role_id = ?`;
-            let updateUserData = [data['name'],data['email'],data['mobile_no'],user_id,1];
+            let sql = `UPDATE users SET name = ?, email = ?, mobile_no = ?, updated_at = ? WHERE id = ? AND role_id = ?`;
+            let updateUserData = [data['name'],data['email'],data['mobile_no'],new Date().toJSON(),user_id,1];
             db.executeSql(sql,updateUserData).then((row: any)=>{
                 return { event_id:row.insertId }
              }).catch(res=>{

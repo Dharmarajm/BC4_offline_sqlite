@@ -75,7 +75,7 @@ export class syncProvider {
             let event_id = data.rows.item(i).event_id;
             if(index.length>0){
               let user_id = await this.getuserID();
-              let params ={ "index":index,"id":user_id }
+              let params = { "index":index,"id":user_id }
               this.deleteEventImages(params).subscribe((responseList) => {
                  console.log(responseList)
                  for(let j in index){
@@ -322,14 +322,12 @@ export class syncProvider {
                       //   created_at: data.rows.item(i).created_at,
                       //   updated_at: data.rows.item(i).updated_at,
                       // });
-                      if(data.rows.item(i).id==null){
-                         this.updateSingleHealthDetail(rowData); 
-                      }else{
-                        let index = this.responseData2.findIndex(res=>res.id==data.rows.item(i).id);
-                        console.log(index);
-                        if(data.rows.item(i).updated_at > this.responseData2[index]['updated_at']){
-                          
-                        }        
+                      let index = this.responseData2.findIndex(res=>res.id==data.rows.item(i).id);
+                      console.log(index);
+                      if(data.rows.item(i).id==null || data.rows.item(i).updated_at > this.responseData2[index]['updated_at']){
+                         this.createSingleHealthDetail(rowData); 
+                      }else if(data.rows.item(i).updated_at < this.responseData2[index]['updated_at']){
+                          this.createSingleHealthDetail(this.responseData2[index]);        
                       }  
                          
                     }
@@ -354,7 +352,7 @@ export class syncProvider {
                         let findindex = this.responseData3.indexOf(res=>res.id==data.rows.item(i).id)
                         let sql = `UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?`;
                         if(findindex!=-1 && this.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at){
-                          let createEventData = [this.responseData3[findindex]["name"],this.responseData3[findindex]["email"],this.responseData3[findindex]["password"],this.responseData3[findindex]["mobile_no"],this.responseData3[findindex]["address"],this.responseData3[findindex]["country"],this.responseData3[findindex]["blood_group"],this.responseData3[findindex]["age"],this.responseData3[findindex]["user_uid"],this.responseData3[findindex]["forgot_password_code"],this.responseData3[findindex]["user_picture"],this.responseData3[findindex]["active_status"],this.responseData3[findindex]["role_id"],this.responseData3[findindex]["created_at"],this.responseData3[findindex]["updated_at"],this.responseData3[findindex]["delete1"],this.responseData3[findindex]["id"]]      
+                          let createEventData = [this.responseData3[findindex]["name"],this.responseData3[findindex]["email"],this.responseData3[findindex]["password"],this.responseData3[findindex]["mobile_no"],this.responseData3[findindex]["address"],this.responseData3[findindex]["country"],this.responseData3[findindex]["blood_group"],this.responseData3[findindex]["age"],this.responseData3[findindex]["user_uid"],this.responseData3[findindex]["forgot_password_code"],this.responseData3[findindex]["user_picture"],this.responseData3[findindex]["active_status"],this.responseData3[findindex]["role_id"],this.responseData3[findindex]["created_at"],this.responseData3[findindex]["updated_at"],false,this.responseData3[findindex]["id"]]      
                           this.commonUpdateAndDeleteEvent(sql,createEventData);
                         }else if(findindex!=-1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at){
                           this.updateUsersData(rowData);
@@ -544,12 +542,12 @@ export class syncProvider {
       return forkJoin([response1]); 
     }
 
-    updateSingleHealthDetail(rowData){
-      let data = { "contact_name": rowData["contact_name"], "emergency_no": rowData["emergency_no"], "user_type": rowData["user_type"] };
-      this.insertEmergencyData(data).subscribe((responseList)=>{ 
-        let response = responseList[0];
-        let sql = `UPDATE emergency_details SET id = ?, created_at = ?, updated_at = ? WHERE emergency_id = ?`;
-        let createEventData = [response["id"],response["created_at"],response["updated_at"],rowData["emergency_id"]]
+    createSingleHealthDetail(rowData){
+      let data = { attribute_name_value: rowData['attribute_name_value'] };
+      this.updateHealthData(data).subscribe((responseList)=>{ 
+        let response = responseList[0]['health_detail'];
+        let sql = `UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?`;
+        let createEventData = [response["id"],response["attribute_name_value"],response["created_at"],response["updated_at"],rowData["health_id"]]
         this.commonUpdateAndDeleteEvent(sql,createEventData)
       }) 
     }
@@ -584,7 +582,9 @@ export class syncProvider {
 
             for(var i in localImagePath){
               if(localImagePath[i]["globalURI"]!=null){
-                let uploadStatus = await this.uploadImage(localImagePath[i],response["id"])
+                let params = { "id":response["id"] }
+                let requestUrl = `events/update_image`;
+                let uploadStatus = await this.uploadImage(localImagePath[i],params,requestUrl)
                 if(uploadStatus["status"]==true){
                   let updateEventOptions = rowData["event_options"];
                   updateEventOptions["localImagePath"][i]["globalURI"] = uploadStatus["url"]
@@ -619,7 +619,7 @@ export class syncProvider {
       }
       
       
-      async updateUsersData(rowData){
+      async updateUsersData(rowData) {
         // let data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"]};
         // this.updateEventData(rowData["id"],data).subscribe((responseList)=>{
         //   let response = responseList[0]['event'];
@@ -653,10 +653,15 @@ export class syncProvider {
         return forkJoin([response1]); 
       }
 
-      async uploadImage(localfile,event_id){
+      public updateHealthData(data): Observable<any[]> {
+        let response1 = this.http.post(`health_details`,data);
+        return forkJoin([response1]); 
+      }
+
+      async uploadImage(localfile,params,requestMethods){
         const fileTransfer: FileTransferObject = this.transfer.create();
     
-        let data = { "id":event_id };
+        let data = params;
         
 
         let options: FileUploadOptions = {
@@ -668,7 +673,7 @@ export class syncProvider {
         headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
         }
         let getUrl:any; 
-        fileTransfer.upload(localfile["cdvFilePath"],environment.apiUrl+'events/update_image',options).then(res=>{
+        fileTransfer.upload(localfile["cdvFilePath"],environment.apiUrl+requestMethods,options).then(res=>{
           getUrl = res["response"];
           return { url: getUrl,status: true }
         },error=>{
