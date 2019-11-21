@@ -344,4 +344,14 @@ export class DatabaseProvider {
         return user_id
     }
 
+    getProfileID(){
+        let profile_id:any=null;
+        if(localStorage.getItem("profile_id")!=undefined){
+            profile_id=localStorage.getItem("profile_id");
+            return profile_id;
+        }
+        
+        return profile_id
+    }
+
 }

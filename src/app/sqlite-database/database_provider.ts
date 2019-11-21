@@ -110,36 +110,38 @@ export class DataBaseSummaryProvider {
         })
     }
 
-    checkEventType(event,tab,offset) {
+    async checkEventType(event,tab,offset) {
         
         let eventQuery:any;
+        let user_id = await this.databaseService.getuserID();
         //let nowDate = new Date().toJSON()
         if(event=='appointment' && tab=='New'){
-            return eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`      
+            return eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`      
         }else if(event=='appointment' && tab=='history'){
-            return eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
+            return eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
         }else if(event=='health_diary' || event=='doc_visit'){
-            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`
+            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`
         }else{
-            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
+            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
         }
         
     }
 
-    checkEventTypeSearch(event,search,type,offset) {
+    async checkEventTypeSearch(event,search,type,offset) {
         let eventSearchQuery:any;
         //let nowDate = new Date().toJSON()
+        let user_id = await this.databaseService.getuserID();
         if(event=='appointment' && type=='New'){
             
-            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
+            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
             
         }else if(event=='appointment' && type=='history'){
             
-            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
+            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
         }else if(event=='health_diary' || event=='doc_visit'){
-            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`
+            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`
         }else{
-            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
+            return eventSearchQuery= ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
         }
         
     }
@@ -161,8 +163,9 @@ export class DataBaseSummaryProvider {
         })
     }
 
-    diaryRecordFilter(data): Promise<any> {
-      let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (created_at BETWEEN DATE('${data["from_date"]}') AND DATE('${data["end_date"]}','+1 DAY')) AND (event_type='${data["event_type"]}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET 0`;
+    async diaryRecordFilter(data): Promise<any> {
+        let user_id = await this.databaseService.getuserID();
+      let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (created_at BETWEEN DATE('${data["from_date"]}') AND DATE('${data["end_date"]}','+1 DAY')) AND (event_type='${data["event_type"]}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET 0`;
         
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
@@ -403,7 +406,8 @@ export class DataBaseSummaryProvider {
     }
 
     async getRecentAppointments(event){
-        let eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 4 OFFSET 0`      
+        let user_id = await this.databaseService.getuserID(); 
+        let eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 4 OFFSET 0`      
         let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+eventQuery;
         
         return this.databaseService.getDatabase().then(database => {
@@ -448,5 +452,4 @@ export class DataBaseSummaryProvider {
         }
         return setQRcode;
     }
-
 }

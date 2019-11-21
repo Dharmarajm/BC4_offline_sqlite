@@ -86,6 +86,7 @@ export class LoginPage implements OnInit {
         this.router.navigate(['/register/self-care-offer-payment']);
       }else{
       localStorage.setItem('user_id',this.User.user.id);
+      localStorage.setItem('profile_id',this.User.user.id);
        let data:any=res["token"];
        let role:any=res["user"];
        let u_uid=role['user_uid']

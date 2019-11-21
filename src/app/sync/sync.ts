@@ -263,7 +263,8 @@ export class syncProvider {
                 this.responseData5 = responseList[4]["qrcode_image"];
                 console.log(responseList)
                 
-                localStorage.setItem("qrcode",this.responseData5);     
+                localStorage.setItem("qrcode",this.responseData5);
+                let profile_id = localStorage.getItem("profile_id");     
                 database.executeSql(`SELECT * FROM emergency_details`, []).then((data) => {
                   let length = data.rows.length;
                   console.log(length)
@@ -271,10 +272,10 @@ export class syncProvider {
                     //let emergencyContacts = [];
                     for (let i = 0; i < data.rows.length; i++) {
                       let rowData = data.rows.item(i);
-                      if(data.rows.item(i).id==null){
+                      if(data.rows.item(i).id==null && profile_id == data.rows.item(i).user_id){
                          this.updateSingleEmergencyDetail(rowData); 
                       }else{
-                        if(data.rows.item(i).delete1=='true'){
+                        if(data.rows.item(i).delete1=='true' && profile_id == data.rows.item(i).user_id){
                            this.deleteSingleEmergencyDetail(rowData);  
                         }else{
                           // let index = this.responseData1.findIndex(res=>res.id==data.rows.item(i).id);
@@ -324,9 +325,9 @@ export class syncProvider {
                       // });
                       let index = this.responseData2.findIndex(res=>res.id==data.rows.item(i).id);
                       console.log(index);
-                      if(data.rows.item(i).id==null || data.rows.item(i).updated_at > this.responseData2[index]['updated_at']){
+                      if(data.rows.item(i).id==null && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id || data.rows.item(i).updated_at > this.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id){
                          this.createSingleHealthDetail(rowData); 
-                      }else if(data.rows.item(i).updated_at < this.responseData2[index]['updated_at']){
+                      }else if(data.rows.item(i).updated_at < this.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id){
                           this.createSingleHealthDetail(this.responseData2[index]);        
                       }  
                          
@@ -339,7 +340,7 @@ export class syncProvider {
                   console.log(error,'healtherror');
                 })
                 
-                database.executeSql(`SELECT * FROM users`, []).then((data) => {
+                database.executeSql(`SELECT * FROM users`, []).then(async (data) => {
                   let length = data.rows.length;
                   console.log(length)
                   
@@ -349,13 +350,36 @@ export class syncProvider {
                       if(data.rows.item(i).delete1=='true'){
                         this.deleteUsersData(rowData);  
                       }else{
+                        let getHealthData = await this.getUserPolicy();
+                        let assigngetUserData = getHealthData['policies'];
+                        let healthData = assigngetUserData[0] 
                         let findindex = this.responseData3.indexOf(res=>res.id==data.rows.item(i).id)
                         let sql = `UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?`;
                         if(findindex!=-1 && this.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at){
-                          let createEventData = [this.responseData3[findindex]["name"],this.responseData3[findindex]["email"],this.responseData3[findindex]["password"],this.responseData3[findindex]["mobile_no"],this.responseData3[findindex]["address"],this.responseData3[findindex]["country"],this.responseData3[findindex]["blood_group"],this.responseData3[findindex]["age"],this.responseData3[findindex]["user_uid"],this.responseData3[findindex]["forgot_password_code"],this.responseData3[findindex]["user_picture"],this.responseData3[findindex]["active_status"],this.responseData3[findindex]["role_id"],this.responseData3[findindex]["created_at"],this.responseData3[findindex]["updated_at"],false,this.responseData3[findindex]["id"]]      
+                          let createEventData = [this.responseData3[findindex]["name"],this.responseData3[findindex]["email"],this.responseData3[findindex]["password"],this.responseData3[findindex]["mobile_no"],this.responseData3[findindex]["address"],this.responseData3[findindex]["country"],this.responseData3[findindex]["blood_group"],this.responseData3[findindex]["age"],this.responseData3[findindex]["user_uid"],this.responseData3[findindex]["forgot_password_code"],JSON.stringify(this.responseData3[findindex]["user_picture"]),this.responseData3[findindex]["active_status"],this.responseData3[findindex]["role_id"],this.responseData3[findindex]["created_at"],this.responseData3[findindex]["updated_at"],false,this.responseData3[findindex]["id"]]      
                           this.commonUpdateAndDeleteEvent(sql,createEventData);
-                        }else if(findindex!=-1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at){
-                          this.updateUsersData(rowData);
+                        }else if(findindex!=-1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData['id']==null && findindex!=-1 && profile_id == data.rows.item(i).id){
+                          let profile_picture = JSON.parse(data.rows.item(i).user_picture);
+                          if(profile_picture['url']!=null && profile_picture['toUpdate']==true){
+                            let localPath = profile_picture;
+                            let params = { localURL: profile_picture['localURL'],
+                                           cdvFilePath: profile_picture['cdvFilePath'],
+                                           toUpdate: false
+                                          }
+                            let requestUrl = `users/profile_picture`;
+                            let uploadStatus = await this.uploadImage(localPath,params,requestUrl);
+                            if(uploadStatus["status"]==true){
+                              let updateEventOptions = profile_picture;
+                              updateEventOptions["url"] = uploadStatus["url"];
+                              updateEventOptions["toUpdate"] = false;
+                              
+                              let sql = `UPDATE users SET user_picture = ? WHERE id = ?`
+                              let id  = data.rows.item(i).id;
+                              let createEventData = [JSON.stringify(updateEventOptions),id];
+                              this.commonUpdateAndDeleteEvent(sql,createEventData); 
+                            }
+                          }
+                          this.updateUsersData(rowData,healthData);
                         }
                       }  
                     }  
@@ -619,14 +643,57 @@ export class syncProvider {
       }
       
       
-      async updateUsersData(rowData) {
-        // let data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"]};
-        // this.updateEventData(rowData["id"],data).subscribe((responseList)=>{
-        //   let response = responseList[0]['event'];
-        //   let sql = `UPDATE events SET created_at = ?, updated_at = ? WHERE event_id = ?`
-        //   let createEventData = [response["created_at"],response["updated_at"],rowData["event_id"]]
-        //   this.commonUpdateAndDeleteEvent(sql,createEventData);
-        // })
+      async updateUsersData(rowData,healthData) {
+        let data = { policy: { 
+                              attribute_name_value: {
+                                                      mediclaim_policy : healthData['attribute_name_value']["mediclaim_policy"] , 
+                                                      policy_issuer: healthData['attribute_name_value']["policy_issuer"] 
+                                                    }  
+                              },
+                     user:{ 
+                      age: rowData['age'],
+                      blood_group: rowData['blood_group']
+                     } 
+                    } 
+          this.updateUserAndHealthData(data).subscribe((responseList)=>{
+            let response = responseList[0];
+            let policies = response['policies'];
+            let userData = response['user'];  
+            let sql = `UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?`
+            let createEventData = [policies["id"],policies["attribute_name_value"],policies["created_at"],policies["updated_at"],healthData["health_id"]];
+            this.commonUpdateAndDeleteEvent(sql,createEventData);
+            let sql1 = `UPDATE users SET age = ?, blood_group = ?, created_at = ?, updated_at = ? WHERE id = ?`
+            let createEventData1 = [userData["age"],userData["blood_group"],userData["created_at"],userData["updated_at"],userData["id"]];
+            this.commonUpdateAndDeleteEvent(sql1,createEventData1);
+          })
+       }
+
+       async getUserPolicy(){
+        return this.sqlite.create({
+          name: DATA_BASE_NAME,
+          location: 'default'
+        }).then((db: SQLiteObject) => {
+          let sqlHealthQuery = `SELECT * FROM health_details WHERE name='policy'`;
+          let healthData = [];
+          db.executeSql(sqlHealthQuery, []).then((data1) => {
+            for (let i = 0; i < data1.rows.length; i++) {
+              let event_json:any = null;
+              if (data1.rows.item(i).attribute_name_value != '') {
+                  event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
+              }  
+              healthData.push({ 
+                  id: data1.rows.item(i).id, 
+                  health_id: data1.rows.item(i).health_id, 
+                  name: data1.rows.item(i).name, 
+                  attribute_name_value: event_json, 
+                  user_id: data1.rows.item(i).user_id, 
+                  created_at: data1.rows.item(i).created_at, 
+                  updated_at: data1.rows.item(i).updated_at 
+              })  
+            }
+          })
+          return { policies: healthData };
+        })    
        }
 
       deleteUsersData(rowData){
@@ -655,6 +722,11 @@ export class syncProvider {
 
       public updateHealthData(data): Observable<any[]> {
         let response1 = this.http.post(`health_details`,data);
+        return forkJoin([response1]); 
+      }
+
+      public updateUserAndHealthData(data): Observable<any[]> {
+        let response1 = this.http.post(`health_details/about_update`,data);
         return forkJoin([response1]); 
       }
 
