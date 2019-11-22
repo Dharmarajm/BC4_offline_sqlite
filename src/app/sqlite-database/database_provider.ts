@@ -395,6 +395,42 @@ export class DataBaseSummaryProvider {
         })  
     }
 
+    async getAllPatients(){
+        let user_id = await this.databaseService.getuserID();
+        let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE (role_id=1 AND delete1='false')`;
+        //let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id=${user_id} AND role_id=1`;
+        return this.databaseService.getDatabase().then((database) => {
+          let userData=[];   
+          database.executeSql(sqlUsersQuery, []).then((data2) => {
+            for (let i = 0; i < data2.rows.length; i++) {
+             if(data2.rows.item(i).email!=null){                
+              let attribute_json = JSON.parse(data2.rows.item(i).user_picture);  
+              userData.push({ 
+                  id: data2.rows.item(i).id,
+                  name: data2.rows.item(i).name,
+                  email: data2.rows.item(i).email,
+                  password: data2.rows.item(i).password,
+                  mobile_no: data2.rows.item(i).mobile_no,
+                  address: data2.rows.item(i).address,
+                  country: data2.rows.item(i).country,
+                  blood_group: data2.rows.item(i).blood_group,
+                  age: data2.rows.item(i).age,
+                  user_uid: data2.rows.item(i).user_uid,
+                  forgot_password_code: data2.rows.item(i).forgot_password_code,
+                  user_picture: attribute_json,
+                  active_status: data2.rows.item(i).active_status,
+                  role_id: data2.rows.item(i).role_id,
+                  created_at: data2.rows.item(i).created_at,
+                  updated_at: data2.rows.item(i).updated_at,
+                  delete1: data2.rows.item(i).delete1
+              })
+             }   
+            }
+          })
+          return { patients: userData };
+        })   
+    }
+
     async getPicture_Show(){
        
         let emergency_data = await this.getEmergencyDeatails();
@@ -403,6 +439,41 @@ export class DataBaseSummaryProvider {
 
         return { caregiver: emergency_data['caregivers'],patient: getAllPatients['patients'],profile_pic: null,user_info: aboutData['user_info'] };
  
+    }
+
+    async getCaregiverData() {
+        let user_data = await this.getProfileID();
+        let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE (role_id=2 AND delete1='false')`;
+        return this.databaseService.getDatabase().then((database) => {
+            let userData=[];   
+            database.executeSql(sqlUsersQuery, []).then((data2) => {
+                for (let i = 0; i < data2.rows.length; i++) {
+                    if(data2.rows.item(i).email!=null){                
+                        let attribute_json = JSON.parse(data2.rows.item(i).user_picture);  
+                        userData.push({ 
+                            id: data2.rows.item(i).id,
+                            name: data2.rows.item(i).name,
+                            email: data2.rows.item(i).email,
+                            password: data2.rows.item(i).password,
+                            mobile_no: data2.rows.item(i).mobile_no,
+                            address: data2.rows.item(i).address,
+                            country: data2.rows.item(i).country,
+                            blood_group: data2.rows.item(i).blood_group,
+                            age: data2.rows.item(i).age,
+                            user_uid: data2.rows.item(i).user_uid,
+                            forgot_password_code: data2.rows.item(i).forgot_password_code,
+                            user_picture: attribute_json,
+                            active_status: data2.rows.item(i).active_status,
+                            role_id: data2.rows.item(i).role_id,
+                            created_at: data2.rows.item(i).created_at,
+                            updated_at: data2.rows.item(i).updated_at,
+                            delete1: data2.rows.item(i).delete1
+                        })
+                    }   
+                }
+            })
+            return { user_info: userData[0] };
+        })
     }
 
     async getRecentAppointments(event){
@@ -451,5 +522,15 @@ export class DataBaseSummaryProvider {
             setQRcode = localStorage.getItem("qrcode");
         }
         return setQRcode;
+    }
+
+    getProfileID(){
+        let profile_id:any=null;
+        if(localStorage.getItem("profile_id")!=undefined){
+            profile_id=localStorage.getItem("profile_id");
+            return profile_id;
+        }
+        
+        return profile_id
     }
 }

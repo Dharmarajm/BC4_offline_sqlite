@@ -1437,8 +1437,8 @@ let ViewPrescriptionPage = class ViewPrescriptionPage {
         }
         this.route.queryParams.subscribe(params => {
             console.log(params);
-            this.view_all_image = [];
             if (params && params.viewprescription) {
+                this.view_all_image = [];
                 this.data = JSON.parse(params.viewprescription);
                 let localAssets = this.data["event_options"];
                 let globalassets = this.data["event_assets"];

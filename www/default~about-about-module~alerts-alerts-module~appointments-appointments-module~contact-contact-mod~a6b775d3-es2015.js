@@ -253,7 +253,7 @@ let DatabaseProvider = class DatabaseProvider {
         return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
-        }).then((db) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+        }).then((db) => {
             let sqlTable1 = `CREATE TABLE IF NOT EXISTS emergency_details(id INTEGER,emergency_id INTEGER PRIMARY KEY AUTOINCREMENT,contact_name TEXT DEFAULT NULL,emergency_no TEXT DEFAULT NULL,user_type TEXT,user_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)`;
             db.executeSql(sqlTable1, []);
             // .then((res)=>{
@@ -273,7 +273,7 @@ let DatabaseProvider = class DatabaseProvider {
                 let sqlTableIndex = `CREATE INDEX IF NOT EXISTS event_index on events(event_type, event_datetime, created_at)`;
                 db.executeSql(sqlTableIndex, []);
             });
-        }));
+        });
     }
     bootstrapTables() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
@@ -391,10 +391,10 @@ let DatabaseProvider = class DatabaseProvider {
                 name: DATA_BASE_NAME,
                 location: 'default'
             }).then((db) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-                let sql = `UPDATE users SET age = ?, blood_group = ? WHERE id = ? AND role_id = ?`;
-                let updateUserData = [user_data['age'], user_data['blood_group'], user_id, 1];
+                let sql = `UPDATE users SET age = ?, blood_group = ?, updated_at = ?  WHERE id = ? AND role_id = ?`;
+                let updateUserData = [user_data['age'], user_data['blood_group'], new Date().toJSON(), user_id, 1];
                 yield db.executeSql(sql, updateUserData);
-                yield db.executeSql(`SELECT * FROM health_details WHERE name='${policy_data['name']}'`, []).then((data) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                yield db.executeSql(`SELECT * FROM health_details WHERE name='${policy_data['name']}'`, []).then((data) => {
                     console.log(data);
                     if (data.rows.length > 0) {
                         let id = data.rows.item(0).health_id;
@@ -405,7 +405,7 @@ let DatabaseProvider = class DatabaseProvider {
                         console.log(policy_data);
                         this.updateHealthData(policy_data);
                     }
-                }), error => {
+                }, error => {
                     console.log(error);
                 });
             }), error => {
@@ -419,15 +419,15 @@ let DatabaseProvider = class DatabaseProvider {
             return this.sqlite.create({
                 name: DATA_BASE_NAME,
                 location: 'default'
-            }).then((db) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-                let sql = `UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ? AND role_id = ?`;
-                let updateUserData = [data['name'], data['email'], data['mobile_no'], user_id, 1];
+            }).then((db) => {
+                let sql = `UPDATE users SET name = ?, email = ?, mobile_no = ?, updated_at = ? WHERE id = ? AND role_id = ?`;
+                let updateUserData = [data['name'], data['email'], data['mobile_no'], new Date().toJSON(), user_id, 1];
                 db.executeSql(sql, updateUserData).then((row) => {
                     return { event_id: row.insertId };
                 }).catch(res => {
                     return res;
                 });
-            }));
+            });
         });
     }
     updateUserImage(data) {
@@ -497,7 +497,7 @@ let DatabaseProvider = class DatabaseProvider {
                 name: DATA_BASE_NAME,
                 location: 'default'
             }).then((db) => {
-                return db.executeSql(`SELECT * FROM health_details WHERE name='${data['name']}'`, []).then((getData) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                return db.executeSql(`SELECT * FROM health_details WHERE name='${data['name']}'`, []).then((getData) => {
                     let sqlQuery;
                     let healthData;
                     console.log(data);
@@ -518,7 +518,7 @@ let DatabaseProvider = class DatabaseProvider {
                         console.log(res);
                         return res;
                     });
-                })).catch(res => {
+                }).catch(res => {
                     console.log(res);
                     return res;
                 });
@@ -543,6 +543,14 @@ let DatabaseProvider = class DatabaseProvider {
             return user_id;
         }
         return user_id;
+    }
+    getProfileID() {
+        let profile_id = null;
+        if (localStorage.getItem("profile_id") != undefined) {
+            profile_id = localStorage.getItem("profile_id");
+            return profile_id;
+        }
+        return profile_id;
     }
 };
 DatabaseProvider.ctorParameters = () => [

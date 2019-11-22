@@ -288,7 +288,8 @@ export class EditProfilePage implements OnInit {
        let data = {   id:this.editprofile.user_info.id, 
                       name : this.usernameupdate, 
                       email:this.useremailupdate, 
-                      mobile_no:this.userphoneupdate
+                      mobile_no:this.userphoneupdate,
+                      role_id : 1
                   }
         
       //  this.serv.editprofile(data, this.editprofile.user_info.id).subscribe(res=>{

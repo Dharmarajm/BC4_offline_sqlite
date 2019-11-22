@@ -347,8 +347,10 @@ export class syncProvider {
                   if(length>0){
                     for (let i = 0; i < data.rows.length; i++) {
                       let rowData = data.rows.item(i);
-                      if(data.rows.item(i).delete1=='true'){
+                      if(data.rows.item(i).delete1 == 'true' && data.rows.item(i).role_id == 2){
                         this.deleteUsersData(rowData);  
+                      }else if(data.rows.item(i).delete1 == 'true' && data.rows.item(i).role_id == 1){
+                        this.deletePatientData(rowData);  
                       }else{
                         let getHealthData = await this.getUserPolicy();
                         let assigngetUserData = getHealthData['policies'];
@@ -705,6 +707,18 @@ export class syncProvider {
         })
       }
 
+      deletePatientData(rowData){
+        this.deletePatientFromCaregiver(rowData["id"]).subscribe((responseList)=>{ 
+          console.log(responseList)
+          let sql = `DELETE FROM users WHERE id = ?`;
+          let createEventData = [rowData["id"]]
+          this.commonUpdateAndDeleteEvent(sql,createEventData);
+          let sql1 = `DELETE FROM events WHERE user_id = ?`;
+          let createEventData1 = [rowData["id"]];
+          this.commonUpdateAndDeleteEvent(sql1,createEventData1);
+        }) 
+      }
+
       public insertEventData(data): Observable<any[]> {
         let response1 = this.http.post(`events`,data);
         return forkJoin([response1]); 
@@ -772,6 +786,11 @@ export class syncProvider {
 
       deleteCareGiver(id) {
         let response1 = this.http.get(`emergency_details/caregiver_delete?cg_id=`+id);
+        return forkJoin([response1]); 
+      }
+
+      deletePatientFromCaregiver(id){
+        let response1 = this.http.get(`users/patient_delete?patient_id=`+id);
         return forkJoin([response1]); 
       }
 

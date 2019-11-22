@@ -15,6 +15,8 @@ import { NavParams, ModalController, ToastController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 // import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DatabaseProvider } from '../../../sqlite-database/database';
+import { NetworkService } from '../../../network-connectivity/network-service';
 
 @Component({
   selector: 'app-cg-edit-profile',
@@ -42,8 +44,9 @@ export class EditCGProfilePage implements OnInit {
   cdvFilePath:any = null;
   audioFileName:any;
   cdvFilePath1:any;
+  isNetwork:any;
 
-  constructor(private toast:Toast,public actionSheetController: ActionSheetController,private fb: FormBuilder,public sanitizer: DomSanitizer, public route:ActivatedRoute, private file: File, private transfer: FileTransfer, private camera: Camera, private imagePicker: ImagePicker, private webview: WebView, private crop: Crop, public serv:careGiverService,public navParams: NavParams,public modalController: ModalController,public toastController: ToastController) { 
+  constructor(private toast:Toast,public actionSheetController: ActionSheetController,private fb: FormBuilder,public sanitizer: DomSanitizer, public route:ActivatedRoute, private file: File, private transfer: FileTransfer, private camera: Camera, private imagePicker: ImagePicker, private webview: WebView, private crop: Crop, public serv:careGiverService,public navParams: NavParams,public modalController: ModalController,public toastController: ToastController,private networkProvider: NetworkService,public database:DatabaseProvider) { 
 
   // this.route.queryParams.subscribe(params => {
   //     if (params && params.special) {
@@ -62,15 +65,39 @@ export class EditCGProfilePage implements OnInit {
   //     }
   //   });
 
-   this.editprofile=this.navParams.get('pics');
-   if(this.editprofile.profile_pic != null){
-    let source=this.editprofile['profile_pic'];
-    this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
-   }else{
-    this.cdvFilePath1= null;
-   }
-   //this.cdvFilePath1=this.editprofile['profile_pic']
-   this.initialLogo = this.editprofile.user_info.name.charAt(0);
+    this.editprofile=this.navParams.get('pics');
+    //  if(this.editprofile.profile_pic != null){
+    //   let source=this.editprofile['profile_pic'];
+    //   this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
+    //  }else{
+    //   this.cdvFilePath1= null;
+    //  }
+    let globalURL:any=null;
+    let localURL:any=null;
+    if(this.editprofile['user_info']['user_picture']['url'] != null){
+    let source = this.editprofile['user_info']['user_picture']['url']
+    let gurl = source.includes("file:///");
+    if(gurl==true){
+      globalURL = this.webview.convertFileSrc(source);
+    }else{
+      globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);  
+    }
+    //this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
+    }else{
+    //this.cdvFilePath1= null;
+    let source = this.webview.convertFileSrc(this.editprofile['user_info']['user_picture']['localURL']); 
+    localURL = source;  
+    }
+
+    if(this.networkProvider.isNetworkOnline){
+    this.isNetwork = true;
+    this.cdvFilePath1 = globalURL!=null ? globalURL : localURL 
+    }else{
+    this.isNetwork = false;
+    this.cdvFilePath1 = localURL; 
+    }
+  // this.cdvFilePath1=this.editprofile['profile_pic']
+    this.initialLogo = this.editprofile.user_info.name.charAt(0);
    
   }
  
@@ -99,26 +126,33 @@ export class EditCGProfilePage implements OnInit {
     this.namefocus.setFocus();
   }
 
-  sample(){
-    const fileTransfer: FileTransferObject = this.transfer.create();
+  sample(data){
+    // const fileTransfer: FileTransferObject = this.transfer.create();
     
-    let data={}
+    // let data={}
 
-    let options: FileUploadOptions = {
-     fileKey: 'user_picture',
-     fileName: this.audioFileName,
-     mimeType: 'multipart/form-data',
-     params:data,
-     chunkedMode: false,
-     headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
-    }
+    // let options: FileUploadOptions = {
+    //  fileKey: 'user_picture',
+    //  fileName: this.audioFileName,
+    //  mimeType: 'multipart/form-data',
+    //  params:data,
+    //  chunkedMode: false,
+    //  headers:{ 'Authorization': 'Bearer '+localStorage.getItem('token') }
+    // }
 
-    fileTransfer.upload(this.cdvFilePath,environment.apiUrl+'users/profile_picture',options).then(res=>{
+    // fileTransfer.upload(this.cdvFilePath,environment.apiUrl+'users/profile_picture',options).then(res=>{
+    //   this.presentToast('Profile updated successfully');
+    //   console.log(res,'res');
+
+
+    // }).catch();
+    this.database.updateUserImage(data).then(res=>{
+      console.log(res);
       this.presentToast('Profile updated successfully');
-      console.log(res,'res');
-
-
-    }).catch();
+    }).catch(error=>{
+      this.presentToast('Failed to update the profile');
+      console.log(error);
+    }) 
 
   }
 
@@ -145,7 +179,24 @@ export class EditCGProfilePage implements OnInit {
               this.audioFileName = fileMeta.name;
               this.cdvFilePath = fileMeta['localURL'];
               console.log(this.cdvFilePath,'filepath')
-              this.sample();   
+              let source =  this.editprofile['user_info']['user_picture']['url'];
+              let userPicturedata:any;
+              if(source==null){
+                userPicturedata = {
+                  url: source,
+                  localURL: newImage,
+                  cdvFilePath: this.cdvFilePath,
+                  toUpdate: true
+                }
+              }else{
+                userPicturedata = {
+                  url: newImage,
+                  localURL: newImage,
+                  cdvFilePath: this.cdvFilePath,
+                  toUpdate: true
+                }
+              }
+              this.sample(userPicturedata);
           })
          },error => console.error('Error cropping image', error));
       },(err) => { 
@@ -203,7 +254,30 @@ export class EditCGProfilePage implements OnInit {
               this.audioFileName = fileMeta.name;
               this.cdvFilePath = fileMeta['localURL'];
               console.log(this.cdvFilePath,'filepath')
-              this.sample();   
+              let source =  this.editprofile['user_info']['user_picture']['url'];
+            // let userPicturedata = {
+            //   url: source,
+            //   localURL: newImage,
+            //   cdvFilePath: this.cdvFilePath,
+            //   toUpdate: true
+            // }
+            let userPicturedata:any;
+            if(source==null){
+              userPicturedata = {
+                url: source,
+                localURL: newImage,
+                cdvFilePath: this.cdvFilePath,
+                toUpdate: true
+              }
+            }else{
+              userPicturedata = {
+                url: newImage,
+                localURL: newImage,
+                cdvFilePath: this.cdvFilePath,
+                toUpdate: true
+              }
+            }
+            this.sample(userPicturedata);
           })
          },error => console.error('Error cropping image', error));
         }, (err) => {
@@ -220,16 +294,25 @@ export class EditCGProfilePage implements OnInit {
        let data = {   id:this.editprofile.user_info.id, 
                       name : this.usernameupdate, 
                       email:this.useremailupdate, 
-                      mobile_no:this.userphoneupdate
+                      mobile_no:this.userphoneupdate,
+                      role_id : 2
                   }
        
-       this.serv.editprofile(data, this.editprofile.user_info.id).subscribe(res=>{
+      //  this.serv.editprofile(data, this.editprofile.user_info.id).subscribe(res=>{
         
+      //   this.presentToast('Profile updated successfully');
+      //   this.modalController.dismiss();
+      //  },error=>{
+        
+      //  })
+
+      this.database.updateUserData(data).then(res=>{
+        console.log(res);
         this.presentToast('Profile updated successfully');
         this.modalController.dismiss();
-       },error=>{
-        //alert("Update Failed...")
-       })
+      }).catch(err=>{
+        console.log(err);
+      })
     }else{
         this.presentToast('Please enter all the fields'); 
     }

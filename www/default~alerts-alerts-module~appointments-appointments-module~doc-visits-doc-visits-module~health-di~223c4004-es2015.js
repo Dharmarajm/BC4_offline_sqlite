@@ -127,36 +127,42 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         });
     }
     checkEventType(event, tab, offset) {
-        let eventQuery;
-        //let nowDate = new Date().toJSON()
-        if (event == 'appointment' && tab == 'New') {
-            return eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
-        }
-        else if (event == 'appointment' && tab == 'history') {
-            return eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
-        }
-        else if (event == 'health_diary' || event == 'doc_visit') {
-            return eventQuery = ` WHERE (event_type='${event}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`;
-        }
-        else {
-            return eventQuery = ` WHERE (event_type='${event}' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`;
-        }
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let eventQuery;
+            let user_id = yield this.databaseService.getuserID();
+            //let nowDate = new Date().toJSON()
+            if (event == 'appointment' && tab == 'New') {
+                return eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
+            }
+            else if (event == 'appointment' && tab == 'history') {
+                return eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
+            }
+            else if (event == 'health_diary' || event == 'doc_visit') {
+                return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`;
+            }
+            else {
+                return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`;
+            }
+        });
     }
     checkEventTypeSearch(event, search, type, offset) {
-        let eventSearchQuery;
-        //let nowDate = new Date().toJSON()
-        if (event == 'appointment' && type == 'New') {
-            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
-        }
-        else if (event == 'appointment' && type == 'history') {
-            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
-        }
-        else if (event == 'health_diary' || event == 'doc_visit') {
-            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`;
-        }
-        else {
-            return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`;
-        }
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let eventSearchQuery;
+            //let nowDate = new Date().toJSON()
+            let user_id = yield this.databaseService.getuserID();
+            if (event == 'appointment' && type == 'New') {
+                return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
+            }
+            else if (event == 'appointment' && type == 'history') {
+                return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`;
+            }
+            else if (event == 'health_diary' || event == 'doc_visit') {
+                return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`;
+            }
+            else {
+                return eventSearchQuery = ` WHERE ((event_name LIKE '%${search}%') OR (description LIKE '%${search}%') OR (event_category LIKE '%${search}%')) AND (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`;
+            }
+        });
     }
     getEnumMasters(name) {
         let sqlEnumQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_ENUMS"] + ` WHERE category_name='${name}'`;
@@ -172,38 +178,41 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         });
     }
     diaryRecordFilter(data) {
-        let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (created_at BETWEEN DATE('${data["from_date"]}') AND DATE('${data["end_date"]}','+1 DAY')) AND (event_type='${data["event_type"]}' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET 0`;
-        return this.databaseService.getDatabase().then(database => {
-            return database.executeSql(sqlSearchEventQuery, []).then((data) => {
-                let events = [];
-                let eventAssetsJson = null;
-                for (let i = 0; i < data.rows.length; i++) {
-                    let event_json = null;
-                    if (data.rows.item(i).event_options != null) {
-                        event_json = JSON.parse(data.rows.item(i).event_options);
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let user_id = yield this.databaseService.getuserID();
+            let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (created_at BETWEEN DATE('${data["from_date"]}') AND DATE('${data["end_date"]}','+1 DAY')) AND (event_type='${data["event_type"]}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET 0`;
+            return this.databaseService.getDatabase().then(database => {
+                return database.executeSql(sqlSearchEventQuery, []).then((data) => {
+                    let events = [];
+                    let eventAssetsJson = null;
+                    for (let i = 0; i < data.rows.length; i++) {
+                        let event_json = null;
+                        if (data.rows.item(i).event_options != null) {
+                            event_json = JSON.parse(data.rows.item(i).event_options);
+                        }
+                        if (data.rows.item(i).event_assets != null) {
+                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                        }
+                        events.push({
+                            id: data.rows.item(i).id,
+                            event_id: data.rows.item(i).event_id,
+                            event_name: data.rows.item(i).event_name,
+                            description: data.rows.item(i).description,
+                            value: data.rows.item(i).value,
+                            event_datetime: data.rows.item(i).event_datetime,
+                            event_type: data.rows.item(i).event_type,
+                            event_category: data.rows.item(i).event_category,
+                            event_assets: eventAssetsJson,
+                            event_options: event_json,
+                            user_id: data.rows.item(i).user_id,
+                            delete1: data.rows.item(i).delete1,
+                            created_at: data.rows.item(i).created_at,
+                            updated_at: data.rows.item(i).updated_at
+                        });
                     }
-                    if (data.rows.item(i).event_assets != null) {
-                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
-                    }
-                    events.push({
-                        id: data.rows.item(i).id,
-                        event_id: data.rows.item(i).event_id,
-                        event_name: data.rows.item(i).event_name,
-                        description: data.rows.item(i).description,
-                        value: data.rows.item(i).value,
-                        event_datetime: data.rows.item(i).event_datetime,
-                        event_type: data.rows.item(i).event_type,
-                        event_category: data.rows.item(i).event_category,
-                        event_assets: eventAssetsJson,
-                        event_options: event_json,
-                        user_id: data.rows.item(i).user_id,
-                        delete1: data.rows.item(i).delete1,
-                        created_at: data.rows.item(i).created_at,
-                        updated_at: data.rows.item(i).updated_at
-                    });
-                }
-                ;
-                return { count: data.rows.length, event_list: events };
+                    ;
+                    return { count: data.rows.length, event_list: events };
+                });
             });
         });
     }
@@ -213,7 +222,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             let getQRcode = yield this.setQRcode();
             let sqlHealthQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_HEALTH_DETAILS"] + ` WHERE name='policy'`;
             let sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE id=${user_id} AND role_id=1`;
-            return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            return this.databaseService.getDatabase().then((database) => {
                 let healthData = [];
                 let userData = [];
                 database.executeSql(sqlHealthQuery, []).then((data1) => {
@@ -258,14 +267,14 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     }
                 });
                 return { policies: healthData, user_info: userData[0], qrcode_image: getQRcode };
-            }));
+            });
         });
     }
     getHealthDeatails() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             //let user_id = await this.databaseService.getuserID(); 
             let sqlHealthQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_HEALTH_DETAILS"] + ` WHERE name='health'`;
-            return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            return this.databaseService.getDatabase().then((database) => {
                 return database.executeSql(sqlHealthQuery, []).then((data) => {
                     let healthData = [];
                     for (let i = 0; i < data.rows.length; i++) {
@@ -285,14 +294,14 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     }
                     return { health_detail: healthData };
                 });
-            }));
+            });
         });
     }
     getEmergencyDeatails() {
         let sqlEmergeQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EMERGENCY_DATA"];
         let sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (role_id=2 AND delete1='false')`;
         console.log(sqlUsersQuery);
-        return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+        return this.databaseService.getDatabase().then((database) => {
             let emergencyContacts = [];
             let careGiverData = [];
             database.executeSql(sqlEmergeQuery, []).then((data) => {
@@ -337,7 +346,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                 }
             });
             return { caregiver_count: careGiverData.length, caregivers: careGiverData, emergency_contact_count: emergencyContacts.length, emergency_detail: emergencyContacts };
-        }));
+        });
     }
     getAllUserPreviewData() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
@@ -365,7 +374,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let user_id = yield this.databaseService.getuserID();
             let sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE id=${user_id} AND role_id=1`;
-            return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            return this.databaseService.getDatabase().then((database) => {
                 let userData = [];
                 database.executeSql(sqlUserQuery, []).then((data2) => {
                     for (let i = 0; i < data2.rows.length; i++) {
@@ -392,7 +401,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     }
                 });
                 return { patients: userData };
-            }));
+            });
         });
     }
     getPicture_Show() {
@@ -405,7 +414,8 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     }
     getRecentAppointments(event) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            let eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 4 OFFSET 0`;
+            let user_id = yield this.databaseService.getuserID();
+            let eventQuery = ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 4 OFFSET 0`;
             let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + eventQuery;
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {

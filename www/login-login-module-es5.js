@@ -195,6 +195,7 @@ var LoginPage = /** @class */ (function () {
                 }
                 else {
                     localStorage.setItem('user_id', _this.User.user.id);
+                    localStorage.setItem('profile_id', _this.User.user.id);
                     var data_1 = res["token"];
                     var role = res["user"];
                     var u_uid = role['user_uid'];

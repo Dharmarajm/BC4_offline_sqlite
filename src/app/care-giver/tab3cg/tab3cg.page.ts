@@ -10,9 +10,13 @@ import { AboutPage } from '../../login/about/about.page';
 import { EditCGProfilePage } from './cg-edit-profile/cg-edit-profile.page'
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { File,FileEntry, IFile } from '@ionic-native/file/ngx';
+import { environment } from '../../../environments/environment'
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
+import { NetworkService } from '../../network-connectivity/network-service';
 
 @Component({
   selector: 'app-tab3cg',
@@ -33,6 +37,7 @@ export class Tab3cPage {
   nativepath:any;
   playaudio:any;
   playaudio1:any;
+  environment:any;
   dataArray:any[]=[];
   alertFileName:any;
   remainderFileName:any;
@@ -48,8 +53,11 @@ export class Tab3cPage {
     {name:'day5',type:'radio',label:'15 Days',value:"15 Days",checked: false}
   ]; 
   autoUpdateDays:any="Never";
-  
-  constructor(private statusBar: StatusBar,public modalController: ModalController, public sanitizer: DomSanitizer, public serv: careGiverService, public actionSheetController: ActionSheetController, public router:Router, public alertController: AlertController,private clipboard: Clipboard,private file: File,private FilePath: FilePath,private fileChooser: FileChooser) {}
+  isNetwork:boolean;
+
+  constructor(private statusBar: StatusBar,public modalController: ModalController, public sanitizer: DomSanitizer, public serv: careGiverService, public actionSheetController: ActionSheetController, public router:Router, public alertController: AlertController,private clipboard: Clipboard,private file: File,private FilePath: FilePath,private fileChooser: FileChooser,private databaseSummary:DataBaseSummaryProvider,private networkProvider: NetworkService,private webview: WebView) {
+    this.environment = environment.ImageUrl;
+  }
   
 
   ngOnInit() {
@@ -59,36 +67,59 @@ export class Tab3cPage {
 
 
   ionViewWillEnter(){
-    this.serv.setting().subscribe(res => {
-      this.pic = res;
-      console.log(this.pic)   
-      this.initialLogo=this.pic.user_info.name.charAt(0);
-      console.log(this.initialLogo)
-      this.caregiver = this.pic.caregiver;
+    // this.serv.setting().subscribe(res => {
+    //   this.pic = res;
+    //   console.log(this.pic)   
+    //   this.initialLogo=this.pic.user_info.name.charAt(0);
+    //   console.log(this.initialLogo)
+    //   this.caregiver = this.pic.caregiver;
       
-      this.caregive_option=this.pic['caregiver'].map(data=>({
-          name: 'radio1',
-          type: 'radio',
-          label: data.name,
-          value: data.name,
-      }));
-      console.log(this.caregive_option)
-      // if(this.pic.profile_pic == null)
-      // {  
-      //    this.img="../../../assets/img/contact.png"
-        
-      // }else{
-      //   this.linkSource = this.pic.profile_pic;
-      //   this.img= this.sanitizer.bypassSecurityTrustResourceUrl(this.linkSource)
-      //   console.log(this.img)
-      // }
+    //   this.caregive_option=this.pic['caregiver'].map(data=>({
+    //       name: 'radio1',
+    //       type: 'radio',
+    //       label: data.name,
+    //       value: data.name,
+    //   }));
+    //   console.log(this.caregive_option)
+    
+    //   if(this.pic.profile_pic != null){
+    //     let source=this.pic['profile_pic'];
+    //     this.img= this.sanitizer.bypassSecurityTrustResourceUrl(source);
+    //   }
+      
+    // })
 
-      if(this.pic.profile_pic != null){
-        let source=this.pic['profile_pic'];
-        this.img= this.sanitizer.bypassSecurityTrustResourceUrl(source);
+    this.databaseSummary.getCaregiverData().then(res=>{
+      this.pic = res;
+      
+      this.initialLogo=this.pic['user_info'].name.charAt(0);
+      
+      let globalURL=null;
+      let localURL=null;
+      if(this.pic['user_info']['user_picture']['url'] != null){
+        let source = this.pic['user_info']['user_picture']['url'];
+        let gurl = source.includes("file:///");
+        if(gurl==true){
+          globalURL = this.webview.convertFileSrc(source);
+        }else{
+          let byPassURL = this.environment+source;
+          globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);  
+        }
+      }else{
+        let source = this.webview.convertFileSrc(this.pic['user_info']['user_picture']['localURL']); 
+        localURL = source;
       }
       
+      if(this.networkProvider.isNetworkOnline){
+        this.isNetwork = true;
+        this.img = globalURL!=null ? globalURL : localURL 
+      }else{
+        this.isNetwork = false;
+        this.img = localURL || null; 
+      }
+      console.log(this.img)
     })
+
     this.statusBar.backgroundColorByHexString('#483df6');
     this.autoUpdateDays=localStorage.getItem("autoUpdateDays")  || "Never";
     this.updateAutoTriggers();

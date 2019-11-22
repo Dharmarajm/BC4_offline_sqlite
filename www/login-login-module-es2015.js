@@ -187,6 +187,7 @@ let LoginPage = class LoginPage {
                 }
                 else {
                     localStorage.setItem('user_id', this.User.user.id);
+                    localStorage.setItem('profile_id', this.User.user.id);
                     let data = res["token"];
                     let role = res["user"];
                     let u_uid = role['user_uid'];

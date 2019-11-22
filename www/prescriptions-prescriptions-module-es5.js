@@ -1542,8 +1542,8 @@ var ViewPrescriptionPage = /** @class */ (function () {
         }
         this.route.queryParams.subscribe(function (params) {
             console.log(params);
-            _this.view_all_image = [];
             if (params && params.viewprescription) {
+                _this.view_all_image = [];
                 _this.data = JSON.parse(params.viewprescription);
                 var localAssets = _this.data["event_options"];
                 var globalassets = _this.data["event_assets"];

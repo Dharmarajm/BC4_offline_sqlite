@@ -213,14 +213,16 @@ var EditProfilePage = /** @class */ (function () {
                         userPicturedata = {
                             url: source,
                             localURL: newImage,
-                            cdvFilePath: _this.cdvFilePath
+                            cdvFilePath: _this.cdvFilePath,
+                            toUpdate: true
                         };
                     }
                     else {
                         userPicturedata = {
                             url: newImage,
                             localURL: newImage,
-                            cdvFilePath: _this.cdvFilePath
+                            cdvFilePath: _this.cdvFilePath,
+                            toUpdate: true
                         };
                     }
                     _this.sample(userPicturedata);
@@ -291,11 +293,29 @@ var EditProfilePage = /** @class */ (function () {
                     _this.cdvFilePath = fileMeta['localURL'];
                     console.log(_this.cdvFilePath, 'filepath');
                     var source = _this.editprofile['user_info']['user_picture']['url'];
-                    var userPicturedata = {
-                        url: source,
-                        localURL: newImage,
-                        cdvFilePath: _this.cdvFilePath
-                    };
+                    // let userPicturedata = {
+                    //   url: source,
+                    //   localURL: newImage,
+                    //   cdvFilePath: this.cdvFilePath,
+                    //   toUpdate: true
+                    // }
+                    var userPicturedata;
+                    if (source == null) {
+                        userPicturedata = {
+                            url: source,
+                            localURL: newImage,
+                            cdvFilePath: _this.cdvFilePath,
+                            toUpdate: true
+                        };
+                    }
+                    else {
+                        userPicturedata = {
+                            url: newImage,
+                            localURL: newImage,
+                            cdvFilePath: _this.cdvFilePath,
+                            toUpdate: true
+                        };
+                    }
                     _this.sample(userPicturedata);
                 });
             }, function (error) { return console.error('Error cropping image', error); });

@@ -440,8 +440,8 @@ var DatabaseProvider = /** @class */ (function () {
                                 return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                     switch (_a.label) {
                                         case 0:
-                                            sql = "UPDATE users SET age = ?, blood_group = ? WHERE id = ? AND role_id = ?";
-                                            updateUserData = [user_data['age'], user_data['blood_group'], user_id, 1];
+                                            sql = "UPDATE users SET age = ?, blood_group = ?, updated_at = ?  WHERE id = ? AND role_id = ?";
+                                            updateUserData = [user_data['age'], user_data['blood_group'], new Date().toJSON(), user_id, 1];
                                             return [4 /*yield*/, db.executeSql(sql, updateUserData)];
                                         case 1:
                                             _a.sent();
@@ -483,8 +483,8 @@ var DatabaseProvider = /** @class */ (function () {
                                 name: DATA_BASE_NAME,
                                 location: 'default'
                             }).then(function (db) {
-                                var sql = "UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ? AND role_id = ?";
-                                var updateUserData = [data['name'], data['email'], data['mobile_no'], user_id, 1];
+                                var sql = "UPDATE users SET name = ?, email = ?, mobile_no = ?, updated_at = ? WHERE id = ? AND role_id = ?";
+                                var updateUserData = [data['name'], data['email'], data['mobile_no'], new Date().toJSON(), user_id, 1];
                                 db.executeSql(sql, updateUserData).then(function (row) {
                                     return { event_id: row.insertId };
                                 }).catch(function (res) {
@@ -629,6 +629,14 @@ var DatabaseProvider = /** @class */ (function () {
             return user_id;
         }
         return user_id;
+    };
+    DatabaseProvider.prototype.getProfileID = function () {
+        var profile_id = null;
+        if (localStorage.getItem("profile_id") != undefined) {
+            profile_id = localStorage.getItem("profile_id");
+            return profile_id;
+        }
+        return profile_id;
     };
     DatabaseProvider.ctorParameters = function () { return [
         { type: _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_4__["SQLite"] },

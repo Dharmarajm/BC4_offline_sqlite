@@ -1613,13 +1613,13 @@ var ViewReportPage = /** @class */ (function () {
         }
         console.log(this.environment);
         this.route.queryParams.subscribe(function (params) {
-            _this.view_all_image = [];
             // if (params && params.viewReport) {
             //   this.data = JSON.parse(params.viewReport);
             //   this.view_all_image = this.data.event_assets;
             //   console.log(this.view_all_image);
             // }
             if (params && params.viewReport) {
+                _this.view_all_image = [];
                 _this.data = JSON.parse(params.viewReport);
                 var localAssets = _this.data["event_options"];
                 var globalassets = _this.data["event_assets"];

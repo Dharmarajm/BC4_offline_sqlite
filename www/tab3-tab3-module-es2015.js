@@ -211,14 +211,16 @@ let EditProfilePage = class EditProfilePage {
                         userPicturedata = {
                             url: source,
                             localURL: newImage,
-                            cdvFilePath: this.cdvFilePath
+                            cdvFilePath: this.cdvFilePath,
+                            toUpdate: true
                         };
                     }
                     else {
                         userPicturedata = {
                             url: newImage,
                             localURL: newImage,
-                            cdvFilePath: this.cdvFilePath
+                            cdvFilePath: this.cdvFilePath,
+                            toUpdate: true
                         };
                     }
                     this.sample(userPicturedata);
@@ -277,11 +279,29 @@ let EditProfilePage = class EditProfilePage {
                     this.cdvFilePath = fileMeta['localURL'];
                     console.log(this.cdvFilePath, 'filepath');
                     let source = this.editprofile['user_info']['user_picture']['url'];
-                    let userPicturedata = {
-                        url: source,
-                        localURL: newImage,
-                        cdvFilePath: this.cdvFilePath
-                    };
+                    // let userPicturedata = {
+                    //   url: source,
+                    //   localURL: newImage,
+                    //   cdvFilePath: this.cdvFilePath,
+                    //   toUpdate: true
+                    // }
+                    let userPicturedata;
+                    if (source == null) {
+                        userPicturedata = {
+                            url: source,
+                            localURL: newImage,
+                            cdvFilePath: this.cdvFilePath,
+                            toUpdate: true
+                        };
+                    }
+                    else {
+                        userPicturedata = {
+                            url: newImage,
+                            localURL: newImage,
+                            cdvFilePath: this.cdvFilePath,
+                            toUpdate: true
+                        };
+                    }
                     this.sample(userPicturedata);
                 });
             }, error => console.error('Error cropping image', error));

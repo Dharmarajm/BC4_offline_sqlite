@@ -141,36 +141,55 @@ var DataBaseSummaryProvider = /** @class */ (function () {
         });
     };
     DataBaseSummaryProvider.prototype.checkEventType = function (event, tab, offset) {
-        var eventQuery;
-        //let nowDate = new Date().toJSON()
-        if (event == 'appointment' && tab == 'New') {
-            return eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
-        }
-        else if (event == 'appointment' && tab == 'history') {
-            return eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
-        }
-        else if (event == 'health_diary' || event == 'doc_visit') {
-            return eventQuery = " WHERE (event_type='" + event + "' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET " + offset;
-        }
-        else {
-            return eventQuery = " WHERE (event_type='" + event + "' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET " + offset;
-        }
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var eventQuery, user_id;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.databaseService.getuserID()];
+                    case 1:
+                        user_id = _a.sent();
+                        //let nowDate = new Date().toJSON()
+                        if (event == 'appointment' && tab == 'New') {
+                            return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false' AND user_id='" + user_id + "') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset];
+                        }
+                        else if (event == 'appointment' && tab == 'history') {
+                            return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false' AND user_id='" + user_id + "') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset];
+                        }
+                        else if (event == 'health_diary' || event == 'doc_visit') {
+                            return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "') ORDER BY created_at DESC LIMIT 10 OFFSET " + offset];
+                        }
+                        else {
+                            return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "') ORDER BY event_datetime DESC LIMIT 10 OFFSET " + offset];
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     DataBaseSummaryProvider.prototype.checkEventTypeSearch = function (event, search, type, offset) {
-        var eventSearchQuery;
-        //let nowDate = new Date().toJSON()
-        if (event == 'appointment' && type == 'New') {
-            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
-        }
-        else if (event == 'appointment' && type == 'history') {
-            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset;
-        }
-        else if (event == 'health_diary' || event == 'doc_visit') {
-            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET " + offset;
-        }
-        else {
-            return eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND delete1='false') ORDER BY event_datetime DESC LIMIT 10 OFFSET " + offset;
-        }
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var eventSearchQuery, user_id;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.databaseService.getuserID()];
+                    case 1:
+                        user_id = _a.sent();
+                        if (event == 'appointment' && type == 'New') {
+                            return [2 /*return*/, eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false' AND user_id='" + user_id + "') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset];
+                        }
+                        else if (event == 'appointment' && type == 'history') {
+                            return [2 /*return*/, eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false' AND user_id='" + user_id + "') ORDER BY event_datetime ASC LIMIT 10 OFFSET " + offset];
+                        }
+                        else if (event == 'health_diary' || event == 'doc_visit') {
+                            return [2 /*return*/, eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "') ORDER BY created_at DESC LIMIT 10 OFFSET " + offset];
+                        }
+                        else {
+                            return [2 /*return*/, eventSearchQuery = " WHERE ((event_name LIKE '%" + search + "%') OR (description LIKE '%" + search + "%') OR (event_category LIKE '%" + search + "%')) AND (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "') ORDER BY event_datetime DESC LIMIT 10 OFFSET " + offset];
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     DataBaseSummaryProvider.prototype.getEnumMasters = function (name) {
         var sqlEnumQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_ENUMS"] + (" WHERE category_name='" + name + "'");
@@ -186,38 +205,48 @@ var DataBaseSummaryProvider = /** @class */ (function () {
         });
     };
     DataBaseSummaryProvider.prototype.diaryRecordFilter = function (data) {
-        var sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + (" WHERE (created_at BETWEEN DATE('" + data["from_date"] + "') AND DATE('" + data["end_date"] + "','+1 DAY')) AND (event_type='" + data["event_type"] + "' AND delete1='false') ORDER BY created_at DESC LIMIT 10 OFFSET 0");
-        return this.databaseService.getDatabase().then(function (database) {
-            return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
-                var events = [];
-                var eventAssetsJson = null;
-                for (var i = 0; i < data.rows.length; i++) {
-                    var event_json = null;
-                    if (data.rows.item(i).event_options != null) {
-                        event_json = JSON.parse(data.rows.item(i).event_options);
-                    }
-                    if (data.rows.item(i).event_assets != null) {
-                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
-                    }
-                    events.push({
-                        id: data.rows.item(i).id,
-                        event_id: data.rows.item(i).event_id,
-                        event_name: data.rows.item(i).event_name,
-                        description: data.rows.item(i).description,
-                        value: data.rows.item(i).value,
-                        event_datetime: data.rows.item(i).event_datetime,
-                        event_type: data.rows.item(i).event_type,
-                        event_category: data.rows.item(i).event_category,
-                        event_assets: eventAssetsJson,
-                        event_options: event_json,
-                        user_id: data.rows.item(i).user_id,
-                        delete1: data.rows.item(i).delete1,
-                        created_at: data.rows.item(i).created_at,
-                        updated_at: data.rows.item(i).updated_at
-                    });
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var user_id, sqlSearchEventQuery;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.databaseService.getuserID()];
+                    case 1:
+                        user_id = _a.sent();
+                        sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + (" WHERE (created_at BETWEEN DATE('" + data["from_date"] + "') AND DATE('" + data["end_date"] + "','+1 DAY')) AND (event_type='" + data["event_type"] + "' AND delete1='false' AND user_id='" + user_id + "') ORDER BY created_at DESC LIMIT 10 OFFSET 0");
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
+                                return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
+                                    var events = [];
+                                    var eventAssetsJson = null;
+                                    for (var i = 0; i < data.rows.length; i++) {
+                                        var event_json = null;
+                                        if (data.rows.item(i).event_options != null) {
+                                            event_json = JSON.parse(data.rows.item(i).event_options);
+                                        }
+                                        if (data.rows.item(i).event_assets != null) {
+                                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                                        }
+                                        events.push({
+                                            id: data.rows.item(i).id,
+                                            event_id: data.rows.item(i).event_id,
+                                            event_name: data.rows.item(i).event_name,
+                                            description: data.rows.item(i).description,
+                                            value: data.rows.item(i).value,
+                                            event_datetime: data.rows.item(i).event_datetime,
+                                            event_type: data.rows.item(i).event_type,
+                                            event_category: data.rows.item(i).event_category,
+                                            event_assets: eventAssetsJson,
+                                            event_options: event_json,
+                                            user_id: data.rows.item(i).user_id,
+                                            delete1: data.rows.item(i).delete1,
+                                            created_at: data.rows.item(i).created_at,
+                                            updated_at: data.rows.item(i).updated_at
+                                        });
+                                    }
+                                    ;
+                                    return { count: data.rows.length, event_list: events };
+                                });
+                            })];
                 }
-                ;
-                return { count: data.rows.length, event_list: events };
             });
         });
     };
@@ -457,43 +486,48 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     };
     DataBaseSummaryProvider.prototype.getRecentAppointments = function (event) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var eventQuery, sqlSearchEventQuery;
+            var user_id, eventQuery, sqlSearchEventQuery;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false') ORDER BY event_datetime ASC LIMIT 4 OFFSET 0";
-                sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + eventQuery;
-                return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
-                        return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
-                            var events = [];
-                            for (var i = 0; i < data.rows.length; i++) {
-                                var event_json = null;
-                                var eventAssetsJson = null;
-                                if (data.rows.item(i).event_options != null) {
-                                    event_json = JSON.parse(data.rows.item(i).event_options);
-                                }
-                                if (data.rows.item(i).event_assets != null) {
-                                    eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
-                                }
-                                events.push({
-                                    id: data.rows.item(i).id,
-                                    event_id: data.rows.item(i).event_id,
-                                    event_name: data.rows.item(i).event_name,
-                                    description: data.rows.item(i).description,
-                                    value: data.rows.item(i).value,
-                                    event_datetime: data.rows.item(i).event_datetime,
-                                    event_type: data.rows.item(i).event_type,
-                                    event_category: data.rows.item(i).event_category,
-                                    event_assets: eventAssetsJson,
-                                    event_options: event_json,
-                                    user_id: data.rows.item(i).user_id,
-                                    delete1: data.rows.item(i).delete1,
-                                    created_at: data.rows.item(i).created_at,
-                                    updated_at: data.rows.item(i).updated_at
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.databaseService.getuserID()];
+                    case 1:
+                        user_id = _a.sent();
+                        eventQuery = " WHERE (event_type='" + event + "' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false' AND user_id='" + user_id + "') ORDER BY event_datetime ASC LIMIT 4 OFFSET 0";
+                        sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + eventQuery;
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
+                                return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
+                                    var events = [];
+                                    for (var i = 0; i < data.rows.length; i++) {
+                                        var event_json = null;
+                                        var eventAssetsJson = null;
+                                        if (data.rows.item(i).event_options != null) {
+                                            event_json = JSON.parse(data.rows.item(i).event_options);
+                                        }
+                                        if (data.rows.item(i).event_assets != null) {
+                                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                                        }
+                                        events.push({
+                                            id: data.rows.item(i).id,
+                                            event_id: data.rows.item(i).event_id,
+                                            event_name: data.rows.item(i).event_name,
+                                            description: data.rows.item(i).description,
+                                            value: data.rows.item(i).value,
+                                            event_datetime: data.rows.item(i).event_datetime,
+                                            event_type: data.rows.item(i).event_type,
+                                            event_category: data.rows.item(i).event_category,
+                                            event_assets: eventAssetsJson,
+                                            event_options: event_json,
+                                            user_id: data.rows.item(i).user_id,
+                                            delete1: data.rows.item(i).delete1,
+                                            created_at: data.rows.item(i).created_at,
+                                            updated_at: data.rows.item(i).updated_at
+                                        });
+                                    }
+                                    ;
+                                    return { appointment_list: events };
                                 });
-                            }
-                            ;
-                            return { appointment_list: events };
-                        });
-                    })];
+                            })];
+                }
             });
         });
     };

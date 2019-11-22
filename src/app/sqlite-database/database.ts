@@ -212,13 +212,13 @@ export class DatabaseProvider {
     }
 
     async updateUserData(data){
-        let user_id = await this.getuserID();
+        //let user_id = await this.getuserID();
         return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db: SQLiteObject) => {
             let sql = `UPDATE users SET name = ?, email = ?, mobile_no = ?, updated_at = ? WHERE id = ? AND role_id = ?`;
-            let updateUserData = [data['name'],data['email'],data['mobile_no'],new Date().toJSON(),user_id,1];
+            let updateUserData = [data['name'],data['email'],data['mobile_no'],new Date().toJSON(),data['id'],data['role_id']];
             db.executeSql(sql,updateUserData).then((row: any)=>{
                 return { event_id:row.insertId }
              }).catch(res=>{
@@ -267,6 +267,23 @@ export class DatabaseProvider {
         }).then((db: SQLiteObject) => { 
           let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
           return db.executeSql(sql,[id]).then((row: any)=>{
+            return { event_id:row.insertId }
+         }).catch(res=>{
+            return res;
+         });
+        })
+    }
+
+    deletePatientFromCareGiver(id){
+        return this.sqlite.create({
+            name: DATA_BASE_NAME,
+            location: 'default'
+        }).then((db: SQLiteObject) => { 
+          let sql = `UPDATE users SET delete1 = ? WHERE id = ?`;
+          return db.executeSql(sql,[true,id]).then(async (row: any)=>{
+            let sql1 = `DELETE FROM events WHERE user_id = ?`;
+            let createEventData1 = [id];
+            await db.executeSql(sql1,createEventData1)
             return { event_id:row.insertId }
          }).catch(res=>{
             return res;

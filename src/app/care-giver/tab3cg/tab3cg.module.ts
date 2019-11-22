@@ -8,9 +8,8 @@ import { ImagePicker, ImagePickerOptions  } from '@ionic-native/image-picker/ngx
 import { Crop } from '@ionic-native/crop/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
-import { File, FileEntry, IFile } from '@ionic-native/file/ngx';
+import { File } from '@ionic-native/file/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
-
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { AlertController } from '@ionic/angular';
@@ -20,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditCGProfilePage } from './cg-edit-profile/cg-edit-profile.page';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 @NgModule({
   imports: [
@@ -43,7 +43,8 @@ import { Toast } from '@ionic-native/toast/ngx';
   WebView,
   Clipboard,
   AlertController,
-  Toast
+  Toast,
+  DataBaseSummaryProvider
   ]
 })
 export class Tab3PageModule {}
