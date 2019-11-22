@@ -35,7 +35,7 @@ export class Tab2cPage {
   }
 
   ionViewWillEnter(){
-    this.user_uid=localStorage.getItem("user_id")
+    this.user_uid = localStorage.getItem("user_id")
     console.log(this.user_uid)
 
     //  this.ser_add.patient_list().subscribe(res =>{

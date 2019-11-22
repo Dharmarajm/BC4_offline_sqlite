@@ -476,6 +476,14 @@ export class DataBaseSummaryProvider {
         })
     }
 
+
+    async getCurrentUserandPatientsList(){
+        let current_user = await this.getCaregiverData();
+        let patients_list = await this.getAllPatients();
+
+        return { user_info: current_user['user_info'] , patient: patients_list['patients'] }
+    }
+
     async getRecentAppointments(event){
         let user_id = await this.databaseService.getuserID(); 
         let eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)>=DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 4 OFFSET 0`      
