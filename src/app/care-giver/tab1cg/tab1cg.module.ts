@@ -10,9 +10,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { commonCareGiverPlay } from './common-care-giver-play/common-care-giver-play.page';
 
 import { DatePipe } from '@angular/common';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { Media } from '@ionic-native/media/ngx';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 const routes: Routes = [
   {  
@@ -66,6 +68,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [Tab1cPage,commonCareGiverPlay],
-  providers:[File,FileTransfer,Media,DatePipe]
+  providers:[File,FileTransfer,Media,DatePipe,DataBaseSummaryProvider,WebView]
 })
 export class Tab1PageModule {}

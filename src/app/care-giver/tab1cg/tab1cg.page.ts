@@ -3,6 +3,10 @@ import { ActivatedRoute,Router,NavigationExtras } from '@angular/router';
 import { careGiverService } from '../care-giver-service/caregiver-service.service';
 import { environment } from '../../../environments/environment';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { DatabaseProvider } from '../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
+import { NetworkService } from '../../network-connectivity/network-service';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Component({
   selector: 'app-tab1cg',
@@ -18,11 +22,11 @@ export class Tab1cPage {
   environment:any;
   caregiverImageStatus:boolean;
   show_details:any[]=[];
-  constructor(private router: Router,public service: careGiverService,private statusBar: StatusBar) {
+  constructor(private router: Router,public service: careGiverService,private statusBar: StatusBar,private database: DatabaseProvider,private databaseSummary:DataBaseSummaryProvider,private networkProvider: NetworkService,private webview: WebView) {
     this.environment = environment.ImageUrl;
   }
   
-  ionViewWillEnter(){
+   ionViewWillEnter(){
     this.loader=true;
     this.database.Oninit();
 
