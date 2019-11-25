@@ -187,6 +187,7 @@ import {
 import { File } from '@ionic-native/file/ngx';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { environment } from '../../../../environments/environment';
+import { NetworkService } from '../../../network-connectivity/network-service';
 
 @Component({
     selector: 'app-common-care-giver-play',
@@ -217,6 +218,8 @@ import { environment } from '../../../../environments/environment';
   get_position_interval: any;
   environment:any;
   show_event:any;
+  isNetwork:boolean;
+
   constructor(
     private platform: Platform,
     private loadingCtrl: LoadingController,
@@ -227,7 +230,8 @@ import { environment } from '../../../../environments/environment';
     private datePipe: DatePipe,
     public route:ActivatedRoute,
    // private router: Router,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private networkProvider: NetworkService
   ) {
     this.platform.ready().then(() => {
       if (this.platform.is('ios')) {
@@ -246,7 +250,11 @@ import { environment } from '../../../../environments/environment';
       this.description = this.currentTrack['description'];
       this.show_event = this.currentTrack['event_name'];
       console.log(this.show_event )
-      
+      if(this.networkProvider.isNetworkOnline){
+        this.isNetwork = true;
+      }else{
+        this.isNetwork = false;
+      }
     })
   }
 
@@ -261,12 +269,25 @@ import { environment } from '../../../../environments/environment';
   }
 
   prepareAudioFile() {
-    //let url ='https://ia800207.us.archive.org/29/items/MLKDream/MLKDream_64kb.mp3';
+      //let url ='https://ia800207.us.archive.org/29/items/MLKDream/MLKDream_64kb.mp3';
+      let url:any;
+      if(this.isNetwork && this.currentTrack['event_options']['localAudioPath'][0]['globalURI']!=null){
+        url = this.currentTrack['event_options']['localAudioPath'][0]['globalURI'];
+      }else{
+        url = this.currentTrack['event_options']['localAudioPath'][0]['localURI'];
+      }
 
-      let url=this.environment+this.currentTrack['event_assets'][0]['url'];
+      //let url=this.environment+this.currentTrack['event_assets'][0]['url'];
       console.log(url)
+    
     this.platform.ready().then(() => {
-      let current_url = this.currentTrack['event_assets'][0]['url'];
+      let current_url:any
+      if(this.isNetwork && this.currentTrack['event_options']['localAudioPath'][0]['globalURI']!=null){
+        current_url = this.currentTrack['event_options']['localAudioPath'][0]['globalURI'];
+      }else{
+        current_url = this.currentTrack['event_options']['localAudioPath'][0]['localURI'];
+      }  
+      //let current_url = this.currentTrack['event_assets'][0]['url'];
       let split = current_url.split('/');
       console.log(split)
       this.filename =  split[split.length-1];

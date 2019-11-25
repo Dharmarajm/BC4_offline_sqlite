@@ -12,6 +12,8 @@ import { environment } from '../../../environments/environment';
 import {CalendarModal, CalendarModalOptions,  CalendarResult } from 'ion2-calendar';
 import { ModalController } from '@ionic/angular';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DatabaseProvider } from '../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 @Component({
   selector: 'app-cgdoc-visit',
@@ -41,7 +43,10 @@ export class CgdocVisitPage implements OnInit {
   from_date1: any;
   end_date1: any;
   userId: any;
-  constructor(private toast:Toast, public datepipe: DatePipe,public modalCtrl: ModalController,private streamingMedia: StreamingMedia,public toastController: ToastController, private statusBar: StatusBar, private router: Router, public settingService: careGiverService, public alertController: AlertController) {
+  diaryPage_offset:number=0;
+  doctorPage_offset:number=0;
+
+  constructor(private toast:Toast, public datepipe: DatePipe,public modalCtrl: ModalController,private streamingMedia: StreamingMedia,public toastController: ToastController, private statusBar: StatusBar, private router: Router, public settingService: careGiverService, public alertController: AlertController,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) {
     this.environmentUrl=environment.ImageUrl;
    }
 
@@ -71,21 +76,43 @@ export class CgdocVisitPage implements OnInit {
   }
 
   getDiaryRecords(){
-    this.settingService.commonEventList("health_diary",this.diaryPage).subscribe(res => {
-      let data:any = res['event_list']
-      this.data_diary_details=res['event_list']; 
+    // this.settingService.commonEventList("health_diary",this.diaryPage).subscribe(res => {
+    //   let data:any = res['event_list']
+    //   this.data_diary_details=res['event_list']; 
+    //   this.groupByDiary(data)
+    //   this.status = true;
+    // })
+
+    this.diaryPage=1;
+    this.diaryPage_offset=0;
+
+    // For DB Connect
+    this.databaseSummary.getAllEvents('health_diary','New',this.diaryPage_offset).then(res=>{
+      let data:any = res['event_list'];
+      this.data_diary_details=res['event_list'];
       this.groupByDiary(data)
       this.status = true;
-    })
+    }).catch(err=>{console.log(err)})
   }
 
   getDoctorRecords(){
-    this.settingService.commonEventList("doc_visit",this.doctorPage).subscribe(res => {
+    // this.settingService.commonEventList("doc_visit",this.doctorPage).subscribe(res => {
+    //   let data:any = res['event_list']
+    //   this.data_doctor_details=res['event_list'];
+    //   this.groupByDoctor(data)
+    //   this.status = true;
+    // })
+
+    this.doctorPage=1;
+    this.doctorPage_offset=0;
+
+    // For DB Connect
+    this.databaseSummary.getAllEvents('doc_visit','New',this.doctorPage_offset).then(res=>{
       let data:any = res['event_list']
-      this.data_doctor_details=res['event_list'];
+      this.data_doctor_details=res['event_list']; 
       this.groupByDoctor(data)
       this.status = true;
-    })
+    }).catch(err=>{console.log(err)})
   }
 
   groupByDiary(data){
@@ -155,11 +182,19 @@ export class CgdocVisitPage implements OnInit {
     console.log(event)
     let search = event.detail.value;
     this.diaryPage=1;
-    this.settingService.commonEventSearchList("health_diary",search).subscribe(res => {
-      let data:any = res['event_list']
-      this.data_diary_details=res['event_list'];
-      this.groupByDiary(data)
-    })
+    this.diaryPage_offset=0;
+
+    // For DB Connect
+    this.databaseSummary.getAllEventsSearchList('health_diary',search,'New',this.diaryPage_offset).then(res=>{
+       let data:any = res['event_list']
+       this.data_diary_details=res['event_list']; 
+       this.groupByDiary(data)
+    }).catch(err=>{console.log(err)})
+    // this.settingService.commonEventSearchList("health_diary",search).subscribe(res => {
+    //   let data:any = res['event_list']
+    //   this.data_diary_details=res['event_list'];
+    //   this.groupByDiary(data)
+    // })
   }
 
   onDiaryCancel(event){
@@ -170,11 +205,18 @@ export class CgdocVisitPage implements OnInit {
     console.log(event)
     let search = event.detail.value;
     this.doctorPage=1;
-    this.settingService.commonEventSearchList("doc_visit",search).subscribe(res => {
+    this.doctorPage_offset=0;
+    // this.settingService.commonEventSearchList("doc_visit",search).subscribe(res => {
+    //   let data:any = res['event_list']
+    //   this.data_doctor_details=res['event_list'];
+    //   this.groupByDoctor(data)
+    // })
+
+    this.databaseSummary.getAllEventsSearchList('doc_visit',search,'New',this.doctorPage_offset).then(res=>{
       let data:any = res['event_list']
-      this.data_doctor_details=res['event_list'];
+      this.data_doctor_details=res['event_list']; 
       this.groupByDoctor(data)
-    })
+   }).catch(err=>{console.log(err)})
   }
 
   onDoctorCancel(event){
@@ -233,71 +275,131 @@ export class CgdocVisitPage implements OnInit {
           "per_page":10,
           "sort":"created_at"
           }
-          console.log(filter_data)
-          console.log(this.userId)
-         this.settingService.record_filter(filter_data).subscribe(res=>{
-          console.log(res)
-          let data:any = res['diary_records']
-          this.data_diary_details=res['diary_records'];
-          this.groupByDiary(data);
-         })
+        //   console.log(filter_data)
+        //   console.log(this.userId)
+        //  this.settingService.record_filter(filter_data).subscribe(res=>{
+        //   console.log(res)
+        //   let data:any = res['diary_records']
+        //   this.data_diary_details=res['diary_records'];
+        //   this.groupByDiary(data);
+        //  })
+
+        this.databaseSummary.diaryRecordFilter(filter_data).then(res=>{
+          let data:any = res['event_list']
+          this.data_diary_details=res['event_list']; 
+          this.groupByDiary(data)
+        }).catch(err=>{console.log(err)})
   }
 
   loadData1(event){
     setTimeout(() => {
       console.log('Done');
       this.diaryPage+=1;
-      this.settingService.commonEventList("health_diary",this.diaryPage).subscribe(res => {
-         let data:any = res['event_list'];
-         let concat=this.data_diary_details.concat(data);
-          this.diary_scroll=concat.map(item => ({
-           id:item.id,
-           created_at: item.created_at,
-           description: item.description,
-           event_assets: item.event_assets,
-           event_name: item.event_name,
-           value: item.value,
-           event_type: item.event_type,
-           user_id: item.user_id,
-           playing: false,
-           progress: 0
-          }));
-          let value = []
-          const example = from(this.diary_scroll).pipe(
-            groupBy(person => formatDate(person.created_at, 'yyyy-MM-dd', 'en-US')),
-            mergeMap(group => group.pipe(toArray()))
-          ).subscribe(val => {
-            console.log(val)
-            if(val){
-                let ff = { "created_at":val[0].created_at,"events" :val }
-                value.push(ff);
-            }
-          })
-          this.diary_scroll=value;
-          //this.diary_scroll.map(item => this.diary_records.push(item));
-          this.diary_records=this.diary_scroll;
-          event.target.complete();
-          if (this.diaryPage *10 !=this.diary_records.length){
-             event.target.disabled = true;
+      this.diaryPage_offset=this.diaryPage*10-10;
+      let data:any[]=[];
+      this.databaseSummary.getAllEvents('health_diary','New',this.diaryPage_offset).then(async(res)=>{
+        data = res['event_list'];
+        let concat=this.data_diary_details.concat(data);
+        
+        this.diary_scroll=concat.map(item => ({
+          id:item.id,
+          event_id: item.event_id,
+          created_at: item.created_at,
+          description: item.description,
+          event_assets: item.event_assets,
+          event_options: item.event_options,
+          event_name: item.event_name,
+          value: item.value,
+          event_type: item.event_type,
+          user_id: item.user_id,
+          playing: false,
+          progress: 0
+        }));
+        let value = []
+        const example = from(this.diary_scroll).pipe(
+          groupBy(person => formatDate(person.created_at, 'yyyy-MM-dd', 'en-US')),
+          mergeMap(group => group.pipe(toArray()))
+        ).subscribe(val => {
+          console.log(val)
+          if(val){
+              let ff = { "created_at":val[0].created_at,"events" :val }
+              value.push(ff);
           }
-      },error=>{
-         event.target.disabled = true;
-      })
+        })
+        this.diary_scroll=value;
+        
+        this.diary_records=this.diary_scroll;
+        event.target.complete();
+        if (this.diaryPage *10 !=this.diary_records.length){
+            event.target.disabled = true;
+        }
+      }).catch(err=>{
+        event.target.disabled = true;
+        console.log(err)
+      })  
      }, 500);
+
+    //   this.settingService.commonEventList("health_diary",this.diaryPage).subscribe(res => {
+    //      let data:any = res['event_list'];
+    //      let concat=this.data_diary_details.concat(data);
+    //       this.diary_scroll=concat.map(item => ({
+    //        id:item.id,
+    //        created_at: item.created_at,
+    //        description: item.description,
+    //        event_assets: item.event_assets,
+    //        event_name: item.event_name,
+    //        value: item.value,
+    //        event_type: item.event_type,
+    //        user_id: item.user_id,
+    //        playing: false,
+    //        progress: 0
+    //       }));
+    //       let value = []
+    //       const example = from(this.diary_scroll).pipe(
+    //         groupBy(person => formatDate(person.created_at, 'yyyy-MM-dd', 'en-US')),
+    //         mergeMap(group => group.pipe(toArray()))
+    //       ).subscribe(val => {
+    //         console.log(val)
+    //         if(val){
+    //             let ff = { "created_at":val[0].created_at,"events" :val }
+    //             value.push(ff);
+    //         }
+    //       })
+    //       this.diary_scroll=value;
+    //       //this.diary_scroll.map(item => this.diary_records.push(item));
+    //       this.diary_records=this.diary_scroll;
+    //       event.target.complete();
+    //       if (this.diaryPage *10 !=this.diary_records.length){
+    //          event.target.disabled = true;
+    //       }
+    //   },error=>{
+    //      event.target.disabled = true;
+    //   })
+    //  }, 500);
+
+   
+
+
   }
 
   loadData2(event){
     setTimeout(() => {
       console.log('Done');
       this.doctorPage+=1;
-      this.settingService.commonEventList("doc_visit",this.doctorPage).subscribe(res => {
-         let data:any = res['event_list'];
-         let concat=this.data_doctor_details.concat(data);
+      this.doctorPage_offset=this.doctorPage*10-10;
+
+      // For DB Connect
+      let data:any[]=[];
+      this.databaseSummary.getAllEvents('doc_visit','New',this.doctorPage_offset).then(async(res)=>{
+         data = res['event_list'];
+         let concat=this.data_doctor_details.concat(data); 
           this.doctor_scroll=concat.map(item => ({
            id:item.id,
+           event_id: item.event_id,
            created_at: item.created_at,
            description: item.description,
            event_assets: item.event_assets,
+           event_options: item.event_options,
            event_name: item.event_name,
            value: item.value,
            event_type: item.event_type,
@@ -323,10 +425,51 @@ export class CgdocVisitPage implements OnInit {
           if (this.doctorPage *10 !=this.doctor_records.length){
              event.target.disabled = true;
           }
-      },error=>{
-         event.target.disabled = true;
-      })
+      }).catch(err=>{
+        event.target.disabled = true;
+        console.log(err)
+      })  
      }, 500);
+
+
+
+    //   this.settingService.commonEventList("doc_visit",this.doctorPage).subscribe(res => {
+    //      let data:any = res['event_list'];
+    //      let concat=this.data_doctor_details.concat(data);
+    //       this.doctor_scroll=concat.map(item => ({
+    //        id:item.id,
+    //        created_at: item.created_at,
+    //        description: item.description,
+    //        event_assets: item.event_assets,
+    //        event_name: item.event_name,
+    //        value: item.value,
+    //        event_type: item.event_type,
+    //        user_id: item.user_id,
+    //        playing: false,
+    //        progress: 0
+    //       }));
+    //       let value = []
+    //       const example = from(this.doctor_scroll).pipe(
+    //         groupBy(person => formatDate(person.created_at, 'yyyy-MM-dd', 'en-US')),
+    //         mergeMap(group => group.pipe(toArray()))
+    //       ).subscribe(val => {
+    //         console.log(val)
+    //         if(val){
+    //             let ff = { "created_at":val[0].created_at,"events" :val }
+    //             value.push(ff);
+    //         }
+    //       })
+    //       this.doctor_scroll=value;
+    //       //this.doctor_scroll.map(item => this.doctor_records.push(item));
+    //       this.doctor_records=this.doctor_scroll;
+    //       event.target.complete();
+    //       if (this.doctorPage *10 !=this.doctor_records.length){
+    //          event.target.disabled = true;
+    //       }
+    //   },error=>{
+    //      event.target.disabled = true;
+    //   })
+    //  }, 500);
   }
 
   // playDocRecord(record,data,index){

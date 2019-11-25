@@ -9,6 +9,8 @@ import { ToastController,AlertController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { environment } from '../../../environments/environment';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DataBaseSummaryProvider } from 'src/app/sqlite-database/database_provider';
+import { DatabaseProvider } from 'src/app/sqlite-database/database';
 
 
 @Component({
@@ -40,12 +42,16 @@ export class CgalertsPage implements OnInit {
   medi_loader:boolean=true;
   vital_loader:boolean=true;
   general_loader:boolean=true;
+  general_per_page_offset:number;
+  med_per_page_offset:number;
+  vital_per_page_offset:number;
+
 
 
   repeatOrder=[{'days':[{day:'Mon',checked:false}, {day:'Tue',checked:false}, {day:'Wed',checked:false},{day: 'Thu',checked:false},{ day:'Fri',checked:false},{day:'Sat',checked:false},{day:'Sun',checked:false}],
   'others':[{day:'1 mo.',checked:false},{day:'2 mo.',checked:false},{day:'3 mo.',checked:false},{day:'6 mo.',checked:false},{day:'12 mo.',checked:false}]}];
   
-  constructor(private toast: Toast, public alertController:AlertController,public toastController: ToastController,private router: Router, public route:ActivatedRoute,public settingService: careGiverService,public datepipe: DatePipe, private statusBar: StatusBar) {
+  constructor(private toast: Toast, public alertController:AlertController,public toastController: ToastController,private router: Router, public route:ActivatedRoute,public settingService: careGiverService,public datepipe: DatePipe, private statusBar: StatusBar,private databaseSummary: DataBaseSummaryProvider,private database: DatabaseProvider) {
     this.environmentUrl=environment.ImageUrl;
    }
 
@@ -60,30 +66,52 @@ export class CgalertsPage implements OnInit {
    
       this.medi_loader=true 
       this.med_per_page=1;
-      this.settingService.commonDateEventList('alert_medication',this.med_per_page).subscribe(res=>{
+      this.med_per_page_offset=0;
+      // this.settingService.commonDateEventList('alert_medication',this.med_per_page).subscribe(res=>{
+      //   this.medi_loader=false;
+      //   this.alert_med_list=res['event_list']; 
+      //   console.log(this.alert_med_list)
+      // })
+      // For DB Connection
+      this.databaseSummary.getAllEvents('alert_medication','New',this.med_per_page_offset).then(res=>{
         this.medi_loader=false;
         this.alert_med_list=res['event_list']; 
         console.log(this.alert_med_list)
-      })
-
+      }).catch(err=>{console.log(err)})   
    
      //Vitals List api
         this.vital_per_page=1;
+        this.vital_per_page_offset=0;
+
         this.vital_loader=true;
-        this.settingService.commonDateEventList('alert_vital',this.vital_per_page).subscribe(res=>{
+      //   this.settingService.commonDateEventList('alert_vital',this.vital_per_page).subscribe(res=>{
+      //   this.vital_loader=false;
+      //   this.alert_vital_list=res['event_list']; 
+      // })
+// For DB Connection
+      this.databaseSummary.getAllEvents('alert_vital','New',this.vital_per_page_offset).then(res=>{
         this.vital_loader=false;
         this.alert_vital_list=res['event_list']; 
-      })
+      }).catch(err=>{console.log(err)})
  
 
-    // general List api
+    // general List DB Connection
       this.general_per_page=1;
+      this.general_per_page_offset=0;
       this.general_loader=true;
-      this.settingService.commonDateEventList('alert_general',this.general_per_page).subscribe(res=>{
-        this.general_loader=false;
-        this.alert_general_list=res['event_list']; 
-      })
+      // this.settingService.commonDateEventList('alert_general',this.general_per_page).subscribe(res=>{
+      //   this.general_loader=false;
+      //   this.alert_general_list=res['event_list']; 
+      // })
 
+// For DB Connection
+      
+      this.databaseSummary.getAllEvents('alert_general','New',this.general_per_page_offset).then(res=>{
+        this.general_loader=false;
+        this.alert_general_list=res['event_list'];
+      }).catch(err=>{console.log(err)})
+
+// Need to update
       this.profile_details=JSON.parse(localStorage.getItem("details"));
       console.log(this.profile_details)
       if(this.profile_details!= undefined){
@@ -105,85 +133,126 @@ export class CgalertsPage implements OnInit {
 
   SearchItem(event_type,event){
     let search:any=event.detail.value;
-    this.settingService.commonDateEventSearchList(event_type,search).subscribe(res=>{
-      console.log(res)
+    let offset:number = 0;
+
+    // this.settingService.commonDateEventSearchList(event_type,search).subscribe(res=>{
+    //   console.log(res)
+    //   if(event_type=='alert_medication'){
+    //     this.med_per_page=1;
+    //     this.alert_med_list=res['event_list'];  
+    //   }else if(event_type=='alert_vital'){
+    //     this.vital_per_page=1;
+    //     this.alert_vital_list=res['event_list']; 
+    //   }else{
+    //     this.general_per_page=1;
+    //     this.alert_general_list=res['event_list']; 
+    //   }
+
+    // }, error=>{
+    //      this.presentToast("Server slow, Please try again")
+    // })
+
+    this.databaseSummary.getAllEventsSearchList(event_type,search,'New',offset).then(res=>{
+      
       if(event_type=='alert_medication'){
         this.med_per_page=1;
+        this.med_per_page_offset=0;
         this.alert_med_list=res['event_list'];  
       }else if(event_type=='alert_vital'){
         this.vital_per_page=1;
+        this.vital_per_page_offset=0;
         this.alert_vital_list=res['event_list']; 
       }else{
         this.general_per_page=1;
+        this.general_per_page_offset=0;
         this.alert_general_list=res['event_list']; 
       }
-
-    }, error=>{
-         this.presentToast("Server slow, Please try again")
-    })
+    }).catch(err=>{console.log(err)})
   }
 
   async presentToast(message: string) {
-    this.toast.show(message, '2000', 'bottom').subscribe(
-      toast => { 
-        console.log(toast); 
-      });
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  
   }
 
   loadData1(event) {
     setTimeout(() => {
      
-     this.med_per_page+=1;
+      this.med_per_page+=1;
+      this.med_per_page_offset=this.med_per_page*10-10;
     
-     this.settingService.commonDateEventList("alert_medication",this.med_per_page).subscribe(res => {
-         this.alert_med_scoll=res['event_list'];
-         this.alert_med_scoll.map(item => this.alert_med_list.push(item));
+    //  this.settingService.commonDateEventList("alert_medication",this.med_per_page).subscribe(res => {
+    //      this.alert_med_scoll=res['event_list'];
+    //      this.alert_med_scoll.map(item => this.alert_med_list.push(item));
         
-         event.target.complete();
-         if (this.med_per_page *10 !=this.alert_med_list.length){
-            event.target.disabled = true;
-         }
-     },error=>{
+    //      event.target.complete();
+    //      if (this.med_per_page *10 !=this.alert_med_list.length){
+    //         event.target.disabled = true;
+    //      }
+    //  },error=>{
+    //     event.target.disabled = true;
+    //  })
+    // }, 500);
+    this.databaseSummary.getAllEvents('alert_medication','New',this.med_per_page_offset).then(async(res)=>{
+      this.alert_med_scoll=res['event_list'];
+      this.alert_med_scoll.map(item => this.alert_med_list.push(item));
+    
+      event.target.complete();
+      if (this.med_per_page *10 !=this.alert_med_list.length){
         event.target.disabled = true;
-     })
-    }, 500);
+      }    
+    }).catch(err=>{
+      console.log(err)
+      event.target.disabled = true;
+    })
+  }, 500);
+
    }
 
    loadData2(event) {
     setTimeout(() => {
      
-     this.vital_per_page+=1;
+      this.vital_per_page+=1;
+      this.vital_per_page_offset=this.vital_per_page*10-10;
      
-     this.settingService.commonDateEventList("alert_vital",this.vital_per_page).subscribe(res => {
-         this.alert_vital_scoll=res['event_list']; 
-         this.alert_vital_scoll.map(item => this.alert_vital_list.push(item));
-        
-         event.target.complete();
-         if (this.vital_per_page *10 !=this.alert_vital_list.length){
-            event.target.disabled = true;
-         }
-     },error=>{
-        event.target.disabled = true;
-     })
-    }, 500);
+      this.databaseSummary.getAllEvents('alert_vital','New',this.vital_per_page_offset).then(async(res)=>{
+        this.alert_vital_scoll=res['event_list']; 
+        this.alert_vital_scoll.map(item => this.alert_vital_list.push(item));
+      
+        event.target.complete();
+        if (this.vital_per_page *10 !=this.alert_vital_list.length){
+          event.target.disabled = true;
+        }   
+      }).catch(err=>{
+        console.log(err)
+        event.target.disabled = true; 
+      })
+  
+      }, 500);
    }
 
    loadData3(event) {
     setTimeout(() => {
     
-     this.general_per_page+=1;
+      this.general_per_page+=1;
+      this.general_per_page_offset=this.general_per_page*10-10;
     
-     this.settingService.commonDateEventList("alert_general",this.general_per_page).subscribe(res => {
-         this.alert_general_scoll=res['event_list']; 
-         this.alert_general_scoll.map(item => this.alert_general_list.push(item));
-        
-         event.target.complete();
-         if (this.general_per_page *10 !=this.alert_general_list.length){
-            event.target.disabled = true;
-         }
-     },error=>{
+      this.databaseSummary.getAllEvents('alert_general','New',this.general_per_page_offset).then(async(res)=>{
+        this.alert_general_scoll=res['event_list']; 
+        this.alert_general_scoll.map(item => this.alert_general_list.push(item));
+      
+        event.target.complete();
+        if (this.general_per_page *10 !=this.alert_general_list.length){
+          event.target.disabled = true;
+        }
+      }).catch(err=>{
+        console.log(err);
         event.target.disabled = true;
-     })
+      })
     }, 500);
    }
    

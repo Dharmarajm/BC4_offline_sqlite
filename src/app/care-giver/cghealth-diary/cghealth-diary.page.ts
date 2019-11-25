@@ -10,7 +10,8 @@ import { concatMap, groupBy, map, mergeMap, reduce, toArray } from 'rxjs/operato
 import { formatDate } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { Toast } from '@ionic-native/toast/ngx';
-
+import { DatabaseProvider } from '../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 @Component({
   selector: 'app-cghealth-diary',
   templateUrl: './cghealth-diary.page.html',
@@ -27,11 +28,13 @@ export class CghealthDiaryPage implements OnInit {
   profile_details:any; 
   profile_pic:any;
   user_name:any;
+  healthDiaryPage_offset:number = 0;
+
   logoinitial:any;
   data_details:any[]=[];
   @ViewChild(IonInfiniteScroll,{ static: true }) infiniteScroll: IonInfiniteScroll;
 
-  constructor(private toast: Toast,private streamingMedia: StreamingMedia,public toastController: ToastController, private statusBar: StatusBar, private router: Router, public settingService: careGiverService, public alertController: AlertController) { 
+  constructor(private toast: Toast,private streamingMedia: StreamingMedia,public toastController: ToastController, private statusBar: StatusBar, private router: Router, public settingService: careGiverService, public alertController: AlertController,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) { 
     this.environmentUrl=environment.ImageUrl;
   }
 
@@ -42,23 +45,35 @@ export class CghealthDiaryPage implements OnInit {
     this.tabBar = document.getElementById('myTabBar1').childNodes[0];
     this.tabBar.classList.remove("tab-selected");
     this.healthDiaryPage = 1;
-    this.settingService.commonEventList("health_diary",this.healthDiaryPage).subscribe(res => {
-      let data:any = res['event_list']
-      this.data_details=res['event_list'];    
-      this.groupBy(data)
+    // this.settingService.commonEventList("health_diary",this.healthDiaryPage).subscribe(res => {
+    //   let data:any = res['event_list']
+    //   this.data_details=res['event_list'];    
+    //   this.groupBy(data)
 
+    //   this.status = true;
+
+
+    //   // Need to change
+    //   this.profile_details=JSON.parse(localStorage.getItem("details"));
+    //   if(this.profile_details!= undefined){
+    //   console.log(this.profile_details)
+    //   this.logoinitial=this.profile_details.name.charAt(0);
+    //   this.profile_pic=this.environmentUrl+this.profile_details.profile_pic;
+    //   if(this.profile_details.profile_pic==null){
+    //     this.profile_pic=null;  
+    //   }
+    //   this.user_name=this.profile_details.name;
+    //   }
+    // })
+
+    this.healthDiaryPage=1;
+    this.healthDiaryPage_offset=0;
+    this.databaseSummary.getAllEvents('health_diary','New',this.healthDiaryPage_offset).then(res=>{
+      let data:any = res['event_list']
+      this.data_details=res['event_list'];     
+      this.groupBy(data)
       this.status = true;
-      this.profile_details=JSON.parse(localStorage.getItem("details"));
-      if(this.profile_details!= undefined){
-      console.log(this.profile_details)
-      this.logoinitial=this.profile_details.name.charAt(0);
-      this.profile_pic=this.environmentUrl+this.profile_details.profile_pic;
-      if(this.profile_details.profile_pic==null){
-        this.profile_pic=null;  
-      }
-      this.user_name=this.profile_details.name;
-      }
-    })
+    }).catch(err=>{console.log(err)})
   }
 
   groupBy(data){
@@ -93,12 +108,20 @@ export class CghealthDiaryPage implements OnInit {
   onSearchChange(event) {
     console.log(event)
     let search = event.detail.value;
+    // this.healthDiaryPage=1;
+    // this.settingService.commonEventSearchList("health_diary",search).subscribe(res => {
+    //   let data:any = res['event_list'];
+    //   this.data_details=res['event_list']; 
+    //   this.groupBy(data)
+    // })
+
     this.healthDiaryPage=1;
-    this.settingService.commonEventSearchList("health_diary",search).subscribe(res => {
-      let data:any = res['event_list'];
-      this.data_details=res['event_list']; 
-      this.groupBy(data)
-    })
+    this.healthDiaryPage_offset=0;
+    this.databaseSummary.getAllEventsSearchList('health_diary',search,'New',this.healthDiaryPage_offset).then(res=>{
+       let data:any = res['event_list'];
+       this.data_details=res['event_list'];    
+       this.groupBy(data)
+    }).catch(err=>{console.log(err)})
   }
 
   onCancel(event) {
@@ -156,46 +179,91 @@ export class CghealthDiaryPage implements OnInit {
     loadData(event) {
      setTimeout(() => {
       console.log('Done');
-      this.healthDiaryPage+=1;
-      this.settingService.commonEventList("health_diary",this.healthDiaryPage).subscribe(res => {
-         let data:any = res['event_list'];
-         let concat=this.data_details.concat(data);
-          this.health_scroll=concat.map(item => ({
-           id:item.id,
-           created_at: item.created_at,
-           description: item.description,
-           event_assets: item.event_assets,
-           event_name: item.event_name,
-           value: item.value,
-           event_type: item.event_type,
-           user_id: item.user_id,
-           playing: false,
-           progress: 0
-          }));
-          let value = []
-          const example = from(this.health_scroll).pipe(
-            groupBy(person => formatDate(person.created_at, 'yyyy-MM-dd', 'en-US')),
-            mergeMap(group => group.pipe(toArray()))
-          ).subscribe(val => {
-            console.log(val)
-            if(val){
-                let ff: any = { "created_at":val[0].created_at,"events" :val }
-                value.push(ff);
-            }
-          })
-          this.health_scroll=value;
-          //this.health_scroll.map(item => this.health_records.push(item));
-          console.log(this.health_scroll)
-          console.log(this.health_records)
-          this.health_records=this.health_scroll;
-          event.target.complete();
-          if (this.healthDiaryPage *10 !=this.health_records.length){
-             event.target.disabled = true;
+    //   this.settingService.commonEventList("health_diary",this.healthDiaryPage).subscribe(res => {
+    //      let data:any = res['event_list'];
+    //      let concat=this.data_details.concat(data);
+    //       this.health_scroll=concat.map(item => ({
+    //        id:item.id,
+    //        created_at: item.created_at,
+    //        description: item.description,
+    //        event_assets: item.event_assets,
+    //        event_name: item.event_name,
+    //        value: item.value,
+    //        event_type: item.event_type,
+    //        user_id: item.user_id,
+    //        playing: false,
+    //        progress: 0
+    //       }));
+    //       let value = []
+    //       const example = from(this.health_scroll).pipe(
+    //         groupBy(person => formatDate(person.created_at, 'yyyy-MM-dd', 'en-US')),
+    //         mergeMap(group => group.pipe(toArray()))
+    //       ).subscribe(val => {
+    //         console.log(val)
+    //         if(val){
+    //             let ff: any = { "created_at":val[0].created_at,"events" :val }
+    //             value.push(ff);
+    //         }
+    //       })
+    //       this.health_scroll=value;
+    //       //this.health_scroll.map(item => this.health_records.push(item));
+    //       console.log(this.health_scroll)
+    //       console.log(this.health_records)
+    //       this.health_records=this.health_scroll;
+    //       event.target.complete();
+    //       if (this.healthDiaryPage *10 !=this.health_records.length){
+    //          event.target.disabled = true;
+    //       }
+    //   },error=>{
+    //      event.target.disabled = true;
+    //   })
+    //  }, 500);
+
+    // For DB Connection
+    this.healthDiaryPage+=1;
+    this.healthDiaryPage_offset=this.healthDiaryPage*10-10;
+    let data:any[]=[];
+    this.databaseSummary.getAllEvents('health_diary','New',this.healthDiaryPage_offset).then(async(res)=>{
+        data = res['event_list'];
+        let concat=this.data_details.concat(data);
+        this.health_scroll=concat.map(item => ({
+         id:item.id,
+         event_id: item.event_id,
+         created_at: item.created_at,
+         description: item.description,
+         event_assets: item.event_assets,
+         event_options: item.event_options,
+         event_name: item.event_name,
+         value: item.value,
+         event_type: item.event_type,
+         user_id: item.user_id,
+         playing: false,
+         progress: 0
+        }));
+        let value = []
+        const example = from(this.health_scroll).pipe(
+          groupBy(person => formatDate(person.created_at, 'yyyy-MM-dd', 'en-US')),
+          mergeMap(group => group.pipe(toArray()))
+        ).subscribe(val => {
+          console.log(val)
+          if(val){
+              let ff: any = { "created_at":val[0].created_at,"events" :val }
+              value.push(ff);
           }
+        })
+        this.health_scroll=value;
+        
+        this.health_records=this.health_scroll;
+        console.log(this.health_scroll)
+        console.log(this.health_records)
+        event.target.complete();
+        if (this.healthDiaryPage *10 !=this.health_records.length){
+           event.target.disabled = true;
+        }
       },error=>{
-         event.target.disabled = true;
-      })
-     }, 500);
+       event.target.disabled = true;
+      })  
+   }, 500);
     }
    
    toggleInfiniteScroll() {
