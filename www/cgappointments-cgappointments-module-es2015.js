@@ -100,6 +100,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
+
 
 
 
@@ -113,7 +117,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CgappointmentsPage = class CgappointmentsPage {
-    constructor(toast, alertController, toastController, router, route, service, datepipe, statusBar) {
+    constructor(toast, alertController, toastController, router, route, service, datepipe, statusBar, databaseSummary, database) {
         this.toast = toast;
         this.alertController = alertController;
         this.toastController = toastController;
@@ -122,13 +126,17 @@ let CgappointmentsPage = class CgappointmentsPage {
         this.service = service;
         this.datepipe = datepipe;
         this.statusBar = statusBar;
+        this.databaseSummary = databaseSummary;
+        this.database = database;
         this.selectedSegment = "future";
         this.show_details = [];
         this.per_page = 1;
+        this.per_page_offset = 0;
         this.appointmentData = [];
         this.appoint_details = [];
         this.getDate = this.datepipe.transform(new Date(), "dd MMM yyyy");
         this.completepage = 1;
+        this.completepage_offset = 0;
         this.environmentUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].ImageUrl;
     }
     ngOnInit() {
@@ -138,16 +146,20 @@ let CgappointmentsPage = class CgappointmentsPage {
         this.statusBar.backgroundColorByHexString('#c7a254');
         this.tabBar = document.getElementById('myTabBar1').childNodes[0];
         this.tabBar.classList.remove("tab-selected");
-        this.service.commonAppointmentDateEventList('appointment', this.per_page).subscribe(res => {
-            console.log(res);
-            this.show_details = res['event_list'];
-            this.groupBy(this.show_details);
-        });
-        this.service.completedAppointmentEventList('appointment', this.per_page).subscribe(res => {
-            console.log(res);
-            this.history_details = res['event_list'];
-            this.groupBy1(this.history_details);
-        });
+        // this.service.commonAppointmentDateEventList('appointment',this.per_page).subscribe(res=>{
+        //   console.log(res)
+        //   this.show_details = res['event_list'];
+        //   this.groupBy(this.show_details);
+        // })
+        // this.service.completedAppointmentEventList('appointment',this.per_page).subscribe(res=>{
+        //   console.log(res)
+        //   this.history_details = res['event_list'];
+        //   this.groupBy1(this.history_details);
+        // })
+        if (this.selectedSegment == 'future')
+            this.cgUpcoming();
+        else if (this.selectedSegment == 'completed')
+            this.cgCompleted();
         let todayDate = new Date();
         this.TodayDate = this.datepipe.transform(todayDate, "dd MMM yyyy");
         let tommorrowDate = todayDate.setDate(todayDate.getDate() + 1);
@@ -164,8 +176,41 @@ let CgappointmentsPage = class CgappointmentsPage {
             this.user_name = this.profile_details.name;
         }
     }
+    cgUpcoming() {
+        // this.service.commonAppointmentDateEventList('appointment',this.per_page).subscribe(res=>{
+        //   console.log(res)
+        //   this.show_details = res['event_list'];
+        //   this.groupBy(this.show_details);
+        // })
+        this.per_page = 1;
+        this.per_page_offset = 0;
+        console.log("upcoming");
+        // For DB Connect
+        this.databaseSummary.getAllEvents('appointment', 'New', this.per_page_offset).then(res => {
+            this.show_details = res['event_list'];
+            console.log(this.show_details);
+            this.groupBy(this.show_details);
+        }).catch(err => { console.log(err); });
+    }
+    cgCompleted() {
+        // this.service.completedAppointmentEventList('appointment',this.per_page).subscribe(res=>{
+        //   console.log(res)
+        //   this.history_details = res['event_list'];
+        //   this.groupBy1(this.history_details);
+        // })
+        this.completepage = 1;
+        this.completepage_offset = 0;
+        console.log("Completed");
+        // For DB Connect
+        this.databaseSummary.getAllEvents('appointment', 'history', this.completepage_offset).then(res => {
+            this.history_details = res['event_list'];
+            console.log(this.history_details);
+            this.groupBy1(this.history_details);
+        }).catch(err => { console.log(err); });
+    }
     segmentChanged(event) {
         console.log(event);
+        this.selectedSegment = event;
     }
     groupBy(data) {
         let records = data.map(item => ({
@@ -253,23 +298,34 @@ let CgappointmentsPage = class CgappointmentsPage {
         let search = event.detail.value;
         console.log(event);
         this.per_page = 1;
-        this.service.commonAppointmentSearchList('appointment', search).subscribe(res => {
-            console.log(res);
+        this.per_page_offset = 0;
+        // this.service.commonAppointmentSearchList('appointment',search).subscribe(res=>{
+        //   console.log(res)
+        //   this.show_details= res['event_list'];
+        // this.groupBy(this.show_details)
+        // }, error=>{
+        //     this.presentToast("Server slow, Please try again")
+        // })
+        // For DB Connect
+        this.databaseSummary.getAllEventsSearchList('appointment', search, 'New', this.per_page_offset).then(res => {
             this.show_details = res['event_list'];
             this.groupBy(this.show_details);
-        }, error => {
-            this.presentToast("Server slow, Please try again");
-        });
+        }).catch(err => { console.log(err); });
     }
     loadData(event) {
         setTimeout(() => {
             console.log('Done');
             this.per_page += 1;
-            this.service.commonAppointmentDateEventList("appointment", this.per_page).subscribe(res => {
-                let data = res['event_list'];
-                let concat = this.show_details.concat(data);
-                this.appointmentData = concat.map(item => ({
+            this.per_page_offset = this.per_page * 10 - 10;
+            let data = [];
+            // For DB Connect
+            this.databaseSummary.getAllEvents('appointment', 'New', this.per_page_offset).then((res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                data = res['event_list'];
+                console.log(data, 'load1');
+                let concat = yield this.show_details.concat(data);
+                this.appointmentData = yield concat.map(item => ({
                     id: item.id,
+                    event_id: item.event_id,
                     created_at: item.created_at,
                     description: item.description,
                     event_name: item.event_name,
@@ -294,13 +350,7 @@ let CgappointmentsPage = class CgappointmentsPage {
                         let tommorrowDate = todayDate.setDate(todayDate.getDate() + 1);
                         let mapTomorrowDate = this.datepipe.transform(tommorrowDate, "dd MMM yyyy");
                         console.log(mapTomorrowDate, todaydate);
-                        // if(this.getDate==todaydate){           
-                        //   mapDate="Today"
-                        // }else if(mapTomorrowDate==todaydate){            
-                        //   mapDate="Tommorrow"
-                        // }else{
                         mapDate = this.datepipe.transform(val[0].event_datetime, "dd MMM yyyy");
-                        // }
                         let ff = { "created_at": mapDate, "events": val };
                         if (mapDate != 'Today' && mapDate != "Tommorrow") {
                             valueOther.push(ff);
@@ -318,32 +368,92 @@ let CgappointmentsPage = class CgappointmentsPage {
                 if (this.per_page * 10 != this.display_details.length) {
                     event.target.disabled = true;
                 }
-            }, error => {
-                event.target.disabled = true;
-            });
+            })).catch(err => { console.log(err); });
         }, 500);
+        // this.service.commonAppointmentDateEventList("appointment",this.per_page).subscribe(res => {
+        //     let data:any[] = res['event_list'];
+        //     let concat=this.show_details.concat(data);
+        //     this.appointmentData=concat.map(item => ({
+        //       id:item.id,
+        //       created_at: item.created_at,
+        //       description: item.description,
+        //       event_name: item.event_name,
+        //       event_datetime:item.event_datetime,
+        //       event_category:item.event_category,
+        //       value: item.value,
+        //       event_type: item.event_type,
+        //       reminder:item['event_options']['reminder'],
+        //       appointment_fixed:item['event_options']['appointment_fixed']
+        //     }));
+        //     let valueOther = [];
+        //     let valueCurrent = [];
+        //     console.log(this.appointmentData)
+        //     const example = from(this.appointmentData).pipe(
+        //       groupBy(person => formatDate(person.event_datetime, 'yyyy-MM-dd', 'en-US')),
+        //       mergeMap(group => group.pipe(toArray()))
+        //     ).subscribe(val => {
+        //     console.log(val)
+        //     if(val){
+        //       let todaydate:any=this.datepipe.transform(val[0].event_datetime,"dd MMM yyyy")
+        //       console.log(this.getDate+1==todaydate)
+        //       console.log(this.getDate+1,todaydate)
+        //       let mapDate:any;
+        //       let todayDate:any=new Date(); 
+        //       let tommorrowDate=todayDate.setDate(todayDate.getDate() + 1);
+        //       let mapTomorrowDate:any=this.datepipe.transform(tommorrowDate,"dd MMM yyyy");
+        //       console.log(mapTomorrowDate,todaydate)
+        //       // if(this.getDate==todaydate){           
+        //       //   mapDate="Today"
+        //       // }else if(mapTomorrowDate==todaydate){            
+        //       //   mapDate="Tommorrow"
+        //       // }else{
+        //         mapDate=this.datepipe.transform(val[0].event_datetime,"dd MMM yyyy")
+        //       // }
+        //       let ff = { "created_at":mapDate,"events" :val };
+        //       if(mapDate!='Today' && mapDate!="Tommorrow"){
+        //         valueOther.push(ff);
+        //       }else{
+        //         valueCurrent.push(ff)
+        //       }
+        //     }
+        //   })
+        //     valueCurrent.map(item => valueOther.unshift(item));
+        //     this.appointmentData=valueOther;
+        //     this.appointmentData.map(item => this.display_details.push(item));
+        //     console.log(this.display_details,"data")
+        //     event.target.complete();
+        //     if (this.per_page *10 !=this.display_details.length){
+        //         event.target.disabled = true;
+        //     }
+        // },error=>{
+        //     event.target.disabled = true;
+        // })
     }
     completedSearchItem(event) {
         let search = event.detail.value;
         console.log(event);
         this.completepage = 1;
-        this.service.completedAppointmentSearchList('appointment', search).subscribe(res => {
-            console.log(res);
+        this.completepage_offset = 0;
+        // For DB Connect
+        this.databaseSummary.getAllEventsSearchList('appointment', search, 'history', this.completepage_offset).then(res => {
             this.history_details = res['event_list'];
             this.groupBy1(this.history_details);
-        }, error => {
-            this.presentToast("Server slow, Please try again");
-        });
+        }).catch(err => { console.log(err); });
     }
     loadData1(event) {
         setTimeout(() => {
             console.log('Done');
             this.completepage += 1;
-            this.service.completedAppointmentEventList("appointment", this.completepage).subscribe(res => {
-                let data = res['event_list'];
-                let concat = this.history_details.concat(data);
-                this.appointmentData = concat.map(item => ({
+            this.completepage_offset = this.completepage * 10 - 10;
+            console.log(this.completepage_offset);
+            let data = [];
+            this.databaseSummary.getAllEvents('appointment', 'history', this.completepage_offset).then((res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                data = res['event_list'];
+                console.log(data, 'load1');
+                let concat = yield this.history_details.concat(data);
+                this.appointmentData = yield concat.map(item => ({
                     id: item.id,
+                    event_id: item.event_id,
                     created_at: item.created_at,
                     description: item.description,
                     event_name: item.event_name,
@@ -369,10 +479,46 @@ let CgappointmentsPage = class CgappointmentsPage {
                 if (this.completepage * 10 != this.completed_data.length) {
                     event.target.disabled = true;
                 }
-            }, error => {
-                event.target.disabled = true;
-            });
+            })).catch(err => { console.log(err); });
         }, 500);
+        // console.log('Done');
+        // this.completepage+=1;
+        // this.service.completedAppointmentEventList("appointment",this.completepage).subscribe(res => {
+        //     let data:any[] = res['event_list'];
+        //     let concat=this.history_details.concat(data);
+        //     this.appointmentData=concat.map(item => ({
+        //       id:item.id,
+        //       created_at: item.created_at,
+        //       description: item.description,
+        //       event_name: item.event_name,
+        //       event_datetime:item.event_datetime,
+        //       event_category:item.event_category,
+        //       value: item.value,
+        //       event_type: item.event_type,
+        //       reminder:item['event_options']['reminder'],
+        //       appointment_fixed:item['event_options']['appointment_fixed']
+        //     }));
+        //     let valueOther = [];
+        //     console.log(this.appointmentData)
+        //     const example = from(this.appointmentData).pipe(
+        //       groupBy(person => formatDate(person.event_datetime, 'yyyy-MM-dd', 'en-US')),
+        //       mergeMap(group => group.pipe(toArray()))
+        //     ).subscribe(val => {
+        //     console.log(val)
+        //     if(val){  
+        //       let ff = { "created_at":val[0].event_datetime,"events" :val };
+        //       valueOther.push(ff) 
+        //       console.log(valueOther)          
+        //     }
+        //   })
+        //     this.completed_data=valueOther;
+        //     event.target.complete();
+        //     if (this.completepage *10 !=this.completed_data.length){
+        //         event.target.disabled = true;
+        //     }
+        // },error=>{
+        //     event.target.disabled = true;
+        // })
     }
     ionViewWillLeave() {
         this.statusBar.backgroundColorByHexString('#483df6');
@@ -387,7 +533,9 @@ CgappointmentsPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
     { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"] },
     { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_12__["DataBaseSummaryProvider"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_11__["DatabaseProvider"] }
 ];
 CgappointmentsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -395,7 +543,7 @@ CgappointmentsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./cgappointments.page.html */ "./node_modules/raw-loader/index.js!./src/app/care-giver/cgappointments/cgappointments.page.html"),
         styles: [__webpack_require__(/*! ./cgappointments.page.scss */ "./src/app/care-giver/cgappointments/cgappointments.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_10__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ToastController"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_10__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["ToastController"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_8__["StatusBar"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_12__["DataBaseSummaryProvider"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_11__["DatabaseProvider"]])
 ], CgappointmentsPage);
 
 

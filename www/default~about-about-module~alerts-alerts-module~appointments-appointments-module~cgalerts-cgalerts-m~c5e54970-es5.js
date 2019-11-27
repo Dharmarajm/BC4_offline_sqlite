@@ -1,203 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3"],{
-
-/***/ "./src/app/self-care/self-common-service/settings/settings.service.ts":
-/*!****************************************************************************!*\
-  !*** ./src/app/self-care/self-common-service/settings/settings.service.ts ***!
-  \****************************************************************************/
-/*! exports provided: settingsService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settingsService", function() { return settingsService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-
-
-
-var settingsService = /** @class */ (function () {
-    function settingsService(http) {
-        this.http = http;
-    }
-    settingsService.prototype.relatedto = function () {
-        return this.http.get("enum_masters?category_name=health_diary");
-    };
-    settingsService.prototype.aboutUpdate = function (detail) {
-        return this.http.post("health_details/about_update", detail);
-    };
-    settingsService.prototype.aboutDetail = function () {
-        return this.http.get("health_details/about");
-    };
-    settingsService.prototype.getPreview = function (id) {
-        return this.http.get("users/user_details?user_uid=" + id);
-    };
-    settingsService.prototype.setting = function () {
-        return this.http.get("users/picture_show");
-    };
-    settingsService.prototype.editprofile = function (val, id) {
-        return this.http.put("users/" + id, val);
-    };
-    settingsService.prototype.sendimage = function (val) {
-        return this.http.post("users/profile_picture", val);
-    };
-    settingsService.prototype.contactDetails = function () {
-        return this.http.get("emergency_details");
-    };
-    settingsService.prototype.addContacts = function (user_details) {
-        return this.http.post("emergency_details", user_details);
-    };
-    settingsService.prototype.deleteData = function (id) {
-        return this.http.delete("emergency_details/" + id);
-    };
-    settingsService.prototype.deleteCaregiver = function (id) {
-        return this.http.get("emergency_details/caregiver_delete?cg_id=" + id);
-    };
-    settingsService.prototype.commonEventList = function (event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=created_at&&per_page=10&&page=" + page);
-    };
-    settingsService.prototype.commonDateEventList = function (event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    };
-    settingsService.prototype.commonAppointmentDateEventList = function (event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=ASC&&sort=event_datetime&&per_page=10&&page=" + page);
-    };
-    settingsService.prototype.commonEventSearchList = function (event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=created_at");
-    };
-    settingsService.prototype.commonDateEventSearchList = function (event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=event_datetime");
-    };
-    settingsService.prototype.commonAppointmentSearchList = function (event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=ASC&&sort=event_datetime");
-    };
-    settingsService.prototype.commonVitalList = function (event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    };
-    settingsService.prototype.commonVitalSearchList = function (event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=event_datetime");
-    };
-    settingsService.prototype.commonDeleteEvent = function (id) {
-        return this.http.delete("events/" + id);
-    };
-    settingsService.prototype.commonPost = function (record) {
-        return this.http.post("events", record);
-    };
-    settingsService.prototype.vitalCommonPost = function (record) {
-        return this.http.post("events/vital_update", record);
-    };
-    settingsService.prototype.commonUpdatePost = function (id, record) {
-        return this.http.put("events/" + id, record);
-    };
-    settingsService.prototype.myEmergencyHealthDetail = function () {
-        return this.http.get("health_details");
-    };
-    settingsService.prototype.myEmergencyHealthUpdate = function (data) {
-        return this.http.post("health_details", data);
-    };
-    settingsService.prototype.myEmergencyPreview = function () {
-        return this.http.get("users/preview");
-    };
-    settingsService.prototype.reportType = function () {
-        return this.http.get("enum_masters?category_name=report");
-    };
-    settingsService.prototype.deleteImage = function (data) {
-        return this.http.post("events/delete_image", data);
-    };
-    settingsService.prototype.vitaldelete = function (data) {
-        return this.http.put("events/vital_delete", data);
-    };
-    settingsService.prototype.vitalReading = function () {
-        return this.http.get("enum_masters?category_name=vital");
-    };
-    settingsService.prototype.vitalFoodTime = function () {
-        return this.http.get("enum_masters?category_name=food_time");
-    };
-    settingsService.prototype.view_expenses = function (id) {
-        return this.http.get("events/expense_list?user_id=" + id);
-    };
-    settingsService.prototype.event_view_delete = function (id) {
-        return this.http.delete("events/" + id);
-    };
-    settingsService.prototype.event_add_option = function () {
-        return this.http.get("enum_masters?category_name=spent_place");
-    };
-    settingsService.prototype.event_add = function (value) {
-        return this.http.post("events", value);
-    };
-    settingsService.prototype.view_expenses_cal = function (id) {
-        return this.http.get("events/expense_calculation?user_id=" + id);
-    };
-    settingsService.prototype.chartrepeat = function (id) {
-        return this.http.get("events/expense_chart?user_id=" + id);
-    };
-    settingsService.prototype.main_chart = function (id) {
-        return this.http.get("events/expense_cals_chart?user_id=" + id);
-    };
-    settingsService.prototype.filterChart = function (id, data) {
-        return this.http.post("events/expense_chart_filter?user_id=" + id, data);
-    };
-    settingsService.prototype.filterAmount = function (from, to, id) {
-        return this.http.get("events/expense_list?from_date=" + from + "&&end_date=" + to + "&&user_id=" + id);
-    };
-    settingsService.prototype.Appointmentdropdown = function () {
-        return this.http.get("enum_masters?category_name=appointment");
-    };
-    settingsService.prototype.appointmentDetails = function (data) {
-        return this.http.post("events", data);
-    };
-    settingsService.prototype.EditDetails = function (id, data) {
-        return this.http.put("events/" + id, data);
-    };
-    settingsService.prototype.recentAppointment = function (id) {
-        return this.http.get("events/appointment_list?user_id=" + id);
-    };
-    settingsService.prototype.record_filter = function (data) {
-        console.log(data);
-        return this.http.post("events/diary_recording?", data);
-    };
-    settingsService.prototype.completedAppointmentEventList = function (event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&tab=history&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    };
-    settingsService.prototype.completedAppointmentSearchList = function (event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&tab=history&&order=DESC&&sort=event_datetime");
-    };
-    settingsService.prototype.vitalFoodTime1 = function () {
-        return this.http.get("enum_masters?category_name=food_time_1");
-    };
-    settingsService.prototype.vitalFoodTime2 = function () {
-        return this.http.get("enum_masters?category_name=food_time_2");
-    };
-    settingsService.prototype.vitalEventListNew = function (id) {
-        return this.http.get("events/vitals_list1?user_id=" + id);
-    };
-    settingsService.prototype.reading_history = function (event, id, page, count) {
-        return this.http.get("events/vital_history?event_name=" + event + "&&user_id=" + id + "&&page=" + page + "&&per_page=" + count);
-    };
-    settingsService.prototype.filterReading = function (event, id, page, count, from, end) {
-        return this.http.get("events/vital_history?event_name=" + event + "&&user_id=" + id + "&&page=" + page + "&&per_page=" + count + "&&from_date=" + from + "&&end_date=" + end);
-    };
-    settingsService.prototype.vitalEventList = function (id) {
-        return this.http.get("events/vital_names_list?user_id=" + id);
-    };
-    settingsService.prototype.vitalfilter = function (id, data) {
-        return this.http.post("events/vitals_list1?user_id=" + id, data);
-    };
-    settingsService.ctorParameters = function () { return [
-        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-    ]; };
-    settingsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-            providedIn: 'root'
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
-    ], settingsService);
-    return settingsService;
-}());
-
-
-
-/***/ }),
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970"],{
 
 /***/ "./src/app/sqlite-database/database.ts":
 /*!*********************************************!*\
@@ -340,7 +141,7 @@ var DatabaseProvider = /** @class */ (function () {
                                 location: 'default'
                             }).then(function (db) {
                                 var sql = "INSERT INTO events VALUES (NULL,NULL,?,?,?,?,?,?,?,?,?,?,?,?)";
-                                var createEventData = [data["event_name"], data["description"], data["value"], data["event_datetime"], data["event_type"], data["event_category"], data["event_assets"], JSON.stringify(data["event_options"]), user_id, new Date().toJSON(), new Date().toJSON(), false];
+                                var createEventData = [data["event_name"], data["description"], data["value"], data["event_datetime"], data["event_type"], data["event_category"], JSON.stringify(data["event_assets"]), JSON.stringify(data["event_options"]), user_id, new Date().toJSON(), new Date().toJSON(), false];
                                 return db.executeSql(sql, createEventData).then(function (row) {
                                     return { event_id: row.insertId };
                                 }).catch(function (res) {
@@ -348,6 +149,41 @@ var DatabaseProvider = /** @class */ (function () {
                                 });
                             })];
                 }
+            });
+        });
+    };
+    DatabaseProvider.prototype.createAnVitalEvent = function (getData) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                //let user_id = await this.getuserID();
+                return [2 /*return*/, this.sqlite.create({
+                        name: DATA_BASE_NAME,
+                        location: 'default'
+                    }).then(function (db) {
+                        var event_type = getData['event_type'];
+                        var event_name = getData['event_name'];
+                        var event_datetime = getData['event_datetime'];
+                        var event_category = getData['event_category'];
+                        var sqlSearchEventQuery = "SELECT * FROM events WHERE (event_type='" + event_type + "' AND event_name='" + event_name + "' AND event_category='" + event_category + "' AND DATE(event_datetime)=DATE('" + event_datetime + "') AND delete1='false')";
+                        return db.executeSql(sqlSearchEventQuery, []).then(function (data) {
+                            console.log(data);
+                            for (var i = 0; i < data.rows.length; i++) {
+                                console.log(data.rows.item(i));
+                            }
+                            if (data.rows.length > 0) {
+                                var passData = data.rows.item(0);
+                                getData['id'] = passData['id'];
+                                return _this.updateAnEvent(passData['event_id'], getData);
+                            }
+                            else {
+                                console.log(getData);
+                                return _this.createAnEvent(getData);
+                            }
+                        }).catch(function (res) {
+                            console.log(res);
+                        });
+                    })];
             });
         });
     };
@@ -364,7 +200,8 @@ var DatabaseProvider = /** @class */ (function () {
                                 location: 'default'
                             }).then(function (db) {
                                 var sql = "UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?";
-                                var updateEventData = [data["id"], data["event_name"], data["description"], data["value"], data["event_datetime"], data["event_type"], data["event_category"], data["event_assets"], JSON.stringify(data["event_options"]), user_id, data["created_at"], new Date().toJSON(), false, id];
+                                var updateEventData = [data["id"], data["event_name"], data["description"], data["value"], data["event_datetime"], data["event_type"], data["event_category"], JSON.stringify(data["event_assets"]), JSON.stringify(data["event_options"]), user_id, data["created_at"], new Date().toJSON(), false, id];
+                                console.log(data);
                                 return db.executeSql(sql, updateEventData).then(function (row) {
                                     return { event_id: row.insertId };
                                 }).catch(function (res) {
@@ -473,25 +310,20 @@ var DatabaseProvider = /** @class */ (function () {
     };
     DatabaseProvider.prototype.updateUserData = function (data) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var user_id;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getuserID()];
-                    case 1:
-                        user_id = _a.sent();
-                        return [2 /*return*/, this.sqlite.create({
-                                name: DATA_BASE_NAME,
-                                location: 'default'
-                            }).then(function (db) {
-                                var sql = "UPDATE users SET name = ?, email = ?, mobile_no = ?, updated_at = ? WHERE id = ? AND role_id = ?";
-                                var updateUserData = [data['name'], data['email'], data['mobile_no'], new Date().toJSON(), user_id, 1];
-                                db.executeSql(sql, updateUserData).then(function (row) {
-                                    return { event_id: row.insertId };
-                                }).catch(function (res) {
-                                    return res;
-                                });
-                            })];
-                }
+                //let user_id = await this.getuserID();
+                return [2 /*return*/, this.sqlite.create({
+                        name: DATA_BASE_NAME,
+                        location: 'default'
+                    }).then(function (db) {
+                        var sql = "UPDATE users SET name = ?, email = ?, mobile_no = ?, updated_at = ? WHERE id = ? AND role_id = ?";
+                        var updateUserData = [data['name'], data['email'], data['mobile_no'], new Date().toJSON(), data['id'], data['role_id']];
+                        db.executeSql(sql, updateUserData).then(function (row) {
+                            return { event_id: row.insertId };
+                        }).catch(function (res) {
+                            return res;
+                        });
+                    })];
             });
         });
     };
@@ -552,6 +384,31 @@ var DatabaseProvider = /** @class */ (function () {
             return db.executeSql(sql, [id]).then(function (row) {
                 return { event_id: row.insertId };
             }).catch(function (res) {
+                return res;
+            });
+        });
+    };
+    DatabaseProvider.prototype.deletePatientFromCareGiver = function (id) {
+        var _this = this;
+        return this.sqlite.create({
+            name: DATA_BASE_NAME,
+            location: 'default'
+        }).then(function (db) {
+            var sql = "UPDATE users SET delete1 = ? WHERE id = ?";
+            return db.executeSql(sql, [true, id]).then(function (row) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                var sql1, createEventData1;
+                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            sql1 = "DELETE FROM events WHERE user_id = ?";
+                            createEventData1 = [id];
+                            return [4 /*yield*/, db.executeSql(sql1, createEventData1)];
+                        case 1:
+                            _a.sent();
+                            return [2 /*return*/, { event_id: row.insertId }];
+                    }
+                });
+            }); }).catch(function (res) {
                 return res;
             });
         });
@@ -655,4 +512,4 @@ var DatabaseProvider = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3-es5.js.map
+//# sourceMappingURL=default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970-es5.js.map

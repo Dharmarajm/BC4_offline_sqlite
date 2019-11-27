@@ -5,6 +5,8 @@ import { ToastController, AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import {CalendarModal, CalendarModalOptions,  CalendarResult } from 'ion2-calendar';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DatabaseProvider } from '../../../sqlite-database/database';
+
 
 @Component({
   selector: 'app-view-summary',
@@ -21,29 +23,29 @@ export class viewSummaryPage {
   from_date1:any;
   loader:boolean=true;
   getChartValue:any[]=[];
-  constructor(private toast: Toast,public modalCtrl: ModalController, public toastController: ToastController,public alertController:AlertController,public expen_view: settingsService, private statusBar: StatusBar) {
+  constructor(private toast: Toast,public modalCtrl: ModalController, public toastController: ToastController,public alertController:AlertController,public expen_view: settingsService, private statusBar: StatusBar,private database: DatabaseProvider) {
    }
 
   ngOnInit() {           
   }
 
   ionViewWillEnter() {
-    this.user_id = localStorage.getItem("user_id");
+      this.user_id = localStorage.getItem("user_id");
       this.expen_view.view_expenses(this.user_id).subscribe(res =>{
-      this.view_all_expen = res;
-      this.from_date1= this.view_all_expen.from_date 
-      this.end_date1= this.view_all_expen.end_date
-      console.log(this.view_all_expen,'res')  
-      this.expen_key = Object.keys(this.view_all_expen.expense);
-      this.getChartValue=this.expen_key.map(res=>{
-        console.log(res)
-        let chartType=res.toString();       
-        const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
-        return total
-        });
-        this.loader=false;
-       console.log(this.getChartValue)
-       console.log(this.expen_key);
+        this.view_all_expen = res;
+        this.from_date1= this.view_all_expen.from_date 
+        this.end_date1= this.view_all_expen.end_date
+        console.log(this.view_all_expen,'res')  
+        this.expen_key = Object.keys(this.view_all_expen.expense);
+        this.getChartValue=this.expen_key.map(res=>{
+          console.log(res)
+          let chartType=res.toString();       
+          const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
+          return total
+          });
+          this.loader=false;
+        console.log(this.getChartValue)
+        console.log(this.expen_key);
       })
       
     this.statusBar.backgroundColorByHexString('#ffd32c');
@@ -61,13 +63,18 @@ export class viewSummaryPage {
         {
           text: 'Confirm',
           handler: () => {
-           this.expen_view.event_view_delete(id).subscribe(res =>{      
-              console.log(res)                                   
-              this.presentToast("Record Deleted Successfully");  
-              this.ionViewWillEnter();          
-            }, error => {
-              console.log(error)
-            })
+          //  this.expen_view.event_view_delete(id).subscribe(res =>{      
+          //     console.log(res)                                   
+          //     this.presentToast("Record Deleted Successfully");  
+          //     this.ionViewWillEnter();          
+          //   }, error => {
+          //     console.log(error)
+          //   })
+
+          this.database.deleteAnEvent(id).then(res=>{
+            this.presentToast("Record Deleted Successfully");  
+            this.ionViewWillEnter();          
+          }).catch(err=>{console.log(err)})
           }
         },
         {

@@ -4,6 +4,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';  
 import { AlertController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 @Component({
   selector: 'app-vitals',
@@ -23,7 +24,7 @@ export class VitalsPage implements OnInit {
   status1: any = -1;
   user_id: string;
  
-  constructor(public datepipe: DatePipe, public service: settingsService, public route:ActivatedRoute,public router: Router, public alertController:AlertController, private statusBar: StatusBar) { }
+  constructor(public datepipe: DatePipe, public service: settingsService, public route:ActivatedRoute,public router: Router, public alertController:AlertController, private statusBar: StatusBar,private databaseSummary: DataBaseSummaryProvider) { }
 
   ngOnInit() { }
 
@@ -33,11 +34,21 @@ export class VitalsPage implements OnInit {
     this.tabBar.classList.remove("tab-selected");
     this.status=true;
     this.user_id = localStorage.getItem("user_id");
-    this.service.vitalEventList(this.user_id).subscribe(res=>{
-    this.status = false;
-    this.vital_details=res;
-    this.vital_keys = Object.keys(this.vital_details); 
-    }) 
+    
+    // this.service.vitalEventList(this.user_id).subscribe(res=>{
+    // this.status = false;
+    // this.vital_details=res;
+    // this.vital_keys = Object.keys(this.vital_details); 
+    // })
+
+    this.databaseSummary.getVitalEvents('vital','New',7).then(res=>{
+      console.log(res)
+      this.status = false;
+      this.vital_details=res;
+      this.vital_keys = Object.keys(this.vital_details);
+    }).catch(err=>{console.log(err)})
+    
+    
   }
   
  history_view(event){

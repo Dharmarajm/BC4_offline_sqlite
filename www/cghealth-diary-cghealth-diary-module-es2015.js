@@ -108,6 +108,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
 
 
 
@@ -121,8 +123,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 let CghealthDiaryPage = class CghealthDiaryPage {
-    constructor(toast, streamingMedia, toastController, statusBar, router, settingService, alertController) {
+    constructor(toast, streamingMedia, toastController, statusBar, router, settingService, alertController, database, databaseSummary) {
         this.toast = toast;
         this.streamingMedia = streamingMedia;
         this.toastController = toastController;
@@ -130,10 +134,13 @@ let CghealthDiaryPage = class CghealthDiaryPage {
         this.router = router;
         this.settingService = settingService;
         this.alertController = alertController;
+        this.database = database;
+        this.databaseSummary = databaseSummary;
         this.health_records = [];
         this.health_scroll = [];
         this.status = false;
         this.healthDiaryPage = 1;
+        this.healthDiaryPage_offset = 0;
         this.data_details = [];
         this.environmentUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].ImageUrl;
     }
@@ -143,22 +150,31 @@ let CghealthDiaryPage = class CghealthDiaryPage {
         this.tabBar = document.getElementById('myTabBar1').childNodes[0];
         this.tabBar.classList.remove("tab-selected");
         this.healthDiaryPage = 1;
-        this.settingService.commonEventList("health_diary", this.healthDiaryPage).subscribe(res => {
+        // this.settingService.commonEventList("health_diary",this.healthDiaryPage).subscribe(res => {
+        //   let data:any = res['event_list']
+        //   this.data_details=res['event_list'];    
+        //   this.groupBy(data)
+        //   this.status = true;
+        //   // Need to change
+        //   this.profile_details=JSON.parse(localStorage.getItem("details"));
+        //   if(this.profile_details!= undefined){
+        //   console.log(this.profile_details)
+        //   this.logoinitial=this.profile_details.name.charAt(0);
+        //   this.profile_pic=this.environmentUrl+this.profile_details.profile_pic;
+        //   if(this.profile_details.profile_pic==null){
+        //     this.profile_pic=null;  
+        //   }
+        //   this.user_name=this.profile_details.name;
+        //   }
+        // })
+        this.healthDiaryPage = 1;
+        this.healthDiaryPage_offset = 0;
+        this.databaseSummary.getAllEvents('health_diary', 'New', this.healthDiaryPage_offset).then(res => {
             let data = res['event_list'];
             this.data_details = res['event_list'];
             this.groupBy(data);
             this.status = true;
-            this.profile_details = JSON.parse(localStorage.getItem("details"));
-            if (this.profile_details != undefined) {
-                console.log(this.profile_details);
-                this.logoinitial = this.profile_details.name.charAt(0);
-                this.profile_pic = this.environmentUrl + this.profile_details.profile_pic;
-                if (this.profile_details.profile_pic == null) {
-                    this.profile_pic = null;
-                }
-                this.user_name = this.profile_details.name;
-            }
-        });
+        }).catch(err => { console.log(err); });
     }
     groupBy(data) {
         let records = data.map(item => ({
@@ -186,12 +202,19 @@ let CghealthDiaryPage = class CghealthDiaryPage {
     onSearchChange(event) {
         console.log(event);
         let search = event.detail.value;
+        // this.healthDiaryPage=1;
+        // this.settingService.commonEventSearchList("health_diary",search).subscribe(res => {
+        //   let data:any = res['event_list'];
+        //   this.data_details=res['event_list']; 
+        //   this.groupBy(data)
+        // })
         this.healthDiaryPage = 1;
-        this.settingService.commonEventSearchList("health_diary", search).subscribe(res => {
+        this.healthDiaryPage_offset = 0;
+        this.databaseSummary.getAllEventsSearchList('health_diary', search, 'New', this.healthDiaryPage_offset).then(res => {
             let data = res['event_list'];
             this.data_details = res['event_list'];
             this.groupBy(data);
-        });
+        }).catch(err => { console.log(err); });
     }
     onCancel(event) {
         console.log(event);
@@ -237,15 +260,59 @@ let CghealthDiaryPage = class CghealthDiaryPage {
     loadData(event) {
         setTimeout(() => {
             console.log('Done');
+            //   this.settingService.commonEventList("health_diary",this.healthDiaryPage).subscribe(res => {
+            //      let data:any = res['event_list'];
+            //      let concat=this.data_details.concat(data);
+            //       this.health_scroll=concat.map(item => ({
+            //        id:item.id,
+            //        created_at: item.created_at,
+            //        description: item.description,
+            //        event_assets: item.event_assets,
+            //        event_name: item.event_name,
+            //        value: item.value,
+            //        event_type: item.event_type,
+            //        user_id: item.user_id,
+            //        playing: false,
+            //        progress: 0
+            //       }));
+            //       let value = []
+            //       const example = from(this.health_scroll).pipe(
+            //         groupBy(person => formatDate(person.created_at, 'yyyy-MM-dd', 'en-US')),
+            //         mergeMap(group => group.pipe(toArray()))
+            //       ).subscribe(val => {
+            //         console.log(val)
+            //         if(val){
+            //             let ff: any = { "created_at":val[0].created_at,"events" :val }
+            //             value.push(ff);
+            //         }
+            //       })
+            //       this.health_scroll=value;
+            //       //this.health_scroll.map(item => this.health_records.push(item));
+            //       console.log(this.health_scroll)
+            //       console.log(this.health_records)
+            //       this.health_records=this.health_scroll;
+            //       event.target.complete();
+            //       if (this.healthDiaryPage *10 !=this.health_records.length){
+            //          event.target.disabled = true;
+            //       }
+            //   },error=>{
+            //      event.target.disabled = true;
+            //   })
+            //  }, 500);
+            // For DB Connection
             this.healthDiaryPage += 1;
-            this.settingService.commonEventList("health_diary", this.healthDiaryPage).subscribe(res => {
-                let data = res['event_list'];
+            this.healthDiaryPage_offset = this.healthDiaryPage * 10 - 10;
+            let data = [];
+            this.databaseSummary.getAllEvents('health_diary', 'New', this.healthDiaryPage_offset).then((res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                data = res['event_list'];
                 let concat = this.data_details.concat(data);
                 this.health_scroll = concat.map(item => ({
                     id: item.id,
+                    event_id: item.event_id,
                     created_at: item.created_at,
                     description: item.description,
                     event_assets: item.event_assets,
+                    event_options: item.event_options,
                     event_name: item.event_name,
                     value: item.value,
                     event_type: item.event_type,
@@ -262,15 +329,14 @@ let CghealthDiaryPage = class CghealthDiaryPage {
                     }
                 });
                 this.health_scroll = value;
-                //this.health_scroll.map(item => this.health_records.push(item));
+                this.health_records = this.health_scroll;
                 console.log(this.health_scroll);
                 console.log(this.health_records);
-                this.health_records = this.health_scroll;
                 event.target.complete();
                 if (this.healthDiaryPage * 10 != this.health_records.length) {
                     event.target.disabled = true;
                 }
-            }, error => {
+            }), error => {
                 event.target.disabled = true;
             });
         }, 500);
@@ -297,7 +363,9 @@ CghealthDiaryPage.ctorParameters = () => [
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
     { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_12__["DatabaseProvider"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_13__["DataBaseSummaryProvider"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonInfiniteScroll"], { static: true }),
@@ -309,7 +377,7 @@ CghealthDiaryPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./cghealth-diary.page.html */ "./node_modules/raw-loader/index.js!./src/app/care-giver/cghealth-diary/cghealth-diary.page.html"),
         styles: [__webpack_require__(/*! ./cghealth-diary.page.scss */ "./src/app/care-giver/cghealth-diary/cghealth-diary.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_11__["Toast"], _ionic_native_streaming_media_ngx__WEBPACK_IMPORTED_MODULE_6__["StreamingMedia"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_11__["Toast"], _ionic_native_streaming_media_ngx__WEBPACK_IMPORTED_MODULE_6__["StreamingMedia"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_12__["DatabaseProvider"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_13__["DataBaseSummaryProvider"]])
 ], CghealthDiaryPage);
 
 

@@ -101,6 +101,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var src_app_sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+/* harmony import */ var src_app_sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+
+
 
 
 
@@ -111,7 +115,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CgalertsPage = /** @class */ (function () {
-    function CgalertsPage(toast, alertController, toastController, router, route, settingService, datepipe, statusBar) {
+    function CgalertsPage(toast, alertController, toastController, router, route, settingService, datepipe, statusBar, databaseSummary, database) {
         this.toast = toast;
         this.alertController = alertController;
         this.toastController = toastController;
@@ -120,6 +124,8 @@ var CgalertsPage = /** @class */ (function () {
         this.settingService = settingService;
         this.datepipe = datepipe;
         this.statusBar = statusBar;
+        this.databaseSummary = databaseSummary;
+        this.database = database;
         this.selectedSegment = 'first';
         this.alert_med_list = [];
         this.alert_vital_list = [];
@@ -147,25 +153,45 @@ var CgalertsPage = /** @class */ (function () {
         this.tabBar.classList.remove("tab-selected");
         this.medi_loader = true;
         this.med_per_page = 1;
-        this.settingService.commonDateEventList('alert_medication', this.med_per_page).subscribe(function (res) {
+        this.med_per_page_offset = 0;
+        // this.settingService.commonDateEventList('alert_medication',this.med_per_page).subscribe(res=>{
+        //   this.medi_loader=false;
+        //   this.alert_med_list=res['event_list']; 
+        //   console.log(this.alert_med_list)
+        // })
+        // For DB Connection
+        this.databaseSummary.getAllEvents('alert_medication', 'New', this.med_per_page_offset).then(function (res) {
             _this.medi_loader = false;
             _this.alert_med_list = res['event_list'];
             console.log(_this.alert_med_list);
-        });
+        }).catch(function (err) { console.log(err); });
         //Vitals List api
         this.vital_per_page = 1;
+        this.vital_per_page_offset = 0;
         this.vital_loader = true;
-        this.settingService.commonDateEventList('alert_vital', this.vital_per_page).subscribe(function (res) {
+        //   this.settingService.commonDateEventList('alert_vital',this.vital_per_page).subscribe(res=>{
+        //   this.vital_loader=false;
+        //   this.alert_vital_list=res['event_list']; 
+        // })
+        // For DB Connection
+        this.databaseSummary.getAllEvents('alert_vital', 'New', this.vital_per_page_offset).then(function (res) {
             _this.vital_loader = false;
             _this.alert_vital_list = res['event_list'];
-        });
-        // general List api
+        }).catch(function (err) { console.log(err); });
+        // general List DB Connection
         this.general_per_page = 1;
+        this.general_per_page_offset = 0;
         this.general_loader = true;
-        this.settingService.commonDateEventList('alert_general', this.general_per_page).subscribe(function (res) {
+        // this.settingService.commonDateEventList('alert_general',this.general_per_page).subscribe(res=>{
+        //   this.general_loader=false;
+        //   this.alert_general_list=res['event_list']; 
+        // })
+        // For DB Connection
+        this.databaseSummary.getAllEvents('alert_general', 'New', this.general_per_page_offset).then(function (res) {
             _this.general_loader = false;
             _this.alert_general_list = res['event_list'];
-        });
+        }).catch(function (err) { console.log(err); });
+        // Need to update
         this.profile_details = JSON.parse(localStorage.getItem("details"));
         console.log(this.profile_details);
         if (this.profile_details != undefined) {
@@ -184,31 +210,54 @@ var CgalertsPage = /** @class */ (function () {
     CgalertsPage.prototype.SearchItem = function (event_type, event) {
         var _this = this;
         var search = event.detail.value;
-        this.settingService.commonDateEventSearchList(event_type, search).subscribe(function (res) {
-            console.log(res);
+        var offset = 0;
+        // this.settingService.commonDateEventSearchList(event_type,search).subscribe(res=>{
+        //   console.log(res)
+        //   if(event_type=='alert_medication'){
+        //     this.med_per_page=1;
+        //     this.alert_med_list=res['event_list'];  
+        //   }else if(event_type=='alert_vital'){
+        //     this.vital_per_page=1;
+        //     this.alert_vital_list=res['event_list']; 
+        //   }else{
+        //     this.general_per_page=1;
+        //     this.alert_general_list=res['event_list']; 
+        //   }
+        // }, error=>{
+        //      this.presentToast("Server slow, Please try again")
+        // })
+        this.databaseSummary.getAllEventsSearchList(event_type, search, 'New', offset).then(function (res) {
             if (event_type == 'alert_medication') {
                 _this.med_per_page = 1;
+                _this.med_per_page_offset = 0;
                 _this.alert_med_list = res['event_list'];
             }
             else if (event_type == 'alert_vital') {
                 _this.vital_per_page = 1;
+                _this.vital_per_page_offset = 0;
                 _this.alert_vital_list = res['event_list'];
             }
             else {
                 _this.general_per_page = 1;
+                _this.general_per_page_offset = 0;
                 _this.alert_general_list = res['event_list'];
             }
-        }, function (error) {
-            _this.presentToast("Server slow, Please try again");
-        });
+        }).catch(function (err) { console.log(err); });
     };
     CgalertsPage.prototype.presentToast = function (message) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var toast;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                this.toast.show(message, '2000', 'bottom').subscribe(function (toast) {
-                    console.log(toast);
-                });
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.toastController.create({
+                            message: message,
+                            duration: 2000
+                        })];
+                    case 1:
+                        toast = _a.sent();
+                        toast.present();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -216,14 +265,31 @@ var CgalertsPage = /** @class */ (function () {
         var _this = this;
         setTimeout(function () {
             _this.med_per_page += 1;
-            _this.settingService.commonDateEventList("alert_medication", _this.med_per_page).subscribe(function (res) {
-                _this.alert_med_scoll = res['event_list'];
-                _this.alert_med_scoll.map(function (item) { return _this.alert_med_list.push(item); });
-                event.target.complete();
-                if (_this.med_per_page * 10 != _this.alert_med_list.length) {
-                    event.target.disabled = true;
-                }
-            }, function (error) {
+            _this.med_per_page_offset = _this.med_per_page * 10 - 10;
+            //  this.settingService.commonDateEventList("alert_medication",this.med_per_page).subscribe(res => {
+            //      this.alert_med_scoll=res['event_list'];
+            //      this.alert_med_scoll.map(item => this.alert_med_list.push(item));
+            //      event.target.complete();
+            //      if (this.med_per_page *10 !=this.alert_med_list.length){
+            //         event.target.disabled = true;
+            //      }
+            //  },error=>{
+            //     event.target.disabled = true;
+            //  })
+            // }, 500);
+            _this.databaseSummary.getAllEvents('alert_medication', 'New', _this.med_per_page_offset).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                var _this = this;
+                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                    this.alert_med_scoll = res['event_list'];
+                    this.alert_med_scoll.map(function (item) { return _this.alert_med_list.push(item); });
+                    event.target.complete();
+                    if (this.med_per_page * 10 != this.alert_med_list.length) {
+                        event.target.disabled = true;
+                    }
+                    return [2 /*return*/];
+                });
+            }); }).catch(function (err) {
+                console.log(err);
                 event.target.disabled = true;
             });
         }, 500);
@@ -232,14 +298,20 @@ var CgalertsPage = /** @class */ (function () {
         var _this = this;
         setTimeout(function () {
             _this.vital_per_page += 1;
-            _this.settingService.commonDateEventList("alert_vital", _this.vital_per_page).subscribe(function (res) {
-                _this.alert_vital_scoll = res['event_list'];
-                _this.alert_vital_scoll.map(function (item) { return _this.alert_vital_list.push(item); });
-                event.target.complete();
-                if (_this.vital_per_page * 10 != _this.alert_vital_list.length) {
-                    event.target.disabled = true;
-                }
-            }, function (error) {
+            _this.vital_per_page_offset = _this.vital_per_page * 10 - 10;
+            _this.databaseSummary.getAllEvents('alert_vital', 'New', _this.vital_per_page_offset).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                var _this = this;
+                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                    this.alert_vital_scoll = res['event_list'];
+                    this.alert_vital_scoll.map(function (item) { return _this.alert_vital_list.push(item); });
+                    event.target.complete();
+                    if (this.vital_per_page * 10 != this.alert_vital_list.length) {
+                        event.target.disabled = true;
+                    }
+                    return [2 /*return*/];
+                });
+            }); }).catch(function (err) {
+                console.log(err);
                 event.target.disabled = true;
             });
         }, 500);
@@ -248,14 +320,20 @@ var CgalertsPage = /** @class */ (function () {
         var _this = this;
         setTimeout(function () {
             _this.general_per_page += 1;
-            _this.settingService.commonDateEventList("alert_general", _this.general_per_page).subscribe(function (res) {
-                _this.alert_general_scoll = res['event_list'];
-                _this.alert_general_scoll.map(function (item) { return _this.alert_general_list.push(item); });
-                event.target.complete();
-                if (_this.general_per_page * 10 != _this.alert_general_list.length) {
-                    event.target.disabled = true;
-                }
-            }, function (error) {
+            _this.general_per_page_offset = _this.general_per_page * 10 - 10;
+            _this.databaseSummary.getAllEvents('alert_general', 'New', _this.general_per_page_offset).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                var _this = this;
+                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                    this.alert_general_scoll = res['event_list'];
+                    this.alert_general_scoll.map(function (item) { return _this.alert_general_list.push(item); });
+                    event.target.complete();
+                    if (this.general_per_page * 10 != this.alert_general_list.length) {
+                        event.target.disabled = true;
+                    }
+                    return [2 /*return*/];
+                });
+            }); }).catch(function (err) {
+                console.log(err);
                 event.target.disabled = true;
             });
         }, 500);
@@ -272,7 +350,9 @@ var CgalertsPage = /** @class */ (function () {
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
         { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"] },
         { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"] },
-        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"] }
+        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"] },
+        { type: src_app_sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_9__["DataBaseSummaryProvider"] },
+        { type: src_app_sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"] }
     ]; };
     CgalertsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -280,7 +360,7 @@ var CgalertsPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./cgalerts.page.html */ "./node_modules/raw-loader/index.js!./src/app/care-giver/cgalerts/cgalerts.page.html"),
             styles: [__webpack_require__(/*! ./cgalerts.page.scss */ "./src/app/care-giver/cgalerts/cgalerts.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_8__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_8__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], src_app_sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_9__["DataBaseSummaryProvider"], src_app_sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"]])
     ], CgalertsPage);
     return CgalertsPage;
 }());

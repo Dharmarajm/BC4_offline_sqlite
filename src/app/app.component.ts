@@ -23,6 +23,7 @@ export class AppComponent {
   //public unsubscribeBackEvent: any;
 
   public counter = 0;
+  patientList:any;
   routesubscribe:any;
     constructor(
     public http: HttpClient,
@@ -46,11 +47,34 @@ export class AppComponent {
   } 
 
   ngOnInit() {
- 
-    this.getAllEventsList().subscribe((responseList)=>{
-      console.log(responseList)
-     })
+    var array1 = ["ab", "xyz", "qr", "pqrs"],
+    array2 = ["ab", "def", "lmno", "def", "qr", "pqrs"],
+    unique = array1.filter(v => array2.indexOf(v) == -1);
+    
+    console.log(unique);
+    // this.getAllEventsList().subscribe((responseList)=>{
+    //   console.log(responseList)
+    //  })
+    //this.getUserIdFromCareGiver();
   }
+
+  // getPatientsList(){
+  //   let response1 = this.http.get(`users/patient_list`);
+  //   return forkJoin([response1]);
+  // }
+
+  // getUserIdFromCareGiver(){
+  //    this.getPatientsList().subscribe((responseList)=>{
+  //     this.patientList = responseList;
+  //     let userIds = []
+  //     for(let i in this.patientList[0]['patient']){
+  //       alert(i)
+  //       userIds.push(this.patientList[0]['patient'][i]['id'])  
+  //       console.log(userIds)
+  //     }
+  //     console.log(userIds)
+  //   })
+  // }
 
   initializeApp() {
     this.initializeBackButtonCustomHandler();
@@ -131,10 +155,10 @@ export class AppComponent {
   ngOnDestroy() {
  }
 
- getAllEventsList(){
-  let response1 = this.http.get(`users/user_data`);
-  return forkJoin([response1]);
- }
+//  getAllEventsList(){
+//   let response1 = this.http.get(`users/user_data`);
+//   return forkJoin([response1]);
+//  }
 
 
  

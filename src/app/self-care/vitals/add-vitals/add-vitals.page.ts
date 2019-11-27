@@ -6,6 +6,8 @@ import { DatePipe } from '@angular/common';
 import { ToastController, AlertController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DatabaseProvider } from '../../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
 
 
 
@@ -69,7 +71,7 @@ export class AddVitalsPage implements OnInit {
   };
   
 
-  constructor(private toast: Toast,public alertController: AlertController, public toastController: ToastController, public datepipe: DatePipe, public service: settingsService, private fb: FormBuilder, public route: ActivatedRoute, public router: Router, private statusBar: StatusBar) {
+  constructor(private toast: Toast,public alertController: AlertController, public toastController: ToastController, public datepipe: DatePipe, public service: settingsService, private fb: FormBuilder, public route: ActivatedRoute, public router: Router, private statusBar: StatusBar,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) {
    
     
    }
@@ -96,14 +98,23 @@ export class AddVitalsPage implements OnInit {
       value4: ['']
      }); 
 
-    this.service.vitalReading().subscribe(res => {
+    // this.service.vitalReading().subscribe(res => {
 
+    //   this.vital_options = res['enum_masters']
+
+    //   this.vital_keys = this.vital_options;
+    //   this.vital_keys.push('Others')
+
+    // })
+
+    this.databaseSummary.getEnumMasters('vital').then((res)=>{
       this.vital_options = res['enum_masters']
 
       this.vital_keys = this.vital_options;
       this.vital_keys.push('Others')
-
     })
+    .catch(error=>{ console.log(error) });
+
     this.vitalform.controls['event_name'].valueChanges.subscribe((eventName)=>{
       this.submitted=false; 
       this.selectedVital=eventName;
@@ -282,8 +293,17 @@ export class AddVitalsPage implements OnInit {
     } 
 
 
-    let date=this.datepipe.transform(val.event_datetime,"dd MMM yyyy")
+    //let date=this.datepipe.transform(val.event_datetime,"dd MMM yyyy")
     //let time=this.datepipe.transform(val.event_time,"HH:mm:ss")
+
+    let new1 = new Date(val.event_time);
+    let gethours = new1.getHours();
+    let getMinutes = new1.getMinutes();
+
+    let new2 = new Date(val.event_datetime);
+    new2.setHours(gethours)
+    new2.setMinutes(getMinutes)
+    let event_dateTime = new2.toJSON();
       this.name = val['event_name'];
     if(val['event_name']=='Others'){
       this.name=val['others'];
@@ -293,7 +313,7 @@ export class AddVitalsPage implements OnInit {
                   "event_options":options,
                   "event_category":val.food_time,
                   //"value":val.value+" "+this.showunit,
-                  "event_datetime":date +" "+ val.event_time,
+                  "event_datetime":event_dateTime,
                   "event_type": "vital",
                   "description":val.description   
               }
@@ -413,11 +433,18 @@ async addconfirmation(){
         role: 'submit',
         cssClass: 'secondary',
         handler: () => {
-          this.service.vitalCommonPost(this.vital_post).subscribe(res=>{
+          // this.service.vitalCommonPost(this.vital_post).subscribe(res=>{
+          //   this.Progress=false;  
+          //   this.vital_details=res;
+          //   this.presentAlert();   
+          // });
+          
+          this.database.createAnVitalEvent(this.vital_post).then((res)=>{
             this.Progress=false;  
-            this.vital_details=res;
-            this.presentAlert();   
-          });
+            //this.vital_details=res;
+            this.presentAlert();  
+          })
+
         }
       }
     ]

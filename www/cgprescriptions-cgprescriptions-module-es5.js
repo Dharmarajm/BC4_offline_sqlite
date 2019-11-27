@@ -372,6 +372,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
+
 
 
 
@@ -384,17 +388,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CgprescriptionsPage = /** @class */ (function () {
-    function CgprescriptionsPage(toast, alertController, toastController, router, statusBar, settingService) {
+    function CgprescriptionsPage(toast, alertController, toastController, router, statusBar, settingService, databaseSummary, database) {
         this.toast = toast;
         this.alertController = alertController;
         this.toastController = toastController;
         this.router = router;
         this.statusBar = statusBar;
         this.settingService = settingService;
+        this.databaseSummary = databaseSummary;
+        this.database = database;
         this.pres_page = 1;
         this.prescribe_details = [];
         this.prescribe_scroll = [];
         this.data_details = [];
+        this.pres_page_offset = 0;
         this.environmentUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].ImageUrl;
     }
     CgprescriptionsPage.prototype.ngOnInit = function () {
@@ -406,25 +413,32 @@ var CgprescriptionsPage = /** @class */ (function () {
         this.tabBar = document.getElementById('myTabBar1').childNodes[0];
         this.tabBar.classList.remove("tab-selected");
         this.pres_page = 1;
-        this.settingService.commonDateEventList("prescription", this.pres_page).subscribe(function (res) {
+        this.pres_page_offset = 0;
+        // this.settingService.commonDateEventList("prescription",this.pres_page).subscribe(res => {      
+        //     let data:any = res['event_list'];
+        //     this.data_details=res['event_list'];      
+        //        setInterval(() => {  
+        //          this.loader=false;
+        //        }, 2000);
+        //     this.groupBy(data);
+        this.databaseSummary.getAllEvents('prescription', 'New', this.pres_page_offset).then(function (res) {
             var data = res['event_list'];
             _this.data_details = res['event_list'];
-            setInterval(function () {
-                _this.loader = false;
-            }, 2000);
             _this.groupBy(data);
-            _this.profile_details = JSON.parse(localStorage.getItem("details"));
-            console.log(_this.profile_details);
-            if (_this.profile_details != undefined) {
-                console.log(_this.profile_details);
-                _this.logoinitial = _this.profile_details.name.charAt(0);
-                _this.profile_pic = _this.environmentUrl + _this.profile_details.profile_pic;
-                if (_this.profile_details.profile_pic == null) {
-                    _this.profile_pic = null;
-                }
-                _this.user_name = _this.profile_details.name;
-            }
-        });
+        }).catch(function (err) { console.log(err); });
+        //  Need to Update
+        //     this.profile_details=JSON.parse(localStorage.getItem("details"));
+        //     console.log(this.profile_details)
+        //     if(this.profile_details!= undefined){
+        //     console.log(this.profile_details)
+        //     this.logoinitial=this.profile_details.name.charAt(0);
+        //     this.profile_pic=this.environmentUrl+this.profile_details.profile_pic;
+        //     if(this.profile_details.profile_pic==null){
+        //       this.profile_pic=null;  
+        //     }
+        //     this.user_name=this.profile_details.name;
+        //     }
+        //  }); 
     };
     CgprescriptionsPage.prototype.groupBy = function (data) {
         var records = data.map(function (item) { return ({
@@ -499,57 +513,117 @@ var CgprescriptionsPage = /** @class */ (function () {
         var _this = this;
         var search = event.detail.value;
         console.log(event);
-        this.settingService.commonDateEventSearchList('prescription', search).subscribe(function (res) {
-            console.log(res);
+        this.pres_page = 1;
+        this.pres_page_offset = 0;
+        // this.settingService.commonDateEventSearchList('prescription',search).subscribe(res=>{
+        //   console.log(res)
+        //  let data:any = res['event_list'];
+        //  this.data_details=res['event_list'];  
+        //  this.groupBy(data)
+        // }, error=>{
+        //      this.presentToast("Server slow, Please try again")
+        // })
+        this.databaseSummary.getAllEventsSearchList('prescription', search, 'New', this.pres_page_offset).then(function (res) {
             var data = res['event_list'];
             _this.data_details = res['event_list'];
             _this.groupBy(data);
-        }, function (error) {
-            _this.presentToast("Server slow, Please try again");
-        });
+        }).catch(function (err) { console.log(err); });
     };
     CgprescriptionsPage.prototype.loadData = function (event) {
         var _this = this;
         setTimeout(function () {
             console.log('Done');
             _this.pres_page += 1;
-            _this.settingService.commonDateEventList("prescription", _this.pres_page).subscribe(function (res) {
-                var data = res['event_list'];
-                var concat = _this.data_details.concat(data);
-                _this.prescribe_scroll = concat.map(function (item) { return ({
-                    id: item.id,
-                    created_at: item.created_at,
-                    description: item.description,
-                    event_assets: item.event_assets,
-                    event_name: item.event_name,
-                    event_datetime: item.event_datetime,
-                    value: item.value,
-                    event_type: item.event_type,
-                    user_id: item.user_id,
-                    playing: false,
-                    progress: 0
-                }); });
-                var value = [];
-                var example = Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["from"])(_this.prescribe_scroll).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["groupBy"])(function (person) { return Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(person.event_datetime, 'yyyy-MM-dd', 'en-US'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["mergeMap"])(function (group) { return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["toArray"])()); })).subscribe(function (val) {
-                    console.log(val);
-                    if (val) {
-                        var ff = {};
-                        ff["created_at"] = val[0].event_datetime;
-                        ff["events"] = val;
-                        value.push(ff);
+            _this.pres_page_offset = _this.pres_page * 10 - 10;
+            var data = [];
+            _this.databaseSummary.getAllEvents('prescription', 'New', _this.pres_page_offset).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                var concat, _a, value, example;
+                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            data = res['event_list'];
+                            return [4 /*yield*/, this.data_details.concat(data)];
+                        case 1:
+                            concat = _b.sent();
+                            _a = this;
+                            return [4 /*yield*/, concat.map(function (item) { return ({
+                                    id: item.id,
+                                    event_id: item.event_id,
+                                    created_at: item.created_at,
+                                    description: item.description,
+                                    event_assets: item.event_assets,
+                                    event_options: item.event_options,
+                                    event_name: item.event_name,
+                                    event_datetime: item.event_datetime,
+                                    value: item.value,
+                                    event_type: item.event_type,
+                                    user_id: item.user_id,
+                                    playing: false,
+                                    progress: 0
+                                }); })];
+                        case 2:
+                            _a.prescribe_scroll = _b.sent();
+                            value = [];
+                            example = Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["from"])(this.prescribe_scroll).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["groupBy"])(function (person) { return Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(person.event_datetime, 'yyyy-MM-dd', 'en-US'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["mergeMap"])(function (group) { return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["toArray"])()); })).subscribe(function (val) {
+                                console.log(val);
+                                if (val) {
+                                    var ff = {};
+                                    ff["created_at"] = val[0].event_datetime;
+                                    ff["events"] = val;
+                                    value.push(ff);
+                                }
+                            });
+                            this.prescribe_scroll = value;
+                            this.prescribe_details = this.prescribe_scroll;
+                            event.target.complete();
+                            if (this.pres_page * 10 != this.prescribe_details.length) {
+                                event.target.disabled = true;
+                            }
+                            return [2 /*return*/];
                     }
                 });
-                _this.prescribe_scroll = value;
-                //this.prescribe_scroll.map(item => this.prescribe_details.push(item));
-                _this.prescribe_details = _this.prescribe_scroll;
-                event.target.complete();
-                if (_this.pres_page * 10 != _this.prescribe_details.length) {
-                    event.target.disabled = true;
-                }
-            }, function (error) {
-                event.target.disabled = true;
-            });
+            }); }).catch(function (err) { console.log(err); });
         }, 500);
+        //   this.settingService.commonDateEventList("prescription",this.pres_page).subscribe(res => {
+        //      let data:any[] = res['event_list'];
+        //      let concat=this.data_details.concat(data);
+        //       this.prescribe_scroll=concat.map(item => ({
+        //        id:item.id,
+        //        created_at: item.created_at,
+        //        description: item.description,
+        //        event_assets: item.event_assets,
+        //        event_name: item.event_name,
+        //        event_datetime:item.event_datetime,
+        //        value: item.value,
+        //        event_type: item.event_type,
+        //        user_id: item.user_id,
+        //        playing: false,
+        //        progress: 0
+        //       }));
+        //       let value:any = []
+        //       const example = from(this.prescribe_scroll).pipe(
+        //         groupBy(person => formatDate(person.event_datetime, 'yyyy-MM-dd', 'en-US')),
+        //         mergeMap(group => group.pipe(toArray()))
+        //       ).subscribe(val => {
+        //         console.log(val)
+        //         if(val){
+        //             let ff: any = {}
+        //             ff["created_at"] = val[0].event_datetime 
+        //             ff["events"] = val
+        //             value.push(ff);
+        //         }
+        //       })
+        //       this.prescribe_scroll=value;
+        //       //this.prescribe_scroll.map(item => this.prescribe_details.push(item));
+        //       this.prescribe_details=this.prescribe_scroll;
+        //       event.target.complete();
+        //       if (this.pres_page *10 !=this.prescribe_details.length){
+        //          event.target.disabled = true;
+        //       }
+        //   },error=>{
+        //      event.target.disabled = true;
+        //   })
+        //  }, 500);
     };
     CgprescriptionsPage.prototype.viewPrescription = function (view) {
         if (this.prescribe_details.length != 0) {
@@ -571,7 +645,9 @@ var CgprescriptionsPage = /** @class */ (function () {
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
         { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"] },
-        { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_4__["careGiverService"] }
+        { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_4__["careGiverService"] },
+        { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_12__["DataBaseSummaryProvider"] },
+        { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_11__["DatabaseProvider"] }
     ]; };
     CgprescriptionsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -579,7 +655,7 @@ var CgprescriptionsPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./cgprescriptions.page.html */ "./node_modules/raw-loader/index.js!./src/app/care-giver/cgprescriptions/cgprescriptions.page.html"),
             styles: [__webpack_require__(/*! ./cgprescriptions.page.scss */ "./src/app/care-giver/cgprescriptions/cgprescriptions.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_10__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_4__["careGiverService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_10__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_4__["careGiverService"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_12__["DataBaseSummaryProvider"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_11__["DatabaseProvider"]])
     ], CgprescriptionsPage);
     return CgprescriptionsPage;
 }());

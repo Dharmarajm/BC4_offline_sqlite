@@ -54,7 +54,7 @@ export class Tab1Page {
         this.pic = res;
         let globalURL=null
         let localURL=null;
-        if(this.pic['user_info']['user_picture']['url'] != null){
+        if(this.pic['user_info']['user_picture']!=null && this.pic['user_info']['user_picture']['url'] != null){
           let source = this.pic['user_info']['user_picture']['url']
           let gurl = source.includes("file:///");
           if(gurl==true){

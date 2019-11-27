@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ToastController } from '@ionic/angular';
 import { Toast } from '@ionic-native/toast/ngx';
 import { AlertController } from '@ionic/angular';
+import { DatabaseProvider } from '../../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
 
 @Component({
   selector: 'app-add-expenses',
@@ -23,8 +25,8 @@ export class addExpensesPage {
     submitted:boolean=false;
     todaydate:any;
     year:any;
-  add_alert: any;
-    constructor(public alertController:AlertController,private toast: Toast,public toastController: ToastController, public router:Router,public event: settingsService,private fb: FormBuilder, private statusBar: StatusBar) { }
+    add_alert: any;
+    constructor(public alertController:AlertController,private toast: Toast,public toastController: ToastController, public router:Router,public event: settingsService,private fb: FormBuilder, private statusBar: StatusBar,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) { }
   
     ngOnInit() {
       this.todaydate=new Date().toISOString();
@@ -43,6 +45,15 @@ export class addExpensesPage {
           
           this.total_option.push("Others")
         })
+        
+      //offline database code for listing spent on type
+        // this.databaseSummary.getEnumMasters('spent_place').then((res)=>{
+        //   this.Options_res =res;
+        //   this.total_option =this.Options_res.enum_masters;
+          
+        //   this.total_option.push("Others")
+        // })
+        // .catch(error=>{ console.log(error) });
     }
 
     ionViewWillEnter() {
@@ -95,10 +106,17 @@ export class addExpensesPage {
             cssClass: 'secondary',
             handler: () => {
               this.Progress=true;
+
               this.event.event_add(this.myForm.value).subscribe(res =>{
-              this.Progress=false;
-              this.router.navigate(['/self-care-tabs/tabs/tab1/expenses']);
-        })
+                this.Progress=false;
+                this.router.navigate(['/self-care-tabs/tabs/tab1/expenses']);
+              })
+              
+              //offline database code for add the expense
+              // this.database.createAnEvent(this.myForm.value).then((res)=>{
+              //   this.Progress=false;
+              //   this.router.navigate(['/self-care-tabs/tabs/tab1/expenses']);
+              // })
             }
           }
         ]

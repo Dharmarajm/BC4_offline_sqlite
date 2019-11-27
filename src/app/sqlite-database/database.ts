@@ -112,7 +112,7 @@ export class DatabaseProvider {
             location: 'default'
         }).then((db: SQLiteObject) => {
             let sql = `INSERT INTO events VALUES (NULL,NULL,?,?,?,?,?,?,?,?,?,?,?,?)`;
-            let createEventData = [data["event_name"],data["description"],data["value"],data["event_datetime"],data["event_type"],data["event_category"],data["event_assets"],JSON.stringify(data["event_options"]),user_id,new Date().toJSON(),new Date().toJSON(),false]
+            let createEventData = [data["event_name"],data["description"],data["value"],data["event_datetime"],data["event_type"],data["event_category"],JSON.stringify(data["event_assets"]),JSON.stringify(data["event_options"]),user_id,new Date().toJSON(),new Date().toJSON(),false]
             return db.executeSql(sql,createEventData).then((row: any)=>{  
                 return { event_id:row.insertId }
             }).catch(res=>{
@@ -121,6 +121,37 @@ export class DatabaseProvider {
         })
     }
 
+    async createAnVitalEvent(getData) {
+        //let user_id = await this.getuserID();
+        return this.sqlite.create({
+            name: DATA_BASE_NAME,
+            location: 'default'
+        }).then((db: SQLiteObject) => {
+            let event_type = getData['event_type'];
+            let event_name = getData['event_name'];
+            let event_datetime = getData['event_datetime'];
+            let event_category = getData['event_category']
+            let sqlSearchEventQuery = `SELECT * FROM events WHERE (event_type='${event_type}' AND event_name='${event_name}' AND event_category='${event_category}' AND DATE(event_datetime)=DATE('${event_datetime}') AND delete1='false')`;
+            return db.executeSql(sqlSearchEventQuery, []).then((data) => {
+                console.log(data)
+                for (let i = 0; i < data.rows.length; i++) {
+                    console.log(data.rows.item(i));
+                }
+                if(data.rows.length>0){
+                    let passData = data.rows.item(0); 
+                    getData['id'] = passData['id'];
+                    
+                    return this.updateAnEvent(passData['event_id'],getData);
+                }else{
+                    console.log(getData)
+                    return this.createAnEvent(getData);
+                }
+            }).catch(res=>{
+                console.log(res)
+            })
+        })
+    }
+    
     async updateAnEvent(id,data) {
         let user_id = await this.getuserID();
         return this.sqlite.create({
@@ -128,8 +159,8 @@ export class DatabaseProvider {
             location: 'default'
         }).then((db: SQLiteObject) => {
             let sql = `UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?`;
-            let updateEventData = [data["id"],data["event_name"],data["description"],data["value"],data["event_datetime"],data["event_type"],data["event_category"],data["event_assets"],JSON.stringify(data["event_options"]),user_id,data["created_at"],new Date().toJSON(),false,id]
-            
+            let updateEventData = [data["id"],data["event_name"],data["description"],data["value"],data["event_datetime"],data["event_type"],data["event_category"],JSON.stringify(data["event_assets"]),JSON.stringify(data["event_options"]),user_id,data["created_at"],new Date().toJSON(),false,id]
+            console.log(data)
             return db.executeSql(sql,updateEventData).then((row: any)=>{
                 return { event_id:row.insertId }
             }).catch(res=>{

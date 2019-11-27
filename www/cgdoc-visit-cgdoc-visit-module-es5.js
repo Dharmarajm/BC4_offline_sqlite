@@ -118,6 +118,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ion2_calendar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ion2-calendar */ "./node_modules/ion2-calendar/dist/index.js");
 /* harmony import */ var ion2_calendar__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(ion2_calendar__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
+
 
 
 
@@ -134,7 +138,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CgdocVisitPage = /** @class */ (function () {
-    function CgdocVisitPage(toast, datepipe, modalCtrl, streamingMedia, toastController, statusBar, router, settingService, alertController) {
+    function CgdocVisitPage(toast, datepipe, modalCtrl, streamingMedia, toastController, statusBar, router, settingService, alertController, database, databaseSummary) {
         this.toast = toast;
         this.datepipe = datepipe;
         this.modalCtrl = modalCtrl;
@@ -144,6 +148,8 @@ var CgdocVisitPage = /** @class */ (function () {
         this.router = router;
         this.settingService = settingService;
         this.alertController = alertController;
+        this.database = database;
+        this.databaseSummary = databaseSummary;
         this.selectedSegment = "first";
         this.diaryPage = 1;
         this.doctorPage = 1;
@@ -154,6 +160,8 @@ var CgdocVisitPage = /** @class */ (function () {
         this.doctor_scroll = [];
         this.data_doctor_details = [];
         this.data_diary_details = [];
+        this.diaryPage_offset = 0;
+        this.doctorPage_offset = 0;
         this.environmentUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].ImageUrl;
     }
     CgdocVisitPage.prototype.ngOnInit = function () {
@@ -178,22 +186,40 @@ var CgdocVisitPage = /** @class */ (function () {
         }
     };
     CgdocVisitPage.prototype.getDiaryRecords = function () {
+        // this.settingService.commonEventList("health_diary",this.diaryPage).subscribe(res => {
+        //   let data:any = res['event_list']
+        //   this.data_diary_details=res['event_list']; 
+        //   this.groupByDiary(data)
+        //   this.status = true;
+        // })
         var _this = this;
-        this.settingService.commonEventList("health_diary", this.diaryPage).subscribe(function (res) {
+        this.diaryPage = 1;
+        this.diaryPage_offset = 0;
+        // For DB Connect
+        this.databaseSummary.getAllEvents('health_diary', 'New', this.diaryPage_offset).then(function (res) {
             var data = res['event_list'];
             _this.data_diary_details = res['event_list'];
             _this.groupByDiary(data);
             _this.status = true;
-        });
+        }).catch(function (err) { console.log(err); });
     };
     CgdocVisitPage.prototype.getDoctorRecords = function () {
+        // this.settingService.commonEventList("doc_visit",this.doctorPage).subscribe(res => {
+        //   let data:any = res['event_list']
+        //   this.data_doctor_details=res['event_list'];
+        //   this.groupByDoctor(data)
+        //   this.status = true;
+        // })
         var _this = this;
-        this.settingService.commonEventList("doc_visit", this.doctorPage).subscribe(function (res) {
+        this.doctorPage = 1;
+        this.doctorPage_offset = 0;
+        // For DB Connect
+        this.databaseSummary.getAllEvents('doc_visit', 'New', this.doctorPage_offset).then(function (res) {
             var data = res['event_list'];
             _this.data_doctor_details = res['event_list'];
             _this.groupByDoctor(data);
             _this.status = true;
-        });
+        }).catch(function (err) { console.log(err); });
     };
     CgdocVisitPage.prototype.groupByDiary = function (data) {
         var records = data.map(function (item) { return ({
@@ -248,11 +274,18 @@ var CgdocVisitPage = /** @class */ (function () {
         console.log(event);
         var search = event.detail.value;
         this.diaryPage = 1;
-        this.settingService.commonEventSearchList("health_diary", search).subscribe(function (res) {
+        this.diaryPage_offset = 0;
+        // For DB Connect
+        this.databaseSummary.getAllEventsSearchList('health_diary', search, 'New', this.diaryPage_offset).then(function (res) {
             var data = res['event_list'];
             _this.data_diary_details = res['event_list'];
             _this.groupByDiary(data);
-        });
+        }).catch(function (err) { console.log(err); });
+        // this.settingService.commonEventSearchList("health_diary",search).subscribe(res => {
+        //   let data:any = res['event_list']
+        //   this.data_diary_details=res['event_list'];
+        //   this.groupByDiary(data)
+        // })
     };
     CgdocVisitPage.prototype.onDiaryCancel = function (event) {
     };
@@ -261,11 +294,17 @@ var CgdocVisitPage = /** @class */ (function () {
         console.log(event);
         var search = event.detail.value;
         this.doctorPage = 1;
-        this.settingService.commonEventSearchList("doc_visit", search).subscribe(function (res) {
+        this.doctorPage_offset = 0;
+        // this.settingService.commonEventSearchList("doc_visit",search).subscribe(res => {
+        //   let data:any = res['event_list']
+        //   this.data_doctor_details=res['event_list'];
+        //   this.groupByDoctor(data)
+        // })
+        this.databaseSummary.getAllEventsSearchList('doc_visit', search, 'New', this.doctorPage_offset).then(function (res) {
             var data = res['event_list'];
             _this.data_doctor_details = res['event_list'];
             _this.groupByDoctor(data);
-        });
+        }).catch(function (err) { console.log(err); });
     };
     CgdocVisitPage.prototype.onDoctorCancel = function (event) {
     };
@@ -330,14 +369,19 @@ var CgdocVisitPage = /** @class */ (function () {
                             "per_page": 10,
                             "sort": "created_at"
                         };
-                        console.log(filter_data);
-                        console.log(this.userId);
-                        this.settingService.record_filter(filter_data).subscribe(function (res) {
-                            console.log(res);
-                            var data = res['diary_records'];
-                            _this.data_diary_details = res['diary_records'];
+                        //   console.log(filter_data)
+                        //   console.log(this.userId)
+                        //  this.settingService.record_filter(filter_data).subscribe(res=>{
+                        //   console.log(res)
+                        //   let data:any = res['diary_records']
+                        //   this.data_diary_details=res['diary_records'];
+                        //   this.groupByDiary(data);
+                        //  })
+                        this.databaseSummary.diaryRecordFilter(filter_data).then(function (res) {
+                            var data = res['event_list'];
+                            _this.data_diary_details = res['event_list'];
                             _this.groupByDiary(data);
-                        });
+                        }).catch(function (err) { console.log(err); });
                         return [2 /*return*/];
                 }
             });
@@ -348,80 +392,172 @@ var CgdocVisitPage = /** @class */ (function () {
         setTimeout(function () {
             console.log('Done');
             _this.diaryPage += 1;
-            _this.settingService.commonEventList("health_diary", _this.diaryPage).subscribe(function (res) {
-                var data = res['event_list'];
-                var concat = _this.data_diary_details.concat(data);
-                _this.diary_scroll = concat.map(function (item) { return ({
-                    id: item.id,
-                    created_at: item.created_at,
-                    description: item.description,
-                    event_assets: item.event_assets,
-                    event_name: item.event_name,
-                    value: item.value,
-                    event_type: item.event_type,
-                    user_id: item.user_id,
-                    playing: false,
-                    progress: 0
-                }); });
-                var value = [];
-                var example = Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["from"])(_this.diary_scroll).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["groupBy"])(function (person) { return Object(_angular_common__WEBPACK_IMPORTED_MODULE_9__["formatDate"])(person.created_at, 'yyyy-MM-dd', 'en-US'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["mergeMap"])(function (group) { return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["toArray"])()); })).subscribe(function (val) {
-                    console.log(val);
-                    if (val) {
-                        var ff = { "created_at": val[0].created_at, "events": val };
-                        value.push(ff);
+            _this.diaryPage_offset = _this.diaryPage * 10 - 10;
+            var data = [];
+            _this.databaseSummary.getAllEvents('health_diary', 'New', _this.diaryPage_offset).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                var concat, value, example;
+                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                    data = res['event_list'];
+                    concat = this.data_diary_details.concat(data);
+                    this.diary_scroll = concat.map(function (item) { return ({
+                        id: item.id,
+                        event_id: item.event_id,
+                        created_at: item.created_at,
+                        description: item.description,
+                        event_assets: item.event_assets,
+                        event_options: item.event_options,
+                        event_name: item.event_name,
+                        value: item.value,
+                        event_type: item.event_type,
+                        user_id: item.user_id,
+                        playing: false,
+                        progress: 0
+                    }); });
+                    value = [];
+                    example = Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["from"])(this.diary_scroll).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["groupBy"])(function (person) { return Object(_angular_common__WEBPACK_IMPORTED_MODULE_9__["formatDate"])(person.created_at, 'yyyy-MM-dd', 'en-US'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["mergeMap"])(function (group) { return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["toArray"])()); })).subscribe(function (val) {
+                        console.log(val);
+                        if (val) {
+                            var ff = { "created_at": val[0].created_at, "events": val };
+                            value.push(ff);
+                        }
+                    });
+                    this.diary_scroll = value;
+                    this.diary_records = this.diary_scroll;
+                    event.target.complete();
+                    if (this.diaryPage * 10 != this.diary_records.length) {
+                        event.target.disabled = true;
                     }
+                    return [2 /*return*/];
                 });
-                _this.diary_scroll = value;
-                //this.diary_scroll.map(item => this.diary_records.push(item));
-                _this.diary_records = _this.diary_scroll;
-                event.target.complete();
-                if (_this.diaryPage * 10 != _this.diary_records.length) {
-                    event.target.disabled = true;
-                }
-            }, function (error) {
+            }); }).catch(function (err) {
                 event.target.disabled = true;
+                console.log(err);
             });
         }, 500);
+        //   this.settingService.commonEventList("health_diary",this.diaryPage).subscribe(res => {
+        //      let data:any = res['event_list'];
+        //      let concat=this.data_diary_details.concat(data);
+        //       this.diary_scroll=concat.map(item => ({
+        //        id:item.id,
+        //        created_at: item.created_at,
+        //        description: item.description,
+        //        event_assets: item.event_assets,
+        //        event_name: item.event_name,
+        //        value: item.value,
+        //        event_type: item.event_type,
+        //        user_id: item.user_id,
+        //        playing: false,
+        //        progress: 0
+        //       }));
+        //       let value = []
+        //       const example = from(this.diary_scroll).pipe(
+        //         groupBy(person => formatDate(person.created_at, 'yyyy-MM-dd', 'en-US')),
+        //         mergeMap(group => group.pipe(toArray()))
+        //       ).subscribe(val => {
+        //         console.log(val)
+        //         if(val){
+        //             let ff = { "created_at":val[0].created_at,"events" :val }
+        //             value.push(ff);
+        //         }
+        //       })
+        //       this.diary_scroll=value;
+        //       //this.diary_scroll.map(item => this.diary_records.push(item));
+        //       this.diary_records=this.diary_scroll;
+        //       event.target.complete();
+        //       if (this.diaryPage *10 !=this.diary_records.length){
+        //          event.target.disabled = true;
+        //       }
+        //   },error=>{
+        //      event.target.disabled = true;
+        //   })
+        //  }, 500);
     };
     CgdocVisitPage.prototype.loadData2 = function (event) {
         var _this = this;
         setTimeout(function () {
             console.log('Done');
             _this.doctorPage += 1;
-            _this.settingService.commonEventList("doc_visit", _this.doctorPage).subscribe(function (res) {
-                var data = res['event_list'];
-                var concat = _this.data_doctor_details.concat(data);
-                _this.doctor_scroll = concat.map(function (item) { return ({
-                    id: item.id,
-                    created_at: item.created_at,
-                    description: item.description,
-                    event_assets: item.event_assets,
-                    event_name: item.event_name,
-                    value: item.value,
-                    event_type: item.event_type,
-                    user_id: item.user_id,
-                    playing: false,
-                    progress: 0
-                }); });
-                var value = [];
-                var example = Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["from"])(_this.doctor_scroll).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["groupBy"])(function (person) { return Object(_angular_common__WEBPACK_IMPORTED_MODULE_9__["formatDate"])(person.created_at, 'yyyy-MM-dd', 'en-US'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["mergeMap"])(function (group) { return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["toArray"])()); })).subscribe(function (val) {
-                    console.log(val);
-                    if (val) {
-                        var ff = { "created_at": val[0].created_at, "events": val };
-                        value.push(ff);
+            _this.doctorPage_offset = _this.doctorPage * 10 - 10;
+            // For DB Connect
+            var data = [];
+            _this.databaseSummary.getAllEvents('doc_visit', 'New', _this.doctorPage_offset).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                var concat, value, example;
+                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                    data = res['event_list'];
+                    concat = this.data_doctor_details.concat(data);
+                    this.doctor_scroll = concat.map(function (item) { return ({
+                        id: item.id,
+                        event_id: item.event_id,
+                        created_at: item.created_at,
+                        description: item.description,
+                        event_assets: item.event_assets,
+                        event_options: item.event_options,
+                        event_name: item.event_name,
+                        value: item.value,
+                        event_type: item.event_type,
+                        user_id: item.user_id,
+                        playing: false,
+                        progress: 0
+                    }); });
+                    value = [];
+                    example = Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["from"])(this.doctor_scroll).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["groupBy"])(function (person) { return Object(_angular_common__WEBPACK_IMPORTED_MODULE_9__["formatDate"])(person.created_at, 'yyyy-MM-dd', 'en-US'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["mergeMap"])(function (group) { return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["toArray"])()); })).subscribe(function (val) {
+                        console.log(val);
+                        if (val) {
+                            var ff = { "created_at": val[0].created_at, "events": val };
+                            value.push(ff);
+                        }
+                    });
+                    this.doctor_scroll = value;
+                    //this.doctor_scroll.map(item => this.doctor_records.push(item));
+                    this.doctor_records = this.doctor_scroll;
+                    event.target.complete();
+                    if (this.doctorPage * 10 != this.doctor_records.length) {
+                        event.target.disabled = true;
                     }
+                    return [2 /*return*/];
                 });
-                _this.doctor_scroll = value;
-                //this.doctor_scroll.map(item => this.doctor_records.push(item));
-                _this.doctor_records = _this.doctor_scroll;
-                event.target.complete();
-                if (_this.doctorPage * 10 != _this.doctor_records.length) {
-                    event.target.disabled = true;
-                }
-            }, function (error) {
+            }); }).catch(function (err) {
                 event.target.disabled = true;
+                console.log(err);
             });
         }, 500);
+        //   this.settingService.commonEventList("doc_visit",this.doctorPage).subscribe(res => {
+        //      let data:any = res['event_list'];
+        //      let concat=this.data_doctor_details.concat(data);
+        //       this.doctor_scroll=concat.map(item => ({
+        //        id:item.id,
+        //        created_at: item.created_at,
+        //        description: item.description,
+        //        event_assets: item.event_assets,
+        //        event_name: item.event_name,
+        //        value: item.value,
+        //        event_type: item.event_type,
+        //        user_id: item.user_id,
+        //        playing: false,
+        //        progress: 0
+        //       }));
+        //       let value = []
+        //       const example = from(this.doctor_scroll).pipe(
+        //         groupBy(person => formatDate(person.created_at, 'yyyy-MM-dd', 'en-US')),
+        //         mergeMap(group => group.pipe(toArray()))
+        //       ).subscribe(val => {
+        //         console.log(val)
+        //         if(val){
+        //             let ff = { "created_at":val[0].created_at,"events" :val }
+        //             value.push(ff);
+        //         }
+        //       })
+        //       this.doctor_scroll=value;
+        //       //this.doctor_scroll.map(item => this.doctor_records.push(item));
+        //       this.doctor_records=this.doctor_scroll;
+        //       event.target.complete();
+        //       if (this.doctorPage *10 !=this.doctor_records.length){
+        //          event.target.disabled = true;
+        //       }
+        //   },error=>{
+        //      event.target.disabled = true;
+        //   })
+        //  }, 500);
     };
     // playDocRecord(record,data,index){
     //   console.log(record,data['events'][0]['event_assets'][0]['url']);
@@ -455,7 +591,9 @@ var CgdocVisitPage = /** @class */ (function () {
         { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
         { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] },
+        { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_13__["DatabaseProvider"] },
+        { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_14__["DataBaseSummaryProvider"] }
     ]; };
     CgdocVisitPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -463,7 +601,7 @@ var CgdocVisitPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./cgdoc-visit.page.html */ "./node_modules/raw-loader/index.js!./src/app/care-giver/cgdoc-visit/cgdoc-visit.page.html"),
             styles: [__webpack_require__(/*! ./cgdoc-visit.page.scss */ "./src/app/care-giver/cgdoc-visit/cgdoc-visit.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_12__["Toast"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["DatePipe"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ModalController"], _ionic_native_streaming_media_ngx__WEBPACK_IMPORTED_MODULE_6__["StreamingMedia"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_12__["Toast"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["DatePipe"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ModalController"], _ionic_native_streaming_media_ngx__WEBPACK_IMPORTED_MODULE_6__["StreamingMedia"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_13__["DatabaseProvider"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_14__["DataBaseSummaryProvider"]])
     ], CgdocVisitPage);
     return CgdocVisitPage;
 }());

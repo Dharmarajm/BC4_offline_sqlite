@@ -59,7 +59,7 @@ export class PrescriptionsPage implements OnInit {
 
   groupBy(data){
 
-      let records:any[]=data.map(item => ({
+      let records:any[] = data.map(item => ({
            id:item.id,
            event_id: item.event_id,
            created_at: item.created_at,
@@ -75,7 +75,7 @@ export class PrescriptionsPage implements OnInit {
            progress: 0
       }));
 
-      let value = []
+      let value = [];
       const example = from(records).pipe(
         groupBy(person => formatDate(person.event_datetime, 'yyyy-MM-dd', 'en-US')),
         mergeMap(group => group.pipe(toArray()))

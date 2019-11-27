@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52"],{
 
 /***/ "./src/app/sqlite-database/database_provider.ts":
 /*!******************************************************!*\
@@ -126,6 +126,20 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             });
         });
     }
+    getVitalEvents(event_type, search, additionType) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let checkEvent = yield this.checkEventType(event_type, search, additionType);
+            let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
+            return this.databaseService.getDatabase().then(database => {
+                return database.executeSql(sqlSearchEventQuery, []).then((data) => {
+                    console.log(data, "vital");
+                    for (let i = 0; i < data.rows.length; i++) {
+                        console.log(data.rows.item(i));
+                    }
+                });
+            });
+        });
+    }
     checkEventType(event, tab, offset) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let eventQuery;
@@ -139,6 +153,9 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             }
             else if (event == 'health_diary' || event == 'doc_visit') {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`;
+            }
+            if (event == 'vital') {
+                return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC`;
             }
             else {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`;
@@ -221,11 +238,11 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             let user_id = yield this.databaseService.getuserID();
             let getQRcode = yield this.setQRcode();
             let sqlHealthQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_HEALTH_DETAILS"] + ` WHERE name='policy'`;
-            let sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE id=${user_id} AND role_id=1`;
-            return this.databaseService.getDatabase().then((database) => {
+            let sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (id='${user_id}' AND role_id=1)`; //(id='${user_id}' AND role_id=1)
+            return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                 let healthData = [];
                 let userData = [];
-                database.executeSql(sqlHealthQuery, []).then((data1) => {
+                yield database.executeSql(sqlHealthQuery, []).then((data1) => {
                     for (let i = 0; i < data1.rows.length; i++) {
                         let event_json = null;
                         if (data1.rows.item(i).attribute_name_value != '') {
@@ -241,10 +258,17 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                             updated_at: data1.rows.item(i).updated_at
                         });
                     }
+                }).catch(res => {
+                    console.log(res);
                 });
-                database.executeSql(sqlUserQuery, []).then((data2) => {
+                yield database.executeSql(sqlUserQuery, []).then((data2) => {
+                    console.log(data2.rows);
                     for (let i = 0; i < data2.rows.length; i++) {
-                        let attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                        console.log(data2.rows.item(i));
+                        let attribute_json = null;
+                        if (data2.rows.item(i).user_picture != null) {
+                            attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                        }
                         userData.push({
                             id: data2.rows.item(i).id,
                             name: data2.rows.item(i).name,
@@ -265,9 +289,11 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                             delete1: data2.rows.item(i).delete1
                         });
                     }
+                }).catch(res => {
+                    console.log(res);
                 });
                 return { policies: healthData, user_info: userData[0], qrcode_image: getQRcode };
-            });
+            }));
         });
     }
     getHealthDeatails() {
@@ -293,18 +319,20 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                         });
                     }
                     return { health_detail: healthData };
+                }).catch(res => {
+                    console.log(res);
                 });
             });
         });
     }
     getEmergencyDeatails() {
         let sqlEmergeQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EMERGENCY_DATA"];
-        let sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (role_id=2 AND delete1='false')`;
+        let sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (role_id=1 AND delete1='false')`;
         console.log(sqlUsersQuery);
-        return this.databaseService.getDatabase().then((database) => {
+        return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let emergencyContacts = [];
             let careGiverData = [];
-            database.executeSql(sqlEmergeQuery, []).then((data) => {
+            yield database.executeSql(sqlEmergeQuery, []).then((data) => {
                 for (let i = 0; i < data.rows.length; i++) {
                     emergencyContacts.push({
                         id: data.rows.item(i).id,
@@ -319,10 +347,13 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     });
                 }
             });
-            database.executeSql(sqlUsersQuery, []).then((data1) => {
+            yield database.executeSql(sqlUsersQuery, []).then((data1) => {
                 for (let i = 0; i < data1.rows.length; i++) {
                     if (data1.rows.item(i).email != null) {
-                        let attribute_json = JSON.parse(data1.rows.item(i).user_picture);
+                        let attribute_json = null;
+                        if (data1.rows.item(i).user_picture != null) {
+                            attribute_json = JSON.parse(data1.rows.item(i).user_picture);
+                        }
                         careGiverData.push({
                             id: data1.rows.item(i).id,
                             name: data1.rows.item(i).name,
@@ -346,6 +377,8 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                 }
             });
             return { caregiver_count: careGiverData.length, caregivers: careGiverData, emergency_contact_count: emergencyContacts.length, emergency_detail: emergencyContacts };
+        })).catch(res => {
+            console.log(res);
         });
     }
     getAllUserPreviewData() {
@@ -373,12 +406,15 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     getPatients() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let user_id = yield this.databaseService.getuserID();
-            let sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE id=${user_id} AND role_id=1`;
-            return this.databaseService.getDatabase().then((database) => {
+            let sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (id='${user_id}' AND role_id=1)`;
+            return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                 let userData = [];
-                database.executeSql(sqlUserQuery, []).then((data2) => {
+                yield database.executeSql(sqlUserQuery, []).then((data2) => {
                     for (let i = 0; i < data2.rows.length; i++) {
-                        let attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                        let attribute_json = null;
+                        if (data2.rows.item(i).user_picture != null) {
+                            attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                        }
                         userData.push({
                             id: data2.rows.item(i).id,
                             name: data2.rows.item(i).name,
@@ -399,9 +435,53 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                             delete1: data2.rows.item(i).delete1
                         });
                     }
+                }).catch(res => {
+                    console.log(res);
                 });
                 return { patients: userData };
+            })).catch(res => {
+                console.log(res);
             });
+        });
+    }
+    getAllPatients() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let user_id = yield this.databaseService.getuserID();
+            let sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (role_id=1 AND delete1='false')`;
+            //let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id=${user_id} AND role_id=1`;
+            return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                let userData = [];
+                yield database.executeSql(sqlUsersQuery, []).then((data2) => {
+                    for (let i = 0; i < data2.rows.length; i++) {
+                        if (data2.rows.item(i).email != null) {
+                            let attribute_json = null;
+                            if (data2.rows.item(i).user_picture != null) {
+                                attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                            }
+                            userData.push({
+                                id: data2.rows.item(i).id,
+                                name: data2.rows.item(i).name,
+                                email: data2.rows.item(i).email,
+                                password: data2.rows.item(i).password,
+                                mobile_no: data2.rows.item(i).mobile_no,
+                                address: data2.rows.item(i).address,
+                                country: data2.rows.item(i).country,
+                                blood_group: data2.rows.item(i).blood_group,
+                                age: data2.rows.item(i).age,
+                                user_uid: data2.rows.item(i).user_uid,
+                                forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                user_picture: attribute_json,
+                                active_status: data2.rows.item(i).active_status,
+                                role_id: data2.rows.item(i).role_id,
+                                created_at: data2.rows.item(i).created_at,
+                                updated_at: data2.rows.item(i).updated_at,
+                                delete1: data2.rows.item(i).delete1
+                            });
+                        }
+                    }
+                });
+                return { patients: userData };
+            }));
         });
     }
     getPicture_Show() {
@@ -410,6 +490,52 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             let aboutData = yield this.getAboutData();
             let getAllPatients = yield this.getPatients();
             return { caregiver: emergency_data['caregivers'], patient: getAllPatients['patients'], profile_pic: null, user_info: aboutData['user_info'] };
+        });
+    }
+    getCaregiverData() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let user_data = yield this.getProfileID();
+            let sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (role_id=2 AND delete1='false')`;
+            return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                let userData = [];
+                yield database.executeSql(sqlUsersQuery, []).then((data2) => {
+                    for (let i = 0; i < data2.rows.length; i++) {
+                        if (data2.rows.item(i).email != null) {
+                            let attribute_json = null;
+                            if (data2.rows.item(i).user_picture != null) {
+                                attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                            }
+                            userData.push({
+                                id: data2.rows.item(i).id,
+                                name: data2.rows.item(i).name,
+                                email: data2.rows.item(i).email,
+                                password: data2.rows.item(i).password,
+                                mobile_no: data2.rows.item(i).mobile_no,
+                                address: data2.rows.item(i).address,
+                                country: data2.rows.item(i).country,
+                                blood_group: data2.rows.item(i).blood_group,
+                                age: data2.rows.item(i).age,
+                                user_uid: data2.rows.item(i).user_uid,
+                                forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                user_picture: attribute_json,
+                                active_status: data2.rows.item(i).active_status,
+                                role_id: data2.rows.item(i).role_id,
+                                created_at: data2.rows.item(i).created_at,
+                                updated_at: data2.rows.item(i).updated_at,
+                                delete1: data2.rows.item(i).delete1
+                            });
+                        }
+                    }
+                });
+                return { user_info: userData[0] };
+            }));
+        });
+    }
+    getCurrentUserandPatientsList() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let current_user = yield this.getCaregiverData();
+            let patients_list = yield this.getAllPatients();
+            return { user_info: current_user['user_info'], patient: patients_list['patients'] };
         });
     }
     getRecentAppointments(event) {
@@ -459,6 +585,14 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         }
         return setQRcode;
     }
+    getProfileID() {
+        let profile_id = null;
+        if (localStorage.getItem("profile_id") != undefined) {
+            profile_id = localStorage.getItem("profile_id");
+            return profile_id;
+        }
+        return profile_id;
+    }
 };
 DataBaseSummaryProvider.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
@@ -474,4 +608,4 @@ DataBaseSummaryProvider = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /***/ })
 
 }]);
-//# sourceMappingURL=default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004-es2015.js.map
+//# sourceMappingURL=default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52-es2015.js.map

@@ -139,6 +139,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm2015/ngx-translate-core.js");
 /* harmony import */ var _add_patient_add_patient_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./add-patient/add-patient.page */ "./src/app/care-giver/tab2cg/add-patient/add-patient.page.ts");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
 
 
 
@@ -166,7 +168,7 @@ Tab2PageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             ])
         ],
         declarations: [_tab2cg_page__WEBPACK_IMPORTED_MODULE_6__["Tab2cPage"], _add_patient_add_patient_page__WEBPACK_IMPORTED_MODULE_8__["addPatientPage"]],
-        providers: [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__["Toast"]]
+        providers: [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_9__["Toast"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_10__["DataBaseSummaryProvider"]]
     })
 ], Tab2PageModule);
 
@@ -204,6 +206,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
+
+
 
 
 
@@ -214,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let Tab2cPage = class Tab2cPage {
-    constructor(toast, router, toastController, fb, ser_add, statusBar, alertController) {
+    constructor(toast, router, toastController, fb, ser_add, statusBar, alertController, database, databaseSummary, networkProvider) {
         this.toast = toast;
         this.router = router;
         this.toastController = toastController;
@@ -222,6 +230,9 @@ let Tab2cPage = class Tab2cPage {
         this.ser_add = ser_add;
         this.statusBar = statusBar;
         this.alertController = alertController;
+        this.database = database;
+        this.databaseSummary = databaseSummary;
+        this.networkProvider = networkProvider;
         this.list = [];
         this.details = [];
         this.environment = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].ImageUrl;
@@ -231,23 +242,54 @@ let Tab2cPage = class Tab2cPage {
     ionViewWillEnter() {
         this.user_uid = localStorage.getItem("user_id");
         console.log(this.user_uid);
-        this.ser_add.patient_list().subscribe(res => {
+        //  this.ser_add.patient_list().subscribe(res =>{
+        //     this.patient_total = res;  
+        //     console.log(this.patient_total)
+        //     let data:any = this.patient_total.patient;
+        //     this.list=data.map(item=>({
+        //       user_uid:item.user_uid,
+        //       name:item.name,
+        //       checked:false,
+        //       id:item.id,
+        //       profile_pic:item['user_picture'].url,
+        //       nameAt:item.name.charAt(0)
+        //      }));
+        //     let index = this.list.findIndex(index=>index.id==this.user_uid);
+        //     if(index>-1){
+        //       this.list[index].checked=true;  
+        //     } 
+        //  })
+        this.databaseSummary.getAllPatients().then(res => {
             this.patient_total = res;
-            console.log(this.patient_total);
-            let data = this.patient_total.patient;
-            this.list = data.map(item => ({
-                user_uid: item.user_uid,
-                name: item.name,
-                checked: false,
-                id: item.id,
-                profile_pic: item['user_picture'].url,
-                nameAt: item.name.charAt(0)
-            }));
+            let data = this.patient_total['patients'];
+            if (this.networkProvider.isNetworkOnline) {
+                this.isNetwork = true;
+            }
+            else {
+                this.isNetwork = false;
+            }
+            this.list = data.map(item => {
+                let sourceurl;
+                if (this.isNetwork == true) {
+                    sourceurl = item['user_picture']['url'];
+                }
+                else {
+                    sourceurl = null;
+                }
+                return {
+                    user_uid: item.user_uid,
+                    name: item.name,
+                    checked: false,
+                    id: item.id,
+                    profile_pic: sourceurl,
+                    nameAt: item.name.charAt(0)
+                };
+            });
             let index = this.list.findIndex(index => index.id == this.user_uid);
             if (index > -1) {
                 this.list[index].checked = true;
             }
-        });
+        }).catch(err => { console.log(err); });
         this.statusBar.backgroundColorByHexString('#483df6');
     }
     list_value(event, id, user_id, index) {
@@ -298,7 +340,11 @@ let Tab2cPage = class Tab2cPage {
                         text: 'Confirm',
                         handler: () => {
                             console.log('Confirm Ok');
-                            this.ser_add.removePatient(id).subscribe(res => {
+                            // this.ser_add.removePatient(id).subscribe(res=>{
+                            //      this.ionViewWillEnter();
+                            //      this.presentToast('Patient has been deleted successfully');
+                            // })
+                            this.database.deletePatientFromCareGiver(id).then(res => {
                                 this.ionViewWillEnter();
                                 this.presentToast('Patient has been deleted successfully');
                             });
@@ -332,7 +378,10 @@ Tab2cPage.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
     { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_11__["DataBaseSummaryProvider"] },
+    { type: _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_9__["NetworkService"] }
 ];
 Tab2cPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -341,7 +390,7 @@ Tab2cPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [__webpack_require__(/*! ./tab2cg.page.scss */ "./src/app/care-giver/tab2cg/tab2cg.page.scss")]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_8__["Toast"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
-        _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"]])
+        _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_10__["DatabaseProvider"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_11__["DataBaseSummaryProvider"], _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_9__["NetworkService"]])
 ], Tab2cPage);
 
 

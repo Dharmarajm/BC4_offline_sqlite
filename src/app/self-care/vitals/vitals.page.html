@@ -32,7 +32,7 @@
     </ion-buttons>
   </ion-toolbar>
 
-  <ion-note class="ion-padding-start">Note: Last 7data</ion-note>
+  <ion-note class="ion-padding">Note:<span>&nbsp;Last 7 data points</span></ion-note>
   <div class="ion-padding" >
     <ion-item-group class="expense_card" *ngFor="let vital of vital_details | keyvalue">
       <ion-item button (click)="toggle(vital.key)" *ngIf="vital.key == 'Blood Pressure'">

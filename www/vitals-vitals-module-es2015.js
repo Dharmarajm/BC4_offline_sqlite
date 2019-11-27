@@ -51,205 +51,7 @@ module.exports = "<ion-header class=\"main-header shadow\">\r\n  <ion-toolbar>\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header class=\"main-header shadow\">\n  <ion-toolbar>\n   <!--  <ion-back-button slot=\"start\"></ion-back-button> -->\n   <ion-back-button slot=\"start\" defaultHref=\"self-care-tabs/tabs/tab1\"></ion-back-button>\n    <ion-title>Vitals</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button>\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22.888\" height=\"22.888\" viewBox=\"0 0 22.888 22.888\"><g transform=\"translate(0.25 0.25)\"><path d=\"M11.194,0A11.194,11.194,0,1,0,22.388,11.194,11.206,11.206,0,0,0,11.194,0Zm0,21.527A10.333,10.333,0,1,1,21.527,11.194,10.345,10.345,0,0,1,11.194,21.527Z\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M25.431,37a.43.43,0,0,0-.431.431v.861a.431.431,0,1,0,.861,0v-.861A.43.43,0,0,0,25.431,37Z\" transform=\"translate(-14.236 -21.07)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M21.493,9h-.05A3.445,3.445,0,0,0,18,12.444a.431.431,0,1,0,.861,0,2.583,2.583,0,0,1,2.62-2.583,2.632,2.632,0,0,1,2.546,2.546,2.571,2.571,0,0,1-1.184,2.21,4.107,4.107,0,0,0-1.829,3.493v1.224a.431.431,0,1,0,.861,0V18.109a3.293,3.293,0,0,1,1.435-2.769A3.427,3.427,0,0,0,24.888,12.4,3.468,3.468,0,0,0,21.493,9Z\" transform=\"translate(-10.25 -5.125)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n      </ion-button>\n      <ion-button>\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"26.711\" height=\"22.342\" viewBox=\"0 0 26.711 22.342\"><g transform=\"translate(0.25 0.25)\"><path d=\"M22.268,12.074A7.48,7.48,0,0,0,14.889,5,7.7,7.7,0,0,0,8.8,8.061c-.033-.017-.068-.029-.1-.045-.086-.042-.172-.081-.261-.116-.052-.021-.1-.039-.156-.057-.086-.03-.173-.057-.262-.081-.052-.014-.1-.028-.157-.041-.1-.022-.194-.038-.293-.053-.046-.007-.091-.016-.138-.021a3.849,3.849,0,0,0-.44-.027,3.936,3.936,0,0,0-3.932,3.932c0,.056,0,.111.007.166A6.04,6.04,0,0,0,0,16.862a5.618,5.618,0,0,0,5.611,5.612H7.863a.437.437,0,1,0,0-.874H5.611A4.743,4.743,0,0,1,.874,16.862a5.193,5.193,0,0,1,2.81-4.479l.248-.118v-.275c0-.054,0-.109.007-.164l0-.076-.005-.088c0-.036-.005-.073-.005-.109A3.037,3.037,0,0,1,7.39,8.524l.1.016a3.07,3.07,0,0,1,.345.077l.046.012a3.048,3.048,0,0,1,.365.14l.091.044a3.019,3.019,0,0,1,.308.174,3.057,3.057,0,0,1,1.4,2.566.437.437,0,0,0,.874,0,3.923,3.923,0,0,0-1.4-3,6.919,6.919,0,0,1,5.366-2.677,6.6,6.6,0,0,1,6.486,6.066,8.343,8.343,0,0,0-1.784.054.437.437,0,0,0,.065.869.429.429,0,0,0,.066-.005,8.054,8.054,0,0,1,2.046,0,4.478,4.478,0,0,1,3.567,4.362A4.386,4.386,0,0,1,20.956,21.6H19.221a.437.437,0,0,0,0,.874h1.735a5.26,5.26,0,0,0,5.254-5.254A5.376,5.376,0,0,0,22.268,12.074Z\" transform=\"translate(0 -5)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M29.174,36.242a.437.437,0,0,0-.437.437,3.932,3.932,0,1,1-3.932-3.932A3.789,3.789,0,0,1,28,34.495H25.242a.437.437,0,1,0,0,.874h3.5a.455.455,0,0,0,.092-.018.471.471,0,0,0,.079-.017h0a.393.393,0,0,0,.038-.027.276.276,0,0,0,.145-.137.432.432,0,0,0,.046-.073.451.451,0,0,0,.024-.116.476.476,0,0,0,.01-.048v0h0V31.437a.437.437,0,0,0-.874,0v2.009a4.633,4.633,0,0,0-3.495-1.573,4.805,4.805,0,1,0,4.805,4.805A.437.437,0,0,0,29.174,36.242Z\" transform=\"translate(-11.263 -19.642)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n      </ion-button>\n      <ion-button>\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19.708\" height=\"22.342\" viewBox=\"0 0 19.708 22.342\"><g transform=\"translate(0.255 0.25)\"><path d=\"M22.41,17.986a8.877,8.877,0,0,1-2.789-6.47V7.945A5.779,5.779,0,0,0,16.234,2.7a7.984,7.984,0,0,0-1.388-.483V1.986a1.986,1.986,0,0,0-3.971,0v.263A7.863,7.863,0,0,0,9.625,2.7,6.008,6.008,0,0,0,6.109,7.943v3.574a8.811,8.811,0,0,1-2.663,6.47.4.4,0,0,0,.212.673l3.769.651c.7.121,1.349.22,1.964.3a3.926,3.926,0,0,0,7.082,0c.613-.081,1.256-.18,1.954-.3l3.769-.651a.4.4,0,0,0,.213-.673Zm-10.741-16a1.191,1.191,0,1,1,2.383,0v.072a7.9,7.9,0,0,0-2.383.019Zm1.264,19.062a3.183,3.183,0,0,1-2.548-1.316,24.6,24.6,0,0,0,2.544.137,24.462,24.462,0,0,0,2.554-.139A3.184,3.184,0,0,1,12.933,21.048Zm5.36-2.521c-.762.131-1.461.238-2.121.322h0c-.291.037-.573.069-.85.1h-.009c-.253.025-.5.046-.745.064l-.139.01c-.212.014-.422.025-.63.033l-.129.005c-.494.017-.981.017-1.475,0l-.132-.006q-.309-.012-.622-.033l-.148-.01c-.238-.017-.479-.037-.726-.062l-.025,0c-.275-.027-.556-.06-.844-.1h0c-.662-.084-1.363-.191-2.129-.323L4.52,18A9.558,9.558,0,0,0,6.9,11.517V7.945A5.2,5.2,0,0,1,9.957,3.421a7.1,7.1,0,0,1,1.389-.47h.012a7.22,7.22,0,0,1,3.01-.027c.005,0,.01,0,.015,0a7.182,7.182,0,0,1,1.519.5,5.041,5.041,0,0,1,2.923,4.524v3.574A9.663,9.663,0,0,0,21.334,18Z\" transform=\"translate(-3.329)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n   <ion-toolbar class=\"action_tools\" >\n    <!-- <ion-searchbar (ionChange)=\"SearchItem($event)\" slot=\"start\" placeholder=\"Search\" [debounce]=\"250\" mode=\"ios\"></ion-searchbar> -->\n    <ion-buttons slot=\"end\" color=\"secondary\">\n      <ion-button class=\"btn\" [routerLink]=\"['/self-care-tabs/tabs/tab1/vitals/analytics']\" >\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"15.7\" height=\"15.7\" viewBox=\"0 0 15.7 15.7\"> <g id=\"fluctuation\" transform=\"translate(0.1 0.1)\"> <g id=\"Group_187\" data-name=\"Group 187\" transform=\"translate(0.258 10.592)\"> <g id=\"Group_186\" data-name=\"Group 186\"> <path id=\"Path_689\" data-name=\"Path 689\" d=\"M10.327,328H8.26A.258.258,0,0,0,8,328.26H8v4.392a.258.258,0,0,0,.258.258h2.067a.258.258,0,0,0,.258-.258h0V328.26A.258.258,0,0,0,10.327,328Zm-.258,4.392H8.519v-3.875h1.55Z\" transform=\"translate(-8.002 -328.002)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> <g id=\"Group_189\" data-name=\"Group 189\" transform=\"translate(9.558 8.525)\"> <g id=\"Group_188\" data-name=\"Group 188\"> <path id=\"Path_690\" data-name=\"Path 690\" d=\"M298.327,264H296.26a.258.258,0,0,0-.258.258h0v6.458a.258.258,0,0,0,.258.258h2.067a.258.258,0,0,0,.258-.258h0V264.26A.258.258,0,0,0,298.327,264Zm-.258,6.458h-1.55v-5.942h1.55Z\" transform=\"translate(-296.002 -264.002)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> <g id=\"Group_191\" data-name=\"Group 191\" transform=\"translate(6.458 9.817)\"> <g id=\"Group_190\" data-name=\"Group 190\"> <path id=\"Path_691\" data-name=\"Path 691\" d=\"M202.327,304H200.26a.258.258,0,0,0-.258.258h0v5.167a.258.258,0,0,0,.258.258h2.067a.258.258,0,0,0,.258-.258h0V304.26A.258.258,0,0,0,202.327,304Zm-.258,5.167h-1.55v-4.65h1.55Z\" transform=\"translate(-200.002 -304.002)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> <g id=\"Group_193\" data-name=\"Group 193\" transform=\"translate(3.358 6.717)\"> <g id=\"Group_192\" data-name=\"Group 192\"> <path id=\"Path_692\" data-name=\"Path 692\" d=\"M106.327,208H104.26a.258.258,0,0,0-.258.258h0v8.267a.258.258,0,0,0,.258.258h2.067a.258.258,0,0,0,.258-.258h0V208.26A.258.258,0,0,0,106.327,208Zm-.258,8.267h-1.55v-7.75h1.55Z\" transform=\"translate(-104.002 -208.002)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> <g id=\"Group_195\" data-name=\"Group 195\" transform=\"translate(12.658 11.883)\"> <g id=\"Group_194\" data-name=\"Group 194\"> <path id=\"Path_693\" data-name=\"Path 693\" d=\"M394.327,368H392.26a.258.258,0,0,0-.258.258h0v3.1a.258.258,0,0,0,.258.258h2.067a.258.258,0,0,0,.258-.258h0v-3.1A.258.258,0,0,0,394.327,368Zm-.258,3.1h-1.55v-2.583h1.55Z\" transform=\"translate(-392.002 -368.002)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> <g id=\"Group_197\" data-name=\"Group 197\"> <g id=\"Group_196\" data-name=\"Group 196\"> <path id=\"Path_694\" data-name=\"Path 694\" d=\"M15.439,5.663a.257.257,0,0,0-.057-.049l-1.033-.664a.258.258,0,0,0-.4.217v.517h-.9L11.066,2.7a.268.268,0,0,0-.43,0L7.8,6.951,4.888.156A.255.255,0,0,0,4.647,0a.258.258,0,0,0-.237.164L1.117,8.525H0v.517H1.293a.258.258,0,0,0,.24-.164L4.661.938,7.514,7.593a.258.258,0,0,0,.452.042l2.885-4.328L12.7,6.085a.258.258,0,0,0,.215.115h1.033v.517a.258.258,0,0,0,.426.2l1.033-.886A.258.258,0,0,0,15.439,5.663Zm-.971.492V5.64l.343.221Z\" transform=\"translate(-0.001 0)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> </g> </svg>\n        Analytics\n      </ion-button>\n      <ion-button class=\"btn\" [routerLink]=\"['/self-care-tabs/tabs/tab1/vitals/add-vitals']\">\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11.965\" height=\"11.965\" viewBox=\"0 0 11.965 11.965\"><g transform=\"translate(-291.035 -86.035)\"><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(296.322 86.035)\" fill=\"#2c2c2c\"/><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(291.035 92.713) rotate(-90)\" fill=\"#2c2c2c\"/></g></svg>\n        Add\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n\n  <ion-note class=\"ion-padding-start\">Note: Last 7data</ion-note>\n  <div class=\"ion-padding\" >\n    <ion-item-group class=\"expense_card\" *ngFor=\"let vital of vital_details | keyvalue\">\n      <ion-item button (click)=\"toggle(vital.key)\" *ngIf=\"vital.key == 'Blood Pressure'\">\n          <h4>{{vital.key}}</h4>           \n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"9.629\" viewBox=\"0 0 18 9.629\"><g transform=\"translate(-6.4 -33.4)\"><path d=\"M24.216,33.586a.636.636,0,0,0-.9,0l-7.908,7.923L7.485,33.586a.636.636,0,1,0-.9.9l8.357,8.357a.621.621,0,0,0,.45.186.647.647,0,0,0,.45-.186L24.2,34.485A.623.623,0,0,0,24.216,33.586Z\"/></g></svg>\n      </ion-item>\n      <ion-list [ngClass]=\"{'expand': vital.key === status1, 'collapse': vital.key != status1}\" *ngIf=\"vital.key == 'Blood Pressure'\">\n        <ion-item *ngFor=\"let data of vital.value\"  (click)=\"history_view(vital.key)\">\n          <ion-avatar>\n            {{data?.event_datetime|date:'dd'}}\n            <br>\n            {{data?.event_datetime|date:'MMM'}}\n          </ion-avatar>\n          <ion-label>\n            <!-- <div *ngIf=\"vital.key == 'Blood Pressure'\"> -->\n            <span><h3 *ngIf=\"data?.event_options['value1']\">BP: {{data?.event_options['value1']}}/</h3>\n            <h3 *ngIf=\"data?.event_options['value2']\">{{data?.event_options['value2']}}</h3><br>\n            <h3 *ngIf=\"data?.event_options['value3']\">PR: {{data?.event_options['value3']}}</h3></span>\n            <p>{{data?.event_category\t}}</p>\n            <!-- </div> -->\n          </ion-label>        \n        </ion-item>     \n      </ion-list>\n\n\n      <ion-item button (click)=\"toggle(vital.key)\" *ngIf=\"vital.key == 'Cholesterol'\">\n          <h4>{{vital.key}}</h4>           \n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"9.629\" viewBox=\"0 0 18 9.629\"><g transform=\"translate(-6.4 -33.4)\"><path d=\"M24.216,33.586a.636.636,0,0,0-.9,0l-7.908,7.923L7.485,33.586a.636.636,0,1,0-.9.9l8.357,8.357a.621.621,0,0,0,.45.186.647.647,0,0,0,.45-.186L24.2,34.485A.623.623,0,0,0,24.216,33.586Z\"/></g></svg>\n      </ion-item>\n      <ion-list [ngClass]=\"{'expand': vital.key === status1, 'collapse': vital.key != status1}\" *ngIf=\"vital.key == 'Cholesterol'\">\n        <ion-item *ngFor=\"let data of vital.value\"  (click)=\"history_view(vital.key)\">\n          <ion-avatar>\n            {{data?.event_datetime|date:'dd'}}\n            <br>\n            {{data?.event_datetime|date:'MMM'}}\n          </ion-avatar>\n          <ion-label>\n            <div *ngIf=\"vital.key == 'Cholesterol'\">\n            <span><h3 *ngIf=\"data?.event_options['value1']\">HDL: {{data?.event_options['value1']}}</h3>&nbsp;\n            <h3 *ngIf=\"data?.event_options['value2']\">LDL: {{data?.event_options['value2']}}</h3>&nbsp;\n            <h3 *ngIf=\"data?.event_options['value3']\">TG: {{data?.event_options['value3']}}</h3>&nbsp;<br>\n            <h3 *ngIf=\"data?.event_options['value4']\">TC: {{data?.event_options['value4']}}</h3></span>\n            <p>{{data?.event_category\t}}</p>\n            </div>\n          </ion-label>        \n        </ion-item>     \n      </ion-list>\n\n      \n\n      <ion-item button (click)=\"toggle(vital.key)\" *ngIf=\"vital.key == 'Blood Glucose'\">\n          <h4>{{vital.key}}</h4>           \n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"9.629\" viewBox=\"0 0 18 9.629\"><g transform=\"translate(-6.4 -33.4)\"><path d=\"M24.216,33.586a.636.636,0,0,0-.9,0l-7.908,7.923L7.485,33.586a.636.636,0,1,0-.9.9l8.357,8.357a.621.621,0,0,0,.45.186.647.647,0,0,0,.45-.186L24.2,34.485A.623.623,0,0,0,24.216,33.586Z\"/></g></svg>\n      </ion-item>\n      <ion-list [ngClass]=\"{'expand': vital.key === status1, 'collapse': vital.key != status1}\" *ngIf=\"vital.key == 'Blood Glucose'\">\n        <ion-item *ngFor=\"let data of vital.value\"  (click)=\"history_view(vital.key)\">\n          <ion-avatar>\n            {{data?.event_datetime|date:'dd'}}\n            <br>\n            {{data?.event_datetime|date:'MMM'}}\n          </ion-avatar>\n          <ion-label>\n            <div *ngIf=\"vital.key == 'Blood Glucose'\">\n            <span>\n            <h3 *ngIf=\"data?.event_options['value1']\">BG: {{data?.event_options['value1']}}</h3><br>\n            <h3 *ngIf=\"data?.event_options['value2']\">HbA1c: {{data?.event_options['value2']}}</h3></span>\n            \n            <p>{{data?.event_category\t}}</p>\n            </div>\n          </ion-label>        \n        </ion-item>     \n      </ion-list>\n\n\n      <ion-item button (click)=\"toggle(vital.key)\" *ngIf=\"vital.key != 'Blood Pressure' && vital.key != 'Cholesterol' && vital.key != 'Blood Glucose'\">\n          <h4>{{vital.key}}</h4>           \n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"9.629\" viewBox=\"0 0 18 9.629\"><g transform=\"translate(-6.4 -33.4)\"><path d=\"M24.216,33.586a.636.636,0,0,0-.9,0l-7.908,7.923L7.485,33.586a.636.636,0,1,0-.9.9l8.357,8.357a.621.621,0,0,0,.45.186.647.647,0,0,0,.45-.186L24.2,34.485A.623.623,0,0,0,24.216,33.586Z\"/></g></svg>\n      </ion-item>\n      <ion-list [ngClass]=\"{'expand': vital.key === status1, 'collapse': vital.key != status1}\" *ngIf=\"vital.key != 'Blood Pressure' && vital.key != 'Cholesterol' && vital.key != 'Blood Glucose'\">\n        <ion-item *ngFor=\"let data of vital.value\"  (click)=\"history_view(vital.key)\">\n          <ion-avatar>\n            {{data?.event_datetime|date:'dd'}}\n            <br>\n            {{data?.event_datetime|date:'MMM'}}\n          </ion-avatar>\n          <ion-label>\n            <div *ngIf=\"vital.key != 'Blood Pressure' && vital.key != 'Cholesterol' && vital.key != 'Blood Glucose'\">\n            <span><h3 *ngIf=\"data?.event_options['value1']\">{{data?.event_options['value1']}}</h3>&nbsp;\n            <h3 *ngIf=\"data?.event_options['value2']\">{{data?.event_options['value2']}}</h3>&nbsp;\n            <h3 *ngIf=\"data?.event_options['value3']\">{{data?.event_options['value3']}}</h3>&nbsp;\n            <h3 *ngIf=\"data?.event_options['value4']\">{{data?.event_options['value4']}}</h3></span>\n            <p>{{data?.event_category\t}}</p>\n            </div>\n          </ion-label>        \n        </ion-item>     \n      </ion-list>\n\n    </ion-item-group>\n  </div>\n\n  <div *ngIf=\"vital_keys.length == 0 && !status\" class=\"no_record\">\n    <div>\n      <svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"102.83\" height=\"97.896\" viewBox=\"0 0 102.83 97.896\"><defs><linearGradient id=\"a\" x1=\"0.509\" y1=\"0.997\" x2=\"0.509\" y2=\"-0.003\" gradientUnits=\"objectBoundingBox\"><stop offset=\"0\" stop-color=\"gray\" stop-opacity=\"0.251\"/><stop offset=\"0.54\" stop-color=\"gray\" stop-opacity=\"0.122\"/><stop offset=\"1\" stop-color=\"gray\" stop-opacity=\"0.102\"/></linearGradient><linearGradient id=\"b\" x1=\"0.813\" y1=\"0.841\" x2=\"0.813\" y2=\"-0.159\" xlink:href=\"#a\"/><linearGradient id=\"c\" x1=\"1.78\" y1=\"0.849\" x2=\"1.78\" y2=\"-0.151\" xlink:href=\"#a\"/><linearGradient id=\"d\" x1=\"0.5\" y1=\"1\" x2=\"0.5\" y2=\"0\" xlink:href=\"#a\"/><linearGradient id=\"f\" x1=\"0.5\" y1=\"0.999\" x2=\"0.5\" y2=\"-0.001\" xlink:href=\"#a\"/></defs><g transform=\"translate(0 0)\"><rect width=\"54.792\" height=\"75.705\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 8.666, 16.987)\" fill=\"#e0e0e0\"/><g transform=\"translate(9.841 6.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 0, 11.106)\" fill=\"url(#a)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 10.612, 18.43)\" fill=\"#fafafa\"/><rect width=\"25.594\" height=\"6.2\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.737, 12.656)\" fill=\"url(#b)\"/><path d=\"M441.3,91.351a3.664,3.664,0,1,0,4.263,2.831A3.621,3.621,0,0,0,441.3,91.351Zm1.212,5.654a2.114,2.114,0,1,1,1.575-2.508,2.089,2.089,0,0,1-1.575,2.508Z\" transform=\"translate(-407.323 -87.3)\" fill=\"url(#c)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.945, 12.34)\" fill=\"#0e9bff\"/><path d=\"M441.623,91.351a3.5,3.5,0,1,0,4.159,2.689A3.5,3.5,0,0,0,441.623,91.351Zm1.158,5.4a2.021,2.021,0,1,1,1.552-2.4,2.021,2.021,0,0,1-1.552,2.4Z\" transform=\"translate(-407.645 -87.3)\" fill=\"#0e9bff\"/><rect width=\"54.792\" height=\"75.705\" transform=\"translate(32.333 14.658)\" fill=\"#e0e0e0\"/><g transform=\"translate(33.26 15.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" fill=\"url(#d)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"translate(33.933 16.477)\" fill=\"#fff\"/><rect width=\"25.594\" height=\"6.2\" transform=\"translate(47 13.375)\" fill=\"url(#d)\"/><path d=\"M641.9,118a3.665,3.665,0,1,0,3.578,3.664A3.622,3.622,0,0,0,641.9,118Zm0,5.777a2.114,2.114,0,1,1,2.064-2.114,2.089,2.089,0,0,1-2.064,2.1Z\" transform=\"translate(-582.101 -110.677)\" fill=\"url(#f)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"translate(47.269 13.109)\" fill=\"#0e9bff\"/><path d=\"M642.432,118a3.5,3.5,0,1,0,3.5,3.5A3.5,3.5,0,0,0,642.432,118Zm0,5.523a2.023,2.023,0,1,0,0-.006Z\" transform=\"translate(-582.635 -110.677)\" fill=\"#0e9bff\"/><g transform=\"translate(0.814 92.409)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.102) rotate(90)\" fill=\"#47e6b1\"/></g><g transform=\"translate(55.505)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.101) rotate(90)\" fill=\"#47e6b1\"/></g><path d=\"M947.523,824.69a.578.578,0,0,1-.322-.7.282.282,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.272.272,0,0,0-.033.056.578.578,0,0,1-.7.322.279.279,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.277.277,0,0,0,.056.033.578.578,0,0,1,.322.7.273.273,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.272.272,0,0,0,.033-.056.578.578,0,0,1,.7-.322.279.279,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.274.274,0,0,0,947.523,824.69Z\" transform=\"translate(-850.847 -727.829)\" fill=\"#4d8af0\" opacity=\"0.5\"/><path d=\"M313.113,619.63a.578.578,0,0,1-.322-.7.279.279,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.28.28,0,0,0-.033.056.578.578,0,0,1-.7.322.269.269,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.279.279,0,0,0,.056.033.578.578,0,0,1,.322.7.277.277,0,0,0-.013.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.28.28,0,0,0,313.113,619.63Z\" transform=\"translate(-295.978 -548.479)\" fill=\"#fdd835\" opacity=\"0.5\"/><path d=\"M841.523,120.31a.578.578,0,0,1-.322-.7.285.285,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.274.274,0,0,0-.033.056.578.578,0,0,1-.7.322.28.28,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.275.275,0,0,0,.056.033.578.578,0,0,1,.322.7.278.278,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.275.275,0,0,0,841.523,120.31Z\" transform=\"translate(-758.137 -111.762)\" fill=\"#fdd835\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(100.942 38.483)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(27.984 92.668)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(91.247 58.889)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(9.981 11.136)\" fill=\"#4d8af0\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(0 36.89)\" fill=\"#47e6b1\" opacity=\"0.5\"/></g></svg>\n      <h3>No Record Found</h3>\n    </div>\n  </div>\n  <ion-toolbar class=\"action_tools\" *ngIf=\"status\">\n    <ion-skeleton-text slot=\"start\" animated style=\"width: 20%\"></ion-skeleton-text>\n    <ion-skeleton-text slot=\"end\" animated style=\"width: 20%\"></ion-skeleton-text>\n  </ion-toolbar>\n  \n\n  <ion-list *ngIf=\"status\">\n    <ion-list-header>\n      <ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n    </ion-list-header>\n    <ion-item>\n      <ion-label>\n        <h3>\n          <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n        </h3>\n        <p>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </p>\n        <h6>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </h6>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>\n        <h3>\n          <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n        </h3>\n        <p>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </p>\n        <h6>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </h6>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>\n        <h3>\n          <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n        </h3>\n        <p>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </p>\n        <h6>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </h6>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>\n        <h3>\n          <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n        </h3>\n        <p>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </p>\n        <h6>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </h6>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>\n        <h3>\n          <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n        </h3>\n        <p>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </p>\n        <h6>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </h6>\n      </ion-label>\n    </ion-item>\n  </ion-list>\n</ion-content>\n"
-
-/***/ }),
-
-/***/ "./src/app/self-care/self-common-service/settings/settings.service.ts":
-/*!****************************************************************************!*\
-  !*** ./src/app/self-care/self-common-service/settings/settings.service.ts ***!
-  \****************************************************************************/
-/*! exports provided: settingsService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settingsService", function() { return settingsService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-
-
-
-let settingsService = class settingsService {
-    constructor(http) {
-        this.http = http;
-    }
-    relatedto() {
-        return this.http.get("enum_masters?category_name=health_diary");
-    }
-    aboutUpdate(detail) {
-        return this.http.post("health_details/about_update", detail);
-    }
-    aboutDetail() {
-        return this.http.get("health_details/about");
-    }
-    getPreview(id) {
-        return this.http.get("users/user_details?user_uid=" + id);
-    }
-    setting() {
-        return this.http.get("users/picture_show");
-    }
-    editprofile(val, id) {
-        return this.http.put("users/" + id, val);
-    }
-    sendimage(val) {
-        return this.http.post("users/profile_picture", val);
-    }
-    contactDetails() {
-        return this.http.get("emergency_details");
-    }
-    addContacts(user_details) {
-        return this.http.post("emergency_details", user_details);
-    }
-    deleteData(id) {
-        return this.http.delete("emergency_details/" + id);
-    }
-    deleteCaregiver(id) {
-        return this.http.get("emergency_details/caregiver_delete?cg_id=" + id);
-    }
-    commonEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=created_at&&per_page=10&&page=" + page);
-    }
-    commonDateEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    commonAppointmentDateEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=ASC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    commonEventSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=created_at");
-    }
-    commonDateEventSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=event_datetime");
-    }
-    commonAppointmentSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=ASC&&sort=event_datetime");
-    }
-    commonVitalList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    commonVitalSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=event_datetime");
-    }
-    commonDeleteEvent(id) {
-        return this.http.delete("events/" + id);
-    }
-    commonPost(record) {
-        return this.http.post("events", record);
-    }
-    vitalCommonPost(record) {
-        return this.http.post("events/vital_update", record);
-    }
-    commonUpdatePost(id, record) {
-        return this.http.put("events/" + id, record);
-    }
-    myEmergencyHealthDetail() {
-        return this.http.get("health_details");
-    }
-    myEmergencyHealthUpdate(data) {
-        return this.http.post("health_details", data);
-    }
-    myEmergencyPreview() {
-        return this.http.get("users/preview");
-    }
-    reportType() {
-        return this.http.get("enum_masters?category_name=report");
-    }
-    deleteImage(data) {
-        return this.http.post("events/delete_image", data);
-    }
-    vitaldelete(data) {
-        return this.http.put("events/vital_delete", data);
-    }
-    vitalReading() {
-        return this.http.get("enum_masters?category_name=vital");
-    }
-    vitalFoodTime() {
-        return this.http.get("enum_masters?category_name=food_time");
-    }
-    view_expenses(id) {
-        return this.http.get("events/expense_list?user_id=" + id);
-    }
-    event_view_delete(id) {
-        return this.http.delete("events/" + id);
-    }
-    event_add_option() {
-        return this.http.get("enum_masters?category_name=spent_place");
-    }
-    event_add(value) {
-        return this.http.post("events", value);
-    }
-    view_expenses_cal(id) {
-        return this.http.get("events/expense_calculation?user_id=" + id);
-    }
-    chartrepeat(id) {
-        return this.http.get("events/expense_chart?user_id=" + id);
-    }
-    main_chart(id) {
-        return this.http.get("events/expense_cals_chart?user_id=" + id);
-    }
-    filterChart(id, data) {
-        return this.http.post("events/expense_chart_filter?user_id=" + id, data);
-    }
-    filterAmount(from, to, id) {
-        return this.http.get("events/expense_list?from_date=" + from + "&&end_date=" + to + "&&user_id=" + id);
-    }
-    Appointmentdropdown() {
-        return this.http.get("enum_masters?category_name=appointment");
-    }
-    appointmentDetails(data) {
-        return this.http.post("events", data);
-    }
-    EditDetails(id, data) {
-        return this.http.put("events/" + id, data);
-    }
-    recentAppointment(id) {
-        return this.http.get("events/appointment_list?user_id=" + id);
-    }
-    record_filter(data) {
-        console.log(data);
-        return this.http.post("events/diary_recording?", data);
-    }
-    completedAppointmentEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&tab=history&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    completedAppointmentSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&tab=history&&order=DESC&&sort=event_datetime");
-    }
-    vitalFoodTime1() {
-        return this.http.get("enum_masters?category_name=food_time_1");
-    }
-    vitalFoodTime2() {
-        return this.http.get("enum_masters?category_name=food_time_2");
-    }
-    vitalEventListNew(id) {
-        return this.http.get("events/vitals_list1?user_id=" + id);
-    }
-    reading_history(event, id, page, count) {
-        return this.http.get("events/vital_history?event_name=" + event + "&&user_id=" + id + "&&page=" + page + "&&per_page=" + count);
-    }
-    filterReading(event, id, page, count, from, end) {
-        return this.http.get("events/vital_history?event_name=" + event + "&&user_id=" + id + "&&page=" + page + "&&per_page=" + count + "&&from_date=" + from + "&&end_date=" + end);
-    }
-    vitalEventList(id) {
-        return this.http.get("events/vital_names_list?user_id=" + id);
-    }
-    vitalfilter(id, data) {
-        return this.http.post("events/vitals_list1?user_id=" + id, data);
-    }
-};
-settingsService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-];
-settingsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
-], settingsService);
-
-
+module.exports = "<ion-header class=\"main-header shadow\">\n  <ion-toolbar>\n   <!--  <ion-back-button slot=\"start\"></ion-back-button> -->\n   <ion-back-button slot=\"start\" defaultHref=\"self-care-tabs/tabs/tab1\"></ion-back-button>\n    <ion-title>Vitals</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button>\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22.888\" height=\"22.888\" viewBox=\"0 0 22.888 22.888\"><g transform=\"translate(0.25 0.25)\"><path d=\"M11.194,0A11.194,11.194,0,1,0,22.388,11.194,11.206,11.206,0,0,0,11.194,0Zm0,21.527A10.333,10.333,0,1,1,21.527,11.194,10.345,10.345,0,0,1,11.194,21.527Z\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M25.431,37a.43.43,0,0,0-.431.431v.861a.431.431,0,1,0,.861,0v-.861A.43.43,0,0,0,25.431,37Z\" transform=\"translate(-14.236 -21.07)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M21.493,9h-.05A3.445,3.445,0,0,0,18,12.444a.431.431,0,1,0,.861,0,2.583,2.583,0,0,1,2.62-2.583,2.632,2.632,0,0,1,2.546,2.546,2.571,2.571,0,0,1-1.184,2.21,4.107,4.107,0,0,0-1.829,3.493v1.224a.431.431,0,1,0,.861,0V18.109a3.293,3.293,0,0,1,1.435-2.769A3.427,3.427,0,0,0,24.888,12.4,3.468,3.468,0,0,0,21.493,9Z\" transform=\"translate(-10.25 -5.125)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n      </ion-button>\n      <ion-button>\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"26.711\" height=\"22.342\" viewBox=\"0 0 26.711 22.342\"><g transform=\"translate(0.25 0.25)\"><path d=\"M22.268,12.074A7.48,7.48,0,0,0,14.889,5,7.7,7.7,0,0,0,8.8,8.061c-.033-.017-.068-.029-.1-.045-.086-.042-.172-.081-.261-.116-.052-.021-.1-.039-.156-.057-.086-.03-.173-.057-.262-.081-.052-.014-.1-.028-.157-.041-.1-.022-.194-.038-.293-.053-.046-.007-.091-.016-.138-.021a3.849,3.849,0,0,0-.44-.027,3.936,3.936,0,0,0-3.932,3.932c0,.056,0,.111.007.166A6.04,6.04,0,0,0,0,16.862a5.618,5.618,0,0,0,5.611,5.612H7.863a.437.437,0,1,0,0-.874H5.611A4.743,4.743,0,0,1,.874,16.862a5.193,5.193,0,0,1,2.81-4.479l.248-.118v-.275c0-.054,0-.109.007-.164l0-.076-.005-.088c0-.036-.005-.073-.005-.109A3.037,3.037,0,0,1,7.39,8.524l.1.016a3.07,3.07,0,0,1,.345.077l.046.012a3.048,3.048,0,0,1,.365.14l.091.044a3.019,3.019,0,0,1,.308.174,3.057,3.057,0,0,1,1.4,2.566.437.437,0,0,0,.874,0,3.923,3.923,0,0,0-1.4-3,6.919,6.919,0,0,1,5.366-2.677,6.6,6.6,0,0,1,6.486,6.066,8.343,8.343,0,0,0-1.784.054.437.437,0,0,0,.065.869.429.429,0,0,0,.066-.005,8.054,8.054,0,0,1,2.046,0,4.478,4.478,0,0,1,3.567,4.362A4.386,4.386,0,0,1,20.956,21.6H19.221a.437.437,0,0,0,0,.874h1.735a5.26,5.26,0,0,0,5.254-5.254A5.376,5.376,0,0,0,22.268,12.074Z\" transform=\"translate(0 -5)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/><path d=\"M29.174,36.242a.437.437,0,0,0-.437.437,3.932,3.932,0,1,1-3.932-3.932A3.789,3.789,0,0,1,28,34.495H25.242a.437.437,0,1,0,0,.874h3.5a.455.455,0,0,0,.092-.018.471.471,0,0,0,.079-.017h0a.393.393,0,0,0,.038-.027.276.276,0,0,0,.145-.137.432.432,0,0,0,.046-.073.451.451,0,0,0,.024-.116.476.476,0,0,0,.01-.048v0h0V31.437a.437.437,0,0,0-.874,0v2.009a4.633,4.633,0,0,0-3.495-1.573,4.805,4.805,0,1,0,4.805,4.805A.437.437,0,0,0,29.174,36.242Z\" transform=\"translate(-11.263 -19.642)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n      </ion-button>\n      <ion-button>\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"19.708\" height=\"22.342\" viewBox=\"0 0 19.708 22.342\"><g transform=\"translate(0.255 0.25)\"><path d=\"M22.41,17.986a8.877,8.877,0,0,1-2.789-6.47V7.945A5.779,5.779,0,0,0,16.234,2.7a7.984,7.984,0,0,0-1.388-.483V1.986a1.986,1.986,0,0,0-3.971,0v.263A7.863,7.863,0,0,0,9.625,2.7,6.008,6.008,0,0,0,6.109,7.943v3.574a8.811,8.811,0,0,1-2.663,6.47.4.4,0,0,0,.212.673l3.769.651c.7.121,1.349.22,1.964.3a3.926,3.926,0,0,0,7.082,0c.613-.081,1.256-.18,1.954-.3l3.769-.651a.4.4,0,0,0,.213-.673Zm-10.741-16a1.191,1.191,0,1,1,2.383,0v.072a7.9,7.9,0,0,0-2.383.019Zm1.264,19.062a3.183,3.183,0,0,1-2.548-1.316,24.6,24.6,0,0,0,2.544.137,24.462,24.462,0,0,0,2.554-.139A3.184,3.184,0,0,1,12.933,21.048Zm5.36-2.521c-.762.131-1.461.238-2.121.322h0c-.291.037-.573.069-.85.1h-.009c-.253.025-.5.046-.745.064l-.139.01c-.212.014-.422.025-.63.033l-.129.005c-.494.017-.981.017-1.475,0l-.132-.006q-.309-.012-.622-.033l-.148-.01c-.238-.017-.479-.037-.726-.062l-.025,0c-.275-.027-.556-.06-.844-.1h0c-.662-.084-1.363-.191-2.129-.323L4.52,18A9.558,9.558,0,0,0,6.9,11.517V7.945A5.2,5.2,0,0,1,9.957,3.421a7.1,7.1,0,0,1,1.389-.47h.012a7.22,7.22,0,0,1,3.01-.027c.005,0,.01,0,.015,0a7.182,7.182,0,0,1,1.519.5,5.041,5.041,0,0,1,2.923,4.524v3.574A9.663,9.663,0,0,0,21.334,18Z\" transform=\"translate(-3.329)\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"0.5\"/></g></svg>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n   <ion-toolbar class=\"action_tools\" >\n    <!-- <ion-searchbar (ionChange)=\"SearchItem($event)\" slot=\"start\" placeholder=\"Search\" [debounce]=\"250\" mode=\"ios\"></ion-searchbar> -->\n    <ion-buttons slot=\"end\" color=\"secondary\">\n      <ion-button class=\"btn\" [routerLink]=\"['/self-care-tabs/tabs/tab1/vitals/analytics']\" >\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"15.7\" height=\"15.7\" viewBox=\"0 0 15.7 15.7\"> <g id=\"fluctuation\" transform=\"translate(0.1 0.1)\"> <g id=\"Group_187\" data-name=\"Group 187\" transform=\"translate(0.258 10.592)\"> <g id=\"Group_186\" data-name=\"Group 186\"> <path id=\"Path_689\" data-name=\"Path 689\" d=\"M10.327,328H8.26A.258.258,0,0,0,8,328.26H8v4.392a.258.258,0,0,0,.258.258h2.067a.258.258,0,0,0,.258-.258h0V328.26A.258.258,0,0,0,10.327,328Zm-.258,4.392H8.519v-3.875h1.55Z\" transform=\"translate(-8.002 -328.002)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> <g id=\"Group_189\" data-name=\"Group 189\" transform=\"translate(9.558 8.525)\"> <g id=\"Group_188\" data-name=\"Group 188\"> <path id=\"Path_690\" data-name=\"Path 690\" d=\"M298.327,264H296.26a.258.258,0,0,0-.258.258h0v6.458a.258.258,0,0,0,.258.258h2.067a.258.258,0,0,0,.258-.258h0V264.26A.258.258,0,0,0,298.327,264Zm-.258,6.458h-1.55v-5.942h1.55Z\" transform=\"translate(-296.002 -264.002)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> <g id=\"Group_191\" data-name=\"Group 191\" transform=\"translate(6.458 9.817)\"> <g id=\"Group_190\" data-name=\"Group 190\"> <path id=\"Path_691\" data-name=\"Path 691\" d=\"M202.327,304H200.26a.258.258,0,0,0-.258.258h0v5.167a.258.258,0,0,0,.258.258h2.067a.258.258,0,0,0,.258-.258h0V304.26A.258.258,0,0,0,202.327,304Zm-.258,5.167h-1.55v-4.65h1.55Z\" transform=\"translate(-200.002 -304.002)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> <g id=\"Group_193\" data-name=\"Group 193\" transform=\"translate(3.358 6.717)\"> <g id=\"Group_192\" data-name=\"Group 192\"> <path id=\"Path_692\" data-name=\"Path 692\" d=\"M106.327,208H104.26a.258.258,0,0,0-.258.258h0v8.267a.258.258,0,0,0,.258.258h2.067a.258.258,0,0,0,.258-.258h0V208.26A.258.258,0,0,0,106.327,208Zm-.258,8.267h-1.55v-7.75h1.55Z\" transform=\"translate(-104.002 -208.002)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> <g id=\"Group_195\" data-name=\"Group 195\" transform=\"translate(12.658 11.883)\"> <g id=\"Group_194\" data-name=\"Group 194\"> <path id=\"Path_693\" data-name=\"Path 693\" d=\"M394.327,368H392.26a.258.258,0,0,0-.258.258h0v3.1a.258.258,0,0,0,.258.258h2.067a.258.258,0,0,0,.258-.258h0v-3.1A.258.258,0,0,0,394.327,368Zm-.258,3.1h-1.55v-2.583h1.55Z\" transform=\"translate(-392.002 -368.002)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> <g id=\"Group_197\" data-name=\"Group 197\"> <g id=\"Group_196\" data-name=\"Group 196\"> <path id=\"Path_694\" data-name=\"Path 694\" d=\"M15.439,5.663a.257.257,0,0,0-.057-.049l-1.033-.664a.258.258,0,0,0-.4.217v.517h-.9L11.066,2.7a.268.268,0,0,0-.43,0L7.8,6.951,4.888.156A.255.255,0,0,0,4.647,0a.258.258,0,0,0-.237.164L1.117,8.525H0v.517H1.293a.258.258,0,0,0,.24-.164L4.661.938,7.514,7.593a.258.258,0,0,0,.452.042l2.885-4.328L12.7,6.085a.258.258,0,0,0,.215.115h1.033v.517a.258.258,0,0,0,.426.2l1.033-.886A.258.258,0,0,0,15.439,5.663Zm-.971.492V5.64l.343.221Z\" transform=\"translate(-0.001 0)\" fill=\"#2c2c2c\" stroke=\"#2c2c2c\" stroke-width=\"0.2\"/> </g> </g> </g> </svg>\n        Analytics\n      </ion-button>\n      <ion-button class=\"btn\" [routerLink]=\"['/self-care-tabs/tabs/tab1/vitals/add-vitals']\">\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11.965\" height=\"11.965\" viewBox=\"0 0 11.965 11.965\"><g transform=\"translate(-291.035 -86.035)\"><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(296.322 86.035)\" fill=\"#2c2c2c\"/><rect width=\"1.391\" height=\"11.965\" rx=\"0.696\" transform=\"translate(291.035 92.713) rotate(-90)\" fill=\"#2c2c2c\"/></g></svg>\n        Add\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n\n  <ion-note class=\"ion-padding\">Note:<span>&nbsp;Last 7 data points</span></ion-note>\n  <div class=\"ion-padding\" >\n    <ion-item-group class=\"expense_card\" *ngFor=\"let vital of vital_details | keyvalue\">\n      <ion-item button (click)=\"toggle(vital.key)\" *ngIf=\"vital.key == 'Blood Pressure'\">\n          <h4>{{vital.key}}</h4>           \n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"9.629\" viewBox=\"0 0 18 9.629\"><g transform=\"translate(-6.4 -33.4)\"><path d=\"M24.216,33.586a.636.636,0,0,0-.9,0l-7.908,7.923L7.485,33.586a.636.636,0,1,0-.9.9l8.357,8.357a.621.621,0,0,0,.45.186.647.647,0,0,0,.45-.186L24.2,34.485A.623.623,0,0,0,24.216,33.586Z\"/></g></svg>\n      </ion-item>\n      <ion-list [ngClass]=\"{'expand': vital.key === status1, 'collapse': vital.key != status1}\" *ngIf=\"vital.key == 'Blood Pressure'\">\n        <ion-item *ngFor=\"let data of vital.value\"  (click)=\"history_view(vital.key)\">\n          <ion-avatar>\n            {{data?.event_datetime|date:'dd'}}\n            <br>\n            {{data?.event_datetime|date:'MMM'}}\n          </ion-avatar>\n          <ion-label>\n            <!-- <div *ngIf=\"vital.key == 'Blood Pressure'\"> -->\n            <span><h3 *ngIf=\"data?.event_options['value1']\">BP: {{data?.event_options['value1']}}/</h3>\n            <h3 *ngIf=\"data?.event_options['value2']\">{{data?.event_options['value2']}}</h3><br>\n            <h3 *ngIf=\"data?.event_options['value3']\">PR: {{data?.event_options['value3']}}</h3></span>\n            <p>{{data?.event_category\t}}</p>\n            <!-- </div> -->\n          </ion-label>        \n        </ion-item>     \n      </ion-list>\n\n\n      <ion-item button (click)=\"toggle(vital.key)\" *ngIf=\"vital.key == 'Cholesterol'\">\n          <h4>{{vital.key}}</h4>           \n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"9.629\" viewBox=\"0 0 18 9.629\"><g transform=\"translate(-6.4 -33.4)\"><path d=\"M24.216,33.586a.636.636,0,0,0-.9,0l-7.908,7.923L7.485,33.586a.636.636,0,1,0-.9.9l8.357,8.357a.621.621,0,0,0,.45.186.647.647,0,0,0,.45-.186L24.2,34.485A.623.623,0,0,0,24.216,33.586Z\"/></g></svg>\n      </ion-item>\n      <ion-list [ngClass]=\"{'expand': vital.key === status1, 'collapse': vital.key != status1}\" *ngIf=\"vital.key == 'Cholesterol'\">\n        <ion-item *ngFor=\"let data of vital.value\"  (click)=\"history_view(vital.key)\">\n          <ion-avatar>\n            {{data?.event_datetime|date:'dd'}}\n            <br>\n            {{data?.event_datetime|date:'MMM'}}\n          </ion-avatar>\n          <ion-label>\n            <div *ngIf=\"vital.key == 'Cholesterol'\">\n            <span><h3 *ngIf=\"data?.event_options['value1']\">HDL: {{data?.event_options['value1']}}</h3>&nbsp;\n            <h3 *ngIf=\"data?.event_options['value2']\">LDL: {{data?.event_options['value2']}}</h3>&nbsp;\n            <h3 *ngIf=\"data?.event_options['value3']\">TG: {{data?.event_options['value3']}}</h3>&nbsp;<br>\n            <h3 *ngIf=\"data?.event_options['value4']\">TC: {{data?.event_options['value4']}}</h3></span>\n            <p>{{data?.event_category\t}}</p>\n            </div>\n          </ion-label>        \n        </ion-item>     \n      </ion-list>\n\n      \n\n      <ion-item button (click)=\"toggle(vital.key)\" *ngIf=\"vital.key == 'Blood Glucose'\">\n          <h4>{{vital.key}}</h4>           \n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"9.629\" viewBox=\"0 0 18 9.629\"><g transform=\"translate(-6.4 -33.4)\"><path d=\"M24.216,33.586a.636.636,0,0,0-.9,0l-7.908,7.923L7.485,33.586a.636.636,0,1,0-.9.9l8.357,8.357a.621.621,0,0,0,.45.186.647.647,0,0,0,.45-.186L24.2,34.485A.623.623,0,0,0,24.216,33.586Z\"/></g></svg>\n      </ion-item>\n      <ion-list [ngClass]=\"{'expand': vital.key === status1, 'collapse': vital.key != status1}\" *ngIf=\"vital.key == 'Blood Glucose'\">\n        <ion-item *ngFor=\"let data of vital.value\"  (click)=\"history_view(vital.key)\">\n          <ion-avatar>\n            {{data?.event_datetime|date:'dd'}}\n            <br>\n            {{data?.event_datetime|date:'MMM'}}\n          </ion-avatar>\n          <ion-label>\n            <div *ngIf=\"vital.key == 'Blood Glucose'\">\n            <span>\n            <h3 *ngIf=\"data?.event_options['value1']\">BG: {{data?.event_options['value1']}}</h3><br>\n            <h3 *ngIf=\"data?.event_options['value2']\">HbA1c: {{data?.event_options['value2']}}</h3></span>\n            \n            <p>{{data?.event_category\t}}</p>\n            </div>\n          </ion-label>        \n        </ion-item>     \n      </ion-list>\n\n\n      <ion-item button (click)=\"toggle(vital.key)\" *ngIf=\"vital.key != 'Blood Pressure' && vital.key != 'Cholesterol' && vital.key != 'Blood Glucose'\">\n          <h4>{{vital.key}}</h4>           \n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"9.629\" viewBox=\"0 0 18 9.629\"><g transform=\"translate(-6.4 -33.4)\"><path d=\"M24.216,33.586a.636.636,0,0,0-.9,0l-7.908,7.923L7.485,33.586a.636.636,0,1,0-.9.9l8.357,8.357a.621.621,0,0,0,.45.186.647.647,0,0,0,.45-.186L24.2,34.485A.623.623,0,0,0,24.216,33.586Z\"/></g></svg>\n      </ion-item>\n      <ion-list [ngClass]=\"{'expand': vital.key === status1, 'collapse': vital.key != status1}\" *ngIf=\"vital.key != 'Blood Pressure' && vital.key != 'Cholesterol' && vital.key != 'Blood Glucose'\">\n        <ion-item *ngFor=\"let data of vital.value\"  (click)=\"history_view(vital.key)\">\n          <ion-avatar>\n            {{data?.event_datetime|date:'dd'}}\n            <br>\n            {{data?.event_datetime|date:'MMM'}}\n          </ion-avatar>\n          <ion-label>\n            <div *ngIf=\"vital.key != 'Blood Pressure' && vital.key != 'Cholesterol' && vital.key != 'Blood Glucose'\">\n            <span><h3 *ngIf=\"data?.event_options['value1']\">{{data?.event_options['value1']}}</h3>&nbsp;\n            <h3 *ngIf=\"data?.event_options['value2']\">{{data?.event_options['value2']}}</h3>&nbsp;\n            <h3 *ngIf=\"data?.event_options['value3']\">{{data?.event_options['value3']}}</h3>&nbsp;\n            <h3 *ngIf=\"data?.event_options['value4']\">{{data?.event_options['value4']}}</h3></span>\n            <p>{{data?.event_category\t}}</p>\n            </div>\n          </ion-label>        \n        </ion-item>     \n      </ion-list>\n\n    </ion-item-group>\n  </div>\n\n  <div *ngIf=\"vital_keys.length == 0 && !status\" class=\"no_record\">\n    <div>\n      <svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"102.83\" height=\"97.896\" viewBox=\"0 0 102.83 97.896\"><defs><linearGradient id=\"a\" x1=\"0.509\" y1=\"0.997\" x2=\"0.509\" y2=\"-0.003\" gradientUnits=\"objectBoundingBox\"><stop offset=\"0\" stop-color=\"gray\" stop-opacity=\"0.251\"/><stop offset=\"0.54\" stop-color=\"gray\" stop-opacity=\"0.122\"/><stop offset=\"1\" stop-color=\"gray\" stop-opacity=\"0.102\"/></linearGradient><linearGradient id=\"b\" x1=\"0.813\" y1=\"0.841\" x2=\"0.813\" y2=\"-0.159\" xlink:href=\"#a\"/><linearGradient id=\"c\" x1=\"1.78\" y1=\"0.849\" x2=\"1.78\" y2=\"-0.151\" xlink:href=\"#a\"/><linearGradient id=\"d\" x1=\"0.5\" y1=\"1\" x2=\"0.5\" y2=\"0\" xlink:href=\"#a\"/><linearGradient id=\"f\" x1=\"0.5\" y1=\"0.999\" x2=\"0.5\" y2=\"-0.001\" xlink:href=\"#a\"/></defs><g transform=\"translate(0 0)\"><rect width=\"54.792\" height=\"75.705\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 8.666, 16.987)\" fill=\"#e0e0e0\"/><g transform=\"translate(9.841 6.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 0, 11.106)\" fill=\"url(#a)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 10.612, 18.43)\" fill=\"#fafafa\"/><rect width=\"25.594\" height=\"6.2\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.737, 12.656)\" fill=\"url(#b)\"/><path d=\"M441.3,91.351a3.664,3.664,0,1,0,4.263,2.831A3.621,3.621,0,0,0,441.3,91.351Zm1.212,5.654a2.114,2.114,0,1,1,1.575-2.508,2.089,2.089,0,0,1-1.575,2.508Z\" transform=\"translate(-407.323 -87.3)\" fill=\"url(#c)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"matrix(0.978, -0.21, 0.21, 0.978, 22.945, 12.34)\" fill=\"#0e9bff\"/><path d=\"M441.623,91.351a3.5,3.5,0,1,0,4.159,2.689A3.5,3.5,0,0,0,441.623,91.351Zm1.158,5.4a2.021,2.021,0,1,1,1.552-2.4,2.021,2.021,0,0,1-1.552,2.4Z\" transform=\"translate(-407.645 -87.3)\" fill=\"#0e9bff\"/><rect width=\"54.792\" height=\"75.705\" transform=\"translate(32.333 14.658)\" fill=\"#e0e0e0\"/><g transform=\"translate(33.26 15.938)\" opacity=\"0.5\"><rect width=\"52.94\" height=\"73.146\" fill=\"url(#d)\"/></g><rect width=\"51.592\" height=\"71.53\" transform=\"translate(33.933 16.477)\" fill=\"#fff\"/><rect width=\"25.594\" height=\"6.2\" transform=\"translate(47 13.375)\" fill=\"url(#d)\"/><path d=\"M641.9,118a3.665,3.665,0,1,0,3.578,3.664A3.622,3.622,0,0,0,641.9,118Zm0,5.777a2.114,2.114,0,1,1,2.064-2.114,2.089,2.089,0,0,1-2.064,2.1Z\" transform=\"translate(-582.101 -110.677)\" fill=\"url(#f)\"/><rect width=\"25.055\" height=\"5.927\" transform=\"translate(47.269 13.109)\" fill=\"#0e9bff\"/><path d=\"M642.432,118a3.5,3.5,0,1,0,3.5,3.5A3.5,3.5,0,0,0,642.432,118Zm0,5.523a2.023,2.023,0,1,0,0-.006Z\" transform=\"translate(-582.635 -110.677)\" fill=\"#0e9bff\"/><g transform=\"translate(0.814 92.409)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.102) rotate(90)\" fill=\"#47e6b1\"/></g><g transform=\"translate(55.505)\" opacity=\"0.5\"><rect width=\"0.471\" height=\"2.674\" transform=\"translate(1.101)\" fill=\"#47e6b1\"/><rect width=\"0.471\" height=\"2.674\" transform=\"translate(2.674 1.101) rotate(90)\" fill=\"#47e6b1\"/></g><path d=\"M947.523,824.69a.578.578,0,0,1-.322-.7.282.282,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.272.272,0,0,0-.033.056.578.578,0,0,1-.7.322.279.279,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.277.277,0,0,0,.056.033.578.578,0,0,1,.322.7.273.273,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.272.272,0,0,0,.033-.056.578.578,0,0,1,.7-.322.279.279,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.274.274,0,0,0,947.523,824.69Z\" transform=\"translate(-850.847 -727.829)\" fill=\"#4d8af0\" opacity=\"0.5\"/><path d=\"M313.113,619.63a.578.578,0,0,1-.322-.7.279.279,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.28.28,0,0,0-.033.056.578.578,0,0,1-.7.322.269.269,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.279.279,0,0,0,.056.033.578.578,0,0,1,.322.7.277.277,0,0,0-.013.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.28.28,0,0,0,313.113,619.63Z\" transform=\"translate(-295.978 -548.479)\" fill=\"#fdd835\" opacity=\"0.5\"/><path d=\"M841.523,120.31a.578.578,0,0,1-.322-.7.285.285,0,0,0,.013-.064h0a.29.29,0,0,0-.52-.192h0a.274.274,0,0,0-.033.056.578.578,0,0,1-.7.322.28.28,0,0,0-.064-.013h0a.29.29,0,0,0-.192.52h0a.275.275,0,0,0,.056.033.578.578,0,0,1,.322.7.278.278,0,0,0-.012.064h0a.29.29,0,0,0,.52.192h0a.274.274,0,0,0,.033-.056.578.578,0,0,1,.7-.322.278.278,0,0,0,.064.013h0a.29.29,0,0,0,.192-.52h0A.275.275,0,0,0,841.523,120.31Z\" transform=\"translate(-758.137 -111.762)\" fill=\"#fdd835\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(100.942 38.483)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(27.984 92.668)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(91.247 58.889)\" fill=\"#f55f44\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(9.981 11.136)\" fill=\"#4d8af0\" opacity=\"0.5\"/><circle cx=\"0.944\" cy=\"0.944\" r=\"0.944\" transform=\"translate(0 36.89)\" fill=\"#47e6b1\" opacity=\"0.5\"/></g></svg>\n      <h3>No Record Found</h3>\n    </div>\n  </div>\n  <ion-toolbar class=\"action_tools\" *ngIf=\"status\">\n    <ion-skeleton-text slot=\"start\" animated style=\"width: 20%\"></ion-skeleton-text>\n    <ion-skeleton-text slot=\"end\" animated style=\"width: 20%\"></ion-skeleton-text>\n  </ion-toolbar>\n  \n\n  <ion-list *ngIf=\"status\">\n    <ion-list-header>\n      <ion-skeleton-text animated style=\"width: 20%\"></ion-skeleton-text>\n    </ion-list-header>\n    <ion-item>\n      <ion-label>\n        <h3>\n          <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n        </h3>\n        <p>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </p>\n        <h6>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </h6>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>\n        <h3>\n          <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n        </h3>\n        <p>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </p>\n        <h6>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </h6>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>\n        <h3>\n          <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n        </h3>\n        <p>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </p>\n        <h6>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </h6>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>\n        <h3>\n          <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n        </h3>\n        <p>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </p>\n        <h6>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </h6>\n      </ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-label>\n        <h3>\n          <ion-skeleton-text animated style=\"width: 50%\"></ion-skeleton-text>\n        </h3>\n        <p>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </p>\n        <h6>\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\n        </h6>\n      </ion-label>\n    </ion-item>\n  </ion-list>\n</ion-content>\n"
 
 /***/ }),
 
@@ -272,6 +74,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
+
 
 
 
@@ -282,7 +88,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AddVitalsPage = class AddVitalsPage {
-    constructor(toast, alertController, toastController, datepipe, service, fb, route, router, statusBar) {
+    constructor(toast, alertController, toastController, datepipe, service, fb, route, router, statusBar, database, databaseSummary) {
         this.toast = toast;
         this.alertController = alertController;
         this.toastController = toastController;
@@ -292,6 +98,8 @@ let AddVitalsPage = class AddVitalsPage {
         this.route = route;
         this.router = router;
         this.statusBar = statusBar;
+        this.database = database;
+        this.databaseSummary = databaseSummary;
         this.food_options = [];
         this.Progress = false;
         this.showBackdrop = false;
@@ -347,11 +155,17 @@ let AddVitalsPage = class AddVitalsPage {
             value3: [''],
             value4: ['']
         });
-        this.service.vitalReading().subscribe(res => {
+        // this.service.vitalReading().subscribe(res => {
+        //   this.vital_options = res['enum_masters']
+        //   this.vital_keys = this.vital_options;
+        //   this.vital_keys.push('Others')
+        // })
+        this.databaseSummary.getEnumMasters('vital').then((res) => {
             this.vital_options = res['enum_masters'];
             this.vital_keys = this.vital_options;
             this.vital_keys.push('Others');
-        });
+        })
+            .catch(error => { console.log(error); });
         this.vitalform.controls['event_name'].valueChanges.subscribe((eventName) => {
             this.submitted = false;
             this.selectedVital = eventName;
@@ -515,8 +329,15 @@ let AddVitalsPage = class AddVitalsPage {
                 options[fieldName] = val[fieldName];
             }
         }
-        let date = this.datepipe.transform(val.event_datetime, "dd MMM yyyy");
+        //let date=this.datepipe.transform(val.event_datetime,"dd MMM yyyy")
         //let time=this.datepipe.transform(val.event_time,"HH:mm:ss")
+        let new1 = new Date(val.event_time);
+        let gethours = new1.getHours();
+        let getMinutes = new1.getMinutes();
+        let new2 = new Date(val.event_datetime);
+        new2.setHours(gethours);
+        new2.setMinutes(getMinutes);
+        let event_dateTime = new2.toJSON();
         this.name = val['event_name'];
         if (val['event_name'] == 'Others') {
             this.name = val['others'];
@@ -526,7 +347,7 @@ let AddVitalsPage = class AddVitalsPage {
             "event_options": options,
             "event_category": val.food_time,
             //"value":val.value+" "+this.showunit,
-            "event_datetime": date + " " + val.event_time,
+            "event_datetime": event_dateTime,
             "event_type": "vital",
             "description": val.description
         };
@@ -633,9 +454,14 @@ let AddVitalsPage = class AddVitalsPage {
                         role: 'submit',
                         cssClass: 'secondary',
                         handler: () => {
-                            this.service.vitalCommonPost(this.vital_post).subscribe(res => {
+                            // this.service.vitalCommonPost(this.vital_post).subscribe(res=>{
+                            //   this.Progress=false;  
+                            //   this.vital_details=res;
+                            //   this.presentAlert();   
+                            // });
+                            this.database.createAnVitalEvent(this.vital_post).then((res) => {
                                 this.Progress = false;
-                                this.vital_details = res;
+                                //this.vital_details=res;
                                 this.presentAlert();
                             });
                         }
@@ -711,7 +537,9 @@ AddVitalsPage.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_9__["DatabaseProvider"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_10__["DataBaseSummaryProvider"] }
 ];
 AddVitalsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -719,7 +547,7 @@ AddVitalsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./add-vitals.page.html */ "./node_modules/raw-loader/index.js!./src/app/self-care/vitals/add-vitals/add-vitals.page.html"),
         styles: [__webpack_require__(/*! ../vitals.page.scss */ "./src/app/self-care/vitals/vitals.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_8__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_8__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_9__["DatabaseProvider"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_10__["DataBaseSummaryProvider"]])
 ], AddVitalsPage);
 
 
@@ -1147,27 +975,26 @@ let VitalReadingPage = class VitalReadingPage {
         this.count = 10;
         this.previous_data = [];
         this.vital_reading = [];
-        this.vital_scroll = [];
         this.route.queryParams.subscribe(params => {
             this.event_name = params.data;
             this.user_id = localStorage.getItem("user_id");
-            this.service.reading_history(this.event_name, this.user_id, this.page, this.count).subscribe(res => {
-                this.previous_data = res['events'];
-                this.delete_content = this.previous_data['event_name'];
-                this.groupBy(this.previous_data);
-            });
         });
     }
     ngOnInit() {
-        this.end_date1 = new Date();
-        var y = this.end_date1.getFullYear();
-        var m = this.end_date1.getMonth();
-        this.from_date1 = new Date(y, m, 1);
     }
     ionViewWillEnter() {
         this.statusBar.backgroundColorByHexString('#60dc68');
         this.tabBar = document.getElementById('myTabBar');
         this.tabBar.style.display = 'none';
+        this.end_date1 = new Date();
+        var y = this.end_date1.getFullYear();
+        var m = this.end_date1.getMonth();
+        this.from_date1 = new Date(y, m, 1);
+        this.service.filterReading(this.event_name, this.user_id, this.page, this.count, this.from_date1, this.end_date1).subscribe(res => {
+            this.previous_data = res['events'];
+            this.groupBy(this.previous_data);
+            console.log(this.previous_data);
+        });
     }
     groupBy(data) {
         let records = data.map(item => ({
@@ -1190,6 +1017,7 @@ let VitalReadingPage = class VitalReadingPage {
             }
         });
         this.vital_reading = value;
+        console.log(this.vital_reading);
     }
     openCalendar() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
@@ -1204,6 +1032,7 @@ let VitalReadingPage = class VitalReadingPage {
                 componentProps: { options }
             });
             myCalendar.present();
+            this.page = 1;
             const event = yield myCalendar.onDidDismiss();
             const date = event.data;
             const from_date = date.from.dateObj;
@@ -1211,45 +1040,29 @@ let VitalReadingPage = class VitalReadingPage {
             this.from_date1 = from_date;
             this.end_date1 = end_date;
             this.service.filterReading(this.event_name, this.user_id, this.page, this.count, from_date, end_date).subscribe(res => {
-                let filter = res['events'];
-                this.groupBy(filter);
+                this.previous_data = res['events'];
+                console.log(this.previous_data);
+                this.groupBy(this.previous_data);
             });
         });
     }
-    scroll(event) {
+    loadData(scroll) {
         setTimeout(() => {
             this.page += 1;
-            this.service.reading_history(this.event_name, this.user_id, this.page, this.count).subscribe(res => {
-                let data = res['events'];
-                let concat = this.previous_data.concat(data);
-                this.previous_data = concat;
-                let records = this.previous_data.map(item => ({
-                    id: item.id,
-                    description: item.description,
-                    event_name: item.event_name,
-                    event_category: item.event_category,
-                    event_datetime: item.event_datetime,
-                    event_type: item.event_type,
-                    value1: item.event_options.value1,
-                    value2: item.event_options.value2,
-                    value3: item.event_options.value3,
-                    value4: item.event_options.value4,
-                }));
-                let value = [];
-                const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_9__["from"])(records).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_10__["groupBy"])(person => Object(_angular_common__WEBPACK_IMPORTED_MODULE_3__["formatDate"])(person.event_datetime, 'yyyy-MM-dd', 'en-US')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_10__["mergeMap"])(group => group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_10__["toArray"])()))).subscribe(val => {
-                    if (val) {
-                        let ff = { "created_at": val[0].event_datetime, "events": val };
-                        value.push(ff);
-                    }
-                });
-                this.vital_scroll = value;
-                this.vital_reading = this.vital_scroll;
-                event.target.complete();
+            this.service.filterReading(this.event_name, this.user_id, this.page, this.count, this.from_date1, this.end_date1).subscribe(res => {
+                let event = res['events'];
+                console.log(event);
+                let merge = this.previous_data.concat(event);
+                console.log(merge);
+                this.previous_data = merge;
+                console.log(this.previous_data);
+                this.groupBy(merge);
+                scroll.target.complete();
                 if (this.page * 10 != this.vital_reading.length) {
-                    event.target.disabled = true;
+                    scroll.target.disabled = true;
                 }
             }, error => {
-                event.target.disabled = true;
+                scroll.target.disabled = true;
             });
         }, 500);
     }
@@ -1257,7 +1070,7 @@ let VitalReadingPage = class VitalReadingPage {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: 'Vitals',
-                message: 'Are you sure want to delete' + ' ' + this.event_name + '?',
+                message: 'Are you sure want to delete?',
                 mode: 'md',
                 buttons: [
                     {
@@ -1284,7 +1097,7 @@ let VitalReadingPage = class VitalReadingPage {
     }
     presentToast(message) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            this.toast.show(message, '2000', 'bottom').subscribe(toast => {
+            this.toast.show(message, '4000', 'center').subscribe(toast => {
             });
         });
     }
@@ -1342,6 +1155,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
 /* harmony import */ var ion2_calendar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ion2-calendar */ "./node_modules/ion2-calendar/dist/index.js");
 /* harmony import */ var ion2_calendar__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(ion2_calendar__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
 
 
 
@@ -1393,7 +1208,7 @@ VitalsPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
         ],
-        providers: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"], _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_12__["Toast"]],
+        providers: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"], _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_12__["Toast"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_14__["DataBaseSummaryProvider"]],
         declarations: [_vitals_page__WEBPACK_IMPORTED_MODULE_6__["VitalsPage"],
             _add_vitals_add_vitals_page__WEBPACK_IMPORTED_MODULE_8__["AddVitalsPage"],
             _analytics_analytics_page__WEBPACK_IMPORTED_MODULE_9__["AnalyticsPage"],
@@ -1435,6 +1250,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
 
 
 
@@ -1443,13 +1260,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let VitalsPage = class VitalsPage {
-    constructor(datepipe, service, route, router, alertController, statusBar) {
+    constructor(datepipe, service, route, router, alertController, statusBar, databaseSummary) {
         this.datepipe = datepipe;
         this.service = service;
         this.route = route;
         this.router = router;
         this.alertController = alertController;
         this.statusBar = statusBar;
+        this.databaseSummary = databaseSummary;
         this.status = true;
         this.vital_keys = [];
         this.status1 = -1;
@@ -1461,11 +1279,17 @@ let VitalsPage = class VitalsPage {
         this.tabBar.classList.remove("tab-selected");
         this.status = true;
         this.user_id = localStorage.getItem("user_id");
-        this.service.vitalEventList(this.user_id).subscribe(res => {
+        // this.service.vitalEventList(this.user_id).subscribe(res=>{
+        // this.status = false;
+        // this.vital_details=res;
+        // this.vital_keys = Object.keys(this.vital_details); 
+        // })
+        this.databaseSummary.getVitalEvents('vital', 'New', 7).then(res => {
+            console.log(res);
             this.status = false;
             this.vital_details = res;
             this.vital_keys = Object.keys(this.vital_details);
-        });
+        }).catch(err => { console.log(err); });
     }
     history_view(event) {
         let navigationExtras = {
@@ -1490,7 +1314,8 @@ VitalsPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"] }
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_7__["DataBaseSummaryProvider"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('width', { static: true }),
@@ -1502,7 +1327,7 @@ VitalsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./vitals.page.html */ "./node_modules/raw-loader/index.js!./src/app/self-care/vitals/vitals.page.html"),
         styles: [__webpack_require__(/*! ./vitals.page.scss */ "./src/app/self-care/vitals/vitals.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _self_common_service_settings_settings_service__WEBPACK_IMPORTED_MODULE_2__["settingsService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_7__["DataBaseSummaryProvider"]])
 ], VitalsPage);
 
 

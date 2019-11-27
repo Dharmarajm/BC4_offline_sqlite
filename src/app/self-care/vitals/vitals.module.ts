@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';  
 import { Toast } from '@ionic-native/toast/ngx';
 import { CalendarModule } from 'ion2-calendar';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 const routes: Routes = [
   {
@@ -49,7 +50,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  providers:[DatePipe,Toast],
+  providers:[DatePipe,Toast,DataBaseSummaryProvider],
   declarations: [VitalsPage,
                  AddVitalsPage,
                  AnalyticsPage,

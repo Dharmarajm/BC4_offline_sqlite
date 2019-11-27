@@ -11,9 +11,9 @@ var map = {
 	"../alerts/alerts.module": [
 		"./src/app/self-care/alerts/alerts.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
-		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
 		"alerts-alerts-module"
@@ -21,25 +21,31 @@ var map = {
 	"../appointments/appointments.module": [
 		"./src/app/self-care/appointments/appointments.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
-		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"appointments-appointments-module"
 	],
 	"../cgalerts/cgalerts.module": [
 		"./src/app/care-giver/cgalerts/cgalerts.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"common",
 		"cgalerts-cgalerts-module"
 	],
 	"../cgappointments/cgappointments.module": [
 		"./src/app/care-giver/cgappointments/cgappointments.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"common",
 		"cgappointments-cgappointments-module"
 	],
 	"../cgdoc-visit/cgdoc-visit.module": [
 		"./src/app/care-giver/cgdoc-visit/cgdoc-visit.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~cgdoc-visit-cgdoc-visit-module~cgexpenses-cgexpenses-module~cgvitals-cgvitals-module~doc-vis~b671623b",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
@@ -58,6 +64,8 @@ var map = {
 	"../cghealth-diary/cghealth-diary.module": [
 		"./src/app/care-giver/cghealth-diary/cghealth-diary.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~f1348979",
@@ -67,6 +75,8 @@ var map = {
 	"../cgprescriptions/cgprescriptions.module": [
 		"./src/app/care-giver/cgprescriptions/cgprescriptions.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"common",
@@ -75,6 +85,8 @@ var map = {
 	"../cgreports/cgreports.module": [
 		"./src/app/care-giver/cgreports/cgreports.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"common",
@@ -90,18 +102,20 @@ var map = {
 	"../doc-visits/doc-visits.module": [
 		"./src/app/self-care/doc-visits/doc-visits.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
-		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~cgdoc-visit-cgdoc-visit-module~cgexpenses-cgexpenses-module~cgvitals-cgvitals-module~doc-vis~b671623b",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~f1348979",
-		"common",
+		"default~doc-visits-doc-visits-module~health-diary-health-diary-module",
 		"doc-visits-doc-visits-module"
 	],
 	"../expenses/expenses.module": [
 		"./src/app/self-care/expenses/expenses.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~cgdoc-visit-cgdoc-visit-module~cgexpenses-cgexpenses-module~cgvitals-cgvitals-module~doc-vis~b671623b",
 		"default~cgexpenses-cgexpenses-module~expenses-expenses-module",
 		"expenses-expenses-module"
@@ -109,20 +123,20 @@ var map = {
 	"../health-diary/health-diary.module": [
 		"./src/app/self-care/health-diary/health-diary.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
-		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~f1348979",
-		"common",
+		"default~doc-visits-doc-visits-module~health-diary-health-diary-module",
 		"health-diary-health-diary-module"
 	],
 	"../prescriptions/prescriptions.module": [
 		"./src/app/self-care/prescriptions/prescriptions.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
-		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
 		"prescriptions-prescriptions-module"
@@ -130,23 +144,25 @@ var map = {
 	"../reports/reports.module": [
 		"./src/app/self-care/reports/reports.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
-		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
 		"reports-reports-module"
 	],
 	"../tab1/tab1.module": [
 		"./src/app/self-care/tab1/tab1.module.ts",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
-		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"tab1-tab1-module"
 	],
 	"../tab1cg/tab1cg.module": [
 		"./src/app/care-giver/tab1cg/tab1cg.module.ts",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"common",
@@ -155,23 +171,25 @@ var map = {
 	"../tab2/tab2.module": [
 		"./src/app/self-care/tab2/tab2.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
-		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
-		"common",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~contact-contact-module~tab2-tab2-module",
 		"tab2-tab2-module"
 	],
 	"../tab2cg/tab2cg.module": [
 		"./src/app/care-giver/tab2cg/tab2cg.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"common",
 		"tab2cg-tab2cg-module"
 	],
 	"../tab3/tab3.module": [
 		"./src/app/self-care/tab3/tab3.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
-		"default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
 		"default~tab3-tab3-module~tab3cg-tab3cg-module",
@@ -180,6 +198,8 @@ var map = {
 	"../tab3cg/tab3cg.module": [
 		"./src/app/care-giver/tab3cg/tab3cg.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
@@ -190,13 +210,15 @@ var map = {
 	"../vitals/vitals.module": [
 		"./src/app/self-care/vitals/vitals.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
 		"default~cgdoc-visit-cgdoc-visit-module~cgexpenses-cgexpenses-module~cgvitals-cgvitals-module~doc-vis~b671623b",
 		"vitals-vitals-module"
 	],
 	"./about/about.module": [
 		"./src/app/self-care/tab2/about/about.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
 		"about-about-module"
 	],
 	"./care-giver/tabscg/tabscg.module": [
@@ -206,8 +228,8 @@ var map = {
 	"./contact/contact.module": [
 		"./src/app/self-care/tab2/contact/contact.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
-		"common",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~contact-contact-module~tab2-tab2-module",
 		"contact-contact-module"
 	],
 	"./forgot-password/step1/step1.module": [
@@ -229,7 +251,7 @@ var map = {
 	"./health/health.module": [
 		"./src/app/self-care/tab2/health/health.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
 		"health-health-module"
 	],
 	"./login/login.module": [
@@ -801,6 +823,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
 /* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
 /* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 
 
 
@@ -816,16 +839,14 @@ __webpack_require__.r(__webpack_exports__);
 // import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 
-//import { from, Observable, forkJoin  } from 'rxjs';
-//import { HttpClient } from '@angular/common/http';
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(
-    //public http: HttpClient,
-    platform, splashScreen, statusBar, router, toastController, location, androidPermissions, 
+    function AppComponent(http, platform, splashScreen, statusBar, router, toastController, location, androidPermissions, 
     // private autostart: Autostart,
     screenOrientation, network, networkProvider, localNotifications
     // private keyboard: Keyboard
     ) {
+        this.http = http;
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
@@ -844,9 +865,9 @@ var AppComponent = /** @class */ (function () {
         this.statusBar.backgroundColorByHexString('#483df6');
     }
     AppComponent.prototype.ngOnInit = function () {
-        // let id = localStorage.getItem("user_id");
-        // let getUsersID = { "user_id": [id,23] }
-        // this.getAllEventsList(getUsersID).subscribe((responseList)=>{
+        var array1 = ["ab", "xyz", "qr", "pqrs"], array2 = ["ab", "def", "lmno", "def", "qr", "pqrs"], unique = array1.filter(function (v) { return array2.indexOf(v) == -1; });
+        console.log(unique);
+        // this.getAllEventsList().subscribe((responseList)=>{
         //   console.log(responseList)
         //  })
     };
@@ -934,8 +955,8 @@ var AppComponent = /** @class */ (function () {
     };
     AppComponent.prototype.ngOnDestroy = function () {
     };
-    //  getAllEventsList(getUsersID){
-    //   let response1 = this.http.get(`events/event_list?user_id=`+getUsersID["user_id"]);
+    //  getAllEventsList(){
+    //   let response1 = this.http.get(`users/user_data`);
     //   return forkJoin([response1]);
     //  }
     AppComponent.prototype.initializeBackButtonCustomHandler = function () {
@@ -957,6 +978,7 @@ var AppComponent = /** @class */ (function () {
         });
     };
     AppComponent.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_12__["HttpClient"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
         { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"] },
         { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] },
@@ -974,7 +996,8 @@ var AppComponent = /** @class */ (function () {
             selector: 'app-root',
             template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/index.js!./src/app/app.component.html")
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_12__["HttpClient"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
             _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
@@ -1643,7 +1666,13 @@ var syncProvider = /** @class */ (function () {
                     .then(function () {
                     _this.getTotalEnumMasters();
                     _this.getAllEvents();
+                })
+                    .then(function () {
+                    _this.getUniqueEventDataPush();
                     _this.awaitAllUsersTableData();
+                })
+                    .then(function () {
+                    _this.getUniqueUsersDataPush();
                 });
                 return [2 /*return*/];
             });
@@ -1861,6 +1890,93 @@ var syncProvider = /** @class */ (function () {
             });
         });
     };
+    syncProvider.prototype.getUniqueEventDataPush = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var getUserIds;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getUserIdForEvents()];
+                    case 1:
+                        getUserIds = _a.sent();
+                        this.getDatabase().then(function (database) {
+                            _this.getAllEventsList(getUserIds).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var array1, array2, unique, _a, _b, _i, j, sql, event_optionsURI, event_assets_URI, setGlobalURI, createEventData;
+                                var _this = this;
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
+                                    switch (_c.label) {
+                                        case 0:
+                                            array1 = responseList[0]['events'];
+                                            return [4 /*yield*/, database.executeSql("SELECT * FROM events", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                                    var events, i, event_json, eventAssetsJson;
+                                                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                        events = [];
+                                                        for (i = 0; i < data.rows.length; i++) {
+                                                            event_json = null;
+                                                            eventAssetsJson = null;
+                                                            if (data.rows.item(i).event_options != null) {
+                                                                event_json = JSON.parse(data.rows.item(i).event_options);
+                                                            }
+                                                            if (data.rows.item(i).event_assets != null) {
+                                                                eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                                                            }
+                                                            events.push({
+                                                                id: data.rows.item(i).id,
+                                                                event_id: data.rows.item(i).event_id,
+                                                                event_name: data.rows.item(i).event_name,
+                                                                description: data.rows.item(i).description,
+                                                                value: data.rows.item(i).value,
+                                                                event_datetime: data.rows.item(i).event_datetime,
+                                                                event_type: data.rows.item(i).event_type,
+                                                                event_category: data.rows.item(i).event_category,
+                                                                event_assets: eventAssetsJson,
+                                                                event_options: event_json,
+                                                                user_id: data.rows.item(i).user_id,
+                                                                delete1: data.rows.item(i).delete1,
+                                                                created_at: data.rows.item(i).created_at,
+                                                                updated_at: data.rows.item(i).updated_at
+                                                            });
+                                                        }
+                                                        ;
+                                                        return [2 /*return*/, events];
+                                                    });
+                                                }); })];
+                                        case 1:
+                                            array2 = _c.sent();
+                                            unique = array1.filter(function (v) { return array2.indexOf(v.id) == -1; });
+                                            _a = [];
+                                            for (_b in unique.length)
+                                                _a.push(_b);
+                                            _i = 0;
+                                            _c.label = 2;
+                                        case 2:
+                                            if (!(_i < _a.length)) return [3 /*break*/, 5];
+                                            j = _a[_i];
+                                            sql = "INSERT INTO events VALUES (?,NULL,?,?,?,?,?,?,?,?,?,?,?,?)";
+                                            event_optionsURI = unique[j]["event_options"];
+                                            event_assets_URI = unique[j]["event_assets"];
+                                            return [4 /*yield*/, this.getLocalAssets(event_optionsURI, event_assets_URI)];
+                                        case 3:
+                                            setGlobalURI = _c.sent();
+                                            if (setGlobalURI.length > 0) {
+                                                event_optionsURI["localImagePath"] = setGlobalURI;
+                                            }
+                                            createEventData = [unique[j]["id"], unique[j]["event_name"], unique[j]["description"], unique[j]["value"], unique[j]["event_datetime"], unique[j]["event_type"], unique[j]["event_category"], JSON.stringify(unique[j]["event_assets"]), JSON.stringify(event_optionsURI), unique[j]["user_id"], unique[j]["created_at"], unique[j]["updated_at"], false];
+                                            this.commonUpdateAndDeleteEvent(sql, createEventData);
+                                            _c.label = 4;
+                                        case 4:
+                                            _i++;
+                                            return [3 /*break*/, 2];
+                                        case 5: return [2 /*return*/];
+                                    }
+                                });
+                            }); });
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     syncProvider.prototype.getLocalAssets = function (events_options, events_assets) {
         var localAssets = events_options;
         console.log(localAssets);
@@ -1990,24 +2106,28 @@ var syncProvider = /** @class */ (function () {
                                                 switch (_a.label) {
                                                     case 0:
                                                         rowData = data.rows.item(i);
-                                                        if (!(data.rows.item(i).delete1 == 'true')) return [3 /*break*/, 1];
+                                                        if (!(data.rows.item(i).delete1 == 'true' && data.rows.item(i).role_id == 2)) return [3 /*break*/, 1];
                                                         this_3.deleteUsersData(rowData);
-                                                        return [3 /*break*/, 6];
-                                                    case 1: return [4 /*yield*/, this_3.getUserPolicy()];
-                                                    case 2:
+                                                        return [3 /*break*/, 7];
+                                                    case 1:
+                                                        if (!(data.rows.item(i).delete1 == 'true' && data.rows.item(i).role_id == 1)) return [3 /*break*/, 2];
+                                                        this_3.deletePatientData(rowData);
+                                                        return [3 /*break*/, 7];
+                                                    case 2: return [4 /*yield*/, this_3.getUserPolicy()];
+                                                    case 3:
                                                         getHealthData = _a.sent();
                                                         assigngetUserData = getHealthData['policies'];
-                                                        healthData = assigngetUserData[0];
+                                                        healthData = assigngetUserData[0] || null;
                                                         findindex = this_3.responseData3.indexOf(function (res) { return res.id == data.rows.item(i).id; });
                                                         sql = "UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?";
-                                                        if (!(findindex != -1 && this_3.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at)) return [3 /*break*/, 3];
+                                                        if (!(findindex != -1 && this_3.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at)) return [3 /*break*/, 4];
                                                         createEventData = [this_3.responseData3[findindex]["name"], this_3.responseData3[findindex]["email"], this_3.responseData3[findindex]["password"], this_3.responseData3[findindex]["mobile_no"], this_3.responseData3[findindex]["address"], this_3.responseData3[findindex]["country"], this_3.responseData3[findindex]["blood_group"], this_3.responseData3[findindex]["age"], this_3.responseData3[findindex]["user_uid"], this_3.responseData3[findindex]["forgot_password_code"], JSON.stringify(this_3.responseData3[findindex]["user_picture"]), this_3.responseData3[findindex]["active_status"], this_3.responseData3[findindex]["role_id"], this_3.responseData3[findindex]["created_at"], this_3.responseData3[findindex]["updated_at"], false, this_3.responseData3[findindex]["id"]];
                                                         this_3.commonUpdateAndDeleteEvent(sql, createEventData);
-                                                        return [3 /*break*/, 6];
-                                                    case 3:
-                                                        if (!(findindex != -1 && this_3.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData['id'] == null && findindex != -1 && profile_id == data.rows.item(i).id)) return [3 /*break*/, 6];
+                                                        return [3 /*break*/, 7];
+                                                    case 4:
+                                                        if (!(findindex != -1 && this_3.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData != null && healthData['id'] == null && findindex != -1 && profile_id == data.rows.item(i).id)) return [3 /*break*/, 7];
                                                         profile_picture = JSON.parse(data.rows.item(i).user_picture);
-                                                        if (!(profile_picture['url'] != null && profile_picture['toUpdate'] == true)) return [3 /*break*/, 5];
+                                                        if (!(profile_picture['url'] != null && profile_picture['toUpdate'] == true)) return [3 /*break*/, 6];
                                                         localPath = profile_picture;
                                                         params = { localURL: profile_picture['localURL'],
                                                             cdvFilePath: profile_picture['cdvFilePath'],
@@ -2015,7 +2135,7 @@ var syncProvider = /** @class */ (function () {
                                                         };
                                                         requestUrl = "users/profile_picture";
                                                         return [4 /*yield*/, this_3.uploadImage(localPath, params, requestUrl)];
-                                                    case 4:
+                                                    case 5:
                                                         uploadStatus = _a.sent();
                                                         if (uploadStatus["status"] == true) {
                                                             updateEventOptions = profile_picture;
@@ -2026,11 +2146,11 @@ var syncProvider = /** @class */ (function () {
                                                             createEventData = [JSON.stringify(updateEventOptions), id];
                                                             this_3.commonUpdateAndDeleteEvent(sql_1, createEventData);
                                                         }
-                                                        _a.label = 5;
-                                                    case 5:
-                                                        this_3.updateUsersData(rowData, healthData);
                                                         _a.label = 6;
-                                                    case 6: return [2 /*return*/];
+                                                    case 6:
+                                                        this_3.updateUsersData(rowData, healthData);
+                                                        _a.label = 7;
+                                                    case 7: return [2 /*return*/];
                                                 }
                                             });
                                         };
@@ -2073,12 +2193,112 @@ var syncProvider = /** @class */ (function () {
             });
         });
     };
-    syncProvider.prototype.getEmergencyContacts = function (response) {
+    syncProvider.prototype.getUniqueUsersDataPush = function () {
+        var _this = this;
+        this.getDatabase().then(function (database) {
+            _this.requestDataFromMultipleSources().subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                var array1, array2, array3, unique1, unique2, unique3;
+                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            this.emegencyConatcts = responseList[0]["emergency_contacts"];
+                            this.healtDetails = responseList[1]["health_detail"];
+                            this.usersList = responseList[2]["users"];
+                            this.user_associations = responseList[3]["user_associations"];
+                            return [4 /*yield*/, database.executeSql("SELECT * FROM emergency_details", []).then(function (data) {
+                                    var emergencyContacts = [];
+                                    for (var i = 0; i < data.rows.length; i++) {
+                                        emergencyContacts.push({
+                                            id: data.rows.item(i).id,
+                                            emergency_id: data.rows.item(i).emergency_id,
+                                            contact_name: data.rows.item(i).contact_name,
+                                            emergency_no: data.rows.item(i).emergency_no,
+                                            user_type: data.rows.item(i).user_type,
+                                            user_id: data.rows.item(i).user_id,
+                                            created_at: data.rows.item(i).created_at,
+                                            updated_at: data.rows.item(i).updated_at,
+                                            delete1: data.rows.item(i).delete1
+                                        });
+                                    }
+                                    return emergencyContacts;
+                                })];
+                        case 1:
+                            array1 = _a.sent();
+                            return [4 /*yield*/, database.executeSql("SELECT * FROM health_details", []).then(function (data1) {
+                                    var healthData = [];
+                                    for (var i = 0; i < data1.rows.length; i++) {
+                                        var event_json = null;
+                                        if (data1.rows.item(i).attribute_name_value != '') {
+                                            event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
+                                        }
+                                        healthData.push({
+                                            id: data1.rows.item(i).id,
+                                            health_id: data1.rows.item(i).health_id,
+                                            name: data1.rows.item(i).name,
+                                            attribute_name_value: event_json,
+                                            user_id: data1.rows.item(i).user_id,
+                                            created_at: data1.rows.item(i).created_at,
+                                            updated_at: data1.rows.item(i).updated_at
+                                        });
+                                    }
+                                    return healthData;
+                                })];
+                        case 2:
+                            array2 = _a.sent();
+                            return [4 /*yield*/, database.executeSql("SELECT * FROM users", []).then(function (data2) {
+                                    var userData = [];
+                                    for (var i = 0; i < data2.rows.length; i++) {
+                                        var attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                        userData.push({
+                                            id: data2.rows.item(i).id,
+                                            name: data2.rows.item(i).name,
+                                            email: data2.rows.item(i).email,
+                                            password: data2.rows.item(i).password,
+                                            mobile_no: data2.rows.item(i).mobile_no,
+                                            address: data2.rows.item(i).address,
+                                            country: data2.rows.item(i).country,
+                                            blood_group: data2.rows.item(i).blood_group,
+                                            age: data2.rows.item(i).age,
+                                            user_uid: data2.rows.item(i).user_uid,
+                                            forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                            user_picture: attribute_json,
+                                            active_status: data2.rows.item(i).active_status,
+                                            role_id: data2.rows.item(i).role_id,
+                                            created_at: data2.rows.item(i).created_at,
+                                            updated_at: data2.rows.item(i).updated_at,
+                                            delete1: data2.rows.item(i).delete1
+                                        });
+                                    }
+                                    return userData;
+                                })];
+                        case 3:
+                            array3 = _a.sent();
+                            unique1 = this.emegencyConatcts.filter(function (v) { return array1.indexOf(v.id) == -1; });
+                            unique2 = this.healtDetails.filter(function (v) { return array2.indexOf(v.id) == -1; });
+                            unique3 = this.usersList.filter(function (v) { return array3.indexOf(v.id) == -1; });
+                            if (unique1.length > 0) {
+                                this.getEmergencyContacts(unique1, "unique");
+                            }
+                            if (unique2.length > 0) {
+                                this.getHealthDetails(unique2, "unique");
+                            }
+                            if (unique3.length > 0) {
+                                this.getUsersData(unique3, "unique");
+                            }
+                            return [2 /*return*/];
+                    }
+                });
+            }); });
+        });
+    };
+    syncProvider.prototype.getEmergencyContacts = function (response, unique) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 this.getDatabase().then(function (database) {
-                    var sql1 = "DELETE FROM emergency_details";
-                    database.executeSql(sql1, []);
+                    if (unique != "unique") {
+                        var sql1 = "DELETE FROM emergency_details";
+                        database.executeSql(sql1, []);
+                    }
                     for (var i in response) {
                         var data1 = [
                             response[i]["id"],
@@ -2100,12 +2320,14 @@ var syncProvider = /** @class */ (function () {
             });
         });
     };
-    syncProvider.prototype.getHealthDetails = function (response) {
+    syncProvider.prototype.getHealthDetails = function (response, unique) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 this.getDatabase().then(function (database) {
-                    var sql2 = "DELETE FROM health_details";
-                    database.executeSql(sql2, []);
+                    if (unique != "unique") {
+                        var sql2 = "DELETE FROM health_details";
+                        database.executeSql(sql2, []);
+                    }
                     for (var i in response) {
                         var attribute_json = JSON.stringify(response[i]["attribute_name_value"]);
                         var data2 = [
@@ -2126,12 +2348,14 @@ var syncProvider = /** @class */ (function () {
             });
         });
     };
-    syncProvider.prototype.getUsersData = function (response) {
+    syncProvider.prototype.getUsersData = function (response, unique) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 this.getDatabase().then(function (database) {
-                    var sql3 = "DELETE FROM users";
-                    database.executeSql(sql3, []);
+                    if (unique != "unique") {
+                        var sql3 = "DELETE FROM users";
+                        database.executeSql(sql3, []);
+                    }
                     for (var i in response) {
                         var attribute_json = JSON.stringify(response[i]["user_picture"]);
                         var data3 = [
@@ -2264,7 +2488,7 @@ var syncProvider = /** @class */ (function () {
             var data;
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                console.log(rowData);
+                console.log(rowData, 'createSingleEventData');
                 data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"] };
                 console.log(data);
                 this.insertEventData(data).subscribe(function (responseList) {
@@ -2319,6 +2543,7 @@ var syncProvider = /** @class */ (function () {
             var data;
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                console.log(rowData, "updateSingleEventData");
                 data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"] };
                 this.updateEventData(rowData["id"], data).subscribe(function (responseList) {
                     var response = responseList[0]['event'];
@@ -2334,6 +2559,7 @@ var syncProvider = /** @class */ (function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                console.log(rowData, "deleteSingleEventData");
                 this.deleteEventData(rowData["id"]).subscribe(function (responseList) {
                     //let response = responseList[0];
                     var sql = "DELETE FROM events WHERE event_id = ?";
@@ -2415,6 +2641,18 @@ var syncProvider = /** @class */ (function () {
             _this.commonUpdateAndDeleteEvent(sql, createEventData);
         });
     };
+    syncProvider.prototype.deletePatientData = function (rowData) {
+        var _this = this;
+        this.deletePatientFromCaregiver(rowData["id"]).subscribe(function (responseList) {
+            console.log(responseList);
+            var sql = "DELETE FROM users WHERE id = ?";
+            var createEventData = [rowData["id"]];
+            _this.commonUpdateAndDeleteEvent(sql, createEventData);
+            var sql1 = "DELETE FROM events WHERE user_id = ?";
+            var createEventData1 = [rowData["id"]];
+            _this.commonUpdateAndDeleteEvent(sql1, createEventData1);
+        });
+    };
     syncProvider.prototype.insertEventData = function (data) {
         var response1 = this.http.post("events", data);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
@@ -2475,6 +2713,10 @@ var syncProvider = /** @class */ (function () {
         var response1 = this.http.get("emergency_details/caregiver_delete?cg_id=" + id);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
     };
+    syncProvider.prototype.deletePatientFromCaregiver = function (id) {
+        var response1 = this.http.get("users/patient_delete?patient_id=" + id);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+    };
     syncProvider.prototype.getUserIdForEvents = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var user_id;
@@ -2501,7 +2743,7 @@ var syncProvider = /** @class */ (function () {
             for (var i in _this.patientList['patient']) {
                 userIds.push(_this.patientList['patient'][i]['id']);
             }
-            return userIds;
+            return userIds.toString();
         });
     };
     syncProvider.ctorParameters = function () { return [

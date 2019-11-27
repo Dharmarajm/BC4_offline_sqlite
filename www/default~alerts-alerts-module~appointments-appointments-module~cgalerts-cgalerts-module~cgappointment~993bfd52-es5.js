@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52"],{
 
 /***/ "./src/app/sqlite-database/database_provider.ts":
 /*!******************************************************!*\
@@ -140,6 +140,27 @@ var DataBaseSummaryProvider = /** @class */ (function () {
             });
         });
     };
+    DataBaseSummaryProvider.prototype.getVitalEvents = function (event_type, search, additionType) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var checkEvent, sqlSearchEventQuery;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.checkEventType(event_type, search, additionType)];
+                    case 1:
+                        checkEvent = _a.sent();
+                        sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
+                                return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
+                                    console.log(data, "vital");
+                                    for (var i = 0; i < data.rows.length; i++) {
+                                        console.log(data.rows.item(i));
+                                    }
+                                });
+                            })];
+                }
+            });
+        });
+    };
     DataBaseSummaryProvider.prototype.checkEventType = function (event, tab, offset) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var eventQuery, user_id;
@@ -157,6 +178,9 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                         }
                         else if (event == 'health_diary' || event == 'doc_visit') {
                             return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "') ORDER BY created_at DESC LIMIT 10 OFFSET " + offset];
+                        }
+                        if (event == 'vital') {
+                            return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "') ORDER BY event_datetime DESC"];
                         }
                         else {
                             return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "') ORDER BY event_datetime DESC LIMIT 10 OFFSET " + offset];
@@ -253,6 +277,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     DataBaseSummaryProvider.prototype.getAboutData = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var user_id, getQRcode, sqlHealthQuery, sqlUserQuery;
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.databaseService.getuserID()];
@@ -262,53 +287,72 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                     case 2:
                         getQRcode = _a.sent();
                         sqlHealthQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_HEALTH_DETAILS"] + " WHERE name='policy'";
-                        sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE id=" + user_id + " AND role_id=1");
-                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
-                                var healthData = [];
-                                var userData = [];
-                                database.executeSql(sqlHealthQuery, []).then(function (data1) {
-                                    for (var i = 0; i < data1.rows.length; i++) {
-                                        var event_json = null;
-                                        if (data1.rows.item(i).attribute_name_value != '') {
-                                            event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
-                                        }
-                                        healthData.push({
-                                            id: data1.rows.item(i).id,
-                                            health_id: data1.rows.item(i).health_id,
-                                            name: data1.rows.item(i).name,
-                                            attribute_name_value: event_json,
-                                            user_id: data1.rows.item(i).user_id,
-                                            created_at: data1.rows.item(i).created_at,
-                                            updated_at: data1.rows.item(i).updated_at
-                                        });
+                        sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE (id='" + user_id + "' AND role_id=1)");
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var healthData, userData;
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            healthData = [];
+                                            userData = [];
+                                            return [4 /*yield*/, database.executeSql(sqlHealthQuery, []).then(function (data1) {
+                                                    for (var i = 0; i < data1.rows.length; i++) {
+                                                        var event_json = null;
+                                                        if (data1.rows.item(i).attribute_name_value != '') {
+                                                            event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
+                                                        }
+                                                        healthData.push({
+                                                            id: data1.rows.item(i).id,
+                                                            health_id: data1.rows.item(i).health_id,
+                                                            name: data1.rows.item(i).name,
+                                                            attribute_name_value: event_json,
+                                                            user_id: data1.rows.item(i).user_id,
+                                                            created_at: data1.rows.item(i).created_at,
+                                                            updated_at: data1.rows.item(i).updated_at
+                                                        });
+                                                    }
+                                                }).catch(function (res) {
+                                                    console.log(res);
+                                                })];
+                                        case 1:
+                                            _a.sent();
+                                            return [4 /*yield*/, database.executeSql(sqlUserQuery, []).then(function (data2) {
+                                                    console.log(data2.rows);
+                                                    for (var i = 0; i < data2.rows.length; i++) {
+                                                        console.log(data2.rows.item(i));
+                                                        var attribute_json = null;
+                                                        if (data2.rows.item(i).user_picture != null) {
+                                                            attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                                        }
+                                                        userData.push({
+                                                            id: data2.rows.item(i).id,
+                                                            name: data2.rows.item(i).name,
+                                                            email: data2.rows.item(i).email,
+                                                            password: data2.rows.item(i).password,
+                                                            mobile_no: data2.rows.item(i).mobile_no,
+                                                            address: data2.rows.item(i).address,
+                                                            country: data2.rows.item(i).country,
+                                                            blood_group: data2.rows.item(i).blood_group,
+                                                            age: data2.rows.item(i).age,
+                                                            user_uid: data2.rows.item(i).user_uid,
+                                                            forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                                            user_picture: attribute_json,
+                                                            active_status: data2.rows.item(i).active_status,
+                                                            role_id: data2.rows.item(i).role_id,
+                                                            created_at: data2.rows.item(i).created_at,
+                                                            updated_at: data2.rows.item(i).updated_at,
+                                                            delete1: data2.rows.item(i).delete1
+                                                        });
+                                                    }
+                                                }).catch(function (res) {
+                                                    console.log(res);
+                                                })];
+                                        case 2:
+                                            _a.sent();
+                                            return [2 /*return*/, { policies: healthData, user_info: userData[0], qrcode_image: getQRcode }];
                                     }
                                 });
-                                database.executeSql(sqlUserQuery, []).then(function (data2) {
-                                    for (var i = 0; i < data2.rows.length; i++) {
-                                        var attribute_json = JSON.parse(data2.rows.item(i).user_picture);
-                                        userData.push({
-                                            id: data2.rows.item(i).id,
-                                            name: data2.rows.item(i).name,
-                                            email: data2.rows.item(i).email,
-                                            password: data2.rows.item(i).password,
-                                            mobile_no: data2.rows.item(i).mobile_no,
-                                            address: data2.rows.item(i).address,
-                                            country: data2.rows.item(i).country,
-                                            blood_group: data2.rows.item(i).blood_group,
-                                            age: data2.rows.item(i).age,
-                                            user_uid: data2.rows.item(i).user_uid,
-                                            forgot_password_code: data2.rows.item(i).forgot_password_code,
-                                            user_picture: attribute_json,
-                                            active_status: data2.rows.item(i).active_status,
-                                            role_id: data2.rows.item(i).role_id,
-                                            created_at: data2.rows.item(i).created_at,
-                                            updated_at: data2.rows.item(i).updated_at,
-                                            delete1: data2.rows.item(i).delete1
-                                        });
-                                    }
-                                });
-                                return { policies: healthData, user_info: userData[0], qrcode_image: getQRcode };
-                            })];
+                            }); })];
                 }
             });
         });
@@ -337,60 +381,78 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                 });
                             }
                             return { health_detail: healthData };
+                        }).catch(function (res) {
+                            console.log(res);
                         });
                     })];
             });
         });
     };
     DataBaseSummaryProvider.prototype.getEmergencyDeatails = function () {
+        var _this = this;
         var sqlEmergeQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EMERGENCY_DATA"];
-        var sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + " WHERE (role_id=2 AND delete1='false')";
+        var sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + " WHERE (role_id=1 AND delete1='false')";
         console.log(sqlUsersQuery);
-        return this.databaseService.getDatabase().then(function (database) {
-            var emergencyContacts = [];
-            var careGiverData = [];
-            database.executeSql(sqlEmergeQuery, []).then(function (data) {
-                for (var i = 0; i < data.rows.length; i++) {
-                    emergencyContacts.push({
-                        id: data.rows.item(i).id,
-                        emergency_id: data.rows.item(i).emergency_id,
-                        contact_name: data.rows.item(i).contact_name,
-                        emergency_no: data.rows.item(i).emergency_no,
-                        user_type: data.rows.item(i).user_type,
-                        user_id: data.rows.item(i).user_id,
-                        created_at: data.rows.item(i).created_at,
-                        updated_at: data.rows.item(i).updated_at,
-                        delete1: data.rows.item(i).delete1
-                    });
+        return this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+            var emergencyContacts, careGiverData;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        emergencyContacts = [];
+                        careGiverData = [];
+                        return [4 /*yield*/, database.executeSql(sqlEmergeQuery, []).then(function (data) {
+                                for (var i = 0; i < data.rows.length; i++) {
+                                    emergencyContacts.push({
+                                        id: data.rows.item(i).id,
+                                        emergency_id: data.rows.item(i).emergency_id,
+                                        contact_name: data.rows.item(i).contact_name,
+                                        emergency_no: data.rows.item(i).emergency_no,
+                                        user_type: data.rows.item(i).user_type,
+                                        user_id: data.rows.item(i).user_id,
+                                        created_at: data.rows.item(i).created_at,
+                                        updated_at: data.rows.item(i).updated_at,
+                                        delete1: data.rows.item(i).delete1
+                                    });
+                                }
+                            })];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, database.executeSql(sqlUsersQuery, []).then(function (data1) {
+                                for (var i = 0; i < data1.rows.length; i++) {
+                                    if (data1.rows.item(i).email != null) {
+                                        var attribute_json = null;
+                                        if (data1.rows.item(i).user_picture != null) {
+                                            attribute_json = JSON.parse(data1.rows.item(i).user_picture);
+                                        }
+                                        careGiverData.push({
+                                            id: data1.rows.item(i).id,
+                                            name: data1.rows.item(i).name,
+                                            email: data1.rows.item(i).email,
+                                            password: data1.rows.item(i).password,
+                                            mobile_no: data1.rows.item(i).mobile_no,
+                                            address: data1.rows.item(i).address,
+                                            country: data1.rows.item(i).country,
+                                            blood_group: data1.rows.item(i).blood_group,
+                                            age: data1.rows.item(i).age,
+                                            user_uid: data1.rows.item(i).user_uid,
+                                            forgot_password_code: data1.rows.item(i).forgot_password_code,
+                                            user_picture: attribute_json,
+                                            active_status: data1.rows.item(i).active_status,
+                                            role_id: data1.rows.item(i).role_id,
+                                            created_at: data1.rows.item(i).created_at,
+                                            updated_at: data1.rows.item(i).updated_at,
+                                            delete1: data1.rows.item(i).delete1
+                                        });
+                                    }
+                                }
+                            })];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/, { caregiver_count: careGiverData.length, caregivers: careGiverData, emergency_contact_count: emergencyContacts.length, emergency_detail: emergencyContacts }];
                 }
             });
-            database.executeSql(sqlUsersQuery, []).then(function (data1) {
-                for (var i = 0; i < data1.rows.length; i++) {
-                    if (data1.rows.item(i).email != null) {
-                        var attribute_json = JSON.parse(data1.rows.item(i).user_picture);
-                        careGiverData.push({
-                            id: data1.rows.item(i).id,
-                            name: data1.rows.item(i).name,
-                            email: data1.rows.item(i).email,
-                            password: data1.rows.item(i).password,
-                            mobile_no: data1.rows.item(i).mobile_no,
-                            address: data1.rows.item(i).address,
-                            country: data1.rows.item(i).country,
-                            blood_group: data1.rows.item(i).blood_group,
-                            age: data1.rows.item(i).age,
-                            user_uid: data1.rows.item(i).user_uid,
-                            forgot_password_code: data1.rows.item(i).forgot_password_code,
-                            user_picture: attribute_json,
-                            active_status: data1.rows.item(i).active_status,
-                            role_id: data1.rows.item(i).role_id,
-                            created_at: data1.rows.item(i).created_at,
-                            updated_at: data1.rows.item(i).updated_at,
-                            delete1: data1.rows.item(i).delete1
-                        });
-                    }
-                }
-            });
-            return { caregiver_count: careGiverData.length, caregivers: careGiverData, emergency_contact_count: emergencyContacts.length, emergency_detail: emergencyContacts };
+        }); }).catch(function (res) {
+            console.log(res);
         });
     };
     DataBaseSummaryProvider.prototype.getAllUserPreviewData = function () {
@@ -427,40 +489,112 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     DataBaseSummaryProvider.prototype.getPatients = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var user_id, sqlUserQuery;
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.databaseService.getuserID()];
                     case 1:
                         user_id = _a.sent();
-                        sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE id=" + user_id + " AND role_id=1");
-                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
-                                var userData = [];
-                                database.executeSql(sqlUserQuery, []).then(function (data2) {
-                                    for (var i = 0; i < data2.rows.length; i++) {
-                                        var attribute_json = JSON.parse(data2.rows.item(i).user_picture);
-                                        userData.push({
-                                            id: data2.rows.item(i).id,
-                                            name: data2.rows.item(i).name,
-                                            email: data2.rows.item(i).email,
-                                            password: data2.rows.item(i).password,
-                                            mobile_no: data2.rows.item(i).mobile_no,
-                                            address: data2.rows.item(i).address,
-                                            country: data2.rows.item(i).country,
-                                            blood_group: data2.rows.item(i).blood_group,
-                                            age: data2.rows.item(i).age,
-                                            user_uid: data2.rows.item(i).user_uid,
-                                            forgot_password_code: data2.rows.item(i).forgot_password_code,
-                                            user_picture: attribute_json,
-                                            active_status: data2.rows.item(i).active_status,
-                                            role_id: data2.rows.item(i).role_id,
-                                            created_at: data2.rows.item(i).created_at,
-                                            updated_at: data2.rows.item(i).updated_at,
-                                            delete1: data2.rows.item(i).delete1
-                                        });
+                        sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE (id='" + user_id + "' AND role_id=1)");
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var userData;
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            userData = [];
+                                            return [4 /*yield*/, database.executeSql(sqlUserQuery, []).then(function (data2) {
+                                                    for (var i = 0; i < data2.rows.length; i++) {
+                                                        var attribute_json = null;
+                                                        if (data2.rows.item(i).user_picture != null) {
+                                                            attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                                        }
+                                                        userData.push({
+                                                            id: data2.rows.item(i).id,
+                                                            name: data2.rows.item(i).name,
+                                                            email: data2.rows.item(i).email,
+                                                            password: data2.rows.item(i).password,
+                                                            mobile_no: data2.rows.item(i).mobile_no,
+                                                            address: data2.rows.item(i).address,
+                                                            country: data2.rows.item(i).country,
+                                                            blood_group: data2.rows.item(i).blood_group,
+                                                            age: data2.rows.item(i).age,
+                                                            user_uid: data2.rows.item(i).user_uid,
+                                                            forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                                            user_picture: attribute_json,
+                                                            active_status: data2.rows.item(i).active_status,
+                                                            role_id: data2.rows.item(i).role_id,
+                                                            created_at: data2.rows.item(i).created_at,
+                                                            updated_at: data2.rows.item(i).updated_at,
+                                                            delete1: data2.rows.item(i).delete1
+                                                        });
+                                                    }
+                                                }).catch(function (res) {
+                                                    console.log(res);
+                                                })];
+                                        case 1:
+                                            _a.sent();
+                                            return [2 /*return*/, { patients: userData }];
                                     }
                                 });
-                                return { patients: userData };
+                            }); }).catch(function (res) {
+                                console.log(res);
                             })];
+                }
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.getAllPatients = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var user_id, sqlUsersQuery;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.databaseService.getuserID()];
+                    case 1:
+                        user_id = _a.sent();
+                        sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + " WHERE (role_id=1 AND delete1='false')";
+                        //let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id=${user_id} AND role_id=1`;
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var userData;
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            userData = [];
+                                            return [4 /*yield*/, database.executeSql(sqlUsersQuery, []).then(function (data2) {
+                                                    for (var i = 0; i < data2.rows.length; i++) {
+                                                        if (data2.rows.item(i).email != null) {
+                                                            var attribute_json = null;
+                                                            if (data2.rows.item(i).user_picture != null) {
+                                                                attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                                            }
+                                                            userData.push({
+                                                                id: data2.rows.item(i).id,
+                                                                name: data2.rows.item(i).name,
+                                                                email: data2.rows.item(i).email,
+                                                                password: data2.rows.item(i).password,
+                                                                mobile_no: data2.rows.item(i).mobile_no,
+                                                                address: data2.rows.item(i).address,
+                                                                country: data2.rows.item(i).country,
+                                                                blood_group: data2.rows.item(i).blood_group,
+                                                                age: data2.rows.item(i).age,
+                                                                user_uid: data2.rows.item(i).user_uid,
+                                                                forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                                                user_picture: attribute_json,
+                                                                active_status: data2.rows.item(i).active_status,
+                                                                role_id: data2.rows.item(i).role_id,
+                                                                created_at: data2.rows.item(i).created_at,
+                                                                updated_at: data2.rows.item(i).updated_at,
+                                                                delete1: data2.rows.item(i).delete1
+                                                            });
+                                                        }
+                                                    }
+                                                })];
+                                        case 1:
+                                            _a.sent();
+                                            return [2 /*return*/, { patients: userData }];
+                                    }
+                                });
+                            }); })];
                 }
             });
         });
@@ -480,6 +614,77 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                     case 3:
                         getAllPatients = _a.sent();
                         return [2 /*return*/, { caregiver: emergency_data['caregivers'], patient: getAllPatients['patients'], profile_pic: null, user_info: aboutData['user_info'] }];
+                }
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.getCaregiverData = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var user_data, sqlUsersQuery;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getProfileID()];
+                    case 1:
+                        user_data = _a.sent();
+                        sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + " WHERE (role_id=2 AND delete1='false')";
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var userData;
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            userData = [];
+                                            return [4 /*yield*/, database.executeSql(sqlUsersQuery, []).then(function (data2) {
+                                                    for (var i = 0; i < data2.rows.length; i++) {
+                                                        if (data2.rows.item(i).email != null) {
+                                                            var attribute_json = null;
+                                                            if (data2.rows.item(i).user_picture != null) {
+                                                                attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                                            }
+                                                            userData.push({
+                                                                id: data2.rows.item(i).id,
+                                                                name: data2.rows.item(i).name,
+                                                                email: data2.rows.item(i).email,
+                                                                password: data2.rows.item(i).password,
+                                                                mobile_no: data2.rows.item(i).mobile_no,
+                                                                address: data2.rows.item(i).address,
+                                                                country: data2.rows.item(i).country,
+                                                                blood_group: data2.rows.item(i).blood_group,
+                                                                age: data2.rows.item(i).age,
+                                                                user_uid: data2.rows.item(i).user_uid,
+                                                                forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                                                user_picture: attribute_json,
+                                                                active_status: data2.rows.item(i).active_status,
+                                                                role_id: data2.rows.item(i).role_id,
+                                                                created_at: data2.rows.item(i).created_at,
+                                                                updated_at: data2.rows.item(i).updated_at,
+                                                                delete1: data2.rows.item(i).delete1
+                                                            });
+                                                        }
+                                                    }
+                                                })];
+                                        case 1:
+                                            _a.sent();
+                                            return [2 /*return*/, { user_info: userData[0] }];
+                                    }
+                                });
+                            }); })];
+                }
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.getCurrentUserandPatientsList = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var current_user, patients_list;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getCaregiverData()];
+                    case 1:
+                        current_user = _a.sent();
+                        return [4 /*yield*/, this.getAllPatients()];
+                    case 2:
+                        patients_list = _a.sent();
+                        return [2 /*return*/, { user_info: current_user['user_info'], patient: patients_list['patients'] }];
                 }
             });
         });
@@ -538,6 +743,14 @@ var DataBaseSummaryProvider = /** @class */ (function () {
         }
         return setQRcode;
     };
+    DataBaseSummaryProvider.prototype.getProfileID = function () {
+        var profile_id = null;
+        if (localStorage.getItem("profile_id") != undefined) {
+            profile_id = localStorage.getItem("profile_id");
+            return profile_id;
+        }
+        return profile_id;
+    };
     DataBaseSummaryProvider.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
         { type: _database__WEBPACK_IMPORTED_MODULE_4__["DatabaseProvider"] }
@@ -554,4 +767,4 @@ var DataBaseSummaryProvider = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=default~alerts-alerts-module~appointments-appointments-module~doc-visits-doc-visits-module~health-di~223c4004-es5.js.map
+//# sourceMappingURL=default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52-es5.js.map

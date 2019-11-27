@@ -1,202 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3"],{
-
-/***/ "./src/app/self-care/self-common-service/settings/settings.service.ts":
-/*!****************************************************************************!*\
-  !*** ./src/app/self-care/self-common-service/settings/settings.service.ts ***!
-  \****************************************************************************/
-/*! exports provided: settingsService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settingsService", function() { return settingsService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-
-
-
-let settingsService = class settingsService {
-    constructor(http) {
-        this.http = http;
-    }
-    relatedto() {
-        return this.http.get("enum_masters?category_name=health_diary");
-    }
-    aboutUpdate(detail) {
-        return this.http.post("health_details/about_update", detail);
-    }
-    aboutDetail() {
-        return this.http.get("health_details/about");
-    }
-    getPreview(id) {
-        return this.http.get("users/user_details?user_uid=" + id);
-    }
-    setting() {
-        return this.http.get("users/picture_show");
-    }
-    editprofile(val, id) {
-        return this.http.put("users/" + id, val);
-    }
-    sendimage(val) {
-        return this.http.post("users/profile_picture", val);
-    }
-    contactDetails() {
-        return this.http.get("emergency_details");
-    }
-    addContacts(user_details) {
-        return this.http.post("emergency_details", user_details);
-    }
-    deleteData(id) {
-        return this.http.delete("emergency_details/" + id);
-    }
-    deleteCaregiver(id) {
-        return this.http.get("emergency_details/caregiver_delete?cg_id=" + id);
-    }
-    commonEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=created_at&&per_page=10&&page=" + page);
-    }
-    commonDateEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    commonAppointmentDateEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=ASC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    commonEventSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=created_at");
-    }
-    commonDateEventSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=event_datetime");
-    }
-    commonAppointmentSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=ASC&&sort=event_datetime");
-    }
-    commonVitalList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    commonVitalSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&order=DESC&&sort=event_datetime");
-    }
-    commonDeleteEvent(id) {
-        return this.http.delete("events/" + id);
-    }
-    commonPost(record) {
-        return this.http.post("events", record);
-    }
-    vitalCommonPost(record) {
-        return this.http.post("events/vital_update", record);
-    }
-    commonUpdatePost(id, record) {
-        return this.http.put("events/" + id, record);
-    }
-    myEmergencyHealthDetail() {
-        return this.http.get("health_details");
-    }
-    myEmergencyHealthUpdate(data) {
-        return this.http.post("health_details", data);
-    }
-    myEmergencyPreview() {
-        return this.http.get("users/preview");
-    }
-    reportType() {
-        return this.http.get("enum_masters?category_name=report");
-    }
-    deleteImage(data) {
-        return this.http.post("events/delete_image", data);
-    }
-    vitaldelete(data) {
-        return this.http.put("events/vital_delete", data);
-    }
-    vitalReading() {
-        return this.http.get("enum_masters?category_name=vital");
-    }
-    vitalFoodTime() {
-        return this.http.get("enum_masters?category_name=food_time");
-    }
-    view_expenses(id) {
-        return this.http.get("events/expense_list?user_id=" + id);
-    }
-    event_view_delete(id) {
-        return this.http.delete("events/" + id);
-    }
-    event_add_option() {
-        return this.http.get("enum_masters?category_name=spent_place");
-    }
-    event_add(value) {
-        return this.http.post("events", value);
-    }
-    view_expenses_cal(id) {
-        return this.http.get("events/expense_calculation?user_id=" + id);
-    }
-    chartrepeat(id) {
-        return this.http.get("events/expense_chart?user_id=" + id);
-    }
-    main_chart(id) {
-        return this.http.get("events/expense_cals_chart?user_id=" + id);
-    }
-    filterChart(id, data) {
-        return this.http.post("events/expense_chart_filter?user_id=" + id, data);
-    }
-    filterAmount(from, to, id) {
-        return this.http.get("events/expense_list?from_date=" + from + "&&end_date=" + to + "&&user_id=" + id);
-    }
-    Appointmentdropdown() {
-        return this.http.get("enum_masters?category_name=appointment");
-    }
-    appointmentDetails(data) {
-        return this.http.post("events", data);
-    }
-    EditDetails(id, data) {
-        return this.http.put("events/" + id, data);
-    }
-    recentAppointment(id) {
-        return this.http.get("events/appointment_list?user_id=" + id);
-    }
-    record_filter(data) {
-        console.log(data);
-        return this.http.post("events/diary_recording?", data);
-    }
-    completedAppointmentEventList(event_type, page) {
-        return this.http.get("events?event_type=" + event_type + "&&tab=history&&order=DESC&&sort=event_datetime&&per_page=10&&page=" + page);
-    }
-    completedAppointmentSearchList(event_type, search) {
-        return this.http.get("events?event_type=" + event_type + "&&search=" + search + "&&tab=history&&order=DESC&&sort=event_datetime");
-    }
-    vitalFoodTime1() {
-        return this.http.get("enum_masters?category_name=food_time_1");
-    }
-    vitalFoodTime2() {
-        return this.http.get("enum_masters?category_name=food_time_2");
-    }
-    vitalEventListNew(id) {
-        return this.http.get("events/vitals_list1?user_id=" + id);
-    }
-    reading_history(event, id, page, count) {
-        return this.http.get("events/vital_history?event_name=" + event + "&&user_id=" + id + "&&page=" + page + "&&per_page=" + count);
-    }
-    filterReading(event, id, page, count, from, end) {
-        return this.http.get("events/vital_history?event_name=" + event + "&&user_id=" + id + "&&page=" + page + "&&per_page=" + count + "&&from_date=" + from + "&&end_date=" + end);
-    }
-    vitalEventList(id) {
-        return this.http.get("events/vital_names_list?user_id=" + id);
-    }
-    vitalfilter(id, data) {
-        return this.http.post("events/vitals_list1?user_id=" + id, data);
-    }
-};
-settingsService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-];
-settingsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
-], settingsService);
-
-
-
-/***/ }),
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970"],{
 
 /***/ "./src/app/sqlite-database/database.ts":
 /*!*********************************************!*\
@@ -314,11 +116,43 @@ let DatabaseProvider = class DatabaseProvider {
                 location: 'default'
             }).then((db) => {
                 let sql = `INSERT INTO events VALUES (NULL,NULL,?,?,?,?,?,?,?,?,?,?,?,?)`;
-                let createEventData = [data["event_name"], data["description"], data["value"], data["event_datetime"], data["event_type"], data["event_category"], data["event_assets"], JSON.stringify(data["event_options"]), user_id, new Date().toJSON(), new Date().toJSON(), false];
+                let createEventData = [data["event_name"], data["description"], data["value"], data["event_datetime"], data["event_type"], data["event_category"], JSON.stringify(data["event_assets"]), JSON.stringify(data["event_options"]), user_id, new Date().toJSON(), new Date().toJSON(), false];
                 return db.executeSql(sql, createEventData).then((row) => {
                     return { event_id: row.insertId };
                 }).catch(res => {
                     return res;
+                });
+            });
+        });
+    }
+    createAnVitalEvent(getData) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            //let user_id = await this.getuserID();
+            return this.sqlite.create({
+                name: DATA_BASE_NAME,
+                location: 'default'
+            }).then((db) => {
+                let event_type = getData['event_type'];
+                let event_name = getData['event_name'];
+                let event_datetime = getData['event_datetime'];
+                let event_category = getData['event_category'];
+                let sqlSearchEventQuery = `SELECT * FROM events WHERE (event_type='${event_type}' AND event_name='${event_name}' AND event_category='${event_category}' AND DATE(event_datetime)=DATE('${event_datetime}') AND delete1='false')`;
+                return db.executeSql(sqlSearchEventQuery, []).then((data) => {
+                    console.log(data);
+                    for (let i = 0; i < data.rows.length; i++) {
+                        console.log(data.rows.item(i));
+                    }
+                    if (data.rows.length > 0) {
+                        let passData = data.rows.item(0);
+                        getData['id'] = passData['id'];
+                        return this.updateAnEvent(passData['event_id'], getData);
+                    }
+                    else {
+                        console.log(getData);
+                        return this.createAnEvent(getData);
+                    }
+                }).catch(res => {
+                    console.log(res);
                 });
             });
         });
@@ -331,7 +165,8 @@ let DatabaseProvider = class DatabaseProvider {
                 location: 'default'
             }).then((db) => {
                 let sql = `UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?`;
-                let updateEventData = [data["id"], data["event_name"], data["description"], data["value"], data["event_datetime"], data["event_type"], data["event_category"], data["event_assets"], JSON.stringify(data["event_options"]), user_id, data["created_at"], new Date().toJSON(), false, id];
+                let updateEventData = [data["id"], data["event_name"], data["description"], data["value"], data["event_datetime"], data["event_type"], data["event_category"], JSON.stringify(data["event_assets"]), JSON.stringify(data["event_options"]), user_id, data["created_at"], new Date().toJSON(), false, id];
+                console.log(data);
                 return db.executeSql(sql, updateEventData).then((row) => {
                     return { event_id: row.insertId };
                 }).catch(res => {
@@ -415,13 +250,13 @@ let DatabaseProvider = class DatabaseProvider {
     }
     updateUserData(data) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            let user_id = yield this.getuserID();
+            //let user_id = await this.getuserID();
             return this.sqlite.create({
                 name: DATA_BASE_NAME,
                 location: 'default'
             }).then((db) => {
                 let sql = `UPDATE users SET name = ?, email = ?, mobile_no = ?, updated_at = ? WHERE id = ? AND role_id = ?`;
-                let updateUserData = [data['name'], data['email'], data['mobile_no'], new Date().toJSON(), user_id, 1];
+                let updateUserData = [data['name'], data['email'], data['mobile_no'], new Date().toJSON(), data['id'], data['role_id']];
                 db.executeSql(sql, updateUserData).then((row) => {
                     return { event_id: row.insertId };
                 }).catch(res => {
@@ -473,6 +308,22 @@ let DatabaseProvider = class DatabaseProvider {
             return db.executeSql(sql, [id]).then((row) => {
                 return { event_id: row.insertId };
             }).catch(res => {
+                return res;
+            });
+        });
+    }
+    deletePatientFromCareGiver(id) {
+        return this.sqlite.create({
+            name: DATA_BASE_NAME,
+            location: 'default'
+        }).then((db) => {
+            let sql = `UPDATE users SET delete1 = ? WHERE id = ?`;
+            return db.executeSql(sql, [true, id]).then((row) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                let sql1 = `DELETE FROM events WHERE user_id = ?`;
+                let createEventData1 = [id];
+                yield db.executeSql(sql1, createEventData1);
+                return { event_id: row.insertId };
+            })).catch(res => {
                 return res;
             });
         });
@@ -568,4 +419,4 @@ DatabaseProvider = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /***/ })
 
 }]);
-//# sourceMappingURL=default~about-about-module~alerts-alerts-module~appointments-appointments-module~contact-contact-mod~a6b775d3-es2015.js.map
+//# sourceMappingURL=default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970-es2015.js.map

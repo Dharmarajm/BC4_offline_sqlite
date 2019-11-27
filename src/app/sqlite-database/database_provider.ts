@@ -110,6 +110,22 @@ export class DataBaseSummaryProvider {
         })
     }
 
+    async getVitalEvents(event_type,search,additionType): Promise<any> {
+        let checkEvent = await this.checkEventType(event_type,search,additionType);
+        let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+checkEvent;
+
+        return this.databaseService.getDatabase().then(database => {
+            return database.executeSql(sqlSearchEventQuery, []).then((data) => {
+               console.log(data,"vital")
+               for (let i = 0; i < data.rows.length; i++) {
+                   console.log(data.rows.item(i));
+                   
+               }
+            })
+        })        
+
+    }
+
     async checkEventType(event,tab,offset) {
         
         let eventQuery:any;
@@ -121,6 +137,8 @@ export class DataBaseSummaryProvider {
             return eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
         }else if(event=='health_diary' || event=='doc_visit'){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`
+        }if(event=='vital'){
+            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC`
         }else{
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
         }
@@ -207,13 +225,13 @@ export class DataBaseSummaryProvider {
         let user_id = await this.databaseService.getuserID(); 
         let getQRcode = await this.setQRcode();
         let sqlHealthQuery = SQL_SELECT_ALL_HEALTH_DETAILS+` WHERE name='policy'`;
-        let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id=${user_id} AND role_id=1`;
-        return this.databaseService.getDatabase().then((database) => {
+        let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE (id='${user_id}' AND role_id=1)`; //(id='${user_id}' AND role_id=1)
+        return this.databaseService.getDatabase().then(async (database) => {
             
             let healthData=[];
             let userData=[];
 
-            database.executeSql(sqlHealthQuery, []).then((data1) => {
+            await database.executeSql(sqlHealthQuery, []).then((data1) => {
               for (let i = 0; i < data1.rows.length; i++) {
                 let event_json:any = null;
                 if (data1.rows.item(i).attribute_name_value != '') {
@@ -229,11 +247,19 @@ export class DataBaseSummaryProvider {
                     updated_at: data1.rows.item(i).updated_at 
                 })  
               }
+            }).catch(res=>{
+                console.log(res)
             })
            
-            database.executeSql(sqlUserQuery, []).then((data2) => {
+            await database.executeSql(sqlUserQuery, []).then((data2) => {
+              console.log(data2.rows)
               for (let i = 0; i < data2.rows.length; i++) {
-                let attribute_json = JSON.parse(data2.rows.item(i).user_picture);  
+                  console.log(data2.rows.item(i))
+                let attribute_json:any = null;                    
+                if(data2.rows.item(i).user_picture!=null){
+                  attribute_json = JSON.parse(data2.rows.item(i).user_picture);    
+                }  
+                  
                 userData.push({ 
                     id: data2.rows.item(i).id,
                     name: data2.rows.item(i).name,
@@ -254,6 +280,8 @@ export class DataBaseSummaryProvider {
                     delete1: data2.rows.item(i).delete1
                 })  
               }
+            }).catch(res=>{
+                console.log(res)
             })
 
             return { policies: healthData, user_info: userData[0], qrcode_image: getQRcode };
@@ -284,18 +312,20 @@ export class DataBaseSummaryProvider {
             }
 
             return { health_detail: healthData };
-         })  
+         }).catch(res=>{
+            console.log(res)
+        })  
        })
     }
 
     getEmergencyDeatails(): Promise<any> {
        let sqlEmergeQuery = SQL_SELECT_ALL_EMERGENCY_DATA;
-       let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE (role_id=2 AND delete1='false')`;
+       let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE (role_id=1 AND delete1='false')`;
        console.log(sqlUsersQuery)
-       return this.databaseService.getDatabase().then((database) => {
+       return this.databaseService.getDatabase().then(async (database) => {
         let emergencyContacts = []; 
         let careGiverData=[];
-        database.executeSql(sqlEmergeQuery, []).then((data) => {
+        await database.executeSql(sqlEmergeQuery, []).then((data) => {
             for (let i = 0; i < data.rows.length; i++) {
                 emergencyContacts.push({
                 id: data.rows.item(i).id,
@@ -310,10 +340,13 @@ export class DataBaseSummaryProvider {
                 });
             } 
          })
-         database.executeSql(sqlUsersQuery, []).then((data1) => {
+         await database.executeSql(sqlUsersQuery, []).then((data1) => {
             for (let i = 0; i < data1.rows.length; i++) {
               if(data1.rows.item(i).email!=null){ 
-                let attribute_json = JSON.parse(data1.rows.item(i).user_picture);
+                let attribute_json:any = null;                    
+                if(data1.rows.item(i).user_picture!=null){
+                  attribute_json = JSON.parse(data1.rows.item(i).user_picture);  
+                }
                 careGiverData.push({
                     id: data1.rows.item(i).id,
                     name: data1.rows.item(i).name,
@@ -338,6 +371,8 @@ export class DataBaseSummaryProvider {
          })
          
          return { caregiver_count: careGiverData.length ,caregivers: careGiverData,emergency_contact_count: emergencyContacts.length,emergency_detail: emergencyContacts };  
+       }).catch(res=>{
+        console.log(res)
        })
     }
 
@@ -364,12 +399,16 @@ export class DataBaseSummaryProvider {
 
     async getPatients(){
         let user_id = await this.databaseService.getuserID();
-        let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id=${user_id} AND role_id=1`;
-        return this.databaseService.getDatabase().then((database) => {
+        let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE (id='${user_id}' AND role_id=1)`;
+        return this.databaseService.getDatabase().then(async (database) => {
           let userData=[];   
-          database.executeSql(sqlUserQuery, []).then((data2) => {
+          await database.executeSql(sqlUserQuery, []).then((data2) => {
             for (let i = 0; i < data2.rows.length; i++) {
-              let attribute_json = JSON.parse(data2.rows.item(i).user_picture);  
+              
+                let attribute_json:any = null;                    
+                if(data2.rows.item(i).user_picture!=null){
+                  attribute_json = JSON.parse(data2.rows.item(i).user_picture); 
+                }  
               userData.push({ 
                   id: data2.rows.item(i).id,
                   name: data2.rows.item(i).name,
@@ -390,8 +429,12 @@ export class DataBaseSummaryProvider {
                   delete1: data2.rows.item(i).delete1
               })  
             }
+          }).catch(res=>{
+            console.log(res)
           })
           return { patients: userData };
+        }).catch(res=>{
+            console.log(res)
         })  
     }
 
@@ -399,12 +442,16 @@ export class DataBaseSummaryProvider {
         let user_id = await this.databaseService.getuserID();
         let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE (role_id=1 AND delete1='false')`;
         //let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id=${user_id} AND role_id=1`;
-        return this.databaseService.getDatabase().then((database) => {
+        return this.databaseService.getDatabase().then(async (database) => {
           let userData=[];   
-          database.executeSql(sqlUsersQuery, []).then((data2) => {
+          await database.executeSql(sqlUsersQuery, []).then((data2) => {
             for (let i = 0; i < data2.rows.length; i++) {
              if(data2.rows.item(i).email!=null){                
-              let attribute_json = JSON.parse(data2.rows.item(i).user_picture);  
+             
+              let attribute_json:any = null;                    
+                if(data2.rows.item(i).user_picture!=null){
+                  attribute_json = JSON.parse(data2.rows.item(i).user_picture); 
+                }
               userData.push({ 
                   id: data2.rows.item(i).id,
                   name: data2.rows.item(i).name,
@@ -444,12 +491,16 @@ export class DataBaseSummaryProvider {
     async getCaregiverData() {
         let user_data = await this.getProfileID();
         let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE (role_id=2 AND delete1='false')`;
-        return this.databaseService.getDatabase().then((database) => {
+        return this.databaseService.getDatabase().then(async (database) => {
             let userData=[];   
-            database.executeSql(sqlUsersQuery, []).then((data2) => {
+            await database.executeSql(sqlUsersQuery, []).then((data2) => {
                 for (let i = 0; i < data2.rows.length; i++) {
                     if(data2.rows.item(i).email!=null){                
-                        let attribute_json = JSON.parse(data2.rows.item(i).user_picture);  
+                        
+                        let attribute_json:any = null;                    
+                        if(data2.rows.item(i).user_picture!=null){
+                        attribute_json = JSON.parse(data2.rows.item(i).user_picture); 
+                        }
                         userData.push({ 
                             id: data2.rows.item(i).id,
                             name: data2.rows.item(i).name,

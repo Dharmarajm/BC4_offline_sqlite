@@ -353,6 +353,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/toast/ngx */ "./node_modules/@ionic-native/toast/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
+
 
 
 
@@ -365,16 +369,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CgreportsPage = class CgreportsPage {
-    constructor(toast, alertController, toastController, router, statusBar, settingService) {
+    constructor(toast, alertController, toastController, router, statusBar, settingService, databaseSummary, database) {
         this.toast = toast;
         this.alertController = alertController;
         this.toastController = toastController;
         this.router = router;
         this.statusBar = statusBar;
         this.settingService = settingService;
+        this.databaseSummary = databaseSummary;
+        this.database = database;
         this.report_page = 1;
         this.report_details = [];
         this.data_details = [];
+        this.report_page_offset = 0;
         this.environmentUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].ImageUrl;
     }
     ngOnInit() {
@@ -385,24 +392,22 @@ let CgreportsPage = class CgreportsPage {
         this.tabBar = document.getElementById('myTabBar1').childNodes[0];
         this.tabBar.classList.remove("tab-selected");
         this.report_page = 1;
-        this.settingService.commonDateEventList("report", this.report_page).subscribe(res => {
+        this.databaseSummary.getAllEvents('report', 'New', this.report_page_offset).then(res => {
             let data = res['event_list'];
             this.data_details = res['event_list'];
-            setInterval(() => {
-                this.loader = false;
-            }, 2000);
             this.groupBy(data);
-            this.profile_details = JSON.parse(localStorage.getItem("details"));
-            if (this.profile_details != undefined) {
-                console.log(this.profile_details);
-                this.logoinitial = this.profile_details.name.charAt(0);
-                this.profile_pic = this.environmentUrl + this.profile_details.profile_pic;
-                if (this.profile_details.profile_pic == null) {
-                    this.profile_pic = null;
-                }
-                this.user_name = this.profile_details.name;
-            }
-        });
+        }).catch(err => { console.log(err); });
+        //     this.profile_details=JSON.parse(localStorage.getItem("details"));
+        //     if(this.profile_details!= undefined){
+        //     console.log(this.profile_details)
+        //     this.logoinitial=this.profile_details.name.charAt(0);
+        //     this.profile_pic=this.environmentUrl+this.profile_details.profile_pic;
+        //     if(this.profile_details.profile_pic==null){
+        //       this.profile_pic=null;  
+        //     }
+        //     this.user_name=this.profile_details.name;
+        //     }
+        //  }); 
     }
     groupBy(data) {
         let records = data.map(item => ({
@@ -450,26 +455,75 @@ let CgreportsPage = class CgreportsPage {
         let search = event.detail.value;
         console.log(event);
         this.report_page = 1;
-        this.settingService.commonDateEventSearchList('report', search).subscribe(res => {
+        this.report_page_offset = 0;
+        // this.settingService.commonDateEventSearchList('report',search).subscribe(res=>{
+        //   let data:any = res['event_list'];
+        //   this.data_details=res['event_list'];
+        //   this.groupBy(data);
+        // }, error=>{
+        //      this.presentToast("Server slow, Please try again")
+        // })
+        this.databaseSummary.getAllEventsSearchList('report', search, 'New', this.report_page_offset).then(res => {
             let data = res['event_list'];
             this.data_details = res['event_list'];
             this.groupBy(data);
-        }, error => {
-            this.presentToast("Server slow, Please try again");
-        });
+        }).catch(err => { console.log(err); });
     }
     loadData(event) {
         setTimeout(() => {
             console.log('Done');
             this.report_page += 1;
-            this.settingService.commonDateEventList("report", this.report_page).subscribe(res => {
+            this.report_page_offset = this.report_page * 10 - 10;
+            let data = [];
+            //   this.settingService.commonDateEventList("report",this.report_page).subscribe(res => {
+            //      let data:any = res['event_list'];
+            //      let concat=this.data_details.concat(data);
+            //       this.report_scroll=concat.map(item => ({
+            //        id:item.id,
+            //        created_at: item.created_at,
+            //        description: item.description,
+            //        event_assets: item.event_assets,
+            //        event_name: item.event_name,
+            //        event_datetime: item.event_datetime,
+            //        event_category: item.event_category,
+            //        value: item.value,
+            //        event_type: item.event_type,
+            //        user_id: item.user_id,
+            //        playing: false,
+            //        progress: 0
+            //       }));
+            //       let value = []
+            //       const example = from(this.report_scroll).pipe(
+            //         groupBy(person => formatDate(person.event_datetime, 'yyyy-MM-dd', 'en-US')),
+            //         mergeMap(group => group.pipe(toArray()))
+            //       ).subscribe(val => {
+            //         console.log(val)
+            //         if(val){
+            //             let ff = { "created_at":val[0].event_datetime,"events" :val }
+            //             value.push(ff);
+            //         }
+            //       })
+            //       this.report_scroll=value;
+            //       //this.report_scroll.map(item => this.report_details.push(item));
+            //       this.report_details=this.report_scroll;
+            //       event.target.complete();
+            //       if (this.report_page *10 !=this.report_details.length){
+            //          event.target.disabled = true;
+            //       }
+            //   },error=>{
+            //      event.target.disabled = true;
+            //   })
+            //  }, 500);
+            this.databaseSummary.getAllEvents('report', 'New', this.report_page_offset).then((res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                 let data = res['event_list'];
                 let concat = this.data_details.concat(data);
                 this.report_scroll = concat.map(item => ({
                     id: item.id,
+                    event_id: item.event_id,
                     created_at: item.created_at,
                     description: item.description,
                     event_assets: item.event_assets,
+                    event_options: item.event_options,
                     event_name: item.event_name,
                     event_datetime: item.event_datetime,
                     event_category: item.event_category,
@@ -488,15 +542,12 @@ let CgreportsPage = class CgreportsPage {
                     }
                 });
                 this.report_scroll = value;
-                //this.report_scroll.map(item => this.report_details.push(item));
                 this.report_details = this.report_scroll;
                 event.target.complete();
                 if (this.report_page * 10 != this.report_details.length) {
                     event.target.disabled = true;
                 }
-            }, error => {
-                event.target.disabled = true;
-            });
+            })).catch(err => { console.log(err); });
         }, 500);
     }
     ionViewWillLeave() {
@@ -510,7 +561,9 @@ CgreportsPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"] },
-    { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_4__["careGiverService"] }
+    { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_4__["careGiverService"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_12__["DataBaseSummaryProvider"] },
+    { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_11__["DatabaseProvider"] }
 ];
 CgreportsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -518,7 +571,7 @@ CgreportsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./cgreports.page.html */ "./node_modules/raw-loader/index.js!./src/app/care-giver/cgreports/cgreports.page.html"),
         styles: [__webpack_require__(/*! ./cgreports.page.scss */ "./src/app/care-giver/cgreports/cgreports.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_10__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_4__["careGiverService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_10__["Toast"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_4__["careGiverService"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_12__["DataBaseSummaryProvider"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_11__["DatabaseProvider"]])
 ], CgreportsPage);
 
 

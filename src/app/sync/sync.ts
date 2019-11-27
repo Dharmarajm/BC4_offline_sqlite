@@ -32,6 +32,10 @@ export class syncProvider {
   isNetworkOnline:boolean;
   environment:any;
   getGlobalPath:any;
+  emegencyConatcts:any[];
+  healtDetails:any[];
+  usersList:any[];
+  user_associations:any[];
 
     constructor(public sanitizer: DomSanitizer,private transfer: FileTransfer,public http: HttpClient,public sqlite: SQLite, private platform: Platform,public network: NetworkService) {
       console.log('Hello SettingProvider Provider');
@@ -47,8 +51,16 @@ export class syncProvider {
             .then(()=>{
               this.getTotalEnumMasters();
               this.getAllEvents();
+            })
+            .then(()=>{
+              this.getUniqueEventDataPush();
               this.awaitAllUsersTableData();
             })
+            .then(()=>{
+              this.getUniqueUsersDataPush();
+            })
+            
+              
     }
 
     async updateImageDeletion(){
@@ -199,7 +211,7 @@ export class syncProvider {
                       }
                     }
                   }
-                } 
+                }
               }else{  
                 console.log('else')
                 let sql = `INSERT INTO events VALUES (?,NULL,?,?,?,?,?,?,?,?,?,?,?,?)`;
@@ -218,6 +230,60 @@ export class syncProvider {
                 }
               } 
            })
+        })
+      })  
+    }
+
+    async getUniqueEventDataPush(){
+      let getUserIds = await this.getUserIdForEvents();
+      this.getDatabase().then((database)=>{
+        this.getAllEventsList(getUserIds).subscribe(async (responseList)=>{
+          let array1 = responseList[0]['events'];
+          let array2 = await database.executeSql(`SELECT * FROM events`, []).then(async(data) => {
+            let events = []; 
+              for (let i = 0; i < data.rows.length; i++) {
+                let event_json:any = null;
+                let eventAssetsJson:any = null;
+                if (data.rows.item(i).event_options != null) {
+                    event_json = JSON.parse(data.rows.item(i).event_options);
+                }
+                if (data.rows.item(i).event_assets != null) {
+                    eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                }
+                events.push({
+                    id: data.rows.item(i).id,
+                    event_id:data.rows.item(i).event_id,
+                    event_name: data.rows.item(i).event_name,
+                    description: data.rows.item(i).description,
+                    value: data.rows.item(i).value,
+                    event_datetime: data.rows.item(i).event_datetime,
+                    event_type: data.rows.item(i).event_type,
+                    event_category: data.rows.item(i).event_category,
+                    event_assets: eventAssetsJson,
+                    event_options: event_json,
+                    user_id:data.rows.item(i).user_id,
+                    delete1:data.rows.item(i).delete1,
+                    created_at: data.rows.item(i).created_at,
+                    updated_at: data.rows.item(i).updated_at
+                });  
+              };
+              return events;
+          })
+          let unique = array1.filter(v => array2.indexOf(v.id) == -1);
+          for(let j in unique.length){
+            let sql = `INSERT INTO events VALUES (?,NULL,?,?,?,?,?,?,?,?,?,?,?,?)`;
+            let event_optionsURI = unique[j]["event_options"];
+            let event_assets_URI = unique[j]["event_assets"];
+            let setGlobalURI = await this.getLocalAssets(event_optionsURI,event_assets_URI);
+            if(setGlobalURI.length>0){
+              event_optionsURI["localImagePath"] = setGlobalURI;
+            }
+
+            let createEventData = [unique[j]["id"],unique[j]["event_name"],unique[j]["description"],unique[j]["value"],unique[j]["event_datetime"],unique[j]["event_type"],unique[j]["event_category"],JSON.stringify(unique[j]["event_assets"]),JSON.stringify(event_optionsURI),unique[j]["user_id"],unique[j]["created_at"],unique[j]["updated_at"],false]
+            
+            this.commonUpdateAndDeleteEvent(sql,createEventData);
+          }
+
         })
       })  
     }
@@ -354,13 +420,14 @@ export class syncProvider {
                       }else{
                         let getHealthData = await this.getUserPolicy();
                         let assigngetUserData = getHealthData['policies'];
-                        let healthData = assigngetUserData[0] 
+                        
+                        let healthData = assigngetUserData[0] || null; 
                         let findindex = this.responseData3.indexOf(res=>res.id==data.rows.item(i).id)
                         let sql = `UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?`;
                         if(findindex!=-1 && this.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at){
                           let createEventData = [this.responseData3[findindex]["name"],this.responseData3[findindex]["email"],this.responseData3[findindex]["password"],this.responseData3[findindex]["mobile_no"],this.responseData3[findindex]["address"],this.responseData3[findindex]["country"],this.responseData3[findindex]["blood_group"],this.responseData3[findindex]["age"],this.responseData3[findindex]["user_uid"],this.responseData3[findindex]["forgot_password_code"],JSON.stringify(this.responseData3[findindex]["user_picture"]),this.responseData3[findindex]["active_status"],this.responseData3[findindex]["role_id"],this.responseData3[findindex]["created_at"],this.responseData3[findindex]["updated_at"],false,this.responseData3[findindex]["id"]]      
                           this.commonUpdateAndDeleteEvent(sql,createEventData);
-                        }else if(findindex!=-1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData['id']==null && findindex!=-1 && profile_id == data.rows.item(i).id){
+                        }else if(findindex!=-1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData!=null && healthData['id']==null && findindex!=-1 && profile_id == data.rows.item(i).id){
                           let profile_picture = JSON.parse(data.rows.item(i).user_picture);
                           if(profile_picture['url']!=null && profile_picture['toUpdate']==true){
                             let localPath = profile_picture;
@@ -412,10 +479,107 @@ export class syncProvider {
         //}   
     }
 
-    async getEmergencyContacts(response){
+    getUniqueUsersDataPush(){
+      this.getDatabase().then((database)=>{
+            
+        this.requestDataFromMultipleSources().subscribe(async (responseList)=>{
+          this.emegencyConatcts = responseList[0]["emergency_contacts"]
+          this.healtDetails = responseList[1]["health_detail"];
+          this.usersList = responseList[2]["users"]; 
+          this.user_associations = responseList[3]["user_associations"];
+          let array1 = await database.executeSql(`SELECT * FROM emergency_details`, []).then((data) => {
+            let emergencyContacts = [];
+            for (let i = 0; i < data.rows.length; i++) {
+              emergencyContacts.push({
+              id: data.rows.item(i).id,
+              emergency_id: data.rows.item(i).emergency_id,
+              contact_name: data.rows.item(i).contact_name,
+              emergency_no: data.rows.item(i).emergency_no,
+              user_type: data.rows.item(i).user_type,
+              user_id: data.rows.item(i).user_id,
+              created_at: data.rows.item(i).created_at,
+              updated_at: data.rows.item(i).updated_at,
+              delete1: data.rows.item(i).delete1
+              });
+            }
+            return emergencyContacts; 
+          })
+          
+          let array2 = await database.executeSql(`SELECT * FROM health_details`, []).then((data1) => {
+            let healthData=[];
+            for (let i = 0; i < data1.rows.length; i++) {
+              let event_json:any = null;
+              if (data1.rows.item(i).attribute_name_value != '') {
+                  event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
+              }  
+              healthData.push({ 
+                  id: data1.rows.item(i).id, 
+                  health_id: data1.rows.item(i).health_id, 
+                  name: data1.rows.item(i).name, 
+                  attribute_name_value: event_json, 
+                  user_id: data1.rows.item(i).user_id, 
+                  created_at: data1.rows.item(i).created_at, 
+                  updated_at: data1.rows.item(i).updated_at 
+              })  
+            }
+            return healthData; 
+          })
+
+          let array3 = await database.executeSql(`SELECT * FROM users`, []).then((data2) => {
+            let userData = [];
+            for (let i = 0; i < data2.rows.length; i++) {
+              let attribute_json = JSON.parse(data2.rows.item(i).user_picture);  
+              userData.push({ 
+                  id: data2.rows.item(i).id,
+                  name: data2.rows.item(i).name,
+                  email: data2.rows.item(i).email,
+                  password: data2.rows.item(i).password,
+                  mobile_no: data2.rows.item(i).mobile_no,
+                  address: data2.rows.item(i).address,
+                  country: data2.rows.item(i).country,
+                  blood_group: data2.rows.item(i).blood_group,
+                  age: data2.rows.item(i).age,
+                  user_uid: data2.rows.item(i).user_uid,
+                  forgot_password_code: data2.rows.item(i).forgot_password_code,
+                  user_picture: attribute_json,
+                  active_status: data2.rows.item(i).active_status,
+                  role_id: data2.rows.item(i).role_id,
+                  created_at: data2.rows.item(i).created_at,
+                  updated_at: data2.rows.item(i).updated_at,
+                  delete1: data2.rows.item(i).delete1
+              })  
+            }
+            return userData; 
+          })
+          
+          let unique1 = this.emegencyConatcts.filter(v => array1.indexOf(v.id) == -1);
+          let unique2 = this.healtDetails.filter(v => array2.indexOf(v.id) == -1);
+          let unique3 = this.usersList.filter(v => array3.indexOf(v.id) == -1);
+          if(unique1.length>0){
+            this.getEmergencyContacts(unique1,"unique");
+          }
+
+          if(unique2.length>0){
+            this.getHealthDetails(unique2,"unique"); 
+          }
+
+          if(unique3.length>0){
+            this.getUsersData(unique3,"unique"); 
+          }
+
+        })
+      })  
+    }
+
+
+
+    async getEmergencyContacts(response,unique?){
       this.getDatabase().then((database)=> {
-        let sql1 = `DELETE FROM emergency_details`;
-        database.executeSql(sql1,[]);
+        if(unique!="unique"){
+          let sql1 = `DELETE FROM emergency_details`;
+          database.executeSql(sql1,[]);
+        }
+        
         for(let i in response){
             let data1 = [
                 response[i]["id"],
@@ -436,10 +600,13 @@ export class syncProvider {
       
     }
 
-    async getHealthDetails(response){
+    async getHealthDetails(response,unique?){
       this.getDatabase().then((database)=>{
-        let sql2 = `DELETE FROM health_details`;
-        database.executeSql(sql2,[]);
+        if(unique!="unique"){
+          let sql2 = `DELETE FROM health_details`;
+          database.executeSql(sql2,[]);
+        }
+        
 
         for(let i in response){
           let attribute_json = JSON.stringify(response[i]["attribute_name_value"]);
@@ -461,10 +628,13 @@ export class syncProvider {
       
     }
 
-    async getUsersData(response){
+    async getUsersData(response,unique?){
       this.getDatabase().then((database)=>{
-        let sql3 = `DELETE FROM users`;
-        database.executeSql(sql3,[]);
+        if(unique!="unique"){
+          let sql3 = `DELETE FROM users`;
+          database.executeSql(sql3,[]);
+        }
+        
         
         for (let i in response) {
           let attribute_json = JSON.stringify(response[i]["user_picture"]);
@@ -592,7 +762,7 @@ export class syncProvider {
     }
 
     async createSingleEventData(rowData){
-      console.log(rowData);
+      console.log(rowData,'createSingleEventData');
       let data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"] };
       console.log(data)
       this.insertEventData(data).subscribe((responseList)=>{
@@ -626,6 +796,7 @@ export class syncProvider {
      }
 
      async updateSingleEventData(rowData){
+       console.log(rowData,"updateSingleEventData")
       let data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"]};
       this.updateEventData(rowData["id"],data).subscribe((responseList)=>{
         let response = responseList[0]['event'];
@@ -636,6 +807,7 @@ export class syncProvider {
      }
  
      async deleteSingleEventData(rowData){
+       console.log(rowData,"deleteSingleEventData")
        this.deleteEventData(rowData["id"]).subscribe((responseList)=>{ 
          //let response = responseList[0];
          let sql = `DELETE FROM events WHERE event_id = ?`;
@@ -809,8 +981,9 @@ export class syncProvider {
         return this.getPatientsList().subscribe((responseList)=>{
           this.patientList = responseList;
           let userIds = []
-          for(let i in this.patientList['patient']){
-            userIds.push(this.patientList['patient'][i]['id'])  
+          for(let i in this.patientList[0]['patient']){
+            userIds.push(this.patientList[0]['patient'][i]['id'])  
+            console.log(userIds)
           }
           return userIds
         })

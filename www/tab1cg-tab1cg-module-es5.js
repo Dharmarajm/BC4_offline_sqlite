@@ -1,5 +1,65 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["tab1cg-tab1cg-module"],{
 
+/***/ "./node_modules/@ionic-native/ionic-webview/ngx/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@ionic-native/ionic-webview/ngx/index.js ***!
+  \***************************************************************/
+/*! exports provided: WebView */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WebView", function() { return WebView; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ionic_native_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic-native/core */ "./node_modules/@ionic-native/core/index.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var WebView = /** @class */ (function (_super) {
+    __extends(WebView, _super);
+    function WebView() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Object.defineProperty(WebView.prototype, "convertFileSrc", {
+        get: function () { return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_1__["cordovaPropertyGet"])(this, "convertFileSrc"); },
+        set: function (value) { Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_1__["cordovaPropertySet"])(this, "convertFileSrc", value); },
+        enumerable: true,
+        configurable: true
+    });
+    WebView.pluginName = "WebView";
+    WebView.plugin = "cordova-plugin-ionic-webview";
+    WebView.pluginRef = "window.Ionic.WebView";
+    WebView.repo = "https://github.com/ionic-team/cordova-plugin-ionic-webview";
+    WebView.platforms = ["Android", "iOS"];
+    WebView.install = "ionic cordova plugin add cordova-plugin-ionic-webview";
+    WebView = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])()
+    ], WebView);
+    return WebView;
+}(_ionic_native_core__WEBPACK_IMPORTED_MODULE_1__["IonicNativePlugin"]));
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9zcmMvQGlvbmljLW5hdGl2ZS9wbHVnaW5zL2lvbmljLXdlYnZpZXcvbmd4L2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQzNDLE9BQU8sNkRBQThDLE1BQU0sb0JBQW9CLENBQUM7O0lBK0JuRCwyQkFBaUI7Ozs7MEJBTTVDLG1DQUFjOzs7Ozs7Ozs7Ozs7SUFOSCxPQUFPO1FBRG5CLFVBQVUsRUFBRTtPQUNBLE9BQU87a0JBaENwQjtFQWdDNkIsaUJBQWlCO1NBQWpDLE9BQU8iLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBDb3Jkb3ZhUHJvcGVydHksIElvbmljTmF0aXZlUGx1Z2luLCBQbHVnaW4gfSBmcm9tICdAaW9uaWMtbmF0aXZlL2NvcmUnO1xuXG4vKipcbiAqIEBuYW1lIElvbmljIFdlYnZpZXdcbiAqIEBkZXNjcmlwdGlvblxuICogQWNjZXNzIFdlYiBWaWV3IHV0aWxpdGllcy5cbiAqXG4gKiBSZXF1aXJlcyB0aGUgQ29yZG92YSBwbHVnaW46IGBjb3Jkb3ZhLXBsdWdpbi1pb25pYy13ZWJ2aWV3YCA+IDIuMC4gRm9yIG1vcmUgaW5mbywgcGxlYXNlIHNlZSB0aGUgW0lvbmljIFdlYiBWaWV3XShodHRwczovL2dpdGh1Yi5jb20vaW9uaWMtdGVhbS9jb3Jkb3ZhLXBsdWdpbi1pb25pYy13ZWJ2aWV3KSByZXBvc2l0b3J5LlxuICpcbiAqIEB1c2FnZVxuICogYGBgdHlwZXNjcmlwdFxuICogaW1wb3J0IHsgV2ViVmlldyB9IGZyb20gJ0Bpb25pYy1uYXRpdmUvaW9uaWMtd2Vidmlldy9uZ3gnO1xuICpcbiAqXG4gKiBjb25zdHJ1Y3Rvcihwcml2YXRlIHdlYnZpZXc6IFdlYlZpZXcpIHsgfVxuICpcbiAqIC4uLlxuICpcbiAqIGltZyA9IHRoaXMud2Vidmlldy5jb252ZXJ0RmlsZVNyYygnZmlsZTovLy9Vc2Vycy9kYW4vY2FtZXJhLWltYWdlLTEyMzQ1LnBuZycpXG4gKlxuICogYGBgXG4gKi9cbkBQbHVnaW4oe1xuICBwbHVnaW5OYW1lOiAnV2ViVmlldycsXG4gIHBsdWdpbjogJ2NvcmRvdmEtcGx1Z2luLWlvbmljLXdlYnZpZXcnLFxuICBwbHVnaW5SZWY6ICd3aW5kb3cuSW9uaWMuV2ViVmlldycsXG4gIHJlcG86ICdodHRwczovL2dpdGh1Yi5jb20vaW9uaWMtdGVhbS9jb3Jkb3ZhLXBsdWdpbi1pb25pYy13ZWJ2aWV3JyxcbiAgcGxhdGZvcm1zOiBbJ0FuZHJvaWQnLCAnaU9TJ10sXG4gIGluc3RhbGw6ICdpb25pYyBjb3Jkb3ZhIHBsdWdpbiBhZGQgY29yZG92YS1wbHVnaW4taW9uaWMtd2Vidmlldydcbn0pXG5ASW5qZWN0YWJsZSgpXG5leHBvcnQgY2xhc3MgV2ViVmlldyBleHRlbmRzIElvbmljTmF0aXZlUGx1Z2luIHtcblxuICAvKipcbiAgICogQ29udmVydCBhIGBmaWxlOi8vYCBVUkwgdG8gYSBVUkwgdGhhdCBpcyBjb21wYXRpYmxlIHdpdGggdGhlIGxvY2FsIHdlYiBzZXJ2ZXIgaW4gdGhlIFdlYiBWaWV3IHBsdWdpbi5cbiAgICovXG4gIEBDb3Jkb3ZhUHJvcGVydHkoKVxuICBjb252ZXJ0RmlsZVNyYzogKHVybDogc3RyaW5nKSA9PiBzdHJpbmc7XG5cbn1cbiJdfQ==
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/care-giver/tab1cg/common-care-giver-play/common-care-giver-play.page.html":
 /*!*********************************************************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/care-giver/tab1cg/common-care-giver-play/common-care-giver-play.page.html ***!
@@ -42,6 +102,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
 /* harmony import */ var _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/media/ngx */ "./node_modules/@ionic-native/media/ngx/index.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
 // import { Component , OnInit , NgZone } from '@angular/core';
 // import { Router,ActivatedRoute } from '@angular/router';
 // import { ModalController, ToastController } from '@ionic/angular';
@@ -175,10 +236,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var commonCareGiverPlay = /** @class */ (function () {
     function commonCareGiverPlay(platform, loadingCtrl, toastCtrl, file, transfer, media, datePipe, route, 
     // private router: Router,
-    statusBar) {
+    statusBar, networkProvider) {
         var _this = this;
         this.platform = platform;
         this.loadingCtrl = loadingCtrl;
@@ -189,6 +251,7 @@ var commonCareGiverPlay = /** @class */ (function () {
         this.datePipe = datePipe;
         this.route = route;
         this.statusBar = statusBar;
+        this.networkProvider = networkProvider;
         this.title = 'Health Diary Records';
         this.is_playing = false;
         this.is_in_play = false;
@@ -214,6 +277,12 @@ var commonCareGiverPlay = /** @class */ (function () {
             _this.description = _this.currentTrack['description'];
             _this.show_event = _this.currentTrack['event_name'];
             console.log(_this.show_event);
+            if (_this.networkProvider.isNetworkOnline) {
+                _this.isNetwork = true;
+            }
+            else {
+                _this.isNetwork = false;
+            }
         });
     }
     commonCareGiverPlay.prototype.ngOnInit = function () {
@@ -225,12 +294,26 @@ var commonCareGiverPlay = /** @class */ (function () {
         this.tabBar.style.display = 'none';
     };
     commonCareGiverPlay.prototype.prepareAudioFile = function () {
-        //let url ='https://ia800207.us.archive.org/29/items/MLKDream/MLKDream_64kb.mp3';
         var _this = this;
-        var url = this.environment + this.currentTrack['event_assets'][0]['url'];
+        //let url ='https://ia800207.us.archive.org/29/items/MLKDream/MLKDream_64kb.mp3';
+        var url;
+        if (this.isNetwork && this.currentTrack['event_options']['localAudioPath'][0]['globalURI'] != null) {
+            url = this.currentTrack['event_options']['localAudioPath'][0]['globalURI'];
+        }
+        else {
+            url = this.currentTrack['event_options']['localAudioPath'][0]['localURI'];
+        }
+        //let url=this.environment+this.currentTrack['event_assets'][0]['url'];
         console.log(url);
         this.platform.ready().then(function () {
-            var current_url = _this.currentTrack['event_assets'][0]['url'];
+            var current_url;
+            if (_this.isNetwork && _this.currentTrack['event_options']['localAudioPath'][0]['globalURI'] != null) {
+                current_url = _this.currentTrack['event_options']['localAudioPath'][0]['globalURI'];
+            }
+            else {
+                current_url = _this.currentTrack['event_options']['localAudioPath'][0]['localURI'];
+            }
+            //let current_url = this.currentTrack['event_assets'][0]['url'];
             var split = current_url.split('/');
             console.log(split);
             _this.filename = split[split.length - 1];
@@ -464,7 +547,8 @@ var commonCareGiverPlay = /** @class */ (function () {
         { type: _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_8__["Media"] },
         { type: _angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
-        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"] }
+        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"] },
+        { type: _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_10__["NetworkService"] }
     ]; };
     commonCareGiverPlay = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -480,7 +564,8 @@ var commonCareGiverPlay = /** @class */ (function () {
             _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_8__["Media"],
             _angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
-            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"]])
+            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"],
+            _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_10__["NetworkService"]])
     ], commonCareGiverPlay);
     return commonCareGiverPlay;
 }());
@@ -520,9 +605,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tab1cg_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./tab1cg.page */ "./src/app/care-giver/tab1cg/tab1cg.page.ts");
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
 /* harmony import */ var _common_care_giver_play_common_care_giver_play_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./common-care-giver-play/common-care-giver-play.page */ "./src/app/care-giver/tab1cg/common-care-giver-play/common-care-giver-play.page.ts");
-/* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
-/* harmony import */ var _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/file-transfer/ngx */ "./node_modules/@ionic-native/file-transfer/ngx/index.js");
-/* harmony import */ var _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/media/ngx */ "./node_modules/@ionic-native/media/ngx/index.js");
+/* harmony import */ var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/ionic-webview/ngx */ "./node_modules/@ionic-native/ionic-webview/ngx/index.js");
+/* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
+/* harmony import */ var _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/file-transfer/ngx */ "./node_modules/@ionic-native/file-transfer/ngx/index.js");
+/* harmony import */ var _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/media/ngx */ "./node_modules/@ionic-native/media/ngx/index.js");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
+
 
 
 
@@ -593,7 +682,7 @@ var Tab1PageModule = /** @class */ (function () {
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)
             ],
             declarations: [_tab1cg_page__WEBPACK_IMPORTED_MODULE_7__["Tab1cPage"], _common_care_giver_play_common_care_giver_play_page__WEBPACK_IMPORTED_MODULE_9__["commonCareGiverPlay"]],
-            providers: [_ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_10__["File"], _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_11__["FileTransfer"], _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_12__["Media"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"]]
+            providers: [_ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_11__["File"], _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_12__["FileTransfer"], _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_13__["Media"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_14__["DataBaseSummaryProvider"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_10__["WebView"]]
         })
     ], Tab1PageModule);
     return Tab1PageModule;
@@ -630,6 +719,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../care-giver-service/caregiver-service.service */ "./src/app/care-giver/care-giver-service/caregiver-service.service.ts");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _sqlite_database_database__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../sqlite-database/database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+/* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
+/* harmony import */ var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/ionic-webview/ngx */ "./node_modules/@ionic-native/ionic-webview/ngx/index.js");
+
+
+
+
 
 
 
@@ -637,10 +734,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Tab1cPage = /** @class */ (function () {
-    function Tab1cPage(router, service, statusBar) {
+    function Tab1cPage(router, service, statusBar, database, databaseSummary, networkProvider, webview) {
         this.router = router;
         this.service = service;
         this.statusBar = statusBar;
+        this.database = database;
+        this.databaseSummary = databaseSummary;
+        this.networkProvider = networkProvider;
+        this.webview = webview;
         this.loader = true;
         this.show_details = [];
         this.environment = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].ImageUrl;
@@ -648,8 +749,32 @@ var Tab1cPage = /** @class */ (function () {
     Tab1cPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.loader = true;
+        this.database.Oninit();
         var patient_id = localStorage.getItem("user_id");
-        this.service.setting().subscribe(function (res) {
+        // this.service.setting().subscribe(res => {
+        //   this.pic = res;
+        //   let userInfo=this.pic['user_info'].name.charAt(0);
+        //   if(this.pic['patient'].length!=0){
+        //     let user_id =this.pic['patient'][0];
+        //     let index=this.pic['patient'].findIndex(item=>item.id==patient_id);
+        //     if(index==-1){
+        //       localStorage.setItem("user_id",user_id['id']);
+        //       localStorage.setItem("details",JSON.stringify(user_id));
+        //       this.profile_pic =this.pic['patient'][0]['user_picture']['url'];
+        //       this.initialLogo = this.pic['patient'][0].name.charAt(0);
+        //       this.caregiverImageStatus=false;    
+        //     }else{
+        //       this.profile_pic=this.pic['patient'][index]['user_picture']['url']
+        //       this.initialLogo = this.pic['patient'][index].name.charAt(0);
+        //       this.caregiverImageStatus=false;
+        //     }
+        //   }else{
+        //     this.profile_pic=this.pic['profile_pic'];
+        //     this.initialLogo=userInfo;
+        //     this.caregiverImageStatus=true;
+        //   }
+        // })
+        this.databaseSummary.getCurrentUserandPatientsList().then(function (res) {
             _this.pic = res;
             var userInfo = _this.pic['user_info'].name.charAt(0);
             if (_this.pic['patient'].length != 0) {
@@ -669,19 +794,27 @@ var Tab1cPage = /** @class */ (function () {
                 }
             }
             else {
-                _this.profile_pic = _this.pic['profile_pic'];
+                _this.profile_pic = _this.pic['user_info']['user_picture']['url'];
                 _this.initialLogo = userInfo;
                 _this.caregiverImageStatus = true;
             }
-            // }  
-            // }else{
-            //   this.profile_pic=this.pic['profile_pic'];
-            //   this.initialLogo=userInfo;
-            //   this.caregiverImageStatus=true;
-            // }
         });
         this.show_details = [];
-        this.service.recentAppointment(patient_id).subscribe(function (res) {
+        // this.service.recentAppointment(patient_id).subscribe(res=>{
+        //   let data=res['appointment_list'];
+        //   for(let i=0;i<data.length;i++){
+        //     console.log(i)
+        //     this.show_details.push(data[i])
+        //     if(i==3){
+        //       break;
+        //     }
+        //   }
+        //   this.loader=false;
+        //   console.log(this.show_details)        
+        // },error=>{
+        //   this.loader=false;
+        // })
+        this.databaseSummary.getRecentAppointments('appointment').then(function (res) {
             var data = res['appointment_list'];
             for (var i = 0; i < data.length; i++) {
                 console.log(i);
@@ -692,7 +825,8 @@ var Tab1cPage = /** @class */ (function () {
             }
             _this.loader = false;
             console.log(_this.show_details);
-        }, function (error) {
+        }).catch(function (err) {
+            console.log(err);
             _this.loader = false;
         });
         //this.statusBar.backgroundColorByHexString('#483df6');
@@ -700,7 +834,11 @@ var Tab1cPage = /** @class */ (function () {
     Tab1cPage.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
         { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"] },
-        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] }
+        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] },
+        { type: _sqlite_database_database__WEBPACK_IMPORTED_MODULE_6__["DatabaseProvider"] },
+        { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_7__["DataBaseSummaryProvider"] },
+        { type: _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_8__["NetworkService"] },
+        { type: _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_9__["WebView"] }
     ]; };
     Tab1cPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -708,7 +846,7 @@ var Tab1cPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./tab1cg.page.html */ "./node_modules/raw-loader/index.js!./src/app/care-giver/tab1cg/tab1cg.page.html"),
             styles: [__webpack_require__(/*! ./tab1cg.page.scss */ "./src/app/care-giver/tab1cg/tab1cg.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_3__["careGiverService"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"], _sqlite_database_database__WEBPACK_IMPORTED_MODULE_6__["DatabaseProvider"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_7__["DataBaseSummaryProvider"], _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_8__["NetworkService"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_9__["WebView"]])
     ], Tab1cPage);
     return Tab1cPage;
 }());
