@@ -324,28 +324,39 @@ export class AddVitalsPage implements OnInit {
 
 
 
-  valueSet(val) {
+  valueSet(val) {   
     let selectVital=val.detail.value   
     if(selectVital == "Blood Glucose" || selectVital == "Cholesterol" ){
-        this.service.vitalFoodTime2().subscribe(res => {
-        this.food_options = res['enum_masters']
-      })
+        // this.service.vitalFoodTime2().subscribe(res => {
+        //   this.food_options = res['enum_masters']
+        // })
+        this.getEnumMasters('food_time_1');
     } else if(selectVital == "Blood Pressure" || selectVital == "Body Temperature" || selectVital == "Oxygen Saturation"){
-        this.service.vitalFoodTime1().subscribe(res => {
-        this.food_options = res['enum_masters']
-        console.log(this.food_options)
-      })
+        // this.service.vitalFoodTime1().subscribe(res => {
+        // this.food_options = res['enum_masters']
+        // console.log(this.food_options)
+        // })
+        this.getEnumMasters('food_time_2');
     }
     else{
       this.food_options=["None","Morning", "Afternoon", "Evening", "Night"]
     }
- 
+  }
+
+  getEnumMasters(category){
+    this.databaseSummary.getEnumMasters(category).then((res)=>{
+      this.food_options = res['enum_masters']
+    })
+    .catch(error=>{ console.log(error) });
   }
 
   validateBeforeSubmit(form) {
+    this.submitted=true;     
     let eventName=this.vitalform['value']['event_name'];
-    this.submitted=true;
-    
+//     for (const key in this.vitalform.controls) {
+//       this.vitalform.get(key).clearValidators();
+//       this.vitalform.get(key).updateValueAndValidity();
+//  }
       if (this.vitalform['value']['event_name'] == "Body Temperature") {
         delete this.vitalform.value['value2'];
         delete this.vitalform.value['value3'];
@@ -401,22 +412,23 @@ export class AddVitalsPage implements OnInit {
         return;
       }
       this.vitalDetails(form);
-  }
+    
+}
 
 
-  validateAllFormFields(formGroup: FormGroup) {  
-   Object.keys(formGroup.controls).forEach(control => {
-      this.vitalform.controls[control].markAsTouched();
-    });
-  }
+validateAllFormFields(formGroup: FormGroup) {  
+  Object.keys(formGroup.controls).forEach(control => {
+     this.vitalform.controls[control].markAsTouched();
+   });
+ }
 
 
-  async presentToast(message: string) {
-    this.toast.show(message, '2000', 'bottom').subscribe(
-      toast => { 
-        console.log(toast); 
-      });
-  }
+ async presentToast(message: string) {
+   this.toast.show(message, '4000', 'center').subscribe(
+     toast => { 
+       console.log(toast); 
+     });
+ }
 
 async addconfirmation(){
   this.add_alert = await this.alertController.create({

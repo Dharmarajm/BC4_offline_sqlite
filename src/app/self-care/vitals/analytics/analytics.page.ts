@@ -6,6 +6,8 @@ import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Toast } from '@ionic-native/toast/ngx';
+import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
 
 @Component({
   selector: 'app-analytics',
@@ -45,7 +47,9 @@ export class AnalyticsPage implements OnInit {
       hba1c: false
     }
   }
-  constructor(private fb: FormBuilder, public datepipe: DatePipe, public modalController: ModalController, public service: settingsService, public route: ActivatedRoute, public router: Router, private statusBar: StatusBar) { }
+  constructor(private toast: Toast,private fb: FormBuilder, public datepipe: DatePipe, public modalController: ModalController, public service: settingsService, public route: ActivatedRoute, public router: Router, private statusBar: StatusBar,private databaseSummary: DataBaseSummaryProvider) { 
+    this.filterModal()
+  }
 
   ngOnInit() {
     this.records = [
@@ -54,51 +58,60 @@ export class AnalyticsPage implements OnInit {
         value: '#'
       },
       {
-        name: '6am-9am',
-        value: 'Early Morning'
+        name: '6-9 am',
+        value: '6-9 am'
       },
       {
-        name: '9am-12pm',
-        value: 'Mid Morning'
+        name: '9-12 pm',
+        value: '9-12 pm'
       },
       {
-        name: '12pm-3pm',
-        value: 'Afternoon'
+        name: '12-3 pm',
+        value: '12-3 pm'
       },
       {
-        name: '3pm-6pmm',
-        value: 'Early Evening'
+        name: '3-6 pm',
+        value: '3-6 pm'
       },
       {
-        name: '6pm-9pm',
-        value: 'Evening'
+        name: '6-9 pm',
+        value: '6-9 pm'
       },
       {
-        name: 'and >9pm',
-        value: 'Night'
+        name: '>9 pm',
+        value: '>9 pm'
       }
     ]
     this.records2 = ['#', 'Random', 'Fasting', 'Post Prandial']
-    this.records_time = [{ "Name": "6am-9am" }, { "Name": "9am-12pm" }, { "Name": "12pm-3pm" }, { "Name": "3pm-6pm" }, { "Name": "6pm-9pm" }, { "Name": "and >9pm" }]
+    this.records_time = [{ "Name": "6-9 am" }, { "Name": "9-12 pm" }, { "Name": "12-3 pm" }, { "Name": "3-6 pm" }, { "Name": "6-9 pm" }, { "Name": ">9 pm" }]
     this.records1 = [{ "Name": "HDL" }, { "Name": "LDL" }, { "Name": "Triglyceride" }, { "Name": "Total Count" }]
     // this.records2 = [{ "Name": "Random" }, { "Name": "Fasting" }, { "Name": "Post Prandial" }]
   }
 
+
+  datetoast(){
+    this.presentToast('Use filter to get specific data')   
+  }
   tmpResult = {}
   ionViewWillEnter() {
-    this.date = new Date();
-    this.firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
+    //this.date = new Date();
+    //this.firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
     this.statusBar.backgroundColorByHexString('#60dc68');
     this.tabBar = document.getElementById('myTabBar');
     this.tabBar.style.display = 'none';
-    this.loader = true;
+    // this.loader = true;
     this.user_id = localStorage.getItem("user_id");
-    this.service.vitalEventListNew(this.user_id).subscribe(res => {
-      this.parseResponse(res)
-    });
+    // this.service.vitalEventListNew(this.user_id).subscribe(res => {
+    //   this.parseResponse(res)
+    // });
 
   }
-
+  async presentToast(message: string) {
+    this.toast.show(message, '4000', 'center').subscribe(
+      toast => { 
+        console.log(toast); 
+      });
+  }
 
   async filterModal() {
     const modal = await this.modalController.create({
@@ -111,9 +124,14 @@ export class AnalyticsPage implements OnInit {
           this.firstDay = data.data.from_date;
           this.loader = true;
           data['event_name'] = data.data.event_name;
-          this.service.vitalfilter(this.user_id, data['data']).subscribe(res => {
-            this.parseResponse(res)
-          })
+          // this.service.vitalfilter(this.user_id, data['data']).subscribe(res => {
+          //   this.parseResponse(res)
+          // })
+          
+          this.databaseSummary.vitalFilterAnalytics(this.user_id, data['data']).then(res=>{
+            this.parseResponse(res);
+          }).catch(err=>{console.log(err)})
+
         }
       });
     return await modal.present();

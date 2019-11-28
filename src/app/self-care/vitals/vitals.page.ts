@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { settingsService } from '../self-common-service/settings/settings.service';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+import { of,from } from 'rxjs';
+import { concatMap, groupBy, map, mergeMap, reduce, toArray } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';  
 import { AlertController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -40,16 +42,51 @@ export class VitalsPage implements OnInit {
     // this.vital_details=res;
     // this.vital_keys = Object.keys(this.vital_details); 
     // })
-
-    this.databaseSummary.getVitalEvents('vital','New',7).then(res=>{
+    
+    this.databaseSummary.getAllEvents('vital','New',7).then(res=>{
       console.log(res)
-      this.status = false;
-      this.vital_details=res;
-      this.vital_keys = Object.keys(this.vital_details);
+      let data = res['event_list'];
+      this.groupBy(data);
+     
     }).catch(err=>{console.log(err)})
     
     
   }
+
+  groupBy(data){
+
+    let records:any[] = data.map(item => ({
+      id:item.id,
+      event_id: item.event_id,
+      created_at: item.created_at,
+      description: item.description,
+      event_category : item.event_category,
+      event_assets: item.event_assets,
+      event_options: item.event_options,
+      event_name: item.event_name,
+      event_datetime:item.event_datetime,
+      value: item.value,
+      event_type: item.event_type,
+      user_id: item.user_id
+    }));
+
+    let value = {};
+    const example = from(records).pipe(
+      groupBy(person =>  person.event_name),
+      mergeMap(group => group.pipe(toArray()))
+    ).subscribe(val => {
+      if(val){
+        if(val.length > 7){
+          val.length = 7; 
+        };
+        value[`${val[0]['event_name']}`]=val;
+      }  
+    })
+    
+    this.vital_details = value;
+    this.vital_keys = Object.keys(this.vital_details);
+    this.status = false;
+}
   
  history_view(event){
   let navigationExtras: NavigationExtras = {

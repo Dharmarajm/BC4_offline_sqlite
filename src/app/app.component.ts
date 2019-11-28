@@ -12,8 +12,10 @@ import { Network } from '@ionic-native/network/ngx';
 // import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { NetworkService } from './network-connectivity/network-service';
-import { from, Observable, forkJoin  } from 'rxjs';
+import { of,from, Observable, forkJoin } from 'rxjs';
+import { concatMap, groupBy, map, mergeMap, reduce, toArray } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +26,7 @@ export class AppComponent {
 
   public counter = 0;
   patientList:any;
+  test:any={}
   routesubscribe:any;
     constructor(
     public http: HttpClient,
@@ -56,6 +59,7 @@ export class AppComponent {
     //   console.log(responseList)
     //  })
     //this.getUserIdFromCareGiver();
+    this.groupBy();
   }
 
   // getPatientsList(){
@@ -75,6 +79,197 @@ export class AppComponent {
   //     console.log(userIds)
   //   })
   // }
+  
+  groupBy(data?){
+    data = [{
+      id: 1,
+      event_id: 1,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "6-9 pm",
+      event_options: {value1: "10"},
+      event_name: "Oxygen Saturation",
+      event_datetime:"2019-11-28T04:51:36.551Z" 
+    },{
+      id: 11,
+      event_id: 11,
+      created_at : "2019-11-28T05:18:13.345Z",
+      updated_at: "2019-11-27T04:51:36.551Z", 
+      description: "test",
+      event_category : "6-9 pm",
+      event_options: {value1: "10"},
+      event_name: "Oxygen Saturation",
+      event_datetime:"2019-11-27T05:18:13.345Z" 
+    },{
+      id: 2,
+      event_id: 2,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "Fasting",
+      event_options: {value1: "10", value2: "20"},
+      event_name: "Blood Glucose",
+      event_datetime:"2019-11-28T04:51:36.551Z" 
+    },{
+      id: 3,
+      event_id: 3,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "12-3 pm",
+      event_options: {value1: "10"},
+      event_name: "Oxygen Saturation",
+      event_datetime:"2019-11-28T04:51:36.551Z" 
+    },{
+      id: 4,
+      event_id: 4,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "Fasting",
+      event_options: {value1: "20", value2: "30"},
+      event_name: "Blood Glucose",
+      event_datetime:"2019-11-28T04:51:36.551Z" 
+    },{
+      id: 5,
+      event_id: 5,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "Fasting",
+      event_options: {value1: "20", value2: "30"},
+      event_name: "Blood Glucose",
+      event_datetime:"2019-11-28T04:51:36.551Z" 
+    },{
+      id: 6,
+      event_id: 6,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "Fasting",
+      event_options: {value1: "20", value2: "30"},
+      event_name: "Blood Glucose",
+      event_datetime:"2019-11-28T04:51:36.551Z"  
+    },{
+      id: 7,
+      event_id: 7,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "Fasting",
+      event_options: {value1: "20", value2: "30"},
+      event_name: "Blood Glucose",
+      event_datetime:"2019-11-28T04:51:36.551Z" 
+    },{
+      id: 8,
+      event_id: 8,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "Fasting",
+      event_options: {value1: "20", value2: "30"},
+      event_name: "Blood Glucose",
+      event_datetime:"2019-11-28T04:51:36.551Z" 
+    },{
+      id: 9,
+      event_id: 9,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "Fasting",
+      event_options: {value1: "20", value2: "30"},
+      event_name: "Blood Glucose",
+      event_datetime:"2019-11-28T04:51:36.551Z" 
+    },{
+      id: 10,
+      event_id: 10,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "Fasting",
+      event_options: {value1: "20", value2: "30"},
+      event_name: "Blood Glucose",
+      event_datetime:"2019-11-28T04:51:36.551Z" 
+    },{
+      id: 11,
+      event_id: 11,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "Fasting",
+      event_options: {value1: "20", value2: "30"},
+      event_name: "Blood Glucose",
+      event_datetime:"2019-11-28T04:51:36.551Z" 
+    },{
+      id: 12,
+      event_id: 12,
+      created_at : "2019-11-28T04:51:36.551Z",
+      updated_at: "2019-11-28T04:51:36.551Z", 
+      description: "test",
+      event_category : "Fasting",
+      event_options: {value1: "20", value2: "30"},
+      event_name: "Blood Glucose",
+      event_datetime:"2019-11-28T04:51:36.551Z" 
+    }];
+    let records:any[] = data.map(item => ({
+         id:item.id,
+         event_id: item.event_id,
+         created_at: item.created_at,
+         description: item.description,
+         event_category : item.event_category,
+         event_assets: item.event_assets,
+         event_options: item.event_options,
+         event_name: item.event_name,
+         event_datetime:item.event_datetime,
+         value: item.value,
+         event_type: item.event_type,
+         user_id: item.user_id
+    }));
+
+    
+    
+    const example = from(records).pipe(
+      groupBy(person =>  person.event_name),  //,person =>  person.event_category
+      mergeMap(group => group.pipe(toArray())),
+      mergeMap((array) => {// Take each from above array and group each array by manDate
+        return from(array).pipe(groupBy(
+          val => formatDate(val.event_datetime, 'yyyy-MM-dd', 'en-US'),
+          ),
+          mergeMap(group => {
+            return group.pipe(toArray()); // return the group values as Arrays
+          })
+        );
+      }),
+      mergeMap((array) => {// Take each from above array and group each array by manDate
+        return from(array).pipe(groupBy(
+          val => val.event_category,
+          ),
+          mergeMap(group => {
+            return group.pipe(toArray()); // return the group values as Arrays
+          })
+        );
+      }),map((val) => {  //For each array returned , calculate the sum and map it to the Object you wanted
+        // let event_name = `${val[0]['event_name']}`;
+        // let date = formatDate(val[0].event_datetime, 'yyyy-MM-dd', 'en-US');
+        // let event_category = val[0].event_category;
+        // let combine = {};
+
+        // combine[`${event_name}`][`${date}`][`${event_category}`]=val;
+        return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data:val }
+      })
+    ).subscribe(val => {
+      console.log(val)
+      // let event_name = `${val['event_name']}`;
+      // let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
+      // let event_category = val.event_category;
+      
+      // this.test[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
+    })
+
+    console.log(this.test)
+    
+}
 
   initializeApp() {
     this.initializeBackButtonCustomHandler();

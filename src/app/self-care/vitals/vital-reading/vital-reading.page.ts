@@ -9,6 +9,10 @@ import {CalendarModal, CalendarModalOptions,  CalendarResult } from 'ion2-calend
 import {  from } from 'rxjs';
 import {  groupBy, mergeMap,  toArray } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
+import { DatabaseProvider } from '../../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
+
+
 @Component({
   selector: 'app-vital-reading',
   templateUrl: './vital-reading.page.html',
@@ -26,8 +30,9 @@ end_date1: any;
 user_id: string;
 vital_reading: any[]=[];
 delete_content: any;
+vital_page_offset:number=0;
 
-  constructor(public modalCtrl: ModalController,private toast: Toast,public datepipe: DatePipe, public service: settingsService, public route:ActivatedRoute, public router: Router,public toastController: ToastController,public alertController:AlertController, private statusBar: StatusBar) { 
+constructor(public modalCtrl: ModalController,private toast: Toast,public datepipe: DatePipe, public service: settingsService, public route:ActivatedRoute, public router: Router,public toastController: ToastController,public alertController:AlertController, private statusBar: StatusBar,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) {
       this.route.queryParams.subscribe(params => {      
            this.event_name = params.data
            this.user_id = localStorage.getItem("user_id");               
@@ -46,12 +51,22 @@ delete_content: any;
     this.end_date1 = new Date()
     var y = this.end_date1.getFullYear()
     var m = this.end_date1.getMonth();
-    this.from_date1 = new Date(y, m, 1); 
-    this.service.filterReading( this.event_name,this.user_id,this.page,this.count,this.from_date1, this.end_date1).subscribe(res=>{
-    this.previous_data=res['events']
-    this.groupBy(this.previous_data)
-    console.log(this.previous_data)
-  })
+    this.from_date1 = new Date(y, m, 1);
+    this.vital_page_offset=0; 
+    // this.service.filterReading( this.event_name,this.user_id,this.page,this.count,this.from_date1,this.end_date1).subscribe(res=>{
+    //   this.previous_data=res['events']
+    //   this.groupBy(this.previous_data)
+    //   console.log(this.previous_data)
+    // })
+    this.filterHistory();
+  }
+  
+  filterHistory(){
+
+    this.databaseSummary.filterVitalHistory('vital',this.event_name,this.from_date1,this.end_date1,this.vital_page_offset).then(res=>{
+      this.previous_data=res['events']
+      this.groupBy(this.previous_data)
+    }).catch(err=>{console.log(err)})
   }
 
   groupBy(data){
@@ -103,31 +118,48 @@ delete_content: any;
     const end_date: CalendarResult = date.to.dateObj;
         this.from_date1=from_date
         this.end_date1=end_date
-        this.service.filterReading(this.event_name,this.user_id,this.page,this.count,from_date,end_date).subscribe(res=>{
-        this.previous_data=res['events']
-        console.log(this.previous_data)
-        this.groupBy(this.previous_data)      
-        });      
+        // this.service.filterReading(this.event_name,this.user_id,this.page,this.count,from_date,end_date).subscribe(res=>{
+        //   this.previous_data=res['events']
+        //   console.log(this.previous_data)
+        //   this.groupBy(this.previous_data)      
+        // }); 
+        this.vital_page_offset=0;
+        this.filterHistory();
      }
 
     loadData(scroll){
     setTimeout(() => {
       this.page+=1;
-      this.service.filterReading(this.event_name,this.user_id,this.page,this.count,this.from_date1,this.end_date1).subscribe(res=>{
+      this.vital_page_offset=this.page*10-10;
+      // this.service.filterReading(this.event_name,this.user_id,this.page,this.count,this.from_date1,this.end_date1).subscribe(res=>{
+      //   let event:any=res['events'];
+        
+      //   let merge:any= this.previous_data.concat(event);
+       
+      //   this.previous_data=merge;
+        
+      //   this.groupBy(merge);
+      // scroll.target.complete();
+      // if(this.page *10 !=this.vital_reading.length){
+      //   scroll.target.disabled = true;
+      // }
+      // },error=>{
+      //   scroll.target.disabled = true;
+      // }) 
+
+      this.databaseSummary.filterVitalHistory('vital',this.event_name,this.from_date1,this.end_date1,this.vital_page_offset).then(res=>{
         let event:any=res['events'];
-        console.log(event)
-        let merge:any= this.previous_data.concat(event);
-        console.log(merge)
-        this.previous_data=merge;
-        console.log(this.previous_data)
-        this.groupBy(merge);
-      scroll.target.complete();
-      if(this.page *10 !=this.vital_reading.length){
-        scroll.target.disabled = true;
-      }
-      },error=>{
-        scroll.target.disabled = true;
-      }) 
+        
+          let merge:any= this.previous_data.concat(event);
+         
+          this.previous_data=merge;
+          
+          this.groupBy(merge);
+          scroll.target.complete();
+          if(this.page *10 !=this.vital_reading.length){
+            scroll.target.disabled = true;
+          }
+      }).catch(err=>{console.log(err)})
     }, 500)
   }   
   
@@ -140,12 +172,17 @@ async DeleteItem(id){
         {
           text: 'Confirm',
           handler: () => {
-            this.service.commonDeleteEvent(id).subscribe(res => {                                 
+            // this.service.commonDeleteEvent(id).subscribe(res => {                                 
+            //   this.presentToast("Record Deleted Successfully");              
+            //   this.router.navigate(['/self-care-tabs/tabs/tab1/vitals']);
+            // }, error => {
+
+            // })
+            this.database.deleteAnEvent(id).then(res=>{
               this.presentToast("Record Deleted Successfully");              
               this.router.navigate(['/self-care-tabs/tabs/tab1/vitals']);
-            }, error => {
+            }).catch(err=>{console.log(err)})
 
-            })
           }
         },
         {

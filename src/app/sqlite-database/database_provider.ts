@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SQL_SELECT_ALL_CREDENTIALS, Setting, SQL_SELECT_ALL_EVENTS, events, SQL_SELECT_ALL_ENUMS, enum_masters, SQL_SELECT_ALL_HEALTH_DETAILS, SQL_SELECT_ALL_USERS,SQL_SELECT_ALL_EMERGENCY_DATA  } from './database.interface'
-
+import { of,from } from 'rxjs';
+import { concatMap, groupBy, map, mergeMap, reduce, toArray } from 'rxjs/operators';
+import { formatDate } from '@angular/common';
 import { DatabaseProvider } from './database';
 /*
   Generated class for the SettingProvider provider.
@@ -110,25 +112,130 @@ export class DataBaseSummaryProvider {
         })
     }
 
-    async getVitalEvents(event_type,search,additionType): Promise<any> {
-        let checkEvent = await this.checkEventType(event_type,search,additionType);
+    async filterVitalHistory(event_type,event_name,from_date,end_date,vital_page_offset): Promise<any> {
+        let checkEvent = await this.checkEventType(event_type,'pagefilter',vital_page_offset,from_date,end_date,null,event_name);
         let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+checkEvent;
 
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
-               console.log(data,"vital")
-               for (let i = 0; i < data.rows.length; i++) {
-                   console.log(data.rows.item(i));
-                   
-               }
+                let events: events[] = [];
+                
+                for (let i = 0; i < data.rows.length; i++) {
+                    let event_json:any = null;
+                    let eventAssetsJson:any = null;
+                    if (data.rows.item(i).event_options != null) {
+                        event_json = JSON.parse(data.rows.item(i).event_options);
+                    }
+                    if (data.rows.item(i).event_assets != null) {
+                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                    }
+                    events.push({
+                        id: data.rows.item(i).id,
+                        event_id:data.rows.item(i).event_id,
+                        event_name: data.rows.item(i).event_name,
+                        description: data.rows.item(i).description,
+                        value: data.rows.item(i).value,
+                        event_datetime: data.rows.item(i).event_datetime,
+                        event_type: data.rows.item(i).event_type,
+                        event_category: data.rows.item(i).event_category,
+                        event_assets: eventAssetsJson,
+                        event_options: event_json,
+                        user_id:data.rows.item(i).user_id,
+                        delete1:data.rows.item(i).delete1,
+                        created_at: data.rows.item(i).created_at,
+                        updated_at: data.rows.item(i).updated_at
+                    });  
+                };
+                return { count:data.rows.length,events:events};
             })
         })        
 
     }
 
-    async checkEventType(event,tab,offset) {
+    async getVitalEvents(id,from_date,end_date,event_type,analytics?,event_name?): Promise<any> {
+        let checkEvent = await this.checkEventType(event_type,'filter',0,from_date,end_date,analytics,event_name);
+        let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+checkEvent;
+
+        return this.databaseService.getDatabase().then(database => {
+            return database.executeSql(sqlSearchEventQuery, []).then((data) => {
+                let events: events[] = [];
+                
+                for (let i = 0; i < data.rows.length; i++) {
+                    let event_json:any = null;
+                    let eventAssetsJson:any = null;
+                    if (data.rows.item(i).event_options != null) {
+                        event_json = JSON.parse(data.rows.item(i).event_options);
+                    }
+                    if (data.rows.item(i).event_assets != null) {
+                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                    }
+                    events.push({
+                        id: data.rows.item(i).id,
+                        event_id:data.rows.item(i).event_id,
+                        event_name: data.rows.item(i).event_name,
+                        description: data.rows.item(i).description,
+                        value: data.rows.item(i).value,
+                        event_datetime: data.rows.item(i).event_datetime,
+                        event_type: data.rows.item(i).event_type,
+                        event_category: data.rows.item(i).event_category,
+                        event_assets: eventAssetsJson,
+                        event_options: event_json,
+                        user_id:data.rows.item(i).user_id,
+                        delete1:data.rows.item(i).delete1,
+                        created_at: data.rows.item(i).created_at,
+                        updated_at: data.rows.item(i).updated_at
+                    });  
+                };
+                return { count:data.rows.length,event_list:events};
+            })
+        })        
+
+    }
+
+
+
+    filterVitalEventNameList(id,from,end,type){
+        return this.getVitalEvents(id,from,end,type).then(response => {
+          let data = response['event_list'];
+          
+            let value = [];
+            const example = from(data).pipe(
+            groupBy(person =>  person.event_name),
+            mergeMap(group => group.pipe(toArray()))
+            ).subscribe(val => {
+                if(val){
+                 value.push(val[0]['event_name']); 
+                }  
+             
+            })
+
+            return { events : value }
+
+        })
+    }
+
+    vitalFilterAnalytics(id,data){
+        let params = data;
+        return this.getVitalEvents(id,params['from_date'],params['end_date'],'vital','analytics',params['event_name']).then(response => {
+            let data = response['event_list'];
+            
+              let value = {};
+              const example = from(data).pipe(
+              groupBy(person =>  person.event_name),
+              mergeMap(group => group.pipe(toArray()))
+              ).subscribe(val => {  
+                 
+              })
+  
+              return value;
+  
+          })
+    }
+
+    async checkEventType(event,tab,offset,from_date?,end_date?,analytics?,event_name?) {
         
         let eventQuery:any;
+        let event_nameArray = event_name.toString();
         let user_id = await this.databaseService.getuserID();
         //let nowDate = new Date().toJSON()
         if(event=='appointment' && tab=='New'){
@@ -137,8 +244,16 @@ export class DataBaseSummaryProvider {
             return eventQuery= ` WHERE (event_type='${event}' AND DATETIME(event_datetime)<DATETIME('now') AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime ASC LIMIT 10 OFFSET ${offset}`
         }else if(event=='health_diary' || event=='doc_visit'){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`
-        }if(event=='vital'){
+        }else if(event=='vital' && tab == 'New'){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC`
+        }else if(event=='vital' && tab == 'filter' && analytics != 'analytics'){
+            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${from_date}') AND DATE('${end_date}'))) ORDER BY event_datetime DESC`
+        }else if(event=='vital' && tab == 'filter' && analytics == 'analytics' && event_name.length!=0){
+            return eventQuery= ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${from_date}') AND DATE('${end_date}'))) ORDER BY event_datetime DESC`
+        }else if(event=='vital' && tab == 'filter' && analytics == 'analytics' && event_name.length==0){
+            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${from_date}') AND DATE('${end_date}'))) ORDER BY event_datetime DESC`
+        }else if(event=='vital' && tab == 'pagefilter'){
+            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${from_date}') AND DATE('${end_date}'))) ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
         }else{
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
         }
