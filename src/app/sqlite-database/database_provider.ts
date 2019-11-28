@@ -214,6 +214,43 @@ export class DataBaseSummaryProvider {
         })
     }
 
+    expenseDatefilter(id,from,end,type){
+        return this.getVitalEvents(id,from,end,type,'expense').then(response => {
+            let data = response['event_list'];
+
+            let value = [];
+            const example = from(data).pipe(
+            groupBy(person =>  person.event_name),
+            mergeMap(group => group.pipe(toArray()))
+            ).subscribe(val => {
+                if(val){
+                 value.push(val[0]['event_name']); 
+                }  
+             
+            })
+
+            return { events : value }
+        })    
+    }
+
+    ExpenseViewSummary(from,end,type,event_name?,analytics?){
+        return this.getVitalEvents('1',from,end,type,analytics,event_name).then(response => {
+            let data = response['event_list'];
+            let from_date =  from;
+            let end_date =  end;
+            let value = [];
+            let vital = {}
+            const example = from(data).pipe(
+            groupBy(person =>  person.event_name),
+            mergeMap(group => group.pipe(toArray()))
+            ).subscribe(val => {
+                vital[`${val[0]['event_name']}`]=val;
+            })
+
+            return { from_date : from_date ,end_date: end_date, expense:  vital} 
+        })
+    }
+
     vitalFilterAnalytics(id,data){
         let params = data;
         return this.getVitalEvents(id,params['from_date'],params['end_date'],'vital','analytics',params['event_name']).then(response => {
@@ -254,6 +291,14 @@ export class DataBaseSummaryProvider {
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${from_date}') AND DATE('${end_date}'))) ORDER BY event_datetime DESC`
         }else if(event=='vital' && tab == 'pagefilter'){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${from_date}') AND DATE('${end_date}'))) ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
+        }else if(event=='expense' && analytics == 'expense'){
+            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${from_date}') AND DATE('${end_date}'))) ORDER BY event_datetime DESC`
+        }else if(event=='expense' && analytics == 'view_summary'){
+            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${from_date}') AND DATE('${end_date}'))) ORDER BY event_datetime DESC`
+        }else if(event=='expense' && analytics == 'view_analytics' && event_name.length!=0){
+            return eventQuery= ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${from_date}') AND DATE('${end_date}'))) ORDER BY event_datetime DESC`
+        }else if(event=='expense' && analytics == 'view_analytics' && event_name.length==0){
+            return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${from_date}') AND DATE('${end_date}'))) ORDER BY event_datetime DESC`
         }else{
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
         }

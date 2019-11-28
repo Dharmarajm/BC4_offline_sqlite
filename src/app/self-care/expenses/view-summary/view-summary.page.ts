@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import {CalendarModal, CalendarModalOptions,  CalendarResult } from 'ion2-calendar';
 import { Toast } from '@ionic-native/toast/ngx';
 import { DatabaseProvider } from '../../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class viewSummaryPage {
   from_date1:any;
   loader:boolean=true;
   getChartValue:any[]=[];
-  constructor(private toast: Toast,public modalCtrl: ModalController, public toastController: ToastController,public alertController:AlertController,public expen_view: settingsService, private statusBar: StatusBar,private database: DatabaseProvider) {
+  constructor(private toast: Toast,public modalCtrl: ModalController, public toastController: ToastController,public alertController:AlertController,public expen_view: settingsService, private statusBar: StatusBar,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) {
    }
 
   ngOnInit() {           
@@ -31,7 +32,28 @@ export class viewSummaryPage {
 
   ionViewWillEnter() {
       this.user_id = localStorage.getItem("user_id");
-      this.expen_view.view_expenses(this.user_id).subscribe(res =>{
+      this.from_date1 = new Date();
+      this.from_date1.setDate(this.from_date1.getDate() - 30);
+      this.end_date1 = new Date();
+      
+      // this.expen_view.view_expenses(this.user_id).subscribe(res =>{
+      //   this.view_all_expen = res;
+      //   this.from_date1= this.view_all_expen.from_date 
+      //   this.end_date1= this.view_all_expen.end_date
+      //   console.log(this.view_all_expen,'res')  
+      //   this.expen_key = Object.keys(this.view_all_expen.expense);
+      //   this.getChartValue=this.expen_key.map(res=>{
+      //     console.log(res)
+      //     let chartType=res.toString();       
+      //     const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
+      //     return total
+      //     });
+      //     this.loader=false;
+      //   console.log(this.getChartValue)
+      //   console.log(this.expen_key);
+      // })
+
+      this.databaseSummary.ExpenseViewSummary(this.from_date1,this.end_date1,'expense','event_name','view_summary').then((res)=>{
         this.view_all_expen = res;
         this.from_date1= this.view_all_expen.from_date 
         this.end_date1= this.view_all_expen.end_date
@@ -47,10 +69,11 @@ export class viewSummaryPage {
         console.log(this.getChartValue)
         console.log(this.expen_key);
       })
+      .catch(error=>{ console.log(error) });
       
-    this.statusBar.backgroundColorByHexString('#ffd32c');
-    this.tabBar = document.getElementById('myTabBar');
-    this.tabBar.style.display = 'none';
+      this.statusBar.backgroundColorByHexString('#ffd32c');
+      this.tabBar = document.getElementById('myTabBar');
+      this.tabBar.style.display = 'none';
   }
 
  async delete(id,event){
@@ -109,43 +132,56 @@ export class viewSummaryPage {
 
 
    async openCalendar() {
-  const options: CalendarModalOptions = {
-    canBackwardsSelected:true,
-    pickMode: 'range',
-    color: 'danger',
-    title: ''
-  };
+      const options: CalendarModalOptions = {
+        canBackwardsSelected:true,
+        pickMode: 'range',
+        color: 'danger',
+        title: ''
+      };
 
-  const myCalendar = await this.modalCtrl.create({
-    component: CalendarModal,
-    componentProps: { options }
-  });
-
-  myCalendar.present();
-
-  const event: any = await myCalendar.onDidDismiss();
-  const date = event.data;
-  const from_date: CalendarResult = date.from.dateObj;
-  const end_date: CalendarResult = date.to.dateObj;
-  console.log(from_date)
-      this.from_date1=from_date
-      this.end_date1=end_date
-      console.log(this.from_date1)
-      this.expen_view.filterAmount(from_date,end_date,this.user_id).subscribe(res=>{
-      console.log(res)
-      this.view_all_expen=res
-      this.expen_key = Object.keys(this.view_all_expen.expense);
-      this.getChartValue=this.expen_key.map(res=>{
-      console.log(res)
-      let chartType=res.toString();       
-      const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
-      return total  
+      const myCalendar = await this.modalCtrl.create({
+        component: CalendarModal,
+        componentProps: { options }
       });
-       console.log(this.getChartValue)
-       console.log(this.expen_key);
-    
-   })
+
+      myCalendar.present();
+
+      const event: any = await myCalendar.onDidDismiss();
+      const date = event.data;
+      const from_date: CalendarResult = date.from.dateObj;
+      const end_date: CalendarResult = date.to.dateObj;
+      console.log(from_date)
+          this.from_date1=from_date
+          this.end_date1=end_date
+          console.log(this.from_date1)
+          // this.expen_view.filterAmount(from_date,end_date,this.user_id).subscribe(res=>{
+          //   console.log(res)
+          //   this.view_all_expen=res
+          //   this.expen_key = Object.keys(this.view_all_expen.expense);
+          //   this.getChartValue=this.expen_key.map(res=>{
+          //   console.log(res)
+          //   let chartType=res.toString();       
+          //   const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
+          //   return total  
+          //   });
+          //   console.log(this.getChartValue)
+          //   console.log(this.expen_key);
+          //  })
+
+          this.databaseSummary.ExpenseViewSummary(this.from_date1,this.end_date1,'expense','event_name','view_summary').then((res)=>{
+            console.log(res)
+            this.view_all_expen=res
+            this.expen_key = Object.keys(this.view_all_expen.expense);
+            this.getChartValue=this.expen_key.map(res=>{
+            console.log(res)
+            let chartType=res.toString();       
+            const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
+            return total  
+            });
+            console.log(this.getChartValue)
+            console.log(this.expen_key);
+          })
  
-}
+   }
 
 }

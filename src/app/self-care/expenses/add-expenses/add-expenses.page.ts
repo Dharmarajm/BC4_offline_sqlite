@@ -39,21 +39,21 @@ export class addExpensesPage {
         'description':   [''],
         'event_type':["expense"] 	
         });
-        this.event.event_add_option().subscribe(res =>{
-          this.Options_res =res;
-          this.total_option =this.Options_res.enum_masters;
-          
-          this.total_option.push("Others")
-        })
-        
-      //offline database code for listing spent on type
-        // this.databaseSummary.getEnumMasters('spent_place').then((res)=>{
+        // this.event.event_add_option().subscribe(res =>{
         //   this.Options_res =res;
         //   this.total_option =this.Options_res.enum_masters;
           
         //   this.total_option.push("Others")
         // })
-        // .catch(error=>{ console.log(error) });
+        
+      //offline database code for listing spent on type
+        this.databaseSummary.getEnumMasters('spent_place').then((res)=>{
+          this.Options_res =res;
+          this.total_option =this.Options_res.enum_masters;
+          
+          this.total_option.push("Others")
+        })
+        .catch(error=>{ console.log(error) });
     }
 
     ionViewWillEnter() {
@@ -107,16 +107,16 @@ export class addExpensesPage {
             handler: () => {
               this.Progress=true;
 
-              this.event.event_add(this.myForm.value).subscribe(res =>{
-                this.Progress=false;
-                this.router.navigate(['/self-care-tabs/tabs/tab1/expenses']);
-              })
-              
-              //offline database code for add the expense
-              // this.database.createAnEvent(this.myForm.value).then((res)=>{
+              // this.event.event_add(this.myForm.value).subscribe(res =>{
               //   this.Progress=false;
               //   this.router.navigate(['/self-care-tabs/tabs/tab1/expenses']);
               // })
+              
+              //offline database code for add the expense
+              this.database.createAnEvent(this.myForm.value).then((res)=>{
+                this.Progress=false;
+                this.router.navigate(['/self-care-tabs/tabs/tab1/expenses']);
+              })
             }
           }
         ]

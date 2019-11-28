@@ -60,6 +60,7 @@ export class AppComponent {
     //  })
     //this.getUserIdFromCareGiver();
     this.groupBy();
+
   }
 
   // getPatientsList(){
@@ -229,45 +230,50 @@ export class AppComponent {
 
     
     
-    const example = from(records).pipe(
-      groupBy(person =>  person.event_name),  //,person =>  person.event_category
-      mergeMap(group => group.pipe(toArray())),
-      mergeMap((array) => {// Take each from above array and group each array by manDate
-        return from(array).pipe(groupBy(
-          val => formatDate(val.event_datetime, 'yyyy-MM-dd', 'en-US'),
-          ),
-          mergeMap(group => {
-            return group.pipe(toArray()); // return the group values as Arrays
-          })
-        );
-      }),
-      mergeMap((array) => {// Take each from above array and group each array by manDate
-        return from(array).pipe(groupBy(
-          val => val.event_category,
-          ),
-          mergeMap(group => {
-            return group.pipe(toArray()); // return the group values as Arrays
-          })
-        );
-      }),map((val) => {  //For each array returned , calculate the sum and map it to the Object you wanted
-        // let event_name = `${val[0]['event_name']}`;
-        // let date = formatDate(val[0].event_datetime, 'yyyy-MM-dd', 'en-US');
-        // let event_category = val[0].event_category;
-        // let combine = {};
-
-        // combine[`${event_name}`][`${date}`][`${event_category}`]=val;
-        return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data:val }
-      })
-    ).subscribe(val => {
-      console.log(val)
-      // let event_name = `${val['event_name']}`;
-      // let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
-      // let event_category = val.event_category;
+    // const example = from(records).pipe(
+    //   groupBy(person =>  person.event_name),  //,person =>  person.event_category
+    //   mergeMap(group => group.pipe(toArray())),
+    //   mergeMap((array) => {// Take each from above array and group each array by manDate
+    //     return from(array).pipe(groupBy(
+    //       val => formatDate(val.event_datetime, 'yyyy-MM-dd', 'en-US'),
+    //       ),
+    //       mergeMap(group => {
+    //         return group.pipe(toArray()); // return the group values as Arrays
+    //       })
+    //     );
+    //   }),
+    //   mergeMap((array) => {// Take each from above array and group each array by manDate
+    //     return from(array).pipe(groupBy(
+    //       val => val.event_category,
+    //       ),
+    //       mergeMap(group => {
+    //         return group.pipe(toArray()); // return the group values as Arrays
+    //       })
+    //     );
+    //   }),map((val) => {  //For each array returned , calculate the sum and map it to the Object you wanted
+       
+    //     return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data:val }
+    //   })
+    // ).subscribe(val => {
+    //   console.log(val)
+    //   let event_name = `${val['event_name']}`;
+    //   let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
+    //   let event_category = val.event_category;
       
-      // this.test[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
-    })
+    //   this.test[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
+    // })
+    let vital = {}
+    const example = from(data).pipe(
+      groupBy(person =>  person.event_name),
+      mergeMap(group => group.pipe(toArray()))
+      ).subscribe(val => {   
+         console.log(val[0]['event_name'])
+         console.log(val[0]['event_name'])
 
-    console.log(this.test)
+         vital[`${val[0]['event_name']}`]=val;
+      })
+
+    console.log(vital)
     
 }
 
