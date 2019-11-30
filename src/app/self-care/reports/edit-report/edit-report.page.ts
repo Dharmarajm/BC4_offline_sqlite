@@ -128,7 +128,7 @@ export class EditReportPage implements OnInit {
           let mapUrl = { "localURI": localAssets["localImagePath"][i]["localURI"],"globalURI": null,"cdvFilePath":localAssets["localImagePath"][i]["cdvFilePath"],"fileName":localAssets["localImagePath"][i]["fileName"],"delete":localAssets["localImagePath"][i]["delete"] };
         if(globalassets!=null){
         if(globalassets.length>i){
-          let globeURL = this.environment+globalassets[i]["url"]
+          let globeURL = globalassets[i]["url"]
           mapUrl["globalURI"] = this.sanitizer.bypassSecurityTrustResourceUrl(globeURL);
         }
         } 
@@ -153,7 +153,7 @@ export class EditReportPage implements OnInit {
         Others=this.data['event_category'];   
       }
 
-      this.editReport=this.fb.group({
+      this.editReport = this.fb.group({
         'event_category': [this.report,[Validators.required]],
         'others':      [Others],    
         'event_name':       [this.data.event_name,[Validators.required]],

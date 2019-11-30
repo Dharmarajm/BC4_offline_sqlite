@@ -594,7 +594,7 @@ let EditPrescriptionPage = class EditPrescriptionPage {
             let mapUrl = { "localURI": localAssets["localImagePath"][i]["localURI"], "globalURI": null, "cdvFilePath": localAssets["localImagePath"][i]["cdvFilePath"], "fileName": localAssets["localImagePath"][i]["fileName"], "delete": localAssets["localImagePath"][i]["delete"] };
             if (globalassets != null) {
                 if (globalassets.length > i) {
-                    let globeURL = this.environment + globalassets[i]["url"];
+                    let globeURL = globalassets[i]["url"];
                     mapUrl["globalURI"] = this.sanitizer.bypassSecurityTrustResourceUrl(globeURL);
                 }
             }
@@ -1446,7 +1446,7 @@ let ViewPrescriptionPage = class ViewPrescriptionPage {
                     let mapUrl = { "localURI": localAssets["localImagePath"][i]["localURI"], "globalURI": null, "cdvFilePath": localAssets["localImagePath"][i]["cdvFilePath"], "fileName": localAssets["localImagePath"][i]["fileName"], "delete": localAssets["localImagePath"][i]["delete"] };
                     if (globalassets != null) {
                         if (globalassets.length > i) {
-                            let globeURL = this.environment + globalassets[i]["url"];
+                            let globeURL = globalassets[i]["url"];
                             mapUrl["globalURI"] = this.sanitizer.bypassSecurityTrustResourceUrl(globeURL);
                         }
                     }

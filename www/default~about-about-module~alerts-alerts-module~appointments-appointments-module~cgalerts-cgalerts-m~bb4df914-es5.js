@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914"],{
 
 /***/ "./src/app/sqlite-database/database.ts":
 /*!*********************************************!*\
@@ -66,7 +66,7 @@ var DatabaseProvider = /** @class */ (function () {
             db.executeSql(sqlTable2, []);
             var sqlTable4 = "CREATE TABLE IF NOT EXISTS health_details(id INTEGER,health_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,attribute_name_value TEXT DEFAULT NULL,user_id INTEGER,created_at DATETIME,updated_at DATETIME)";
             db.executeSql(sqlTable4, []);
-            var sqlTable5 = "CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)"; //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
+            var sqlTable5 = "CREATE TABLE IF NOT EXISTS users(id INTEGER,name TEXT,email TEXT,password TEXT DEFAULT NULL,mobile_no TEXT DEFAULT NULL,address TEXT DEFAULT NULL,country TEXT DEFAULT NULL,blood_group TEXT DEFAULT NULL,age INTEGER DEFAULT NULL,user_uid TEXT,forgot_password_code TEXT DEFAULT NULL,user_picture TEXT DEFAULT NULL,user_option TEXT DEFAULT NULL,active_status TEXT,role_id INTEGER,created_at DATETIME,updated_at DATETIME,delete1 BOOLEAN)"; //userRecord_id INTEGER PRIMARY KEY AUTOINCREMENT
             db.executeSql(sqlTable5, []);
             var sqlTable6 = "CREATE TABLE IF NOT EXISTS user_associations(id INTEGER,patient_id INTEGER,caregiver_id INTEGER,nick_name TEXT DEFAULT NULL,created_at DATETIME,updated_at DATETIME)";
             db.executeSql(sqlTable6, []);
@@ -512,4 +512,4 @@ var DatabaseProvider = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970-es5.js.map
+//# sourceMappingURL=default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914-es5.js.map

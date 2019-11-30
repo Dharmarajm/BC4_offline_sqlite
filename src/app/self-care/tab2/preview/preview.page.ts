@@ -118,7 +118,12 @@ export class previewPage implements OnInit {
            let byPassURL = this.environment+source;
            globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);  
          }
-       }else{
+        }
+      //else if(this.previewData['user']['user_option']!=null){
+      //   let source = this.webview.convertFileSrc(this.previewData['user']['user_option']['localURL']); 
+      //   localURL = source;
+      //  }
+       else{
          let source = this.webview.convertFileSrc(this.previewData['user']['user_picture']['localURL']); 
          localURL = source;
        }

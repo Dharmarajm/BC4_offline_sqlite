@@ -793,6 +793,10 @@ var Tab1cPage = /** @class */ (function () {
                     _this.caregiverImageStatus = false;
                 }
             }
+            //else if(this.pic['user_info']['user_option']!=null){
+            //   let source = this.webview.convertFileSrc(this.pic['user_info']['user_option']['localURL']); 
+            //   localURL = source;
+            //  }
             else {
                 _this.profile_pic = _this.pic['user_info']['user_picture']['url'];
                 _this.initialLogo = userInfo;

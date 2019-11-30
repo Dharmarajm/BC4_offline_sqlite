@@ -196,6 +196,10 @@ let previewPage = class previewPage {
                     globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);
                 }
             }
+            //else if(this.previewData['user']['user_option']!=null){
+            //   let source = this.webview.convertFileSrc(this.previewData['user']['user_option']['localURL']); 
+            //   localURL = source;
+            //  }
             else {
                 let source = this.webview.convertFileSrc(this.previewData['user']['user_picture']['localURL']);
                 localURL = source;

@@ -684,7 +684,7 @@ var EditReportPage = /** @class */ (function () {
                 var mapUrl = { "localURI": localAssets["localImagePath"][i]["localURI"], "globalURI": null, "cdvFilePath": localAssets["localImagePath"][i]["cdvFilePath"], "fileName": localAssets["localImagePath"][i]["fileName"], "delete": localAssets["localImagePath"][i]["delete"] };
                 if (globalassets != null) {
                     if (globalassets.length > i) {
-                        var globeURL = _this.environment + globalassets[i]["url"];
+                        var globeURL = globalassets[i]["url"];
                         mapUrl["globalURI"] = _this.sanitizer.bypassSecurityTrustResourceUrl(globeURL);
                     }
                 }
@@ -1627,7 +1627,7 @@ var ViewReportPage = /** @class */ (function () {
                     var mapUrl = { "localURI": localAssets["localImagePath"][i]["localURI"], "globalURI": null, "cdvFilePath": localAssets["localImagePath"][i]["cdvFilePath"], "fileName": localAssets["localImagePath"][i]["fileName"], "delete": localAssets["localImagePath"][i]["delete"] };
                     if (globalassets != null) {
                         if (globalassets.length > i) {
-                            var globeURL = _this.environment + globalassets[i]["url"];
+                            var globeURL = globalassets[i]["url"];
                             mapUrl["globalURI"] = _this.sanitizer.bypassSecurityTrustResourceUrl(globeURL);
                         }
                     }

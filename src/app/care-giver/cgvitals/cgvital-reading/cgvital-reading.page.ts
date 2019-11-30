@@ -9,6 +9,8 @@ import { CalendarModal, CalendarModalOptions,  CalendarResult } from 'ion2-calen
 import {  from } from 'rxjs';
 import {  groupBy, mergeMap,  toArray } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
+import { DatabaseProvider } from '../../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
 
 @Component({
   selector: 'app-cgvital-reading',
@@ -22,31 +24,46 @@ page:number=1;
 count:number=10;
 previous_data: any[]=[];
 event_name: any;
-from_date1: CalendarResult;
-end_date1: CalendarResult;
+from_date1: any;
+end_date1: any;
 user_id: string;
 vital_reading: any[]=[];
 vital_scroll: any[]=[];
+vital_page_offset:number=0;
 
-
-  constructor(public modalCtrl: ModalController,private toast: Toast,public datepipe: DatePipe, public service: careGiverService, public route:ActivatedRoute, public router: Router,public toastController: ToastController,public alertController:AlertController, private statusBar: StatusBar) { 
+  constructor(public modalCtrl: ModalController,private toast: Toast,public datepipe: DatePipe, public service: careGiverService, public route:ActivatedRoute, public router: Router,public toastController: ToastController,public alertController:AlertController, private statusBar: StatusBar,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) { 
       this.route.queryParams.subscribe(params => {      
       this.event_name = params.data
-      this.service.reading_history( this.event_name,this.page,this.count).subscribe(res=>{
-      this.previous_data=res['events']
-      this.groupBy(this.previous_data)
-    })         
+      this.user_id = localStorage.getItem("user_id");  
+      // this.service.reading_history(this.event_name,this.page,this.count).subscribe(res=>{
+      //   this.previous_data=res['events']
+      //   this.groupBy(this.previous_data)
+      // })
     });    
 }
 
-  ngOnInit() {  
+  ngOnInit() {
+    
   }
  
   ionViewWillEnter(){   
     this.statusBar.backgroundColorByHexString('#60dc68');
     this.tabBar = document.getElementById('myTabBar1');
     this.tabBar.style.display = 'none';
-    this.ngOnInit(); 
+    this.end_date1 = new Date();
+    var y = this.end_date1.getFullYear()
+    var m = this.end_date1.getMonth();
+    this.from_date1 = new Date(y, m, 1);
+    this.vital_page_offset=0;
+    this.filterHistory();
+  }
+
+  filterHistory(){
+
+    this.databaseSummary.filterVitalHistory('vital',this.event_name,this.from_date1,this.end_date1,this.vital_page_offset).then(res=>{
+      this.previous_data=res['events']
+      this.groupBy(this.previous_data)
+    }).catch(err=>{console.log(err)})
   }
 
   groupBy(data){
@@ -61,19 +78,19 @@ vital_scroll: any[]=[];
       value2: item.event_options.value2,
       value3: item.event_options.value3,
       value4: item.event_options.value4,
- }));
+    }));
 
- let value = []
- const example = from(records).pipe(
-   groupBy(person => formatDate(person.event_datetime, 'yyyy-MM-dd', 'en-US')),
-   mergeMap(group => group.pipe(toArray()))
- ).subscribe(val => {
-   if(val){
-       let ff = { "created_at":val[0].event_datetime,"events" :val }
-       value.push(ff);
-   }
- })
- this.vital_reading=value;
+    let value = []
+    const example = from(records).pipe(
+      groupBy(person => formatDate(person.event_datetime, 'yyyy-MM-dd', 'en-US')),
+      mergeMap(group => group.pipe(toArray()))
+    ).subscribe(val => {
+      if(val){
+          let ff = { "created_at":val[0].event_datetime,"events" :val }
+          value.push(ff);
+      }
+    })
+    this.vital_reading=value;
   }
 
   async openCalendar() {
@@ -97,57 +114,78 @@ vital_scroll: any[]=[];
     const end_date: CalendarResult = date.to.dateObj;
         this.from_date1=from_date
         this.end_date1=end_date
-        this.service.filterReading(this.event_name,this.page,this.count,from_date,end_date).subscribe(res=>{
-        let filter=res['events']
-        this.groupBy(filter)      
-        });      
+        // this.service.filterReading(this.event_name,this.page,this.count,from_date,end_date).subscribe(res=>{
+        // let filter=res['events']
+        // this.groupBy(filter)      
+        // });
+        
+        this.vital_page_offset=0;
+        this.filterHistory();
      }
 
    scroll(event){
     setTimeout(() => {
       this.page+=1;
-      this.service.reading_history(this.event_name,this.page,this.count).subscribe(res=>{
-        let data=res['events'];
-        let concat= this.previous_data.concat(data);
-        this.previous_data=concat;
-        let records:any[]=this.previous_data.map(item => ({
-          id:item.id,
-          description: item.description,
-          event_name: item.event_name,
-          event_category:item.event_category,
-          event_datetime:item.event_datetime,
-          event_type: item.event_type,
-          value1:item.event_options.value1,
-          value2: item.event_options.value2,
-          value3: item.event_options.value3,
-          value4: item.event_options.value4,
-     }));
-     let value = []
-    const example = from(records).pipe(
-   groupBy(person => formatDate(person.event_datetime, 'yyyy-MM-dd', 'en-US')),
-   mergeMap(group => group.pipe(toArray()))
- ).subscribe(val => {
-   if(val){
-       let ff = { "created_at":val[0].event_datetime,"events" :val }
-       value.push(ff);
-   }
- })
- this.vital_scroll=value;
-          this.vital_reading=this.vital_scroll;
+      this.vital_page_offset=this.page*10-10;
+//       this.service.reading_history(this.event_name,this.page,this.count).subscribe(res=>{
+//         let data=res['events'];
+//         let concat= this.previous_data.concat(data);
+//         this.previous_data=concat;
+//         let records:any[]=this.previous_data.map(item => ({
+//           id:item.id,
+//           description: item.description,
+//           event_name: item.event_name,
+//           event_category:item.event_category,
+//           event_datetime:item.event_datetime,
+//           event_type: item.event_type,
+//           value1:item.event_options.value1,
+//           value2: item.event_options.value2,
+//           value3: item.event_options.value3,
+//           value4: item.event_options.value4,
+//      }));
+//      let value = []
+//     const example = from(records).pipe(
+//    groupBy(person => formatDate(person.event_datetime, 'yyyy-MM-dd', 'en-US')),
+//    mergeMap(group => group.pipe(toArray()))
+//  ).subscribe(val => {
+//    if(val){
+//        let ff = { "created_at":val[0].event_datetime,"events" :val }
+//        value.push(ff);
+//    }
+//  })
+//  this.vital_scroll=value;
+//           this.vital_reading=this.vital_scroll;
+//           event.target.complete();
+//           if (this.page *10 !=this.vital_reading.length){
+//              event.target.disabled = true;
+//           }
+//       },error=>{
+//          event.target.disabled = true;
+//       }) 
+
+      this.databaseSummary.filterVitalHistory('vital',this.event_name,this.from_date1,this.end_date1,this.vital_page_offset).then(res=>{
+        let event:any=res['events'];
+        
+          let merge:any= this.previous_data.concat(event);
+        
+          this.previous_data=merge;
+          
+          this.groupBy(merge);
           event.target.complete();
-          if (this.page *10 !=this.vital_reading.length){
-             event.target.disabled = true;
+          if(this.page *10 !=this.vital_reading.length){
+            event.target.disabled = true;
           }
-      },error=>{
-         event.target.disabled = true;
-      }) 
+      }).catch(err=>{
+        event.target.disabled = true;
+        console.log(err)
+      })
     }, 500)
     }   
   
 
 
   async presentToast(message: string) {
-    this.toast.show(message, '2000', 'bottom').subscribe(
+    this.toast.show(message, '4000', 'center').subscribe(
       toast => { 
       });
   }

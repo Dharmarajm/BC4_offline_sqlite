@@ -114,6 +114,7 @@ export class addExpensesPage {
               
               //offline database code for add the expense
               this.database.createAnEvent(this.myForm.value).then((res)=>{
+                console.log(res)
                 this.Progress=false;
                 this.router.navigate(['/self-care-tabs/tabs/tab1/expenses']);
               })

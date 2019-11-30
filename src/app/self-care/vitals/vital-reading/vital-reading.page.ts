@@ -48,7 +48,7 @@ constructor(public modalCtrl: ModalController,private toast: Toast,public datepi
     this.statusBar.backgroundColorByHexString('#60dc68');
     this.tabBar = document.getElementById('myTabBar');
     this.tabBar.style.display = 'none';
-    this.end_date1 = new Date()
+    this.end_date1 = new Date();
     var y = this.end_date1.getFullYear()
     var m = this.end_date1.getMonth();
     this.from_date1 = new Date(y, m, 1);
@@ -70,32 +70,32 @@ constructor(public modalCtrl: ModalController,private toast: Toast,public datepi
   }
 
   groupBy(data){
-    let records:any[]=data.map(item => ({
-      id:item.id,
-      description: item.description,
-      event_name: item.event_name,
-      event_category:item.event_category,
-      event_datetime:item.event_datetime,
-      event_type: item.event_type,
-      value1:item.event_options.value1,
-      value2: item.event_options.value2,
-      value3: item.event_options.value3,
-      value4: item.event_options.value4,
- }));
+          let records:any[]=data.map(item => ({
+            id:item.id,
+            description: item.description,
+            event_name: item.event_name,
+            event_category:item.event_category,
+            event_datetime:item.event_datetime,
+            event_type: item.event_type,
+            value1:item.event_options.value1,
+            value2: item.event_options.value2,
+            value3: item.event_options.value3,
+            value4: item.event_options.value4,
+          }));
 
-        let value = []
-        const example = from(records).pipe(
-        groupBy(person => formatDate(person.event_datetime, 'yyyy-MM-dd', 'en-US')),
-        mergeMap(group => group.pipe(toArray()))
-      ).subscribe(val => {
-        if(val){
-            let ff = { "created_at":val[0].event_datetime,"events" :val }
-            value.push(ff);
-        }
-       })
-       this.vital_reading=value; 
-       console.log(this.vital_reading)     
-      }
+          let value = []
+          const example = from(records).pipe(
+          groupBy(person => formatDate(person.event_datetime, 'yyyy-MM-dd', 'en-US')),
+          mergeMap(group => group.pipe(toArray()))
+          ).subscribe(val => {
+            if(val){
+                let ff = { "created_at":val[0].event_datetime,"events" :val }
+                value.push(ff);
+            }
+          })
+          this.vital_reading=value; 
+          console.log(this.vital_reading)     
+  }
 
   async openCalendar() {
     const options: CalendarModalOptions = {
@@ -159,7 +159,10 @@ constructor(public modalCtrl: ModalController,private toast: Toast,public datepi
           if(this.page *10 !=this.vital_reading.length){
             scroll.target.disabled = true;
           }
-      }).catch(err=>{console.log(err)})
+      }).catch(err=>{
+        scroll.target.disabled = true;
+        console.log(err)
+      })
     }, 500)
   }   
   

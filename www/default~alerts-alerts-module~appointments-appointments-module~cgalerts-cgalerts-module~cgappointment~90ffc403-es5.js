@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403"],{
 
 /***/ "./src/app/sqlite-database/database_provider.ts":
 /*!******************************************************!*\
@@ -14,7 +14,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _database_interface__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./database.interface */ "./src/app/sqlite-database/database.interface.ts");
-/* harmony import */ var _database__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _database__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./database */ "./src/app/sqlite-database/database.ts");
+
+
+
 
 
 
@@ -140,33 +146,343 @@ var DataBaseSummaryProvider = /** @class */ (function () {
             });
         });
     };
-    DataBaseSummaryProvider.prototype.getVitalEvents = function (event_type, search, additionType) {
+    DataBaseSummaryProvider.prototype.filterVitalHistory = function (event_type, event_name, from_date, end_date, vital_page_offset) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var checkEvent, sqlSearchEventQuery;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.checkEventType(event_type, search, additionType)];
+                    case 0: return [4 /*yield*/, this.checkEventType(event_type, 'pagefilter', vital_page_offset, from_date, end_date, null, event_name)];
                     case 1:
                         checkEvent = _a.sent();
                         sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
                                 return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
-                                    console.log(data, "vital");
+                                    var events = [];
                                     for (var i = 0; i < data.rows.length; i++) {
-                                        console.log(data.rows.item(i));
+                                        var event_json = null;
+                                        var eventAssetsJson = null;
+                                        if (data.rows.item(i).event_options != null) {
+                                            event_json = JSON.parse(data.rows.item(i).event_options);
+                                        }
+                                        if (data.rows.item(i).event_assets != null) {
+                                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                                        }
+                                        events.push({
+                                            id: data.rows.item(i).id,
+                                            event_id: data.rows.item(i).event_id,
+                                            event_name: data.rows.item(i).event_name,
+                                            description: data.rows.item(i).description,
+                                            value: data.rows.item(i).value,
+                                            event_datetime: data.rows.item(i).event_datetime,
+                                            event_type: data.rows.item(i).event_type,
+                                            event_category: data.rows.item(i).event_category,
+                                            event_assets: eventAssetsJson,
+                                            event_options: event_json,
+                                            user_id: data.rows.item(i).user_id,
+                                            delete1: data.rows.item(i).delete1,
+                                            created_at: data.rows.item(i).created_at,
+                                            updated_at: data.rows.item(i).updated_at
+                                        });
                                     }
+                                    ;
+                                    return { count: data.rows.length, events: events };
                                 });
                             })];
                 }
             });
         });
     };
-    DataBaseSummaryProvider.prototype.checkEventType = function (event, tab, offset) {
+    DataBaseSummaryProvider.prototype.getVitalEvents = function (id, from_date, end_date, event_type, analytics, event_name) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var eventQuery, user_id;
+            var checkEvent, sqlSearchEventQuery;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.checkEventType(event_type, 'filter', 0, from_date, end_date, analytics, event_name)];
+                    case 1:
+                        checkEvent = _a.sent();
+                        sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
+                                return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
+                                    var events = [];
+                                    for (var i = 0; i < data.rows.length; i++) {
+                                        var event_json = null;
+                                        var eventAssetsJson = null;
+                                        if (data.rows.item(i).event_options != null) {
+                                            event_json = JSON.parse(data.rows.item(i).event_options);
+                                        }
+                                        if (data.rows.item(i).event_assets != null) {
+                                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                                        }
+                                        events.push({
+                                            id: data.rows.item(i).id,
+                                            event_id: data.rows.item(i).event_id,
+                                            event_name: data.rows.item(i).event_name,
+                                            description: data.rows.item(i).description,
+                                            value: data.rows.item(i).value,
+                                            event_datetime: data.rows.item(i).event_datetime,
+                                            event_type: data.rows.item(i).event_type,
+                                            event_category: data.rows.item(i).event_category,
+                                            event_assets: eventAssetsJson,
+                                            event_options: event_json,
+                                            user_id: data.rows.item(i).user_id,
+                                            delete1: data.rows.item(i).delete1,
+                                            created_at: data.rows.item(i).created_at,
+                                            updated_at: data.rows.item(i).updated_at
+                                        });
+                                    }
+                                    ;
+                                    return { count: data.rows.length, event_list: events };
+                                });
+                            })];
+                }
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.filterVitalEventNameList = function (id, from_date, end, type) {
+        return this.getVitalEvents(id, from_date, end, type).then(function (response) {
+            var data = response['event_list'];
+            var value = [];
+            var example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (person) { return person['event_name']; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); })).subscribe(function (val) {
+                console.log(val);
+                if (val) {
+                    value.push(val[0]['event_name']);
+                }
+            });
+            return { events: value };
+        });
+    };
+    DataBaseSummaryProvider.prototype.expenseCalculation = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var user_id, sqlUserQuery;
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.databaseService.getuserID()];
+                    case 1:
+                        user_id = _a.sent();
+                        sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE (id='" + user_id + "'");
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
+                                return database.executeSql(sqlUserQuery, []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                    var getUserData, joinMonth, currentDate, y, m, first_month, currentMonth, first_day, fy, fm, no_of_months, sqlCurrentMonthExpQuery, getResponseOfMonthExp, i, sqlCurrentYearExpQuery, getResponseOfYearExp, i;
+                                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                        switch (_a.label) {
+                                            case 0: return [4 /*yield*/, this.currentUserData(data)];
+                                            case 1:
+                                                getUserData = _a.sent();
+                                                joinMonth = getUserData[0].created_at || null;
+                                                currentDate = new Date();
+                                                y = currentDate.getFullYear();
+                                                m = currentDate.getMonth();
+                                                first_month = new Date(y, 0, 31);
+                                                currentMonth = new Date(y, m, 1);
+                                                first_day = new Date(y, 0, 1);
+                                                fy = first_day.getFullYear();
+                                                fm = first_day.getMonth();
+                                                no_of_months = (y * 12 + m) - (fy * 12 + fm);
+                                                if (!(joinMonth != null && joinMonth <= first_month)) return [3 /*break*/, 4];
+                                                sqlCurrentMonthExpQuery = "SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + currentMonth.toJSON() + "') AND DATE('" + currentDate.toJSON() + "')))";
+                                                return [4 /*yield*/, this.expenseCalculateValue(sqlCurrentMonthExpQuery)];
+                                            case 2:
+                                                getResponseOfMonthExp = _a.sent();
+                                                console.log(getResponseOfMonthExp);
+                                                for (i in getResponseOfMonthExp.rows.length) {
+                                                    console.log(getResponseOfMonthExp.rows.item(i));
+                                                }
+                                                sqlCurrentYearExpQuery = "SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + first_day.toJSON() + "') AND DATE('" + currentDate.toJSON() + "')))";
+                                                return [4 /*yield*/, this.expenseCalculateValue(sqlCurrentYearExpQuery)];
+                                            case 3:
+                                                getResponseOfYearExp = _a.sent();
+                                                console.log(getResponseOfYearExp);
+                                                for (i in getResponseOfYearExp.rows.length) {
+                                                    console.log(getResponseOfYearExp.rows.item(i));
+                                                }
+                                                _a.label = 4;
+                                            case 4: return [2 /*return*/, { CurrentMonth: "", Yearly: "", status: "" }];
+                                        }
+                                    });
+                                }); });
+                            })];
+                }
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.expenseCalculateValue = function (query) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
+                        return database.executeSql(query, []).then(function (data) {
+                            return data;
+                        }).catch(function (e) { console.log(e); });
+                    })];
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.expense_cals_chart = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var getAllEventsData, data, value, example;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getAllExpenses()];
+                    case 1:
+                        getAllEventsData = _a.sent();
+                        data = getAllEventsData['event_list'];
+                        value = [];
+                        example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (person) { return person['event_name']; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); })).subscribe(function (val) {
+                            console.log(val);
+                        });
+                        return [2 /*return*/, { Currentmonth: '', Totalyear: '', Year: '' }];
+                }
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.getAllExpenses = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var user_id, sqlSearchEventQuery;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.databaseService.getuserID()];
+                    case 1:
+                        user_id = _a.sent();
+                        sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + (" WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "')");
+                        return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
+                                return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
+                                    var events = [];
+                                    for (var i = 0; i < data.rows.length; i++) {
+                                        var event_json = null;
+                                        var eventAssetsJson = null;
+                                        if (data.rows.item(i).event_options != null) {
+                                            event_json = JSON.parse(data.rows.item(i).event_options);
+                                        }
+                                        if (data.rows.item(i).event_assets != null) {
+                                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                                        }
+                                        events.push({
+                                            id: data.rows.item(i).id,
+                                            event_id: data.rows.item(i).event_id,
+                                            event_name: data.rows.item(i).event_name,
+                                            description: data.rows.item(i).description,
+                                            value: data.rows.item(i).value,
+                                            event_datetime: data.rows.item(i).event_datetime,
+                                            event_type: data.rows.item(i).event_type,
+                                            event_category: data.rows.item(i).event_category,
+                                            event_assets: eventAssetsJson,
+                                            event_options: event_json,
+                                            user_id: data.rows.item(i).user_id,
+                                            delete1: data.rows.item(i).delete1,
+                                            created_at: data.rows.item(i).created_at,
+                                            updated_at: data.rows.item(i).updated_at
+                                        });
+                                    }
+                                    ;
+                                    return { count: data.rows.length, event_list: events };
+                                });
+                            })];
+                }
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.currentUserData = function (data) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var events, i, event_json, eventAssetsJson;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                events = [];
+                for (i = 0; i < data.rows.length; i++) {
+                    event_json = null;
+                    eventAssetsJson = null;
+                    if (data.rows.item(i).event_options != null) {
+                        event_json = JSON.parse(data.rows.item(i).event_options);
+                    }
+                    if (data.rows.item(i).event_assets != null) {
+                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                    }
+                    events.push({
+                        id: data.rows.item(i).id,
+                        event_id: data.rows.item(i).event_id,
+                        event_name: data.rows.item(i).event_name,
+                        description: data.rows.item(i).description,
+                        value: data.rows.item(i).value,
+                        event_datetime: data.rows.item(i).event_datetime,
+                        event_type: data.rows.item(i).event_type,
+                        event_category: data.rows.item(i).event_category,
+                        event_assets: eventAssetsJson,
+                        event_options: event_json,
+                        user_id: data.rows.item(i).user_id,
+                        delete1: data.rows.item(i).delete1,
+                        created_at: data.rows.item(i).created_at,
+                        updated_at: data.rows.item(i).updated_at
+                    });
+                }
+                return [2 /*return*/, events];
+            });
+        });
+    };
+    DataBaseSummaryProvider.prototype.expenseDatefilter = function (id, from_date, end, type) {
+        return this.getVitalEvents(id, from_date, end, type, 'expense').then(function (response) {
+            var data = response['event_list'];
+            var value = [];
+            var example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (person) { return person['event_name']; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); })).subscribe(function (val) {
+                console.log(val);
+                if (val) {
+                    value.push(val[0]['event_name']);
+                }
+            });
+            return { events: value };
+        });
+    };
+    DataBaseSummaryProvider.prototype.ExpenseViewSummary = function (from_date, end, type, event_name, analytics) {
+        return this.getVitalEvents('1', from_date, end, type, analytics, event_name).then(function (response) {
+            var data = response['event_list'];
+            var fromDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(from_date, 'yyyy-MM-dd', 'en-US');
+            var end_date = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(end, 'yyyy-MM-dd', 'en-US');
+            var value = [];
+            var vital = {};
+            var example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (person) { return person['event_name']; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); })).subscribe(function (val) {
+                console.log(val);
+                vital["" + val[0]['event_name']] = val;
+            });
+            return { from_date: fromDate, end_date: end_date, expense: vital };
+        });
+    };
+    DataBaseSummaryProvider.prototype.vitalFilterAnalytics = function (id, data) {
+        var params = data;
+        return this.getVitalEvents(id, params['from_date'], params['end_date'], 'vital', 'analytics', params['event_name']).then(function (response) {
+            var data = response['event_list'];
+            var value = {};
+            var example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (person) { return person['event_name']; }), //,person =>  person.event_category
+            Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) { return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (array) {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(array).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (val) { return Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(val['event_datetime'], 'yyyy-MM-dd', 'en-US'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) {
+                    return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); // return the group values as Arrays
+                }));
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (array) {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(array).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (val) { return val['event_category']; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) {
+                    return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); // return the group values as Arrays
+                }));
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (val) {
+                return { event_name: val[0]['event_name'], date: val[0]['event_datetime'], event_category: val[0]['event_category'], data: val };
+            })).subscribe(function (val) {
+                console.log(val, "test");
+                var event_name = "" + val['event_name'];
+                var date = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(val.date, 'yyyy-MM-dd', 'en-US');
+                var event_category = val.event_category;
+                value["" + event_name]["" + date]["" + event_category] = val['data'];
+            });
+            return value;
+        });
+    };
+    DataBaseSummaryProvider.prototype.checkEventType = function (event, tab, offset, from_date, end_date, analytics, event_name) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var startDate, endDate, eventQuery, event_nameArray, user_id;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log(from_date, end_date);
+                        startDate = from_date.toJSON() || null;
+                        endDate = end_date.toJSON() || null;
+                        event_nameArray = null;
+                        if (event_name != null && event_name.length > 0) {
+                            event_nameArray = event_name.toString();
+                        }
+                        return [4 /*yield*/, this.databaseService.getuserID()];
                     case 1:
                         user_id = _a.sent();
                         //let nowDate = new Date().toJSON()
@@ -179,8 +495,32 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                         else if (event == 'health_diary' || event == 'doc_visit') {
                             return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "') ORDER BY created_at DESC LIMIT 10 OFFSET " + offset];
                         }
-                        if (event == 'vital') {
+                        else if (event == 'vital' && tab == 'New') {
                             return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "') ORDER BY event_datetime DESC"];
+                        }
+                        else if (event == 'vital' && tab == 'filter' && analytics != 'analytics') {
+                            return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
+                        }
+                        else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_name.length != 0) {
+                            return [2 /*return*/, eventQuery = " WHERE (event_name IN ('" + event_nameArray + "') AND event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
+                        }
+                        else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_name.length == 0) {
+                            return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
+                        }
+                        else if (event == 'vital' && tab == 'pagefilter') {
+                            return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC LIMIT 10 OFFSET " + offset];
+                        }
+                        else if (event == 'expense' && analytics == 'expense') {
+                            return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
+                        }
+                        else if (event == 'expense' && analytics == 'view_summary') {
+                            return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
+                        }
+                        else if (event == 'expense' && analytics == 'view_analytics' && event_name.length != 0) {
+                            return [2 /*return*/, eventQuery = " WHERE (event_name IN ('" + event_nameArray + "') AND event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
+                        }
+                        else if (event == 'expense' && analytics == 'view_analytics' && event_name.length == 0) {
+                            return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
                         }
                         else {
                             return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "') ORDER BY event_datetime DESC LIMIT 10 OFFSET " + offset];
@@ -421,8 +761,12 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                 for (var i = 0; i < data1.rows.length; i++) {
                                     if (data1.rows.item(i).email != null) {
                                         var attribute_json = null;
+                                        var user_option_json = null;
                                         if (data1.rows.item(i).user_picture != null) {
                                             attribute_json = JSON.parse(data1.rows.item(i).user_picture);
+                                        }
+                                        if (data1.rows.item(i).user_option != null) {
+                                            user_option_json = JSON.parse(data1.rows.item(i).user_option);
                                         }
                                         careGiverData.push({
                                             id: data1.rows.item(i).id,
@@ -437,6 +781,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                             user_uid: data1.rows.item(i).user_uid,
                                             forgot_password_code: data1.rows.item(i).forgot_password_code,
                                             user_picture: attribute_json,
+                                            user_option: user_option_json,
                                             active_status: data1.rows.item(i).active_status,
                                             role_id: data1.rows.item(i).role_id,
                                             created_at: data1.rows.item(i).created_at,
@@ -505,8 +850,12 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                             return [4 /*yield*/, database.executeSql(sqlUserQuery, []).then(function (data2) {
                                                     for (var i = 0; i < data2.rows.length; i++) {
                                                         var attribute_json = null;
+                                                        var user_option_json = null;
                                                         if (data2.rows.item(i).user_picture != null) {
                                                             attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                                        }
+                                                        if (data2.rows.item(i).user_option != null) {
+                                                            user_option_json = JSON.parse(data2.rows.item(i).user_option);
                                                         }
                                                         userData.push({
                                                             id: data2.rows.item(i).id,
@@ -521,6 +870,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                                             user_uid: data2.rows.item(i).user_uid,
                                                             forgot_password_code: data2.rows.item(i).forgot_password_code,
                                                             user_picture: attribute_json,
+                                                            user_option: user_option_json,
                                                             active_status: data2.rows.item(i).active_status,
                                                             role_id: data2.rows.item(i).role_id,
                                                             created_at: data2.rows.item(i).created_at,
@@ -564,8 +914,12 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                                     for (var i = 0; i < data2.rows.length; i++) {
                                                         if (data2.rows.item(i).email != null) {
                                                             var attribute_json = null;
+                                                            var user_option_json = null;
                                                             if (data2.rows.item(i).user_picture != null) {
                                                                 attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                                            }
+                                                            if (data2.rows.item(i).user_option != null) {
+                                                                user_option_json = JSON.parse(data2.rows.item(i).user_option);
                                                             }
                                                             userData.push({
                                                                 id: data2.rows.item(i).id,
@@ -580,6 +934,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                                                 user_uid: data2.rows.item(i).user_uid,
                                                                 forgot_password_code: data2.rows.item(i).forgot_password_code,
                                                                 user_picture: attribute_json,
+                                                                user_option: user_option_json,
                                                                 active_status: data2.rows.item(i).active_status,
                                                                 role_id: data2.rows.item(i).role_id,
                                                                 created_at: data2.rows.item(i).created_at,
@@ -638,8 +993,12 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                                     for (var i = 0; i < data2.rows.length; i++) {
                                                         if (data2.rows.item(i).email != null) {
                                                             var attribute_json = null;
+                                                            var user_option_json = null;
                                                             if (data2.rows.item(i).user_picture != null) {
                                                                 attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                                            }
+                                                            if (data2.rows.item(i).user_option != null) {
+                                                                user_option_json = JSON.parse(data2.rows.item(i).user_option);
                                                             }
                                                             userData.push({
                                                                 id: data2.rows.item(i).id,
@@ -654,6 +1013,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                                                 user_uid: data2.rows.item(i).user_uid,
                                                                 forgot_password_code: data2.rows.item(i).forgot_password_code,
                                                                 user_picture: attribute_json,
+                                                                user_option: user_option_json,
                                                                 active_status: data2.rows.item(i).active_status,
                                                                 role_id: data2.rows.item(i).role_id,
                                                                 created_at: data2.rows.item(i).created_at,
@@ -753,11 +1113,11 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     };
     DataBaseSummaryProvider.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
-        { type: _database__WEBPACK_IMPORTED_MODULE_4__["DatabaseProvider"] }
+        { type: _database__WEBPACK_IMPORTED_MODULE_7__["DatabaseProvider"] }
     ]; };
     DataBaseSummaryProvider = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _database__WEBPACK_IMPORTED_MODULE_4__["DatabaseProvider"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _database__WEBPACK_IMPORTED_MODULE_7__["DatabaseProvider"]])
     ], DataBaseSummaryProvider);
     return DataBaseSummaryProvider;
 }());
@@ -767,4 +1127,4 @@ var DataBaseSummaryProvider = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52-es5.js.map
+//# sourceMappingURL=default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403-es5.js.map

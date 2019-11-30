@@ -15,6 +15,7 @@ import { viewSummaryPage } from './view-summary/view-summary.page';
 import { DatePipe } from '@angular/common';
 import { CalendarModule } from 'ion2-calendar';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 const routes: Routes = [
   {
@@ -49,6 +50,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [ExpensesPage,viewAnalyticsPage,addExpensesPage,viewSummaryPage, FiltersPage],
-  providers: [DatePipe,Toast]
+  providers: [DatePipe,Toast,DataBaseSummaryProvider]
 })
 export class ExpensesPageModule {}

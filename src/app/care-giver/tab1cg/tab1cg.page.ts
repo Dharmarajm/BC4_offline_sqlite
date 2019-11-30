@@ -73,7 +73,12 @@ export class Tab1cPage {
           this.initialLogo = this.pic['patient'][index].name.charAt(0);
           this.caregiverImageStatus=false;
         }
-      }else{
+      }
+      //else if(this.pic['user_info']['user_option']!=null){
+      //   let source = this.webview.convertFileSrc(this.pic['user_info']['user_option']['localURL']); 
+      //   localURL = source;
+      //  }
+      else{
         this.profile_pic=this.pic['user_info']['user_picture']['url'];
         this.initialLogo=userInfo;
         this.caregiverImageStatus=true;

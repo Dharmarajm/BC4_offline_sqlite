@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403"],{
 
 /***/ "./src/app/sqlite-database/database_provider.ts":
 /*!******************************************************!*\
@@ -14,7 +14,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _database_interface__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./database.interface */ "./src/app/sqlite-database/database.interface.ts");
-/* harmony import */ var _database__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./database */ "./src/app/sqlite-database/database.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _database__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./database */ "./src/app/sqlite-database/database.ts");
+
+
+
 
 
 
@@ -126,23 +132,287 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             });
         });
     }
-    getVitalEvents(event_type, search, additionType) {
+    filterVitalHistory(event_type, event_name, from_date, end_date, vital_page_offset) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            let checkEvent = yield this.checkEventType(event_type, search, additionType);
+            let checkEvent = yield this.checkEventType(event_type, 'pagefilter', vital_page_offset, from_date, end_date, null, event_name);
             let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {
-                    console.log(data, "vital");
+                    let events = [];
                     for (let i = 0; i < data.rows.length; i++) {
-                        console.log(data.rows.item(i));
+                        let event_json = null;
+                        let eventAssetsJson = null;
+                        if (data.rows.item(i).event_options != null) {
+                            event_json = JSON.parse(data.rows.item(i).event_options);
+                        }
+                        if (data.rows.item(i).event_assets != null) {
+                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                        }
+                        events.push({
+                            id: data.rows.item(i).id,
+                            event_id: data.rows.item(i).event_id,
+                            event_name: data.rows.item(i).event_name,
+                            description: data.rows.item(i).description,
+                            value: data.rows.item(i).value,
+                            event_datetime: data.rows.item(i).event_datetime,
+                            event_type: data.rows.item(i).event_type,
+                            event_category: data.rows.item(i).event_category,
+                            event_assets: eventAssetsJson,
+                            event_options: event_json,
+                            user_id: data.rows.item(i).user_id,
+                            delete1: data.rows.item(i).delete1,
+                            created_at: data.rows.item(i).created_at,
+                            updated_at: data.rows.item(i).updated_at
+                        });
                     }
+                    ;
+                    return { count: data.rows.length, events: events };
                 });
             });
         });
     }
-    checkEventType(event, tab, offset) {
+    getVitalEvents(id, from_date, end_date, event_type, analytics, event_name) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let checkEvent = yield this.checkEventType(event_type, 'filter', 0, from_date, end_date, analytics, event_name);
+            let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
+            return this.databaseService.getDatabase().then(database => {
+                return database.executeSql(sqlSearchEventQuery, []).then((data) => {
+                    let events = [];
+                    for (let i = 0; i < data.rows.length; i++) {
+                        let event_json = null;
+                        let eventAssetsJson = null;
+                        if (data.rows.item(i).event_options != null) {
+                            event_json = JSON.parse(data.rows.item(i).event_options);
+                        }
+                        if (data.rows.item(i).event_assets != null) {
+                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                        }
+                        events.push({
+                            id: data.rows.item(i).id,
+                            event_id: data.rows.item(i).event_id,
+                            event_name: data.rows.item(i).event_name,
+                            description: data.rows.item(i).description,
+                            value: data.rows.item(i).value,
+                            event_datetime: data.rows.item(i).event_datetime,
+                            event_type: data.rows.item(i).event_type,
+                            event_category: data.rows.item(i).event_category,
+                            event_assets: eventAssetsJson,
+                            event_options: event_json,
+                            user_id: data.rows.item(i).user_id,
+                            delete1: data.rows.item(i).delete1,
+                            created_at: data.rows.item(i).created_at,
+                            updated_at: data.rows.item(i).updated_at
+                        });
+                    }
+                    ;
+                    return { count: data.rows.length, event_list: events };
+                });
+            });
+        });
+    }
+    filterVitalEventNameList(id, from_date, end, type) {
+        return this.getVitalEvents(id, from_date, end, type).then(response => {
+            let data = response['event_list'];
+            let value = [];
+            const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => person['event_name']), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))).subscribe(val => {
+                console.log(val);
+                if (val) {
+                    value.push(val[0]['event_name']);
+                }
+            });
+            return { events: value };
+        });
+    }
+    expenseCalculation() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let user_id = yield this.databaseService.getuserID();
+            let sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (id='${user_id}'`;
+            return this.databaseService.getDatabase().then(database => {
+                return database.executeSql(sqlUserQuery, []).then((data) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                    let getUserData = yield this.currentUserData(data);
+                    let joinMonth = getUserData[0].created_at || null;
+                    let currentDate = new Date();
+                    var y = currentDate.getFullYear();
+                    var m = currentDate.getMonth();
+                    let first_month = new Date(y, 0, 31);
+                    let currentMonth = new Date(y, m, 1);
+                    let first_day = new Date(y, 0, 1);
+                    var fy = first_day.getFullYear();
+                    var fm = first_day.getMonth();
+                    let no_of_months = (y * 12 + m) - (fy * 12 + fm);
+                    if (joinMonth != null && joinMonth <= first_month) {
+                        let sqlCurrentMonthExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${currentMonth.toJSON()}') AND DATE('${currentDate.toJSON()}')))`;
+                        let getResponseOfMonthExp = yield this.expenseCalculateValue(sqlCurrentMonthExpQuery);
+                        console.log(getResponseOfMonthExp);
+                        for (var i in getResponseOfMonthExp.rows.length) {
+                            console.log(getResponseOfMonthExp.rows.item(i));
+                        }
+                        let sqlCurrentYearExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${first_day.toJSON()}') AND DATE('${currentDate.toJSON()}')))`;
+                        let getResponseOfYearExp = yield this.expenseCalculateValue(sqlCurrentYearExpQuery);
+                        console.log(getResponseOfYearExp);
+                        for (var i in getResponseOfYearExp.rows.length) {
+                            console.log(getResponseOfYearExp.rows.item(i));
+                        }
+                    }
+                    return { CurrentMonth: "", Yearly: "", status: "" };
+                }));
+            });
+        });
+    }
+    expenseCalculateValue(query) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            return this.databaseService.getDatabase().then(database => {
+                return database.executeSql(query, []).then((data) => {
+                    return data;
+                }).catch(e => { console.log(e); });
+            });
+        });
+    }
+    expense_cals_chart() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let getAllEventsData = yield this.getAllExpenses();
+            let data = getAllEventsData['event_list'];
+            let value = [];
+            const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => person['event_name']), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))).subscribe(val => {
+                console.log(val);
+            });
+            return { Currentmonth: '', Totalyear: '', Year: '' };
+        });
+    }
+    getAllExpenses() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let user_id = yield this.databaseService.getuserID();
+            let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}')`;
+            return this.databaseService.getDatabase().then(database => {
+                return database.executeSql(sqlSearchEventQuery, []).then((data) => {
+                    let events = [];
+                    for (let i = 0; i < data.rows.length; i++) {
+                        let event_json = null;
+                        let eventAssetsJson = null;
+                        if (data.rows.item(i).event_options != null) {
+                            event_json = JSON.parse(data.rows.item(i).event_options);
+                        }
+                        if (data.rows.item(i).event_assets != null) {
+                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                        }
+                        events.push({
+                            id: data.rows.item(i).id,
+                            event_id: data.rows.item(i).event_id,
+                            event_name: data.rows.item(i).event_name,
+                            description: data.rows.item(i).description,
+                            value: data.rows.item(i).value,
+                            event_datetime: data.rows.item(i).event_datetime,
+                            event_type: data.rows.item(i).event_type,
+                            event_category: data.rows.item(i).event_category,
+                            event_assets: eventAssetsJson,
+                            event_options: event_json,
+                            user_id: data.rows.item(i).user_id,
+                            delete1: data.rows.item(i).delete1,
+                            created_at: data.rows.item(i).created_at,
+                            updated_at: data.rows.item(i).updated_at
+                        });
+                    }
+                    ;
+                    return { count: data.rows.length, event_list: events };
+                });
+            });
+        });
+    }
+    currentUserData(data) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let events = [];
+            for (let i = 0; i < data.rows.length; i++) {
+                let event_json = null;
+                let eventAssetsJson = null;
+                if (data.rows.item(i).event_options != null) {
+                    event_json = JSON.parse(data.rows.item(i).event_options);
+                }
+                if (data.rows.item(i).event_assets != null) {
+                    eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
+                }
+                events.push({
+                    id: data.rows.item(i).id,
+                    event_id: data.rows.item(i).event_id,
+                    event_name: data.rows.item(i).event_name,
+                    description: data.rows.item(i).description,
+                    value: data.rows.item(i).value,
+                    event_datetime: data.rows.item(i).event_datetime,
+                    event_type: data.rows.item(i).event_type,
+                    event_category: data.rows.item(i).event_category,
+                    event_assets: eventAssetsJson,
+                    event_options: event_json,
+                    user_id: data.rows.item(i).user_id,
+                    delete1: data.rows.item(i).delete1,
+                    created_at: data.rows.item(i).created_at,
+                    updated_at: data.rows.item(i).updated_at
+                });
+            }
+            return events;
+        });
+    }
+    expenseDatefilter(id, from_date, end, type) {
+        return this.getVitalEvents(id, from_date, end, type, 'expense').then(response => {
+            let data = response['event_list'];
+            let value = [];
+            const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => person['event_name']), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))).subscribe(val => {
+                console.log(val);
+                if (val) {
+                    value.push(val[0]['event_name']);
+                }
+            });
+            return { events: value };
+        });
+    }
+    ExpenseViewSummary(from_date, end, type, event_name, analytics) {
+        return this.getVitalEvents('1', from_date, end, type, analytics, event_name).then(response => {
+            let data = response['event_list'];
+            let fromDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(from_date, 'yyyy-MM-dd', 'en-US');
+            let end_date = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(end, 'yyyy-MM-dd', 'en-US');
+            let value = [];
+            let vital = {};
+            const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => person['event_name']), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))).subscribe(val => {
+                console.log(val);
+                vital[`${val[0]['event_name']}`] = val;
+            });
+            return { from_date: fromDate, end_date: end_date, expense: vital };
+        });
+    }
+    vitalFilterAnalytics(id, data) {
+        let params = data;
+        return this.getVitalEvents(id, params['from_date'], params['end_date'], 'vital', 'analytics', params['event_name']).then(response => {
+            let data = response['event_list'];
+            let value = {};
+            const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => person['event_name']), //,person =>  person.event_category
+            Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])())), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])((array) => {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(array).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(val => Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(val['event_datetime'], 'yyyy-MM-dd', 'en-US')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => {
+                    return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); // return the group values as Arrays
+                }));
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])((array) => {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(array).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(val => val['event_category']), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => {
+                    return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); // return the group values as Arrays
+                }));
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])((val) => {
+                return { event_name: val[0]['event_name'], date: val[0]['event_datetime'], event_category: val[0]['event_category'], data: val };
+            })).subscribe(val => {
+                console.log(val, "test");
+                let event_name = `${val['event_name']}`;
+                let date = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(val.date, 'yyyy-MM-dd', 'en-US');
+                let event_category = val.event_category;
+                value[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
+            });
+            return value;
+        });
+    }
+    checkEventType(event, tab, offset, from_date, end_date, analytics, event_name) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            console.log(from_date, end_date);
+            let startDate = from_date.toJSON() || null;
+            let endDate = end_date.toJSON() || null;
             let eventQuery;
+            let event_nameArray = null;
+            if (event_name != null && event_name.length > 0) {
+                event_nameArray = event_name.toString();
+            }
             let user_id = yield this.databaseService.getuserID();
             //let nowDate = new Date().toJSON()
             if (event == 'appointment' && tab == 'New') {
@@ -154,8 +424,32 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             else if (event == 'health_diary' || event == 'doc_visit') {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET ${offset}`;
             }
-            if (event == 'vital') {
+            else if (event == 'vital' && tab == 'New') {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC`;
+            }
+            else if (event == 'vital' && tab == 'filter' && analytics != 'analytics') {
+                return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
+            }
+            else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_name.length != 0) {
+                return eventQuery = ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
+            }
+            else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_name.length == 0) {
+                return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
+            }
+            else if (event == 'vital' && tab == 'pagefilter') {
+                return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`;
+            }
+            else if (event == 'expense' && analytics == 'expense') {
+                return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
+            }
+            else if (event == 'expense' && analytics == 'view_summary') {
+                return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
+            }
+            else if (event == 'expense' && analytics == 'view_analytics' && event_name.length != 0) {
+                return eventQuery = ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
+            }
+            else if (event == 'expense' && analytics == 'view_analytics' && event_name.length == 0) {
+                return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
             }
             else {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`;
@@ -351,8 +645,12 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                 for (let i = 0; i < data1.rows.length; i++) {
                     if (data1.rows.item(i).email != null) {
                         let attribute_json = null;
+                        let user_option_json = null;
                         if (data1.rows.item(i).user_picture != null) {
                             attribute_json = JSON.parse(data1.rows.item(i).user_picture);
+                        }
+                        if (data1.rows.item(i).user_option != null) {
+                            user_option_json = JSON.parse(data1.rows.item(i).user_option);
                         }
                         careGiverData.push({
                             id: data1.rows.item(i).id,
@@ -367,6 +665,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                             user_uid: data1.rows.item(i).user_uid,
                             forgot_password_code: data1.rows.item(i).forgot_password_code,
                             user_picture: attribute_json,
+                            user_option: user_option_json,
                             active_status: data1.rows.item(i).active_status,
                             role_id: data1.rows.item(i).role_id,
                             created_at: data1.rows.item(i).created_at,
@@ -412,8 +711,12 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                 yield database.executeSql(sqlUserQuery, []).then((data2) => {
                     for (let i = 0; i < data2.rows.length; i++) {
                         let attribute_json = null;
+                        let user_option_json = null;
                         if (data2.rows.item(i).user_picture != null) {
                             attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                        }
+                        if (data2.rows.item(i).user_option != null) {
+                            user_option_json = JSON.parse(data2.rows.item(i).user_option);
                         }
                         userData.push({
                             id: data2.rows.item(i).id,
@@ -428,6 +731,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                             user_uid: data2.rows.item(i).user_uid,
                             forgot_password_code: data2.rows.item(i).forgot_password_code,
                             user_picture: attribute_json,
+                            user_option: user_option_json,
                             active_status: data2.rows.item(i).active_status,
                             role_id: data2.rows.item(i).role_id,
                             created_at: data2.rows.item(i).created_at,
@@ -455,8 +759,12 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     for (let i = 0; i < data2.rows.length; i++) {
                         if (data2.rows.item(i).email != null) {
                             let attribute_json = null;
+                            let user_option_json = null;
                             if (data2.rows.item(i).user_picture != null) {
                                 attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                            }
+                            if (data2.rows.item(i).user_option != null) {
+                                user_option_json = JSON.parse(data2.rows.item(i).user_option);
                             }
                             userData.push({
                                 id: data2.rows.item(i).id,
@@ -471,6 +779,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                                 user_uid: data2.rows.item(i).user_uid,
                                 forgot_password_code: data2.rows.item(i).forgot_password_code,
                                 user_picture: attribute_json,
+                                user_option: user_option_json,
                                 active_status: data2.rows.item(i).active_status,
                                 role_id: data2.rows.item(i).role_id,
                                 created_at: data2.rows.item(i).created_at,
@@ -502,8 +811,12 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     for (let i = 0; i < data2.rows.length; i++) {
                         if (data2.rows.item(i).email != null) {
                             let attribute_json = null;
+                            let user_option_json = null;
                             if (data2.rows.item(i).user_picture != null) {
                                 attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                            }
+                            if (data2.rows.item(i).user_option != null) {
+                                user_option_json = JSON.parse(data2.rows.item(i).user_option);
                             }
                             userData.push({
                                 id: data2.rows.item(i).id,
@@ -518,6 +831,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                                 user_uid: data2.rows.item(i).user_uid,
                                 forgot_password_code: data2.rows.item(i).forgot_password_code,
                                 user_picture: attribute_json,
+                                user_option: user_option_json,
                                 active_status: data2.rows.item(i).active_status,
                                 role_id: data2.rows.item(i).role_id,
                                 created_at: data2.rows.item(i).created_at,
@@ -596,11 +910,11 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
 };
 DataBaseSummaryProvider.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
-    { type: _database__WEBPACK_IMPORTED_MODULE_4__["DatabaseProvider"] }
+    { type: _database__WEBPACK_IMPORTED_MODULE_7__["DatabaseProvider"] }
 ];
 DataBaseSummaryProvider = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _database__WEBPACK_IMPORTED_MODULE_4__["DatabaseProvider"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _database__WEBPACK_IMPORTED_MODULE_7__["DatabaseProvider"]])
 ], DataBaseSummaryProvider);
 
 
@@ -608,4 +922,4 @@ DataBaseSummaryProvider = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /***/ })
 
 }]);
-//# sourceMappingURL=default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52-es2015.js.map
+//# sourceMappingURL=default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403-es2015.js.map

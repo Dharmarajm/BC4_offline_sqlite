@@ -452,6 +452,7 @@ async addconfirmation(){
           // });
           
           this.database.createAnVitalEvent(this.vital_post).then((res)=>{
+            console.log(res)
             this.Progress=false;  
             //this.vital_details=res;
             this.presentAlert();  

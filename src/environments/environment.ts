@@ -4,12 +4,12 @@
 
 export const environment = {
     production: false,
-    apiUrl: "http://192.168.1.237:4020/",
-   ImageUrl: "http://192.168.1.237:4020"
+   // apiUrl: "http://192.168.1.237:4020/",
+   //ImageUrl: "http://192.168.1.237:4020"
   // apiUrl: "http://13.235.142.131/",
   // ImageUrl: "http://13.235.142.131"
-   //apiUrl: "https://demo.bc4.insightmailer.com/",
-   //ImageUrl: "https://demo.bc4.insightmailer.com"
+   apiUrl: "https://demo.bc4.insightmailer.com/",
+   ImageUrl: "https://demo.bc4.insightmailer.com"
 };
   
 /*

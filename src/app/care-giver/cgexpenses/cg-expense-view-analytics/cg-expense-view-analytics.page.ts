@@ -7,6 +7,8 @@ import { DatePipe } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 import { CgExpenseFiltersPage } from '../cg-expense-filters/cg-expense-filters.page';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Toast } from '@ionic-native/toast/ngx';
+import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
 
 @Component({
   selector: 'app-cg-expense-view-analytics',
@@ -22,39 +24,45 @@ export class CgExpenseAnalyticsPage {
   loader:boolean=false;
   firstDay:any;
   date:any;
-  constructor(public modalController:ModalController, public service: careGiverService, public datepipe:DatePipe, private statusBar: StatusBar) { }
+  constructor(private toast: Toast,public modalController:ModalController, public service: careGiverService, public datepipe:DatePipe, private statusBar: StatusBar,private databaseSummary: DataBaseSummaryProvider) { 
+    this.filterModal();
+  }
 
   ngOnInit() {
   }
 
 ionViewWillEnter() {
-
-      this.date = new Date();
-      console.log(this.date)
-      this.firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
-      this.loader=true;
+      // this.date = new Date();
+      // this.firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
+      // this.loader=true;
       this.statusBar.backgroundColorByHexString('#ffd32c');
       this.tabBar = document.getElementById('myTabBar1')
       //this.tabBar.classList.remove("tab-selected");
       this.tabBar.style.display = 'none';
       this.user_id = localStorage.getItem("user_id");
-      this.service.chartrepeat(this.user_id).subscribe(res=>{
-          
-       this.chartres =res;
-       console.log(this.chartres,'chart')
-       this.chart_keys = Object.keys(this.chartres);
-       setTimeout(() => {
-        this.loader=false;
-       },1500)
-       setTimeout(() => {
-        for(let i of this.chart_keys){
-          this.charts(i,this.chartres[i]);
-        }
-        
-       }, 2000); 
-      });
+      // this.service.chartrepeat(this.user_id).subscribe(res=>{          
+      //  this.chartres =res;
+      //  console.log(this.chartres,'chart')
+      //  this.chart_keys = Object.keys(this.chartres);
+      //  setTimeout(() => {
+      //   this.loader=false;
+      //  },1500)
+      //  setTimeout(() => {
+      //   for(let i of this.chart_keys){
+      //     this.charts(i,this.chartres[i]);
+      //   }        
+      //  }, 2000); 
+      // });
 }
-
+datetoast(){
+  this.presentToast('Use filter to get specific data')   
+}
+async presentToast(message: string) {
+  this.toast.show(message, '4000', 'center').subscribe(
+    toast => { 
+      console.log(toast); 
+    });
+}
 charts(name: string,value){
   console.log(value)
   let xaxis_value = [];
@@ -139,21 +147,38 @@ async filterModal(){
         if(data['data'] != undefined){
           this.loader=true;
         data['event_type']='expense'
-        this.service.filterChart(data['data']).subscribe(res=>{         
-              this.chartres =res;
-              this.date=this.chartres.end_date;
-              this.firstDay=this.chartres.from_date;
-              this.chart_keys = Object.keys(this.chartres.expense); 
-              console.log(this.chart_keys)
-              setTimeout(() => {
-               this.loader=false;
-              },1500)
-              setTimeout(() => {
-               for(let i of this.chart_keys){         
-                 this.charts(i,this.chartres.expense[i]);
-               }
+        // this.service.filterChart(data['data']).subscribe(res=>{         
+        //       this.chartres =res;
+        //       this.date=this.chartres.end_date;
+        //       this.firstDay=this.chartres.from_date;
+        //       this.chart_keys = Object.keys(this.chartres.expense); 
+        //       console.log(this.chart_keys)
+        //       setTimeout(() => {
+        //        this.loader=false;
+        //       },1500)
+        //       setTimeout(() => {
+        //        for(let i of this.chart_keys){         
+        //          this.charts(i,this.chartres.expense[i]);
+        //        }
                
-              }, 2000); 
+        //       }, 2000); 
+        // })
+
+        this.databaseSummary.ExpenseViewSummary(data['from_date'],data['end_date'],'expense',data['event_name'],'view_analytics').then((res)=>{
+          this.chartres =res;
+          this.date=this.chartres.end_date;
+          this.firstDay=this.chartres.from_date;
+          this.chart_keys = Object.keys(this.chartres.expense); 
+          console.log(this.chart_keys)
+          setTimeout(() => {
+            this.loader=false;
+          },1500)
+          setTimeout(() => {
+            for(let i of this.chart_keys){         
+              this.charts(i,this.chartres.expense[i]);
+            }
+            
+          }, 2000); 
         })
       }
     });

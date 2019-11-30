@@ -107,6 +107,7 @@ export interface users {
     user_uid: string;
     forgot_password_code: string;
     user_picture: any;
+    user_option:any;
     active_status: boolean;
     role_id: number;
     created_at: Date;

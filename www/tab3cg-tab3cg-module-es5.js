@@ -636,6 +636,10 @@ var Tab3cPage = /** @class */ (function () {
                     globalURL = _this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);
                 }
             }
+            //else if(this.pic['user_info']['user_option']!=null){
+            //   let source = this.webview.convertFileSrc(this.pic['user_info']['user_option']['localURL']); 
+            //   localURL = source;
+            //  }
             else {
                 var source = _this.webview.convertFileSrc(_this.pic['user_info']['user_picture']['localURL']);
                 localURL = source;

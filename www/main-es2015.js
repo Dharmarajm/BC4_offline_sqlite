@@ -11,8 +11,8 @@ var map = {
 	"../alerts/alerts.module": [
 		"./src/app/self-care/alerts/alerts.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
@@ -22,32 +22,32 @@ var map = {
 	"../appointments/appointments.module": [
 		"./src/app/self-care/appointments/appointments.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"common",
 		"appointments-appointments-module"
 	],
 	"../cgalerts/cgalerts.module": [
 		"./src/app/care-giver/cgalerts/cgalerts.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"common",
 		"cgalerts-cgalerts-module"
 	],
 	"../cgappointments/cgappointments.module": [
 		"./src/app/care-giver/cgappointments/cgappointments.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"common",
 		"cgappointments-cgappointments-module"
 	],
 	"../cgdoc-visit/cgdoc-visit.module": [
 		"./src/app/care-giver/cgdoc-visit/cgdoc-visit.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~cgdoc-visit-cgdoc-visit-module~cgexpenses-cgexpenses-module~cgvitals-cgvitals-module~doc-vis~b671623b",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
@@ -58,6 +58,8 @@ var map = {
 	"../cgexpenses/cgexpenses.module": [
 		"./src/app/care-giver/cgexpenses/cgexpenses.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~cgdoc-visit-cgdoc-visit-module~cgexpenses-cgexpenses-module~cgvitals-cgvitals-module~doc-vis~b671623b",
 		"default~cgexpenses-cgexpenses-module~expenses-expenses-module",
 		"common",
@@ -66,8 +68,8 @@ var map = {
 	"../cghealth-diary/cghealth-diary.module": [
 		"./src/app/care-giver/cghealth-diary/cghealth-diary.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~f1348979",
@@ -77,8 +79,8 @@ var map = {
 	"../cgprescriptions/cgprescriptions.module": [
 		"./src/app/care-giver/cgprescriptions/cgprescriptions.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"common",
@@ -87,8 +89,8 @@ var map = {
 	"../cgreports/cgreports.module": [
 		"./src/app/care-giver/cgreports/cgreports.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"common",
@@ -97,6 +99,8 @@ var map = {
 	"../cgvitals/cgvitals.module": [
 		"./src/app/care-giver/cgvitals/cgvitals.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~cgdoc-visit-cgdoc-visit-module~cgexpenses-cgexpenses-module~cgvitals-cgvitals-module~doc-vis~b671623b",
 		"common",
 		"cgvitals-cgvitals-module"
@@ -104,8 +108,8 @@ var map = {
 	"../doc-visits/doc-visits.module": [
 		"./src/app/self-care/doc-visits/doc-visits.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~cgdoc-visit-cgdoc-visit-module~cgexpenses-cgexpenses-module~cgvitals-cgvitals-module~doc-vis~b671623b",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
@@ -116,8 +120,8 @@ var map = {
 	"../expenses/expenses.module": [
 		"./src/app/self-care/expenses/expenses.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~cgdoc-visit-cgdoc-visit-module~cgexpenses-cgexpenses-module~cgvitals-cgvitals-module~doc-vis~b671623b",
 		"default~cgexpenses-cgexpenses-module~expenses-expenses-module",
 		"common",
@@ -126,8 +130,8 @@ var map = {
 	"../health-diary/health-diary.module": [
 		"./src/app/self-care/health-diary/health-diary.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~f1348979",
@@ -137,8 +141,8 @@ var map = {
 	"../prescriptions/prescriptions.module": [
 		"./src/app/self-care/prescriptions/prescriptions.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
@@ -148,8 +152,8 @@ var map = {
 	"../reports/reports.module": [
 		"./src/app/self-care/reports/reports.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
@@ -158,8 +162,8 @@ var map = {
 	],
 	"../tab1/tab1.module": [
 		"./src/app/self-care/tab1/tab1.module.ts",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"common",
@@ -167,8 +171,8 @@ var map = {
 	],
 	"../tab1cg/tab1cg.module": [
 		"./src/app/care-giver/tab1cg/tab1cg.module.ts",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~doc-visits-doc-visits-mo~79562495",
 		"common",
@@ -177,24 +181,24 @@ var map = {
 	"../tab2/tab2.module": [
 		"./src/app/self-care/tab2/tab2.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"common",
 		"tab2-tab2-module"
 	],
 	"../tab2cg/tab2cg.module": [
 		"./src/app/care-giver/tab2cg/tab2cg.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"common",
 		"tab2cg-tab2cg-module"
 	],
 	"../tab3/tab3.module": [
 		"./src/app/self-care/tab3/tab3.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
@@ -205,8 +209,8 @@ var map = {
 	"../tab3cg/tab3cg.module": [
 		"./src/app/care-giver/tab3cg/tab3cg.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05",
 		"default~alerts-alerts-module~cgprescriptions-cgprescriptions-module~cgreports-cgreports-module~presc~218066a3",
 		"default~alerts-alerts-module~prescriptions-prescriptions-module~reports-reports-module~tab3-tab3-mod~e34d9e3b",
@@ -217,8 +221,8 @@ var map = {
 	"../vitals/vitals.module": [
 		"./src/app/self-care/vitals/vitals.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
-		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~993bfd52",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
+		"default~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-module~cgappointment~90ffc403",
 		"default~cgdoc-visit-cgdoc-visit-module~cgexpenses-cgexpenses-module~cgvitals-cgvitals-module~doc-vis~b671623b",
 		"common",
 		"vitals-vitals-module"
@@ -226,7 +230,7 @@ var map = {
 	"./about/about.module": [
 		"./src/app/self-care/tab2/about/about.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
 		"common",
 		"about-about-module"
 	],
@@ -237,7 +241,7 @@ var map = {
 	"./contact/contact.module": [
 		"./src/app/self-care/tab2/contact/contact.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
 		"common",
 		"contact-contact-module"
 	],
@@ -260,7 +264,7 @@ var map = {
 	"./health/health.module": [
 		"./src/app/self-care/tab2/health/health.module.ts",
 		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~a61761e0",
-		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~c5e54970",
+		"default~about-about-module~alerts-alerts-module~appointments-appointments-module~cgalerts-cgalerts-m~bb4df914",
 		"common",
 		"health-health-module"
 	],
@@ -825,7 +829,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
 /* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
 /* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 
 
 
@@ -839,6 +845,9 @@ __webpack_require__.r(__webpack_exports__);
 
 //import { Gesture } from '@ionic/angular/gestures/gesture';
 // import { Keyboard } from '@ionic-native/keyboard/ngx';
+
+
+
 
 
 
@@ -862,6 +871,7 @@ let AppComponent = class AppComponent {
         this.localNotifications = localNotifications;
         //public unsubscribeBackEvent: any;
         this.counter = 0;
+        this.test = {};
         this.initializeBackButtonCustomHandler();
         this.initializeApp();
         this.statusBar.backgroundColorByHexString('#483df6');
@@ -872,6 +882,245 @@ let AppComponent = class AppComponent {
         // this.getAllEventsList().subscribe((responseList)=>{
         //   console.log(responseList)
         //  })
+        //this.getUserIdFromCareGiver();
+        this.groupBy();
+    }
+    // getPatientsList(){
+    //   let response1 = this.http.get(`users/patient_list`);
+    //   return forkJoin([response1]);
+    // }
+    // getUserIdFromCareGiver(){
+    //    this.getPatientsList().subscribe((responseList)=>{
+    //     this.patientList = responseList;
+    //     let userIds = []
+    //     for(let i in this.patientList[0]['patient']){
+    //       alert(i)
+    //       userIds.push(this.patientList[0]['patient'][i]['id'])  
+    //       console.log(userIds)
+    //     }
+    //     console.log(userIds)
+    //   })
+    // }
+    groupBy(data) {
+        data = [{
+                id: 1,
+                event_id: 1,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "6-9 pm",
+                event_options: { value1: "10" },
+                event_name: "Oxygen Saturation",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }, {
+                id: 11,
+                event_id: 11,
+                created_at: "2019-11-28T05:18:13.345Z",
+                updated_at: "2019-11-27T04:51:36.551Z",
+                description: "test",
+                event_category: "6-9 pm",
+                event_options: { value1: "10" },
+                event_name: "Oxygen Saturation",
+                event_datetime: "2019-11-27T05:18:13.345Z",
+                value: 10
+            }, {
+                id: 2,
+                event_id: 2,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "Fasting",
+                event_options: { value1: "10", value2: "20" },
+                event_name: "Blood Glucose",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }, {
+                id: 3,
+                event_id: 3,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "12-3 pm",
+                event_options: { value1: "10" },
+                event_name: "Oxygen Saturation",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }, {
+                id: 4,
+                event_id: 4,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "Fasting",
+                event_options: { value1: "20", value2: "30" },
+                event_name: "Blood Glucose",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }, {
+                id: 5,
+                event_id: 5,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "Fasting",
+                event_options: { value1: "20", value2: "30" },
+                event_name: "Blood Glucose",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }, {
+                id: 6,
+                event_id: 6,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "Fasting",
+                event_options: { value1: "20", value2: "30" },
+                event_name: "Blood Glucose",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }, {
+                id: 7,
+                event_id: 7,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "Fasting",
+                event_options: { value1: "20", value2: "30" },
+                event_name: "Blood Glucose",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }, {
+                id: 8,
+                event_id: 8,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "Fasting",
+                event_options: { value1: "20", value2: "30" },
+                event_name: "Blood Glucose",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }, {
+                id: 9,
+                event_id: 9,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "Fasting",
+                event_options: { value1: "20", value2: "30" },
+                event_name: "Blood Glucose",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }, {
+                id: 10,
+                event_id: 10,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "Fasting",
+                event_options: { value1: "20", value2: "30" },
+                event_name: "Blood Glucose",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }, {
+                id: 11,
+                event_id: 11,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "Fasting",
+                event_options: { value1: "20", value2: "30" },
+                event_name: "Blood Glucose",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }, {
+                id: 12,
+                event_id: 12,
+                created_at: "2019-11-28T04:51:36.551Z",
+                updated_at: "2019-11-28T04:51:36.551Z",
+                description: "test",
+                event_category: "Fasting",
+                event_options: { value1: "20", value2: "30" },
+                event_name: "Blood Glucose",
+                event_datetime: "2019-11-28T04:51:36.551Z",
+                value: 10
+            }];
+        let records = data.map(item => ({
+            id: item.id,
+            event_id: item.event_id,
+            created_at: item.created_at,
+            description: item.description,
+            event_category: item.event_category,
+            event_assets: item.event_assets,
+            event_options: item.event_options,
+            event_name: item.event_name,
+            event_datetime: item.event_datetime,
+            value: item.value,
+            event_type: item.event_type,
+            user_id: item.user_id
+        }));
+        //   { "body_temperature":{
+        //        "12-01-15":{
+        //          "6-9pm":[data]
+        //        }   
+        //     }
+        // }
+        // const example = from(records).pipe(
+        //   groupBy(person =>  person.event_name),  //,person =>  person.event_category
+        //   mergeMap(group => group.pipe(toArray())),
+        //   mergeMap((array) => {// Take each from above array and group each array by manDate
+        //     return from(array).pipe(groupBy(
+        //       val => formatDate(val.event_datetime, 'yyyy-MM-dd', 'en-US'),
+        //       ),
+        //       mergeMap(group => {
+        //         return group.pipe(toArray()); // return the group values as Arrays
+        //       })
+        //     );
+        //   }),
+        //   mergeMap((array) => {// Take each from above array and group each array by manDate
+        //     return from(array).pipe(groupBy(
+        //       val => val.event_category,
+        //       ),
+        //       mergeMap(group => {
+        //         return group.pipe(toArray()); // return the group values as Arrays
+        //       })
+        //     );
+        //   }),map((val) => {  //For each array returned , calculate the sum and map it to the Object you wanted
+        //     return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data:val }
+        //   })
+        // ).subscribe(val => {
+        //  let test={};
+        //   let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
+        //  test[val['event_name']]={...{date}};
+        //  console.log(test,"test")
+        //   // let event_name = `${val['event_name']}`;
+        //   // let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
+        //   // let event_category = val.event_category;
+        //   // this.test[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
+        // })
+        // let vital = {};
+        // const test = from(data).pipe(
+        //   groupBy(person =>  person['event_name']),
+        //   mergeMap(group => from(group).pipe(toArray()))
+        //   ).subscribe(val => {   
+        //     //  console.log(val[0]['event_name'])
+        //     //  console.log(val[0]['event_name'])
+        //     //  vital[`${val[0]['event_name']}`]=val;
+        //     console.log(val)
+        //   })
+        // console.log(this.test)
+        const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_12__["from"])(records).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["groupBy"])(person => Object(_angular_common__WEBPACK_IMPORTED_MODULE_7__["formatDate"])(person['event_datetime'], 'yyyy-MM-dd', 'en-US')), //,person =>  person.event_category
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["mergeMap"])(group => group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["toArray"])())), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["mergeMap"])((array) => {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_12__["from"])(array).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["groupBy"])(val => val.event_name), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["mergeMap"])(group => {
+                return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["toArray"])()); // return the group values as Arrays
+            }));
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["map"])((val) => {
+            console.log(val);
+            return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data: val };
+        })).subscribe(val => {
+            //console.log(val)
+        });
     }
     initializeApp() {
         this.initializeBackButtonCustomHandler();
@@ -966,7 +1215,7 @@ let AppComponent = class AppComponent {
     }
 };
 AppComponent.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_12__["HttpClient"] },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClient"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] },
@@ -984,7 +1233,7 @@ AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         selector: 'app-root',
         template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/index.js!./src/app/app.component.html")
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_12__["HttpClient"],
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClient"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
         _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
         _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
@@ -1986,18 +2235,19 @@ let syncProvider = class syncProvider {
                                     let assigngetUserData = getHealthData['policies'];
                                     let healthData = assigngetUserData[0] || null;
                                     let findindex = this.responseData3.indexOf(res => res.id == data.rows.item(i).id);
-                                    let sql = `UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?`;
+                                    let sql = `UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, user_option = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?`;
                                     if (findindex != -1 && this.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at) {
-                                        let createEventData = [this.responseData3[findindex]["name"], this.responseData3[findindex]["email"], this.responseData3[findindex]["password"], this.responseData3[findindex]["mobile_no"], this.responseData3[findindex]["address"], this.responseData3[findindex]["country"], this.responseData3[findindex]["blood_group"], this.responseData3[findindex]["age"], this.responseData3[findindex]["user_uid"], this.responseData3[findindex]["forgot_password_code"], JSON.stringify(this.responseData3[findindex]["user_picture"]), this.responseData3[findindex]["active_status"], this.responseData3[findindex]["role_id"], this.responseData3[findindex]["created_at"], this.responseData3[findindex]["updated_at"], false, this.responseData3[findindex]["id"]];
+                                        let createEventData = [this.responseData3[findindex]["name"], this.responseData3[findindex]["email"], this.responseData3[findindex]["password"], this.responseData3[findindex]["mobile_no"], this.responseData3[findindex]["address"], this.responseData3[findindex]["country"], this.responseData3[findindex]["blood_group"], this.responseData3[findindex]["age"], this.responseData3[findindex]["user_uid"], this.responseData3[findindex]["forgot_password_code"], JSON.stringify(this.responseData3[findindex]["user_picture"]), JSON.stringify(this.responseData3[findindex]["user_option"]), this.responseData3[findindex]["active_status"], this.responseData3[findindex]["role_id"], this.responseData3[findindex]["created_at"], this.responseData3[findindex]["updated_at"], false, this.responseData3[findindex]["id"]];
                                         this.commonUpdateAndDeleteEvent(sql, createEventData);
                                     }
                                     else if (findindex != -1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData != null && healthData['id'] == null && findindex != -1 && profile_id == data.rows.item(i).id) {
                                         let profile_picture = JSON.parse(data.rows.item(i).user_picture);
                                         if (profile_picture['url'] != null && profile_picture['toUpdate'] == true) {
                                             let localPath = profile_picture;
-                                            let params = { localURL: profile_picture['localURL'],
-                                                cdvFilePath: profile_picture['cdvFilePath'],
-                                                toUpdate: false
+                                            let params = { user_option: { localURL: profile_picture['localURL'],
+                                                    cdvFilePath: profile_picture['cdvFilePath'],
+                                                    toUpdate: false
+                                                }
                                             };
                                             let requestUrl = `users/profile_picture`;
                                             let uploadStatus = yield this.uploadImage(localPath, params, requestUrl);
@@ -2005,9 +2255,10 @@ let syncProvider = class syncProvider {
                                                 let updateEventOptions = profile_picture;
                                                 updateEventOptions["url"] = uploadStatus["url"];
                                                 updateEventOptions["toUpdate"] = false;
-                                                let sql = `UPDATE users SET user_picture = ? WHERE id = ?`;
+                                                let user_option = params['user_option'];
+                                                let sql = `UPDATE users SET user_picture = ?, user_option = ? WHERE id = ?`;
                                                 let id = data.rows.item(i).id;
-                                                let createEventData = [JSON.stringify(updateEventOptions), id];
+                                                let createEventData = [JSON.stringify(updateEventOptions), JSON.stringify(user_option), id];
                                                 this.commonUpdateAndDeleteEvent(sql, createEventData);
                                             }
                                         }
@@ -2085,6 +2336,7 @@ let syncProvider = class syncProvider {
                     let userData = [];
                     for (let i = 0; i < data2.rows.length; i++) {
                         let attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                        let user_option_json = JSON.parse(data2.rows.item(i).user_option);
                         userData.push({
                             id: data2.rows.item(i).id,
                             name: data2.rows.item(i).name,
@@ -2098,6 +2350,7 @@ let syncProvider = class syncProvider {
                             user_uid: data2.rows.item(i).user_uid,
                             forgot_password_code: data2.rows.item(i).forgot_password_code,
                             user_picture: attribute_json,
+                            user_option: user_option_json,
                             active_status: data2.rows.item(i).active_status,
                             role_id: data2.rows.item(i).role_id,
                             created_at: data2.rows.item(i).created_at,
@@ -2182,6 +2435,7 @@ let syncProvider = class syncProvider {
                 }
                 for (let i in response) {
                     let attribute_json = JSON.stringify(response[i]["user_picture"]);
+                    let user_option_json = JSON.parse(response[i]['user_option']);
                     let data3 = [
                         response[i]["id"],
                         response[i]["name"],
@@ -2195,13 +2449,14 @@ let syncProvider = class syncProvider {
                         response[i]["user_uid"],
                         response[i]["forgot_password_code"],
                         attribute_json,
+                        user_option_json,
                         response[i]["active_status"],
                         response[i]["role_id"],
                         response[i]["created_at"],
                         response[i]["updated_at"],
                         false
                     ];
-                    let sqlData3 = `INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+                    let sqlData3 = `INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
                     database.executeSql(sqlData3, data3).then(res => {
                         console.log(res);
                     });
@@ -2502,10 +2757,11 @@ let syncProvider = class syncProvider {
         return this.getPatientsList().subscribe((responseList) => {
             this.patientList = responseList;
             let userIds = [];
-            for (let i in this.patientList['patient']) {
-                userIds.push(this.patientList['patient'][i]['id']);
+            for (let i in this.patientList[0]['patient']) {
+                userIds.push(this.patientList[0]['patient'][i]['id']);
+                console.log(userIds);
             }
-            return userIds.toString();
+            return userIds;
         });
     }
 };
@@ -2541,12 +2797,12 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    apiUrl: "http://192.168.1.237:4020/",
-    ImageUrl: "http://192.168.1.237:4020"
+    // apiUrl: "http://192.168.1.237:4020/",
+    //ImageUrl: "http://192.168.1.237:4020"
     // apiUrl: "http://13.235.142.131/",
     // ImageUrl: "http://13.235.142.131"
-    //apiUrl: "https://demo.bc4.insightmailer.com/",
-    //ImageUrl: "https://demo.bc4.insightmailer.com"
+    apiUrl: "https://demo.bc4.insightmailer.com/",
+    ImageUrl: "https://demo.bc4.insightmailer.com"
 };
 /*
  * For easier debugging in development mode, you can import the following file

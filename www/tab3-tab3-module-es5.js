@@ -327,6 +327,10 @@ var EditProfilePage = /** @class */ (function () {
             }
             //this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
         }
+        // else if(this.editprofile['user_info']['user_option']!=null){
+        //   let source = this.webview.convertFileSrc(this.editprofile['user_info']['user_option']['localURL']); 
+        //   localURL = source;
+        // }
         else {
             //this.cdvFilePath1= null;
             var source = this.webview.convertFileSrc(this.editprofile['user_info']['user_picture']['localURL']);
@@ -860,6 +864,10 @@ var Tab3Page = /** @class */ (function () {
                     globalURL = _this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);
                 }
             }
+            // else if(this.pic['user_info']['user_option']!=null){
+            //   let source = this.webview.convertFileSrc(this.pic['user_info']['user_option']['localURL']); 
+            //   localURL = source;
+            // }
             else {
                 var source = _this.webview.convertFileSrc(_this.pic['user_info']['user_picture']['localURL']);
                 localURL = source;

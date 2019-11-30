@@ -16,6 +16,7 @@ import { CgVitalFilterPage } from './cg-vital-filters/cg-vital-filters.page';
 import { Toast } from '@ionic-native/toast/ngx';
 import { cgvitalreading } from './cgvital-reading/cgvital-reading.page';
 import { CalendarModule } from 'ion2-calendar';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 const routes: Routes = [
   {
@@ -47,6 +48,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [CgvitalsPage,CgVitalAnalyticsPage,CgVitalFilterPage,cgvitalreading],
-  providers:[DatePipe,Toast],
+  providers:[DatePipe,Toast,DataBaseSummaryProvider],
 })
 export class CgvitalsPageModule {}

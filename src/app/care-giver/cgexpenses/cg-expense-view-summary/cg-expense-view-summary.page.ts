@@ -5,6 +5,8 @@ import { ToastController, AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import {CalendarModal, CalendarModalOptions,  CalendarResult } from 'ion2-calendar';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DatabaseProvider } from '../../../sqlite-database/database';
+import { DataBaseSummaryProvider } from '../../../sqlite-database/database_provider';
 
 @Component({
   selector: 'app-cg-expense-view-summary',
@@ -21,7 +23,7 @@ export class CgExpenseviewSummaryPage {
   from_date1:any;
   loader:boolean=true;
   getChartValue:any[]=[];
-  constructor(private toast:Toast,public modalCtrl: ModalController, public toastController: ToastController,public alertController:AlertController,public service: careGiverService, private statusBar: StatusBar) {
+  constructor(private toast:Toast,public modalCtrl: ModalController, public toastController: ToastController,public alertController:AlertController,public service: careGiverService, private statusBar: StatusBar,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) {
    }
 
   ngOnInit() {           
@@ -29,22 +31,43 @@ export class CgExpenseviewSummaryPage {
 
   ionViewWillEnter() {
     this.user_id = localStorage.getItem("user_id");
-      this.service.view_expenses(this.user_id).subscribe(res =>{
-      this.view_all_expen = res;
-      this.from_date1= this.view_all_expen.from_date 
-      this.end_date1= this.view_all_expen.end_date
-      console.log(this.view_all_expen,'res')  
-      this.expen_key = Object.keys(this.view_all_expen.expense);
-      this.getChartValue=this.expen_key.map(res=>{
-        console.log(res)
-        let chartType=res.toString();       
-        const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
-        return total
-        });
-        this.loader=false;
-       console.log(this.getChartValue)
-       console.log(this.expen_key);
+    this.from_date1 = new Date();
+    this.from_date1.setDate(this.from_date1.getDate() - 30);
+    this.end_date1 = new Date();
+      // this.service.view_expenses(this.user_id).subscribe(res =>{
+      // this.view_all_expen = res;
+      // this.from_date1= this.view_all_expen.from_date 
+      // this.end_date1= this.view_all_expen.end_date
+      // console.log(this.view_all_expen,'res')  
+      // this.expen_key = Object.keys(this.view_all_expen.expense);
+      // this.getChartValue=this.expen_key.map(res=>{
+      //   console.log(res)
+      //   let chartType=res.toString();       
+      //   const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
+      //   return total
+      //   });
+      //   this.loader=false;
+      //  console.log(this.getChartValue)
+      //  console.log(this.expen_key);
+      // })
+
+      this.databaseSummary.ExpenseViewSummary(this.from_date1,this.end_date1,'expense','event_name','view_summary').then((res)=>{
+        this.view_all_expen = res;
+        this.from_date1= this.view_all_expen.from_date 
+        this.end_date1= this.view_all_expen.end_date
+        console.log(this.view_all_expen,'res')  
+        this.expen_key = Object.keys(this.view_all_expen.expense);
+        this.getChartValue=this.expen_key.map(res=>{
+          console.log(res)
+          let chartType=res.toString();       
+          const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
+          return total
+          });
+          this.loader=false;
+        console.log(this.getChartValue)
+        console.log(this.expen_key);
       })
+      .catch(error=>{ console.log(error) });
       
     this.statusBar.backgroundColorByHexString('#ffd32c');
     this.tabBar = document.getElementById('myTabBar1');
@@ -54,7 +77,7 @@ export class CgExpenseviewSummaryPage {
 
   
    async presentToast(message: string) {
-    this.toast.show(message, '2000', 'bottom').subscribe(
+    this.toast.show(message, '4000', 'center').subscribe(
       toast => { 
         console.log(toast); 
       });
@@ -88,20 +111,34 @@ export class CgExpenseviewSummaryPage {
   const end_date: CalendarResult = date.to.dateObj;
       this.from_date1=from_date
       this.end_date1=end_date
-      this.service.filterAmount(from_date,end_date,this.user_id).subscribe(res=>{
-      console.log(res)
-      this.view_all_expen=res
-      this.expen_key = Object.keys(this.view_all_expen.expense);
-      this.getChartValue=this.expen_key.map(res=>{
-      console.log(res)
-      let chartType=res.toString();       
-      const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
-      return total  
-      });
-       console.log(this.getChartValue)
-       console.log(this.expen_key);
+      // this.service.filterAmount(from_date,end_date,this.user_id).subscribe(res=>{
+      //   console.log(res)
+      //   this.view_all_expen=res
+      //   this.expen_key = Object.keys(this.view_all_expen.expense);
+      //   this.getChartValue=this.expen_key.map(res=>{
+      //   console.log(res)
+      //   let chartType=res.toString();       
+      //   const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
+      //   return total  
+      //   });
+      //   console.log(this.getChartValue)
+      //   console.log(this.expen_key);
     
-   })
+      // })
+
+      this.databaseSummary.ExpenseViewSummary(this.from_date1,this.end_date1,'expense','event_name','view_summary').then((res)=>{
+        console.log(res)
+        this.view_all_expen=res
+        this.expen_key = Object.keys(this.view_all_expen.expense);
+        this.getChartValue=this.expen_key.map(res=>{
+        console.log(res)
+        let chartType=res.toString();       
+        const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
+        return total  
+        });
+        console.log(this.getChartValue)
+        console.log(this.expen_key);
+      })
  
 }
 

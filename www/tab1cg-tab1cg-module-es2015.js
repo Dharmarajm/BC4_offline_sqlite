@@ -775,6 +775,10 @@ let Tab1cPage = class Tab1cPage {
                     this.caregiverImageStatus = false;
                 }
             }
+            //else if(this.pic['user_info']['user_option']!=null){
+            //   let source = this.webview.convertFileSrc(this.pic['user_info']['user_option']['localURL']); 
+            //   localURL = source;
+            //  }
             else {
                 this.profile_pic = this.pic['user_info']['user_picture']['url'];
                 this.initialLogo = userInfo;

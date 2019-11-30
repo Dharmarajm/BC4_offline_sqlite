@@ -5,6 +5,7 @@ import * as HighCharts from 'highcharts';
 // drilldown(Highcharts)
 import { DatePipe } from '@angular/common';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 declare var Highcharts;
 
@@ -29,7 +30,7 @@ export class ExpensesPage implements OnInit {
   currentMonthColor:string = "#ffd32c";
   yearColor: string ="#fff";
   drilldownData:any[] = [];
-  constructor(public expense: settingsService, public datepipe:DatePipe, private statusBar: StatusBar) { }
+  constructor(public expense: settingsService, public datepipe:DatePipe, private statusBar: StatusBar,private databaseSummary: DataBaseSummaryProvider) { }
 
   ngOnInit() {
    
@@ -47,12 +48,9 @@ export class ExpensesPage implements OnInit {
     this.yearColor ="#fff"; 
     this.expense.main_chart(this.user_id).subscribe(res => {
       this.main_chart = res;
-      console.log(this.main_chart.Lastmonth,this.main_chart.Currentmonth,this.main_chart.Year,'len')
-      //this.Last_Mon_len = this.main_chart.Lastmonth.length;
-     
       console.log(this.Last_Mon_len)
       for (let i in this.main_chart.Currentmonth) {
-        //this.data.push(Object.values(this.main_chart.Currentmonth[i]))
+        
         this.currentMonthCat.push(i);
         let key:any = Object.values(this.main_chart.Currentmonth[i])
         console.log(key[0])
@@ -68,19 +66,16 @@ export class ExpensesPage implements OnInit {
         })
       }
       console.log(this.drilldownData)
-      // let YearData = this.main_chart.Totalyear[0];
-      // let getyearData= [{
-      //   name: 'Total Spent',
-      //   y: YearData['value']
-      // }]
-      // let yearData = {name:'Year',colorByPoint: true,data:getyearData, color:'#ffd32c'}
-      // this.values.push(yearData)
 
       let hashdata={name:'Current Month',colorByPoint: true,data:this.data, color:'#ffd32c'};
         
       this.values.push(hashdata)
       
       this.mainChart();
+    })
+
+    this.databaseSummary.expenseCalculation().then(res=>{
+      console.log(res)
     })
 
 

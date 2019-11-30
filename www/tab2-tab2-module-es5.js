@@ -197,6 +197,10 @@ var previewPage = /** @class */ (function () {
                     globalURL = _this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);
                 }
             }
+            //else if(this.previewData['user']['user_option']!=null){
+            //   let source = this.webview.convertFileSrc(this.previewData['user']['user_option']['localURL']); 
+            //   localURL = source;
+            //  }
             else {
                 var source = _this.webview.convertFileSrc(_this.previewData['user']['user_picture']['localURL']);
                 localURL = source;

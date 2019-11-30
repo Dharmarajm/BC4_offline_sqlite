@@ -63,7 +63,12 @@ export class Tab1Page {
            let byPassURL = this.environment+source;
            globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);  
           }  
-        }else{
+        }
+        // else if(this.pic['user_info']['user_option']!=null){
+        //   let source = this.webview.convertFileSrc(this.pic['user_info']['user_option']['localURL']); 
+        //   localURL = source;
+        // }
+        else{
           let source = this.webview.convertFileSrc(this.pic['user_info']['user_picture']['localURL']); 
           localURL = source;
         }

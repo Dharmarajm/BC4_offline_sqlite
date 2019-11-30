@@ -59,6 +59,7 @@ export class AppComponent {
     //   console.log(responseList)
     //  })
     //this.getUserIdFromCareGiver();
+    
     this.groupBy();
 
   }
@@ -91,7 +92,8 @@ export class AppComponent {
       event_category : "6-9 pm",
       event_options: {value1: "10"},
       event_name: "Oxygen Saturation",
-      event_datetime:"2019-11-28T04:51:36.551Z" 
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10 
     },{
       id: 11,
       event_id: 11,
@@ -101,7 +103,8 @@ export class AppComponent {
       event_category : "6-9 pm",
       event_options: {value1: "10"},
       event_name: "Oxygen Saturation",
-      event_datetime:"2019-11-27T05:18:13.345Z" 
+      event_datetime:"2019-11-27T05:18:13.345Z",
+      value:10  
     },{
       id: 2,
       event_id: 2,
@@ -111,7 +114,8 @@ export class AppComponent {
       event_category : "Fasting",
       event_options: {value1: "10", value2: "20"},
       event_name: "Blood Glucose",
-      event_datetime:"2019-11-28T04:51:36.551Z" 
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10  
     },{
       id: 3,
       event_id: 3,
@@ -121,7 +125,8 @@ export class AppComponent {
       event_category : "12-3 pm",
       event_options: {value1: "10"},
       event_name: "Oxygen Saturation",
-      event_datetime:"2019-11-28T04:51:36.551Z" 
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10  
     },{
       id: 4,
       event_id: 4,
@@ -131,7 +136,8 @@ export class AppComponent {
       event_category : "Fasting",
       event_options: {value1: "20", value2: "30"},
       event_name: "Blood Glucose",
-      event_datetime:"2019-11-28T04:51:36.551Z" 
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10  
     },{
       id: 5,
       event_id: 5,
@@ -141,7 +147,8 @@ export class AppComponent {
       event_category : "Fasting",
       event_options: {value1: "20", value2: "30"},
       event_name: "Blood Glucose",
-      event_datetime:"2019-11-28T04:51:36.551Z" 
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10  
     },{
       id: 6,
       event_id: 6,
@@ -151,7 +158,8 @@ export class AppComponent {
       event_category : "Fasting",
       event_options: {value1: "20", value2: "30"},
       event_name: "Blood Glucose",
-      event_datetime:"2019-11-28T04:51:36.551Z"  
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10   
     },{
       id: 7,
       event_id: 7,
@@ -161,7 +169,8 @@ export class AppComponent {
       event_category : "Fasting",
       event_options: {value1: "20", value2: "30"},
       event_name: "Blood Glucose",
-      event_datetime:"2019-11-28T04:51:36.551Z" 
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10  
     },{
       id: 8,
       event_id: 8,
@@ -171,7 +180,8 @@ export class AppComponent {
       event_category : "Fasting",
       event_options: {value1: "20", value2: "30"},
       event_name: "Blood Glucose",
-      event_datetime:"2019-11-28T04:51:36.551Z" 
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10  
     },{
       id: 9,
       event_id: 9,
@@ -181,7 +191,8 @@ export class AppComponent {
       event_category : "Fasting",
       event_options: {value1: "20", value2: "30"},
       event_name: "Blood Glucose",
-      event_datetime:"2019-11-28T04:51:36.551Z" 
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10  
     },{
       id: 10,
       event_id: 10,
@@ -191,7 +202,8 @@ export class AppComponent {
       event_category : "Fasting",
       event_options: {value1: "20", value2: "30"},
       event_name: "Blood Glucose",
-      event_datetime:"2019-11-28T04:51:36.551Z" 
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10  
     },{
       id: 11,
       event_id: 11,
@@ -201,7 +213,8 @@ export class AppComponent {
       event_category : "Fasting",
       event_options: {value1: "20", value2: "30"},
       event_name: "Blood Glucose",
-      event_datetime:"2019-11-28T04:51:36.551Z" 
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10  
     },{
       id: 12,
       event_id: 12,
@@ -211,7 +224,8 @@ export class AppComponent {
       event_category : "Fasting",
       event_options: {value1: "20", value2: "30"},
       event_name: "Blood Glucose",
-      event_datetime:"2019-11-28T04:51:36.551Z" 
+      event_datetime:"2019-11-28T04:51:36.551Z",
+      value:10  
     }];
     let records:any[] = data.map(item => ({
          id:item.id,
@@ -229,7 +243,12 @@ export class AppComponent {
     }));
 
     
-    
+  //   { "body_temperature":{
+  //        "12-01-15":{
+  //          "6-9pm":[data]
+  //        }   
+  //     }
+  // }
     // const example = from(records).pipe(
     //   groupBy(person =>  person.event_name),  //,person =>  person.event_category
     //   mergeMap(group => group.pipe(toArray())),
@@ -255,25 +274,49 @@ export class AppComponent {
     //     return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data:val }
     //   })
     // ).subscribe(val => {
-    //   console.log(val)
-    //   let event_name = `${val['event_name']}`;
+    //  let test={};
     //   let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
-    //   let event_category = val.event_category;
+    //  test[val['event_name']]={...{date}};
+    //  console.log(test,"test")
+    //   // let event_name = `${val['event_name']}`;
+    //   // let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
+    //   // let event_category = val.event_category;
       
-    //   this.test[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
+    //   // this.test[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
     // })
-    let vital = {}
-    const example = from(data).pipe(
-      groupBy(person =>  person.event_name),
-      mergeMap(group => group.pipe(toArray()))
-      ).subscribe(val => {   
-         console.log(val[0]['event_name'])
-         console.log(val[0]['event_name'])
+    // let vital = {};
+    // const test = from(data).pipe(
+    //   groupBy(person =>  person['event_name']),
+    //   mergeMap(group => from(group).pipe(toArray()))
+    //   ).subscribe(val => {   
+    //     //  console.log(val[0]['event_name'])
+    //     //  console.log(val[0]['event_name'])
 
-         vital[`${val[0]['event_name']}`]=val;
+    //     //  vital[`${val[0]['event_name']}`]=val;
+    //     console.log(val)
+    //   })
+
+    // console.log(this.test)
+
+    const example = from(records).pipe(
+        groupBy(person =>  formatDate(person['event_datetime'], 'yyyy-MM-dd', 'en-US')),  //,person =>  person.event_category
+        mergeMap(group => group.pipe(toArray())),
+        mergeMap((array) => {// Take each from above array and group each array by manDate
+          return from(array).pipe(groupBy(
+            val => val.event_name,
+            ),
+            mergeMap(group => {
+              return group.pipe(toArray()); // return the group values as Arrays
+            })
+          );
+        }),
+        map((val) => {  //For each array returned , calculate the sum and map it to the Object you wanted
+         console.log(val)
+          return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data:val }
+        })
+      ).subscribe(val => {
+       //console.log(val)
       })
-
-    console.log(vital)
     
 }
 

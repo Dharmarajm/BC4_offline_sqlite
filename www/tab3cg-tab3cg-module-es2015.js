@@ -613,6 +613,10 @@ let Tab3cPage = class Tab3cPage {
                     globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);
                 }
             }
+            //else if(this.pic['user_info']['user_option']!=null){
+            //   let source = this.webview.convertFileSrc(this.pic['user_info']['user_option']['localURL']); 
+            //   localURL = source;
+            //  }
             else {
                 let source = this.webview.convertFileSrc(this.pic['user_info']['user_picture']['localURL']);
                 localURL = source;

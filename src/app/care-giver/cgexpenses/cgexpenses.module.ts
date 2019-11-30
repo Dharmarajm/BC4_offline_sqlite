@@ -17,6 +17,7 @@ import { Toast } from '@ionic-native/toast/ngx';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { CalendarModule } from 'ion2-calendar';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 const routes: Routes = [
   {
@@ -47,6 +48,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [CgexpensesPage,CgExpenseAnalyticsPage, CgExpenseviewSummaryPage,CgExpenseFiltersPage],
-  providers: [DatePipe,Toast]
+  providers: [DatePipe,Toast,DataBaseSummaryProvider]
 })
 export class CgexpensesPageModule {}

@@ -86,7 +86,7 @@ export class VitalsPage implements OnInit {
     this.vital_details = value;
     this.vital_keys = Object.keys(this.vital_details);
     this.status = false;
-}
+  }
   
  history_view(event){
   let navigationExtras: NavigationExtras = {

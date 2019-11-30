@@ -77,7 +77,12 @@ export class EditProfilePage implements OnInit {
       globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);  
     }
     //this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
-   }else{
+   }
+   // else if(this.editprofile['user_info']['user_option']!=null){
+        //   let source = this.webview.convertFileSrc(this.editprofile['user_info']['user_option']['localURL']); 
+        //   localURL = source;
+        // }
+   else{
     //this.cdvFilePath1= null;
     let source = this.webview.convertFileSrc(this.editprofile['user_info']['user_picture']['localURL']); 
     localURL = source;  

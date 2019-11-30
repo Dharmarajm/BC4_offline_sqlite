@@ -423,28 +423,29 @@ export class syncProvider {
                         
                         let healthData = assigngetUserData[0] || null; 
                         let findindex = this.responseData3.indexOf(res=>res.id==data.rows.item(i).id)
-                        let sql = `UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?`;
+                        let sql = `UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, user_option = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?`;
                         if(findindex!=-1 && this.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at){
-                          let createEventData = [this.responseData3[findindex]["name"],this.responseData3[findindex]["email"],this.responseData3[findindex]["password"],this.responseData3[findindex]["mobile_no"],this.responseData3[findindex]["address"],this.responseData3[findindex]["country"],this.responseData3[findindex]["blood_group"],this.responseData3[findindex]["age"],this.responseData3[findindex]["user_uid"],this.responseData3[findindex]["forgot_password_code"],JSON.stringify(this.responseData3[findindex]["user_picture"]),this.responseData3[findindex]["active_status"],this.responseData3[findindex]["role_id"],this.responseData3[findindex]["created_at"],this.responseData3[findindex]["updated_at"],false,this.responseData3[findindex]["id"]]      
+                          let createEventData = [this.responseData3[findindex]["name"],this.responseData3[findindex]["email"],this.responseData3[findindex]["password"],this.responseData3[findindex]["mobile_no"],this.responseData3[findindex]["address"],this.responseData3[findindex]["country"],this.responseData3[findindex]["blood_group"],this.responseData3[findindex]["age"],this.responseData3[findindex]["user_uid"],this.responseData3[findindex]["forgot_password_code"],JSON.stringify(this.responseData3[findindex]["user_picture"]),JSON.stringify(this.responseData3[findindex]["user_option"]),this.responseData3[findindex]["active_status"],this.responseData3[findindex]["role_id"],this.responseData3[findindex]["created_at"],this.responseData3[findindex]["updated_at"],false,this.responseData3[findindex]["id"]]      
                           this.commonUpdateAndDeleteEvent(sql,createEventData);
                         }else if(findindex!=-1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData!=null && healthData['id']==null && findindex!=-1 && profile_id == data.rows.item(i).id){
                           let profile_picture = JSON.parse(data.rows.item(i).user_picture);
                           if(profile_picture['url']!=null && profile_picture['toUpdate']==true){
                             let localPath = profile_picture;
-                            let params = { localURL: profile_picture['localURL'],
+                            let params = { user_option: { localURL: profile_picture['localURL'],
                                            cdvFilePath: profile_picture['cdvFilePath'],
                                            toUpdate: false
-                                          }
+                                           }
+                                         } 
                             let requestUrl = `users/profile_picture`;
                             let uploadStatus = await this.uploadImage(localPath,params,requestUrl);
                             if(uploadStatus["status"]==true){
                               let updateEventOptions = profile_picture;
                               updateEventOptions["url"] = uploadStatus["url"];
                               updateEventOptions["toUpdate"] = false;
-                              
-                              let sql = `UPDATE users SET user_picture = ? WHERE id = ?`
+                              let user_option = params['user_option'];
+                              let sql = `UPDATE users SET user_picture = ?, user_option = ? WHERE id = ?`
                               let id  = data.rows.item(i).id;
-                              let createEventData = [JSON.stringify(updateEventOptions),id];
+                              let createEventData = [JSON.stringify(updateEventOptions),JSON.stringify(user_option),id];
                               this.commonUpdateAndDeleteEvent(sql,createEventData); 
                             }
                           }
@@ -529,6 +530,7 @@ export class syncProvider {
             let userData = [];
             for (let i = 0; i < data2.rows.length; i++) {
               let attribute_json = JSON.parse(data2.rows.item(i).user_picture);  
+              let user_option_json = JSON.parse(data2.rows.item(i).user_option);  
               userData.push({ 
                   id: data2.rows.item(i).id,
                   name: data2.rows.item(i).name,
@@ -542,6 +544,7 @@ export class syncProvider {
                   user_uid: data2.rows.item(i).user_uid,
                   forgot_password_code: data2.rows.item(i).forgot_password_code,
                   user_picture: attribute_json,
+                  user_option : user_option_json,
                   active_status: data2.rows.item(i).active_status,
                   role_id: data2.rows.item(i).role_id,
                   created_at: data2.rows.item(i).created_at,
@@ -638,6 +641,7 @@ export class syncProvider {
         
         for (let i in response) {
           let attribute_json = JSON.stringify(response[i]["user_picture"]);
+          let user_option_json = JSON.parse(response[i]['user_option']);  
           let data3 = [
             response[i]["id"],
             response[i]["name"],
@@ -651,13 +655,14 @@ export class syncProvider {
             response[i]["user_uid"],
             response[i]["forgot_password_code"],
             attribute_json,
+            user_option_json,
             response[i]["active_status"],
             response[i]["role_id"],
             response[i]["created_at"],
             response[i]["updated_at"],
             false
           ];
-          let sqlData3 = `INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+          let sqlData3 = `INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
           database.executeSql(sqlData3,data3).then(res=>{
             console.log(res);
           }); 

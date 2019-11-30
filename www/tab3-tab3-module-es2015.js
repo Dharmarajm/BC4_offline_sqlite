@@ -128,6 +128,10 @@ let EditProfilePage = class EditProfilePage {
             }
             //this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
         }
+        // else if(this.editprofile['user_info']['user_option']!=null){
+        //   let source = this.webview.convertFileSrc(this.editprofile['user_info']['user_option']['localURL']); 
+        //   localURL = source;
+        // }
         else {
             //this.cdvFilePath1= null;
             let source = this.webview.convertFileSrc(this.editprofile['user_info']['user_picture']['localURL']);
@@ -638,6 +642,10 @@ let Tab3Page = class Tab3Page {
                     globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);
                 }
             }
+            // else if(this.pic['user_info']['user_option']!=null){
+            //   let source = this.webview.convertFileSrc(this.pic['user_info']['user_option']['localURL']); 
+            //   localURL = source;
+            // }
             else {
                 let source = this.webview.convertFileSrc(this.pic['user_info']['user_picture']['localURL']);
                 localURL = source;
