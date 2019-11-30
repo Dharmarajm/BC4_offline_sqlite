@@ -439,6 +439,9 @@ var ExpensesPage = /** @class */ (function () {
         this.databaseSummary.expenseCalculation().then(function (res) {
             console.log(res);
         });
+        // this.databaseSummary.expenseCalculation().then(res=>{
+        //   console.log(res)
+        // })
         this.expense.view_expenses_cal(this.user_id).subscribe(function (res) {
             _this.expense_val = res;
             console.log(Math.round(_this.expense_val.MonthProjection));
@@ -1194,6 +1197,7 @@ var viewAnalyticsPage = /** @class */ (function () {
                         modal.onDidDismiss()
                             .then(function (data) {
                             if (data['data'] != undefined) {
+                                console.log(data);
                                 _this.loader = true;
                                 data['event_type'] = 'expense';
                                 // this.service.filterChart(this.user_id ,data['data']).subscribe(res=>{         
@@ -1211,7 +1215,8 @@ var viewAnalyticsPage = /** @class */ (function () {
                                 //        }
                                 //       }, 2000); 
                                 // })
-                                _this.databaseSummary.ExpenseViewSummary(data['from_date'], data['end_date'], 'expense', data['event_name'], 'view_analytics').then(function (res) {
+                                _this.databaseSummary.ExpenseViewSummary(data['data']['from_date'], data['data']['end_date'], 'expense', data['data']['event_name'], 'view_analytics').then(function (res) {
+                                    console.log(res);
                                     _this.chartres = res;
                                     _this.date = _this.chartres.end_date;
                                     _this.firstDay = _this.chartres.from_date;

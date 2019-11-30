@@ -78,6 +78,7 @@ export class AddAppointmentPage implements OnInit {
   }
 
    async ConfirmEvent(val) {
+     console.log(val)
       this.add_alert = await this.alertController.create({
         header: 'Appointment',
         message: 'Are you sure to submit'+' '+ (val.event_category).bold()+' '+'?',

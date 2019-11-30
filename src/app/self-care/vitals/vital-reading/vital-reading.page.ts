@@ -64,6 +64,7 @@ constructor(public modalCtrl: ModalController,private toast: Toast,public datepi
   filterHistory(){
 
     this.databaseSummary.filterVitalHistory('vital',this.event_name,this.from_date1,this.end_date1,this.vital_page_offset).then(res=>{
+      console.log(res)
       this.previous_data=res['events']
       this.groupBy(this.previous_data)
     }).catch(err=>{console.log(err)})
@@ -72,6 +73,7 @@ constructor(public modalCtrl: ModalController,private toast: Toast,public datepi
   groupBy(data){
           let records:any[]=data.map(item => ({
             id:item.id,
+            event_id:item.event_id,
             description: item.description,
             event_name: item.event_name,
             event_category:item.event_category,
@@ -167,6 +169,7 @@ constructor(public modalCtrl: ModalController,private toast: Toast,public datepi
   }   
   
 async DeleteItem(id){
+  console.log(id)
   const alert = await this.alertController.create({
       header: 'Vitals',
       message: 'Are you sure want to delete?',

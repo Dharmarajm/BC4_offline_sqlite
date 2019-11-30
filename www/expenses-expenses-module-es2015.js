@@ -413,6 +413,9 @@ let ExpensesPage = class ExpensesPage {
         this.databaseSummary.expenseCalculation().then(res => {
             console.log(res);
         });
+        // this.databaseSummary.expenseCalculation().then(res=>{
+        //   console.log(res)
+        // })
         this.expense.view_expenses_cal(this.user_id).subscribe(res => {
             this.expense_val = res;
             console.log(Math.round(this.expense_val.MonthProjection));
@@ -1148,6 +1151,7 @@ let viewAnalyticsPage = class viewAnalyticsPage {
             modal.onDidDismiss()
                 .then((data) => {
                 if (data['data'] != undefined) {
+                    console.log(data);
                     this.loader = true;
                     data['event_type'] = 'expense';
                     // this.service.filterChart(this.user_id ,data['data']).subscribe(res=>{         
@@ -1165,7 +1169,8 @@ let viewAnalyticsPage = class viewAnalyticsPage {
                     //        }
                     //       }, 2000); 
                     // })
-                    this.databaseSummary.ExpenseViewSummary(data['from_date'], data['end_date'], 'expense', data['event_name'], 'view_analytics').then((res) => {
+                    this.databaseSummary.ExpenseViewSummary(data['data']['from_date'], data['data']['end_date'], 'expense', data['data']['event_name'], 'view_analytics').then((res) => {
+                        console.log(res);
                         this.chartres = res;
                         this.date = this.chartres.end_date;
                         this.firstDay = this.chartres.from_date;

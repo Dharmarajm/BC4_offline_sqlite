@@ -75,15 +75,17 @@ export class ExpensesPage implements OnInit {
     })
 
     this.databaseSummary.expenseCalculation().then(res=>{
-      console.log(res)
+      this.expense_val = res;
     })
-
+    // this.databaseSummary.expenseCalculation().then(res=>{
+    //   console.log(res)
+    // })
 
     
-    this.expense.view_expenses_cal(this.user_id).subscribe(res =>{
-      this.expense_val = res;
-      console.log(Math.round(this.expense_val.MonthProjection));
-    });
+    // this.expense.view_expenses_cal(this.user_id).subscribe(res =>{
+    //   this.expense_val = res;
+    //   console.log(Math.round(this.expense_val.MonthProjection));
+    // });
     
     this.statusBar.backgroundColorByHexString('#ffd32c');
     this.tabBar = document.getElementById('myTabBar').childNodes[0];

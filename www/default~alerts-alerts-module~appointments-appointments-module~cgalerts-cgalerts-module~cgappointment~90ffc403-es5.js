@@ -155,6 +155,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                     case 1:
                         checkEvent = _a.sent();
                         sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
+                        console.log(sqlSearchEventQuery);
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
                                 return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
                                     var events = [];
@@ -201,8 +202,10 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                     case 1:
                         checkEvent = _a.sent();
                         sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
+                        console.log(sqlSearchEventQuery);
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
                                 return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
+                                    console.log(data);
                                     var events = [];
                                     for (var i = 0; i < data.rows.length; i++) {
                                         var event_json = null;
@@ -260,44 +263,60 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.databaseService.getuserID()];
                     case 1:
                         user_id = _a.sent();
-                        sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE (id='" + user_id + "'");
+                        sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE id='" + user_id + "'");
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
                                 return database.executeSql(sqlUserQuery, []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                    var getUserData, joinMonth, currentDate, y, m, first_month, currentMonth, first_day, fy, fm, no_of_months, sqlCurrentMonthExpQuery, getResponseOfMonthExp, i, sqlCurrentYearExpQuery, getResponseOfYearExp, i;
+                                    var getUserData, joinMonth, currentDate, y, m, lastDate, getfirst_month, setfirst_month, currentMonth, first_day, fy, fm, no_of_months, CurrentMonthStart, CurrentMonthEnd, sqlCurrentMonthExpQuery, getResponseOfMonthExp, i, firstDayOfYear, lastDayofYear, sqlCurrentYearExpQuery, getResponseOfYearExp, j;
                                     return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                         switch (_a.label) {
-                                            case 0: return [4 /*yield*/, this.currentUserData(data)];
-                                            case 1:
-                                                getUserData = _a.sent();
-                                                joinMonth = getUserData[0].created_at || null;
+                                            case 0:
+                                                console.log(data.rows.item(0));
+                                                getUserData = data.rows.item(0);
+                                                joinMonth = getUserData.created_at || null;
+                                                console.log(joinMonth);
                                                 currentDate = new Date();
+                                                console.log(currentDate);
                                                 y = currentDate.getFullYear();
                                                 m = currentDate.getMonth();
-                                                first_month = new Date(y, 0, 31);
+                                                lastDate = currentDate;
+                                                lastDate.setDate(lastDate.getDate() + 1);
+                                                getfirst_month = new Date(y, 0, 31);
+                                                setfirst_month = getfirst_month.toJSON();
                                                 currentMonth = new Date(y, m, 1);
                                                 first_day = new Date(y, 0, 1);
                                                 fy = first_day.getFullYear();
                                                 fm = first_day.getMonth();
                                                 no_of_months = (y * 12 + m) - (fy * 12 + fm);
-                                                if (!(joinMonth != null && joinMonth <= first_month)) return [3 /*break*/, 4];
-                                                sqlCurrentMonthExpQuery = "SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + currentMonth.toJSON() + "') AND DATE('" + currentDate.toJSON() + "')))";
+                                                console.log(no_of_months);
+                                                console.log(joinMonth != null, joinMonth <= setfirst_month, joinMonth, setfirst_month);
+                                                CurrentMonthStart = currentMonth.toJSON();
+                                                console.log(CurrentMonthStart);
+                                                CurrentMonthEnd = lastDate.toJSON();
+                                                console.log(CurrentMonthEnd);
+                                                sqlCurrentMonthExpQuery = "SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + CurrentMonthStart + "') AND DATE('" + CurrentMonthEnd + "')))";
+                                                console.log(sqlCurrentMonthExpQuery);
                                                 return [4 /*yield*/, this.expenseCalculateValue(sqlCurrentMonthExpQuery)];
-                                            case 2:
+                                            case 1:
                                                 getResponseOfMonthExp = _a.sent();
                                                 console.log(getResponseOfMonthExp);
-                                                for (i in getResponseOfMonthExp.rows.length) {
+                                                for (i = 0; i < getResponseOfMonthExp.rows.length; i++) {
                                                     console.log(getResponseOfMonthExp.rows.item(i));
                                                 }
-                                                sqlCurrentYearExpQuery = "SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + first_day.toJSON() + "') AND DATE('" + currentDate.toJSON() + "')))";
+                                                firstDayOfYear = first_day.toJSON();
+                                                console.log(firstDayOfYear);
+                                                lastDayofYear = lastDate.toJSON();
+                                                console.log(lastDayofYear);
+                                                sqlCurrentYearExpQuery = "SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + firstDayOfYear + "') AND DATE('" + lastDayofYear + "')))";
+                                                console.log(sqlCurrentYearExpQuery);
                                                 return [4 /*yield*/, this.expenseCalculateValue(sqlCurrentYearExpQuery)];
-                                            case 3:
+                                            case 2:
                                                 getResponseOfYearExp = _a.sent();
                                                 console.log(getResponseOfYearExp);
-                                                for (i in getResponseOfYearExp.rows.length) {
-                                                    console.log(getResponseOfYearExp.rows.item(i));
+                                                for (j = 0; j < getResponseOfYearExp.rows.length; j++) {
+                                                    console.log(getResponseOfYearExp.rows.item(j));
                                                 }
-                                                _a.label = 4;
-                                            case 4: return [2 /*return*/, { CurrentMonth: "", Yearly: "", status: "" }];
+                                                //}
+                                                return [2 /*return*/, { CurrentMonth: "", Yearly: "", status: "" }];
                                         }
                                     });
                                 }); });
@@ -346,8 +365,10 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                         sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + (" WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "')");
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
                                 return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
+                                    console.log(data);
                                     var events = [];
                                     for (var i = 0; i < data.rows.length; i++) {
+                                        console.log(data.rows.item(i));
                                         var event_json = null;
                                         var eventAssetsJson = null;
                                         if (data.rows.item(i).event_options != null) {
@@ -446,6 +467,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     DataBaseSummaryProvider.prototype.vitalFilterAnalytics = function (id, data) {
         var params = data;
         return this.getVitalEvents(id, params['from_date'], params['end_date'], 'vital', 'analytics', params['event_name']).then(function (response) {
+            console.log(response);
             var data = response['event_list'];
             var value = {};
             var example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (person) { return person['event_name']; }), //,person =>  person.event_category
@@ -471,13 +493,28 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     };
     DataBaseSummaryProvider.prototype.checkEventType = function (event, tab, offset, from_date, end_date, analytics, event_name) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var startDate, endDate, eventQuery, event_nameArray, user_id;
+            var startDate, endDate, string1, string2, Date1, Date2, eventQuery, event_nameArray, user_id;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         console.log(from_date, end_date);
-                        startDate = from_date.toJSON() || null;
-                        endDate = end_date.toJSON() || null;
+                        startDate = null;
+                        endDate = null;
+                        if (from_date != undefined && end_date != undefined) {
+                            string1 = from_date.toString();
+                            console.log(string1);
+                            string2 = end_date.toString();
+                            console.log(string2);
+                            Date1 = new Date(string1);
+                            console.log(Date1);
+                            Date2 = new Date(string2);
+                            Date2.setDate(Date2.getDate() + 1);
+                            console.log(Date2);
+                            startDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(Date1, 'yyyy-MM-dd', 'en-US');
+                            console.log(startDate);
+                            endDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(Date2, 'yyyy-MM-dd', 'en-US');
+                            console.log(endDate);
+                        }
                         event_nameArray = null;
                         if (event_name != null && event_name.length > 0) {
                             event_nameArray = event_name.toString();
@@ -501,10 +538,10 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                         else if (event == 'vital' && tab == 'filter' && analytics != 'analytics') {
                             return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
                         }
-                        else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_name.length != 0) {
+                        else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_nameArray != null) {
                             return [2 /*return*/, eventQuery = " WHERE (event_name IN ('" + event_nameArray + "') AND event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
                         }
-                        else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_name.length == 0) {
+                        else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_nameArray == null) {
                             return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
                         }
                         else if (event == 'vital' && tab == 'pagefilter') {
@@ -516,10 +553,10 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                         else if (event == 'expense' && analytics == 'view_summary') {
                             return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
                         }
-                        else if (event == 'expense' && analytics == 'view_analytics' && event_name.length != 0) {
+                        else if (event == 'expense' && analytics == 'view_analytics' && event_nameArray != null) {
                             return [2 /*return*/, eventQuery = " WHERE (event_name IN ('" + event_nameArray + "') AND event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
                         }
-                        else if (event == 'expense' && analytics == 'view_analytics' && event_name.length == 0) {
+                        else if (event == 'expense' && analytics == 'view_analytics' && event_nameArray == null) {
                             return [2 /*return*/, eventQuery = " WHERE (event_type='" + event + "' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDate + "') AND DATE('" + endDate + "'))) ORDER BY event_datetime DESC"];
                         }
                         else {

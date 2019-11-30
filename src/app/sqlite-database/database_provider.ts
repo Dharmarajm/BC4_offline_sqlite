@@ -115,7 +115,7 @@ export class DataBaseSummaryProvider {
     async filterVitalHistory(event_type,event_name,from_date,end_date,vital_page_offset): Promise<any> {
         let checkEvent = await this.checkEventType(event_type,'pagefilter',vital_page_offset,from_date,end_date,null,event_name);
         let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+checkEvent;
-
+       console.log(sqlSearchEventQuery)
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
                 let events: events[] = [];
@@ -155,9 +155,10 @@ export class DataBaseSummaryProvider {
     async getVitalEvents(id,from_date,end_date,event_type,analytics?,event_name?): Promise<any> {
         let checkEvent = await this.checkEventType(event_type,'filter',0,from_date,end_date,analytics,event_name);
         let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+checkEvent;
-
+        console.log(sqlSearchEventQuery)
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
+                console.log(data)
                 let events: events[] = [];
                 
                 for (let i = 0; i < data.rows.length; i++) {
@@ -197,7 +198,7 @@ export class DataBaseSummaryProvider {
     filterVitalEventNameList(id,from_date,end,type){
         return this.getVitalEvents(id,from_date,end,type).then(response => {
           let data = response['event_list'];
-          
+           
             let value = [];
             const example = from(data).pipe(
             groupBy(person =>  person['event_name']),
@@ -218,39 +219,62 @@ export class DataBaseSummaryProvider {
 
     async expenseCalculation(){
         let user_id = await this.databaseService.getuserID();
-        let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE (id='${user_id}'`
+        let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id='${user_id}'`
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlUserQuery, []).then(async (data) => {
-                
-                let getUserData = await this.currentUserData(data);
-                let joinMonth =  getUserData[0].created_at || null;
+                console.log(data.rows.item(0))
+                let getUserData = data.rows.item(0);
+                let joinMonth =  getUserData.created_at || null;
+                console.log(joinMonth)
                 let currentDate = new Date();
+                console.log(currentDate)
                 var y = currentDate.getFullYear();
                 var m = currentDate.getMonth();
-                let first_month = new Date(y, 0, 31);
+                let lastDate = currentDate;
+                lastDate.setDate(lastDate.getDate() + 1);
+                let getfirst_month = new Date(y, 0, 31);
+                let setfirst_month = getfirst_month.toJSON();
                 let currentMonth = new Date(y, m, 1);
                 let first_day = new Date(y, 0, 1);
                 var fy = first_day.getFullYear();
                 var fm = first_day.getMonth();
                 let no_of_months = ( y * 12 + m) - ( fy * 12 + fm)
-                if(joinMonth!=null && joinMonth <= first_month){
-                let sqlCurrentMonthExpQuery =  `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${currentMonth.toJSON()}') AND DATE('${currentDate.toJSON()}')))`
+                console.log(no_of_months)
+                console.log(joinMonth!=null , joinMonth <= setfirst_month , joinMonth,setfirst_month)
+
+                let CurrentMonthStart = currentMonth.toJSON();
+                console.log(CurrentMonthStart)
+                let CurrentMonthEnd = lastDate.toJSON();
+                console.log(CurrentMonthEnd)      
+                let sqlCurrentMonthExpQuery =  `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${CurrentMonthStart}') AND DATE('${CurrentMonthEnd}')))`
+                console.log(sqlCurrentMonthExpQuery)
                 let getResponseOfMonthExp = await this.expenseCalculateValue(sqlCurrentMonthExpQuery);
                 console.log(getResponseOfMonthExp)
-                for(var i in getResponseOfMonthExp.rows.length){
-                    console.log(getResponseOfMonthExp.rows.item(i))
-                }
-                let sqlCurrentYearExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${first_day.toJSON()}') AND DATE('${currentDate.toJSON()}')))`
+                let CurrentMonthExpense = getResponseOfMonthExp.rows.item(0)['SUM(value)']
+                
+                let firstDayOfYear = first_day.toJSON();
+                console.log(firstDayOfYear)
+                let lastDayofYear = lastDate.toJSON();
+                console.log(lastDayofYear)
+                let sqlCurrentYearExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${firstDayOfYear}') AND DATE('${lastDayofYear}')))`
+                console.log(sqlCurrentYearExpQuery)
                 let getResponseOfYearExp = await this.expenseCalculateValue(sqlCurrentYearExpQuery);
-                console.log(getResponseOfYearExp)
+                let CurrentYearExpense = getResponseOfYearExp.rows.item(0)['SUM(value)']
+                if(joinMonth!=null && joinMonth <= setfirst_month){
+                    
+                    let projectionM = (CurrentYearExpense / no_of_months)
+                    let MonthlyProjection = projectionM.toFixed(2);
+                    let projectionY = (projectionM * 12)
+                    let yearlyProjection = projectionY.toFixed(2);
 
-                for(var i in getResponseOfYearExp.rows.length){
-                    console.log(getResponseOfYearExp.rows.item(i))
-                }
+                    return { CurrentMonth : CurrentMonthExpense, Yearly: CurrentYearExpense, status: true , MonthProjection: MonthlyProjection,YearlyProjection: yearlyProjection};
+                }else{
+                 
+                    return { CurrentMonth : CurrentMonthExpense, Yearly: CurrentYearExpense, status: false };   
                 }
 
                 
-                return { CurrentMonth : "", Yearly: "", status: "" };
+                
             })
             
         })
@@ -285,9 +309,11 @@ export class DataBaseSummaryProvider {
         let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}')`
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
+                console.log(data)
                 let events: events[] = [];
                 
                 for (let i = 0; i < data.rows.length; i++) {
+                    console.log(data.rows.item(i))
                     let event_json:any = null;
                     let eventAssetsJson:any = null;
                     if (data.rows.item(i).event_options != null) {
@@ -394,6 +420,7 @@ export class DataBaseSummaryProvider {
     vitalFilterAnalytics(id,data){
         let params = data;
         return this.getVitalEvents(id,params['from_date'],params['end_date'],'vital','analytics',params['event_name']).then(response => {
+            console.log(response)
             let data = response['event_list'];
             
             let value = {}
@@ -438,8 +465,24 @@ export class DataBaseSummaryProvider {
 
     async checkEventType(event,tab,offset,from_date?,end_date?,analytics?,event_name?) {
         console.log(from_date,end_date)
-        let startDate = from_date.toJSON() || null;
-        let endDate = end_date.toJSON() || null;
+        let startDate = null;
+        let endDate = null;
+        if(from_date!=undefined && end_date!=undefined){
+            let string1 = from_date.toString();
+            console.log(string1)
+            let string2 = end_date.toString();
+            console.log(string2)
+            let Date1 = new Date(string1);
+            console.log(Date1)
+            let Date2 = new Date(string2);
+            Date2.setDate(Date2.getDate() + 1);
+            console.log(Date2)
+            startDate = formatDate(Date1, 'yyyy-MM-dd', 'en-US');
+            console.log(startDate)
+            endDate = formatDate(Date2, 'yyyy-MM-dd', 'en-US');
+            console.log(endDate)
+        }
+    
         let eventQuery:any;
         let event_nameArray = null;
         if(event_name!=null && event_name.length>0){
@@ -458,9 +501,9 @@ export class DataBaseSummaryProvider {
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC`
         }else if(event=='vital' && tab == 'filter' && analytics != 'analytics'){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
-        }else if(event=='vital' && tab == 'filter' && analytics == 'analytics' && event_name.length!=0){
+        }else if(event=='vital' && tab == 'filter' && analytics == 'analytics' && event_nameArray!=null){
             return eventQuery= ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
-        }else if(event=='vital' && tab == 'filter' && analytics == 'analytics' && event_name.length==0){
+        }else if(event=='vital' && tab == 'filter' && analytics == 'analytics' && event_nameArray==null){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
         }else if(event=='vital' && tab == 'pagefilter'){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`
@@ -468,9 +511,9 @@ export class DataBaseSummaryProvider {
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
         }else if(event=='expense' && analytics == 'view_summary'){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
-        }else if(event=='expense' && analytics == 'view_analytics' && event_name.length!=0){
+        }else if(event=='expense' && analytics == 'view_analytics' && event_nameArray!=null){
             return eventQuery= ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
-        }else if(event=='expense' && analytics == 'view_analytics' && event_name.length==0){
+        }else if(event=='expense' && analytics == 'view_analytics' && event_nameArray==null){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
         }else{
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}') ORDER BY event_datetime DESC LIMIT 10 OFFSET ${offset}`

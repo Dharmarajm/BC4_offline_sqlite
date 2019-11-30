@@ -54,6 +54,7 @@ export class viewSummaryPage {
       // })
 
       this.databaseSummary.ExpenseViewSummary(this.from_date1,this.end_date1,'expense','event_name','view_summary').then((res)=>{
+        console.log(res)
         this.view_all_expen = res;
         this.from_date1= this.view_all_expen.from_date 
         this.end_date1= this.view_all_expen.end_date

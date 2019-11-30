@@ -136,6 +136,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let checkEvent = yield this.checkEventType(event_type, 'pagefilter', vital_page_offset, from_date, end_date, null, event_name);
             let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
+            console.log(sqlSearchEventQuery);
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {
                     let events = [];
@@ -175,8 +176,10 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let checkEvent = yield this.checkEventType(event_type, 'filter', 0, from_date, end_date, analytics, event_name);
             let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
+            console.log(sqlSearchEventQuery);
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {
+                    console.log(data);
                     let events = [];
                     for (let i = 0; i < data.rows.length; i++) {
                         let event_json = null;
@@ -226,34 +229,52 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     expenseCalculation() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let user_id = yield this.databaseService.getuserID();
-            let sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (id='${user_id}'`;
+            let sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE id='${user_id}'`;
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlUserQuery, []).then((data) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-                    let getUserData = yield this.currentUserData(data);
-                    let joinMonth = getUserData[0].created_at || null;
+                    console.log(data.rows.item(0));
+                    let getUserData = data.rows.item(0);
+                    let joinMonth = getUserData.created_at || null;
+                    console.log(joinMonth);
                     let currentDate = new Date();
+                    console.log(currentDate);
                     var y = currentDate.getFullYear();
                     var m = currentDate.getMonth();
-                    let first_month = new Date(y, 0, 31);
+                    let lastDate = currentDate;
+                    lastDate.setDate(lastDate.getDate() + 1);
+                    let getfirst_month = new Date(y, 0, 31);
+                    let setfirst_month = getfirst_month.toJSON();
                     let currentMonth = new Date(y, m, 1);
                     let first_day = new Date(y, 0, 1);
                     var fy = first_day.getFullYear();
                     var fm = first_day.getMonth();
                     let no_of_months = (y * 12 + m) - (fy * 12 + fm);
-                    if (joinMonth != null && joinMonth <= first_month) {
-                        let sqlCurrentMonthExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${currentMonth.toJSON()}') AND DATE('${currentDate.toJSON()}')))`;
-                        let getResponseOfMonthExp = yield this.expenseCalculateValue(sqlCurrentMonthExpQuery);
-                        console.log(getResponseOfMonthExp);
-                        for (var i in getResponseOfMonthExp.rows.length) {
-                            console.log(getResponseOfMonthExp.rows.item(i));
-                        }
-                        let sqlCurrentYearExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${first_day.toJSON()}') AND DATE('${currentDate.toJSON()}')))`;
-                        let getResponseOfYearExp = yield this.expenseCalculateValue(sqlCurrentYearExpQuery);
-                        console.log(getResponseOfYearExp);
-                        for (var i in getResponseOfYearExp.rows.length) {
-                            console.log(getResponseOfYearExp.rows.item(i));
-                        }
+                    console.log(no_of_months);
+                    console.log(joinMonth != null, joinMonth <= setfirst_month, joinMonth, setfirst_month);
+                    //if(joinMonth!=null && joinMonth <= setfirst_month){
+                    let CurrentMonthStart = currentMonth.toJSON();
+                    console.log(CurrentMonthStart);
+                    let CurrentMonthEnd = lastDate.toJSON();
+                    console.log(CurrentMonthEnd);
+                    let sqlCurrentMonthExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${CurrentMonthStart}') AND DATE('${CurrentMonthEnd}')))`;
+                    console.log(sqlCurrentMonthExpQuery);
+                    let getResponseOfMonthExp = yield this.expenseCalculateValue(sqlCurrentMonthExpQuery);
+                    console.log(getResponseOfMonthExp);
+                    for (let i = 0; i < getResponseOfMonthExp.rows.length; i++) {
+                        console.log(getResponseOfMonthExp.rows.item(i));
                     }
+                    let firstDayOfYear = first_day.toJSON();
+                    console.log(firstDayOfYear);
+                    let lastDayofYear = lastDate.toJSON();
+                    console.log(lastDayofYear);
+                    let sqlCurrentYearExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${firstDayOfYear}') AND DATE('${lastDayofYear}')))`;
+                    console.log(sqlCurrentYearExpQuery);
+                    let getResponseOfYearExp = yield this.expenseCalculateValue(sqlCurrentYearExpQuery);
+                    console.log(getResponseOfYearExp);
+                    for (let j = 0; j < getResponseOfYearExp.rows.length; j++) {
+                        console.log(getResponseOfYearExp.rows.item(j));
+                    }
+                    //}
                     return { CurrentMonth: "", Yearly: "", status: "" };
                 }));
             });
@@ -285,8 +306,10 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}')`;
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {
+                    console.log(data);
                     let events = [];
                     for (let i = 0; i < data.rows.length; i++) {
+                        console.log(data.rows.item(i));
                         let event_json = null;
                         let eventAssetsJson = null;
                         if (data.rows.item(i).event_options != null) {
@@ -380,6 +403,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     vitalFilterAnalytics(id, data) {
         let params = data;
         return this.getVitalEvents(id, params['from_date'], params['end_date'], 'vital', 'analytics', params['event_name']).then(response => {
+            console.log(response);
             let data = response['event_list'];
             let value = {};
             const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => person['event_name']), //,person =>  person.event_category
@@ -406,8 +430,23 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     checkEventType(event, tab, offset, from_date, end_date, analytics, event_name) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             console.log(from_date, end_date);
-            let startDate = from_date.toJSON() || null;
-            let endDate = end_date.toJSON() || null;
+            let startDate = null;
+            let endDate = null;
+            if (from_date != undefined && end_date != undefined) {
+                let string1 = from_date.toString();
+                console.log(string1);
+                let string2 = end_date.toString();
+                console.log(string2);
+                let Date1 = new Date(string1);
+                console.log(Date1);
+                let Date2 = new Date(string2);
+                Date2.setDate(Date2.getDate() + 1);
+                console.log(Date2);
+                startDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(Date1, 'yyyy-MM-dd', 'en-US');
+                console.log(startDate);
+                endDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(Date2, 'yyyy-MM-dd', 'en-US');
+                console.log(endDate);
+            }
             let eventQuery;
             let event_nameArray = null;
             if (event_name != null && event_name.length > 0) {
@@ -430,10 +469,10 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             else if (event == 'vital' && tab == 'filter' && analytics != 'analytics') {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
             }
-            else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_name.length != 0) {
+            else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_nameArray != null) {
                 return eventQuery = ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
             }
-            else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_name.length == 0) {
+            else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_nameArray == null) {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
             }
             else if (event == 'vital' && tab == 'pagefilter') {
@@ -445,10 +484,10 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             else if (event == 'expense' && analytics == 'view_summary') {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
             }
-            else if (event == 'expense' && analytics == 'view_analytics' && event_name.length != 0) {
+            else if (event == 'expense' && analytics == 'view_analytics' && event_nameArray != null) {
                 return eventQuery = ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
             }
-            else if (event == 'expense' && analytics == 'view_analytics' && event_name.length == 0) {
+            else if (event == 'expense' && analytics == 'view_analytics' && event_nameArray == null) {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
             }
             else {

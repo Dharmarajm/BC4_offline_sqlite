@@ -128,6 +128,7 @@ let AddAppointmentPage = class AddAppointmentPage {
     }
     ConfirmEvent(val) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            console.log(val);
             this.add_alert = yield this.alertController.create({
                 header: 'Appointment',
                 message: 'Are you sure to submit' + ' ' + (val.event_category).bold() + ' ' + '?',

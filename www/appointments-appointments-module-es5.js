@@ -138,6 +138,7 @@ var AddAppointmentPage = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        console.log(val);
                         _a = this;
                         return [4 /*yield*/, this.alertController.create({
                                 header: 'Appointment',
