@@ -8,7 +8,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Autostart } from '@ionic-native/autostart/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
@@ -73,7 +72,6 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
     SplashScreen,
     AndroidPermissions,
     //BackgroundMode,
-    Autostart,
     ScreenOrientation,
     LocalNotifications,
     Network,

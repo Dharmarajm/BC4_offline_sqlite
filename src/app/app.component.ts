@@ -249,6 +249,7 @@ export class AppComponent {
   //        }   
   //     }
   // }
+  let test = {};
     // const example = from(records).pipe(
     //   groupBy(person =>  person.event_name),  //,person =>  person.event_category
     //   mergeMap(group => group.pipe(toArray())),
@@ -274,15 +275,15 @@ export class AppComponent {
     //     return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data:val }
     //   })
     // ).subscribe(val => {
-    //  let test={};
+     
     //   let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
-    //  test[val['event_name']]={...{date}};
+    //  //test[val['event_name']]={...{date}};
     //  console.log(test,"test")
-    //   // let event_name = `${val['event_name']}`;
+    //   let event_name = `${val['event_name']}`;
     //   // let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
-    //   // let event_category = val.event_category;
+    //   let event_category = val.event_category;
       
-    //   // this.test[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
+    //   test[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
     // })
     // let vital = {};
     // const test = from(data).pipe(
@@ -296,26 +297,50 @@ export class AppComponent {
     //     console.log(val)
     //   })
 
-    // console.log(this.test)
+    console.log(this.test)
 
     const example = from(records).pipe(
         groupBy(person =>  formatDate(person['event_datetime'], 'yyyy-MM-dd', 'en-US')),  //,person =>  person.event_category
         mergeMap(group => group.pipe(toArray())),
-        mergeMap((array) => {// Take each from above array and group each array by manDate
-          return from(array).pipe(groupBy(
-            val => val.event_name,
-            ),
-            mergeMap(group => {
-              return group.pipe(toArray()); // return the group values as Arrays
-            })
+        mergeMap( list$ => { // each emission is a stream
+          
+          /* A stream of "aggregated" data. */
+          return from(list$).pipe(groupBy(
+                  val => val.event_name,
+                  ),
+                  mergeMap(group => {
+                    console.log(group)
+
+                    const count$ = group.reduce( ( accumulator, sample ) => { // reduce the stream
+                        console.log(accumulator,sample)
+                        console.log(list$)
+                        return accumulator + sample.data.reduce( ( acc, datum ) => { // reduce the array
+                          return acc + datum;
+                        }, 0);
+                      }, 0);
+                    //return group.pipe(toArray());
+                    return count$.map( count => ({data:[list$['key'],count ],event:group}));
+                    //return group.pipe(toArray()); // return the group values as Arrays
+                  })
           );
+          // const count$ = list$.reduce( ( accumulator, sample ) => { // reduce the stream
+          //   console.log(accumulator,sample)
+          //   console.log(list$)
+          //   return accumulator + sample.data.reduce( ( acc, datum ) => { // reduce the array
+          //     return acc + datum;
+          //   }, 0);
+          // }, 0);
+      
+          /* Format the result. */
+          //return count$.map( count => ([list$['key'],count ]));
         }),
-        map((val) => {  //For each array returned , calculate the sum and map it to the Object you wanted
+         map((val) => {  //For each array returned , calculate the sum and map it to the Object you wanted
          console.log(val)
-          return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data:val }
+          ///return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data:val }
         })
       ).subscribe(val => {
-       //console.log(val)
+        console.log(val)
+        //console.log(val)
       })
     
 }

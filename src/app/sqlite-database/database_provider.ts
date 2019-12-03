@@ -290,23 +290,33 @@ export class DataBaseSummaryProvider {
     }
 
     async expense_cals_chart(){
-      let getAllEventsData = await this.getAllExpenses();
-      let data = getAllEventsData['event_list'];
-      
-      let value = [];
-      const example = from(data).pipe(
-      groupBy(person =>  person['event_name']),
-      mergeMap(group => from(group).pipe(toArray()))
-      ).subscribe(val => {
-        console.log(val)
-      })
+      let currentDate = new Date();
+      var y = currentDate.getFullYear();
+      let first_day = new Date(y, 0, 1);
+      let last_day = currentDate;
+      var m = currentDate.getMonth();
+      let currentMonth = new Date(y, m, 1);
+      let getAllYearData = await this.getAllExpenses(first_day,last_day);
+      let yearData = getAllYearData['event_list'];
 
+      let getAllCurrentData = await this.getAllExpenses(currentMonth,last_day);
+      let MonthData = getAllCurrentData['event_list'];
+      
+      
+    //   let value = [];
+    //   const example = from(data).pipe(
+    //   groupBy(person =>  person['event_name']),
+    //   mergeMap(group => from(group).pipe(toArray()))
+    //   ).subscribe(val => {
+    //     console.log(val)
+    //   })
+      
       return { Currentmonth : '', Totalyear: '', Year: '' };
     }
 
-    async getAllExpenses(){
+    async getAllExpenses(first_day,last_day){
         let user_id = await this.databaseService.getuserID();
-        let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}')`
+        let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${first_day}') AND DATE('${last_day}'))) ORDER BY event_datetime DESC`
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
                 console.log(data)
