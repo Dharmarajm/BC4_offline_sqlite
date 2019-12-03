@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SQL_SELECT_ALL_CREDENTIALS, Setting, SQL_SELECT_ALL_EVENTS, events, SQL_SELECT_ALL_ENUMS, enum_masters, SQL_SELECT_ALL_HEALTH_DETAILS, SQL_SELECT_ALL_USERS,SQL_SELECT_ALL_EMERGENCY_DATA  } from './database.interface'
-import { of,from } from 'rxjs';
+import { of,from ,zip } from 'rxjs';
 import { concatMap, groupBy, map, mergeMap, reduce, toArray } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
 import { DatabaseProvider } from './database';
@@ -302,6 +302,101 @@ export class DataBaseSummaryProvider {
       let getAllCurrentData = await this.getAllExpenses(currentMonth,last_day);
       let MonthData = getAllCurrentData['event_list'];
       
+     let array = [];
+     let dateobject = {};
+     from(MonthData).pipe(
+     groupBy(person => formatDate(person['event_datetime'], 'yyyy-MM-dd', 'en-US')),
+     mergeMap(group => zip(of(group.key),group.pipe(toArray()))),
+     map(val => {
+    
+        let total = val[1].reduce( ( accumulator, sample ) => { // reduce the stream
+            return accumulator + Number(sample['value']);
+        }, 0);
+        return {event_datetime:val[0],data:val[1],value :total};
+     }),
+     toArray()
+     ).subscribe(res=>{
+        
+            array = res;
+            
+            
+            for(var i in array){
+            
+                let data = array[i]['data']
+                let allArray = [];
+                const arrayreduce = Array.from(new Set(array[i]['data'].map(s=>s.event_name))).map((name,index)=>{
+                    
+                    let total = array[i]['data'].reduce((accumulator,data1) => {
+                    console.log(accumulator,data1)
+                    if(data1.event_name == name && accumulator !=undefined && accumulator !=null){
+                        return accumulator + Number(data1['value'])
+                    }else{
+                        return accumulator;
+                    }
+                    },0)
+                    
+                
+                    allArray.push([name,total])
+                    
+                    
+                })
+
+                dateobject[array[i]['event_datetime']]={data: allArray, event_datetime:array[i]['event_datetime'],value:array[i]['value']}
+            
+            }
+
+
+
+    });
+    
+    let array1 = [];
+    let yearObject = {};
+
+    from(yearData).pipe(
+        groupBy(person => formatDate(person['event_datetime'], 'MMMM', 'en-US')),
+        mergeMap(group => zip(of(group.key),group.pipe(toArray()))),
+        map(val => {
+       
+           let total = val[1].reduce( ( accumulator, sample ) => { // reduce the stream
+               return accumulator + Number(sample['value']);
+           }, 0);
+           return {event_datetime:val[0],data:val[1],value :total};
+        }),
+        toArray()
+        ).subscribe(res=>{
+           
+            array1 = res;
+               
+               
+               for(var i in array1){
+               
+                   let data = array1[i]['data']
+                   let allArray = [];
+                   const arrayreduce = Array.from(new Set(array1[i]['data'].map(s=>s.event_name))).map((name,index)=>{
+                       
+                       let total = array1[i]['data'].reduce((accumulator,data1) => {
+                       console.log(accumulator,data1)
+                       if(data1.event_name == name && accumulator !=undefined && accumulator !=null){
+                           return accumulator + Number(data1['value'])
+                       }else{
+                           return accumulator;
+                       }
+                       },0)
+                       
+                   
+                       allArray.push([name,total])
+                       
+                       
+                   })
+   
+                   yearObject[array1[i]['event_datetime']]={data: allArray, event_datetime:array1[i]['event_datetime'],value:array1[i]['value']}
+               
+               }
+   
+   
+   
+       });
+
       
     //   let value = [];
     //   const example = from(data).pipe(
@@ -310,8 +405,11 @@ export class DataBaseSummaryProvider {
     //   ).subscribe(val => {
     //     console.log(val)
     //   })
-      
-      return { Currentmonth : '', Totalyear: '', Year: '' };
+    let totalValue = yearData.reduce((accum,hash)=>{
+        return accum + Number(hash['value'])
+    },0)
+      let total_year = [{ year:y,value: totalValue}]
+      return { Currentmonth : dateobject, Totalyear: total_year, Year: yearObject };
     }
 
     async getAllExpenses(first_day,last_day){
@@ -433,42 +531,67 @@ export class DataBaseSummaryProvider {
             console.log(response)
             let data = response['event_list'];
             
-            let value = {}
-            const example = from(data).pipe(
-                groupBy(person =>  person['event_name']),  //,person =>  person.event_category
-                mergeMap(group => group.pipe(toArray())),
-                mergeMap((array) => {// Take each from above array and group each array by manDate
-                  return from(array).pipe(groupBy(
-                    val => formatDate(val['event_datetime'], 'yyyy-MM-dd', 'en-US'),
-                    ),
-                    mergeMap(group => {
-                      return group.pipe(toArray()); // return the group values as Arrays
-                    })
-                  );
-                }),
-                mergeMap((array) => {// Take each from above array and group each array by manDate
-                  return from(array).pipe(groupBy(
-                    val => val['event_category'],
-                    ),
-                    mergeMap(group => {
-                      return group.pipe(toArray()); // return the group values as Arrays
-                    })
-                  );
-                }),map((val) => {  //For each array returned , calculate the sum and map it to the Object you wanted
+            // let value = {}
+            // const example = from(data).pipe(
+            //     groupBy(person =>  person['event_name']),  //,person =>  person.event_category
+            //     mergeMap(group => group.pipe(toArray())),
+            //     mergeMap((array) => {// Take each from above array and group each array by manDate
+            //       return from(array).pipe(groupBy(
+            //         val => formatDate(val['event_datetime'], 'yyyy-MM-dd', 'en-US'),
+            //         ),
+            //         mergeMap(group => {
+            //           return group.pipe(toArray()); // return the group values as Arrays
+            //         })
+            //       );
+            //     }),
+            //     mergeMap((array) => {// Take each from above array and group each array by manDate
+            //       return from(array).pipe(groupBy(
+            //         val => val['event_category'],
+            //         ),
+            //         mergeMap(group => {
+            //           return group.pipe(toArray()); // return the group values as Arrays
+            //         })
+            //       );
+            //     }),map((val) => {  //For each array returned , calculate the sum and map it to the Object you wanted
                  
-                  return { event_name: val[0]['event_name'], date: val[0]['event_datetime'], event_category: val[0]['event_category'], data:val }
-                })
-              ).subscribe(val => {
+            //       return { event_name: val[0]['event_name'], date: val[0]['event_datetime'], event_category: val[0]['event_category'], data:val }
+            //     })
+            //   ).subscribe(val => {
                
-               console.log(val,"test")
-                 let event_name = `${val['event_name']}`;
-                 let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
-                 let event_category = val.event_category;
+            //    console.log(val,"test")
+            //      let event_name = `${val['event_name']}`;
+            //      let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
+            //      let event_category = val.event_category;
                 
-                 value[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
-              })
+            //      value[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
+            //   })
+            let vitalList = {};
+            for(let i in data){
+                
+                  let event_datetime = formatDate(data[i]['event_datetime'], 'yyyy-MM-dd', 'en-US');
+                  let event_category = data[i]['event_category'];
+                  let event_name = data[i]['event_name'];
+                  if(vitalList[`${event_name}`]==undefined){
+                    vitalList[`${event_name}`] = {};
+                    vitalList[`${event_name}`][`${event_datetime}`]={};
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`] = []
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`].push(data[i]);
+                  }else if(vitalList[`${event_name}`][`${event_datetime}`]==undefined){
+                    vitalList[`${event_name}`][`${event_datetime}`]={};
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`] = []
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`].push(data[i]); 
+                  }else if(vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`]==undefined){
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`]=[]
+                   
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`].push(data[i]);   
+                  }else{
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`].push(data[i]); 
+                  }
+                       
+          
+              }
   
-              return value;
+              return vitalList;
   
           })
     }

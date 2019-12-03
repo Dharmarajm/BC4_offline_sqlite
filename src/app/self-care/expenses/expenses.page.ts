@@ -46,32 +46,60 @@ export class ExpensesPage implements OnInit {
     this.lastMonthColor= "#fff";
     this.currentMonthColor = "#ffd32c";
     this.yearColor ="#fff"; 
-    this.expense.main_chart(this.user_id).subscribe(res => {
-      this.main_chart = res;
-      console.log(this.Last_Mon_len)
-      for (let i in this.main_chart.Currentmonth) {
+    // this.expense.main_chart(this.user_id).subscribe(res => {
+    //   this.main_chart = res;
+    //   console.log(this.Last_Mon_len)
+    //   for (let i in this.main_chart.Currentmonth) {
         
-        this.currentMonthCat.push(i);
-        let key:any = Object.values(this.main_chart.Currentmonth[i])
-        console.log(key[0])
-        this.data.push({
-          name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
-          y: key[0].value,
-          drilldown: this.datepipe.transform(key[0].event_datetime, 'MMM dd')
-        })
-        this.drilldownData.push({
-          name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
-          id: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
-          data: key[0].data
-        })
-      }
-      console.log(this.drilldownData)
+    //     this.currentMonthCat.push(i);
+    //     let key:any = Object.values(this.main_chart.Currentmonth[i])
+    //     console.log(key[0])
+    //     this.data.push({
+    //       name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+    //       y: key[0].value,
+    //       drilldown: this.datepipe.transform(key[0].event_datetime, 'MMM dd')
+    //     })
+    //     this.drilldownData.push({
+    //       name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+    //       id: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+    //       data: key[0].data
+    //     })
+    //   }
+    //   console.log(this.drilldownData)
 
-      let hashdata={name:'Current Month',colorByPoint: true,data:this.data, color:'#ffd32c'};
+    //   let hashdata={name:'Current Month',colorByPoint: true,data:this.data, color:'#ffd32c'};
         
-      this.values.push(hashdata)
+    //   this.values.push(hashdata)
       
-      this.mainChart();
+    //   this.mainChart();
+    // })
+
+    this.databaseSummary.expense_cals_chart().then(res=>{
+      this.main_chart = res;
+        console.log(this.Last_Mon_len)
+        for (let i in this.main_chart.Currentmonth) {
+          
+          this.currentMonthCat.push(i);
+          let key:any = Object.values(this.main_chart.Currentmonth[i])
+          console.log(key[0])
+          this.data.push({
+            name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+            y: key[0].value,
+            drilldown: this.datepipe.transform(key[0].event_datetime, 'MMM dd')
+          })
+          this.drilldownData.push({
+            name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+            id: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+            data: key[0].data
+          })
+        }
+        console.log(this.drilldownData)
+  
+        let hashdata={name:'Current Month',colorByPoint: true,data:this.data, color:'#ffd32c'};
+          
+        this.values.push(hashdata)
+        
+        this.mainChart();
     })
 
     this.databaseSummary.expenseCalculation().then(res=>{

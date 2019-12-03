@@ -4,6 +4,7 @@ import * as HighCharts from 'highcharts';
 import { DatePipe } from '@angular/common';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { environment } from '../../../environments/environment';
+import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
 declare var Highcharts;
 
@@ -35,7 +36,7 @@ export class CgexpensesPage implements OnInit {
   environmentUrl:any;
   drilldownData:any[] = [];
 
-  constructor(public datepipe:DatePipe,private statusBar: StatusBar,public settingService: careGiverService) { 
+  constructor(public datepipe:DatePipe,private statusBar: StatusBar,public settingService: careGiverService,private databaseSummary: DataBaseSummaryProvider) { 
     this.environmentUrl=environment.ImageUrl;
   }
 
@@ -56,50 +57,73 @@ export class CgexpensesPage implements OnInit {
     this.lastMonthColor= "#fff";
     this.currentMonthColor = "#ffd32c";
     this.yearColor ="#fff"; 
-    this.settingService.main_chart(this.user_id).subscribe(res => {
-      this.main_chart = res;
-      //console.log(this.main_chart.Lastmonth,this.main_chart.Currentmonth,this.main_chart.Year,'len')
-      //this.Last_Mon_len = this.main_chart.Lastmonth.length;
-     
-      //console.log(this.Last_Mon_len)
-      for (let i in this.main_chart.Currentmonth) {
-        //this.data.push(Object.values(this.main_chart.Currentmonth[i]))
-        this.currentMonthCat.push(i);
-        let key:any = Object.values(this.main_chart.Currentmonth[i])
-        console.log(key[0])
-        this.data.push({
-          name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
-          y: key[0].value,
-          drilldown: this.datepipe.transform(key[0].event_datetime, 'MMM dd')
-        })
-        this.drilldownData.push({
-          name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
-          id: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
-          data: key[0].data
-        })
-      }
-      console.log(this.drilldownData)
-      // let YearData = this.main_chart.Totalyear[0];
-      // let getyearData= [{
-      //   name: 'Total Spent',
-      //   y: YearData['value']
-      // }]
-      // let yearData = {name:'Year',colorByPoint: true,data:getyearData, color:'#ffd32c'}
-      // this.values.push(yearData)
 
-      let hashdata={name:'Current Month',colorByPoint: true,data:this.data, color:'#ffd32c'};
-        
-      this.values.push(hashdata)
+    // this.settingService.main_chart(this.user_id).subscribe(res => {
+    //   this.main_chart = res;
       
-      this.mainChart();
+    //   for (let i in this.main_chart.Currentmonth) {
+        
+    //     this.currentMonthCat.push(i);
+    //     let key:any = Object.values(this.main_chart.Currentmonth[i])
+        
+    //     this.data.push({
+    //       name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+    //       y: key[0].value,
+    //       drilldown: this.datepipe.transform(key[0].event_datetime, 'MMM dd')
+    //     })
+    //     this.drilldownData.push({
+    //       name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+    //       id: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+    //       data: key[0].data
+    //     })
+    //   }
+    //   console.log(this.drilldownData)
+      
+
+    //   let hashdata={name:'Current Month',colorByPoint: true,data:this.data, color:'#ffd32c'};
+        
+    //   this.values.push(hashdata)
+      
+    //   this.mainChart();
+    // })
+
+    this.databaseSummary.expense_cals_chart().then(res=>{
+      this.main_chart = res;
+        console.log(this.Last_Mon_len)
+        for (let i in this.main_chart.Currentmonth) {
+          
+          this.currentMonthCat.push(i);
+          let key:any = Object.values(this.main_chart.Currentmonth[i])
+          console.log(key[0])
+          this.data.push({
+            name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+            y: key[0].value,
+            drilldown: this.datepipe.transform(key[0].event_datetime, 'MMM dd')
+          })
+          this.drilldownData.push({
+            name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+            id: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+            data: key[0].data
+          })
+        }
+        console.log(this.drilldownData)
+  
+        let hashdata={name:'Current Month',colorByPoint: true,data:this.data, color:'#ffd32c'};
+          
+        this.values.push(hashdata)
+        
+        this.mainChart();
     })
 
 
-    
-    this.settingService.view_expenses_cal(this.user_id).subscribe(res =>{
+    this.databaseSummary.expenseCalculation().then(res=>{
       this.expense_val = res;
-      console.log(Math.round(this.expense_val.MonthProjection));
-    });
+    })
+    
+    // this.settingService.view_expenses_cal(this.user_id).subscribe(res =>{
+    //   this.expense_val = res;
+    //   console.log(Math.round(this.expense_val.MonthProjection));
+    // });
     
     
 
