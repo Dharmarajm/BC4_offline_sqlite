@@ -717,8 +717,10 @@ let AnalyticsPage = class AnalyticsPage {
         this.tmpResult = {};
         console.log(res);
         for (let type of Object.keys(res)) {
+            console.log(type);
+            console.log(Object.keys(res[type]));
             for (let date of Object.keys(res[type]))
-                if (type === 'Blood Glucose') {
+                if (type == 'Blood Glucose') {
                     this.date_val = this.datepipe.transform(date, "MMM d");
                     let rec = {};
                     rec['#'] = rec['#'] || this.date_val;
@@ -763,7 +765,7 @@ let AnalyticsPage = class AnalyticsPage {
                     }
                 }
                 else {
-                    if (type === 'Body Temperature' || type === 'Oxygen Saturation') {
+                    if (type == 'Body Temperature' || type == 'Oxygen Saturation') {
                         let rec = {};
                         this.date_val = this.datepipe.transform(date, "MMM d");
                         rec['#'] = rec['#'] || this.date_val;
@@ -780,7 +782,7 @@ let AnalyticsPage = class AnalyticsPage {
                         this.tmpResult[type].push(rec);
                     }
                     else {
-                        if (type === 'Blood Pressure') {
+                        if (type == 'Blood Pressure') {
                             let rec = {};
                             let flag = false;
                             this.date_val = this.datepipe.transform(date, "MMM d");
@@ -1056,6 +1058,7 @@ let VitalReadingPage = class VitalReadingPage {
         this.vital_page_offset = 0;
         this.route.queryParams.subscribe(params => {
             this.event_name = params.data;
+            console.log(this.event_name);
             this.user_id = localStorage.getItem("user_id");
         });
     }
@@ -1078,6 +1081,7 @@ let VitalReadingPage = class VitalReadingPage {
         this.filterHistory();
     }
     filterHistory() {
+        console.log(this.event_name);
         this.databaseSummary.filterVitalHistory('vital', this.event_name, this.from_date1, this.end_date1, this.vital_page_offset).then(res => {
             console.log(res);
             this.previous_data = res['events'];

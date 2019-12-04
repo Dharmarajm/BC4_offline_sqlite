@@ -387,9 +387,32 @@ let ExpensesPage = class ExpensesPage {
         this.lastMonthColor = "#fff";
         this.currentMonthColor = "#ffd32c";
         this.yearColor = "#fff";
-        this.expense.main_chart(this.user_id).subscribe(res => {
+        // this.expense.main_chart(this.user_id).subscribe(res => {
+        //   this.main_chart = res;
+        //   console.log(this.Last_Mon_len)
+        //   for (let i in this.main_chart.Currentmonth) {
+        //     this.currentMonthCat.push(i);
+        //     let key:any = Object.values(this.main_chart.Currentmonth[i])
+        //     console.log(key[0])
+        //     this.data.push({
+        //       name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+        //       y: key[0].value,
+        //       drilldown: this.datepipe.transform(key[0].event_datetime, 'MMM dd')
+        //     })
+        //     this.drilldownData.push({
+        //       name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+        //       id: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+        //       data: key[0].data
+        //     })
+        //   }
+        //   console.log(this.drilldownData)
+        //   let hashdata={name:'Current Month',colorByPoint: true,data:this.data, color:'#ffd32c'};
+        //   this.values.push(hashdata)
+        //   this.mainChart();
+        // })
+        this.databaseSummary.expense_cals_chart().then(res => {
             this.main_chart = res;
-            console.log(this.Last_Mon_len);
+            console.log(this.main_chart);
             for (let i in this.main_chart.Currentmonth) {
                 this.currentMonthCat.push(i);
                 let key = Object.values(this.main_chart.Currentmonth[i]);
@@ -408,18 +431,20 @@ let ExpensesPage = class ExpensesPage {
             console.log(this.drilldownData);
             let hashdata = { name: 'Current Month', colorByPoint: true, data: this.data, color: '#ffd32c' };
             this.values.push(hashdata);
+            console.log(this.values);
             this.mainChart();
         });
         this.databaseSummary.expenseCalculation().then(res => {
             console.log(res);
+            this.expense_val = res;
         });
         // this.databaseSummary.expenseCalculation().then(res=>{
         //   console.log(res)
         // })
-        this.expense.view_expenses_cal(this.user_id).subscribe(res => {
-            this.expense_val = res;
-            console.log(Math.round(this.expense_val.MonthProjection));
-        });
+        // this.expense.view_expenses_cal(this.user_id).subscribe(res =>{
+        //   this.expense_val = res;
+        //   console.log(Math.round(this.expense_val.MonthProjection));
+        // });
         this.statusBar.backgroundColorByHexString('#ffd32c');
         this.tabBar = document.getElementById('myTabBar').childNodes[0];
         this.tabBar.classList.remove("tab-selected");
@@ -927,6 +952,7 @@ let FiltersPage = class FiltersPage {
             // this.list_keys =res['events']
             // })
             this.databaseSummary.expenseDatefilter(this.user_id, from, end, type).then(res => {
+                console.log(res);
                 this.list_keys = res['events'];
             }).catch(err => { console.log(err); });
         }
@@ -1087,7 +1113,7 @@ let viewAnalyticsPage = class viewAnalyticsPage {
         let yaxis_value = [];
         console.log(yaxis_value);
         Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["from"])(value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["pluck"])("event_datetime")).subscribe(val => xaxis_value.push(this.datepipe.transform(val, 'MMM dd')));
-        Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["from"])(value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["pluck"])("value")).subscribe(val => yaxis_value.push([val]));
+        Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["from"])(value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["pluck"])("value")).subscribe(val => yaxis_value.push([Number(val)]));
         this.yaxis_total = [{
                 name: name,
                 data: yaxis_value,
@@ -1284,6 +1310,7 @@ let viewSummaryPage = class viewSummaryPage {
         //   console.log(this.expen_key);
         // })
         this.databaseSummary.ExpenseViewSummary(this.from_date1, this.end_date1, 'expense', 'event_name', 'view_summary').then((res) => {
+            console.log(res);
             this.view_all_expen = res;
             this.from_date1 = this.view_all_expen.from_date;
             this.end_date1 = this.view_all_expen.end_date;

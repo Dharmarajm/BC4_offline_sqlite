@@ -34,7 +34,8 @@ vital_page_offset:number=0;
 
 constructor(public modalCtrl: ModalController,private toast: Toast,public datepipe: DatePipe, public service: settingsService, public route:ActivatedRoute, public router: Router,public toastController: ToastController,public alertController:AlertController, private statusBar: StatusBar,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) {
       this.route.queryParams.subscribe(params => {      
-           this.event_name = params.data
+           this.event_name = params.data;
+           console.log(this.event_name)
            this.user_id = localStorage.getItem("user_id");               
       });
       
@@ -62,7 +63,7 @@ constructor(public modalCtrl: ModalController,private toast: Toast,public datepi
   }
   
   filterHistory(){
-
+    console.log(this.event_name)
     this.databaseSummary.filterVitalHistory('vital',this.event_name,this.from_date1,this.end_date1,this.vital_page_offset).then(res=>{
       console.log(res)
       this.previous_data=res['events']

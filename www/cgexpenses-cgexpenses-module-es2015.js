@@ -690,6 +690,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../sqlite-database/database_provider */ "./src/app/sqlite-database/database_provider.ts");
+
 
 
 
@@ -697,10 +699,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CgexpensesPage = class CgexpensesPage {
-    constructor(datepipe, statusBar, settingService) {
+    constructor(datepipe, statusBar, settingService, databaseSummary) {
         this.datepipe = datepipe;
         this.statusBar = statusBar;
         this.settingService = settingService;
+        this.databaseSummary = databaseSummary;
         this.currentMonthCat = [];
         this.values = [];
         this.data = [];
@@ -727,13 +730,31 @@ let CgexpensesPage = class CgexpensesPage {
         this.lastMonthColor = "#fff";
         this.currentMonthColor = "#ffd32c";
         this.yearColor = "#fff";
-        this.settingService.main_chart(this.user_id).subscribe(res => {
+        // this.settingService.main_chart(this.user_id).subscribe(res => {
+        //   this.main_chart = res;
+        //   for (let i in this.main_chart.Currentmonth) {
+        //     this.currentMonthCat.push(i);
+        //     let key:any = Object.values(this.main_chart.Currentmonth[i])
+        //     this.data.push({
+        //       name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+        //       y: key[0].value,
+        //       drilldown: this.datepipe.transform(key[0].event_datetime, 'MMM dd')
+        //     })
+        //     this.drilldownData.push({
+        //       name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+        //       id: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
+        //       data: key[0].data
+        //     })
+        //   }
+        //   console.log(this.drilldownData)
+        //   let hashdata={name:'Current Month',colorByPoint: true,data:this.data, color:'#ffd32c'};
+        //   this.values.push(hashdata)
+        //   this.mainChart();
+        // })
+        this.databaseSummary.expense_cals_chart().then(res => {
             this.main_chart = res;
-            //console.log(this.main_chart.Lastmonth,this.main_chart.Currentmonth,this.main_chart.Year,'len')
-            //this.Last_Mon_len = this.main_chart.Lastmonth.length;
-            //console.log(this.Last_Mon_len)
+            console.log(this.Last_Mon_len);
             for (let i in this.main_chart.Currentmonth) {
-                //this.data.push(Object.values(this.main_chart.Currentmonth[i]))
                 this.currentMonthCat.push(i);
                 let key = Object.values(this.main_chart.Currentmonth[i]);
                 console.log(key[0]);
@@ -749,21 +770,17 @@ let CgexpensesPage = class CgexpensesPage {
                 });
             }
             console.log(this.drilldownData);
-            // let YearData = this.main_chart.Totalyear[0];
-            // let getyearData= [{
-            //   name: 'Total Spent',
-            //   y: YearData['value']
-            // }]
-            // let yearData = {name:'Year',colorByPoint: true,data:getyearData, color:'#ffd32c'}
-            // this.values.push(yearData)
             let hashdata = { name: 'Current Month', colorByPoint: true, data: this.data, color: '#ffd32c' };
             this.values.push(hashdata);
             this.mainChart();
         });
-        this.settingService.view_expenses_cal(this.user_id).subscribe(res => {
+        this.databaseSummary.expenseCalculation().then(res => {
             this.expense_val = res;
-            console.log(Math.round(this.expense_val.MonthProjection));
         });
+        // this.settingService.view_expenses_cal(this.user_id).subscribe(res =>{
+        //   this.expense_val = res;
+        //   console.log(Math.round(this.expense_val.MonthProjection));
+        // });
         this.profile_details = JSON.parse(localStorage.getItem("details"));
         if (this.profile_details != undefined) {
             console.log(this.profile_details);
@@ -936,7 +953,8 @@ let CgexpensesPage = class CgexpensesPage {
 CgexpensesPage.ctorParameters = () => [
     { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__["DatePipe"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
-    { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_2__["careGiverService"] }
+    { type: _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_2__["careGiverService"] },
+    { type: _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_6__["DataBaseSummaryProvider"] }
 ];
 CgexpensesPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -944,7 +962,7 @@ CgexpensesPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./cgexpenses.page.html */ "./node_modules/raw-loader/index.js!./src/app/care-giver/cgexpenses/cgexpenses.page.html"),
         styles: [__webpack_require__(/*! ./cgexpenses.page.scss */ "./src/app/care-giver/cgexpenses/cgexpenses.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common__WEBPACK_IMPORTED_MODULE_3__["DatePipe"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_2__["careGiverService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common__WEBPACK_IMPORTED_MODULE_3__["DatePipe"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _care_giver_service_caregiver_service_service__WEBPACK_IMPORTED_MODULE_2__["careGiverService"], _sqlite_database_database_provider__WEBPACK_IMPORTED_MODULE_6__["DataBaseSummaryProvider"]])
 ], CgexpensesPage);
 
 

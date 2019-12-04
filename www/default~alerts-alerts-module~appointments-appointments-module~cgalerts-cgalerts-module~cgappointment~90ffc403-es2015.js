@@ -251,7 +251,6 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     let no_of_months = (y * 12 + m) - (fy * 12 + fm);
                     console.log(no_of_months);
                     console.log(joinMonth != null, joinMonth <= setfirst_month, joinMonth, setfirst_month);
-                    //if(joinMonth!=null && joinMonth <= setfirst_month){
                     let CurrentMonthStart = currentMonth.toJSON();
                     console.log(CurrentMonthStart);
                     let CurrentMonthEnd = lastDate.toJSON();
@@ -260,9 +259,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     console.log(sqlCurrentMonthExpQuery);
                     let getResponseOfMonthExp = yield this.expenseCalculateValue(sqlCurrentMonthExpQuery);
                     console.log(getResponseOfMonthExp);
-                    for (let i = 0; i < getResponseOfMonthExp.rows.length; i++) {
-                        console.log(getResponseOfMonthExp.rows.item(i));
-                    }
+                    let CurrentMonthExpense = getResponseOfMonthExp.rows.item(0)['SUM(value)'];
                     let firstDayOfYear = first_day.toJSON();
                     console.log(firstDayOfYear);
                     let lastDayofYear = lastDate.toJSON();
@@ -270,12 +267,17 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     let sqlCurrentYearExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${firstDayOfYear}') AND DATE('${lastDayofYear}')))`;
                     console.log(sqlCurrentYearExpQuery);
                     let getResponseOfYearExp = yield this.expenseCalculateValue(sqlCurrentYearExpQuery);
-                    console.log(getResponseOfYearExp);
-                    for (let j = 0; j < getResponseOfYearExp.rows.length; j++) {
-                        console.log(getResponseOfYearExp.rows.item(j));
+                    let CurrentYearExpense = getResponseOfYearExp.rows.item(0)['SUM(value)'];
+                    if (joinMonth != null && joinMonth <= setfirst_month) {
+                        let projectionM = (CurrentYearExpense / no_of_months);
+                        let MonthlyProjection = projectionM.toFixed(2);
+                        let projectionY = (projectionM * 12);
+                        let yearlyProjection = projectionY.toFixed(2);
+                        return { CurrentMonth: CurrentMonthExpense, Yearly: CurrentYearExpense, status: true, MonthProjection: MonthlyProjection, YearlyProjection: yearlyProjection };
                     }
-                    //}
-                    return { CurrentMonth: "", Yearly: "", status: "" };
+                    else {
+                        return { CurrentMonth: CurrentMonthExpense, Yearly: CurrentYearExpense, status: false };
+                    }
                 }));
             });
         });
@@ -291,19 +293,92 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     }
     expense_cals_chart() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            let getAllEventsData = yield this.getAllExpenses();
-            let data = getAllEventsData['event_list'];
-            let value = [];
-            const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => person['event_name']), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))).subscribe(val => {
-                console.log(val);
+            let currentDate = new Date();
+            var y = currentDate.getFullYear();
+            let first_day = new Date(y, 0, 1);
+            let last_day = currentDate;
+            var m = currentDate.getMonth();
+            let currentMonth = new Date(y, m, 1);
+            let getAllYearData = yield this.getAllExpenses(first_day, last_day);
+            let yearData = getAllYearData['event_list'];
+            console.log(yearData);
+            let getAllCurrentData = yield this.getAllExpenses(currentMonth, last_day);
+            let MonthData = getAllCurrentData['event_list'];
+            console.log(MonthData);
+            let array = [];
+            let dateobject = {};
+            yield Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(MonthData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(person['event_datetime'], 'yyyy-MM-dd', 'en-US')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["zip"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(group.key), group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(val => {
+                let total = val[1].reduce((accumulator, sample) => {
+                    return accumulator + Number(sample['value']);
+                }, 0);
+                return { event_datetime: val[0], data: val[1], value: total };
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()).subscribe(res => {
+                array = res;
+                for (var i in array) {
+                    let data = array[i]['data'];
+                    let allArray = [];
+                    const arrayreduce = Array.from(new Set(array[i]['data'].map(s => s.event_name))).map((name, index) => {
+                        let total = array[i]['data'].reduce((accumulator, data1) => {
+                            console.log(accumulator, data1);
+                            if (data1.event_name == name && accumulator != undefined && accumulator != null) {
+                                return accumulator + Number(data1['value']);
+                            }
+                            else {
+                                return accumulator;
+                            }
+                        }, 0);
+                        allArray.push([name, total]);
+                    });
+                    dateobject[array[i]['event_datetime']] = { data: allArray, event_datetime: array[i]['event_datetime'], value: array[i]['value'] };
+                }
             });
-            return { Currentmonth: '', Totalyear: '', Year: '' };
+            console.log(dateobject);
+            let array1 = [];
+            let yearObject = {};
+            yield Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(yearData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(person['event_datetime'], 'MMMM', 'en-US')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["zip"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(group.key), group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(val => {
+                let total = val[1].reduce((accumulator, sample) => {
+                    return accumulator + Number(sample['value']);
+                }, 0);
+                return { event_datetime: val[0], data: val[1], value: total };
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()).subscribe(res => {
+                array1 = res;
+                for (var i in array1) {
+                    let data = array1[i]['data'];
+                    let allArray = [];
+                    const arrayreduce = Array.from(new Set(array1[i]['data'].map(s => s.event_name))).map((name, index) => {
+                        let total = array1[i]['data'].reduce((accumulator, data1) => {
+                            console.log(accumulator, data1);
+                            if (data1.event_name == name && accumulator != undefined && accumulator != null) {
+                                return accumulator + Number(data1['value']);
+                            }
+                            else {
+                                return accumulator;
+                            }
+                        }, 0);
+                        allArray.push([name, total]);
+                    });
+                    yearObject[array1[i]['event_datetime']] = { data: allArray, event_datetime: array1[i]['event_datetime'], value: array1[i]['value'] };
+                }
+            });
+            console.log(yearObject);
+            //   let value = [];
+            //   const example = from(data).pipe(
+            //   groupBy(person =>  person['event_name']),
+            //   mergeMap(group => from(group).pipe(toArray()))
+            //   ).subscribe(val => {
+            //     console.log(val)
+            //   })
+            let totalValue = yield yearData.reduce((accum, hash) => {
+                return accum + Number(hash['value']);
+            }, 0);
+            let total_year = [{ year: y, value: totalValue }];
+            return { Currentmonth: dateobject, Totalyear: total_year, Year: yearObject };
         });
     }
-    getAllExpenses() {
+    getAllExpenses(first_day, last_day) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let user_id = yield this.databaseService.getuserID();
-            let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}')`;
+            let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${first_day}') AND DATE('${last_day}'))) ORDER BY event_datetime DESC`;
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {
                     console.log(data);
@@ -400,31 +475,67 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             return { from_date: fromDate, end_date: end_date, expense: vital };
         });
     }
-    vitalFilterAnalytics(id, data) {
-        let params = data;
+    vitalFilterAnalytics(id, paramsOfdata) {
+        let params = paramsOfdata;
         return this.getVitalEvents(id, params['from_date'], params['end_date'], 'vital', 'analytics', params['event_name']).then(response => {
             console.log(response);
             let data = response['event_list'];
-            let value = {};
-            const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => person['event_name']), //,person =>  person.event_category
-            Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])())), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])((array) => {
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(array).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(val => Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(val['event_datetime'], 'yyyy-MM-dd', 'en-US')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => {
-                    return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); // return the group values as Arrays
-                }));
-            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])((array) => {
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(array).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(val => val['event_category']), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => {
-                    return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); // return the group values as Arrays
-                }));
-            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])((val) => {
-                return { event_name: val[0]['event_name'], date: val[0]['event_datetime'], event_category: val[0]['event_category'], data: val };
-            })).subscribe(val => {
-                console.log(val, "test");
-                let event_name = `${val['event_name']}`;
-                let date = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(val.date, 'yyyy-MM-dd', 'en-US');
-                let event_category = val.event_category;
-                value[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
-            });
-            return value;
+            // let value = {}
+            // const example = from(data).pipe(
+            //     groupBy(person =>  person['event_name']),  //,person =>  person.event_category
+            //     mergeMap(group => group.pipe(toArray())),
+            //     mergeMap((array) => {// Take each from above array and group each array by manDate
+            //       return from(array).pipe(groupBy(
+            //         val => formatDate(val['event_datetime'], 'yyyy-MM-dd', 'en-US'),
+            //         ),
+            //         mergeMap(group => {
+            //           return group.pipe(toArray()); // return the group values as Arrays
+            //         })
+            //       );
+            //     }),
+            //     mergeMap((array) => {// Take each from above array and group each array by manDate
+            //       return from(array).pipe(groupBy(
+            //         val => val['event_category'],
+            //         ),
+            //         mergeMap(group => {
+            //           return group.pipe(toArray()); // return the group values as Arrays
+            //         })
+            //       );
+            //     }),map((val) => {  //For each array returned , calculate the sum and map it to the Object you wanted
+            //       return { event_name: val[0]['event_name'], date: val[0]['event_datetime'], event_category: val[0]['event_category'], data:val }
+            //     })
+            //   ).subscribe(val => {
+            //    console.log(val,"test")
+            //      let event_name = `${val['event_name']}`;
+            //      let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
+            //      let event_category = val.event_category;
+            //      value[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
+            //   })
+            let vitalList = {};
+            for (let i in data) {
+                let event_datetime = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(data[i]['event_datetime'], 'yyyy-MM-dd', 'en-US');
+                let event_category = data[i]['event_category'];
+                let event_name = data[i]['event_name'];
+                if (vitalList[`${event_name}`] == undefined) {
+                    vitalList[`${event_name}`] = {};
+                    vitalList[`${event_name}`][`${event_datetime}`] = {};
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`] = [];
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`].push(data[i]);
+                }
+                else if (vitalList[`${event_name}`][`${event_datetime}`] == undefined) {
+                    vitalList[`${event_name}`][`${event_datetime}`] = {};
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`] = [];
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`].push(data[i]);
+                }
+                else if (vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`] == undefined) {
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`] = [];
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`].push(data[i]);
+                }
+                else {
+                    vitalList[`${event_name}`][`${event_datetime}`][`${event_category}`].push(data[i]);
+                }
+            }
+            return vitalList;
         });
     }
     checkEventType(event, tab, offset, from_date, end_date, analytics, event_name) {
@@ -449,8 +560,8 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             }
             let eventQuery;
             let event_nameArray = null;
-            if (event_name != null && event_name.length > 0) {
-                event_nameArray = event_name.toString();
+            if (event_name != null && event_name.length > 0 && typeof (event_name) == "object") {
+                event_nameArray = event_name.map(x => `"${x}"`).toString();
             }
             let user_id = yield this.databaseService.getuserID();
             //let nowDate = new Date().toJSON()
@@ -470,7 +581,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
             }
             else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_nameArray != null) {
-                return eventQuery = ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
+                return eventQuery = ` WHERE (event_name IN (${event_nameArray}) AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
             }
             else if (event == 'vital' && tab == 'filter' && analytics == 'analytics' && event_nameArray == null) {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
@@ -485,7 +596,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
             }
             else if (event == 'expense' && analytics == 'view_analytics' && event_nameArray != null) {
-                return eventQuery = ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
+                return eventQuery = ` WHERE (event_name IN (${event_nameArray}) AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;
             }
             else if (event == 'expense' && analytics == 'view_analytics' && event_nameArray == null) {
                 return eventQuery = ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`;

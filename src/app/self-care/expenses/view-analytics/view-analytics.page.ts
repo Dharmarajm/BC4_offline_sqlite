@@ -31,7 +31,7 @@ export class viewAnalyticsPage {
   ngOnInit() {
   }
 
-ionViewWillEnter() {
+  ionViewWillEnter() { 
 
       //this.date = new Date();
       //console.log(this.date)
@@ -54,136 +54,137 @@ ionViewWillEnter() {
       //   }        
       //  }, 2000); 
       // });
-}
+  } 
 
 
-datetoast(){
-  this.presentToast('Use filter to get specific data')   
-}
-async presentToast(message: string) {
-  this.toast.show(message, '4000', 'center').subscribe(
-    toast => { 
-      console.log(toast); 
-    });
-}
-charts(name: string,value){
-  console.log(value)
-  let xaxis_value = [];
-  console.log(xaxis_value);
-  let yaxis_value = [];
-  console.log(yaxis_value);
-  from(value).pipe(pluck("event_datetime")).subscribe(val => xaxis_value.push(this.datepipe.transform(val, 'MMM dd')))
-  from(value).pipe(pluck("value")).subscribe(val => yaxis_value.push([val]))
-  this.yaxis_total=[{
-       name: name,
-       data:yaxis_value,
-       colorByPoint: true,
-       color:'#ffd32c'
-       }]
-  Highcharts.chart(name,{
-    chart: {
-       type: 'column',
-       zoomType: 'xy',
-       renderTo: "container",
-       options3d: {
-           enabled: true,
-           alpha: 15,
-           beta: 15,
-           depth: 50,
-           viewDistance: 25
-       }
-    },
-    title: {
-       text: name
-    },
-   
-    tooltip: {
-      crosshairs: true,
-      shared: true,
-      headerFormat:  '<span style="font-size:11px"><b>{series.name}</b> </span><br>',
-      pointFormat: '<span style="color:{point.color}">Total Spent</span>: <b>{point.y:.2f} Rs</b><br/>'
-    }, 
-    xAxis: {
-       categories: xaxis_value
-    },
-    yAxis: {
-      title: {
-        text: 'Rupees'
-      }
-    },
-     series:this.yaxis_total,
-    credits: {
-       enabled: false
-    },
-    legend: {
-      enabled: false
-    },
-    lang: {
-        noData: "No data found"
-    },
-    noData: {
-        style: {
-            fontWeight: 'bold',
-            fontSize: '15px',
-            color: '#303030'
+  datetoast(){
+    this.presentToast('Use filter to get specific data')   
+  }
+  async presentToast(message: string) {
+    this.toast.show(message, '4000', 'center').subscribe(
+      toast => { 
+        console.log(toast); 
+      });
+  }
+
+  charts(name: string,value){
+    console.log(value)
+    let xaxis_value = [];
+    console.log(xaxis_value);
+    let yaxis_value = [];
+    console.log(yaxis_value);
+    from(value).pipe(pluck("event_datetime")).subscribe(val => xaxis_value.push(this.datepipe.transform(val, 'MMM dd')))
+    from(value).pipe(pluck("value")).subscribe(val => yaxis_value.push([Number(val)]))
+    this.yaxis_total=[{
+        name: name,
+        data:yaxis_value,
+        colorByPoint: true,
+        color:'#ffd32c'
+        }]
+    Highcharts.chart(name,{
+      chart: {
+        type: 'column',
+        zoomType: 'xy',
+        renderTo: "container",
+        options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
         }
-    }   
-  })
-}
+      },
+      title: {
+        text: name
+      },
+    
+      tooltip: {
+        crosshairs: true,
+        shared: true,
+        headerFormat:  '<span style="font-size:11px"><b>{series.name}</b> </span><br>',
+        pointFormat: '<span style="color:{point.color}">Total Spent</span>: <b>{point.y:.2f} Rs</b><br/>'
+      }, 
+      xAxis: {
+        categories: xaxis_value
+      },
+      yAxis: {
+        title: {
+          text: 'Rupees'
+        }
+      },
+      series:this.yaxis_total,
+      credits: {
+        enabled: false
+      },
+      legend: {
+        enabled: false
+      },
+      lang: {
+          noData: "No data found"
+      },
+      noData: {
+          style: {
+              fontWeight: 'bold',
+              fontSize: '15px',
+              color: '#303030'
+          }
+      }   
+    })
+  }
 
 
-async filterModal(){
-   const modal = await this.modalController.create({
+  async filterModal(){
+        const modal = await this.modalController.create({
           component: FiltersPage,
         });
 
-    modal.onDidDismiss()
-      .then((data) => {
-        if(data['data'] != undefined){
-          console.log(data)
-          this.loader=true;
-        data['event_type']='expense'
-        // this.service.filterChart(this.user_id ,data['data']).subscribe(res=>{         
-        //       this.chartres =res;
-        //       this.date=this.chartres.end_date;
-        //       this.firstDay=this.chartres.from_date;
-        //       this.chart_keys = Object.keys(this.chartres.expense); 
-        //       console.log(this.chart_keys)
-        //       setTimeout(() => {
-        //        this.loader=false;
-        //       },1500)
-        //       setTimeout(() => {
-        //        for(let i of this.chart_keys){         
-        //          this.charts(i,this.chartres.expense[i]);
-        //        }
-               
-        //       }, 2000); 
-        // })
+        modal.onDidDismiss()
+          .then((data) => {
+            if(data['data'] != undefined){
+              console.log(data)
+              this.loader=true;
+            data['event_type']='expense'
+            // this.service.filterChart(this.user_id ,data['data']).subscribe(res=>{         
+            //       this.chartres =res;
+            //       this.date=this.chartres.end_date;
+            //       this.firstDay=this.chartres.from_date;
+            //       this.chart_keys = Object.keys(this.chartres.expense); 
+            //       console.log(this.chart_keys)
+            //       setTimeout(() => {
+            //        this.loader=false;
+            //       },1500)
+            //       setTimeout(() => {
+            //        for(let i of this.chart_keys){         
+            //          this.charts(i,this.chartres.expense[i]);
+            //        }
+                  
+            //       }, 2000); 
+            // })
 
-        this.databaseSummary.ExpenseViewSummary(data['data']['from_date'],data['data']['end_date'],'expense',data['data']['event_name'],'view_analytics').then((res)=>{
-          console.log(res)
-          this.chartres =res;
-          this.date=this.chartres.end_date;
-          this.firstDay=this.chartres.from_date;
-          this.chart_keys = Object.keys(this.chartres.expense); 
-          console.log(this.chart_keys)
-          setTimeout(() => {
-            this.loader=false;
-          },1500)
-          setTimeout(() => {
-            for(let i of this.chart_keys){         
-              this.charts(i,this.chartres.expense[i]);
-            }
-            
-          }, 2000); 
-        })
-      }
-    });
-       return await modal.present();
-}
+          this.databaseSummary.ExpenseViewSummary(data['data']['from_date'],data['data']['end_date'],'expense',data['data']['event_name'],'view_analytics').then((res)=>{
+            console.log(res)
+            this.chartres =res;
+            this.date=this.chartres.end_date;
+            this.firstDay=this.chartres.from_date;
+            this.chart_keys = Object.keys(this.chartres.expense); 
+            console.log(this.chart_keys)
+            setTimeout(() => {
+              this.loader=false;
+            },1500)
+            setTimeout(() => {
+              for(let i of this.chart_keys){         
+                this.charts(i,this.chartres.expense[i]);
+              }
+              
+            }, 2000); 
+          })
+        }
+      });
+      return await modal.present();
+  }
 
-ionViewWillLeave(){
-  this.tabBar.style.display = 'flex';
- }
+  ionViewWillLeave(){
+    this.tabBar.style.display = 'flex';
+  }
 
 }

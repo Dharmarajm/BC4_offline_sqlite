@@ -76,7 +76,7 @@ export class ExpensesPage implements OnInit {
 
     this.databaseSummary.expense_cals_chart().then(res=>{
       this.main_chart = res;
-        console.log(this.Last_Mon_len)
+        console.log(this.main_chart)
         for (let i in this.main_chart.Currentmonth) {
           
           this.currentMonthCat.push(i);
@@ -97,12 +97,14 @@ export class ExpensesPage implements OnInit {
   
         let hashdata={name:'Current Month',colorByPoint: true,data:this.data, color:'#ffd32c'};
           
-        this.values.push(hashdata)
+        this.values.push(hashdata);
+        console.log(this.values)
         
         this.mainChart();
     })
 
     this.databaseSummary.expenseCalculation().then(res=>{
+      console.log(res)
       this.expense_val = res;
     })
     // this.databaseSummary.expenseCalculation().then(res=>{

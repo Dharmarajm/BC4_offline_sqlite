@@ -829,9 +829,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
 /* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
 /* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 
 
 
@@ -845,8 +843,6 @@ __webpack_require__.r(__webpack_exports__);
 
 //import { Gesture } from '@ionic/angular/gestures/gesture';
 // import { Keyboard } from '@ionic-native/keyboard/ngx';
-
-
 
 
 
@@ -911,8 +907,7 @@ let AppComponent = class AppComponent {
                 event_category: "6-9 pm",
                 event_options: { value1: "10" },
                 event_name: "Oxygen Saturation",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }, {
                 id: 11,
                 event_id: 11,
@@ -922,8 +917,7 @@ let AppComponent = class AppComponent {
                 event_category: "6-9 pm",
                 event_options: { value1: "10" },
                 event_name: "Oxygen Saturation",
-                event_datetime: "2019-11-27T05:18:13.345Z",
-                value: 10
+                event_datetime: "2019-11-27T05:18:13.345Z"
             }, {
                 id: 2,
                 event_id: 2,
@@ -933,8 +927,7 @@ let AppComponent = class AppComponent {
                 event_category: "Fasting",
                 event_options: { value1: "10", value2: "20" },
                 event_name: "Blood Glucose",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }, {
                 id: 3,
                 event_id: 3,
@@ -944,8 +937,7 @@ let AppComponent = class AppComponent {
                 event_category: "12-3 pm",
                 event_options: { value1: "10" },
                 event_name: "Oxygen Saturation",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }, {
                 id: 4,
                 event_id: 4,
@@ -955,8 +947,7 @@ let AppComponent = class AppComponent {
                 event_category: "Fasting",
                 event_options: { value1: "20", value2: "30" },
                 event_name: "Blood Glucose",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }, {
                 id: 5,
                 event_id: 5,
@@ -966,8 +957,7 @@ let AppComponent = class AppComponent {
                 event_category: "Fasting",
                 event_options: { value1: "20", value2: "30" },
                 event_name: "Blood Glucose",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }, {
                 id: 6,
                 event_id: 6,
@@ -977,8 +967,7 @@ let AppComponent = class AppComponent {
                 event_category: "Fasting",
                 event_options: { value1: "20", value2: "30" },
                 event_name: "Blood Glucose",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }, {
                 id: 7,
                 event_id: 7,
@@ -988,8 +977,7 @@ let AppComponent = class AppComponent {
                 event_category: "Fasting",
                 event_options: { value1: "20", value2: "30" },
                 event_name: "Blood Glucose",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }, {
                 id: 8,
                 event_id: 8,
@@ -999,8 +987,7 @@ let AppComponent = class AppComponent {
                 event_category: "Fasting",
                 event_options: { value1: "20", value2: "30" },
                 event_name: "Blood Glucose",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }, {
                 id: 9,
                 event_id: 9,
@@ -1010,8 +997,7 @@ let AppComponent = class AppComponent {
                 event_category: "Fasting",
                 event_options: { value1: "20", value2: "30" },
                 event_name: "Blood Glucose",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }, {
                 id: 10,
                 event_id: 10,
@@ -1021,8 +1007,7 @@ let AppComponent = class AppComponent {
                 event_category: "Fasting",
                 event_options: { value1: "20", value2: "30" },
                 event_name: "Blood Glucose",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }, {
                 id: 11,
                 event_id: 11,
@@ -1032,8 +1017,7 @@ let AppComponent = class AppComponent {
                 event_category: "Fasting",
                 event_options: { value1: "20", value2: "30" },
                 event_name: "Blood Glucose",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }, {
                 id: 12,
                 event_id: 12,
@@ -1043,8 +1027,7 @@ let AppComponent = class AppComponent {
                 event_category: "Fasting",
                 event_options: { value1: "20", value2: "30" },
                 event_name: "Blood Glucose",
-                event_datetime: "2019-11-28T04:51:36.551Z",
-                value: 10
+                event_datetime: "2019-11-28T04:51:36.551Z"
             }];
         let records = data.map(item => ({
             id: item.id,
@@ -1060,12 +1043,6 @@ let AppComponent = class AppComponent {
             event_type: item.event_type,
             user_id: item.user_id
         }));
-        //   { "body_temperature":{
-        //        "12-01-15":{
-        //          "6-9pm":[data]
-        //        }   
-        //     }
-        // }
         // const example = from(records).pipe(
         //   groupBy(person =>  person.event_name),  //,person =>  person.event_category
         //   mergeMap(group => group.pipe(toArray())),
@@ -1090,37 +1067,23 @@ let AppComponent = class AppComponent {
         //     return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data:val }
         //   })
         // ).subscribe(val => {
-        //  let test={};
+        //   console.log(val)
+        //   let event_name = `${val['event_name']}`;
         //   let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
-        //  test[val['event_name']]={...{date}};
-        //  console.log(test,"test")
-        //   // let event_name = `${val['event_name']}`;
-        //   // let date = formatDate(val.date, 'yyyy-MM-dd', 'en-US');
-        //   // let event_category = val.event_category;
-        //   // this.test[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
+        //   let event_category = val.event_category;
+        //   this.test[`${event_name}`][`${date}`][`${event_category}`] = val['data'];
         // })
-        // let vital = {};
-        // const test = from(data).pipe(
-        //   groupBy(person =>  person['event_name']),
-        //   mergeMap(group => from(group).pipe(toArray()))
-        //   ).subscribe(val => {   
-        //     //  console.log(val[0]['event_name'])
-        //     //  console.log(val[0]['event_name'])
-        //     //  vital[`${val[0]['event_name']}`]=val;
-        //     console.log(val)
-        //   })
-        // console.log(this.test)
-        const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_12__["from"])(records).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["groupBy"])(person => Object(_angular_common__WEBPACK_IMPORTED_MODULE_7__["formatDate"])(person['event_datetime'], 'yyyy-MM-dd', 'en-US')), //,person =>  person.event_category
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["mergeMap"])(group => group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["toArray"])())), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["mergeMap"])((array) => {
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_12__["from"])(array).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["groupBy"])(val => val.event_name), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["mergeMap"])(group => {
-                return group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["toArray"])()); // return the group values as Arrays
-            }));
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["map"])((val) => {
-            console.log(val);
-            return { event_name: val[0].event_name, date: val[0].event_datetime, event_category: val[0].event_category, data: val };
-        })).subscribe(val => {
-            //console.log(val)
-        });
+        let vitalList = {};
+        for (var i in records) {
+            let event_datetime = Object(_angular_common__WEBPACK_IMPORTED_MODULE_7__["formatDate"])(records[i]['event_datetime'], 'yyyy-MM-dd', 'en-US');
+            let event_category = records[i]['event_category'];
+            let event_name = records[i]['event_name'];
+            if (vitalList[event_name][event_datetime][event_category].length == undefined) {
+                vitalList[event_name][event_datetime][event_category] = [];
+            }
+            vitalList[event_name][event_datetime][event_category].push(records[i]);
+        }
+        console.log(vitalList);
     }
     initializeApp() {
         this.initializeBackButtonCustomHandler();
@@ -1215,7 +1178,7 @@ let AppComponent = class AppComponent {
     }
 };
 AppComponent.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClient"] },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_12__["HttpClient"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] },
@@ -1233,7 +1196,7 @@ AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         selector: 'app-root',
         template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/index.js!./src/app/app.component.html")
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClient"],
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_12__["HttpClient"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
         _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
         _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
@@ -1274,27 +1237,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _ionic_native_autostart_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/autostart/ngx */ "./node_modules/@ionic-native/autostart/ngx/index.js");
-/* harmony import */ var _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/screen-orientation/ngx */ "./node_modules/@ionic-native/screen-orientation/ngx/index.js");
-/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
-/* harmony import */ var _core_core_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./core/core.module */ "./src/app/core/core.module.ts");
-/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm2015/ngx-translate-core.js");
-/* harmony import */ var _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ngx-translate/http-loader */ "./node_modules/@ngx-translate/http-loader/fesm2015/ngx-translate-http-loader.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _login_terms_conditions_terms_conditions_page__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./login/terms-conditions/terms-conditions.page */ "./src/app/login/terms-conditions/terms-conditions.page.ts");
-/* harmony import */ var _login_about_about_page__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./login/about/about.page */ "./src/app/login/about/about.page.ts");
-/* harmony import */ var _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @ionic-native/sqlite/ngx */ "./node_modules/@ionic-native/sqlite/ngx/index.js");
-/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
-/* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
-/* harmony import */ var _sync_sync__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./sync/sync */ "./src/app/sync/sync.ts");
-/* harmony import */ var _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @ionic-native/file-transfer/ngx */ "./node_modules/@ionic-native/file-transfer/ngx/index.js");
+/* harmony import */ var _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/screen-orientation/ngx */ "./node_modules/@ionic-native/screen-orientation/ngx/index.js");
+/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
+/* harmony import */ var _core_core_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./core/core.module */ "./src/app/core/core.module.ts");
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm2015/ngx-translate-core.js");
+/* harmony import */ var _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ngx-translate/http-loader */ "./node_modules/@ngx-translate/http-loader/fesm2015/ngx-translate-http-loader.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _login_terms_conditions_terms_conditions_page__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./login/terms-conditions/terms-conditions.page */ "./src/app/login/terms-conditions/terms-conditions.page.ts");
+/* harmony import */ var _login_about_about_page__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./login/about/about.page */ "./src/app/login/about/about.page.ts");
+/* harmony import */ var _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @ionic-native/sqlite/ngx */ "./node_modules/@ionic-native/sqlite/ngx/index.js");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
+/* harmony import */ var _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./network-connectivity/network-service */ "./src/app/network-connectivity/network-service.ts");
+/* harmony import */ var _sync_sync__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./sync/sync */ "./src/app/sync/sync.ts");
+/* harmony import */ var _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @ionic-native/file-transfer/ngx */ "./node_modules/@ionic-native/file-transfer/ngx/index.js");
 
 
 
 
 
 //import { BackgroundMode } from '@ionic-native/background-mode/ngx';
-
 
 
 
@@ -1336,37 +1297,36 @@ let AppModule = class AppModule {
 };
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"], _login_terms_conditions_terms_conditions_page__WEBPACK_IMPORTED_MODULE_17__["TermsConditionsPage"], _login_about_about_page__WEBPACK_IMPORTED_MODULE_18__["AboutPage"],
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"], _login_terms_conditions_terms_conditions_page__WEBPACK_IMPORTED_MODULE_16__["TermsConditionsPage"], _login_about_about_page__WEBPACK_IMPORTED_MODULE_17__["AboutPage"],
         ],
-        entryComponents: [_login_terms_conditions_terms_conditions_page__WEBPACK_IMPORTED_MODULE_17__["TermsConditionsPage"], _login_about_about_page__WEBPACK_IMPORTED_MODULE_18__["AboutPage"]],
+        entryComponents: [_login_terms_conditions_terms_conditions_page__WEBPACK_IMPORTED_MODULE_16__["TermsConditionsPage"], _login_about_about_page__WEBPACK_IMPORTED_MODULE_17__["AboutPage"]],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"].forRoot(),
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_16__["HttpClientModule"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClientModule"],
             //SwapDirectivesModule,
-            _ngx_translate_core__WEBPACK_IMPORTED_MODULE_14__["TranslateModule"].forRoot({
+            _ngx_translate_core__WEBPACK_IMPORTED_MODULE_13__["TranslateModule"].forRoot({
                 loader: {
-                    provide: _ngx_translate_core__WEBPACK_IMPORTED_MODULE_14__["TranslateLoader"],
+                    provide: _ngx_translate_core__WEBPACK_IMPORTED_MODULE_13__["TranslateLoader"],
                     useFactory: HttpLoaderFactory,
-                    deps: [_angular_common_http__WEBPACK_IMPORTED_MODULE_16__["HttpClient"]]
+                    deps: [_angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClient"]]
                 }
             }),
             _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
-            _core_core_module__WEBPACK_IMPORTED_MODULE_13__["CoreModule"]
+            _core_core_module__WEBPACK_IMPORTED_MODULE_12__["CoreModule"]
         ],
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_6__["SplashScreen"],
             _ionic_native_android_permissions_ngx__WEBPACK_IMPORTED_MODULE_4__["AndroidPermissions"],
             //BackgroundMode,
-            _ionic_native_autostart_ngx__WEBPACK_IMPORTED_MODULE_10__["Autostart"],
-            _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_11__["ScreenOrientation"],
-            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_12__["LocalNotifications"],
-            _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_20__["Network"],
-            _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_21__["NetworkService"],
-            _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_19__["SQLite"],
-            _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_23__["FileTransfer"],
-            _sync_sync__WEBPACK_IMPORTED_MODULE_22__["syncProvider"],
+            _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_10__["ScreenOrientation"],
+            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_11__["LocalNotifications"],
+            _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_19__["Network"],
+            _network_connectivity_network_service__WEBPACK_IMPORTED_MODULE_20__["NetworkService"],
+            _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_18__["SQLite"],
+            _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_22__["FileTransfer"],
+            _sync_sync__WEBPACK_IMPORTED_MODULE_21__["syncProvider"],
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicRouteStrategy"] }
             // {provide: highchartsModules,
             //   useFactory: () => [ drilldown]
@@ -1379,7 +1339,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 ], AppModule);
 
 function HttpLoaderFactory(http) {
-    return new _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_15__["TranslateHttpLoader"](http);
+    return new _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_14__["TranslateHttpLoader"](http);
 }
 
 

@@ -298,13 +298,13 @@ export class DataBaseSummaryProvider {
       let currentMonth = new Date(y, m, 1);
       let getAllYearData = await this.getAllExpenses(first_day,last_day);
       let yearData = getAllYearData['event_list'];
-
+      console.log(yearData)  
       let getAllCurrentData = await this.getAllExpenses(currentMonth,last_day);
       let MonthData = getAllCurrentData['event_list'];
-      
+      console.log(MonthData) 
      let array = [];
      let dateobject = {};
-     from(MonthData).pipe(
+     await from(MonthData).pipe(
      groupBy(person => formatDate(person['event_datetime'], 'yyyy-MM-dd', 'en-US')),
      mergeMap(group => zip(of(group.key),group.pipe(toArray()))),
      map(val => {
@@ -348,11 +348,11 @@ export class DataBaseSummaryProvider {
 
 
     });
-    
+    console.log(dateobject)
     let array1 = [];
     let yearObject = {};
 
-    from(yearData).pipe(
+    await from(yearData).pipe(
         groupBy(person => formatDate(person['event_datetime'], 'MMMM', 'en-US')),
         mergeMap(group => zip(of(group.key),group.pipe(toArray()))),
         map(val => {
@@ -397,7 +397,7 @@ export class DataBaseSummaryProvider {
    
        });
 
-      
+       console.log(yearObject)
     //   let value = [];
     //   const example = from(data).pipe(
     //   groupBy(person =>  person['event_name']),
@@ -405,9 +405,9 @@ export class DataBaseSummaryProvider {
     //   ).subscribe(val => {
     //     console.log(val)
     //   })
-    let totalValue = yearData.reduce((accum,hash)=>{
-        return accum + Number(hash['value'])
-    },0)
+        let totalValue = await yearData.reduce((accum,hash)=>{
+            return accum + Number(hash['value'])
+        },0)
       let total_year = [{ year:y,value: totalValue}]
       return { Currentmonth : dateobject, Totalyear: total_year, Year: yearObject };
     }
@@ -525,8 +525,8 @@ export class DataBaseSummaryProvider {
         })
     }
 
-    vitalFilterAnalytics(id,data){
-        let params = data;
+    vitalFilterAnalytics(id,paramsOfdata){
+        let params = paramsOfdata;
         return this.getVitalEvents(id,params['from_date'],params['end_date'],'vital','analytics',params['event_name']).then(response => {
             console.log(response)
             let data = response['event_list'];
@@ -589,9 +589,9 @@ export class DataBaseSummaryProvider {
                   }
                        
           
-              }
-  
-              return vitalList;
+            }
+
+            return vitalList;
   
           })
     }
@@ -618,8 +618,8 @@ export class DataBaseSummaryProvider {
     
         let eventQuery:any;
         let event_nameArray = null;
-        if(event_name!=null && event_name.length>0){
-            event_nameArray = event_name.toString();
+        if(event_name!=null && event_name.length>0 && typeof(event_name)=="object"){
+            event_nameArray = event_name.map(x=>`"${x}"`).toString();
         }
         
         let user_id = await this.databaseService.getuserID();
@@ -635,7 +635,7 @@ export class DataBaseSummaryProvider {
         }else if(event=='vital' && tab == 'filter' && analytics != 'analytics'){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
         }else if(event=='vital' && tab == 'filter' && analytics == 'analytics' && event_nameArray!=null){
-            return eventQuery= ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
+            return eventQuery= ` WHERE (event_name IN (${event_nameArray}) AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
         }else if(event=='vital' && tab == 'filter' && analytics == 'analytics' && event_nameArray==null){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
         }else if(event=='vital' && tab == 'pagefilter'){
@@ -645,7 +645,7 @@ export class DataBaseSummaryProvider {
         }else if(event=='expense' && analytics == 'view_summary'){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
         }else if(event=='expense' && analytics == 'view_analytics' && event_nameArray!=null){
-            return eventQuery= ` WHERE (event_name IN ('${event_nameArray}') AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
+            return eventQuery= ` WHERE (event_name IN (${event_nameArray}) AND event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
         }else if(event=='expense' && analytics == 'view_analytics' && event_nameArray==null){
             return eventQuery= ` WHERE (event_type='${event}' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDate}') AND DATE('${endDate}'))) ORDER BY event_datetime DESC`
         }else{

@@ -48,6 +48,7 @@ export class FiltersPage {
       // })
 
       this.databaseSummary.expenseDatefilter(this.user_id,from,end,type).then(res=>{
+        console.log(res)
         this.list_keys=res['events'] 
       }).catch(err=>{console.log(err)})
      }

@@ -70,7 +70,7 @@ export class viewSummaryPage {
         console.log(this.getChartValue)
         console.log(this.expen_key);
       })
-      .catch(error=>{ console.log(error) });
+      .catch( error => { console.log(error) });
       
       this.statusBar.backgroundColorByHexString('#ffd32c');
       this.tabBar = document.getElementById('myTabBar');
