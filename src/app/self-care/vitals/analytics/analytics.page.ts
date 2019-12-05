@@ -46,7 +46,10 @@ export class AnalyticsPage implements OnInit {
       bloodGlucose: false,
       hba1c: false
     }
-  }
+  };
+
+  tmpResult:any = {};
+
   constructor(private toast: Toast,private fb: FormBuilder, public datepipe: DatePipe, public modalController: ModalController, public service: settingsService, public route: ActivatedRoute, public router: Router, private statusBar: StatusBar,private databaseSummary: DataBaseSummaryProvider) { 
     this.filterModal()
   }
@@ -92,7 +95,7 @@ export class AnalyticsPage implements OnInit {
   datetoast(){
     this.presentToast('Use filter to get specific data')   
   }
-  tmpResult = {}
+  
   ionViewWillEnter() {
     //this.date = new Date();
     //this.firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
@@ -129,6 +132,7 @@ export class AnalyticsPage implements OnInit {
           // })
           
           this.databaseSummary.vitalFilterAnalytics(this.user_id, data['data']).then(res=>{
+            console.log(res)
             this.parseResponse(res);
           }).catch(err=>{console.log(err)})
 
@@ -136,16 +140,15 @@ export class AnalyticsPage implements OnInit {
       });
     return await modal.present();
   }
+
   filterTerms = {}
 
   parseResponse(res) {
     this.tmpResult = {}
       console.log(res)
       for (let type of Object.keys(res)) {
-        console.log(type)
-        console.log(Object.keys(res[type]))
         for (let date of Object.keys(res[type]))
-          if (type == 'Blood Glucose') {
+          if (type === 'Blood Glucose') {
             this.date_val =this.datepipe.transform(date,"MMM d");
             let rec = {}
             rec['#'] = rec['#'] || this.date_val
@@ -187,7 +190,7 @@ export class AnalyticsPage implements OnInit {
               this.tmpResult['HbA1c'].push(rec)
             }
           } else {
-            if (type == 'Body Temperature' || type == 'Oxygen Saturation') {
+            if (type === 'Body Temperature' || type === 'Oxygen Saturation') {
               let rec = {}
               this.date_val =this.datepipe.transform(date,"MMM d");
               rec['#'] = rec['#'] || this.date_val
@@ -203,7 +206,7 @@ export class AnalyticsPage implements OnInit {
               this.tmpResult[type].push(rec)
             } else {
 
-              if (type == 'Blood Pressure') {
+              if (type === 'Blood Pressure') {
                 let rec = {}
                 let flag = false
                 this.date_val =this.datepipe.transform(date,"MMM d");

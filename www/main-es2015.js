@@ -879,6 +879,9 @@ let AppComponent = class AppComponent {
         //   console.log(responseList)
         //  })
         //this.getUserIdFromCareGiver();
+        var d = new Date();
+        let startDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_7__["formatDate"])(d, 'yyyy-MM-dd', 'en-US');
+        console.log(startDate);
         this.groupBy();
     }
     // getPatientsList(){

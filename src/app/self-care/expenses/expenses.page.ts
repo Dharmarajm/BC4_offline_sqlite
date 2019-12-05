@@ -78,13 +78,13 @@ export class ExpensesPage implements OnInit {
       this.main_chart = res;
         console.log(this.main_chart)
         for (let i in this.main_chart.Currentmonth) {
-          
+          console.log(this.main_chart.Currentmonth)
           this.currentMonthCat.push(i);
           let key:any = Object.values(this.main_chart.Currentmonth[i])
           console.log(key[0])
           this.data.push({
             name: this.datepipe.transform(key[0].event_datetime, 'MMM dd'),
-            y: key[0].value,
+            y: Number(key[0].value),
             drilldown: this.datepipe.transform(key[0].event_datetime, 'MMM dd')
           })
           this.drilldownData.push({
@@ -96,7 +96,7 @@ export class ExpensesPage implements OnInit {
         console.log(this.drilldownData)
   
         let hashdata={name:'Current Month',colorByPoint: true,data:this.data, color:'#ffd32c'};
-          
+        console.log(hashdata)  
         this.values.push(hashdata);
         console.log(this.values)
         

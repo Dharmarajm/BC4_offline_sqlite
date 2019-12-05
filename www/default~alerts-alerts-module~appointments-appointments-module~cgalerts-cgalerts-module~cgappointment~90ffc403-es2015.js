@@ -329,8 +329,15 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                         }, 0);
                         allArray.push([name, total]);
                     });
-                    dateobject[array[i]['event_datetime']] = { data: allArray, event_datetime: array[i]['event_datetime'], value: array[i]['value'] };
+                    if (dateobject[array[i]['event_datetime']] == undefined) {
+                        dateobject[array[i]['event_datetime']] = [];
+                        dateobject[array[i]['event_datetime']].push({ data: allArray, event_datetime: array[i]['event_datetime'], value: array[i]['value'] });
+                    }
+                    else {
+                        dateobject[array[i]['event_datetime']].push({ data: allArray, event_datetime: array[i]['event_datetime'], value: array[i]['value'] });
+                    }
                 }
+                console.log(dateobject);
             });
             console.log(dateobject);
             let array1 = [];
@@ -357,8 +364,15 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                         }, 0);
                         allArray.push([name, total]);
                     });
-                    yearObject[array1[i]['event_datetime']] = { data: allArray, event_datetime: array1[i]['event_datetime'], value: array1[i]['value'] };
+                    if (yearObject[array1[i]['event_datetime']] == undefined) {
+                        yearObject[array1[i]['event_datetime']] = [];
+                        yearObject[array1[i]['event_datetime']].push({ data: allArray, event_datetime: array1[i]['event_datetime'], value: array1[i]['value'] });
+                    }
+                    else {
+                        yearObject[array1[i]['event_datetime']].push({ data: allArray, event_datetime: array1[i]['event_datetime'], value: array1[i]['value'] });
+                    }
                 }
+                console.log(yearObject);
             });
             console.log(yearObject);
             //   let value = [];
@@ -378,7 +392,10 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     getAllExpenses(first_day, last_day) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let user_id = yield this.databaseService.getuserID();
-            let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${first_day}') AND DATE('${last_day}'))) ORDER BY event_datetime DESC`;
+            let startDay = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(first_day, 'yyyy-MM-dd', 'en-US');
+            let endDay = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(last_day, 'yyyy-MM-dd', 'en-US');
+            let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDay}') AND DATE('${endDay}'))) ORDER BY event_datetime DESC`;
+            console.log(sqlSearchEventQuery);
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {
                     console.log(data);

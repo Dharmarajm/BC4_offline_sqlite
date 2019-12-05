@@ -59,6 +59,9 @@ export class AppComponent {
     //   console.log(responseList)
     //  })
     //this.getUserIdFromCareGiver();
+    var d = new Date();
+    let startDate = formatDate(d, 'yyyy-MM-dd', 'en-US');
+    console.log(startDate)
     this.groupBy();
 
   }

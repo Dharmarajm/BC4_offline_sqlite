@@ -340,12 +340,16 @@ export class DataBaseSummaryProvider {
                     
                     
                 })
-
-                dateobject[array[i]['event_datetime']]={data: allArray, event_datetime:array[i]['event_datetime'],value:array[i]['value']}
-            
+                
+                if(dateobject[array[i]['event_datetime']]==undefined){
+                    dateobject[array[i]['event_datetime']]=[]; 
+                    dateobject[array[i]['event_datetime']].push({data: allArray, event_datetime:array[i]['event_datetime'], value:array[i]['value'] });
+                }else{
+                    dateobject[array[i]['event_datetime']].push({data: allArray, event_datetime:array[i]['event_datetime'], value:array[i]['value'] });
+                }
             }
-
-
+          
+         console.log(dateobject)
 
     });
     console.log(dateobject)
@@ -388,12 +392,17 @@ export class DataBaseSummaryProvider {
                        
                        
                    })
-   
-                   yearObject[array1[i]['event_datetime']]={data: allArray, event_datetime:array1[i]['event_datetime'],value:array1[i]['value']}
+                   if(yearObject[array1[i]['event_datetime']]==undefined){
+                     yearObject[array1[i]['event_datetime']]=[];
+                     yearObject[array1[i]['event_datetime']].push({data: allArray, event_datetime:array1[i]['event_datetime'],value:array1[i]['value']})
+                   }else{
+                     yearObject[array1[i]['event_datetime']].push({data: allArray, event_datetime:array1[i]['event_datetime'],value:array1[i]['value']})
+                   }
+                   
                
                }
    
-   
+            console.log(yearObject)
    
        });
 
@@ -414,7 +423,12 @@ export class DataBaseSummaryProvider {
 
     async getAllExpenses(first_day,last_day){
         let user_id = await this.databaseService.getuserID();
-        let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${first_day}') AND DATE('${last_day}'))) ORDER BY event_datetime DESC`
+        let startDay = formatDate(first_day, 'yyyy-MM-dd', 'en-US');
+        let lastDay = last_day.toString();
+        let endDay = new Date(lastDay);
+        endDay.setDate(endDay.getDate() + 1);
+        let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDay}') AND DATE('${endDay}'))) ORDER BY event_datetime DESC`
+        console.log(sqlSearchEventQuery)
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
                 console.log(data)

@@ -325,7 +325,8 @@ export class AddVitalsPage implements OnInit {
 
 
   valueSet(val) {   
-    let selectVital=val.detail.value   
+    let selectVital=val.detail.value 
+    this.food_options=[];  
     if(selectVital == "Blood Glucose" || selectVital == "Cholesterol" ){
         // this.service.vitalFoodTime2().subscribe(res => {
         //   this.food_options = res['enum_masters']
