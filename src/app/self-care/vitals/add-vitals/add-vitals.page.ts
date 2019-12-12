@@ -326,18 +326,18 @@ export class AddVitalsPage implements OnInit {
 
   valueSet(val) {   
     let selectVital=val.detail.value 
-    this.food_options=[];  
+    
     if(selectVital == "Blood Glucose" || selectVital == "Cholesterol" ){
         // this.service.vitalFoodTime2().subscribe(res => {
         //   this.food_options = res['enum_masters']
         // })
-        this.getEnumMasters('food_time_1');
+        this.getEnumMasters('food_time_2');
     } else if(selectVital == "Blood Pressure" || selectVital == "Body Temperature" || selectVital == "Oxygen Saturation"){
         // this.service.vitalFoodTime1().subscribe(res => {
         // this.food_options = res['enum_masters']
         // console.log(this.food_options)
         // })
-        this.getEnumMasters('food_time_2');
+        this.getEnumMasters('food_time_1');
     }
     else{
       this.food_options=["None","Morning", "Afternoon", "Evening", "Night"]

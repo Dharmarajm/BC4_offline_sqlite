@@ -1864,6 +1864,10 @@ var syncProvider = /** @class */ (function () {
         this.sqlite = sqlite;
         this.platform = platform;
         this.network = network;
+        this.emegencyConatcts = [];
+        this.healtDetails = [];
+        this.usersList = [];
+        this.user_associations = [];
         console.log('Hello SettingProvider Provider');
         //this.initiateSync();
     }
@@ -1880,11 +1884,11 @@ var syncProvider = /** @class */ (function () {
                     _this.getAllEvents();
                 })
                     .then(function () {
-                    _this.getUniqueEventDataPush();
+                    //this.getUniqueEventDataPush();
                     _this.awaitAllUsersTableData();
                 })
                     .then(function () {
-                    _this.getUniqueUsersDataPush();
+                    //this.getUniqueUsersDataPush();
                 });
                 return [2 /*return*/];
             });
@@ -1917,7 +1921,7 @@ var syncProvider = /** @class */ (function () {
                                                         eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                                                     }
                                                     index = [];
-                                                    for (i_1 in event_json['localImagePath']) {
+                                                    for (i_1 = 0; i_1 < event_json['localImagePath'].length; i_1++) {
                                                         if (event_json['localImagePath'][i_1]['delete'] == 'true') {
                                                             index.push(i_1);
                                                         }
@@ -1929,8 +1933,7 @@ var syncProvider = /** @class */ (function () {
                                                     user_id = _a.sent();
                                                     params = { "index": index, "id": user_id };
                                                     this_1.deleteEventImages(params).subscribe(function (responseList) {
-                                                        console.log(responseList);
-                                                        for (var j in index) {
+                                                        for (var j = 0; j < index.length; j++) {
                                                             event_json['localImagePath'].splice(index[i], 1);
                                                             eventAssetsJson.splice(index[i], 1);
                                                         }
@@ -1940,7 +1943,9 @@ var syncProvider = /** @class */ (function () {
                                                     }, function (err) {
                                                     });
                                                     _a.label = 2;
-                                                case 2: return [2 /*return*/];
+                                                case 2:
+                                                    console.log(data.rows.length - 1 == i);
+                                                    return [2 /*return*/];
                                             }
                                         });
                                     };
@@ -1988,7 +1993,6 @@ var syncProvider = /** @class */ (function () {
                                         sql1 = "DELETE FROM enum_masters";
                                         database.executeSql(sql1, []);
                                         for (i in this.enumResponseData) {
-                                            console.log(this.enumResponseData[i]);
                                             sql2 = "INSERT INTO enum_masters VALUES (?,?,?,?,?)";
                                             database.executeSql(sql2, [
                                                 this.enumResponseData[i]["id"],
@@ -1997,9 +2001,9 @@ var syncProvider = /** @class */ (function () {
                                                 this.enumResponseData[i]["created_at"],
                                                 this.enumResponseData[i]["updated_at"]
                                             ]).then(function (res) {
-                                                console.log(res, 'enum');
+                                                // console.log(res, 'enum');
                                             }, function (error) {
-                                                console.log(error, 'errorenum');
+                                                // console.log(error, 'errorenum');
                                             });
                                         }
                                         ;
@@ -2015,34 +2019,34 @@ var syncProvider = /** @class */ (function () {
     };
     syncProvider.prototype.getAllEvents = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var getUserIds;
+            var getUserIds, sendIds;
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.getUserIdForEvents()];
                     case 1:
                         getUserIds = _a.sent();
+                        sendIds = getUserIds.toString();
                         this.getDatabase().then(function (database) {
-                            _this.getAllEventsList(getUserIds).subscribe(function (responseList) {
+                            _this.getAllEventsList(sendIds).subscribe(function (responseList) {
                                 console.log(responseList);
                                 _this.allEvents = responseList[0]['events'];
                                 database.executeSql("SELECT * FROM events", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                    var length, _loop_2, this_2, i, sql, _a, _b, _i, i, event_optionsURI, event_assets_URI, setGlobalURI, createEventData;
-                                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
-                                        switch (_c.label) {
+                                    var length, _loop_2, this_2, i, sql, i, event_optionsURI, event_assets_URI, setGlobalURI, createEventData;
+                                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                        switch (_a.label) {
                                             case 0:
                                                 length = data.rows.length;
                                                 if (!(length > 0)) return [3 /*break*/, 1];
-                                                console.log('if');
                                                 _loop_2 = function (i) {
                                                     var rowData = data.rows.item(i);
                                                     if (data.rows.item(i).id == null) {
-                                                        console.log('null', data.rows.item(i).id);
+                                                        //console.log('null',data.rows.item(i).id)
                                                         this_2.createSingleEventData(rowData);
                                                     }
                                                     else {
                                                         if (data.rows.item(i).delete1 == 'true') {
-                                                            console.log('delete', data.rows.item(i).delete1);
+                                                            // console.log('delete',data.rows.item(i).delete1)
                                                             this_2.deleteSingleEventData(rowData);
                                                         }
                                                         else {
@@ -2058,38 +2062,37 @@ var syncProvider = /** @class */ (function () {
                                                             }
                                                         }
                                                     }
+                                                    console.log((data.rows.length - 1) == i);
+                                                    if ((data.rows.length - 1) == i) {
+                                                        this_2.getUniqueEventDataPush();
+                                                    }
                                                 };
                                                 this_2 = this;
+                                                //console.log('if')
                                                 for (i = 0; i < data.rows.length; i++) {
                                                     _loop_2(i);
                                                 }
                                                 return [3 /*break*/, 5];
                                             case 1:
-                                                console.log('else');
                                                 sql = "INSERT INTO events VALUES (?,NULL,?,?,?,?,?,?,?,?,?,?,?,?)";
-                                                _a = [];
-                                                for (_b in this.allEvents)
-                                                    _a.push(_b);
-                                                _i = 0;
-                                                _c.label = 2;
+                                                i = 0;
+                                                _a.label = 2;
                                             case 2:
-                                                if (!(_i < _a.length)) return [3 /*break*/, 5];
-                                                i = _a[_i];
-                                                console.log(this.allEvents[i]);
+                                                if (!(i < this.allEvents.length)) return [3 /*break*/, 5];
                                                 event_optionsURI = this.allEvents[i]["event_options"];
                                                 event_assets_URI = this.allEvents[i]["event_assets"];
                                                 return [4 /*yield*/, this.getLocalAssets(event_optionsURI, event_assets_URI)];
                                             case 3:
-                                                setGlobalURI = _c.sent();
+                                                setGlobalURI = _a.sent();
                                                 if (setGlobalURI.length > 0) {
                                                     event_optionsURI["localImagePath"] = setGlobalURI;
                                                 }
                                                 createEventData = [this.allEvents[i]["id"], this.allEvents[i]["event_name"], this.allEvents[i]["description"], this.allEvents[i]["value"], this.allEvents[i]["event_datetime"], this.allEvents[i]["event_type"], this.allEvents[i]["event_category"], JSON.stringify(this.allEvents[i]["event_assets"]), JSON.stringify(event_optionsURI), this.allEvents[i]["user_id"], this.allEvents[i]["created_at"], this.allEvents[i]["updated_at"], false];
                                                 //database.executeSql(sql, createEventData)
                                                 this.commonUpdateAndDeleteEvent(sql, createEventData);
-                                                _c.label = 4;
+                                                _a.label = 4;
                                             case 4:
-                                                _i++;
+                                                i++;
                                                 return [3 /*break*/, 2];
                                             case 5: return [2 /*return*/];
                                         }
@@ -2113,10 +2116,10 @@ var syncProvider = /** @class */ (function () {
                         getUserIds = _a.sent();
                         this.getDatabase().then(function (database) {
                             _this.getAllEventsList(getUserIds).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var array1, array2, unique, _a, _b, _i, j, sql, event_optionsURI, event_assets_URI, setGlobalURI, createEventData;
+                                var array1, array2, unique, j, sql, event_optionsURI, event_assets_URI, setGlobalURI, createEventData;
                                 var _this = this;
-                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
-                                    switch (_c.label) {
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                    switch (_a.label) {
                                         case 0:
                                             array1 = responseList[0]['events'];
                                             return [4 /*yield*/, database.executeSql("SELECT * FROM events", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
@@ -2154,32 +2157,30 @@ var syncProvider = /** @class */ (function () {
                                                     });
                                                 }); })];
                                         case 1:
-                                            array2 = _c.sent();
-                                            unique = array1.filter(function (v) { return array2.indexOf(v.id) == -1; });
-                                            _a = [];
-                                            for (_b in unique.length)
-                                                _a.push(_b);
-                                            _i = 0;
-                                            _c.label = 2;
+                                            array2 = _a.sent();
+                                            return [4 /*yield*/, this.unique(array1, array2)];
                                         case 2:
-                                            if (!(_i < _a.length)) return [3 /*break*/, 5];
-                                            j = _a[_i];
+                                            unique = _a.sent();
+                                            j = 0;
+                                            _a.label = 3;
+                                        case 3:
+                                            if (!(j < unique.length)) return [3 /*break*/, 6];
                                             sql = "INSERT INTO events VALUES (?,NULL,?,?,?,?,?,?,?,?,?,?,?,?)";
                                             event_optionsURI = unique[j]["event_options"];
                                             event_assets_URI = unique[j]["event_assets"];
                                             return [4 /*yield*/, this.getLocalAssets(event_optionsURI, event_assets_URI)];
-                                        case 3:
-                                            setGlobalURI = _c.sent();
+                                        case 4:
+                                            setGlobalURI = _a.sent();
                                             if (setGlobalURI.length > 0) {
                                                 event_optionsURI["localImagePath"] = setGlobalURI;
                                             }
                                             createEventData = [unique[j]["id"], unique[j]["event_name"], unique[j]["description"], unique[j]["value"], unique[j]["event_datetime"], unique[j]["event_type"], unique[j]["event_category"], JSON.stringify(unique[j]["event_assets"]), JSON.stringify(event_optionsURI), unique[j]["user_id"], unique[j]["created_at"], unique[j]["updated_at"], false];
                                             this.commonUpdateAndDeleteEvent(sql, createEventData);
-                                            _c.label = 4;
-                                        case 4:
-                                            _i++;
-                                            return [3 /*break*/, 2];
-                                        case 5: return [2 /*return*/];
+                                            _a.label = 5;
+                                        case 5:
+                                            j++;
+                                            return [3 /*break*/, 3];
+                                        case 6: return [2 /*return*/];
                                     }
                                 });
                             }); });
@@ -2191,11 +2192,11 @@ var syncProvider = /** @class */ (function () {
     };
     syncProvider.prototype.getLocalAssets = function (events_options, events_assets) {
         var localAssets = events_options;
-        console.log(localAssets);
+        //console.log(localAssets)
         var globalassets = events_assets;
-        console.log(globalassets);
+        //console.log(globalassets)
         var getGlobalURIs = [];
-        console.log(globalassets.length > 0);
+        // console.log(globalassets.length>0)
         if (globalassets.length > 0 && localAssets != null) {
             for (var i in localAssets["localImagePath"]) {
                 var mapUrl = { "localURI": localAssets["localImagePath"][i]["localURI"], "globalURI": null, "cdvFilePath": localAssets["localImagePath"][i]["cdvFilePath"], "fileName": localAssets["localImagePath"][i]["fileName"], "delete": localAssets["localImagePath"][i]["delete"] };
@@ -2229,7 +2230,6 @@ var syncProvider = /** @class */ (function () {
                         var profile_id = localStorage.getItem("profile_id");
                         database.executeSql("SELECT * FROM emergency_details", []).then(function (data) {
                             var length = data.rows.length;
-                            console.log(length);
                             if (length > 0) {
                                 //let emergencyContacts = [];
                                 for (var i = 0; i < data.rows.length; i++) {
@@ -2258,10 +2258,14 @@ var syncProvider = /** @class */ (function () {
                                     //   updated_at: data.rows.item(i).updated_at,
                                     //   delete1: data.rows.item(i).delete1
                                     // });
+                                    if ((data.rows.length - 1) == i) {
+                                        _this.getUniqueUsersDataPush();
+                                    }
                                 }
                                 //await this.getEmergencyContacts(emergencyContacts); 
                             }
                             else {
+                                console.log('test');
                                 _this.getEmergencyContacts(_this.responseData1);
                             }
                         }, function (error) {
@@ -2292,6 +2296,9 @@ var syncProvider = /** @class */ (function () {
                                     else if (data.rows.item(i).updated_at < _this.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id) {
                                         _this.createSingleHealthDetail(_this.responseData2[index]);
                                     }
+                                    if ((data.rows.length - 1) == i) {
+                                        _this.getUniqueUsersDataPush();
+                                    }
                                 };
                                 for (var i = 0; i < data.rows.length; i++) {
                                     _loop_3(i);
@@ -2299,6 +2306,7 @@ var syncProvider = /** @class */ (function () {
                                 //await this.getHealthDetails(healthData);      
                             }
                             else {
+                                console.log('test1');
                                 _this.getHealthDetails(_this.responseData2);
                             }
                         }, function (error) {
@@ -2364,7 +2372,11 @@ var syncProvider = /** @class */ (function () {
                                                     case 6:
                                                         this_3.updateUsersData(rowData, healthData);
                                                         _a.label = 7;
-                                                    case 7: return [2 /*return*/];
+                                                    case 7:
+                                                        if ((data.rows.length - 1) == i) {
+                                                            this_3.getUniqueUsersDataPush();
+                                                        }
+                                                        return [2 /*return*/];
                                                 }
                                             });
                                         };
@@ -2382,6 +2394,7 @@ var syncProvider = /** @class */ (function () {
                                         return [3 /*break*/, 1];
                                     case 4: return [3 /*break*/, 6];
                                     case 5:
+                                        console.log('test3');
                                         this.getUsersData(this.responseData3);
                                         _a.label = 6;
                                     case 6: return [2 /*return*/];
@@ -2486,12 +2499,25 @@ var syncProvider = /** @class */ (function () {
                                         });
                                     }
                                     return userData;
-                                })];
+                                })
+                                // let unique1 = await this.emegencyConatcts.filter( function(n) { return !array1.some((arr1)=>(arr1.id == n.id && arr1.id != null)) });
+                                // let unique2 = await this.healtDetails.filter( function(n) { return !array2.some((arr2)=>(arr2.id == n.id && arr2.id != null)) });  
+                                // let unique3 = await this.usersList.filter( function(n) { return !array3.some((arr3)=>(arr3.id == n.id && arr3.id != null)) }); 
+                            ];
                         case 3:
                             array3 = _a.sent();
-                            unique1 = this.emegencyConatcts.filter(function (v) { return array1.indexOf(v.id) == -1; });
-                            unique2 = this.healtDetails.filter(function (v) { return array2.indexOf(v.id) == -1; });
-                            unique3 = this.usersList.filter(function (v) { return array3.indexOf(v.id) == -1; });
+                            return [4 /*yield*/, this.unique(this.emegencyConatcts, array1)];
+                        case 4:
+                            unique1 = _a.sent();
+                            return [4 /*yield*/, this.unique(this.healtDetails, array2)];
+                        case 5:
+                            unique2 = _a.sent();
+                            return [4 /*yield*/, this.unique(this.usersList, array3)];
+                        case 6:
+                            unique3 = _a.sent();
+                            console.log(unique1);
+                            console.log(unique2);
+                            console.log(unique3);
                             if (unique1.length > 0) {
                                 this.getEmergencyContacts(unique1, "unique");
                             }
@@ -2507,28 +2533,44 @@ var syncProvider = /** @class */ (function () {
             }); });
         });
     };
+    syncProvider.prototype.unique = function (first, second) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var uniq;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                uniq = [];
+                uniq = first.filter(function (n) { return !second.some(function (arr1) { return (arr1.id == n.id && arr1.id != null); }); });
+                console.log(uniq);
+                return [2 /*return*/, uniq];
+            });
+        });
+    };
     syncProvider.prototype.getEmergencyContacts = function (response, unique) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                console.log('getEmergency');
                 this.getDatabase().then(function (database) {
                     if (unique != "unique") {
                         var sql1 = "DELETE FROM emergency_details";
                         database.executeSql(sql1, []);
                     }
-                    for (var i in response) {
+                    var allEmergency = response;
+                    for (var i = 0; i < allEmergency.length; i++) {
+                        console.log(i);
                         var data1 = [
-                            response[i]["id"],
-                            response[i]["contact_name"],
-                            response[i]["emergency_no"],
-                            response[i]["user_type"],
-                            response[i]["user_id"],
-                            response[i]["created_at"],
-                            response[i]["updated_at"],
+                            allEmergency[i]["id"],
+                            allEmergency[i]["contact_name"],
+                            allEmergency[i]["emergency_no"],
+                            allEmergency[i]["user_type"],
+                            allEmergency[i]["user_id"],
+                            allEmergency[i]["created_at"],
+                            allEmergency[i]["updated_at"],
                             false
                         ];
                         var sqlData1 = "INSERT INTO emergency_details VALUES (?,NULL,?,?,?,?,?,?,?)";
                         database.executeSql(sqlData1, data1).then(function (res) {
-                            console.log(res);
+                            console.log(res, 'emergency_details');
+                        }, function (error) {
+                            console.log(error, 'erroremergency_details');
                         });
                     }
                 });
@@ -2539,24 +2581,29 @@ var syncProvider = /** @class */ (function () {
     syncProvider.prototype.getHealthDetails = function (response, unique) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                console.log('getHealth');
                 this.getDatabase().then(function (database) {
                     if (unique != "unique") {
                         var sql2 = "DELETE FROM health_details";
                         database.executeSql(sql2, []);
                     }
-                    for (var i in response) {
-                        var attribute_json = JSON.stringify(response[i]["attribute_name_value"]);
+                    var totalHealth = response;
+                    for (var i = 0; i < totalHealth.length; i++) {
+                        console.log(i);
+                        var attribute_json = JSON.stringify(totalHealth[i]["attribute_name_value"]);
                         var data2 = [
-                            response[i]["id"],
-                            response[i]["name"],
+                            totalHealth[i]["id"],
+                            totalHealth[i]["name"],
                             attribute_json,
-                            response[i]["user_id"],
-                            response[i]["created_at"],
-                            response[i]["updated_at"]
+                            totalHealth[i]["user_id"],
+                            totalHealth[i]["created_at"],
+                            totalHealth[i]["updated_at"]
                         ];
                         var sqlData2 = "INSERT INTO health_details VALUES (?,NULL,?,?,?,?,?)";
                         database.executeSql(sqlData2, data2).then(function (res) {
-                            console.log(res);
+                            console.log(res, 'health_details');
+                        }, function (error) {
+                            console.log(error, 'errorhealth_details');
                         });
                     }
                 });
@@ -2567,38 +2614,45 @@ var syncProvider = /** @class */ (function () {
     syncProvider.prototype.getUsersData = function (response, unique) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                console.log('getUsers');
                 this.getDatabase().then(function (database) {
                     if (unique != "unique") {
                         var sql3 = "DELETE FROM users";
                         database.executeSql(sql3, []);
                     }
-                    for (var i in response) {
-                        var attribute_json = JSON.stringify(response[i]["user_picture"]);
-                        var user_option_json = JSON.parse(response[i]['user_option']);
+                    var allUsers = response;
+                    for (var i = 0; i < allUsers.length; i++) {
+                        console.log(i);
+                        var attribute_json = JSON.stringify(allUsers[i]["user_picture"]);
+                        var user_option_json = JSON.parse(allUsers[i]['user_option']);
                         var data3 = [
-                            response[i]["id"],
-                            response[i]["name"],
-                            response[i]["email"],
-                            response[i]["password"],
-                            response[i]["mobile_no"],
-                            response[i]["address"],
-                            response[i]["country"],
-                            response[i]["blood_group"],
-                            response[i]["age"],
-                            response[i]["user_uid"],
-                            response[i]["forgot_password_code"],
+                            allUsers[i]["id"],
+                            allUsers[i]["name"],
+                            allUsers[i]["email"],
+                            allUsers[i]["password"],
+                            allUsers[i]["mobile_no"],
+                            allUsers[i]["address"],
+                            allUsers[i]["country"],
+                            allUsers[i]["blood_group"],
+                            allUsers[i]["age"],
+                            allUsers[i]["user_uid"],
+                            allUsers[i]["forgot_password_code"],
                             attribute_json,
                             user_option_json,
-                            response[i]["active_status"],
-                            response[i]["role_id"],
-                            response[i]["created_at"],
-                            response[i]["updated_at"],
+                            allUsers[i]["active_status"],
+                            allUsers[i]["role_id"],
+                            allUsers[i]["created_at"],
+                            allUsers[i]["updated_at"],
                             false
                         ];
                         var sqlData3 = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                         database.executeSql(sqlData3, data3).then(function (res) {
-                            console.log(res);
+                            console.log(res, 'users');
+                        }, function (error) {
+                            console.log(error, 'errorusers');
                         });
+                        ;
+                        ;
                     }
                 });
                 return [2 /*return*/];
@@ -2709,49 +2763,88 @@ var syncProvider = /** @class */ (function () {
                 console.log(rowData, 'createSingleEventData');
                 data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"] };
                 console.log(data);
-                this.insertEventData(data).subscribe(function (responseList) {
-                    var response = responseList[0]['event'];
-                    var sql = "UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?";
-                    var createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["event_id"]];
-                    _this.commonUpdateAndDeleteEvent(sql, createEventData).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                        var localImagePath, _a, _b, _i, i, params, requestUrl, uploadStatus, updateEventOptions, sql_2, createEventData_1;
-                        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
-                            switch (_c.label) {
-                                case 0:
-                                    console.log(rowData["event_options"]);
-                                    console.log(res);
-                                    if (!(res["event_id"] != undefined && rowData["event_options"]["localImagePath"] != undefined && rowData["event_options"]["localImagePath"] != null)) return [3 /*break*/, 4];
-                                    localImagePath = rowData["event_options"]["localImagePath"];
-                                    _a = [];
-                                    for (_b in localImagePath)
-                                        _a.push(_b);
-                                    _i = 0;
-                                    _c.label = 1;
-                                case 1:
-                                    if (!(_i < _a.length)) return [3 /*break*/, 4];
-                                    i = _a[_i];
-                                    if (!(localImagePath[i]["globalURI"] != null)) return [3 /*break*/, 3];
-                                    params = { "id": response["id"] };
-                                    requestUrl = "events/update_image";
-                                    return [4 /*yield*/, this.uploadImage(localImagePath[i], params, requestUrl)];
-                                case 2:
-                                    uploadStatus = _c.sent();
-                                    if (uploadStatus["status"] == true) {
-                                        updateEventOptions = rowData["event_options"];
-                                        updateEventOptions["localImagePath"][i]["globalURI"] = uploadStatus["url"];
-                                        sql_2 = "UPDATE events SET event_options = ? WHERE event_id = ?";
-                                        createEventData_1 = [sql_2, [JSON.stringify(updateEventOptions), res["event_id"]]];
-                                        this.commonUpdateAndDeleteEvent(sql_2, createEventData_1);
-                                    }
-                                    _c.label = 3;
-                                case 3:
-                                    _i++;
-                                    return [3 /*break*/, 1];
-                                case 4: return [2 /*return*/];
-                            }
-                        });
-                    }); });
-                });
+                if (data['event_type'] != 'vital') {
+                    this.insertEventData(data).subscribe(function (responseList) {
+                        var response = responseList[0]['event'];
+                        var sql = "UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?";
+                        var createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["event_id"]];
+                        _this.commonUpdateAndDeleteEvent(sql, createEventData).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                            var localImagePath, i, params, requestUrl, uploadStatus, updateEventOptions, sql_2, createEventData_1;
+                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        console.log(rowData["event_options"]);
+                                        console.log(res);
+                                        if (!(res["event_id"] != undefined && rowData["event_options"]["localImagePath"] != undefined && rowData["event_options"]["localImagePath"] != null)) return [3 /*break*/, 4];
+                                        localImagePath = rowData["event_options"]["localImagePath"];
+                                        i = 0;
+                                        _a.label = 1;
+                                    case 1:
+                                        if (!(i < localImagePath.length)) return [3 /*break*/, 4];
+                                        if (!(localImagePath[i]["globalURI"] != null)) return [3 /*break*/, 3];
+                                        params = { "id": response["id"] };
+                                        requestUrl = "events/update_image";
+                                        return [4 /*yield*/, this.uploadImage(localImagePath[i], params, requestUrl)];
+                                    case 2:
+                                        uploadStatus = _a.sent();
+                                        if (uploadStatus["status"] == true) {
+                                            updateEventOptions = rowData["event_options"];
+                                            updateEventOptions["localImagePath"][i]["globalURI"] = uploadStatus["url"];
+                                            sql_2 = "UPDATE events SET event_options = ? WHERE event_id = ?";
+                                            createEventData_1 = [sql_2, [JSON.stringify(updateEventOptions), res["event_id"]]];
+                                            this.commonUpdateAndDeleteEvent(sql_2, createEventData_1);
+                                        }
+                                        _a.label = 3;
+                                    case 3:
+                                        i++;
+                                        return [3 /*break*/, 1];
+                                    case 4: return [2 /*return*/];
+                                }
+                            });
+                        }); });
+                    });
+                }
+                else {
+                    this.updateVitalEvent(data).subscribe(function (responseList) {
+                        var response = responseList[0]['event'];
+                        var sql = "UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?";
+                        var createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["event_id"]];
+                        _this.commonUpdateAndDeleteEvent(sql, createEventData).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                            var localImagePath, i, params, requestUrl, uploadStatus, updateEventOptions, sql_3, createEventData_2;
+                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        console.log(rowData["event_options"]);
+                                        console.log(res);
+                                        if (!(res["event_id"] != undefined && rowData["event_options"]["localImagePath"] != undefined && rowData["event_options"]["localImagePath"] != null)) return [3 /*break*/, 4];
+                                        localImagePath = rowData["event_options"]["localImagePath"];
+                                        i = 0;
+                                        _a.label = 1;
+                                    case 1:
+                                        if (!(i < localImagePath.length)) return [3 /*break*/, 4];
+                                        if (!(localImagePath[i]["globalURI"] != null)) return [3 /*break*/, 3];
+                                        params = { "id": response["id"] };
+                                        requestUrl = "events/update_image";
+                                        return [4 /*yield*/, this.uploadImage(localImagePath[i], params, requestUrl)];
+                                    case 2:
+                                        uploadStatus = _a.sent();
+                                        if (uploadStatus["status"] == true) {
+                                            updateEventOptions = rowData["event_options"];
+                                            updateEventOptions["localImagePath"][i]["globalURI"] = uploadStatus["url"];
+                                            sql_3 = "UPDATE events SET event_options = ? WHERE event_id = ?";
+                                            createEventData_2 = [sql_3, [JSON.stringify(updateEventOptions), res["event_id"]]];
+                                            this.commonUpdateAndDeleteEvent(sql_3, createEventData_2);
+                                        }
+                                        _a.label = 3;
+                                    case 3:
+                                        i++;
+                                        return [3 /*break*/, 1];
+                                    case 4: return [2 /*return*/];
+                                }
+                            });
+                        }); });
+                    });
+                }
                 return [2 /*return*/];
             });
         });
@@ -2763,12 +2856,22 @@ var syncProvider = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 console.log(rowData, "updateSingleEventData");
                 data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"] };
-                this.updateEventData(rowData["id"], data).subscribe(function (responseList) {
-                    var response = responseList[0]['event'];
-                    var sql = "UPDATE events SET created_at = ?, updated_at = ? WHERE event_id = ?";
-                    var createEventData = [response["created_at"], response["updated_at"], rowData["event_id"]];
-                    _this.commonUpdateAndDeleteEvent(sql, createEventData);
-                });
+                if (data['event_type'] != 'vital') {
+                    this.updateEventData(rowData["id"], data).subscribe(function (responseList) {
+                        var response = responseList[0]['event'];
+                        var sql = "UPDATE events SET created_at = ?, updated_at = ? WHERE event_id = ?";
+                        var createEventData = [response["created_at"], response["updated_at"], rowData["event_id"]];
+                        _this.commonUpdateAndDeleteEvent(sql, createEventData);
+                    });
+                }
+                else {
+                    this.updateVitalEvent(data).subscribe(function (responseList) {
+                        var response = responseList[0]['event'];
+                        var sql = "UPDATE events SET created_at = ?, updated_at = ? WHERE event_id = ?";
+                        var createEventData = [response["created_at"], response["updated_at"], rowData["event_id"]];
+                        _this.commonUpdateAndDeleteEvent(sql, createEventData);
+                    });
+                }
                 return [2 /*return*/];
             });
         });
@@ -2875,6 +2978,10 @@ var syncProvider = /** @class */ (function () {
         var response1 = this.http.post("events", data);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
     };
+    syncProvider.prototype.updateVitalEvent = function (data) {
+        var response1 = this.http.post("events/vital_update", data);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+    };
     syncProvider.prototype.updateEventData = function (id, record) {
         var response1 = this.http.put("events/" + id, record);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
@@ -2958,7 +3065,7 @@ var syncProvider = /** @class */ (function () {
         return this.getPatientsList().subscribe(function (responseList) {
             _this.patientList = responseList;
             var userIds = [];
-            for (var i in _this.patientList[0]['patient']) {
+            for (var i = 0; i < _this.patientList[0]['patient'].length; i++) {
                 userIds.push(_this.patientList[0]['patient'][i]['id']);
                 console.log(userIds);
             }

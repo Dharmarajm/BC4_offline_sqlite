@@ -44,7 +44,8 @@ export class VitalsPage implements OnInit {
     // })
     
     this.databaseSummary.getAllEvents('vital','New',7).then(res=>{
-      console.log(res)
+      console.log(res);
+      this.status = false;
       let data = res['event_list'];
       this.groupBy(data);
      

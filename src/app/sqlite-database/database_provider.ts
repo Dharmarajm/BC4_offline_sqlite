@@ -427,7 +427,8 @@ export class DataBaseSummaryProvider {
         let lastDay = last_day.toString();
         let endDay = new Date(lastDay);
         endDay.setDate(endDay.getDate() + 1);
-        let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDay}') AND DATE('${endDay}'))) ORDER BY event_datetime DESC`
+        let EndDayOfCurrent = endDay.toJSON()
+        let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDay}') AND DATE('${EndDayOfCurrent}'))) ORDER BY event_datetime DESC`
         console.log(sqlSearchEventQuery)
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
@@ -706,7 +707,7 @@ export class DataBaseSummaryProvider {
 
     async diaryRecordFilter(data): Promise<any> {
         let user_id = await this.databaseService.getuserID();
-      let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (created_at BETWEEN DATE('${data["from_date"]}') AND DATE('${data["end_date"]}','+1 DAY')) AND (event_type='${data["event_type"]}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET 0`;
+        let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (created_at BETWEEN DATE('${data["from_date"]}') AND DATE('${data["end_date"]}','+1 DAY')) AND (event_type='${data["event_type"]}' AND delete1='false' AND user_id='${user_id}') ORDER BY created_at DESC LIMIT 10 OFFSET 0`;
         
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {

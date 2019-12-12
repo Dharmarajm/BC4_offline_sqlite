@@ -455,15 +455,18 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     };
     DataBaseSummaryProvider.prototype.getAllExpenses = function (first_day, last_day) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var user_id, startDay, endDay, sqlSearchEventQuery;
+            var user_id, startDay, lastDay, endDay, EndDayOfCurrent, sqlSearchEventQuery;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.databaseService.getuserID()];
                     case 1:
                         user_id = _a.sent();
                         startDay = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(first_day, 'yyyy-MM-dd', 'en-US');
-                        endDay = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(last_day, 'yyyy-MM-dd', 'en-US');
-                        sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + (" WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDay + "') AND DATE('" + endDay + "'))) ORDER BY event_datetime DESC");
+                        lastDay = last_day.toString();
+                        endDay = new Date(lastDay);
+                        endDay.setDate(endDay.getDate() + 1);
+                        EndDayOfCurrent = endDay.toJSON();
+                        sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + (" WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDay + "') AND DATE('" + EndDayOfCurrent + "'))) ORDER BY event_datetime DESC");
                         console.log(sqlSearchEventQuery);
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
                                 return database.executeSql(sqlSearchEventQuery, []).then(function (data) {

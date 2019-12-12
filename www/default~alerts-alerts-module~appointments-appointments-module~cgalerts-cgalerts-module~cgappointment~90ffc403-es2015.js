@@ -393,8 +393,11 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let user_id = yield this.databaseService.getuserID();
             let startDay = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(first_day, 'yyyy-MM-dd', 'en-US');
-            let endDay = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(last_day, 'yyyy-MM-dd', 'en-US');
-            let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDay}') AND DATE('${endDay}'))) ORDER BY event_datetime DESC`;
+            let lastDay = last_day.toString();
+            let endDay = new Date(lastDay);
+            endDay.setDate(endDay.getDate() + 1);
+            let EndDayOfCurrent = endDay.toJSON();
+            let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDay}') AND DATE('${EndDayOfCurrent}'))) ORDER BY event_datetime DESC`;
             console.log(sqlSearchEventQuery);
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {
