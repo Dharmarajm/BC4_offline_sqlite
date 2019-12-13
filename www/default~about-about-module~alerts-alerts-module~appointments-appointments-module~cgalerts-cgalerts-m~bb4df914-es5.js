@@ -287,11 +287,11 @@ var DatabaseProvider = /** @class */ (function () {
                                                     if (data.rows.length > 0) {
                                                         var id = data.rows.item(0).health_id;
                                                         console.log(policy_data, id);
-                                                        _this.updateHealthData(policy_data, id);
+                                                        return _this.updateHealthData(policy_data, id);
                                                     }
                                                     else {
                                                         console.log(policy_data);
-                                                        _this.updateHealthData(policy_data);
+                                                        return _this.updateHealthData(policy_data);
                                                     }
                                                 }, function (error) {
                                                     console.log(error);
@@ -380,8 +380,9 @@ var DatabaseProvider = /** @class */ (function () {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then(function (db) {
-            var sql = "DELETE FROM emergency_details WHERE emergency_id = ?";
-            return db.executeSql(sql, [id]).then(function (row) {
+            //let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
+            var sql = "UPDATE emergency_details SET delete1 = ? WHERE emergency_id = ?";
+            return db.executeSql(sql, [true, id]).then(function (row) {
                 return { event_id: row.insertId };
             }).catch(function (res) {
                 return res;

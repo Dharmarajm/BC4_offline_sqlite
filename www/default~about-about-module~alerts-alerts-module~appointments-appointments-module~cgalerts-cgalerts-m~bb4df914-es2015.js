@@ -234,11 +234,11 @@ let DatabaseProvider = class DatabaseProvider {
                     if (data.rows.length > 0) {
                         let id = data.rows.item(0).health_id;
                         console.log(policy_data, id);
-                        this.updateHealthData(policy_data, id);
+                        return this.updateHealthData(policy_data, id);
                     }
                     else {
                         console.log(policy_data);
-                        this.updateHealthData(policy_data);
+                        return this.updateHealthData(policy_data);
                     }
                 }, error => {
                     console.log(error);
@@ -304,8 +304,9 @@ let DatabaseProvider = class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db) => {
-            let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
-            return db.executeSql(sql, [id]).then((row) => {
+            //let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
+            let sql = `UPDATE emergency_details SET delete1 = ? WHERE emergency_id = ?`;
+            return db.executeSql(sql, [true, id]).then((row) => {
                 return { event_id: row.insertId };
             }).catch(res => {
                 return res;

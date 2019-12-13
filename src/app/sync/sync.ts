@@ -52,17 +52,11 @@ export class syncProvider {
                  await this.getUserIdFromCareGiver();
                  this.updateImageDeletion()
               })
-            .then(()=>{
+            .then(async ()=>{
               this.getTotalEnumMasters();
-              this.getAllEvents();
-            })
-            .then(()=>{
-              //this.getUniqueEventDataPush();
+              await this.getAllEvents();
               this.awaitAllUsersTableData();
-            })
-            .then(()=>{
-              //this.getUniqueUsersDataPush();
-            })        
+            })    
     }
 
     async updateImageDeletion(){
@@ -234,7 +228,7 @@ export class syncProvider {
                   }
                   let createEventData = [this.allEvents[i]["id"],this.allEvents[i]["event_name"],this.allEvents[i]["description"],this.allEvents[i]["value"],this.allEvents[i]["event_datetime"],this.allEvents[i]["event_type"],this.allEvents[i]["event_category"],JSON.stringify(this.allEvents[i]["event_assets"]),JSON.stringify(event_optionsURI),this.allEvents[i]["user_id"],this.allEvents[i]["created_at"],this.allEvents[i]["updated_at"],false]
                   //database.executeSql(sql, createEventData)
-                  this.commonUpdateAndDeleteEvent(sql,createEventData);
+                  await this.commonUpdateAndDeleteEvent(sql,createEventData);
                 }
               } 
            })
@@ -365,10 +359,11 @@ export class syncProvider {
                 this.responseData2 = responseList[1]["health_detail"];
                 this.responseData3 = responseList[2]["users"]; 
                 this.responseData4 = responseList[3]["user_associations"];
-                this.responseData5 = responseList[4]["qrcode_image"];
+                //this.responseData5 = responseList[4]["qrcode_image"];
+                this.responseData5 = responseList[4];
                 console.log(responseList)
-                
-                localStorage.setItem("qrcode",this.responseData5);
+                let qrcode = this.responseData5['qrcode_image']
+                localStorage.setItem("qrcode",qrcode);
                 let profile_id = localStorage.getItem("profile_id");     
                 await database.executeSql(`SELECT * FROM emergency_details`, []).then(async (data) => {
                   let length = data.rows.length;
@@ -413,6 +408,7 @@ export class syncProvider {
 
                 await database.executeSql(`SELECT * FROM health_details`, []).then(async (data) => {
                   let length = data.rows.length;
+
                   console.log(length)
                   if(length>0){
                     let healthData = [];
@@ -449,6 +445,100 @@ export class syncProvider {
                 },error=>{
                   console.log(error,'healtherror');
                 })
+
+                await database.executeSql(`SELECT * FROM health_details WHERE name='policy'`,[]).then(async (data)=>{
+                  console.log(data);
+                  let length = data.rows.length;
+                  if(length==0){
+                   for(let i=0;i<this.responseData5["policies"].length;i++){
+                    let attribute_json = JSON.stringify(this.responseData5["policies"][i]["attribute_name_value"]);
+                    let data2 = [
+                      this.responseData5["policies"][i]["id"],
+                      this.responseData5["policies"][i]["name"],
+                      attribute_json,
+                      this.responseData5["policies"][i]["user_id"],
+                      this.responseData5["policies"][i]["created_at"],
+                      this.responseData5["policies"][i]["updated_at"]
+                    ]
+                    let sqlData2 = `INSERT INTO health_details VALUES (?,NULL,?,?,?,?,?)`;
+                    await database.executeSql(sqlData2,data2).then(res => {
+                      console.log(res, 'health_details');
+                    }, error => {
+                      console.log(error, 'errorhealth_details');
+                    });
+                   } 
+                    
+                  }else{
+                    let profile_id = localStorage.getItem("profile_id");
+                    let sqlUserQuery = `SELECT * FROM users WHERE id='${profile_id}'`;
+                    let userData = [];
+                    await database.executeSql(sqlUserQuery, []).then((data2) => {
+                      console.log(data2.rows)
+                      for (let i = 0; i < data2.rows.length; i++) {
+                          console.log(data2.rows.item(i))
+                        let attribute_json:any = null;                    
+                        if(data2.rows.item(i).user_picture!=null){
+                          attribute_json = JSON.parse(data2.rows.item(i).user_picture);    
+                        }  
+                          
+                        userData.push({ 
+                            id: data2.rows.item(i).id,
+                            name: data2.rows.item(i).name,
+                            email: data2.rows.item(i).email,
+                            password: data2.rows.item(i).password,
+                            mobile_no: data2.rows.item(i).mobile_no,
+                            address: data2.rows.item(i).address,
+                            country: data2.rows.item(i).country,
+                            blood_group: data2.rows.item(i).blood_group,
+                            age: data2.rows.item(i).age,
+                            user_uid: data2.rows.item(i).user_uid,
+                            forgot_password_code: data2.rows.item(i).forgot_password_code,
+                            user_picture: attribute_json,
+                            active_status: data2.rows.item(i).active_status,
+                            role_id: data2.rows.item(i).role_id,
+                            created_at: data2.rows.item(i).created_at,
+                            updated_at: data2.rows.item(i).updated_at,
+                            delete1: data2.rows.item(i).delete1
+                        })  
+                      }
+                    }).catch(res=>{
+                        console.log(res)
+                    })
+                    
+                    let healthData = []
+                    for (let j = 0; j < data.rows.length; j++) {
+                      let rowData = data.rows.item(j);
+                      //let attribute_json = JSON.stringify(data.rows.item(j).attribute_name_value);
+                      // let data2 = [
+                      //   data.rows.item(j).id,
+                      //   data.rows.item(j).name,
+                      //   attribute_json,
+                      //   data.rows.item(j).user_id,
+                      //   data.rows.item(j).created_at,
+                      //   data.rows.item(j).updated_at
+                      // ]
+
+                      let attribute_json = JSON.stringify(data.rows.item(j).attribute_name_value); 
+                      healthData.push({ 
+                        id: data.rows.item(j).id, 
+                        health_id: data.rows.item(j).health_id, 
+                        name: data.rows.item(j).name, 
+                        attribute_name_value: attribute_json, 
+                        user_id: data.rows.item(j).user_id, 
+                        created_at: data.rows.item(j).created_at, 
+                        updated_at: data.rows.item(j).updated_at 
+                      })  
+                      if(data.rows.item(j).id==null && data.rows.item(j).name == "policy" && profile_id == data.rows.item(j).user_id || data.rows.item(j).updated_at > this.responseData5["policies"][0]['updated_at'] && data.rows.item(j).name == "policy" && profile_id == data.rows.item(j).user_id){
+                        //await this.createSingleHealthDetail(rowData); 
+                        await this.updateUsersData(userData[0],healthData[0])
+                        
+                      }else if(data.rows.item(j).updated_at < this.responseData5["policies"][0]['updated_at'] && data.rows.item(j).name == "policy" && profile_id == data.rows.item(j).user_id){
+                          //await this.createSingleHealthDetail(this.responseData5["policies"][0]);
+                        await this.updateUsersData(userData[0],this.responseData5["policies"][0])
+                      }
+                    }  
+                  }
+                })
                 
                 await database.executeSql(`SELECT * FROM users`, []).then(async (data) => {
                   let length = data.rows.length;
@@ -468,16 +558,16 @@ export class syncProvider {
                           this.getUniqueUsersDataPush();  
                         }  
                       }else{
-                        let getHealthData = await this.getUserPolicy();
-                        let assigngetUserData = getHealthData['policies'];
+                        //let getHealthData = await this.getUserPolicy();
+                        //let assigngetUserData = getHealthData['policies'];
                         
-                        let healthData = assigngetUserData[0] || null; 
+                        //let healthData = assigngetUserData[0] || null; 
                         let findindex = this.responseData3.indexOf(res=>res.id==data.rows.item(i).id)
                         let sql = `UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, user_option = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?`;
                         if(findindex!=-1 && this.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at){
                           let createEventData = [this.responseData3[findindex]["name"],this.responseData3[findindex]["email"],this.responseData3[findindex]["password"],this.responseData3[findindex]["mobile_no"],this.responseData3[findindex]["address"],this.responseData3[findindex]["country"],this.responseData3[findindex]["blood_group"],this.responseData3[findindex]["age"],this.responseData3[findindex]["user_uid"],this.responseData3[findindex]["forgot_password_code"],JSON.stringify(this.responseData3[findindex]["user_picture"]),JSON.stringify(this.responseData3[findindex]["user_option"]),this.responseData3[findindex]["active_status"],this.responseData3[findindex]["role_id"],this.responseData3[findindex]["created_at"],this.responseData3[findindex]["updated_at"],false,this.responseData3[findindex]["id"]]      
                           await this.commonUpdateAndDeleteEvent(sql,createEventData);
-                        }else if(findindex!=-1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData!=null && healthData['id']==null && findindex!=-1 && profile_id == data.rows.item(i).id){
+                        }else if(findindex!=-1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id){  //|| healthData!=null && healthData['id']==null && findindex!=-1 && profile_id == data.rows.item(i).id
                           let profile_picture = JSON.parse(data.rows.item(i).user_picture);
                           if(profile_picture['url']!=null && profile_picture['toUpdate']==true){
                             let localPath = profile_picture;
@@ -499,7 +589,7 @@ export class syncProvider {
                               await this.commonUpdateAndDeleteEvent(sql,createEventData); 
                             }
                           }
-                          await this.updateUsersData(rowData,healthData);
+                          //await this.updateUsersData(rowData,healthData);
                         }
                         if((data.rows.length-1)==i){
                           this.getUniqueUsersDataPush();  
@@ -1025,7 +1115,8 @@ export class syncProvider {
           name: DATA_BASE_NAME,
           location: 'default'
         }).then((db: SQLiteObject) => {
-          let sqlHealthQuery = `SELECT * FROM health_details WHERE (name='policy' AND role_id=2)`;
+          let user_id = localStorage.getItem('profile_id')
+          let sqlHealthQuery = `SELECT * FROM health_details WHERE (name='policy' AND user_id='${user_id}')`;
           let healthData = [];
           return db.executeSql(sqlHealthQuery, []).then((data1) => {
             for (let i = 0; i < data1.rows.length; i++) {
@@ -1156,8 +1247,11 @@ export class syncProvider {
           user_id = localStorage.getItem("user_id");
           return user_id;
         }else{
-          user_id = this.getPatientIds;
-          return user_id;
+          await this.getUserIdFromCareGiver().then((response)=>{
+            user_id = response;
+            return user_id;
+          })
+          
         }
       }
 

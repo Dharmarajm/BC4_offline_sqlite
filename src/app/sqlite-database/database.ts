@@ -296,8 +296,9 @@ export class DatabaseProvider {
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db: SQLiteObject) => { 
-          let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
-          return db.executeSql(sql,[id]).then((row: any)=>{
+          //let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
+          let sql = `UPDATE emergency_details SET delete1 = ? WHERE emergency_id = ?`
+          return db.executeSql(sql,[true,id]).then((row: any)=>{
             return { event_id:row.insertId }
          }).catch(res=>{
             return res;

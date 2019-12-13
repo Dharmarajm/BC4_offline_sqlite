@@ -1852,17 +1852,11 @@ let syncProvider = class syncProvider {
                 yield this.getUserIdFromCareGiver();
                 this.updateImageDeletion();
             }))
-                .then(() => {
+                .then(() => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                 this.getTotalEnumMasters();
-                this.getAllEvents();
-            })
-                .then(() => {
-                //this.getUniqueEventDataPush();
+                yield this.getAllEvents();
                 this.awaitAllUsersTableData();
-            })
-                .then(() => {
-                //this.getUniqueUsersDataPush();
-            });
+            }));
         });
     }
     updateImageDeletion() {
@@ -2022,7 +2016,7 @@ let syncProvider = class syncProvider {
                                 }
                                 let createEventData = [this.allEvents[i]["id"], this.allEvents[i]["event_name"], this.allEvents[i]["description"], this.allEvents[i]["value"], this.allEvents[i]["event_datetime"], this.allEvents[i]["event_type"], this.allEvents[i]["event_category"], JSON.stringify(this.allEvents[i]["event_assets"]), JSON.stringify(event_optionsURI), this.allEvents[i]["user_id"], this.allEvents[i]["created_at"], this.allEvents[i]["updated_at"], false];
                                 //database.executeSql(sql, createEventData)
-                                this.commonUpdateAndDeleteEvent(sql, createEventData);
+                                yield this.commonUpdateAndDeleteEvent(sql, createEventData);
                             }
                         }
                     }));
@@ -2140,8 +2134,10 @@ let syncProvider = class syncProvider {
                     this.responseData2 = responseList[1]["health_detail"];
                     this.responseData3 = responseList[2]["users"];
                     this.responseData4 = responseList[3]["user_associations"];
-                    this.responseData5 = responseList[4]["qrcode_image"];
+                    //this.responseData5 = responseList[4]["qrcode_image"];
+                    this.responseData5 = responseList[4];
                     console.log(responseList);
+                    let qrcode = this.responseData5['qrcode_image'];
                     localStorage.setItem("qrcode", this.responseData5);
                     let profile_id = localStorage.getItem("profile_id");
                     yield database.executeSql(`SELECT * FROM emergency_details`, []).then((data) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
@@ -2221,6 +2217,96 @@ let syncProvider = class syncProvider {
                     }), error => {
                         console.log(error, 'healtherror');
                     });
+                    yield database.executeSql(`SELECT * FROM health_details WHERE name='policy'`, []).then((data) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                        console.log(data);
+                        let length = data.rows.length;
+                        if (length == 0) {
+                            for (let i = 0; i < this.responseData5["policies"].length; i++) {
+                                let attribute_json = JSON.stringify(this.responseData5["policies"][i]["attribute_name_value"]);
+                                let data2 = [
+                                    this.responseData5["policies"][i]["id"],
+                                    this.responseData5["policies"][i]["name"],
+                                    attribute_json,
+                                    this.responseData5["policies"][i]["user_id"],
+                                    this.responseData5["policies"][i]["created_at"],
+                                    this.responseData5["policies"][i]["updated_at"]
+                                ];
+                                let sqlData2 = `INSERT INTO health_details VALUES (?,NULL,?,?,?,?,?)`;
+                                yield database.executeSql(sqlData2, data2).then(res => {
+                                    console.log(res, 'health_details');
+                                }, error => {
+                                    console.log(error, 'errorhealth_details');
+                                });
+                            }
+                        }
+                        else {
+                            let profile_id = localStorage.getItem("profile_id");
+                            let sqlUserQuery = `SELECT * FROM users WHERE id='${profile_id}'`;
+                            let userData = [];
+                            yield database.executeSql(sqlUserQuery, []).then((data2) => {
+                                console.log(data2.rows);
+                                for (let i = 0; i < data2.rows.length; i++) {
+                                    console.log(data2.rows.item(i));
+                                    let attribute_json = null;
+                                    if (data2.rows.item(i).user_picture != null) {
+                                        attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                    }
+                                    userData.push({
+                                        id: data2.rows.item(i).id,
+                                        name: data2.rows.item(i).name,
+                                        email: data2.rows.item(i).email,
+                                        password: data2.rows.item(i).password,
+                                        mobile_no: data2.rows.item(i).mobile_no,
+                                        address: data2.rows.item(i).address,
+                                        country: data2.rows.item(i).country,
+                                        blood_group: data2.rows.item(i).blood_group,
+                                        age: data2.rows.item(i).age,
+                                        user_uid: data2.rows.item(i).user_uid,
+                                        forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                        user_picture: attribute_json,
+                                        active_status: data2.rows.item(i).active_status,
+                                        role_id: data2.rows.item(i).role_id,
+                                        created_at: data2.rows.item(i).created_at,
+                                        updated_at: data2.rows.item(i).updated_at,
+                                        delete1: data2.rows.item(i).delete1
+                                    });
+                                }
+                            }).catch(res => {
+                                console.log(res);
+                            });
+                            let healthData = [];
+                            for (let j = 0; j < data.rows.length; j++) {
+                                let rowData = data.rows.item(j);
+                                //let attribute_json = JSON.stringify(data.rows.item(j).attribute_name_value);
+                                // let data2 = [
+                                //   data.rows.item(j).id,
+                                //   data.rows.item(j).name,
+                                //   attribute_json,
+                                //   data.rows.item(j).user_id,
+                                //   data.rows.item(j).created_at,
+                                //   data.rows.item(j).updated_at
+                                // ]
+                                let attribute_json = JSON.stringify(data.rows.item(j).attribute_name_value);
+                                healthData.push({
+                                    id: data.rows.item(j).id,
+                                    health_id: data.rows.item(j).health_id,
+                                    name: data.rows.item(j).name,
+                                    attribute_name_value: attribute_json,
+                                    user_id: data.rows.item(j).user_id,
+                                    created_at: data.rows.item(j).created_at,
+                                    updated_at: data.rows.item(j).updated_at
+                                });
+                                if (data.rows.item(j).id == null && data.rows.item(j).name == "policy" && profile_id == data.rows.item(j).user_id || data.rows.item(j).updated_at > this.responseData5["policies"][0]['updated_at'] && data.rows.item(j).name == "policy" && profile_id == data.rows.item(j).user_id) {
+                                    //await this.createSingleHealthDetail(rowData); 
+                                    yield this.updateUsersData(userData[0], healthData[0]);
+                                }
+                                else if (data.rows.item(j).updated_at < this.responseData5["policies"][0]['updated_at'] && data.rows.item(j).name == "policy" && profile_id == data.rows.item(j).user_id) {
+                                    //await this.createSingleHealthDetail(this.responseData5["policies"][0]);
+                                    yield this.updateUsersData(userData[0], this.responseData5["policies"][0]);
+                                }
+                            }
+                        }
+                    }));
                     yield database.executeSql(`SELECT * FROM users`, []).then((data) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
                         let length = data.rows.length;
                         console.log(length);
@@ -2240,16 +2326,16 @@ let syncProvider = class syncProvider {
                                     }
                                 }
                                 else {
-                                    let getHealthData = yield this.getUserPolicy();
-                                    let assigngetUserData = getHealthData['policies'];
-                                    let healthData = assigngetUserData[0] || null;
+                                    //let getHealthData = await this.getUserPolicy();
+                                    //let assigngetUserData = getHealthData['policies'];
+                                    //let healthData = assigngetUserData[0] || null; 
                                     let findindex = this.responseData3.indexOf(res => res.id == data.rows.item(i).id);
                                     let sql = `UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, user_option = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?`;
                                     if (findindex != -1 && this.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at) {
                                         let createEventData = [this.responseData3[findindex]["name"], this.responseData3[findindex]["email"], this.responseData3[findindex]["password"], this.responseData3[findindex]["mobile_no"], this.responseData3[findindex]["address"], this.responseData3[findindex]["country"], this.responseData3[findindex]["blood_group"], this.responseData3[findindex]["age"], this.responseData3[findindex]["user_uid"], this.responseData3[findindex]["forgot_password_code"], JSON.stringify(this.responseData3[findindex]["user_picture"]), JSON.stringify(this.responseData3[findindex]["user_option"]), this.responseData3[findindex]["active_status"], this.responseData3[findindex]["role_id"], this.responseData3[findindex]["created_at"], this.responseData3[findindex]["updated_at"], false, this.responseData3[findindex]["id"]];
                                         yield this.commonUpdateAndDeleteEvent(sql, createEventData);
                                     }
-                                    else if (findindex != -1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData != null && healthData['id'] == null && findindex != -1 && profile_id == data.rows.item(i).id) {
+                                    else if (findindex != -1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id) { //|| healthData!=null && healthData['id']==null && findindex!=-1 && profile_id == data.rows.item(i).id
                                         let profile_picture = JSON.parse(data.rows.item(i).user_picture);
                                         if (profile_picture['url'] != null && profile_picture['toUpdate'] == true) {
                                             let localPath = profile_picture;
@@ -2271,7 +2357,7 @@ let syncProvider = class syncProvider {
                                                 yield this.commonUpdateAndDeleteEvent(sql, createEventData);
                                             }
                                         }
-                                        yield this.updateUsersData(rowData, healthData);
+                                        //await this.updateUsersData(rowData,healthData);
                                     }
                                     if ((data.rows.length - 1) == i) {
                                         this.getUniqueUsersDataPush();
@@ -2619,7 +2705,7 @@ let syncProvider = class syncProvider {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
     }
     createSingleHealthDetail(rowData) {
-        let data = { attribute_name_value: rowData['attribute_name_value'] };
+        let data = { attribute_name_value: JSON.parse(rowData['attribute_name_value']) };
         return this.updateHealthData(data).subscribe((responseList) => {
             let response = responseList[0]['health_detail'];
             let sql = `UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?`;
@@ -2767,9 +2853,10 @@ let syncProvider = class syncProvider {
                 name: DATA_BASE_NAME,
                 location: 'default'
             }).then((db) => {
-                let sqlHealthQuery = `SELECT * FROM health_details WHERE name='policy'`;
+                let user_id = localStorage.getItem('profile_id');
+                let sqlHealthQuery = `SELECT * FROM health_details WHERE (name='policy' AND user_id='${user_id}')`;
                 let healthData = [];
-                db.executeSql(sqlHealthQuery, []).then((data1) => {
+                return db.executeSql(sqlHealthQuery, []).then((data1) => {
                     for (let i = 0; i < data1.rows.length; i++) {
                         let event_json = null;
                         if (data1.rows.item(i).attribute_name_value != '') {
@@ -2785,8 +2872,8 @@ let syncProvider = class syncProvider {
                             updated_at: data1.rows.item(i).updated_at
                         });
                     }
+                    return { policies: healthData };
                 });
-                return { policies: healthData };
             });
         });
     }
@@ -2882,8 +2969,10 @@ let syncProvider = class syncProvider {
                 return user_id;
             }
             else {
-                user_id = this.getPatientIds;
-                return user_id;
+                yield this.getUserIdFromCareGiver().then((response) => {
+                    user_id = response;
+                    return user_id;
+                });
             }
         });
     }

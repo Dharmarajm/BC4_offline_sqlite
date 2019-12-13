@@ -843,7 +843,7 @@ export class DataBaseSummaryProvider {
     }
 
     getEmergencyDeatails(): Promise<any> {
-       let sqlEmergeQuery = SQL_SELECT_ALL_EMERGENCY_DATA;
+       let sqlEmergeQuery = SQL_SELECT_ALL_EMERGENCY_DATA+` WHERE delete1='false'`;
        let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE (role_id=2 AND delete1='false')`;
        console.log(sqlUsersQuery)
        return this.databaseService.getDatabase().then(async (database) => {

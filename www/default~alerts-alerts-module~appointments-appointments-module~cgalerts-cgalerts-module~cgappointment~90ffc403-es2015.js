@@ -791,7 +791,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     }
     getEmergencyDeatails() {
         let sqlEmergeQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EMERGENCY_DATA"];
-        let sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (role_id=1 AND delete1='false')`;
+        let sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (role_id=2 AND delete1='false')`;
         console.log(sqlUsersQuery);
         return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let emergencyContacts = [];
