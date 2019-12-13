@@ -875,7 +875,7 @@ export class syncProvider {
     }
 
     createSingleHealthDetail(rowData){
-      let data = { attribute_name_value: rowData['attribute_name_value'] };
+      let data = { attribute_name_value: JSON.parse(rowData['attribute_name_value']) };
       return this.updateHealthData(data).subscribe((responseList)=>{ 
         let response = responseList[0]['health_detail'];
         let sql = `UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?`;
@@ -1025,9 +1025,9 @@ export class syncProvider {
           name: DATA_BASE_NAME,
           location: 'default'
         }).then((db: SQLiteObject) => {
-          let sqlHealthQuery = `SELECT * FROM health_details WHERE name='policy'`;
+          let sqlHealthQuery = `SELECT * FROM health_details WHERE (name='policy' AND role_id=2)`;
           let healthData = [];
-          db.executeSql(sqlHealthQuery, []).then((data1) => {
+          return db.executeSql(sqlHealthQuery, []).then((data1) => {
             for (let i = 0; i < data1.rows.length; i++) {
               let event_json:any = null;
               if (data1.rows.item(i).attribute_name_value != '') {
@@ -1043,8 +1043,9 @@ export class syncProvider {
                   updated_at: data1.rows.item(i).updated_at 
               })  
             }
+            return { policies: healthData };
           })
-          return { policies: healthData };
+          
         })    
        }
 

@@ -229,10 +229,10 @@ export class DatabaseProvider {
             if(data.rows.length>0){
              let id = data.rows.item(0).health_id;
              console.log(policy_data,id)
-             this.updateHealthData(policy_data,id);
+             return this.updateHealthData(policy_data,id);
            }else{
             console.log(policy_data)
-             this.updateHealthData(policy_data);
+             return this.updateHealthData(policy_data);
            } 
          },error=>{
              console.log(error)
