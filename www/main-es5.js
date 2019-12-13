@@ -1868,6 +1868,7 @@ var syncProvider = /** @class */ (function () {
         this.healtDetails = [];
         this.usersList = [];
         this.user_associations = [];
+        this.getPatientIds = [];
         console.log('Hello SettingProvider Provider');
         //this.initiateSync();
     }
@@ -1878,7 +1879,17 @@ var syncProvider = /** @class */ (function () {
                 this.ready = this.platform.ready()
                     // .then(() => this.getTotalEnumMasters())
                     // .then(() => this.awaitAllUsersTableData())
-                    .then(function () { return _this.updateImageDeletion(); })
+                    .then(function () { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, this.getUserIdFromCareGiver()];
+                            case 1:
+                                _a.sent();
+                                this.updateImageDeletion();
+                                return [2 /*return*/];
+                        }
+                    });
+                }); })
                     .then(function () {
                     _this.getTotalEnumMasters();
                     _this.getAllEvents();
@@ -1900,73 +1911,83 @@ var syncProvider = /** @class */ (function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 sqlEventQuery = "SELECT * FROM events WHERE (event_type='alert_medication' AND event_type='report' AND event_type='prescription' AND delete1='false')";
-                this.getDatabase().then(function (database) {
-                    database.executeSql(sqlEventQuery, []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                        var _loop_1, this_1, i;
-                        var _this = this;
-                        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    _loop_1 = function (i) {
-                                        var event_json, eventAssetsJson, index, i_1, event_id, user_id, params;
-                                        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                            switch (_a.label) {
-                                                case 0:
-                                                    event_json = null;
-                                                    eventAssetsJson = null;
-                                                    if (data.rows.item(i).event_options != null) {
-                                                        event_json = JSON.parse(data.rows.item(i).event_options);
-                                                    }
-                                                    if (data.rows.item(i).event_assets != null) {
-                                                        eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
-                                                    }
-                                                    index = [];
-                                                    for (i_1 = 0; i_1 < event_json['localImagePath'].length; i_1++) {
-                                                        if (event_json['localImagePath'][i_1]['delete'] == 'true') {
-                                                            index.push(i_1);
+                return [2 /*return*/, this.getDatabase().then(function (database) {
+                        return database.executeSql(sqlEventQuery, []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                            var _loop_1, this_1, i;
+                            var _this = this;
+                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        _loop_1 = function (i) {
+                                            var event_json, eventAssetsJson, index, i_1, event_id, user_id, params;
+                                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                switch (_a.label) {
+                                                    case 0:
+                                                        event_json = null;
+                                                        eventAssetsJson = null;
+                                                        if (data.rows.item(i).event_options != null) {
+                                                            event_json = JSON.parse(data.rows.item(i).event_options);
                                                         }
-                                                    }
-                                                    event_id = data.rows.item(i).event_id;
-                                                    if (!(index.length > 0)) return [3 /*break*/, 2];
-                                                    return [4 /*yield*/, this_1.getuserID()];
-                                                case 1:
-                                                    user_id = _a.sent();
-                                                    params = { "index": index, "id": user_id };
-                                                    this_1.deleteEventImages(params).subscribe(function (responseList) {
-                                                        for (var j = 0; j < index.length; j++) {
-                                                            event_json['localImagePath'].splice(index[i], 1);
-                                                            eventAssetsJson.splice(index[i], 1);
+                                                        if (data.rows.item(i).event_assets != null) {
+                                                            eventAssetsJson = JSON.parse(data.rows.item(i).event_assets);
                                                         }
-                                                        var sql = "UPDATE events SET event_options = ?, event_assets = ? WHERE event_id = ?";
-                                                        var createEventData = [JSON.stringify(event_json), JSON.stringify(eventAssetsJson), event_id];
-                                                        _this.commonUpdateAndDeleteEvent(sql, createEventData);
-                                                    }, function (err) {
-                                                    });
-                                                    _a.label = 2;
-                                                case 2:
-                                                    console.log(data.rows.length - 1 == i);
-                                                    return [2 /*return*/];
-                                            }
-                                        });
-                                    };
-                                    this_1 = this;
-                                    i = 0;
-                                    _a.label = 1;
-                                case 1:
-                                    if (!(i < data.rows.length)) return [3 /*break*/, 4];
-                                    return [5 /*yield**/, _loop_1(i)];
-                                case 2:
-                                    _a.sent();
-                                    _a.label = 3;
-                                case 3:
-                                    i++;
-                                    return [3 /*break*/, 1];
-                                case 4: return [2 /*return*/];
-                            }
-                        });
-                    }); });
-                });
-                return [2 /*return*/];
+                                                        index = [];
+                                                        for (i_1 = 0; i_1 < event_json['localImagePath'].length; i_1++) {
+                                                            if (event_json['localImagePath'][i_1]['delete'] == 'true') {
+                                                                index.push(i_1);
+                                                            }
+                                                        }
+                                                        event_id = data.rows.item(i).event_id;
+                                                        if (!(index.length > 0)) return [3 /*break*/, 3];
+                                                        return [4 /*yield*/, this_1.getuserID()];
+                                                    case 1:
+                                                        user_id = _a.sent();
+                                                        params = { "index": index, "id": user_id };
+                                                        return [4 /*yield*/, this_1.deleteEventImages(params).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                                                var j, sql, createEventData;
+                                                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                                    switch (_a.label) {
+                                                                        case 0:
+                                                                            for (j = 0; j < index.length; j++) {
+                                                                                event_json['localImagePath'].splice(index[i], 1);
+                                                                                eventAssetsJson.splice(index[i], 1);
+                                                                            }
+                                                                            sql = "UPDATE events SET event_options = ?, event_assets = ? WHERE event_id = ?";
+                                                                            createEventData = [JSON.stringify(event_json), JSON.stringify(eventAssetsJson), event_id];
+                                                                            return [4 /*yield*/, this.commonUpdateAndDeleteEvent(sql, createEventData)];
+                                                                        case 1:
+                                                                            _a.sent();
+                                                                            return [2 /*return*/];
+                                                                    }
+                                                                });
+                                                            }); }, function (err) {
+                                                            })];
+                                                    case 2:
+                                                        _a.sent();
+                                                        _a.label = 3;
+                                                    case 3:
+                                                        console.log(data.rows.length - 1 == i);
+                                                        return [2 /*return*/];
+                                                }
+                                            });
+                                        };
+                                        this_1 = this;
+                                        i = 0;
+                                        _a.label = 1;
+                                    case 1:
+                                        if (!(i < data.rows.length)) return [3 /*break*/, 4];
+                                        return [5 /*yield**/, _loop_1(i)];
+                                    case 2:
+                                        _a.sent();
+                                        _a.label = 3;
+                                    case 3:
+                                        i++;
+                                        return [3 /*break*/, 1];
+                                    case 4: return [2 /*return*/];
+                                }
+                            });
+                        }); });
+                    })];
             });
         });
     };
@@ -2037,52 +2058,77 @@ var syncProvider = /** @class */ (function () {
                                         switch (_a.label) {
                                             case 0:
                                                 length = data.rows.length;
-                                                if (!(length > 0)) return [3 /*break*/, 1];
+                                                if (!(length > 0)) return [3 /*break*/, 5];
                                                 _loop_2 = function (i) {
-                                                    var rowData = data.rows.item(i);
-                                                    if (data.rows.item(i).id == null) {
-                                                        //console.log('null',data.rows.item(i).id)
-                                                        this_2.createSingleEventData(rowData);
-                                                    }
-                                                    else {
-                                                        if (data.rows.item(i).delete1 == 'true') {
-                                                            // console.log('delete',data.rows.item(i).delete1)
-                                                            this_2.deleteSingleEventData(rowData);
-                                                        }
-                                                        else {
-                                                            var findindex = this_2.allEvents.indexOf(function (res) { return res.id == data.rows.item(i).id; });
-                                                            var sql = "UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?";
-                                                            if (findindex != -1 && this_2.allEvents[findindex]['updated_at'] > data.rows.item(i).updated_at) {
-                                                                var createEventData = [this_2.allEvents[findindex]["id"], this_2.allEvents[findindex]["event_name"], this_2.allEvents[findindex]["description"], this_2.allEvents[findindex]["value"], this_2.allEvents[findindex]["event_datetime"], this_2.allEvents[findindex]["event_type"], this_2.allEvents[findindex]["event_category"], JSON.stringify(this_2.allEvents[findindex]["event_assets"]), JSON.stringify(this_2.allEvents[findindex]["event_options"]), this_2.allEvents[findindex]["user_id"], this_2.allEvents[findindex]["created_at"], this_2.allEvents[findindex]["updated_at"], false, rowData['event_id']];
+                                                    var rowData, findindex, sql, createEventData;
+                                                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                        switch (_a.label) {
+                                                            case 0:
+                                                                rowData = data.rows.item(i);
+                                                                if (!(data.rows.item(i).id == null)) return [3 /*break*/, 2];
+                                                                //console.log('null',data.rows.item(i).id)
+                                                                return [4 /*yield*/, this_2.createSingleEventData(rowData)];
+                                                            case 1:
+                                                                //console.log('null',data.rows.item(i).id)
+                                                                _a.sent();
+                                                                return [3 /*break*/, 8];
+                                                            case 2:
+                                                                if (!(data.rows.item(i).delete1 == 'true')) return [3 /*break*/, 4];
+                                                                // console.log('delete',data.rows.item(i).delete1)
+                                                                return [4 /*yield*/, this_2.deleteSingleEventData(rowData)];
+                                                            case 3:
+                                                                // console.log('delete',data.rows.item(i).delete1)
+                                                                _a.sent();
+                                                                return [3 /*break*/, 8];
+                                                            case 4:
+                                                                findindex = this_2.allEvents.indexOf(function (res) { return res.id == data.rows.item(i).id; });
+                                                                sql = "UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?";
+                                                                if (!(findindex != -1 && this_2.allEvents[findindex]['updated_at'] > data.rows.item(i).updated_at)) return [3 /*break*/, 6];
+                                                                createEventData = [this_2.allEvents[findindex]["id"], this_2.allEvents[findindex]["event_name"], this_2.allEvents[findindex]["description"], this_2.allEvents[findindex]["value"], this_2.allEvents[findindex]["event_datetime"], this_2.allEvents[findindex]["event_type"], this_2.allEvents[findindex]["event_category"], JSON.stringify(this_2.allEvents[findindex]["event_assets"]), JSON.stringify(this_2.allEvents[findindex]["event_options"]), this_2.allEvents[findindex]["user_id"], this_2.allEvents[findindex]["created_at"], this_2.allEvents[findindex]["updated_at"], false, rowData['event_id']];
                                                                 //database.executeSql(sql, createEventData)
-                                                                this_2.commonUpdateAndDeleteEvent(sql, createEventData);
-                                                            }
-                                                            else if (findindex != -1 && this_2.allEvents[findindex]['updated_at'] < data.rows.item(i).updated_at) {
-                                                                this_2.updateSingleEventData(rowData);
-                                                            }
+                                                                return [4 /*yield*/, this_2.commonUpdateAndDeleteEvent(sql, createEventData)];
+                                                            case 5:
+                                                                //database.executeSql(sql, createEventData)
+                                                                _a.sent();
+                                                                return [3 /*break*/, 8];
+                                                            case 6:
+                                                                if (!(findindex != -1 && this_2.allEvents[findindex]['updated_at'] < data.rows.item(i).updated_at)) return [3 /*break*/, 8];
+                                                                return [4 /*yield*/, this_2.updateSingleEventData(rowData)];
+                                                            case 7:
+                                                                _a.sent();
+                                                                _a.label = 8;
+                                                            case 8:
+                                                                console.log((data.rows.length - 1) == i);
+                                                                if ((data.rows.length - 1) == i) {
+                                                                    this_2.getUniqueEventDataPush();
+                                                                }
+                                                                return [2 /*return*/];
                                                         }
-                                                    }
-                                                    console.log((data.rows.length - 1) == i);
-                                                    if ((data.rows.length - 1) == i) {
-                                                        this_2.getUniqueEventDataPush();
-                                                    }
+                                                    });
                                                 };
                                                 this_2 = this;
-                                                //console.log('if')
-                                                for (i = 0; i < data.rows.length; i++) {
-                                                    _loop_2(i);
-                                                }
-                                                return [3 /*break*/, 5];
+                                                i = 0;
+                                                _a.label = 1;
                                             case 1:
+                                                if (!(i < data.rows.length)) return [3 /*break*/, 4];
+                                                return [5 /*yield**/, _loop_2(i)];
+                                            case 2:
+                                                _a.sent();
+                                                _a.label = 3;
+                                            case 3:
+                                                i++;
+                                                return [3 /*break*/, 1];
+                                            case 4: return [3 /*break*/, 9];
+                                            case 5:
                                                 sql = "INSERT INTO events VALUES (?,NULL,?,?,?,?,?,?,?,?,?,?,?,?)";
                                                 i = 0;
-                                                _a.label = 2;
-                                            case 2:
-                                                if (!(i < this.allEvents.length)) return [3 /*break*/, 5];
+                                                _a.label = 6;
+                                            case 6:
+                                                if (!(i < this.allEvents.length)) return [3 /*break*/, 9];
                                                 event_optionsURI = this.allEvents[i]["event_options"];
                                                 event_assets_URI = this.allEvents[i]["event_assets"];
                                                 return [4 /*yield*/, this.getLocalAssets(event_optionsURI, event_assets_URI)];
-                                            case 3:
+                                            case 7:
                                                 setGlobalURI = _a.sent();
                                                 if (setGlobalURI.length > 0) {
                                                     event_optionsURI["localImagePath"] = setGlobalURI;
@@ -2090,11 +2136,11 @@ var syncProvider = /** @class */ (function () {
                                                 createEventData = [this.allEvents[i]["id"], this.allEvents[i]["event_name"], this.allEvents[i]["description"], this.allEvents[i]["value"], this.allEvents[i]["event_datetime"], this.allEvents[i]["event_type"], this.allEvents[i]["event_category"], JSON.stringify(this.allEvents[i]["event_assets"]), JSON.stringify(event_optionsURI), this.allEvents[i]["user_id"], this.allEvents[i]["created_at"], this.allEvents[i]["updated_at"], false];
                                                 //database.executeSql(sql, createEventData)
                                                 this.commonUpdateAndDeleteEvent(sql, createEventData);
-                                                _a.label = 4;
-                                            case 4:
+                                                _a.label = 8;
+                                            case 8:
                                                 i++;
-                                                return [3 /*break*/, 2];
-                                            case 5: return [2 /*return*/];
+                                                return [3 /*break*/, 6];
+                                            case 9: return [2 /*return*/];
                                         }
                                     });
                                 }); });
@@ -2116,7 +2162,7 @@ var syncProvider = /** @class */ (function () {
                         getUserIds = _a.sent();
                         this.getDatabase().then(function (database) {
                             _this.getAllEventsList(getUserIds).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var array1, array2, unique, j, sql, event_optionsURI, event_assets_URI, setGlobalURI, createEventData;
+                                var array1, array2, unique, j, sql, event_optionsURI, event_assets_URI, setGlobalURI, createEventData, unique1, unique1;
                                 var _this = this;
                                 return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                     switch (_a.label) {
@@ -2158,13 +2204,13 @@ var syncProvider = /** @class */ (function () {
                                                 }); })];
                                         case 1:
                                             array2 = _a.sent();
-                                            return [4 /*yield*/, this.unique(array1, array2)];
+                                            return [4 /*yield*/, this.findUniqueOnOnline(array1, array2)];
                                         case 2:
                                             unique = _a.sent();
                                             j = 0;
                                             _a.label = 3;
                                         case 3:
-                                            if (!(j < unique.length)) return [3 /*break*/, 6];
+                                            if (!(j < unique.length)) return [3 /*break*/, 7];
                                             sql = "INSERT INTO events VALUES (?,NULL,?,?,?,?,?,?,?,?,?,?,?,?)";
                                             event_optionsURI = unique[j]["event_options"];
                                             event_assets_URI = unique[j]["event_assets"];
@@ -2176,11 +2222,25 @@ var syncProvider = /** @class */ (function () {
                                             }
                                             createEventData = [unique[j]["id"], unique[j]["event_name"], unique[j]["description"], unique[j]["value"], unique[j]["event_datetime"], unique[j]["event_type"], unique[j]["event_category"], JSON.stringify(unique[j]["event_assets"]), JSON.stringify(event_optionsURI), unique[j]["user_id"], unique[j]["created_at"], unique[j]["updated_at"], false];
                                             this.commonUpdateAndDeleteEvent(sql, createEventData);
-                                            _a.label = 5;
+                                            if (!((unique.length - 1) == j)) return [3 /*break*/, 6];
+                                            return [4 /*yield*/, this.findUniqueOffline(array2, array1)];
                                         case 5:
+                                            unique1 = _a.sent();
+                                            this.deleteDataIfnotExistsonOnline(unique1);
+                                            _a.label = 6;
+                                        case 6:
                                             j++;
                                             return [3 /*break*/, 3];
-                                        case 6: return [2 /*return*/];
+                                        case 7:
+                                            if (!(unique.length == 0)) return [3 /*break*/, 10];
+                                            return [4 /*yield*/, this.findUniqueOffline(array2, array1)];
+                                        case 8:
+                                            unique1 = _a.sent();
+                                            return [4 /*yield*/, this.deleteDataIfnotExistsonOnline(unique1)];
+                                        case 9:
+                                            _a.sent();
+                                            _a.label = 10;
+                                        case 10: return [2 /*return*/];
                                     }
                                 });
                             }); });
@@ -2189,6 +2249,25 @@ var syncProvider = /** @class */ (function () {
                 }
             });
         });
+    };
+    syncProvider.prototype.findUniqueOffline = function (first, second) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var uniq;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                uniq = [];
+                uniq = first.filter(function (n) { return !second.some(function (arr1) { return (arr1.id == n.id && n.id != null); }); });
+                console.log(uniq);
+                return [2 /*return*/, uniq];
+            });
+        });
+    };
+    syncProvider.prototype.deleteDataIfnotExistsonOnline = function (unique1) {
+        for (var j = 0; j < unique1.length; j++) {
+            var sql = "DELETE FROM events WHERE event_id = ?";
+            var event_id = unique1[j]['event_id'];
+            var deleteEventData = [event_id];
+            this.commonUpdateAndDeleteEvent(sql, deleteEventData);
+        }
     };
     syncProvider.prototype.getLocalAssets = function (events_options, events_assets) {
         var localAssets = events_options;
@@ -2219,202 +2298,240 @@ var syncProvider = /** @class */ (function () {
                 this.isNetworkOnline = true;
                 //if(this.isNetworkOnline == true){  
                 this.getDatabase().then(function (database) {
-                    _this.requestDataFromMultipleSources().subscribe(function (responseList) {
-                        _this.responseData1 = responseList[0]["emergency_contacts"];
-                        _this.responseData2 = responseList[1]["health_detail"];
-                        _this.responseData3 = responseList[2]["users"];
-                        _this.responseData4 = responseList[3]["user_associations"];
-                        _this.responseData5 = responseList[4]["qrcode_image"];
-                        console.log(responseList);
-                        localStorage.setItem("qrcode", _this.responseData5);
-                        var profile_id = localStorage.getItem("profile_id");
-                        database.executeSql("SELECT * FROM emergency_details", []).then(function (data) {
-                            var length = data.rows.length;
-                            if (length > 0) {
-                                //let emergencyContacts = [];
-                                for (var i = 0; i < data.rows.length; i++) {
-                                    var rowData = data.rows.item(i);
-                                    if (data.rows.item(i).id == null && profile_id == data.rows.item(i).user_id) {
-                                        _this.updateSingleEmergencyDetail(rowData);
-                                    }
-                                    else {
-                                        if (data.rows.item(i).delete1 == 'true' && profile_id == data.rows.item(i).user_id) {
-                                            _this.deleteSingleEmergencyDetail(rowData);
-                                        }
-                                        else {
-                                            // let index = this.responseData1.findIndex(res=>res.id==data.rows.item(i).id);
-                                            // console.log(index);
-                                            // if(data.rows.item(i).updated_at>this.responseData1[index]['updated_at']){
-                                            // }   
-                                        }
-                                    }
-                                    // emergencyContacts.push({
-                                    //   id: data.rows.item(i).id,
-                                    //   contact_name: data.rows.item(i).contact_name,
-                                    //   emergency_no: data.rows.item(i).emergency_no,
-                                    //   user_type: data.rows.item(i).user_type,
-                                    //   user_id: data.rows.item(i).user_id,
-                                    //   created_at: data.rows.item(i).created_at,
-                                    //   updated_at: data.rows.item(i).updated_at,
-                                    //   delete1: data.rows.item(i).delete1
-                                    // });
-                                    if ((data.rows.length - 1) == i) {
-                                        _this.getUniqueUsersDataPush();
-                                    }
-                                }
-                                //await this.getEmergencyContacts(emergencyContacts); 
-                            }
-                            else {
-                                console.log('test');
-                                _this.getEmergencyContacts(_this.responseData1);
-                            }
-                        }, function (error) {
-                            console.log(error, 'emergencyerror');
-                        });
-                        database.executeSql("SELECT * FROM health_details", []).then(function (data) {
-                            var length = data.rows.length;
-                            console.log(length);
-                            if (length > 0) {
-                                var healthData = [];
-                                var _loop_3 = function (i) {
-                                    var rowData = data.rows.item(i);
-                                    // let attribute_json = JSON.parse(data.rows.item(i).attribute_name_value);
-                                    // healthData.push({
-                                    //   id: data.rows.item(i).id,
-                                    //   health_id: data.rows.item(i).health_id,
-                                    //   name: data.rows.item(i).name,
-                                    //   attribute_name_value: attribute_json,
-                                    //   user_id: data.rows.item(i).user_id,
-                                    //   created_at: data.rows.item(i).created_at,
-                                    //   updated_at: data.rows.item(i).updated_at,
-                                    // });
-                                    var index = _this.responseData2.findIndex(function (res) { return res.id == data.rows.item(i).id; });
-                                    console.log(index);
-                                    if (data.rows.item(i).id == null && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id || data.rows.item(i).updated_at > _this.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id) {
-                                        _this.createSingleHealthDetail(rowData);
-                                    }
-                                    else if (data.rows.item(i).updated_at < _this.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id) {
-                                        _this.createSingleHealthDetail(_this.responseData2[index]);
-                                    }
-                                    if ((data.rows.length - 1) == i) {
-                                        _this.getUniqueUsersDataPush();
-                                    }
-                                };
-                                for (var i = 0; i < data.rows.length; i++) {
-                                    _loop_3(i);
-                                }
-                                //await this.getHealthDetails(healthData);      
-                            }
-                            else {
-                                console.log('test1');
-                                _this.getHealthDetails(_this.responseData2);
-                            }
-                        }, function (error) {
-                            console.log(error, 'healtherror');
-                        });
-                        database.executeSql("SELECT * FROM users", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                            var length, _loop_4, this_3, i;
-                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        length = data.rows.length;
-                                        console.log(length);
-                                        if (!(length > 0)) return [3 /*break*/, 5];
-                                        _loop_4 = function (i) {
-                                            var rowData, getHealthData, assigngetUserData, healthData, findindex, sql, createEventData, profile_picture, localPath, params, requestUrl, uploadStatus, updateEventOptions, user_option, sql_1, id, createEventData;
+                    _this.requestDataFromMultipleSources().subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                        var profile_id, sql4, data4, sqlData4;
+                        var _this = this;
+                        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    this.responseData1 = responseList[0]["emergency_contacts"];
+                                    this.responseData2 = responseList[1]["health_detail"];
+                                    this.responseData3 = responseList[2]["users"];
+                                    this.responseData4 = responseList[3]["user_associations"];
+                                    this.responseData5 = responseList[4]["qrcode_image"];
+                                    console.log(responseList);
+                                    localStorage.setItem("qrcode", this.responseData5);
+                                    profile_id = localStorage.getItem("profile_id");
+                                    return [4 /*yield*/, database.executeSql("SELECT * FROM emergency_details", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                            var length, i, rowData;
                                             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                                 switch (_a.label) {
                                                     case 0:
-                                                        rowData = data.rows.item(i);
-                                                        if (!(data.rows.item(i).delete1 == 'true' && data.rows.item(i).role_id == 2)) return [3 /*break*/, 1];
-                                                        this_3.deleteUsersData(rowData);
-                                                        return [3 /*break*/, 7];
+                                                        length = data.rows.length;
+                                                        if (!(length > 0)) return [3 /*break*/, 7];
+                                                        i = 0;
+                                                        _a.label = 1;
                                                     case 1:
-                                                        if (!(data.rows.item(i).delete1 == 'true' && data.rows.item(i).role_id == 1)) return [3 /*break*/, 2];
-                                                        this_3.deletePatientData(rowData);
-                                                        return [3 /*break*/, 7];
-                                                    case 2: return [4 /*yield*/, this_3.getUserPolicy()];
+                                                        if (!(i < data.rows.length)) return [3 /*break*/, 6];
+                                                        rowData = data.rows.item(i);
+                                                        if (!(data.rows.item(i).id == null && profile_id == data.rows.item(i).user_id)) return [3 /*break*/, 3];
+                                                        return [4 /*yield*/, this.updateSingleEmergencyDetail(rowData)];
+                                                    case 2:
+                                                        _a.sent();
+                                                        return [3 /*break*/, 5];
                                                     case 3:
-                                                        getHealthData = _a.sent();
-                                                        assigngetUserData = getHealthData['policies'];
-                                                        healthData = assigngetUserData[0] || null;
-                                                        findindex = this_3.responseData3.indexOf(function (res) { return res.id == data.rows.item(i).id; });
-                                                        sql = "UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, user_option = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?";
-                                                        if (!(findindex != -1 && this_3.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at)) return [3 /*break*/, 4];
-                                                        createEventData = [this_3.responseData3[findindex]["name"], this_3.responseData3[findindex]["email"], this_3.responseData3[findindex]["password"], this_3.responseData3[findindex]["mobile_no"], this_3.responseData3[findindex]["address"], this_3.responseData3[findindex]["country"], this_3.responseData3[findindex]["blood_group"], this_3.responseData3[findindex]["age"], this_3.responseData3[findindex]["user_uid"], this_3.responseData3[findindex]["forgot_password_code"], JSON.stringify(this_3.responseData3[findindex]["user_picture"]), JSON.stringify(this_3.responseData3[findindex]["user_option"]), this_3.responseData3[findindex]["active_status"], this_3.responseData3[findindex]["role_id"], this_3.responseData3[findindex]["created_at"], this_3.responseData3[findindex]["updated_at"], false, this_3.responseData3[findindex]["id"]];
-                                                        this_3.commonUpdateAndDeleteEvent(sql, createEventData);
-                                                        return [3 /*break*/, 7];
+                                                        if (!(data.rows.item(i).delete1 == 'true' && profile_id == data.rows.item(i).user_id)) return [3 /*break*/, 5];
+                                                        return [4 /*yield*/, this.deleteSingleEmergencyDetail(rowData)];
                                                     case 4:
-                                                        if (!(findindex != -1 && this_3.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData != null && healthData['id'] == null && findindex != -1 && profile_id == data.rows.item(i).id)) return [3 /*break*/, 7];
-                                                        profile_picture = JSON.parse(data.rows.item(i).user_picture);
-                                                        if (!(profile_picture['url'] != null && profile_picture['toUpdate'] == true)) return [3 /*break*/, 6];
-                                                        localPath = profile_picture;
-                                                        params = { user_option: { localURL: profile_picture['localURL'],
-                                                                cdvFilePath: profile_picture['cdvFilePath'],
-                                                                toUpdate: false
-                                                            }
-                                                        };
-                                                        requestUrl = "users/profile_picture";
-                                                        return [4 /*yield*/, this_3.uploadImage(localPath, params, requestUrl)];
+                                                        _a.sent();
+                                                        return [3 /*break*/, 5];
                                                     case 5:
-                                                        uploadStatus = _a.sent();
-                                                        if (uploadStatus["status"] == true) {
-                                                            updateEventOptions = profile_picture;
-                                                            updateEventOptions["url"] = uploadStatus["url"];
-                                                            updateEventOptions["toUpdate"] = false;
-                                                            user_option = params['user_option'];
-                                                            sql_1 = "UPDATE users SET user_picture = ?, user_option = ? WHERE id = ?";
-                                                            id = data.rows.item(i).id;
-                                                            createEventData = [JSON.stringify(updateEventOptions), JSON.stringify(user_option), id];
-                                                            this_3.commonUpdateAndDeleteEvent(sql_1, createEventData);
-                                                        }
-                                                        _a.label = 6;
-                                                    case 6:
-                                                        this_3.updateUsersData(rowData, healthData);
-                                                        _a.label = 7;
+                                                        i++;
+                                                        return [3 /*break*/, 1];
+                                                    case 6: return [3 /*break*/, 8];
                                                     case 7:
-                                                        if ((data.rows.length - 1) == i) {
-                                                            this_3.getUniqueUsersDataPush();
-                                                        }
-                                                        return [2 /*return*/];
+                                                        console.log('test');
+                                                        this.getEmergencyContacts(this.responseData1);
+                                                        _a.label = 8;
+                                                    case 8: return [2 /*return*/];
                                                 }
                                             });
-                                        };
-                                        this_3 = this;
-                                        i = 0;
-                                        _a.label = 1;
-                                    case 1:
-                                        if (!(i < data.rows.length)) return [3 /*break*/, 4];
-                                        return [5 /*yield**/, _loop_4(i)];
-                                    case 2:
-                                        _a.sent();
-                                        _a.label = 3;
-                                    case 3:
-                                        i++;
-                                        return [3 /*break*/, 1];
-                                    case 4: return [3 /*break*/, 6];
-                                    case 5:
-                                        console.log('test3');
-                                        this.getUsersData(this.responseData3);
-                                        _a.label = 6;
-                                    case 6: return [2 /*return*/];
-                                }
-                            });
-                        }); }, function (error) {
-                            console.log(error, 'userserror');
+                                        }); }, function (error) {
+                                            console.log(error, 'emergencyerror');
+                                        })];
+                                case 1:
+                                    _a.sent();
+                                    return [4 /*yield*/, database.executeSql("SELECT * FROM health_details", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                            var length, healthData, _loop_3, this_3, i;
+                                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                switch (_a.label) {
+                                                    case 0:
+                                                        length = data.rows.length;
+                                                        console.log(length);
+                                                        if (!(length > 0)) return [3 /*break*/, 5];
+                                                        healthData = [];
+                                                        _loop_3 = function (i) {
+                                                            var rowData, index;
+                                                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                                switch (_a.label) {
+                                                                    case 0:
+                                                                        rowData = data.rows.item(i);
+                                                                        index = this_3.responseData2.findIndex(function (res) { return res.id == data.rows.item(i).id; });
+                                                                        console.log(index);
+                                                                        if (!(index != -1)) return [3 /*break*/, 4];
+                                                                        if (!(data.rows.item(i).id == null && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id || data.rows.item(i).updated_at > this_3.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id)) return [3 /*break*/, 2];
+                                                                        return [4 /*yield*/, this_3.createSingleHealthDetail(rowData)];
+                                                                    case 1:
+                                                                        _a.sent();
+                                                                        return [3 /*break*/, 4];
+                                                                    case 2:
+                                                                        if (!(data.rows.item(i).updated_at < this_3.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id)) return [3 /*break*/, 4];
+                                                                        return [4 /*yield*/, this_3.createSingleHealthDetail(this_3.responseData2[index])];
+                                                                    case 3:
+                                                                        _a.sent();
+                                                                        _a.label = 4;
+                                                                    case 4: return [2 /*return*/];
+                                                                }
+                                                            });
+                                                        };
+                                                        this_3 = this;
+                                                        i = 0;
+                                                        _a.label = 1;
+                                                    case 1:
+                                                        if (!(i < data.rows.length)) return [3 /*break*/, 4];
+                                                        return [5 /*yield**/, _loop_3(i)];
+                                                    case 2:
+                                                        _a.sent();
+                                                        _a.label = 3;
+                                                    case 3:
+                                                        i++;
+                                                        return [3 /*break*/, 1];
+                                                    case 4: return [3 /*break*/, 6];
+                                                    case 5:
+                                                        console.log('test1');
+                                                        this.getHealthDetails(this.responseData2);
+                                                        _a.label = 6;
+                                                    case 6: return [2 /*return*/];
+                                                }
+                                            });
+                                        }); }, function (error) {
+                                            console.log(error, 'healtherror');
+                                        })];
+                                case 2:
+                                    _a.sent();
+                                    return [4 /*yield*/, database.executeSql("SELECT * FROM users", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                            var length, _loop_4, this_4, i;
+                                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                switch (_a.label) {
+                                                    case 0:
+                                                        length = data.rows.length;
+                                                        console.log(length);
+                                                        if (!(length > 0)) return [3 /*break*/, 5];
+                                                        _loop_4 = function (i) {
+                                                            var rowData, getHealthData, assigngetUserData, healthData, findindex, sql, createEventData, profile_picture, localPath, params, requestUrl, uploadStatus, updateEventOptions, user_option, sql_1, id, createEventData;
+                                                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                                switch (_a.label) {
+                                                                    case 0:
+                                                                        rowData = data.rows.item(i);
+                                                                        if (!(data.rows.item(i).delete1 == 'true' && data.rows.item(i).role_id == 2)) return [3 /*break*/, 2];
+                                                                        return [4 /*yield*/, this_4.deleteUsersData(rowData)];
+                                                                    case 1:
+                                                                        _a.sent();
+                                                                        if ((data.rows.length - 1) == i) {
+                                                                            this_4.getUniqueUsersDataPush();
+                                                                        }
+                                                                        return [3 /*break*/, 13];
+                                                                    case 2:
+                                                                        if (!(data.rows.item(i).delete1 == 'true' && data.rows.item(i).role_id == 1)) return [3 /*break*/, 4];
+                                                                        return [4 /*yield*/, this_4.deletePatientData(rowData)];
+                                                                    case 3:
+                                                                        _a.sent();
+                                                                        if ((data.rows.length - 1) == i) {
+                                                                            this_4.getUniqueUsersDataPush();
+                                                                        }
+                                                                        return [3 /*break*/, 13];
+                                                                    case 4: return [4 /*yield*/, this_4.getUserPolicy()];
+                                                                    case 5:
+                                                                        getHealthData = _a.sent();
+                                                                        assigngetUserData = getHealthData['policies'];
+                                                                        healthData = assigngetUserData[0] || null;
+                                                                        findindex = this_4.responseData3.indexOf(function (res) { return res.id == data.rows.item(i).id; });
+                                                                        sql = "UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, user_option = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?";
+                                                                        if (!(findindex != -1 && this_4.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at)) return [3 /*break*/, 7];
+                                                                        createEventData = [this_4.responseData3[findindex]["name"], this_4.responseData3[findindex]["email"], this_4.responseData3[findindex]["password"], this_4.responseData3[findindex]["mobile_no"], this_4.responseData3[findindex]["address"], this_4.responseData3[findindex]["country"], this_4.responseData3[findindex]["blood_group"], this_4.responseData3[findindex]["age"], this_4.responseData3[findindex]["user_uid"], this_4.responseData3[findindex]["forgot_password_code"], JSON.stringify(this_4.responseData3[findindex]["user_picture"]), JSON.stringify(this_4.responseData3[findindex]["user_option"]), this_4.responseData3[findindex]["active_status"], this_4.responseData3[findindex]["role_id"], this_4.responseData3[findindex]["created_at"], this_4.responseData3[findindex]["updated_at"], false, this_4.responseData3[findindex]["id"]];
+                                                                        return [4 /*yield*/, this_4.commonUpdateAndDeleteEvent(sql, createEventData)];
+                                                                    case 6:
+                                                                        _a.sent();
+                                                                        return [3 /*break*/, 12];
+                                                                    case 7:
+                                                                        if (!(findindex != -1 && this_4.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData != null && healthData['id'] == null && findindex != -1 && profile_id == data.rows.item(i).id)) return [3 /*break*/, 12];
+                                                                        profile_picture = JSON.parse(data.rows.item(i).user_picture);
+                                                                        if (!(profile_picture['url'] != null && profile_picture['toUpdate'] == true)) return [3 /*break*/, 10];
+                                                                        localPath = profile_picture;
+                                                                        params = { user_option: { localURL: profile_picture['localURL'],
+                                                                                cdvFilePath: profile_picture['cdvFilePath'],
+                                                                                toUpdate: false
+                                                                            }
+                                                                        };
+                                                                        requestUrl = "users/profile_picture";
+                                                                        return [4 /*yield*/, this_4.uploadImage(localPath, params, requestUrl)];
+                                                                    case 8:
+                                                                        uploadStatus = _a.sent();
+                                                                        if (!(uploadStatus["status"] == true)) return [3 /*break*/, 10];
+                                                                        updateEventOptions = profile_picture;
+                                                                        updateEventOptions["url"] = uploadStatus["url"];
+                                                                        updateEventOptions["toUpdate"] = false;
+                                                                        user_option = params['user_option'];
+                                                                        sql_1 = "UPDATE users SET user_picture = ?, user_option = ?, updated_at = ? WHERE id = ?";
+                                                                        id = data.rows.item(i).id;
+                                                                        createEventData = [JSON.stringify(updateEventOptions), JSON.stringify(user_option), new Date().toJSON(), id];
+                                                                        return [4 /*yield*/, this_4.commonUpdateAndDeleteEvent(sql_1, createEventData)];
+                                                                    case 9:
+                                                                        _a.sent();
+                                                                        _a.label = 10;
+                                                                    case 10: return [4 /*yield*/, this_4.updateUsersData(rowData, healthData)];
+                                                                    case 11:
+                                                                        _a.sent();
+                                                                        _a.label = 12;
+                                                                    case 12:
+                                                                        if ((data.rows.length - 1) == i) {
+                                                                            this_4.getUniqueUsersDataPush();
+                                                                        }
+                                                                        _a.label = 13;
+                                                                    case 13: return [2 /*return*/];
+                                                                }
+                                                            });
+                                                        };
+                                                        this_4 = this;
+                                                        i = 0;
+                                                        _a.label = 1;
+                                                    case 1:
+                                                        if (!(i < data.rows.length)) return [3 /*break*/, 4];
+                                                        return [5 /*yield**/, _loop_4(i)];
+                                                    case 2:
+                                                        _a.sent();
+                                                        _a.label = 3;
+                                                    case 3:
+                                                        i++;
+                                                        return [3 /*break*/, 1];
+                                                    case 4: return [3 /*break*/, 6];
+                                                    case 5:
+                                                        console.log('test3');
+                                                        this.getUsersData(this.responseData3);
+                                                        _a.label = 6;
+                                                    case 6: return [2 /*return*/];
+                                                }
+                                            });
+                                        }); }, function (error) {
+                                            console.log(error, 'userserror');
+                                        })];
+                                case 3:
+                                    _a.sent();
+                                    if (this.responseData4.length != 0) {
+                                        sql4 = "DELETE FROM user_associations";
+                                        database.executeSql(sql4, []);
+                                        data4 = [this.responseData4[0]["id"], this.responseData4[0]["patient_id"], this.responseData4[0]["caregiver_id"], this.responseData4[0]["nick_name"], this.responseData4[0]["created_at"], this.responseData4[0]["updated_at"]];
+                                        sqlData4 = "INSERT INTO user_associations VALUES (?,?,?,?,?,?)";
+                                        database.executeSql(sqlData4, data4).then(function (res) {
+                                            console.log(res, 'user_associate');
+                                        }, function (error) {
+                                            console.log(error, 'userassociateerror');
+                                        });
+                                    }
+                                    return [2 /*return*/];
+                            }
                         });
-                        if (_this.responseData4.length != 0) {
-                            var sql4 = "DELETE FROM user_associations";
-                            database.executeSql(sql4, []);
-                            var data4 = [_this.responseData4[0]["id"], _this.responseData4[0]["patient_id"], _this.responseData4[0]["caregiver_id"], _this.responseData4[0]["nick_name"], _this.responseData4[0]["created_at"], _this.responseData4[0]["updated_at"]];
-                            var sqlData4 = "INSERT INTO user_associations VALUES (?,?,?,?,?,?)";
-                            database.executeSql(sqlData4, data4).then(function (res) {
-                                console.log(res, 'user_associate');
-                            }, function (error) {
-                                console.log(error, 'userassociateerror');
-                            });
-                        }
-                    });
+                    }); });
                 });
                 return [2 /*return*/];
             });
@@ -2424,7 +2541,7 @@ var syncProvider = /** @class */ (function () {
         var _this = this;
         this.getDatabase().then(function (database) {
             _this.requestDataFromMultipleSources().subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                var array1, array2, array3, unique1, unique2, unique3;
+                var array1, array2, array3, unique1, unique2, unique3, uniqueData1, uniqueData2, uniqueData3;
                 return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -2506,34 +2623,75 @@ var syncProvider = /** @class */ (function () {
                             ];
                         case 3:
                             array3 = _a.sent();
-                            return [4 /*yield*/, this.unique(this.emegencyConatcts, array1)];
+                            return [4 /*yield*/, this.findUniqueOnOnline(this.emegencyConatcts, array1)];
                         case 4:
                             unique1 = _a.sent();
-                            return [4 /*yield*/, this.unique(this.healtDetails, array2)];
+                            return [4 /*yield*/, this.findUniqueOnOnline(this.healtDetails, array2)];
                         case 5:
                             unique2 = _a.sent();
-                            return [4 /*yield*/, this.unique(this.usersList, array3)];
+                            return [4 /*yield*/, this.findUniqueOnOnline(this.usersList, array3)];
                         case 6:
                             unique3 = _a.sent();
                             console.log(unique1);
                             console.log(unique2);
                             console.log(unique3);
-                            if (unique1.length > 0) {
-                                this.getEmergencyContacts(unique1, "unique");
-                            }
-                            if (unique2.length > 0) {
-                                this.getHealthDetails(unique2, "unique");
-                            }
-                            if (unique3.length > 0) {
-                                this.getUsersData(unique3, "unique");
-                            }
-                            return [2 /*return*/];
+                            if (!(unique1.length > 0)) return [3 /*break*/, 7];
+                            this.getEmergencyContacts(unique1, "unique", array1, this.emegencyConatcts);
+                            return [3 /*break*/, 9];
+                        case 7: return [4 /*yield*/, this.findUniqueOffline(array1, this.emegencyConatcts)];
+                        case 8:
+                            uniqueData1 = _a.sent();
+                            this.deleteEmergencyDataIfnotExistsonOnline(uniqueData1);
+                            _a.label = 9;
+                        case 9:
+                            if (!(unique2.length > 0)) return [3 /*break*/, 10];
+                            this.getHealthDetails(unique2, "unique", array2, this.healtDetails);
+                            return [3 /*break*/, 12];
+                        case 10: return [4 /*yield*/, this.findUniqueOffline(array2, this.healtDetails)];
+                        case 11:
+                            uniqueData2 = _a.sent();
+                            this.deleteHealthDataIfnotExistsonOnline(uniqueData2);
+                            _a.label = 12;
+                        case 12:
+                            if (!(unique3.length > 0)) return [3 /*break*/, 13];
+                            this.getUsersData(unique3, "unique", array3, this.usersList);
+                            return [3 /*break*/, 15];
+                        case 13: return [4 /*yield*/, this.findUniqueOffline(array3, this.usersList)];
+                        case 14:
+                            uniqueData3 = _a.sent();
+                            this.deleteUsersDataIfnotExistsonOnline(uniqueData3);
+                            _a.label = 15;
+                        case 15: return [2 /*return*/];
                     }
                 });
             }); });
         });
     };
-    syncProvider.prototype.unique = function (first, second) {
+    syncProvider.prototype.deleteEmergencyDataIfnotExistsonOnline = function (unique1) {
+        for (var j = 0; j < unique1.length; j++) {
+            var sql = "DELETE FROM emergency_details WHERE emergency_id = ?";
+            var event_id = unique1[j]['emergency_id'];
+            var deleteEventData = [event_id];
+            this.commonUpdateAndDeleteEvent(sql, deleteEventData);
+        }
+    };
+    syncProvider.prototype.deleteUsersDataIfnotExistsonOnline = function (unique1) {
+        for (var j = 0; j < unique1.length; j++) {
+            var sql = "DELETE FROM users WHERE id = ?";
+            var event_id = unique1[j]['id'];
+            var deleteEventData = [event_id];
+            this.commonUpdateAndDeleteEvent(sql, deleteEventData);
+        }
+    };
+    syncProvider.prototype.deleteHealthDataIfnotExistsonOnline = function (unique1) {
+        for (var j = 0; j < unique1.length; j++) {
+            var sql = "DELETE FROM health_details WHERE health_id = ?";
+            var event_id = unique1[j]['health_id'];
+            var deleteEventData = [event_id];
+            this.commonUpdateAndDeleteEvent(sql, deleteEventData);
+        }
+    };
+    syncProvider.prototype.findUniqueOnOnline = function (first, second) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var uniq;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
@@ -2544,117 +2702,172 @@ var syncProvider = /** @class */ (function () {
             });
         });
     };
-    syncProvider.prototype.getEmergencyContacts = function (response, unique) {
+    syncProvider.prototype.getEmergencyContacts = function (response, unique, array2, array1) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 console.log('getEmergency');
-                this.getDatabase().then(function (database) {
-                    if (unique != "unique") {
-                        var sql1 = "DELETE FROM emergency_details";
-                        database.executeSql(sql1, []);
-                    }
-                    var allEmergency = response;
-                    for (var i = 0; i < allEmergency.length; i++) {
-                        console.log(i);
-                        var data1 = [
-                            allEmergency[i]["id"],
-                            allEmergency[i]["contact_name"],
-                            allEmergency[i]["emergency_no"],
-                            allEmergency[i]["user_type"],
-                            allEmergency[i]["user_id"],
-                            allEmergency[i]["created_at"],
-                            allEmergency[i]["updated_at"],
-                            false
-                        ];
-                        var sqlData1 = "INSERT INTO emergency_details VALUES (?,NULL,?,?,?,?,?,?,?)";
-                        database.executeSql(sqlData1, data1).then(function (res) {
-                            console.log(res, 'emergency_details');
-                        }, function (error) {
-                            console.log(error, 'erroremergency_details');
-                        });
-                    }
-                });
+                this.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var sql1, allEmergency, i, data1, sqlData1, unique1;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (unique != "unique") {
+                                    sql1 = "DELETE FROM emergency_details";
+                                    database.executeSql(sql1, []);
+                                }
+                                allEmergency = response;
+                                i = 0;
+                                _a.label = 1;
+                            case 1:
+                                if (!(i < allEmergency.length)) return [3 /*break*/, 4];
+                                console.log(i);
+                                data1 = [
+                                    allEmergency[i]["id"],
+                                    allEmergency[i]["contact_name"],
+                                    allEmergency[i]["emergency_no"],
+                                    allEmergency[i]["user_type"],
+                                    allEmergency[i]["user_id"],
+                                    allEmergency[i]["created_at"],
+                                    allEmergency[i]["updated_at"],
+                                    false
+                                ];
+                                sqlData1 = "INSERT INTO emergency_details VALUES (?,NULL,?,?,?,?,?,?,?)";
+                                database.executeSql(sqlData1, data1).then(function (res) {
+                                    console.log(res, 'emergency_details');
+                                }, function (error) {
+                                    console.log(error, 'erroremergency_details');
+                                });
+                                if (!((allEmergency.length - 1) == i && array2 != undefined)) return [3 /*break*/, 3];
+                                return [4 /*yield*/, this.findUniqueOffline(array2, array1)];
+                            case 2:
+                                unique1 = _a.sent();
+                                this.deleteEmergencyDataIfnotExistsonOnline(unique1);
+                                _a.label = 3;
+                            case 3:
+                                i++;
+                                return [3 /*break*/, 1];
+                            case 4: return [2 /*return*/];
+                        }
+                    });
+                }); });
                 return [2 /*return*/];
             });
         });
     };
-    syncProvider.prototype.getHealthDetails = function (response, unique) {
+    syncProvider.prototype.getHealthDetails = function (response, unique, array2, array1) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 console.log('getHealth');
-                this.getDatabase().then(function (database) {
-                    if (unique != "unique") {
-                        var sql2 = "DELETE FROM health_details";
-                        database.executeSql(sql2, []);
-                    }
-                    var totalHealth = response;
-                    for (var i = 0; i < totalHealth.length; i++) {
-                        console.log(i);
-                        var attribute_json = JSON.stringify(totalHealth[i]["attribute_name_value"]);
-                        var data2 = [
-                            totalHealth[i]["id"],
-                            totalHealth[i]["name"],
-                            attribute_json,
-                            totalHealth[i]["user_id"],
-                            totalHealth[i]["created_at"],
-                            totalHealth[i]["updated_at"]
-                        ];
-                        var sqlData2 = "INSERT INTO health_details VALUES (?,NULL,?,?,?,?,?)";
-                        database.executeSql(sqlData2, data2).then(function (res) {
-                            console.log(res, 'health_details');
-                        }, function (error) {
-                            console.log(error, 'errorhealth_details');
-                        });
-                    }
-                });
+                this.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var sql2, totalHealth, i, attribute_json, data2, sqlData2, unique1;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (unique != "unique") {
+                                    sql2 = "DELETE FROM health_details";
+                                    database.executeSql(sql2, []);
+                                }
+                                totalHealth = response;
+                                i = 0;
+                                _a.label = 1;
+                            case 1:
+                                if (!(i < totalHealth.length)) return [3 /*break*/, 4];
+                                console.log(i);
+                                attribute_json = JSON.stringify(totalHealth[i]["attribute_name_value"]);
+                                data2 = [
+                                    totalHealth[i]["id"],
+                                    totalHealth[i]["name"],
+                                    attribute_json,
+                                    totalHealth[i]["user_id"],
+                                    totalHealth[i]["created_at"],
+                                    totalHealth[i]["updated_at"]
+                                ];
+                                sqlData2 = "INSERT INTO health_details VALUES (?,NULL,?,?,?,?,?)";
+                                database.executeSql(sqlData2, data2).then(function (res) {
+                                    console.log(res, 'health_details');
+                                }, function (error) {
+                                    console.log(error, 'errorhealth_details');
+                                });
+                                if (!((totalHealth.length - 1) == i && array2 != undefined)) return [3 /*break*/, 3];
+                                return [4 /*yield*/, this.findUniqueOffline(array2, array1)];
+                            case 2:
+                                unique1 = _a.sent();
+                                this.deleteHealthDataIfnotExistsonOnline(unique1);
+                                _a.label = 3;
+                            case 3:
+                                i++;
+                                return [3 /*break*/, 1];
+                            case 4: return [2 /*return*/];
+                        }
+                    });
+                }); });
                 return [2 /*return*/];
             });
         });
     };
-    syncProvider.prototype.getUsersData = function (response, unique) {
+    syncProvider.prototype.getUsersData = function (response, unique, array2, array1) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 console.log('getUsers');
-                this.getDatabase().then(function (database) {
-                    if (unique != "unique") {
-                        var sql3 = "DELETE FROM users";
-                        database.executeSql(sql3, []);
-                    }
-                    var allUsers = response;
-                    for (var i = 0; i < allUsers.length; i++) {
-                        console.log(i);
-                        var attribute_json = JSON.stringify(allUsers[i]["user_picture"]);
-                        var user_option_json = JSON.parse(allUsers[i]['user_option']);
-                        var data3 = [
-                            allUsers[i]["id"],
-                            allUsers[i]["name"],
-                            allUsers[i]["email"],
-                            allUsers[i]["password"],
-                            allUsers[i]["mobile_no"],
-                            allUsers[i]["address"],
-                            allUsers[i]["country"],
-                            allUsers[i]["blood_group"],
-                            allUsers[i]["age"],
-                            allUsers[i]["user_uid"],
-                            allUsers[i]["forgot_password_code"],
-                            attribute_json,
-                            user_option_json,
-                            allUsers[i]["active_status"],
-                            allUsers[i]["role_id"],
-                            allUsers[i]["created_at"],
-                            allUsers[i]["updated_at"],
-                            false
-                        ];
-                        var sqlData3 = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                        database.executeSql(sqlData3, data3).then(function (res) {
-                            console.log(res, 'users');
-                        }, function (error) {
-                            console.log(error, 'errorusers');
-                        });
-                        ;
-                        ;
-                    }
-                });
+                this.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var sql3, allUsers, i, attribute_json, user_option_json, data3, sqlData3, unique1;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (unique != "unique") {
+                                    sql3 = "DELETE FROM users";
+                                    database.executeSql(sql3, []);
+                                }
+                                allUsers = response;
+                                i = 0;
+                                _a.label = 1;
+                            case 1:
+                                if (!(i < allUsers.length)) return [3 /*break*/, 4];
+                                console.log(i);
+                                attribute_json = JSON.stringify(allUsers[i]["user_picture"]);
+                                user_option_json = JSON.parse(allUsers[i]['user_option']);
+                                data3 = [
+                                    allUsers[i]["id"],
+                                    allUsers[i]["name"],
+                                    allUsers[i]["email"],
+                                    allUsers[i]["password"],
+                                    allUsers[i]["mobile_no"],
+                                    allUsers[i]["address"],
+                                    allUsers[i]["country"],
+                                    allUsers[i]["blood_group"],
+                                    allUsers[i]["age"],
+                                    allUsers[i]["user_uid"],
+                                    allUsers[i]["forgot_password_code"],
+                                    attribute_json,
+                                    user_option_json,
+                                    allUsers[i]["active_status"],
+                                    allUsers[i]["role_id"],
+                                    allUsers[i]["created_at"],
+                                    allUsers[i]["updated_at"],
+                                    false
+                                ];
+                                sqlData3 = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                                database.executeSql(sqlData3, data3).then(function (res) {
+                                    console.log(res, 'users');
+                                }, function (error) {
+                                    console.log(error, 'errorusers');
+                                });
+                                if (!((allUsers.length - 1) == i && array2 != undefined)) return [3 /*break*/, 3];
+                                return [4 /*yield*/, this.findUniqueOffline(array2, array1)];
+                            case 2:
+                                unique1 = _a.sent();
+                                this.deleteUsersDataIfnotExistsonOnline(unique1);
+                                _a.label = 3;
+                            case 3:
+                                i++;
+                                return [3 /*break*/, 1];
+                            case 4: return [2 /*return*/];
+                        }
+                    });
+                }); });
                 return [2 /*return*/];
             });
         });
@@ -2699,13 +2912,12 @@ var syncProvider = /** @class */ (function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 data = { "contact_name": rowData["contact_name"], "emergency_no": rowData["emergency_no"], "user_type": rowData["user_type"] };
-                this.insertEmergencyData(data).subscribe(function (responseList) {
-                    var response = responseList[0];
-                    var sql = "UPDATE emergency_details SET id = ?, created_at = ?, updated_at = ? WHERE emergency_id = ?";
-                    var createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["emergency_id"]];
-                    _this.commonUpdateAndDeleteEvent(sql, createEventData);
-                });
-                return [2 /*return*/];
+                return [2 /*return*/, this.insertEmergencyData(data).subscribe(function (responseList) {
+                        var response = responseList[0];
+                        var sql = "UPDATE emergency_details SET id = ?, created_at = ?, updated_at = ? WHERE emergency_id = ?";
+                        var createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["emergency_id"]];
+                        return _this.commonUpdateAndDeleteEvent(sql, createEventData);
+                    })];
             });
         });
     };
@@ -2714,14 +2926,13 @@ var syncProvider = /** @class */ (function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 console.log(rowData);
-                this.deleteEmergencyData(rowData["id"]).subscribe(function (responseList) {
-                    //let response = responseList[0];
-                    console.log(responseList);
-                    var sql = "DELETE FROM emergency_details WHERE emergency_id = ?";
-                    var createEventData = [rowData["emergency_id"]];
-                    _this.commonUpdateAndDeleteEvent(sql, createEventData);
-                });
-                return [2 /*return*/];
+                return [2 /*return*/, this.deleteEmergencyData(rowData["id"]).subscribe(function (responseList) {
+                        //let response = responseList[0];
+                        console.log(responseList);
+                        var sql = "DELETE FROM emergency_details WHERE emergency_id = ?";
+                        var createEventData = [rowData["emergency_id"]];
+                        return _this.commonUpdateAndDeleteEvent(sql, createEventData);
+                    })];
             });
         });
     };
@@ -2736,11 +2947,11 @@ var syncProvider = /** @class */ (function () {
     syncProvider.prototype.createSingleHealthDetail = function (rowData) {
         var _this = this;
         var data = { attribute_name_value: rowData['attribute_name_value'] };
-        this.updateHealthData(data).subscribe(function (responseList) {
+        return this.updateHealthData(data).subscribe(function (responseList) {
             var response = responseList[0]['health_detail'];
             var sql = "UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?";
             var createEventData = [response["id"], response["attribute_name_value"], response["created_at"], response["updated_at"], rowData["health_id"]];
-            _this.commonUpdateAndDeleteEvent(sql, createEventData);
+            return _this.commonUpdateAndDeleteEvent(sql, createEventData);
         });
     };
     syncProvider.prototype.commonUpdateAndDeleteEvent = function (sql, updateEventData) {
@@ -2764,86 +2975,86 @@ var syncProvider = /** @class */ (function () {
                 data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"] };
                 console.log(data);
                 if (data['event_type'] != 'vital') {
-                    this.insertEventData(data).subscribe(function (responseList) {
-                        var response = responseList[0]['event'];
-                        var sql = "UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?";
-                        var createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["event_id"]];
-                        _this.commonUpdateAndDeleteEvent(sql, createEventData).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                            var localImagePath, i, params, requestUrl, uploadStatus, updateEventOptions, sql_2, createEventData_1;
-                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        console.log(rowData["event_options"]);
-                                        console.log(res);
-                                        if (!(res["event_id"] != undefined && rowData["event_options"]["localImagePath"] != undefined && rowData["event_options"]["localImagePath"] != null)) return [3 /*break*/, 4];
-                                        localImagePath = rowData["event_options"]["localImagePath"];
-                                        i = 0;
-                                        _a.label = 1;
-                                    case 1:
-                                        if (!(i < localImagePath.length)) return [3 /*break*/, 4];
-                                        if (!(localImagePath[i]["globalURI"] != null)) return [3 /*break*/, 3];
-                                        params = { "id": response["id"] };
-                                        requestUrl = "events/update_image";
-                                        return [4 /*yield*/, this.uploadImage(localImagePath[i], params, requestUrl)];
-                                    case 2:
-                                        uploadStatus = _a.sent();
-                                        if (uploadStatus["status"] == true) {
-                                            updateEventOptions = rowData["event_options"];
-                                            updateEventOptions["localImagePath"][i]["globalURI"] = uploadStatus["url"];
-                                            sql_2 = "UPDATE events SET event_options = ? WHERE event_id = ?";
-                                            createEventData_1 = [sql_2, [JSON.stringify(updateEventOptions), res["event_id"]]];
-                                            this.commonUpdateAndDeleteEvent(sql_2, createEventData_1);
-                                        }
-                                        _a.label = 3;
-                                    case 3:
-                                        i++;
-                                        return [3 /*break*/, 1];
-                                    case 4: return [2 /*return*/];
-                                }
-                            });
-                        }); });
-                    });
+                    return [2 /*return*/, this.insertEventData(data).subscribe(function (responseList) {
+                            var response = responseList[0]['event'];
+                            var sql = "UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?";
+                            var createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["event_id"]];
+                            return _this.commonUpdateAndDeleteEvent(sql, createEventData).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var localImagePath, i, params, requestUrl, uploadStatus, updateEventOptions, sql_2, createEventData_1;
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            console.log(rowData["event_options"]);
+                                            console.log(res);
+                                            if (!(res["event_id"] != undefined && rowData["event_options"]["localImagePath"] != undefined && rowData["event_options"]["localImagePath"] != null)) return [3 /*break*/, 4];
+                                            localImagePath = rowData["event_options"]["localImagePath"];
+                                            i = 0;
+                                            _a.label = 1;
+                                        case 1:
+                                            if (!(i < localImagePath.length)) return [3 /*break*/, 4];
+                                            if (!(localImagePath[i]["globalURI"] != null)) return [3 /*break*/, 3];
+                                            params = { "id": response["id"] };
+                                            requestUrl = "events/update_image";
+                                            return [4 /*yield*/, this.uploadImage(localImagePath[i], params, requestUrl)];
+                                        case 2:
+                                            uploadStatus = _a.sent();
+                                            if (uploadStatus["status"] == true) {
+                                                updateEventOptions = rowData["event_options"];
+                                                updateEventOptions["localImagePath"][i]["globalURI"] = uploadStatus["url"];
+                                                sql_2 = "UPDATE events SET event_options = ? WHERE event_id = ?";
+                                                createEventData_1 = [sql_2, [JSON.stringify(updateEventOptions), res["event_id"]]];
+                                                this.commonUpdateAndDeleteEvent(sql_2, createEventData_1);
+                                            }
+                                            _a.label = 3;
+                                        case 3:
+                                            i++;
+                                            return [3 /*break*/, 1];
+                                        case 4: return [2 /*return*/];
+                                    }
+                                });
+                            }); });
+                        })];
                 }
                 else {
-                    this.updateVitalEvent(data).subscribe(function (responseList) {
-                        var response = responseList[0]['event'];
-                        var sql = "UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?";
-                        var createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["event_id"]];
-                        _this.commonUpdateAndDeleteEvent(sql, createEventData).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                            var localImagePath, i, params, requestUrl, uploadStatus, updateEventOptions, sql_3, createEventData_2;
-                            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        console.log(rowData["event_options"]);
-                                        console.log(res);
-                                        if (!(res["event_id"] != undefined && rowData["event_options"]["localImagePath"] != undefined && rowData["event_options"]["localImagePath"] != null)) return [3 /*break*/, 4];
-                                        localImagePath = rowData["event_options"]["localImagePath"];
-                                        i = 0;
-                                        _a.label = 1;
-                                    case 1:
-                                        if (!(i < localImagePath.length)) return [3 /*break*/, 4];
-                                        if (!(localImagePath[i]["globalURI"] != null)) return [3 /*break*/, 3];
-                                        params = { "id": response["id"] };
-                                        requestUrl = "events/update_image";
-                                        return [4 /*yield*/, this.uploadImage(localImagePath[i], params, requestUrl)];
-                                    case 2:
-                                        uploadStatus = _a.sent();
-                                        if (uploadStatus["status"] == true) {
-                                            updateEventOptions = rowData["event_options"];
-                                            updateEventOptions["localImagePath"][i]["globalURI"] = uploadStatus["url"];
-                                            sql_3 = "UPDATE events SET event_options = ? WHERE event_id = ?";
-                                            createEventData_2 = [sql_3, [JSON.stringify(updateEventOptions), res["event_id"]]];
-                                            this.commonUpdateAndDeleteEvent(sql_3, createEventData_2);
-                                        }
-                                        _a.label = 3;
-                                    case 3:
-                                        i++;
-                                        return [3 /*break*/, 1];
-                                    case 4: return [2 /*return*/];
-                                }
-                            });
-                        }); });
-                    });
+                    return [2 /*return*/, this.updateVitalEvent(data).subscribe(function (responseList) {
+                            var response = responseList[0]['event'];
+                            var sql = "UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?";
+                            var createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["event_id"]];
+                            return _this.commonUpdateAndDeleteEvent(sql, createEventData).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var localImagePath, i, params, requestUrl, uploadStatus, updateEventOptions, sql_3, createEventData_2;
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            console.log(rowData["event_options"]);
+                                            console.log(res);
+                                            if (!(res["event_id"] != undefined && rowData["event_options"]["localImagePath"] != undefined && rowData["event_options"]["localImagePath"] != null)) return [3 /*break*/, 4];
+                                            localImagePath = rowData["event_options"]["localImagePath"];
+                                            i = 0;
+                                            _a.label = 1;
+                                        case 1:
+                                            if (!(i < localImagePath.length)) return [3 /*break*/, 4];
+                                            if (!(localImagePath[i]["globalURI"] != null)) return [3 /*break*/, 3];
+                                            params = { "id": response["id"] };
+                                            requestUrl = "events/update_image";
+                                            return [4 /*yield*/, this.uploadImage(localImagePath[i], params, requestUrl)];
+                                        case 2:
+                                            uploadStatus = _a.sent();
+                                            if (uploadStatus["status"] == true) {
+                                                updateEventOptions = rowData["event_options"];
+                                                updateEventOptions["localImagePath"][i]["globalURI"] = uploadStatus["url"];
+                                                sql_3 = "UPDATE events SET event_options = ? WHERE event_id = ?";
+                                                createEventData_2 = [sql_3, [JSON.stringify(updateEventOptions), res["event_id"]]];
+                                                this.commonUpdateAndDeleteEvent(sql_3, createEventData_2);
+                                            }
+                                            _a.label = 3;
+                                        case 3:
+                                            i++;
+                                            return [3 /*break*/, 1];
+                                        case 4: return [2 /*return*/];
+                                    }
+                                });
+                            }); });
+                        })];
                 }
                 return [2 /*return*/];
             });
@@ -2857,20 +3068,20 @@ var syncProvider = /** @class */ (function () {
                 console.log(rowData, "updateSingleEventData");
                 data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"] };
                 if (data['event_type'] != 'vital') {
-                    this.updateEventData(rowData["id"], data).subscribe(function (responseList) {
-                        var response = responseList[0]['event'];
-                        var sql = "UPDATE events SET created_at = ?, updated_at = ? WHERE event_id = ?";
-                        var createEventData = [response["created_at"], response["updated_at"], rowData["event_id"]];
-                        _this.commonUpdateAndDeleteEvent(sql, createEventData);
-                    });
+                    return [2 /*return*/, this.updateEventData(rowData["id"], data).subscribe(function (responseList) {
+                            var response = responseList[0]['event'];
+                            var sql = "UPDATE events SET created_at = ?, updated_at = ? WHERE event_id = ?";
+                            var createEventData = [response["created_at"], response["updated_at"], rowData["event_id"]];
+                            return _this.commonUpdateAndDeleteEvent(sql, createEventData);
+                        })];
                 }
                 else {
-                    this.updateVitalEvent(data).subscribe(function (responseList) {
-                        var response = responseList[0]['event'];
-                        var sql = "UPDATE events SET created_at = ?, updated_at = ? WHERE event_id = ?";
-                        var createEventData = [response["created_at"], response["updated_at"], rowData["event_id"]];
-                        _this.commonUpdateAndDeleteEvent(sql, createEventData);
-                    });
+                    return [2 /*return*/, this.updateVitalEvent(data).subscribe(function (responseList) {
+                            var response = responseList[0]['event'];
+                            var sql = "UPDATE events SET created_at = ?, updated_at = ? WHERE event_id = ?";
+                            var createEventData = [response["created_at"], response["updated_at"], rowData["event_id"]];
+                            return _this.commonUpdateAndDeleteEvent(sql, createEventData);
+                        })];
                 }
                 return [2 /*return*/];
             });
@@ -2881,13 +3092,12 @@ var syncProvider = /** @class */ (function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 console.log(rowData, "deleteSingleEventData");
-                this.deleteEventData(rowData["id"]).subscribe(function (responseList) {
-                    //let response = responseList[0];
-                    var sql = "DELETE FROM events WHERE event_id = ?";
-                    var createEventData = [rowData["event_id"]];
-                    _this.commonUpdateAndDeleteEvent(sql, createEventData);
-                });
-                return [2 /*return*/];
+                return [2 /*return*/, this.deleteEventData(rowData["id"]).subscribe(function (responseList) {
+                        //let response = responseList[0];
+                        var sql = "DELETE FROM events WHERE event_id = ?";
+                        var createEventData = [rowData["event_id"]];
+                        return _this.commonUpdateAndDeleteEvent(sql, createEventData);
+                    })];
             });
         });
     };
@@ -2907,18 +3117,28 @@ var syncProvider = /** @class */ (function () {
                         blood_group: rowData['blood_group']
                     }
                 };
-                this.updateUserAndHealthData(data).subscribe(function (responseList) {
-                    var response = responseList[0];
-                    var policies = response['policies'];
-                    var userData = response['user'];
-                    var sql = "UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?";
-                    var createEventData = [policies["id"], policies["attribute_name_value"], policies["created_at"], policies["updated_at"], healthData["health_id"]];
-                    _this.commonUpdateAndDeleteEvent(sql, createEventData);
-                    var sql1 = "UPDATE users SET age = ?, blood_group = ?, created_at = ?, updated_at = ? WHERE id = ?";
-                    var createEventData1 = [userData["age"], userData["blood_group"], userData["created_at"], userData["updated_at"], userData["id"]];
-                    _this.commonUpdateAndDeleteEvent(sql1, createEventData1);
-                });
-                return [2 /*return*/];
+                return [2 /*return*/, this.updateUserAndHealthData(data).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                        var response, policies, userData, sql, createEventData, sql1, createEventData1;
+                        return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    response = responseList[0];
+                                    policies = response['policies'];
+                                    userData = response['user'];
+                                    sql = "UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?";
+                                    createEventData = [policies["id"], policies["attribute_name_value"], policies["created_at"], policies["updated_at"], healthData["health_id"]];
+                                    return [4 /*yield*/, this.commonUpdateAndDeleteEvent(sql, createEventData)];
+                                case 1:
+                                    _a.sent();
+                                    sql1 = "UPDATE users SET age = ?, blood_group = ?, created_at = ?, updated_at = ? WHERE id = ?";
+                                    createEventData1 = [userData["age"], userData["blood_group"], userData["created_at"], userData["updated_at"], userData["id"]];
+                                    return [4 /*yield*/, this.commonUpdateAndDeleteEvent(sql1, createEventData1)];
+                                case 2:
+                                    _a.sent();
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); })];
             });
         });
     };
@@ -2955,24 +3175,35 @@ var syncProvider = /** @class */ (function () {
     };
     syncProvider.prototype.deleteUsersData = function (rowData) {
         var _this = this;
-        this.deleteCareGiver(rowData["id"]).subscribe(function (responseList) {
+        return this.deleteCareGiver(rowData["id"]).subscribe(function (responseList) {
             console.log(responseList);
             var sql = "DELETE FROM users WHERE id = ?";
             var createEventData = [rowData["id"]];
-            _this.commonUpdateAndDeleteEvent(sql, createEventData);
+            return _this.commonUpdateAndDeleteEvent(sql, createEventData);
         });
     };
     syncProvider.prototype.deletePatientData = function (rowData) {
         var _this = this;
-        this.deletePatientFromCaregiver(rowData["id"]).subscribe(function (responseList) {
-            console.log(responseList);
-            var sql = "DELETE FROM users WHERE id = ?";
-            var createEventData = [rowData["id"]];
-            _this.commonUpdateAndDeleteEvent(sql, createEventData);
-            var sql1 = "DELETE FROM events WHERE user_id = ?";
-            var createEventData1 = [rowData["id"]];
-            _this.commonUpdateAndDeleteEvent(sql1, createEventData1);
-        });
+        return this.deletePatientFromCaregiver(rowData["id"]).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+            var sql, createEventData, sql1, createEventData1;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log(responseList);
+                        sql = "DELETE FROM users WHERE id = ?";
+                        createEventData = [rowData["id"]];
+                        return [4 /*yield*/, this.commonUpdateAndDeleteEvent(sql, createEventData)];
+                    case 1:
+                        _a.sent();
+                        sql1 = "DELETE FROM events WHERE user_id = ?";
+                        createEventData1 = [rowData["id"]];
+                        return [4 /*yield*/, this.commonUpdateAndDeleteEvent(sql1, createEventData1)];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        }); });
     };
     syncProvider.prototype.insertEventData = function (data) {
         var response1 = this.http.post("events", data);
@@ -3046,30 +3277,35 @@ var syncProvider = /** @class */ (function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var user_id;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        user_id = null;
-                        if (!(localStorage.getItem("role_id") == '1')) return [3 /*break*/, 1];
-                        user_id = localStorage.getItem("user_id");
-                        return [2 /*return*/, user_id];
-                    case 1: return [4 /*yield*/, this.getUserIdFromCareGiver()];
-                    case 2:
-                        user_id = _a.sent();
-                        return [2 /*return*/, user_id];
+                user_id = null;
+                if (localStorage.getItem("role_id") == '1') {
+                    user_id = localStorage.getItem("user_id");
+                    return [2 /*return*/, user_id];
                 }
+                else {
+                    user_id = this.getPatientIds;
+                    return [2 /*return*/, user_id];
+                }
+                return [2 /*return*/];
             });
         });
     };
     syncProvider.prototype.getUserIdFromCareGiver = function () {
-        var _this = this;
-        return this.getPatientsList().subscribe(function (responseList) {
-            _this.patientList = responseList;
-            var userIds = [];
-            for (var i = 0; i < _this.patientList[0]['patient'].length; i++) {
-                userIds.push(_this.patientList[0]['patient'][i]['id']);
-                console.log(userIds);
-            }
-            return userIds;
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.getPatientIds = [];
+                return [2 /*return*/, this.getPatientsList().subscribe(function (responseList) {
+                        _this.patientList = responseList;
+                        for (var i = 0; i < _this.patientList[0]['patient'].length; i++) {
+                            _this.getPatientIds.push(_this.patientList[0]['patient'][i]['id']);
+                            console.log(_this.getPatientIds);
+                        }
+                        return _this.getPatientIds;
+                    }, function (error) {
+                        return _this.getPatientIds;
+                    })];
+            });
         });
     };
     syncProvider.ctorParameters = function () { return [

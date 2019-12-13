@@ -36,6 +36,7 @@ export class syncProvider {
   healtDetails:any = [];
   usersList:any = [];
   user_associations:any = [];
+  getPatientIds:any = [];
 
     constructor(public sanitizer: DomSanitizer,private transfer: FileTransfer,public http: HttpClient,public sqlite: SQLite, private platform: Platform,public network: NetworkService) {
       console.log('Hello SettingProvider Provider');
@@ -47,7 +48,10 @@ export class syncProvider {
       this.ready = this.platform.ready()
             // .then(() => this.getTotalEnumMasters())
             // .then(() => this.awaitAllUsersTableData())
-            .then(()=>this.updateImageDeletion())
+            .then(async ()=>{ 
+                 await this.getUserIdFromCareGiver();
+                 this.updateImageDeletion()
+              })
             .then(()=>{
               this.getTotalEnumMasters();
               this.getAllEvents();
@@ -63,8 +67,8 @@ export class syncProvider {
 
     async updateImageDeletion(){
       let sqlEventQuery = `SELECT * FROM events WHERE (event_type='alert_medication' AND event_type='report' AND event_type='prescription' AND delete1='false')`
-      this.getDatabase().then((database)=>{
-         database.executeSql(sqlEventQuery, []).then(async (data) => {
+      return this.getDatabase().then((database)=>{
+        return database.executeSql(sqlEventQuery, []).then(async (data) => {
             for (let i = 0; i < data.rows.length; i++) {
               let event_json:any = null;
               let eventAssetsJson:any = null;
@@ -87,7 +91,7 @@ export class syncProvider {
               if(index.length>0){
                 let user_id = await this.getuserID();
                 let params = { "index":index,"id":user_id }
-                this.deleteEventImages(params).subscribe((responseList) => {
+                await this.deleteEventImages(params).subscribe(async (responseList) => {
                   
                   for (let j = 0; j < index.length; j++) {
                     event_json['localImagePath'].splice(index[i],1);
@@ -95,7 +99,7 @@ export class syncProvider {
                   }
                   let sql = `UPDATE events SET event_options = ?, event_assets = ? WHERE event_id = ?`;
                   let createEventData = [JSON.stringify(event_json),JSON.stringify(eventAssetsJson),event_id]
-                  this.commonUpdateAndDeleteEvent(sql,createEventData);
+                  await this.commonUpdateAndDeleteEvent(sql,createEventData);
                 },err=>{
                   
                 })
@@ -193,20 +197,20 @@ export class syncProvider {
                   let rowData = data.rows.item(i);
                   if(data.rows.item(i).id == null){
                      //console.log('null',data.rows.item(i).id)
-                     this.createSingleEventData(rowData); 
+                     await this.createSingleEventData(rowData); 
                   }else{
                     if(data.rows.item(i).delete1=='true'){
                      // console.log('delete',data.rows.item(i).delete1)
-                       this.deleteSingleEventData(rowData);  
+                      await this.deleteSingleEventData(rowData);  
                     }else{
                       let findindex = this.allEvents.indexOf(res=>res.id==data.rows.item(i).id)
                       let sql = `UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?`;
                       if(findindex!=-1 && this.allEvents[findindex]['updated_at'] > data.rows.item(i).updated_at){
                         let createEventData = [this.allEvents[findindex]["id"],this.allEvents[findindex]["event_name"],this.allEvents[findindex]["description"],this.allEvents[findindex]["value"],this.allEvents[findindex]["event_datetime"],this.allEvents[findindex]["event_type"],this.allEvents[findindex]["event_category"],JSON.stringify(this.allEvents[findindex]["event_assets"]),JSON.stringify(this.allEvents[findindex]["event_options"]),this.allEvents[findindex]["user_id"],this.allEvents[findindex]["created_at"],this.allEvents[findindex]["updated_at"],false,rowData['event_id']]      
                         //database.executeSql(sql, createEventData)
-                        this.commonUpdateAndDeleteEvent(sql,createEventData);
+                        await this.commonUpdateAndDeleteEvent(sql,createEventData);
                       }else if(findindex!=-1 && this.allEvents[findindex]['updated_at'] < data.rows.item(i).updated_at){
-                        this.updateSingleEventData(rowData); 
+                        await this.updateSingleEventData(rowData); 
                       }
                     }
                   }
@@ -355,7 +359,7 @@ export class syncProvider {
           
            this.getDatabase().then((database)=>{
             
-            this.requestDataFromMultipleSources().subscribe((responseList)=>{
+            this.requestDataFromMultipleSources().subscribe(async (responseList)=>{
               
                 this.responseData1 = responseList[0]["emergency_contacts"]
                 this.responseData2 = responseList[1]["health_detail"];
@@ -366,7 +370,7 @@ export class syncProvider {
                 
                 localStorage.setItem("qrcode",this.responseData5);
                 let profile_id = localStorage.getItem("profile_id");     
-                database.executeSql(`SELECT * FROM emergency_details`, []).then((data) => {
+                await database.executeSql(`SELECT * FROM emergency_details`, []).then(async (data) => {
                   let length = data.rows.length;
                   
                   if(length>0){
@@ -374,10 +378,10 @@ export class syncProvider {
                     for (let i = 0; i < data.rows.length; i++) {
                       let rowData = data.rows.item(i);
                       if(data.rows.item(i).id==null && profile_id == data.rows.item(i).user_id){
-                         this.updateSingleEmergencyDetail(rowData); 
+                         await this.updateSingleEmergencyDetail(rowData);
                       }else{
                         if(data.rows.item(i).delete1=='true' && profile_id == data.rows.item(i).user_id){
-                           this.deleteSingleEmergencyDetail(rowData);  
+                          await this.deleteSingleEmergencyDetail(rowData);  
                         }else{
                           // let index = this.responseData1.findIndex(res=>res.id==data.rows.item(i).id);
                           // console.log(index);
@@ -396,9 +400,7 @@ export class syncProvider {
                       //   updated_at: data.rows.item(i).updated_at,
                       //   delete1: data.rows.item(i).delete1
                       // });
-                      if((data.rows.length-1)==i){
-                        this.getUniqueUsersDataPush();  
-                      }
+                      
                     }
                     //await this.getEmergencyContacts(emergencyContacts); 
                   }else{
@@ -409,7 +411,7 @@ export class syncProvider {
                   console.log(error,'emergencyerror')
                 })
 
-                database.executeSql(`SELECT * FROM health_details`, []).then((data) => {
+                await database.executeSql(`SELECT * FROM health_details`, []).then(async (data) => {
                   let length = data.rows.length;
                   console.log(length)
                   if(length>0){
@@ -429,14 +431,15 @@ export class syncProvider {
                       // });
                       let index = this.responseData2.findIndex(res=>res.id==data.rows.item(i).id);
                       console.log(index);
-                      if(data.rows.item(i).id==null && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id || data.rows.item(i).updated_at > this.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id){
-                         this.createSingleHealthDetail(rowData); 
-                      }else if(data.rows.item(i).updated_at < this.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id){
-                          this.createSingleHealthDetail(this.responseData2[index]);        
-                      }  
-                      if((data.rows.length-1)==i){
-                        this.getUniqueUsersDataPush();  
+                      if(index!=-1){
+                        if(data.rows.item(i).id==null && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id || data.rows.item(i).updated_at > this.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id){
+                          await this.createSingleHealthDetail(rowData); 
+                          
+                        }else if(data.rows.item(i).updated_at < this.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id){
+                            await this.createSingleHealthDetail(this.responseData2[index]);
+                        } 
                       }   
+                         
                     }
                     //await this.getHealthDetails(healthData);      
                   }else{
@@ -447,7 +450,7 @@ export class syncProvider {
                   console.log(error,'healtherror');
                 })
                 
-                database.executeSql(`SELECT * FROM users`, []).then(async (data) => {
+                await database.executeSql(`SELECT * FROM users`, []).then(async (data) => {
                   let length = data.rows.length;
                   console.log(length)
                   
@@ -455,9 +458,15 @@ export class syncProvider {
                     for (let i = 0; i < data.rows.length; i++) {
                       let rowData = data.rows.item(i);
                       if(data.rows.item(i).delete1 == 'true' && data.rows.item(i).role_id == 2){
-                        this.deleteUsersData(rowData);  
+                        await this.deleteUsersData(rowData);
+                        if((data.rows.length-1)==i){
+                          this.getUniqueUsersDataPush();  
+                        }  
                       }else if(data.rows.item(i).delete1 == 'true' && data.rows.item(i).role_id == 1){
-                        this.deletePatientData(rowData);  
+                        await this.deletePatientData(rowData);
+                        if((data.rows.length-1)==i){
+                          this.getUniqueUsersDataPush();  
+                        }  
                       }else{
                         let getHealthData = await this.getUserPolicy();
                         let assigngetUserData = getHealthData['policies'];
@@ -467,7 +476,7 @@ export class syncProvider {
                         let sql = `UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, user_option = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?`;
                         if(findindex!=-1 && this.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at){
                           let createEventData = [this.responseData3[findindex]["name"],this.responseData3[findindex]["email"],this.responseData3[findindex]["password"],this.responseData3[findindex]["mobile_no"],this.responseData3[findindex]["address"],this.responseData3[findindex]["country"],this.responseData3[findindex]["blood_group"],this.responseData3[findindex]["age"],this.responseData3[findindex]["user_uid"],this.responseData3[findindex]["forgot_password_code"],JSON.stringify(this.responseData3[findindex]["user_picture"]),JSON.stringify(this.responseData3[findindex]["user_option"]),this.responseData3[findindex]["active_status"],this.responseData3[findindex]["role_id"],this.responseData3[findindex]["created_at"],this.responseData3[findindex]["updated_at"],false,this.responseData3[findindex]["id"]]      
-                          this.commonUpdateAndDeleteEvent(sql,createEventData);
+                          await this.commonUpdateAndDeleteEvent(sql,createEventData);
                         }else if(findindex!=-1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id || healthData!=null && healthData['id']==null && findindex!=-1 && profile_id == data.rows.item(i).id){
                           let profile_picture = JSON.parse(data.rows.item(i).user_picture);
                           if(profile_picture['url']!=null && profile_picture['toUpdate']==true){
@@ -484,18 +493,17 @@ export class syncProvider {
                               updateEventOptions["url"] = uploadStatus["url"];
                               updateEventOptions["toUpdate"] = false;
                               let user_option = params['user_option'];
-                              let sql = `UPDATE users SET user_picture = ?, user_option = ? WHERE id = ?`
+                              let sql = `UPDATE users SET user_picture = ?, user_option = ?, updated_at = ? WHERE id = ?`
                               let id  = data.rows.item(i).id;
-                              let createEventData = [JSON.stringify(updateEventOptions),JSON.stringify(user_option),id];
-                              this.commonUpdateAndDeleteEvent(sql,createEventData); 
+                              let createEventData = [JSON.stringify(updateEventOptions),JSON.stringify(user_option),new Date().toJSON(),id];
+                              await this.commonUpdateAndDeleteEvent(sql,createEventData); 
                             }
                           }
-                          this.updateUsersData(rowData,healthData);
+                          await this.updateUsersData(rowData,healthData);
                         }
-                      }
-                      
-                      if((data.rows.length-1)==i){
-                        this.getUniqueUsersDataPush();  
+                        if((data.rows.length-1)==i){
+                          this.getUniqueUsersDataPush();  
+                        }
                       }
                     }  
                       
@@ -611,21 +619,24 @@ export class syncProvider {
           console.log(unique2)
           console.log(unique3)
           if(unique1.length>0){
-            await this.getEmergencyContacts(unique1,"unique");
+            this.getEmergencyContacts(unique1,"unique",array1,this.emegencyConatcts);
+          }else{
             let uniqueData1 = await this.findUniqueOffline(array1,this.emegencyConatcts);
             this.deleteEmergencyDataIfnotExistsonOnline(uniqueData1);
           }
 
           if(unique2.length>0){
-           await this.getHealthDetails(unique2,"unique");
-           let uniqueData2 = await this.findUniqueOffline(array2,this.healtDetails);
-            this.deleteHealthDataIfnotExistsonOnline(uniqueData2); 
+           this.getHealthDetails(unique2,"unique",array2,this.healtDetails);
+          }else{
+            let uniqueData2 = await this.findUniqueOffline(array2,this.healtDetails);
+            this.deleteHealthDataIfnotExistsonOnline(uniqueData2);
           }
 
           if(unique3.length>0){
-           await this.getUsersData(unique3,"unique");
-           let uniqueData3 = await this.findUniqueOffline(array3,this.usersList);
-           this.deleteUsersDataIfnotExistsonOnline(uniqueData3); 
+           this.getUsersData(unique3,"unique",array3,this.usersList); 
+          }else{
+            let uniqueData3 = await this.findUniqueOffline(array3,this.usersList);
+            this.deleteUsersDataIfnotExistsonOnline(uniqueData3);
           }
 
         })
@@ -673,9 +684,9 @@ export class syncProvider {
     }
 
 
-    async getEmergencyContacts(response,unique?){
+    async getEmergencyContacts(response,unique?,array2?,array1?){
       console.log('getEmergency')
-      this.getDatabase().then((database)=> {
+      this.getDatabase().then(async (database)=> {
         if(unique!="unique"){
           let sql1 = `DELETE FROM emergency_details`;
           database.executeSql(sql1,[]);
@@ -699,14 +710,19 @@ export class syncProvider {
             }, error => {
               console.log(error, 'erroremergency_details');
             });
+
+            if((allEmergency.length-1)==i && array2!=undefined){
+              let unique1 = await this.findUniqueOffline(array2,array1);
+              this.deleteEmergencyDataIfnotExistsonOnline(unique1);  
+            }
         } 
       })
       
     }
 
-    async getHealthDetails(response,unique?){
+    async getHealthDetails(response,unique?,array2?,array1?){
       console.log('getHealth')
-      this.getDatabase().then((database)=>{
+      this.getDatabase().then(async (database)=>{
         if(unique!= "unique"){
           let sql2 = `DELETE FROM health_details`;
           database.executeSql(sql2,[]);
@@ -730,13 +746,18 @@ export class syncProvider {
           }, error => {
             console.log(error, 'errorhealth_details');
           });
+
+          if((totalHealth.length-1)==i && array2!=undefined){
+            let unique1 = await this.findUniqueOffline(array2,array1);
+            this.deleteHealthDataIfnotExistsonOnline(unique1);  
+          }
         }
       })  
     }
 
-    async getUsersData(response,unique?){
+    async getUsersData(response,unique?,array2?,array1?){
       console.log('getUsers')
-      this.getDatabase().then((database)=>{
+      this.getDatabase().then(async (database)=>{
         if(unique!= "unique"){
           let sql3 = `DELETE FROM users`;
           database.executeSql(sql3,[]);
@@ -772,7 +793,11 @@ export class syncProvider {
             console.log(res, 'users');
           }, error => {
             console.log(error, 'errorusers');
-          });;;
+          });
+          if((allUsers.length-1)==i && array2!=undefined){
+            let unique1 = await this.findUniqueOffline(array2,array1);
+            this.deleteUsersDataIfnotExistsonOnline(unique1);  
+          }
         } 
       })
     }
@@ -819,23 +844,23 @@ export class syncProvider {
     }
 
     async updateSingleEmergencyDetail(rowData){
-     let data = { "contact_name": rowData["contact_name"], "emergency_no": rowData["emergency_no"], "user_type": rowData["user_type"] };
-     this.insertEmergencyData(data).subscribe((responseList)=>{ 
+      let data = { "contact_name": rowData["contact_name"], "emergency_no": rowData["emergency_no"], "user_type": rowData["user_type"] };
+      return this.insertEmergencyData(data).subscribe((responseList)=>{ 
        let response = responseList[0];
        let sql = `UPDATE emergency_details SET id = ?, created_at = ?, updated_at = ? WHERE emergency_id = ?`;
        let createEventData = [response["id"],response["created_at"],response["updated_at"],rowData["emergency_id"]]
-       this.commonUpdateAndDeleteEvent(sql,createEventData)
+       return this.commonUpdateAndDeleteEvent(sql,createEventData)
      })
     }
 
     async deleteSingleEmergencyDetail(rowData){
       console.log(rowData)
-      this.deleteEmergencyData(rowData["id"]).subscribe((responseList)=>{ 
+      return this.deleteEmergencyData(rowData["id"]).subscribe((responseList)=>{ 
         //let response = responseList[0];
         console.log(responseList)
         let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
         let createEventData = [rowData["emergency_id"]]
-        this.commonUpdateAndDeleteEvent(sql,createEventData);
+       return this.commonUpdateAndDeleteEvent(sql,createEventData);
       })
      }
 
@@ -851,11 +876,11 @@ export class syncProvider {
 
     createSingleHealthDetail(rowData){
       let data = { attribute_name_value: rowData['attribute_name_value'] };
-      this.updateHealthData(data).subscribe((responseList)=>{ 
+      return this.updateHealthData(data).subscribe((responseList)=>{ 
         let response = responseList[0]['health_detail'];
         let sql = `UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?`;
         let createEventData = [response["id"],response["attribute_name_value"],response["created_at"],response["updated_at"],rowData["health_id"]]
-        this.commonUpdateAndDeleteEvent(sql,createEventData)
+       return this.commonUpdateAndDeleteEvent(sql,createEventData)
       }) 
     }
 
@@ -877,11 +902,11 @@ export class syncProvider {
       let data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"] };
       console.log(data)
         if(data['event_type']!='vital'){
-            this.insertEventData(data).subscribe((responseList)=>{
+           return this.insertEventData(data).subscribe((responseList)=>{
               let response = responseList[0]['event'];
               let sql = `UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?`
               let createEventData = [response["id"],response["created_at"],response["updated_at"],rowData["event_id"]]
-              this.commonUpdateAndDeleteEvent(sql,createEventData).then(async (res)=>{
+              return this.commonUpdateAndDeleteEvent(sql,createEventData).then(async (res)=>{
                 console.log(rowData["event_options"])  
                 console.log(res)
                 if(res["event_id"]!=undefined && rowData["event_options"]["localImagePath"]!=undefined && rowData["event_options"]["localImagePath"]!=null){
@@ -906,11 +931,11 @@ export class syncProvider {
               })
             })
         }else{
-          this.updateVitalEvent(data).subscribe((responseList)=>{
+          return this.updateVitalEvent(data).subscribe((responseList)=>{
             let response = responseList[0]['event'];
             let sql = `UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?`
             let createEventData = [response["id"],response["created_at"],response["updated_at"],rowData["event_id"]]
-            this.commonUpdateAndDeleteEvent(sql,createEventData).then(async (res)=>{
+            return this.commonUpdateAndDeleteEvent(sql,createEventData).then(async (res)=>{
               console.log(rowData["event_options"])  
               console.log(res)
               if(res["event_id"]!=undefined && rowData["event_options"]["localImagePath"]!=undefined && rowData["event_options"]["localImagePath"]!=null){
@@ -942,18 +967,18 @@ export class syncProvider {
        console.log(rowData,"updateSingleEventData")
        let data = { event_name: rowData["event_name"], description: rowData["description"], event_datetime: rowData["event_datetime"], event_type: rowData["event_type"], event_category: rowData["event_category"], event_options: JSON.parse(rowData["event_options"]), value: rowData["value"]};
        if(data['event_type']!='vital'){
-        this.updateEventData(rowData["id"],data).subscribe((responseList)=>{
+        return this.updateEventData(rowData["id"],data).subscribe((responseList)=>{
           let response = responseList[0]['event'];
           let sql = `UPDATE events SET created_at = ?, updated_at = ? WHERE event_id = ?`
           let createEventData = [response["created_at"],response["updated_at"],rowData["event_id"]]
-          this.commonUpdateAndDeleteEvent(sql,createEventData);
+        return  this.commonUpdateAndDeleteEvent(sql,createEventData);
         })
        }else{
-        this.updateVitalEvent(data).subscribe((responseList)=>{
+        return this.updateVitalEvent(data).subscribe((responseList)=>{
           let response = responseList[0]['event'];
           let sql = `UPDATE events SET created_at = ?, updated_at = ? WHERE event_id = ?`
           let createEventData = [response["created_at"],response["updated_at"],rowData["event_id"]]
-          this.commonUpdateAndDeleteEvent(sql,createEventData); 
+        return  this.commonUpdateAndDeleteEvent(sql,createEventData); 
         })
        }
         
@@ -961,11 +986,11 @@ export class syncProvider {
  
      async deleteSingleEventData(rowData){
        console.log(rowData,"deleteSingleEventData")
-       this.deleteEventData(rowData["id"]).subscribe((responseList)=>{ 
+       return this.deleteEventData(rowData["id"]).subscribe((responseList)=>{ 
          //let response = responseList[0];
          let sql = `DELETE FROM events WHERE event_id = ?`;
          let createEventData = [rowData["event_id"]]
-         this.commonUpdateAndDeleteEvent(sql,createEventData);
+        return this.commonUpdateAndDeleteEvent(sql,createEventData);
        })
       }
       
@@ -982,16 +1007,16 @@ export class syncProvider {
                       blood_group: rowData['blood_group']
                      } 
                     } 
-          this.updateUserAndHealthData(data).subscribe((responseList)=>{
+            return this.updateUserAndHealthData(data).subscribe(async (responseList)=>{
             let response = responseList[0];
             let policies = response['policies'];
             let userData = response['user'];  
             let sql = `UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?`
             let createEventData = [policies["id"],policies["attribute_name_value"],policies["created_at"],policies["updated_at"],healthData["health_id"]];
-            this.commonUpdateAndDeleteEvent(sql,createEventData);
+            await this.commonUpdateAndDeleteEvent(sql,createEventData);
             let sql1 = `UPDATE users SET age = ?, blood_group = ?, created_at = ?, updated_at = ? WHERE id = ?`
             let createEventData1 = [userData["age"],userData["blood_group"],userData["created_at"],userData["updated_at"],userData["id"]];
-            this.commonUpdateAndDeleteEvent(sql1,createEventData1);
+            await this.commonUpdateAndDeleteEvent(sql1,createEventData1);
           })
        }
 
@@ -1024,23 +1049,23 @@ export class syncProvider {
        }
 
       deleteUsersData(rowData){
-        this.deleteCareGiver(rowData["id"]).subscribe((responseList)=>{
+        return this.deleteCareGiver(rowData["id"]).subscribe((responseList)=>{
           console.log(responseList)
           let sql = `DELETE FROM users WHERE id = ?`;
           let createEventData = [rowData["id"]]
-          this.commonUpdateAndDeleteEvent(sql,createEventData);
+        return this.commonUpdateAndDeleteEvent(sql,createEventData);
         })
       }
 
       deletePatientData(rowData){
-        this.deletePatientFromCaregiver(rowData["id"]).subscribe((responseList)=>{ 
+        return this.deletePatientFromCaregiver(rowData["id"]).subscribe(async (responseList)=>{ 
           console.log(responseList)
           let sql = `DELETE FROM users WHERE id = ?`;
           let createEventData = [rowData["id"]]
-          this.commonUpdateAndDeleteEvent(sql,createEventData);
+          await this.commonUpdateAndDeleteEvent(sql,createEventData);
           let sql1 = `DELETE FROM events WHERE user_id = ?`;
           let createEventData1 = [rowData["id"]];
-          this.commonUpdateAndDeleteEvent(sql1,createEventData1);
+          await this.commonUpdateAndDeleteEvent(sql1,createEventData1);
         }) 
       }
 
@@ -1130,21 +1155,24 @@ export class syncProvider {
           user_id = localStorage.getItem("user_id");
           return user_id;
         }else{
-          user_id = await this.getUserIdFromCareGiver();
+          user_id = this.getPatientIds;
           return user_id;
         }
       }
 
-      getUserIdFromCareGiver(){
+      async getUserIdFromCareGiver(){
+        this.getPatientIds = []
         return this.getPatientsList().subscribe((responseList)=>{
           this.patientList = responseList;
-          let userIds = []
+          
           
           for(let i=0;i<this.patientList[0]['patient'].length;i++){
-            userIds.push(this.patientList[0]['patient'][i]['id'])  
-            console.log(userIds)
+            this.getPatientIds.push(this.patientList[0]['patient'][i]['id'])  
+            console.log(this.getPatientIds)
           }
-          return userIds
+          return this.getPatientIds
+        },(error)=>{
+          return this.getPatientIds
         })
       }
 
