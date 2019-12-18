@@ -135,6 +135,8 @@ let CgappointmentsPage = class CgappointmentsPage {
         this.appointmentData = [];
         this.appoint_details = [];
         this.getDate = this.datepipe.transform(new Date(), "dd MMM yyyy");
+        this.history_details = [];
+        this.completed_data = [];
         this.completepage = 1;
         this.completepage_offset = 0;
         this.environmentUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].ImageUrl;
@@ -156,10 +158,12 @@ let CgappointmentsPage = class CgappointmentsPage {
         //   this.history_details = res['event_list'];
         //   this.groupBy1(this.history_details);
         // })
-        if (this.selectedSegment == 'future')
+        if (this.selectedSegment == 'future') {
             this.cgUpcoming();
-        else if (this.selectedSegment == 'completed')
+        }
+        else {
             this.cgCompleted();
+        }
         let todayDate = new Date();
         this.TodayDate = this.datepipe.transform(todayDate, "dd MMM yyyy");
         let tommorrowDate = todayDate.setDate(todayDate.getDate() + 1);

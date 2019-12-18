@@ -197,7 +197,8 @@ export class syncProvider {
                      // console.log('delete',data.rows.item(i).delete1)
                       await this.deleteSingleEventData(rowData);  
                     }else{
-                      let findindex = this.allEvents.indexOf(res=>res.id==data.rows.item(i).id)
+                      let id = data.rows.item(i).id;
+                      let findindex = this.allEvents.findIndex(res=>{ return res.id==id})
                       let sql = `UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?`;
                       if(findindex!=-1 && this.allEvents[findindex]['updated_at'] > data.rows.item(i).updated_at){
                         let createEventData = [this.allEvents[findindex]["id"],this.allEvents[findindex]["event_name"],this.allEvents[findindex]["description"],this.allEvents[findindex]["value"],this.allEvents[findindex]["event_datetime"],this.allEvents[findindex]["event_type"],this.allEvents[findindex]["event_category"],JSON.stringify(this.allEvents[findindex]["event_assets"]),JSON.stringify(this.allEvents[findindex]["event_options"]),this.allEvents[findindex]["user_id"],this.allEvents[findindex]["created_at"],this.allEvents[findindex]["updated_at"],false,rowData['event_id']]      
@@ -425,10 +426,12 @@ export class syncProvider {
                       //   created_at: data.rows.item(i).created_at,
                       //   updated_at: data.rows.item(i).updated_at,
                       // });
-                      let index = this.responseData2.findIndex(res=>res.id==data.rows.item(i).id);
+                      let id = data.rows.item(i).id;
+                      let index = this.responseData2.findIndex(res=>{ return res.id == id });
                       console.log(index);
                       if(index!=-1){
                         if(data.rows.item(i).id==null && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id || data.rows.item(i).updated_at > this.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id){
+                          rowData['attribute_name_value'] = JSON.parse(data.rows.item(i).attribute_name_value);
                           await this.createSingleHealthDetail(rowData); 
                           
                         }else if(data.rows.item(i).updated_at < this.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id){
@@ -451,7 +454,7 @@ export class syncProvider {
                   let length = data.rows.length;
                   if(length==0){
                    for(let i=0;i<this.responseData5["policies"].length;i++){
-                    let attribute_json = JSON.stringify(this.responseData5["policies"][i]["attribute_name_value"]);
+                    let attribute_json = this.responseData5["policies"][i]["attribute_name_value"];
                     let data2 = [
                       this.responseData5["policies"][i]["id"],
                       this.responseData5["policies"][i]["name"],
@@ -472,7 +475,7 @@ export class syncProvider {
                     let profile_id = localStorage.getItem("profile_id");
                     let sqlUserQuery = `SELECT * FROM users WHERE id='${profile_id}'`;
                     let userData = [];
-                    await database.executeSql(sqlUserQuery, []).then((data2) => {
+                    await database.executeSql(sqlUserQuery, []).then(async (data2) => {
                       console.log(data2.rows)
                       for (let i = 0; i < data2.rows.length; i++) {
                           console.log(data2.rows.item(i))
@@ -481,7 +484,7 @@ export class syncProvider {
                           attribute_json = JSON.parse(data2.rows.item(i).user_picture);    
                         }  
                           
-                        userData.push({ 
+                        await userData.push({ 
                             id: data2.rows.item(i).id,
                             name: data2.rows.item(i).name,
                             email: data2.rows.item(i).email,
@@ -505,9 +508,10 @@ export class syncProvider {
                         console.log(res)
                     })
                     
-                    let healthData = []
+                    
                     for (let j = 0; j < data.rows.length; j++) {
                       let rowData = data.rows.item(j);
+                      let healthData = [];
                       //let attribute_json = JSON.stringify(data.rows.item(j).attribute_name_value);
                       // let data2 = [
                       //   data.rows.item(j).id,
@@ -517,9 +521,12 @@ export class syncProvider {
                       //   data.rows.item(j).created_at,
                       //   data.rows.item(j).updated_at
                       // ]
-
-                      let attribute_json = JSON.stringify(data.rows.item(j).attribute_name_value); 
-                      healthData.push({ 
+                      let attribute_json = null;
+                      if (data.rows.item(j).attribute_name_value != '' && data.rows.item(j).attribute_name_value != null) {
+                        attribute_json = JSON.parse(data.rows.item(j).attribute_name_value); 
+                      }
+                      
+                      await healthData.push({
                         id: data.rows.item(j).id, 
                         health_id: data.rows.item(j).health_id, 
                         name: data.rows.item(j).name, 
@@ -543,7 +550,7 @@ export class syncProvider {
                 await database.executeSql(`SELECT * FROM users`, []).then(async (data) => {
                   let length = data.rows.length;
                   console.log(length)
-                  
+                  debugger;
                   if(length>0){
                     for (let i = 0; i < data.rows.length; i++) {
                       let rowData = data.rows.item(i);
@@ -560,15 +567,28 @@ export class syncProvider {
                       }else{
                         //let getHealthData = await this.getUserPolicy();
                         //let assigngetUserData = getHealthData['policies'];
-                        
+                       
                         //let healthData = assigngetUserData[0] || null; 
-                        let findindex = this.responseData3.indexOf(res=>res.id==data.rows.item(i).id)
+                        let id = data.rows.item(i).id;
+                        let findindex = this.responseData3.findIndex((res)=>{ return res.id == id })
+                        debugger;
                         let sql = `UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, user_option = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?`;
                         if(findindex!=-1 && this.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at){
                           let createEventData = [this.responseData3[findindex]["name"],this.responseData3[findindex]["email"],this.responseData3[findindex]["password"],this.responseData3[findindex]["mobile_no"],this.responseData3[findindex]["address"],this.responseData3[findindex]["country"],this.responseData3[findindex]["blood_group"],this.responseData3[findindex]["age"],this.responseData3[findindex]["user_uid"],this.responseData3[findindex]["forgot_password_code"],JSON.stringify(this.responseData3[findindex]["user_picture"]),JSON.stringify(this.responseData3[findindex]["user_option"]),this.responseData3[findindex]["active_status"],this.responseData3[findindex]["role_id"],this.responseData3[findindex]["created_at"],this.responseData3[findindex]["updated_at"],false,this.responseData3[findindex]["id"]]      
                           await this.commonUpdateAndDeleteEvent(sql,createEventData);
                         }else if(findindex!=-1 && this.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id){  //|| healthData!=null && healthData['id']==null && findindex!=-1 && profile_id == data.rows.item(i).id
                           let profile_picture = JSON.parse(data.rows.item(i).user_picture);
+                          let createEventData = {
+                                         name: data.rows.item(i).name,
+                                         email: data.rows.item(i).email,
+                                         mobile_no: data.rows.item(i).mobile_no
+                                      }
+                          let putId = data.rows.item(i).id          
+                          console.log(putId)
+                          await this.updateUsersBasicsData(putId,createEventData).subscribe(async (responseList)=>{
+                             
+                          })
+                          //let updateUserssql = `UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ?`;      
                           if(profile_picture['url']!=null && profile_picture['toUpdate']==true){
                             let localPath = profile_picture;
                             let params = { user_option: { localURL: profile_picture['localURL'],
@@ -965,11 +985,11 @@ export class syncProvider {
     }
 
     createSingleHealthDetail(rowData){
-      let data = { attribute_name_value: JSON.parse(rowData['attribute_name_value']) };
+      let data = { attribute_name_value: rowData['attribute_name_value'] };
       return this.updateHealthData(data).subscribe((responseList)=>{ 
         let response = responseList[0]['health_detail'];
         let sql = `UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?`;
-        let createEventData = [response["id"],response["attribute_name_value"],response["created_at"],response["updated_at"],rowData["health_id"]]
+        let createEventData = [response["id"],JSON.stringify(response["attribute_name_value"]),response["created_at"],response["updated_at"],rowData["health_id"]]
        return this.commonUpdateAndDeleteEvent(sql,createEventData)
       }) 
     }
@@ -1102,10 +1122,10 @@ export class syncProvider {
             let policies = response['policies'];
             let userData = response['user'];  
             let sql = `UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?`
-            let createEventData = [policies["id"],policies["attribute_name_value"],policies["created_at"],policies["updated_at"],healthData["health_id"]];
+            let createEventData = [policies["id"],JSON.stringify(policies["attribute_name_value"]),policies["created_at"],policies["updated_at"],healthData["health_id"]];
             await this.commonUpdateAndDeleteEvent(sql,createEventData);
-            let sql1 = `UPDATE users SET age = ?, blood_group = ?, created_at = ?, updated_at = ? WHERE id = ?`
-            let createEventData1 = [userData["age"],userData["blood_group"],userData["created_at"],userData["updated_at"],userData["id"]];
+            let sql1 = `UPDATE users SET age = ?, blood_group = ?, created_at = ? WHERE id = ?`
+            let createEventData1 = [userData["age"],userData["blood_group"],userData["created_at"],userData["id"]];
             await this.commonUpdateAndDeleteEvent(sql1,createEventData1);
           })
        }
@@ -1191,6 +1211,11 @@ export class syncProvider {
         return forkJoin([response1]); 
       }
 
+      public updateUsersBasicsData(id,data): Observable<any[]> {
+        let response1 = this.http.put(`users/`+id,data);
+        return forkJoin([response1]); 
+      }
+
       async uploadImage(localfile,params,requestMethods){
         const fileTransfer: FileTransferObject = this.transfer.create();
     
@@ -1221,9 +1246,8 @@ export class syncProvider {
         return forkJoin([response1]);
       }
 
-      getPatientsList(){
-        let response1 = this.http.get(`users/patient_list`);
-        return forkJoin([response1]);
+      getPatientsList(): Promise<any>{
+         return this.http.get(`users/patient_list`).toPromise();
       }
 
       deleteEventImages(data){
@@ -1247,22 +1271,20 @@ export class syncProvider {
           user_id = localStorage.getItem("user_id");
           return user_id;
         }else{
-          await this.getUserIdFromCareGiver().then((response)=>{
-            user_id = response;
-            return user_id;
-          })
           
+          user_id = await this.getUserIdFromCareGiver();
+          return user_id;
         }
       }
 
       async getUserIdFromCareGiver(){
         this.getPatientIds = []
-        return this.getPatientsList().subscribe((responseList)=>{
+        return this.getPatientsList().then((responseList)=>{
           this.patientList = responseList;
           
           
-          for(let i=0;i<this.patientList[0]['patient'].length;i++){
-            this.getPatientIds.push(this.patientList[0]['patient'][i]['id'])  
+          for(let i=0;i<this.patientList['patient'].length;i++){
+            this.getPatientIds.push(this.patientList['patient'][i]['id'])  
             console.log(this.getPatientIds)
           }
           return this.getPatientIds

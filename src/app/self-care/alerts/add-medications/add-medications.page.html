@@ -50,7 +50,7 @@
       <ion-row >    
         <ion-col size="6">
           <div class="date_filter">
-            <h1>Time</h1>
+            <h1>Time1</h1>
          <ion-item [ngClass]="{ 'ion-invalid': submitted && f.event_time.invalid,'ion-touched': submitted && f.event_time.invalid }">
           <ion-datetime display-format="HH:mm" formControlName="event_time"  placeholder="--:--"></ion-datetime>
           <svg xmlns="http://www.w3.org/2000/svg" width="25.643" height="26.128" viewBox="0 0 25.643 26.128">
@@ -70,6 +70,7 @@
             </g>
           </svg>
         </ion-item>
+        <h6>(Set Time)</h6>
       </div>          
     </ion-col>       
     <ion-col size="6">
@@ -129,7 +130,92 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
+    <div *ngIf="addform.value.time_repeat==true">
+      <ion-grid class="ion-no-padding ion-margin-top ion-margin-bottom">
+          <ion-row >    
+              <ion-col size="6">
+                <div class="date_filter">
+                  <h1>Time2</h1>
+               <ion-item >
+                <ion-datetime display-format="HH:mm" formControlName="event_time1"  placeholder="--:--"></ion-datetime>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25.643" height="26.128" viewBox="0 0 25.643 26.128">
+                  <g transform="translate(0.25 0.25)">
+                    <path
+                      d="M56.966,85.208a.485.485,0,0,0,.663-.174,8.526,8.526,0,0,1,.91-1.273.485.485,0,1,0-.734-.634,9.49,9.49,0,0,0-1.014,1.419.485.485,0,0,0,.174.663Zm0,0"
+                      transform="translate(-52.729 -77.067)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+                    <path
+                      d="M116.172,103.294a.484.484,0,0,0,.343-.142l3.58-3.58a.484.484,0,0,0,.142-.343V94.114a.485.485,0,0,0-.97,0v4.914l-3.438,3.438a.485.485,0,0,0,.343.827Zm0,0"
+                      transform="translate(-107.504 -86.98)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+                    <path
+                      d="M23.836,17.338a12.123,12.123,0,0,0,1.11-5.09,12.249,12.249,0,1,0-7.8,11.412,4.65,4.65,0,1,0,6.691-6.323ZM12.7,23.527A11.279,11.279,0,1,1,23.976,12.248a11.16,11.16,0,0,1-.966,4.564,4.617,4.617,0,0,0-1.776-.478A9.468,9.468,0,0,0,7.8,4.143a.485.485,0,0,0,.5.829A8.5,8.5,0,0,1,20.119,16.4a4.661,4.661,0,0,0-3.7,3.5l-.011,0A8.5,8.5,0,0,1,4.253,11.26a.485.485,0,1,0-.963-.113A9.472,9.472,0,0,0,11.6,21.656a9.545,9.545,0,0,0,1.109.065,9.436,9.436,0,0,0,3.581-.707,4.622,4.622,0,0,0,.376,1.795,11.21,11.21,0,0,1-3.965.718Zm8.241,1.132a3.685,3.685,0,1,1,3.684-3.685A3.689,3.689,0,0,1,20.939,24.659Zm0,0"
+                      transform="translate(-0.45 0)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+                    <path
+                      d="M257.717,258.145l-.325-.379a1.726,1.726,0,0,1-.416-1.123v-.264a1.962,1.962,0,0,0-1.727-1.966,1.913,1.913,0,0,0-2.1,1.9v.434a1.715,1.715,0,0,1-.321,1l-.3.423a.485.485,0,0,0,.394.766h1.656v.308a.485.485,0,0,0,.969,0v-.308h1.8a.485.485,0,0,0,.368-.8Zm-3.89-.169a2.677,2.677,0,0,0,.293-1.223v-.434a.947.947,0,0,1,.309-.7.933.933,0,0,1,.729-.24.985.985,0,0,1,.849,1v.264a2.7,2.7,0,0,0,.353,1.333Zm0,0"
+                      transform="translate(-234.543 -236.34)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+                  </g>
+                </svg>
+              </ion-item>
+              <h6>(Set Time)</h6>
+            </div>          
+          </ion-col>
+          <ion-col size="6">
+              <div class="date_filter">
+                <h1>Time3</h1>
+             <ion-item >
+              <ion-datetime display-format="HH:mm" formControlName="event_time2"  placeholder="--:--"></ion-datetime>
+              <svg xmlns="http://www.w3.org/2000/svg" width="25.643" height="26.128" viewBox="0 0 25.643 26.128">
+                <g transform="translate(0.25 0.25)">
+                  <path
+                    d="M56.966,85.208a.485.485,0,0,0,.663-.174,8.526,8.526,0,0,1,.91-1.273.485.485,0,1,0-.734-.634,9.49,9.49,0,0,0-1.014,1.419.485.485,0,0,0,.174.663Zm0,0"
+                    transform="translate(-52.729 -77.067)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+                  <path
+                    d="M116.172,103.294a.484.484,0,0,0,.343-.142l3.58-3.58a.484.484,0,0,0,.142-.343V94.114a.485.485,0,0,0-.97,0v4.914l-3.438,3.438a.485.485,0,0,0,.343.827Zm0,0"
+                    transform="translate(-107.504 -86.98)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+                  <path
+                    d="M23.836,17.338a12.123,12.123,0,0,0,1.11-5.09,12.249,12.249,0,1,0-7.8,11.412,4.65,4.65,0,1,0,6.691-6.323ZM12.7,23.527A11.279,11.279,0,1,1,23.976,12.248a11.16,11.16,0,0,1-.966,4.564,4.617,4.617,0,0,0-1.776-.478A9.468,9.468,0,0,0,7.8,4.143a.485.485,0,0,0,.5.829A8.5,8.5,0,0,1,20.119,16.4a4.661,4.661,0,0,0-3.7,3.5l-.011,0A8.5,8.5,0,0,1,4.253,11.26a.485.485,0,1,0-.963-.113A9.472,9.472,0,0,0,11.6,21.656a9.545,9.545,0,0,0,1.109.065,9.436,9.436,0,0,0,3.581-.707,4.622,4.622,0,0,0,.376,1.795,11.21,11.21,0,0,1-3.965.718Zm8.241,1.132a3.685,3.685,0,1,1,3.684-3.685A3.689,3.689,0,0,1,20.939,24.659Zm0,0"
+                    transform="translate(-0.45 0)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+                  <path
+                    d="M257.717,258.145l-.325-.379a1.726,1.726,0,0,1-.416-1.123v-.264a1.962,1.962,0,0,0-1.727-1.966,1.913,1.913,0,0,0-2.1,1.9v.434a1.715,1.715,0,0,1-.321,1l-.3.423a.485.485,0,0,0,.394.766h1.656v.308a.485.485,0,0,0,.969,0v-.308h1.8a.485.485,0,0,0,.368-.8Zm-3.89-.169a2.677,2.677,0,0,0,.293-1.223v-.434a.947.947,0,0,1,.309-.7.933.933,0,0,1,.729-.24.985.985,0,0,1,.849,1v.264a2.7,2.7,0,0,0,.353,1.333Zm0,0"
+                    transform="translate(-234.543 -236.34)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+                </g>
+              </svg>
+            </ion-item>
+            <h6>(Set Time)</h6>
+          </div>          
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid class="ion-no-padding ion-margin-top ion-margin-bottom">
+        <ion-row >    
+          <ion-col size="6">
+            <div class="date_filter">
+              <h1>Time4</h1>
+           <ion-item>
+            <ion-datetime display-format="HH:mm" formControlName="event_time3"  placeholder="--:--"></ion-datetime>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25.643" height="26.128" viewBox="0 0 25.643 26.128">
+              <g transform="translate(0.25 0.25)">
+                <path
+                  d="M56.966,85.208a.485.485,0,0,0,.663-.174,8.526,8.526,0,0,1,.91-1.273.485.485,0,1,0-.734-.634,9.49,9.49,0,0,0-1.014,1.419.485.485,0,0,0,.174.663Zm0,0"
+                  transform="translate(-52.729 -77.067)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+                <path
+                  d="M116.172,103.294a.484.484,0,0,0,.343-.142l3.58-3.58a.484.484,0,0,0,.142-.343V94.114a.485.485,0,0,0-.97,0v4.914l-3.438,3.438a.485.485,0,0,0,.343.827Zm0,0"
+                  transform="translate(-107.504 -86.98)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+                <path
+                  d="M23.836,17.338a12.123,12.123,0,0,0,1.11-5.09,12.249,12.249,0,1,0-7.8,11.412,4.65,4.65,0,1,0,6.691-6.323ZM12.7,23.527A11.279,11.279,0,1,1,23.976,12.248a11.16,11.16,0,0,1-.966,4.564,4.617,4.617,0,0,0-1.776-.478A9.468,9.468,0,0,0,7.8,4.143a.485.485,0,0,0,.5.829A8.5,8.5,0,0,1,20.119,16.4a4.661,4.661,0,0,0-3.7,3.5l-.011,0A8.5,8.5,0,0,1,4.253,11.26a.485.485,0,1,0-.963-.113A9.472,9.472,0,0,0,11.6,21.656a9.545,9.545,0,0,0,1.109.065,9.436,9.436,0,0,0,3.581-.707,4.622,4.622,0,0,0,.376,1.795,11.21,11.21,0,0,1-3.965.718Zm8.241,1.132a3.685,3.685,0,1,1,3.684-3.685A3.689,3.689,0,0,1,20.939,24.659Zm0,0"
+                  transform="translate(-0.45 0)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+                <path
+                  d="M257.717,258.145l-.325-.379a1.726,1.726,0,0,1-.416-1.123v-.264a1.962,1.962,0,0,0-1.727-1.966,1.913,1.913,0,0,0-2.1,1.9v.434a1.715,1.715,0,0,1-.321,1l-.3.423a.485.485,0,0,0,.394.766h1.656v.308a.485.485,0,0,0,.969,0v-.308h1.8a.485.485,0,0,0,.368-.8Zm-3.89-.169a2.677,2.677,0,0,0,.293-1.223v-.434a.947.947,0,0,1,.309-.7.933.933,0,0,1,.729-.24.985.985,0,0,1,.849,1v.264a2.7,2.7,0,0,0,.353,1.333Zm0,0"
+                  transform="translate(-234.543 -236.34)" fill="#ea4e4e" stroke="#ea4e4e" stroke-width="0.5" />
+              </g>
+            </svg>
+          </ion-item>
+          <h6>(Set Time)</h6>
+        </div>          
+      </ion-col>    
+      </ion-row>
+      </ion-grid>
+    </div>
     <ion-grid>
       <ion-row class="repeat">
         <ion-col size="6">
@@ -140,11 +226,11 @@
         </ion-col>
         <ion-col size="4" offset="2" *ngIf="addform.value.remainder_repeat==true">
           <ion-item>
-            <ion-label>Choose Repeat</ion-label>
+            <ion-label>Change to Select</ion-label>
             <ion-select okText="Set" cancelText="cancel" formControlName="event_category"
               (ionChange)='repeatCategChange($event)' [value]="repeatType">
-              <ion-select-option value="days">Days</ion-select-option>
-              <ion-select-option value="others">Others</ion-select-option>
+              <ion-select-option  value="others">Schedule As</ion-select-option>
+              <ion-select-option  value="days">Specific Days</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -156,47 +242,23 @@
             <ion-label>{{days.day}}</ion-label>
           </ion-item>
         </ion-col>
-      </ion-row>
+      </ion-row >
+      <ion-note *ngIf="addform.value.event_category=='days' && addform.value.remainder_repeat==true"><span>Note:</span>&nbsp;Selecct Days of Week by clicking on text</ion-note>
+
       <ion-row class="repeat_others" *ngIf="addform.value.event_category=='others' && addform.value.remainder_repeat==true">
         <ion-col *ngFor="let others of repeatOrder[0][addform.value.event_category]">
           <ion-radio-group (ionChange)="checkValue($event)" [value]="defaultMonth">
             <ion-item button>
               <ion-radio type="radio" slot="start" name="month" [value]="others.day"></ion-radio>
-              <ion-label>{{others.day}}</ion-label>
+              <ion-label class="label_text">{{others.day}}</ion-label>
             </ion-item>
           </ion-radio-group>
         </ion-col>
       </ion-row>
-    </ion-grid>
-    <!-- <label>
-      <ion-checkbox [checked]="status" formControlName="remainder_repeat" (ionChange)="repeatCheck($event)">
-      </ion-checkbox>
-      Repeat
-    </label> -->
-    <!-- <ion-item *ngIf="addform.value.remainder_repeat==true">
-      <ion-label position="floating">Choose Repeat</ion-label>
-      <ion-select okText="Set" cancelText="cancel" formControlName="event_category"
-        (ionChange)='repeatCategChange($event)' [value]="repeatType">
-        <ion-select-option value="days">Days</ion-select-option>
-        <ion-select-option value="others">Others</ion-select-option>
-      </ion-select>
-    </ion-item> -->
-    <!-- <label *ngIf="addform.value.event_category=='days' && addform.value.remainder_repeat==true">
-      <p *ngFor="let days of repeatOrder[0][addform.value.event_category]">
-        {{days.day}}
-        <ion-checkbox name="{{days.day}}" [checked]="days.checked" [(ngModel)]="days.checked"
-          [ngModelOptions]="{standalone: true}" (ionChange)='repeatDayCheck(days,days.checked)'></ion-checkbox>
-        &nbsp;</p>
-    </label> -->
-    <!-- <label *ngIf="addform.value.event_category=='others' && addform.value.remainder_repeat==true">
+       <ion-note *ngIf="addform.value.event_category=='others' && addform.value.remainder_repeat==true"><span>Note:</span>&nbsp;Change schedule by clicking on text above</ion-note> 
 
-      <ion-radio-group (ionChange)="checkValue($event)" [value]="defaultMonth">
-        <ion-item *ngFor="let others of repeatOrder[0][addform.value.event_category]">
-          <ion-label>{{others.day}}</ion-label>
-          <ion-radio type="radio" slot="start" name="month" [value]="others.day"></ion-radio>
-        </ion-item>
-      </ion-radio-group>
-    </label> -->
+    </ion-grid>
+    
 
     <ion-radio-group formControlName="meals" [value]="initialMeal">
       <ion-item>
@@ -209,10 +271,6 @@
       </ion-item>
     </ion-radio-group>
 
-    <!-- <ion-radio-group [(ngModel)]="meals" [ngModelOptions]="{standalone: true}" *ngFor="let meal of meals_option">
-                     {{meal.name}}
-                    <ion-radio  type="radio" slot="start" [value]="meal.value"></ion-radio>
-              </ion-radio-group> -->
     <ion-item
       [ngClass]="{ 'ion-invalid': submitted && f.medicine_type.invalid,'ion-touched': submitted && f.medicine_type.invalid }">
       <ion-label position="floating">Tablet/Syrup/Injection</ion-label>
@@ -225,21 +283,28 @@
       <ion-label position="floating">Name</ion-label>
       <ion-input type="text" formControlName="event_name"></ion-input>
     </ion-item>
-    <ion-item *ngIf="addform.value.medicine_type=='Tablet'"
+    <ion-item *ngIf="addform.value.medicine_type ==='Tablet'"
       [ngClass]="{ 'ion-invalid': submitted && f.quantity.invalid,'ion-touched': submitted && f.quantity.invalid }">
-      <ion-label position="floating">Add Quantity</ion-label>
+      <ion-label position="floating">Add Quantity In Hand</ion-label>
       <ion-input type="text" formControlName="quantity" (keypress)="_keyPress($event)"></ion-input>
     </ion-item>
-    <ion-item
+    <ion-item *ngIf="addform.value.medicine_type=='Tablet'"
       [ngClass]="{ 'ion-invalid': submitted && f.dossage.invalid,'ion-touched': submitted && f.dossage.invalid }">
-      <ion-label position="floating">Dossage</ion-label>
+      <ion-label position="floating">Dosage</ion-label>
       <ion-select okText="Set" cancelText="cancel" formControlName="dossage" (ionChange)="otherCheck($event)">
         <ion-select-option *ngFor="let doss of dossage_option" [value]="doss">{{doss}}</ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-item *ngIf="addform.value.medicine_type=='Syrup'"
+      [ngClass]="{ 'ion-invalid': submitted && f.dossage.invalid,'ion-touched': submitted && f.dossage.invalid }">
+      <ion-label position="floating">Dosage</ion-label>
+      <ion-select okText="Set" cancelText="cancel" formControlName="dossage" (ionChange)="otherCheck($event)">
+        <ion-select-option *ngFor="let doss of dossage_option1" [value]="doss">{{doss}}</ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-item *ngIf="addform.value.dossage=='Others'"
       [ngClass]="{ 'ion-invalid': submitted && f.unit.invalid,'ion-touched': submitted && f.unit.invalid }">
-      <ion-label position="floating">Other Dossage</ion-label>
+      <ion-label position="floating">Other Dosage</ion-label>
       <ion-input type="text" formControlName="unit"></ion-input>
     </ion-item>
 

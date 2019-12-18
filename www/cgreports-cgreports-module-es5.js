@@ -407,6 +407,7 @@ var CgreportsPage = /** @class */ (function () {
         this.tabBar = document.getElementById('myTabBar1').childNodes[0];
         this.tabBar.classList.remove("tab-selected");
         this.report_page = 1;
+        this.report_page_offset = 0;
         this.databaseSummary.getAllEvents('report', 'New', this.report_page_offset).then(function (res) {
             var data = res['event_list'];
             _this.data_details = res['event_list'];
@@ -448,6 +449,7 @@ var CgreportsPage = /** @class */ (function () {
             }
         });
         this.report_details = value;
+        this.loader = false;
     };
     CgreportsPage.prototype.viewReport = function (view) {
         if (this.report_details.length != 0) {

@@ -25,14 +25,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-autostart.AutoStart",
-      "file": "plugins/cordova-plugin-autostart/www/auto-start.js",
-      "pluginId": "cordova-plugin-autostart",
-      "clobbers": [
-        "cordova.plugins.autoStart"
-      ]
-    },
-    {
       "id": "cordova-plugin-badge.Badge",
       "file": "plugins/cordova-plugin-badge/www/badge.js",
       "pluginId": "cordova-plugin-badge",
@@ -574,13 +566,20 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "Connection"
       ]
+    },
+    {
+      "id": "info.protonet.imageresizer.ImageResizer",
+      "file": "plugins/info.protonet.imageresizer/www/image_resizer.js",
+      "pluginId": "info.protonet.imageresizer",
+      "clobbers": [
+        "ImageResizer"
+      ]
     }
   ];
   module.exports.metadata = {
     "com.razorpay.cordova": "0.16.1",
     "cordova-clipboard": "1.3.0",
     "cordova-plugin-android-permissions": "1.0.0",
-    "cordova-plugin-autostart": "2.3.0",
     "cordova-plugin-badge": "0.8.8",
     "cordova-plugin-camera": "4.1.0",
     "cordova-plugin-contacts": "3.0.1",
@@ -604,6 +603,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "es6-promise-plugin": "4.2.2",
     "cordova-plugin-screen-orientation": "3.0.2",
     "cordova-sqlite-storage": "3.4.0",
-    "cordova-plugin-network-information": "2.0.2"
+    "cordova-plugin-network-information": "2.0.2",
+    "info.protonet.imageresizer": "0.1.1"
   };
 });

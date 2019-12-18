@@ -463,6 +463,7 @@ var CgprescriptionsPage = /** @class */ (function () {
             }
         });
         this.prescribe_details = value;
+        this.loader = false;
     };
     /*addPrescription(){
      

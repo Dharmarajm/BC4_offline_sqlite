@@ -375,9 +375,8 @@ export class AppointmentsPage implements OnInit {
 
     groupBy1(data){
 
-      let records:any[]=data.map(item => ({
+        let records:any[]=data.map(item => ({
           id:item.id,
-          event_id: item.event_id,
           created_at: item.created_at,
           description: item.description,
           event_name: item.event_name,
@@ -398,12 +397,11 @@ export class AppointmentsPage implements OnInit {
         if(val){
           let ff = { "created_at":val[0].event_datetime,"events" :val };        
           valueCurrent.push(ff)      
-      }
-    });
+        }
+      });
       this.completed_data=valueCurrent;
       this.loader=false;
       console.log(this.completed_data)
-      console.log("completedC")
   }
 
     loadData1(event){

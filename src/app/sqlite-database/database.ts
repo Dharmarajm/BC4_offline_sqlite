@@ -275,6 +275,51 @@ export class DatabaseProvider {
         })
     }
 
+    addPatient(value,patientAddData){
+     let data = value['user_uid'];
+        return this.sqlite.create({
+            name: DATA_BASE_NAME,
+            location: 'default'
+        }).then((db: SQLiteObject) => {
+            let sql = `SELECT * FROM users WHERE user_uid='${data}'`;
+            return db.executeSql(sql,[]).then((data: any)=>{
+                let length = data.rows.length;
+                if(length==0){
+                    let attribute_json = JSON.stringify(patientAddData["user_picture"]);
+                    let user_option_json = JSON.parse(patientAddData['user_option']);  
+                    let data3 = [
+                        patientAddData["id"],
+                        patientAddData["name"],
+                        patientAddData["email"],
+                        patientAddData["password"],
+                        patientAddData["mobile_no"],
+                        patientAddData["address"],
+                        patientAddData["country"],
+                        patientAddData["blood_group"],
+                        patientAddData["age"],
+                        patientAddData["user_uid"],
+                        patientAddData["forgot_password_code"],
+                        attribute_json,
+                        user_option_json,
+                        patientAddData["active_status"],
+                        patientAddData["role_id"],
+                        patientAddData["created_at"],
+                        patientAddData["updated_at"],
+                        false
+                    ];
+                    let sqlData3 = `INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+                    return db.executeSql(sqlData3,data3).then(row => {
+                        return { id: row.insertId }
+                    }, error => {
+                        return error;
+                    });
+                }else{
+                    return;
+                }
+            })
+        })
+    }
+
     async createEmergencyContacts(data) {
         let user_id = await this.getuserID();
         return this.sqlite.create({
@@ -291,19 +336,30 @@ export class DatabaseProvider {
         })
     }
 
-    deleteEmergencyContact(id){
+    deleteEmergencyContact(event){
         return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db: SQLiteObject) => { 
           //let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
-          let sql = `UPDATE emergency_details SET delete1 = ? WHERE emergency_id = ?`
-          return db.executeSql(sql,[true,id]).then((row: any)=>{
-            return { event_id:row.insertId }
-         }).catch(res=>{
-            return res;
-         });
+          if(event["id"]==null){
+            let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
+            return db.executeSql(sql,[event["emergency_id"]]).then((row: any)=>{
+              return { event_id:row.insertId }
+            }).catch(res=>{
+                return res;
+            });
+          }else{
+            let sql = `UPDATE emergency_details SET delete1 = ? WHERE emergency_id = ?`
+            return db.executeSql(sql,[true,event["emergency_id"]]).then((row: any)=>{
+              return { event_id:row.insertId }
+            }).catch(res=>{
+                return res;
+            }); 
+          }
         })
+
+           
     }
 
     deletePatientFromCareGiver(id){

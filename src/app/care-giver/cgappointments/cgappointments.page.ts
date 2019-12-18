@@ -30,8 +30,8 @@ export class CgappointmentsPage implements OnInit {
   loader:boolean;
   tabBar: any;
   getDate:any=this.datepipe.transform(new Date(),"dd MMM yyyy")
-  history_details: any;
-  completed_data: any[];
+  history_details: any[]=[];
+  completed_data: any[]=[];
   completepage: number=1;
   TodayDate:any;
   TommorrowDate:any;
@@ -68,10 +68,12 @@ export class CgappointmentsPage implements OnInit {
     //   this.groupBy1(this.history_details);
     // })
 
-    if(this.selectedSegment=='future')
-    this.cgUpcoming();
-  else if(this.selectedSegment =='completed')
-    this.cgCompleted();
+    if(this.selectedSegment=='future'){
+      this.cgUpcoming();
+    }else{
+      this.cgCompleted();
+    }
+        
 
     let todayDate:any=new Date();
     this.TodayDate= this.datepipe.transform(todayDate,"dd MMM yyyy")

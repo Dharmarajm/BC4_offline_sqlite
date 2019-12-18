@@ -77,10 +77,12 @@ let addPatientPage = class addPatientPage {
                 console.log(res);
                 this.router.navigate(['/care-giver-tabs/tabsc/tab2c']);
             }, error => {
-                if (error.status == 401)
+                if (error.status == 401) {
                     this.presentToast("Please enter valid UID");
-                else if (error.status == 422)
+                }
+                else if (error.status == 422) {
                     this.presentToast("The patient already have two caregivers");
+                }
             });
         }
     }

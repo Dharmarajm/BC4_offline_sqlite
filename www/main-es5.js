@@ -2062,7 +2062,7 @@ var syncProvider = /** @class */ (function () {
                                                 length = data.rows.length;
                                                 if (!(length > 0)) return [3 /*break*/, 5];
                                                 _loop_2 = function (i) {
-                                                    var rowData, findindex, sql, createEventData;
+                                                    var rowData, id_1, findindex, sql, createEventData;
                                                     return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                                         switch (_a.label) {
                                                             case 0:
@@ -2083,7 +2083,8 @@ var syncProvider = /** @class */ (function () {
                                                                 _a.sent();
                                                                 return [3 /*break*/, 8];
                                                             case 4:
-                                                                findindex = this_2.allEvents.indexOf(function (res) { return res.id == data.rows.item(i).id; });
+                                                                id_1 = data.rows.item(i).id;
+                                                                findindex = this_2.allEvents.findIndex(function (res) { return res.id == id_1; });
                                                                 sql = "UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?";
                                                                 if (!(findindex != -1 && this_2.allEvents[findindex]['updated_at'] > data.rows.item(i).updated_at)) return [3 /*break*/, 6];
                                                                 createEventData = [this_2.allEvents[findindex]["id"], this_2.allEvents[findindex]["event_name"], this_2.allEvents[findindex]["description"], this_2.allEvents[findindex]["value"], this_2.allEvents[findindex]["event_datetime"], this_2.allEvents[findindex]["event_type"], this_2.allEvents[findindex]["event_category"], JSON.stringify(this_2.allEvents[findindex]["event_assets"]), JSON.stringify(this_2.allEvents[findindex]["event_options"]), this_2.allEvents[findindex]["user_id"], this_2.allEvents[findindex]["created_at"], this_2.allEvents[findindex]["updated_at"], false, rowData['event_id']];
@@ -2317,7 +2318,7 @@ var syncProvider = /** @class */ (function () {
                                     this.responseData5 = responseList[4];
                                     console.log(responseList);
                                     qrcode = this.responseData5['qrcode_image'];
-                                    localStorage.setItem("qrcode", this.responseData5);
+                                    localStorage.setItem("qrcode", qrcode);
                                     profile_id = localStorage.getItem("profile_id");
                                     return [4 /*yield*/, database.executeSql("SELECT * FROM emergency_details", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
                                             var length, i, rowData;
@@ -2368,15 +2369,17 @@ var syncProvider = /** @class */ (function () {
                                                         if (!(length > 0)) return [3 /*break*/, 5];
                                                         healthData = [];
                                                         _loop_3 = function (i) {
-                                                            var rowData, index;
+                                                            var rowData, id, index;
                                                             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                                                 switch (_a.label) {
                                                                     case 0:
                                                                         rowData = data.rows.item(i);
-                                                                        index = this_3.responseData2.findIndex(function (res) { return res.id == data.rows.item(i).id; });
+                                                                        id = data.rows.item(i).id;
+                                                                        index = this_3.responseData2.findIndex(function (res) { return res.id == id; });
                                                                         console.log(index);
                                                                         if (!(index != -1)) return [3 /*break*/, 4];
                                                                         if (!(data.rows.item(i).id == null && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id || data.rows.item(i).updated_at > this_3.responseData2[index]['updated_at'] && data.rows.item(i).name == "health" && profile_id == data.rows.item(i).user_id)) return [3 /*break*/, 2];
+                                                                        rowData['attribute_name_value'] = JSON.parse(data.rows.item(i).attribute_name_value);
                                                                         return [4 /*yield*/, this_3.createSingleHealthDetail(rowData)];
                                                                     case 1:
                                                                         _a.sent();
@@ -2417,7 +2420,8 @@ var syncProvider = /** @class */ (function () {
                                 case 2:
                                     _a.sent();
                                     return [4 /*yield*/, database.executeSql("SELECT * FROM health_details WHERE name='policy'", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                            var length, i, attribute_json, data2, sqlData2, profile_id_1, sqlUserQuery, userData_1, healthData, j, rowData, attribute_json;
+                                            var length, i, attribute_json, data2, sqlData2, profile_id_1, sqlUserQuery, userData_1, j, rowData, healthData, attribute_json;
+                                            var _this = this;
                                             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                                 switch (_a.label) {
                                                     case 0:
@@ -2428,7 +2432,7 @@ var syncProvider = /** @class */ (function () {
                                                         _a.label = 1;
                                                     case 1:
                                                         if (!(i < this.responseData5["policies"].length)) return [3 /*break*/, 4];
-                                                        attribute_json = JSON.stringify(this.responseData5["policies"][i]["attribute_name_value"]);
+                                                        attribute_json = this.responseData5["policies"][i]["attribute_name_value"];
                                                         data2 = [
                                                             this.responseData5["policies"][i]["id"],
                                                             this.responseData5["policies"][i]["name"],
@@ -2449,79 +2453,99 @@ var syncProvider = /** @class */ (function () {
                                                     case 3:
                                                         i++;
                                                         return [3 /*break*/, 1];
-                                                    case 4: return [3 /*break*/, 12];
+                                                    case 4: return [3 /*break*/, 13];
                                                     case 5:
                                                         profile_id_1 = localStorage.getItem("profile_id");
                                                         sqlUserQuery = "SELECT * FROM users WHERE id='" + profile_id_1 + "'";
                                                         userData_1 = [];
-                                                        return [4 /*yield*/, database.executeSql(sqlUserQuery, []).then(function (data2) {
-                                                                console.log(data2.rows);
-                                                                for (var i = 0; i < data2.rows.length; i++) {
-                                                                    console.log(data2.rows.item(i));
-                                                                    var attribute_json = null;
-                                                                    if (data2.rows.item(i).user_picture != null) {
-                                                                        attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                                        return [4 /*yield*/, database.executeSql(sqlUserQuery, []).then(function (data2) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                                                var i, attribute_json;
+                                                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                                    switch (_a.label) {
+                                                                        case 0:
+                                                                            console.log(data2.rows);
+                                                                            i = 0;
+                                                                            _a.label = 1;
+                                                                        case 1:
+                                                                            if (!(i < data2.rows.length)) return [3 /*break*/, 4];
+                                                                            console.log(data2.rows.item(i));
+                                                                            attribute_json = null;
+                                                                            if (data2.rows.item(i).user_picture != null) {
+                                                                                attribute_json = JSON.parse(data2.rows.item(i).user_picture);
+                                                                            }
+                                                                            return [4 /*yield*/, userData_1.push({
+                                                                                    id: data2.rows.item(i).id,
+                                                                                    name: data2.rows.item(i).name,
+                                                                                    email: data2.rows.item(i).email,
+                                                                                    password: data2.rows.item(i).password,
+                                                                                    mobile_no: data2.rows.item(i).mobile_no,
+                                                                                    address: data2.rows.item(i).address,
+                                                                                    country: data2.rows.item(i).country,
+                                                                                    blood_group: data2.rows.item(i).blood_group,
+                                                                                    age: data2.rows.item(i).age,
+                                                                                    user_uid: data2.rows.item(i).user_uid,
+                                                                                    forgot_password_code: data2.rows.item(i).forgot_password_code,
+                                                                                    user_picture: attribute_json,
+                                                                                    active_status: data2.rows.item(i).active_status,
+                                                                                    role_id: data2.rows.item(i).role_id,
+                                                                                    created_at: data2.rows.item(i).created_at,
+                                                                                    updated_at: data2.rows.item(i).updated_at,
+                                                                                    delete1: data2.rows.item(i).delete1
+                                                                                })];
+                                                                        case 2:
+                                                                            _a.sent();
+                                                                            _a.label = 3;
+                                                                        case 3:
+                                                                            i++;
+                                                                            return [3 /*break*/, 1];
+                                                                        case 4: return [2 /*return*/];
                                                                     }
-                                                                    userData_1.push({
-                                                                        id: data2.rows.item(i).id,
-                                                                        name: data2.rows.item(i).name,
-                                                                        email: data2.rows.item(i).email,
-                                                                        password: data2.rows.item(i).password,
-                                                                        mobile_no: data2.rows.item(i).mobile_no,
-                                                                        address: data2.rows.item(i).address,
-                                                                        country: data2.rows.item(i).country,
-                                                                        blood_group: data2.rows.item(i).blood_group,
-                                                                        age: data2.rows.item(i).age,
-                                                                        user_uid: data2.rows.item(i).user_uid,
-                                                                        forgot_password_code: data2.rows.item(i).forgot_password_code,
-                                                                        user_picture: attribute_json,
-                                                                        active_status: data2.rows.item(i).active_status,
-                                                                        role_id: data2.rows.item(i).role_id,
-                                                                        created_at: data2.rows.item(i).created_at,
-                                                                        updated_at: data2.rows.item(i).updated_at,
-                                                                        delete1: data2.rows.item(i).delete1
-                                                                    });
-                                                                }
-                                                            }).catch(function (res) {
+                                                                });
+                                                            }); }).catch(function (res) {
                                                                 console.log(res);
                                                             })];
                                                     case 6:
                                                         _a.sent();
-                                                        healthData = [];
                                                         j = 0;
                                                         _a.label = 7;
                                                     case 7:
-                                                        if (!(j < data.rows.length)) return [3 /*break*/, 12];
+                                                        if (!(j < data.rows.length)) return [3 /*break*/, 13];
                                                         rowData = data.rows.item(j);
-                                                        attribute_json = JSON.stringify(data.rows.item(j).attribute_name_value);
-                                                        healthData.push({
-                                                            id: data.rows.item(j).id,
-                                                            health_id: data.rows.item(j).health_id,
-                                                            name: data.rows.item(j).name,
-                                                            attribute_name_value: attribute_json,
-                                                            user_id: data.rows.item(j).user_id,
-                                                            created_at: data.rows.item(j).created_at,
-                                                            updated_at: data.rows.item(j).updated_at
-                                                        });
-                                                        if (!(data.rows.item(j).id == null && data.rows.item(j).name == "policy" && profile_id_1 == data.rows.item(j).user_id || data.rows.item(j).updated_at > this.responseData5["policies"][0]['updated_at'] && data.rows.item(j).name == "policy" && profile_id_1 == data.rows.item(j).user_id)) return [3 /*break*/, 9];
+                                                        healthData = [];
+                                                        attribute_json = null;
+                                                        if (data.rows.item(j).attribute_name_value != '' && data.rows.item(j).attribute_name_value != null) {
+                                                            attribute_json = JSON.parse(data.rows.item(j).attribute_name_value);
+                                                        }
+                                                        return [4 /*yield*/, healthData.push({
+                                                                id: data.rows.item(j).id,
+                                                                health_id: data.rows.item(j).health_id,
+                                                                name: data.rows.item(j).name,
+                                                                attribute_name_value: attribute_json,
+                                                                user_id: data.rows.item(j).user_id,
+                                                                created_at: data.rows.item(j).created_at,
+                                                                updated_at: data.rows.item(j).updated_at
+                                                            })];
+                                                    case 8:
+                                                        _a.sent();
+                                                        if (!(data.rows.item(j).id == null && data.rows.item(j).name == "policy" && profile_id_1 == data.rows.item(j).user_id || data.rows.item(j).updated_at > this.responseData5["policies"][0]['updated_at'] && data.rows.item(j).name == "policy" && profile_id_1 == data.rows.item(j).user_id)) return [3 /*break*/, 10];
                                                         //await this.createSingleHealthDetail(rowData); 
                                                         return [4 /*yield*/, this.updateUsersData(userData_1[0], healthData[0])];
-                                                    case 8:
+                                                    case 9:
                                                         //await this.createSingleHealthDetail(rowData); 
                                                         _a.sent();
-                                                        return [3 /*break*/, 11];
-                                                    case 9:
-                                                        if (!(data.rows.item(j).updated_at < this.responseData5["policies"][0]['updated_at'] && data.rows.item(j).name == "policy" && profile_id_1 == data.rows.item(j).user_id)) return [3 /*break*/, 11];
+                                                        return [3 /*break*/, 12];
+                                                    case 10:
+                                                        if (!(data.rows.item(j).updated_at < this.responseData5["policies"][0]['updated_at'] && data.rows.item(j).name == "policy" && profile_id_1 == data.rows.item(j).user_id)) return [3 /*break*/, 12];
                                                         //await this.createSingleHealthDetail(this.responseData5["policies"][0]);
                                                         return [4 /*yield*/, this.updateUsersData(userData_1[0], this.responseData5["policies"][0])];
-                                                    case 10:
+                                                    case 11:
                                                         //await this.createSingleHealthDetail(this.responseData5["policies"][0]);
                                                         _a.sent();
-                                                        _a.label = 11;
-                                                    case 11:
+                                                        _a.label = 12;
+                                                    case 12:
                                                         j++;
                                                         return [3 /*break*/, 7];
-                                                    case 12: return [2 /*return*/];
+                                                    case 13: return [2 /*return*/];
                                                 }
                                             });
                                         }); })];
@@ -2529,14 +2553,16 @@ var syncProvider = /** @class */ (function () {
                                     _a.sent();
                                     return [4 /*yield*/, database.executeSql("SELECT * FROM users", []).then(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
                                             var length, _loop_4, this_4, i;
+                                            var _this = this;
                                             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                                 switch (_a.label) {
                                                     case 0:
                                                         length = data.rows.length;
                                                         console.log(length);
+                                                        debugger;
                                                         if (!(length > 0)) return [3 /*break*/, 5];
                                                         _loop_4 = function (i) {
-                                                            var rowData, findindex, sql, createEventData, profile_picture, localPath, params, requestUrl, uploadStatus, updateEventOptions, user_option, sql_1, id, createEventData;
+                                                            var rowData, id_2, findindex, sql, createEventData, profile_picture, createEventData, putId, localPath, params, requestUrl, uploadStatus, updateEventOptions, user_option, sql_1, id_3, createEventData_1;
                                                             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                                                 switch (_a.label) {
                                                                     case 0:
@@ -2548,7 +2574,7 @@ var syncProvider = /** @class */ (function () {
                                                                         if ((data.rows.length - 1) == i) {
                                                                             this_4.getUniqueUsersDataPush();
                                                                         }
-                                                                        return [3 /*break*/, 10];
+                                                                        return [3 /*break*/, 11];
                                                                     case 2:
                                                                         if (!(data.rows.item(i).delete1 == 'true' && data.rows.item(i).role_id == 1)) return [3 /*break*/, 4];
                                                                         return [4 /*yield*/, this_4.deletePatientData(rowData)];
@@ -2557,20 +2583,38 @@ var syncProvider = /** @class */ (function () {
                                                                         if ((data.rows.length - 1) == i) {
                                                                             this_4.getUniqueUsersDataPush();
                                                                         }
-                                                                        return [3 /*break*/, 10];
+                                                                        return [3 /*break*/, 11];
                                                                     case 4:
-                                                                        findindex = this_4.responseData3.indexOf(function (res) { return res.id == data.rows.item(i).id; });
+                                                                        id_2 = data.rows.item(i).id;
+                                                                        findindex = this_4.responseData3.findIndex(function (res) { return res.id == id_2; });
+                                                                        debugger;
                                                                         sql = "UPDATE users SET name = ?, email = ?, password = ?, mobile_no = ?, address = ?, country = ?, blood_group = ?, age = ?, user_uid = ?, forgot_password_code = ?, user_picture = ?, user_option = ?, active_status = ?, role_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE id = ?";
                                                                         if (!(findindex != -1 && this_4.responseData3[findindex]['updated_at'] > data.rows.item(i).updated_at)) return [3 /*break*/, 6];
                                                                         createEventData = [this_4.responseData3[findindex]["name"], this_4.responseData3[findindex]["email"], this_4.responseData3[findindex]["password"], this_4.responseData3[findindex]["mobile_no"], this_4.responseData3[findindex]["address"], this_4.responseData3[findindex]["country"], this_4.responseData3[findindex]["blood_group"], this_4.responseData3[findindex]["age"], this_4.responseData3[findindex]["user_uid"], this_4.responseData3[findindex]["forgot_password_code"], JSON.stringify(this_4.responseData3[findindex]["user_picture"]), JSON.stringify(this_4.responseData3[findindex]["user_option"]), this_4.responseData3[findindex]["active_status"], this_4.responseData3[findindex]["role_id"], this_4.responseData3[findindex]["created_at"], this_4.responseData3[findindex]["updated_at"], false, this_4.responseData3[findindex]["id"]];
                                                                         return [4 /*yield*/, this_4.commonUpdateAndDeleteEvent(sql, createEventData)];
                                                                     case 5:
                                                                         _a.sent();
-                                                                        return [3 /*break*/, 9];
+                                                                        return [3 /*break*/, 10];
                                                                     case 6:
-                                                                        if (!(findindex != -1 && this_4.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id)) return [3 /*break*/, 9];
+                                                                        if (!(findindex != -1 && this_4.responseData3[findindex]['updated_at'] < data.rows.item(i).updated_at && profile_id == data.rows.item(i).id)) return [3 /*break*/, 10];
                                                                         profile_picture = JSON.parse(data.rows.item(i).user_picture);
-                                                                        if (!(profile_picture['url'] != null && profile_picture['toUpdate'] == true)) return [3 /*break*/, 9];
+                                                                        createEventData = {
+                                                                            name: data.rows.item(i).name,
+                                                                            email: data.rows.item(i).email,
+                                                                            mobile_no: data.rows.item(i).mobile_no
+                                                                        };
+                                                                        putId = data.rows.item(i).id;
+                                                                        console.log(putId);
+                                                                        return [4 /*yield*/, this_4.updateUsersBasicsData(putId, createEventData).subscribe(function (responseList) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                                                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                                                                                    return [2 /*return*/];
+                                                                                });
+                                                                            }); })
+                                                                            //let updateUserssql = `UPDATE users SET name = ?, email = ?, mobile_no = ? WHERE id = ?`;      
+                                                                        ];
+                                                                    case 7:
+                                                                        _a.sent();
+                                                                        if (!(profile_picture['url'] != null && profile_picture['toUpdate'] == true)) return [3 /*break*/, 10];
                                                                         localPath = profile_picture;
                                                                         params = { user_option: { localURL: profile_picture['localURL'],
                                                                                 cdvFilePath: profile_picture['cdvFilePath'],
@@ -2579,26 +2623,26 @@ var syncProvider = /** @class */ (function () {
                                                                         };
                                                                         requestUrl = "users/profile_picture";
                                                                         return [4 /*yield*/, this_4.uploadImage(localPath, params, requestUrl)];
-                                                                    case 7:
+                                                                    case 8:
                                                                         uploadStatus = _a.sent();
-                                                                        if (!(uploadStatus["status"] == true)) return [3 /*break*/, 9];
+                                                                        if (!(uploadStatus["status"] == true)) return [3 /*break*/, 10];
                                                                         updateEventOptions = profile_picture;
                                                                         updateEventOptions["url"] = uploadStatus["url"];
                                                                         updateEventOptions["toUpdate"] = false;
                                                                         user_option = params['user_option'];
                                                                         sql_1 = "UPDATE users SET user_picture = ?, user_option = ?, updated_at = ? WHERE id = ?";
-                                                                        id = data.rows.item(i).id;
-                                                                        createEventData = [JSON.stringify(updateEventOptions), JSON.stringify(user_option), new Date().toJSON(), id];
-                                                                        return [4 /*yield*/, this_4.commonUpdateAndDeleteEvent(sql_1, createEventData)];
-                                                                    case 8:
-                                                                        _a.sent();
-                                                                        _a.label = 9;
+                                                                        id_3 = data.rows.item(i).id;
+                                                                        createEventData_1 = [JSON.stringify(updateEventOptions), JSON.stringify(user_option), new Date().toJSON(), id_3];
+                                                                        return [4 /*yield*/, this_4.commonUpdateAndDeleteEvent(sql_1, createEventData_1)];
                                                                     case 9:
+                                                                        _a.sent();
+                                                                        _a.label = 10;
+                                                                    case 10:
                                                                         if ((data.rows.length - 1) == i) {
                                                                             this_4.getUniqueUsersDataPush();
                                                                         }
-                                                                        _a.label = 10;
-                                                                    case 10: return [2 /*return*/];
+                                                                        _a.label = 11;
+                                                                    case 11: return [2 /*return*/];
                                                                 }
                                                             });
                                                         };
@@ -3056,11 +3100,11 @@ var syncProvider = /** @class */ (function () {
     };
     syncProvider.prototype.createSingleHealthDetail = function (rowData) {
         var _this = this;
-        var data = { attribute_name_value: JSON.parse(rowData['attribute_name_value']) };
+        var data = { attribute_name_value: rowData['attribute_name_value'] };
         return this.updateHealthData(data).subscribe(function (responseList) {
             var response = responseList[0]['health_detail'];
             var sql = "UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?";
-            var createEventData = [response["id"], response["attribute_name_value"], response["created_at"], response["updated_at"], rowData["health_id"]];
+            var createEventData = [response["id"], JSON.stringify(response["attribute_name_value"]), response["created_at"], response["updated_at"], rowData["health_id"]];
             return _this.commonUpdateAndDeleteEvent(sql, createEventData);
         });
     };
@@ -3090,7 +3134,7 @@ var syncProvider = /** @class */ (function () {
                             var sql = "UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?";
                             var createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["event_id"]];
                             return _this.commonUpdateAndDeleteEvent(sql, createEventData).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var localImagePath, i, params, requestUrl, uploadStatus, updateEventOptions, sql_2, createEventData_1;
+                                var localImagePath, i, params, requestUrl, uploadStatus, updateEventOptions, sql_2, createEventData_2;
                                 return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                     switch (_a.label) {
                                         case 0:
@@ -3112,8 +3156,8 @@ var syncProvider = /** @class */ (function () {
                                                 updateEventOptions = rowData["event_options"];
                                                 updateEventOptions["localImagePath"][i]["globalURI"] = uploadStatus["url"];
                                                 sql_2 = "UPDATE events SET event_options = ? WHERE event_id = ?";
-                                                createEventData_1 = [sql_2, [JSON.stringify(updateEventOptions), res["event_id"]]];
-                                                this.commonUpdateAndDeleteEvent(sql_2, createEventData_1);
+                                                createEventData_2 = [sql_2, [JSON.stringify(updateEventOptions), res["event_id"]]];
+                                                this.commonUpdateAndDeleteEvent(sql_2, createEventData_2);
                                             }
                                             _a.label = 3;
                                         case 3:
@@ -3131,7 +3175,7 @@ var syncProvider = /** @class */ (function () {
                             var sql = "UPDATE events SET id = ?, created_at = ?, updated_at = ? WHERE event_id = ?";
                             var createEventData = [response["id"], response["created_at"], response["updated_at"], rowData["event_id"]];
                             return _this.commonUpdateAndDeleteEvent(sql, createEventData).then(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var localImagePath, i, params, requestUrl, uploadStatus, updateEventOptions, sql_3, createEventData_2;
+                                var localImagePath, i, params, requestUrl, uploadStatus, updateEventOptions, sql_3, createEventData_3;
                                 return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                     switch (_a.label) {
                                         case 0:
@@ -3153,8 +3197,8 @@ var syncProvider = /** @class */ (function () {
                                                 updateEventOptions = rowData["event_options"];
                                                 updateEventOptions["localImagePath"][i]["globalURI"] = uploadStatus["url"];
                                                 sql_3 = "UPDATE events SET event_options = ? WHERE event_id = ?";
-                                                createEventData_2 = [sql_3, [JSON.stringify(updateEventOptions), res["event_id"]]];
-                                                this.commonUpdateAndDeleteEvent(sql_3, createEventData_2);
+                                                createEventData_3 = [sql_3, [JSON.stringify(updateEventOptions), res["event_id"]]];
+                                                this.commonUpdateAndDeleteEvent(sql_3, createEventData_3);
                                             }
                                             _a.label = 3;
                                         case 3:
@@ -3236,12 +3280,12 @@ var syncProvider = /** @class */ (function () {
                                     policies = response['policies'];
                                     userData = response['user'];
                                     sql = "UPDATE health_details SET id = ?, attribute_name_value = ?, created_at = ?, updated_at = ? WHERE health_id = ?";
-                                    createEventData = [policies["id"], policies["attribute_name_value"], policies["created_at"], policies["updated_at"], healthData["health_id"]];
+                                    createEventData = [policies["id"], JSON.stringify(policies["attribute_name_value"]), policies["created_at"], policies["updated_at"], healthData["health_id"]];
                                     return [4 /*yield*/, this.commonUpdateAndDeleteEvent(sql, createEventData)];
                                 case 1:
                                     _a.sent();
-                                    sql1 = "UPDATE users SET age = ?, blood_group = ?, created_at = ?, updated_at = ? WHERE id = ?";
-                                    createEventData1 = [userData["age"], userData["blood_group"], userData["created_at"], userData["updated_at"], userData["id"]];
+                                    sql1 = "UPDATE users SET age = ?, blood_group = ?, created_at = ? WHERE id = ?";
+                                    createEventData1 = [userData["age"], userData["blood_group"], userData["created_at"], userData["id"]];
                                     return [4 /*yield*/, this.commonUpdateAndDeleteEvent(sql1, createEventData1)];
                                 case 2:
                                     _a.sent();
@@ -3340,6 +3384,10 @@ var syncProvider = /** @class */ (function () {
         var response1 = this.http.post("health_details/about_update", data);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
     };
+    syncProvider.prototype.updateUsersBasicsData = function (id, data) {
+        var response1 = this.http.put("users/" + id, data);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+    };
     syncProvider.prototype.uploadImage = function (localfile, params, requestMethods) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var fileTransfer, data, options, getUrl;
@@ -3369,8 +3417,7 @@ var syncProvider = /** @class */ (function () {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
     };
     syncProvider.prototype.getPatientsList = function () {
-        var response1 = this.http.get("users/patient_list");
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["forkJoin"])([response1]);
+        return this.http.get("users/patient_list").toPromise();
     };
     syncProvider.prototype.deleteEventImages = function (data) {
         var response1 = this.http.post("events/delete_image", data);
@@ -3394,14 +3441,10 @@ var syncProvider = /** @class */ (function () {
                         if (!(localStorage.getItem("role_id") == '1')) return [3 /*break*/, 1];
                         user_id = localStorage.getItem("user_id");
                         return [2 /*return*/, user_id];
-                    case 1: return [4 /*yield*/, this.getUserIdFromCareGiver().then(function (response) {
-                            user_id = response;
-                            return user_id;
-                        })];
+                    case 1: return [4 /*yield*/, this.getUserIdFromCareGiver()];
                     case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
+                        user_id = _a.sent();
+                        return [2 /*return*/, user_id];
                 }
             });
         });
@@ -3411,10 +3454,10 @@ var syncProvider = /** @class */ (function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 this.getPatientIds = [];
-                return [2 /*return*/, this.getPatientsList().subscribe(function (responseList) {
+                return [2 /*return*/, this.getPatientsList().then(function (responseList) {
                         _this.patientList = responseList;
-                        for (var i = 0; i < _this.patientList[0]['patient'].length; i++) {
-                            _this.getPatientIds.push(_this.patientList[0]['patient'][i]['id']);
+                        for (var i = 0; i < _this.patientList['patient'].length; i++) {
+                            _this.getPatientIds.push(_this.patientList['patient'][i]['id']);
                             console.log(_this.getPatientIds);
                         }
                         return _this.getPatientIds;

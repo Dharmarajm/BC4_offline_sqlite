@@ -78,10 +78,12 @@ var addPatientPage = /** @class */ (function () {
                 console.log(res);
                 _this.router.navigate(['/care-giver-tabs/tabsc/tab2c']);
             }, function (error) {
-                if (error.status == 401)
+                if (error.status == 401) {
                     _this.presentToast("Please enter valid UID");
-                else if (error.status == 422)
+                }
+                else if (error.status == 422) {
                     _this.presentToast("The patient already have two caregivers");
+                }
             });
         }
     };

@@ -746,7 +746,6 @@ let AppointmentsPage = class AppointmentsPage {
     groupBy1(data) {
         let records = data.map(item => ({
             id: item.id,
-            event_id: item.event_id,
             created_at: item.created_at,
             description: item.description,
             event_name: item.event_name,
@@ -768,7 +767,6 @@ let AppointmentsPage = class AppointmentsPage {
         this.completed_data = valueCurrent;
         this.loader = false;
         console.log(this.completed_data);
-        console.log("completedC");
     }
     loadData1(event) {
         setTimeout(() => {

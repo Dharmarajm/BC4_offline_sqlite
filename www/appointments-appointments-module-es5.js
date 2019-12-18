@@ -812,7 +812,6 @@ var AppointmentsPage = /** @class */ (function () {
     AppointmentsPage.prototype.groupBy1 = function (data) {
         var records = data.map(function (item) { return ({
             id: item.id,
-            event_id: item.event_id,
             created_at: item.created_at,
             description: item.description,
             event_name: item.event_name,
@@ -834,7 +833,6 @@ var AppointmentsPage = /** @class */ (function () {
         this.completed_data = valueCurrent;
         this.loader = false;
         console.log(this.completed_data);
-        console.log("completedC");
     };
     AppointmentsPage.prototype.loadData1 = function (event) {
         var _this = this;

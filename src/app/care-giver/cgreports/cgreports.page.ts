@@ -45,9 +45,10 @@ export class CgreportsPage implements OnInit {
     this.tabBar = document.getElementById('myTabBar1').childNodes[0];
     this.tabBar.classList.remove("tab-selected");
     this.report_page=1; 
+    this.report_page_offset=0;
     this.databaseSummary.getAllEvents('report','New',this.report_page_offset).then(res=>{
       let data:any = res['event_list'];
-      this.data_details=res['event_list'];
+      this.data_details = res['event_list'];
       this.groupBy(data);
     }).catch(err=>{console.log(err)})
         
@@ -93,6 +94,7 @@ export class CgreportsPage implements OnInit {
         }
       })
       this.report_details=value;
+      this.loader=false;
   }
 
   viewReport(view){

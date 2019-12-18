@@ -106,6 +106,7 @@ export class CgprescriptionsPage implements OnInit {
         }
       })
       this.prescribe_details=value;
+      this.loader=false;
   }
  
  /*addPrescription(){

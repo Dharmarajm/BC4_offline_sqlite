@@ -758,9 +758,13 @@ export class DataBaseSummaryProvider {
             await database.executeSql(sqlHealthQuery, []).then((data1) => {
               for (let i = 0; i < data1.rows.length; i++) {
                 let event_json:any = null;
-                if (data1.rows.item(i).attribute_name_value != '') {
+                if (data1.rows.item(i).attribute_name_value != '' && data1.rows.item(i).attribute_name_value != null) {
+                    console.log(JSON.parse(data1.rows.item(i).attribute_name_value))
                     event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
-                }  
+                }
+
+                console.log(event_json)
+                  
                 healthData.push({ 
                     id: data1.rows.item(i).id, 
                     health_id: data1.rows.item(i).health_id, 

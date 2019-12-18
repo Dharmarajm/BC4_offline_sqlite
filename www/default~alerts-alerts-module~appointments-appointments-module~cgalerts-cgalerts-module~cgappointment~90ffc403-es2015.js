@@ -709,9 +709,11 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                 yield database.executeSql(sqlHealthQuery, []).then((data1) => {
                     for (let i = 0; i < data1.rows.length; i++) {
                         let event_json = null;
-                        if (data1.rows.item(i).attribute_name_value != '') {
+                        if (data1.rows.item(i).attribute_name_value != '' && data1.rows.item(i).attribute_name_value != null) {
+                            console.log(JSON.parse(data1.rows.item(i).attribute_name_value));
                             event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
                         }
+                        console.log(event_json);
                         healthData.push({
                             id: data1.rows.item(i).id,
                             health_id: data1.rows.item(i).health_id,
@@ -790,7 +792,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         });
     }
     getEmergencyDeatails() {
-        let sqlEmergeQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EMERGENCY_DATA"];
+        let sqlEmergeQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EMERGENCY_DATA"] + ` WHERE delete1='false'`;
         let sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (role_id=2 AND delete1='false')`;
         console.log(sqlUsersQuery);
         return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {

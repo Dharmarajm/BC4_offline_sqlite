@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl,FormBuilder,Validators } from '@angular/forms';
 import { careGiverService } from '../../care-giver-service/caregiver-service.service';
 import { ToastController } from '@ionic/angular';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Toast } from '@ionic-native/toast/ngx';
+import { DatabaseProvider } from '../../../sqlite-database/database';
 
 @Component({
   selector: 'app-add-patient',
@@ -13,7 +14,7 @@ import { Toast } from '@ionic-native/toast/ngx';
 export class addPatientPage {
     myForm: FormGroup;
     tabBar: any;
-    constructor(private toast: Toast,public router:Router,public toastController: ToastController,private fb: FormBuilder,public ser_add :careGiverService) { }
+    constructor(private database: DatabaseProvider,private toast: Toast,public router:Router,public toastController: ToastController,private fb: FormBuilder,public ser_add :careGiverService) { }
     ngOnInit() {
         this.myForm=this.fb.group({
           //'nick_name':['',[Validators.required]], 
@@ -37,15 +38,21 @@ export class addPatientPage {
         }
        
         if(this.myForm.valid){
-          this.ser_add.add_care_giver(value).subscribe(res =>{
+          console.log(this.myForm.value)
+          debugger;
+          this.ser_add.add_care_giver(value).subscribe(async res =>{
+            let patientDataFromAdd = res['patient_detail'];
+            await this.database.addPatient(this.myForm.value,patientDataFromAdd);
             console.log(res)
-          this.router.navigate(['/care-giver-tabs/tabsc/tab2c']);
-        },error=>{ 
-          if(error.status == 401)
-            this.presentToast("Please enter valid UID")
-          else if(error.status == 422)
-            this.presentToast("The patient already have two caregivers")
-        })
+            this.router.navigate(['/care-giver-tabs/tabsc/tab2c']);
+          },error=>{
+            if(error.status == 401){
+              this.presentToast("Please enter valid UID")
+            }
+            else if(error.status == 422){
+              this.presentToast("The patient already have two caregivers") 
+            }
+          })
       }
     
       }

@@ -509,7 +509,7 @@ var CgExpenseviewSummaryPage = /** @class */ (function () {
             _this.getChartValue = _this.expen_key.map(function (res) {
                 console.log(res);
                 var chartType = res.toString();
-                var total = _this.view_all_expen.expense[chartType].reduce(function (sum, item) { return sum + item.value; }, 0);
+                var total = _this.view_all_expen.expense[chartType].reduce(function (sum, item) { return sum + Number(item.value); }, 0);
                 return total;
             });
             _this.loader = false;

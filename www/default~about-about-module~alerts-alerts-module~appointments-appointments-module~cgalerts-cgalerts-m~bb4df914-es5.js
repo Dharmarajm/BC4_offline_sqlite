@@ -375,18 +375,28 @@ var DatabaseProvider = /** @class */ (function () {
             });
         });
     };
-    DatabaseProvider.prototype.deleteEmergencyContact = function (id) {
+    DatabaseProvider.prototype.deleteEmergencyContact = function (event) {
         return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
         }).then(function (db) {
             //let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
-            var sql = "UPDATE emergency_details SET delete1 = ? WHERE emergency_id = ?";
-            return db.executeSql(sql, [true, id]).then(function (row) {
-                return { event_id: row.insertId };
-            }).catch(function (res) {
-                return res;
-            });
+            if (event["id"] == null) {
+                var sql = "DELETE FROM emergency_details WHERE emergency_id = ?";
+                return db.executeSql(sql, [event["emergency_id"]]).then(function (row) {
+                    return { event_id: row.insertId };
+                }).catch(function (res) {
+                    return res;
+                });
+            }
+            else {
+                var sql = "UPDATE emergency_details SET delete1 = ? WHERE emergency_id = ?";
+                return db.executeSql(sql, [true, event["emergency_id"]]).then(function (row) {
+                    return { event_id: row.insertId };
+                }).catch(function (res) {
+                    return res;
+                });
+            }
         });
     };
     DatabaseProvider.prototype.deletePatientFromCareGiver = function (id) {

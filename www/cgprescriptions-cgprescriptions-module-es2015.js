@@ -447,6 +447,7 @@ let CgprescriptionsPage = class CgprescriptionsPage {
             }
         });
         this.prescribe_details = value;
+        this.loader = false;
     }
     /*addPrescription(){
      

@@ -392,6 +392,7 @@ let CgreportsPage = class CgreportsPage {
         this.tabBar = document.getElementById('myTabBar1').childNodes[0];
         this.tabBar.classList.remove("tab-selected");
         this.report_page = 1;
+        this.report_page_offset = 0;
         this.databaseSummary.getAllEvents('report', 'New', this.report_page_offset).then(res => {
             let data = res['event_list'];
             this.data_details = res['event_list'];
@@ -433,6 +434,7 @@ let CgreportsPage = class CgreportsPage {
             }
         });
         this.report_details = value;
+        this.loader = false;
     }
     viewReport(view) {
         if (this.report_details.length != 0) {

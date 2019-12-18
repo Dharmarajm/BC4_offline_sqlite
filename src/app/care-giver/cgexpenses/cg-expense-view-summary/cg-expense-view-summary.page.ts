@@ -60,7 +60,7 @@ export class CgExpenseviewSummaryPage {
         this.getChartValue=this.expen_key.map(res=>{
           console.log(res)
           let chartType=res.toString();       
-          const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + item.value, 0);    
+          const total = this.view_all_expen.expense[chartType].reduce((sum, item) => sum + Number(item.value), 0);    
           return total
           });
           this.loader=false;

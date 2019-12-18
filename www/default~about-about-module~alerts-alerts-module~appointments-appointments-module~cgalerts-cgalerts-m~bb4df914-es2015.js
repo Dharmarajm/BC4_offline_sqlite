@@ -299,18 +299,28 @@ let DatabaseProvider = class DatabaseProvider {
             });
         });
     }
-    deleteEmergencyContact(id) {
+    deleteEmergencyContact(event) {
         return this.sqlite.create({
             name: DATA_BASE_NAME,
             location: 'default'
         }).then((db) => {
             //let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
-            let sql = `UPDATE emergency_details SET delete1 = ? WHERE emergency_id = ?`;
-            return db.executeSql(sql, [true, id]).then((row) => {
-                return { event_id: row.insertId };
-            }).catch(res => {
-                return res;
-            });
+            if (event["id"] == null) {
+                let sql = `DELETE FROM emergency_details WHERE emergency_id = ?`;
+                return db.executeSql(sql, [event["emergency_id"]]).then((row) => {
+                    return { event_id: row.insertId };
+                }).catch(res => {
+                    return res;
+                });
+            }
+            else {
+                let sql = `UPDATE emergency_details SET delete1 = ? WHERE emergency_id = ?`;
+                return db.executeSql(sql, [true, event["emergency_id"]]).then((row) => {
+                    return { event_id: row.insertId };
+                }).catch(res => {
+                    return res;
+                });
+            }
         });
     }
     deletePatientFromCareGiver(id) {
