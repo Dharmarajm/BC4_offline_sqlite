@@ -18,6 +18,7 @@ $doc_visit: #5ee4a2;
 $prescription: #978ad2;
 $report: #ea4e4e;
 $expense: #ffd32c;
+$my-grey-blue : #ea4e4e;
 
 %font-color {
   --color: #2c2c2c;
@@ -28,6 +29,7 @@ $expense: #ffd32c;
 %primary-color {
   --color: #483df6;
 }
+
 
 @mixin font($size, $weight, $letter, $transform, $align, $line_height, $fn_color) {
   font: {
@@ -53,6 +55,7 @@ $expense: #ffd32c;
   align-items: $align;
   justify-content: $justify;
 }
+
 
 ion-header {
   ion-toolbar {
@@ -432,6 +435,11 @@ ion-radio {
 }
 
 form {
+  // ion-item{
+  //   ion-label{
+  //     --color: #7b7b7b;
+  //   }
+  // }
   ion-radio-group {
     @include flex(flex, wrap, center, unset);
 
@@ -496,7 +504,13 @@ form {
 
   p {
     @include font(0.85rem, 500, 0, capitalize, center, inherit, #8b9398);
-    width: 250px;
+    width: 300px;
+    span {
+      color: #1c1c1c;
+      background-color: #60dc68;
+      padding: 1px 8px;
+      border-radius: 20px;
+    }
   }
 }
 
@@ -602,6 +616,7 @@ ion-list{
         --border-color: #bcbbcf;
       }
     }
+    color: red;
   }
 }
 form{
@@ -668,6 +683,9 @@ form{
     overflow: hidden;
     white-space: wrap;
     // text-overflow: ellipsis;
+    z-index: 9999;
+    position: absolute;
+    width: 100%;
   }
   .img_container{
     position: absolute;

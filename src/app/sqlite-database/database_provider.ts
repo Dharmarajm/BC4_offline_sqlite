@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SQL_SELECT_ALL_CREDENTIALS, Setting, SQL_SELECT_ALL_EVENTS, events, SQL_SELECT_ALL_ENUMS, enum_masters, SQL_SELECT_ALL_HEALTH_DETAILS, SQL_SELECT_ALL_USERS,SQL_SELECT_ALL_EMERGENCY_DATA  } from './database.interface'
 import { of,from ,zip } from 'rxjs';
+
 import { concatMap, groupBy, map, mergeMap, reduce, toArray } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
 import { DatabaseProvider } from './database';
@@ -36,7 +37,9 @@ export class DataBaseSummaryProvider {
 
     async getAllEvents(event_type,tab,offset): Promise<any> {
         let checkEvent = await this.checkEventType(event_type,tab,offset);
+        console.log(checkEvent);
         let sqlEventQuery = SQL_SELECT_ALL_EVENTS+checkEvent;
+        console.log(sqlEventQuery)
         
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlEventQuery, []).then((data) => {
@@ -68,6 +71,7 @@ export class DataBaseSummaryProvider {
                         updated_at: data.rows.item(i).updated_at
                     });  
                 };
+                console.log(data.rows.length,events)
                 return { count:data.rows.length,event_list:events};
             })
         })
@@ -115,7 +119,7 @@ export class DataBaseSummaryProvider {
     async filterVitalHistory(event_type,event_name,from_date,end_date,vital_page_offset): Promise<any> {
         let checkEvent = await this.checkEventType(event_type,'pagefilter',vital_page_offset,from_date,end_date,null,event_name);
         let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+checkEvent;
-       console.log(sqlSearchEventQuery)
+      
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
                 let events: events[] = [];
@@ -155,10 +159,10 @@ export class DataBaseSummaryProvider {
     async getVitalEvents(id,from_date,end_date,event_type,analytics?,event_name?): Promise<any> {
         let checkEvent = await this.checkEventType(event_type,'filter',0,from_date,end_date,analytics,event_name);
         let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+checkEvent;
-        console.log(sqlSearchEventQuery)
+        
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
-                console.log(data)
+                
                 let events: events[] = [];
                 
                 for (let i = 0; i < data.rows.length; i++) {
@@ -204,7 +208,7 @@ export class DataBaseSummaryProvider {
             groupBy(person =>  person['event_name']),
             mergeMap(group => from(group).pipe(toArray()))
             ).subscribe(val => {
-                console.log(val)
+               
                 if(val){
                  value.push(val[0]['event_name']); 
                 }  
@@ -222,12 +226,12 @@ export class DataBaseSummaryProvider {
         let sqlUserQuery = SQL_SELECT_ALL_USERS+` WHERE id='${user_id}'`
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlUserQuery, []).then(async (data) => {
-                console.log(data.rows.item(0))
+                
                 let getUserData = data.rows.item(0);
                 let joinMonth =  getUserData.created_at || null;
-                console.log(joinMonth)
+                
                 let currentDate = new Date();
-                console.log(currentDate)
+                
                 var y = currentDate.getFullYear();
                 var m = currentDate.getMonth();
                 let lastDate = currentDate;
@@ -239,25 +243,23 @@ export class DataBaseSummaryProvider {
                 var fy = first_day.getFullYear();
                 var fm = first_day.getMonth();
                 let no_of_months = ( y * 12 + m) - ( fy * 12 + fm)
-                console.log(no_of_months)
-                console.log(joinMonth!=null , joinMonth <= setfirst_month , joinMonth,setfirst_month)
 
                 let CurrentMonthStart = currentMonth.toJSON();
-                console.log(CurrentMonthStart)
+                
                 let CurrentMonthEnd = lastDate.toJSON();
-                console.log(CurrentMonthEnd)      
+                 
                 let sqlCurrentMonthExpQuery =  `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${CurrentMonthStart}') AND DATE('${CurrentMonthEnd}')))`
-                console.log(sqlCurrentMonthExpQuery)
+                
                 let getResponseOfMonthExp = await this.expenseCalculateValue(sqlCurrentMonthExpQuery);
-                console.log(getResponseOfMonthExp)
+                
                 let CurrentMonthExpense = getResponseOfMonthExp.rows.item(0)['SUM(value)']
                 
                 let firstDayOfYear = first_day.toJSON();
-                console.log(firstDayOfYear)
+               
                 let lastDayofYear = lastDate.toJSON();
-                console.log(lastDayofYear)
+                
                 let sqlCurrentYearExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${firstDayOfYear}') AND DATE('${lastDayofYear}')))`
-                console.log(sqlCurrentYearExpQuery)
+               
                 let getResponseOfYearExp = await this.expenseCalculateValue(sqlCurrentYearExpQuery);
                 let CurrentYearExpense = getResponseOfYearExp.rows.item(0)['SUM(value)']
                 if(joinMonth!=null && joinMonth <= setfirst_month){
@@ -298,10 +300,10 @@ export class DataBaseSummaryProvider {
       let currentMonth = new Date(y, m, 1);
       let getAllYearData = await this.getAllExpenses(first_day,last_day);
       let yearData = getAllYearData['event_list'];
-      console.log(yearData)  
+      
       let getAllCurrentData = await this.getAllExpenses(currentMonth,last_day);
       let MonthData = getAllCurrentData['event_list'];
-      console.log(MonthData) 
+      
      let array = [];
      let dateobject = {};
      await from(MonthData).pipe(
@@ -327,7 +329,7 @@ export class DataBaseSummaryProvider {
                 const arrayreduce = Array.from(new Set(array[i]['data'].map(s=>s.event_name))).map((name,index)=>{
                     
                     let total = array[i]['data'].reduce((accumulator,data1) => {
-                    console.log(accumulator,data1)
+                    
                     if(data1.event_name == name && accumulator !=undefined && accumulator !=null){
                         return accumulator + Number(data1['value'])
                     }else{
@@ -348,11 +350,9 @@ export class DataBaseSummaryProvider {
                     dateobject[array[i]['event_datetime']].push({data: allArray, event_datetime:array[i]['event_datetime'], value:array[i]['value'] });
                 }
             }
-          
-         console.log(dateobject)
 
     });
-    console.log(dateobject)
+   
     let array1 = [];
     let yearObject = {};
 
@@ -379,7 +379,7 @@ export class DataBaseSummaryProvider {
                    const arrayreduce = Array.from(new Set(array1[i]['data'].map(s=>s.event_name))).map((name,index)=>{
                        
                        let total = array1[i]['data'].reduce((accumulator,data1) => {
-                       console.log(accumulator,data1)
+                      
                        if(data1.event_name == name && accumulator !=undefined && accumulator !=null){
                            return accumulator + Number(data1['value'])
                        }else{
@@ -401,12 +401,9 @@ export class DataBaseSummaryProvider {
                    
                
                }
-   
-            console.log(yearObject)
+
    
        });
-
-       console.log(yearObject)
     //   let value = [];
     //   const example = from(data).pipe(
     //   groupBy(person =>  person['event_name']),
@@ -429,14 +426,14 @@ export class DataBaseSummaryProvider {
         endDay.setDate(endDay.getDate() + 1);
         let EndDayOfCurrent = endDay.toJSON()
         let sqlSearchEventQuery = SQL_SELECT_ALL_EVENTS+` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDay}') AND DATE('${EndDayOfCurrent}'))) ORDER BY event_datetime DESC`
-        console.log(sqlSearchEventQuery)
+       
         return this.databaseService.getDatabase().then(database => {
             return database.executeSql(sqlSearchEventQuery, []).then((data) => {
-                console.log(data)
+               
                 let events: events[] = [];
                 
                 for (let i = 0; i < data.rows.length; i++) {
-                    console.log(data.rows.item(i))
+                   
                     let event_json:any = null;
                     let eventAssetsJson:any = null;
                     if (data.rows.item(i).event_options != null) {
@@ -510,7 +507,7 @@ export class DataBaseSummaryProvider {
             groupBy(person =>  person['event_name']),
             mergeMap(group => from(group).pipe(toArray()))
             ).subscribe(val => {
-                console.log(val)
+                
                 if(val){
                  value.push(val[0]['event_name']); 
                 }  
@@ -532,7 +529,7 @@ export class DataBaseSummaryProvider {
             groupBy(person =>  person['event_name']),
             mergeMap(group => from(group).pipe(toArray()))
             ).subscribe(val => {
-                console.log(val)
+                
                 vital[`${val[0]['event_name']}`]=val;
             })
 
@@ -543,7 +540,7 @@ export class DataBaseSummaryProvider {
     vitalFilterAnalytics(id,paramsOfdata){
         let params = paramsOfdata;
         return this.getVitalEvents(id,params['from_date'],params['end_date'],'vital','analytics',params['event_name']).then(response => {
-            console.log(response)
+            
             let data = response['event_list'];
             
             // let value = {}
@@ -612,23 +609,23 @@ export class DataBaseSummaryProvider {
     }
 
     async checkEventType(event,tab,offset,from_date?,end_date?,analytics?,event_name?) {
-        console.log(from_date,end_date)
+        
         let startDate = null;
         let endDate = null;
         if(from_date!=undefined && end_date!=undefined){
             let string1 = from_date.toString();
-            console.log(string1)
+            
             let string2 = end_date.toString();
-            console.log(string2)
+            
             let Date1 = new Date(string1);
-            console.log(Date1)
+            
             let Date2 = new Date(string2);
             Date2.setDate(Date2.getDate() + 1);
-            console.log(Date2)
+            
             startDate = formatDate(Date1, 'yyyy-MM-dd', 'en-US');
-            console.log(startDate)
+            
             endDate = formatDate(Date2, 'yyyy-MM-dd', 'en-US');
-            console.log(endDate)
+            
         }
     
         let eventQuery:any;
@@ -745,7 +742,7 @@ export class DataBaseSummaryProvider {
         })     
     }
 
-    async getAboutData(): Promise<any> {
+    async getAboutData() {
         let user_id = await this.databaseService.getuserID(); 
         let getQRcode = await this.setQRcode();
         let sqlHealthQuery = SQL_SELECT_ALL_HEALTH_DETAILS+` WHERE name='policy'`;
@@ -754,16 +751,16 @@ export class DataBaseSummaryProvider {
             
             let healthData=[];
             let userData=[];
-
+            
             await database.executeSql(sqlHealthQuery, []).then((data1) => {
               for (let i = 0; i < data1.rows.length; i++) {
+                console.log(data1.rows.item(i))
+                debugger;
                 let event_json:any = null;
                 if (data1.rows.item(i).attribute_name_value != '' && data1.rows.item(i).attribute_name_value != null) {
-                    console.log(JSON.parse(data1.rows.item(i).attribute_name_value))
+                   
                     event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
                 }
-
-                console.log(event_json)
                   
                 healthData.push({ 
                     id: data1.rows.item(i).id, 
@@ -775,14 +772,42 @@ export class DataBaseSummaryProvider {
                     updated_at: data1.rows.item(i).updated_at 
                 })  
               }
-            }).catch(res=>{
-                console.log(res)
+              return healthData;
             })
+
+            // let await1 = new Promise(resolve => {
+            //     database.executeSql(sqlHealthQuery, []).then((data1) => {
+            //         for (let i = 0; i < data1.rows.length; i++) {
+            //             console.log(data1.rows.item(i))
+                
+            //             let event_json:any = null;
+            //             if (data1.rows.item(i).attribute_name_value != '' && data1.rows.item(i).attribute_name_value != null) {
+                            
+            //                 event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
+            //             }
+                            
+            //             healthData.push({ 
+            //                 id: data1.rows.item(i).id, 
+            //                 health_id: data1.rows.item(i).health_id, 
+            //                 name: data1.rows.item(i).name, 
+            //                 attribute_name_value: event_json, 
+            //                 user_id: data1.rows.item(i).user_id, 
+            //                 created_at: data1.rows.item(i).created_at, 
+            //                 updated_at: data1.rows.item(i).updated_at 
+            //             });
+                        
+            //             if((data1.rows.length-1)==i){
+            //                 setTimeout(()=>{
+            //                     resolve('Hello from a Promise!');  
+            //                 },500)
+            //             }
+            //         }
+            //     })
+            // });
            
-            await database.executeSql(sqlUserQuery, []).then((data2) => {
-              console.log(data2.rows)
+            let await2 = await database.executeSql(sqlUserQuery, []).then((data2) => {
+              
               for (let i = 0; i < data2.rows.length; i++) {
-                  console.log(data2.rows.item(i))
                 let attribute_json:any = null;                    
                 if(data2.rows.item(i).user_picture!=null){
                   attribute_json = JSON.parse(data2.rows.item(i).user_picture);    
@@ -808,8 +833,7 @@ export class DataBaseSummaryProvider {
                     delete1: data2.rows.item(i).delete1
                 })  
               }
-            }).catch(res=>{
-                console.log(res)
+              return userData;
             })
 
             return { policies: healthData, user_info: userData[0], qrcode_image: getQRcode };
@@ -849,7 +873,7 @@ export class DataBaseSummaryProvider {
     getEmergencyDeatails(): Promise<any> {
        let sqlEmergeQuery = SQL_SELECT_ALL_EMERGENCY_DATA+` WHERE delete1='false'`;
        let sqlUsersQuery = SQL_SELECT_ALL_USERS+` WHERE (role_id=2 AND delete1='false')`;
-       console.log(sqlUsersQuery)
+       
        return this.databaseService.getDatabase().then(async (database) => {
         let emergencyContacts = []; 
         let careGiverData=[];

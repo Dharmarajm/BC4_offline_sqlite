@@ -24,3 +24,18 @@ ion-app {
     box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.16);
   }
 }
+.modal_sheet{
+&.sc-ion-modal-md-h {
+  --width: 255px;
+  --height: 325px;
+  --border-radius: 5px;
+  ion-backdrop {
+    opacity: 0.32;
+        background: #000;
+    }
+}
+.ion-item{
+  padding-left: 16px;
+}
+
+}

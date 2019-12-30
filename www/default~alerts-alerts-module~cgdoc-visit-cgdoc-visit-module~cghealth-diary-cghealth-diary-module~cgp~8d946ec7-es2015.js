@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~8d946ec7"],{
 
 /***/ "./node_modules/@ionic-native/file/ngx/index.js":
 /*!******************************************************!*\
@@ -10,7 +10,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "File", function() { return File; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_native_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic-native/core */ "./node_modules/@ionic-native/core/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -735,4 +735,4 @@ var File = /** @class */ (function (_super) {
 /***/ })
 
 }]);
-//# sourceMappingURL=default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~32109e05-es5.js.map
+//# sourceMappingURL=default~alerts-alerts-module~cgdoc-visit-cgdoc-visit-module~cghealth-diary-cghealth-diary-module~cgp~8d946ec7-es2015.js.map

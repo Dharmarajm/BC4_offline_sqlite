@@ -26,9 +26,13 @@ export class Tab1cPage {
     this.environment = environment.ImageUrl;
   }
   
-   ionViewWillEnter(){
+  ionViewWillEnter(){
     this.loader=true;
-    this.database.Oninit();
+    this.inIt();
+  } 
+
+  async inIt(){
+    await this.database.Oninit();
 
     let patient_id=localStorage.getItem("user_id");
   	// this.service.setting().subscribe(res => {
@@ -118,5 +122,5 @@ export class Tab1cPage {
     })
 
     //this.statusBar.backgroundColorByHexString('#483df6');
-  } 
+  }
 }

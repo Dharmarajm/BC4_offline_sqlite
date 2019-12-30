@@ -138,9 +138,7 @@ let DatabaseProvider = class DatabaseProvider {
                 let event_category = getData['event_category'];
                 let sqlSearchEventQuery = `SELECT * FROM events WHERE (event_type='${event_type}' AND event_name='${event_name}' AND event_category='${event_category}' AND DATE(event_datetime)=DATE('${event_datetime}') AND delete1='false')`;
                 return db.executeSql(sqlSearchEventQuery, []).then((data) => {
-                    console.log(data);
                     for (let i = 0; i < data.rows.length; i++) {
-                        console.log(data.rows.item(i));
                     }
                     if (data.rows.length > 0) {
                         let passData = data.rows.item(0);
@@ -148,11 +146,9 @@ let DatabaseProvider = class DatabaseProvider {
                         return this.updateAnEvent(passData['event_id'], getData);
                     }
                     else {
-                        console.log(getData);
                         return this.createAnEvent(getData);
                     }
                 }).catch(res => {
-                    console.log(res);
                 });
             });
         });
@@ -166,7 +162,6 @@ let DatabaseProvider = class DatabaseProvider {
             }).then((db) => {
                 let sql = `UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?`;
                 let updateEventData = [data["id"], data["event_name"], data["description"], data["value"], data["event_datetime"], data["event_type"], data["event_category"], JSON.stringify(data["event_assets"]), JSON.stringify(data["event_options"]), user_id, data["created_at"], new Date().toJSON(), false, id];
-                console.log(data);
                 return db.executeSql(sql, updateEventData).then((row) => {
                     return { event_id: row.insertId };
                 }).catch(res => {
@@ -216,12 +211,10 @@ let DatabaseProvider = class DatabaseProvider {
     }
     updateUserAndPolicyData(data) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            console.log(data);
             let user_id = yield this.getuserID();
             let user_data = data['user'];
             let policy_data = data['policy'];
             policy_data["name"] = "policy";
-            console.log(policy_data);
             return this.sqlite.create({
                 name: DATA_BASE_NAME,
                 location: 'default'
@@ -230,21 +223,16 @@ let DatabaseProvider = class DatabaseProvider {
                 let updateUserData = [user_data['age'], user_data['blood_group'], new Date().toJSON(), user_id, 1];
                 yield db.executeSql(sql, updateUserData);
                 yield db.executeSql(`SELECT * FROM health_details WHERE name='${policy_data['name']}'`, []).then((data) => {
-                    console.log(data);
                     if (data.rows.length > 0) {
                         let id = data.rows.item(0).health_id;
-                        console.log(policy_data, id);
                         return this.updateHealthData(policy_data, id);
                     }
                     else {
-                        console.log(policy_data);
                         return this.updateHealthData(policy_data);
                     }
                 }, error => {
-                    console.log(error);
                 });
             }), error => {
-                console.log(error);
             });
         });
     }
@@ -279,6 +267,51 @@ let DatabaseProvider = class DatabaseProvider {
                 }).catch(res => {
                     return res;
                 });
+            });
+        });
+    }
+    addPatient(value, patientAddData) {
+        let data = value['user_uid'];
+        return this.sqlite.create({
+            name: DATA_BASE_NAME,
+            location: 'default'
+        }).then((db) => {
+            let sql = `SELECT * FROM users WHERE user_uid='${data}'`;
+            return db.executeSql(sql, []).then((data) => {
+                let length = data.rows.length;
+                if (length == 0) {
+                    let attribute_json = JSON.stringify(patientAddData["user_picture"]);
+                    let user_option_json = JSON.parse(patientAddData['user_option']);
+                    let data3 = [
+                        patientAddData["id"],
+                        patientAddData["name"],
+                        patientAddData["email"],
+                        patientAddData["password"],
+                        patientAddData["mobile_no"],
+                        patientAddData["address"],
+                        patientAddData["country"],
+                        patientAddData["blood_group"],
+                        patientAddData["age"],
+                        patientAddData["user_uid"],
+                        patientAddData["forgot_password_code"],
+                        attribute_json,
+                        user_option_json,
+                        patientAddData["active_status"],
+                        patientAddData["role_id"],
+                        patientAddData["created_at"],
+                        patientAddData["updated_at"],
+                        false
+                    ];
+                    let sqlData3 = `INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+                    return db.executeSql(sqlData3, data3).then(row => {
+                        return { id: row.insertId };
+                    }, error => {
+                        return error;
+                    });
+                }
+                else {
+                    return;
+                }
             });
         });
     }
@@ -362,7 +395,6 @@ let DatabaseProvider = class DatabaseProvider {
                 return db.executeSql(`SELECT * FROM health_details WHERE name='${data['name']}'`, []).then((getData) => {
                     let sqlQuery;
                     let healthData;
-                    console.log(data);
                     if (getData.rows.length > 0) {
                         sqlQuery = `UPDATE health_details SET id = ?, name = ?, attribute_name_value = ?, user_id = ?, created_at = ?, updated_at = ? WHERE health_id = ?`;
                         healthData = [data["id"], data["name"], JSON.stringify(data["attribute_name_value"]), user_id, data["created_at"], new Date().toJSON(), id];
@@ -371,17 +403,12 @@ let DatabaseProvider = class DatabaseProvider {
                         sqlQuery = `INSERT INTO health_details VALUES (NULL,NULL,?,?,?,?,?)`;
                         healthData = [data["name"], JSON.stringify(data["attribute_name_value"]), user_id, new Date().toJSON(), new Date().toJSON()];
                     }
-                    console.log(sqlQuery);
-                    console.log(healthData);
                     return db.executeSql(sqlQuery, healthData).then((row) => {
-                        console.log(row);
                         return { event_id: row.insertId };
                     }).catch(res => {
-                        console.log(res);
                         return res;
                     });
                 }).catch(res => {
-                    console.log(res);
                     return res;
                 });
             });

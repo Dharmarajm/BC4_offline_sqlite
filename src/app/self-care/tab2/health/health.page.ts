@@ -37,13 +37,13 @@ export class HealthPage implements OnInit {
       console.log(JSON.parse(params['data']))
       this.allHealthData=JSON.parse(params['special']);
       this.getAllIds = JSON.parse(params['data']);
-      this.medicationChiptest = this.allHealthData['current_medication'] || [];
-      this.alergyChiptest = this.allHealthData['allergy'] || [];
-      if(this.allHealthData['current_medication']==undefined){
-         this.medicationChiptest=[];
-      }else if(this.allHealthData['current_medication']==undefined){
-         this.alergyChiptest=[];   
-      }
+      // this.medicationChiptest = this.allHealthData['current_medication'] || [];
+      // this.alergyChiptest = this.allHealthData['allergy'] || [];
+      // if(this.allHealthData['current_medication']==undefined){
+      //    this.medicationChiptest=[];
+      // }else if(this.allHealthData['current_medication']==undefined){
+      //    this.alergyChiptest=[];   
+      // }
     })
   }
 
@@ -75,8 +75,8 @@ export class HealthPage implements OnInit {
        diabetes_through = 'Insulin';
     }
      
-    this.health=this.fb.group({
-      "allergies": [''],
+    this.health = this.fb.group({
+      "allergies": [this.allHealthData['allergy']],
       "heart_conditions":[heart_condition],
       "pacemaker" : [pacemaker ],
       "diabetes": [diabetes],
@@ -84,7 +84,7 @@ export class HealthPage implements OnInit {
       "bloodpressure":[this.allHealthData['blood_pressure'] || 'Normal'],
       "implant":[this.allHealthData['implants'] || '', [Validators.maxLength(20)]],
       "cancer":[this.allHealthData['cancer'] || 'No'],
-      "curent_medication":[''],
+      "curent_medication":[this.allHealthData['current_medication']],
       "recent_surgeries": [this.allHealthData['recent_surgeries'] || '']
     });
     
@@ -130,13 +130,13 @@ export class HealthPage implements OnInit {
       let data={
          "id": id,  
          "attribute_name_value":{
-                    "allergy":this.alergyChiptest,
+                    "allergy":val["allergies"],
                     "heart_condition":heart_conditions,
                     "diabetes":diabetes,
                     "blood_pressure":val["bloodpressure"],
                     "implants":val["implant"],
                     "cancer":val["cancer"],
-                    "current_medication":this.medicationChiptest,
+                    "current_medication":val["curent_medication"],
                     "recent_surgeries":val["recent_surgeries"]   
          },
          "name":"health",

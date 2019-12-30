@@ -7,6 +7,8 @@ import { AlertController,ToastController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonSlides } from '@ionic/angular';
 import { Toast } from '@ionic-native/toast/ngx';
+import { FileTransfer,FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 import { DatabaseProvider } from '../../sqlite-database/database';
 import { DataBaseSummaryProvider } from '../../sqlite-database/database_provider';
 
@@ -41,7 +43,7 @@ export class Tab2Page {
   careGiver_contact: any[]=[];
   constructor(private toast: Toast,private statusBar: StatusBar,public toastController: ToastController,public alertController: AlertController, 
     public modalController: ModalController,private router: Router, public route:ActivatedRoute, 
-    public settingService: settingsService,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider) {
+    public settingService: settingsService,private database: DatabaseProvider,private databaseSummary: DataBaseSummaryProvider,private file: File,private transfer: FileTransfer) {
     
   }
 
@@ -364,5 +366,19 @@ async RemoveCaregiver(id){
   // async slideChanged() {
   //   this.selectedSegment = await this.slider.getActiveIndex();
   // }
+  
+  imagedownload(path){
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    //const url = path;
+    fileTransfer.download(path, this.file.externalRootDirectory + 
+      '/Download/' + "QR-Code.png").then((entry) => {
+        this.presentToast('Download Successfully');
+      console.log('download complete: ' + entry.toURL());  // I always enter here.
+    }, (error) => {
+      // handle error
+      console.log("error!"); 
+    });
+  }
 
 }

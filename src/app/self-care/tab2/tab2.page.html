@@ -39,6 +39,9 @@
       <ion-thumbnail>
         <img [src]= "details?.qrcode_image">
       </ion-thumbnail>
+      <ion-button color="primary" (click)="imagedownload(details?.qrcode_image)">
+        <svg width="9.356" height="11.805" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><path d="M382.56,233.376C379.968,227.648,374.272,224,368,224h-64V16c0-8.832-7.168-16-16-16h-64c-8.832,0-16,7.168-16,16v208h-64c-6.272,0-11.968,3.68-14.56,9.376c-2.624,5.728-1.6,12.416,2.528,17.152l112,128c3.04,3.488,7.424,5.472,12.032,5.472c4.608,0,8.992-2.016,12.032-5.472l112-128C384.192,245.824,385.152,239.104,382.56,233.376z"/><path d="M432,352v96H80v-96H16v128c0,17.696,14.336,32,32,32h416c17.696,0,32-14.304,32-32V352H432z"/></svg>
+      download</ion-button>
       <h1>{{details?.user_info.name}}</h1>
       <ion-button color="warning" (click)="previewData()">
         <svg xmlns="http://www.w3.org/2000/svg" width="9.356" height="11.805" viewBox="0 0 9.356 11.805"><g transform="translate(-6.25 0.25)"><path d="M21.4,22H16.688a.188.188,0,1,0,0,.377H21.4a.188.188,0,0,0,0-.377Z" transform="translate(-8.116 -17.855)" fill="#2c2c2c" stroke="#2c2c2c" stroke-width="0.5"/><path d="M16.688,14.377h1.884a.188.188,0,0,0,0-.377H16.688a.188.188,0,1,0,0,.377Z" transform="translate(-8.116 -11.362)" fill="#2c2c2c" stroke="#2c2c2c" stroke-width="0.5"/><path d="M21.4,30H16.688a.188.188,0,1,0,0,.377H21.4a.188.188,0,0,0,0-.377Z" transform="translate(-8.116 -24.347)" fill="#2c2c2c" stroke="#2c2c2c" stroke-width="0.5"/><path d="M21.4,38H16.688a.188.188,0,1,0,0,.377H21.4a.188.188,0,0,0,0-.377Z" transform="translate(-8.116 -30.84)" fill="#2c2c2c" stroke="#2c2c2c" stroke-width="0.5"/><path d="M21.4,46H16.688a.188.188,0,1,0,0,.377H21.4a.188.188,0,0,0,0-.377Z" transform="translate(-8.116 -37.333)" fill="#2c2c2c" stroke="#2c2c2c" stroke-width="0.5"/><path d="M12.607,0H6.5V11.305h8.856V2.748Zm.11.643,1.995,1.995H12.718ZM6.877,10.928V.377h5.464V3.015h2.638v7.914Z" fill="#2c2c2c" stroke="#2c2c2c" stroke-width="0.5"/></g></svg>
@@ -146,7 +149,7 @@
              <h3>{{i?.contact_name}}</h3>
              <p>{{i?.emergency_no}}</p>
           </ion-label>
-          <ion-button class="trans_btn" (click)="deleteItem(i.emergency_id)">
+          <ion-button class="trans_btn" (click)="deleteItem(i)">
             <svg xmlns="http://www.w3.org/2000/svg" width="10.873" height="13.398" viewBox="0 0 10.873 13.398"><g transform="translate(0.1 0.1)"><g transform="translate(0)"><path d="M55.32,1.581H53.266a1.786,1.786,0,0,0-3.548,0H47.663a1.51,1.51,0,0,0-1.508,1.508v.077a1.509,1.509,0,0,0,.953,1.4V11.69A1.51,1.51,0,0,0,48.616,13.2h5.752a1.51,1.51,0,0,0,1.508-1.508V4.567a1.509,1.509,0,0,0,.953-1.4V3.089A1.51,1.51,0,0,0,55.32,1.581ZM51.491.715a1.073,1.073,0,0,1,1.052.866h-2.1A1.073,1.073,0,0,1,51.491.715ZM55.16,11.69a.794.794,0,0,1-.793.793H48.616a.794.794,0,0,1-.793-.793V4.674H55.16Zm.953-8.524a.794.794,0,0,1-.793.793H47.663a.794.794,0,0,1-.793-.793V3.089a.794.794,0,0,1,.793-.793H55.32a.794.794,0,0,1,.793.793v.077Z" transform="translate(-46.155)" fill="#fa5457" stroke="#fa5457" stroke-width="0.2"/><path d="M158.433,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,158.433,254.312Z" transform="translate(-155.013 -242.743)" fill="#fa5457" stroke="#fa5457" stroke-width="0.2"/><path d="M228.5,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,228.5,254.312Z" transform="translate(-223.166 -242.743)" fill="#fa5457" stroke="#fa5457" stroke-width="0.2"/><path d="M298.572,254.312a.358.358,0,0,0,.358-.358v-4.026a.358.358,0,1,0-.715,0v4.026A.358.358,0,0,0,298.572,254.312Z" transform="translate(-291.318 -242.743)" fill="#fa5457" stroke="#fa5457" stroke-width="0.2"/></g></g></svg>
             Delete
           </ion-button>
@@ -165,16 +168,16 @@
         Update
       </ion-button>
     </ion-toolbar>
-    <ion-item-group class="ion-padding-bottom ion-padding-start ion-padding-end alergies">
+    <ion-item-group class="ion-padding-bottom ion-padding-start ion-padding-end medication">
       <ion-item-divider>
         <ion-label>Alergies</ion-label>
       </ion-item-divider>
-      <ion-chip *ngFor="let alergy of alergiesList; let i=index">
-        <ion-label>{{alergy}}</ion-label>
+      <ion-chip>    
+        <ion-label class="ion-no-margin" text-wrap>{{ healthDetailList?.allergy || 'No Alergies' }}</ion-label >
       </ion-chip>
-      <ion-chip *ngIf="alergiesList?.length==0">
-        <ion-label>No Alergies</ion-label>
-      </ion-chip>
+      <!-- <ion-chip *ngIf="healthDetailList?.allergy==''">
+        <ion-label>No Alergies Reported</ion-label>
+      </ion-chip> -->
     </ion-item-group>
 
     <ion-item-group class="ion-padding-bottom ion-padding-start ion-padding-end pre_conditon">
@@ -183,7 +186,7 @@
       </ion-item-divider>
       <ion-item>
         <ion-label>Heart Conditions</ion-label>
-        <ion-label><span>{{ healthDetailList?.heart_condition || 'No' }}</span></ion-label>
+        <ion-label><span>{{ healthDetailList?.heart_condition || 'None' }}</span></ion-label>
       </ion-item>
       <ion-item>
         <ion-label>Diabetes</ion-label>
@@ -195,7 +198,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Implants</ion-label>
-        <ion-label><span>{{ healthDetailList?.implants || '-' }}</span></ion-label>
+        <ion-label><span>{{ healthDetailList?.implants || 'None' }}</span></ion-label>
       </ion-item>
       <ion-item>
         <ion-label>Cancer</ion-label>
@@ -207,20 +210,22 @@
       <ion-item-divider>
         <ion-label>Current Medications</ion-label>
       </ion-item-divider>
-      <ion-chip *ngFor="let medication of currentMedicationList; let i=index">
-        <ion-label>{{medication}}</ion-label>
+      <ion-chip>       
+        <ion-label class="ion-no-margin" text-wrap>{{ healthDetailList?.current_medication || 'No Current Medications' }}</ion-label>
       </ion-chip>
-      <ion-chip *ngIf="currentMedicationList?.length==0">
-        <ion-label>No current Medications</ion-label>
-      </ion-chip>
+      <!-- <ion-chip *ngIf="healthDetailList?.current_medication==''">
+        <ion-label>No Current Medications</ion-label>
+      </ion-chip>       -->
     </ion-item-group>
 
-    <ion-item-group class="ion-padding-bottom ion-padding-start ion-padding-end recent">
+    <ion-item-group class="ion-padding-bottom ion-padding-start ion-padding-end medication">
       <ion-item-divider>
         <ion-label>Recent Surgeries</ion-label>
       </ion-item-divider>
       <ion-item>
-        <ion-label class="ion-no-margin" text-wrap>{{healthDetailList?.recent_surgeries || 'No'}}</ion-label>
+        <ion-chip >
+        <ion-label class="ion-no-margin" text-wrap>{{ healthDetailList?.recent_surgeries || 'None' }}</ion-label>
+        </ion-chip>
       </ion-item>
     </ion-item-group>
   </ng-container>

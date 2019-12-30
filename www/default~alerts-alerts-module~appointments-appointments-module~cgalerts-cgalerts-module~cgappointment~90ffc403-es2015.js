@@ -57,7 +57,9 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     getAllEvents(event_type, tab, offset) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let checkEvent = yield this.checkEventType(event_type, tab, offset);
+            console.log(checkEvent);
             let sqlEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
+            console.log(sqlEventQuery);
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlEventQuery, []).then((data) => {
                     let events = [];
@@ -88,6 +90,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                         });
                     }
                     ;
+                    console.log(data.rows.length, events);
                     return { count: data.rows.length, event_list: events };
                 });
             });
@@ -136,7 +139,6 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let checkEvent = yield this.checkEventType(event_type, 'pagefilter', vital_page_offset, from_date, end_date, null, event_name);
             let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
-            console.log(sqlSearchEventQuery);
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {
                     let events = [];
@@ -176,10 +178,8 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let checkEvent = yield this.checkEventType(event_type, 'filter', 0, from_date, end_date, analytics, event_name);
             let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
-            console.log(sqlSearchEventQuery);
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {
-                    console.log(data);
                     let events = [];
                     for (let i = 0; i < data.rows.length; i++) {
                         let event_json = null;
@@ -218,7 +218,6 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             let data = response['event_list'];
             let value = [];
             const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => person['event_name']), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))).subscribe(val => {
-                console.log(val);
                 if (val) {
                     value.push(val[0]['event_name']);
                 }
@@ -232,12 +231,9 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             let sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE id='${user_id}'`;
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlUserQuery, []).then((data) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-                    console.log(data.rows.item(0));
                     let getUserData = data.rows.item(0);
                     let joinMonth = getUserData.created_at || null;
-                    console.log(joinMonth);
                     let currentDate = new Date();
-                    console.log(currentDate);
                     var y = currentDate.getFullYear();
                     var m = currentDate.getMonth();
                     let lastDate = currentDate;
@@ -249,23 +245,14 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     var fy = first_day.getFullYear();
                     var fm = first_day.getMonth();
                     let no_of_months = (y * 12 + m) - (fy * 12 + fm);
-                    console.log(no_of_months);
-                    console.log(joinMonth != null, joinMonth <= setfirst_month, joinMonth, setfirst_month);
                     let CurrentMonthStart = currentMonth.toJSON();
-                    console.log(CurrentMonthStart);
                     let CurrentMonthEnd = lastDate.toJSON();
-                    console.log(CurrentMonthEnd);
                     let sqlCurrentMonthExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${CurrentMonthStart}') AND DATE('${CurrentMonthEnd}')))`;
-                    console.log(sqlCurrentMonthExpQuery);
                     let getResponseOfMonthExp = yield this.expenseCalculateValue(sqlCurrentMonthExpQuery);
-                    console.log(getResponseOfMonthExp);
                     let CurrentMonthExpense = getResponseOfMonthExp.rows.item(0)['SUM(value)'];
                     let firstDayOfYear = first_day.toJSON();
-                    console.log(firstDayOfYear);
                     let lastDayofYear = lastDate.toJSON();
-                    console.log(lastDayofYear);
                     let sqlCurrentYearExpQuery = `SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${firstDayOfYear}') AND DATE('${lastDayofYear}')))`;
-                    console.log(sqlCurrentYearExpQuery);
                     let getResponseOfYearExp = yield this.expenseCalculateValue(sqlCurrentYearExpQuery);
                     let CurrentYearExpense = getResponseOfYearExp.rows.item(0)['SUM(value)'];
                     if (joinMonth != null && joinMonth <= setfirst_month) {
@@ -301,10 +288,8 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             let currentMonth = new Date(y, m, 1);
             let getAllYearData = yield this.getAllExpenses(first_day, last_day);
             let yearData = getAllYearData['event_list'];
-            console.log(yearData);
             let getAllCurrentData = yield this.getAllExpenses(currentMonth, last_day);
             let MonthData = getAllCurrentData['event_list'];
-            console.log(MonthData);
             let array = [];
             let dateobject = {};
             yield Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(MonthData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(person['event_datetime'], 'yyyy-MM-dd', 'en-US')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["zip"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(group.key), group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(val => {
@@ -319,7 +304,6 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     let allArray = [];
                     const arrayreduce = Array.from(new Set(array[i]['data'].map(s => s.event_name))).map((name, index) => {
                         let total = array[i]['data'].reduce((accumulator, data1) => {
-                            console.log(accumulator, data1);
                             if (data1.event_name == name && accumulator != undefined && accumulator != null) {
                                 return accumulator + Number(data1['value']);
                             }
@@ -337,9 +321,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                         dateobject[array[i]['event_datetime']].push({ data: allArray, event_datetime: array[i]['event_datetime'], value: array[i]['value'] });
                     }
                 }
-                console.log(dateobject);
             });
-            console.log(dateobject);
             let array1 = [];
             let yearObject = {};
             yield Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(yearData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(person['event_datetime'], 'MMMM', 'en-US')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["zip"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(group.key), group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(val => {
@@ -354,7 +336,6 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                     let allArray = [];
                     const arrayreduce = Array.from(new Set(array1[i]['data'].map(s => s.event_name))).map((name, index) => {
                         let total = array1[i]['data'].reduce((accumulator, data1) => {
-                            console.log(accumulator, data1);
                             if (data1.event_name == name && accumulator != undefined && accumulator != null) {
                                 return accumulator + Number(data1['value']);
                             }
@@ -372,9 +353,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                         yearObject[array1[i]['event_datetime']].push({ data: allArray, event_datetime: array1[i]['event_datetime'], value: array1[i]['value'] });
                     }
                 }
-                console.log(yearObject);
             });
-            console.log(yearObject);
             //   let value = [];
             //   const example = from(data).pipe(
             //   groupBy(person =>  person['event_name']),
@@ -398,13 +377,10 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             endDay.setDate(endDay.getDate() + 1);
             let EndDayOfCurrent = endDay.toJSON();
             let sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + ` WHERE (event_type='expense' AND delete1='false' AND user_id='${user_id}' AND (event_datetime BETWEEN DATE('${startDay}') AND DATE('${EndDayOfCurrent}'))) ORDER BY event_datetime DESC`;
-            console.log(sqlSearchEventQuery);
             return this.databaseService.getDatabase().then(database => {
                 return database.executeSql(sqlSearchEventQuery, []).then((data) => {
-                    console.log(data);
                     let events = [];
                     for (let i = 0; i < data.rows.length; i++) {
-                        console.log(data.rows.item(i));
                         let event_json = null;
                         let eventAssetsJson = null;
                         if (data.rows.item(i).event_options != null) {
@@ -473,7 +449,6 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             let data = response['event_list'];
             let value = [];
             const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => person['event_name']), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))).subscribe(val => {
-                console.log(val);
                 if (val) {
                     value.push(val[0]['event_name']);
                 }
@@ -489,7 +464,6 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
             let value = [];
             let vital = {};
             const example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(person => person['event_name']), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(group => Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()))).subscribe(val => {
-                console.log(val);
                 vital[`${val[0]['event_name']}`] = val;
             });
             return { from_date: fromDate, end_date: end_date, expense: vital };
@@ -498,7 +472,6 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     vitalFilterAnalytics(id, paramsOfdata) {
         let params = paramsOfdata;
         return this.getVitalEvents(id, params['from_date'], params['end_date'], 'vital', 'analytics', params['event_name']).then(response => {
-            console.log(response);
             let data = response['event_list'];
             // let value = {}
             // const example = from(data).pipe(
@@ -560,23 +533,16 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     }
     checkEventType(event, tab, offset, from_date, end_date, analytics, event_name) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            console.log(from_date, end_date);
             let startDate = null;
             let endDate = null;
             if (from_date != undefined && end_date != undefined) {
                 let string1 = from_date.toString();
-                console.log(string1);
                 let string2 = end_date.toString();
-                console.log(string2);
                 let Date1 = new Date(string1);
-                console.log(Date1);
                 let Date2 = new Date(string2);
                 Date2.setDate(Date2.getDate() + 1);
-                console.log(Date2);
                 startDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(Date1, 'yyyy-MM-dd', 'en-US');
-                console.log(startDate);
                 endDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(Date2, 'yyyy-MM-dd', 'en-US');
-                console.log(endDate);
             }
             let eventQuery;
             let event_nameArray = null;
@@ -708,12 +674,12 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                 let userData = [];
                 yield database.executeSql(sqlHealthQuery, []).then((data1) => {
                     for (let i = 0; i < data1.rows.length; i++) {
+                        console.log(data1.rows.item(i));
+                        debugger;
                         let event_json = null;
                         if (data1.rows.item(i).attribute_name_value != '' && data1.rows.item(i).attribute_name_value != null) {
-                            console.log(JSON.parse(data1.rows.item(i).attribute_name_value));
                             event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
                         }
-                        console.log(event_json);
                         healthData.push({
                             id: data1.rows.item(i).id,
                             health_id: data1.rows.item(i).health_id,
@@ -724,13 +690,35 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                             updated_at: data1.rows.item(i).updated_at
                         });
                     }
-                }).catch(res => {
-                    console.log(res);
+                    return healthData;
                 });
-                yield database.executeSql(sqlUserQuery, []).then((data2) => {
-                    console.log(data2.rows);
+                // let await1 = new Promise(resolve => {
+                //     database.executeSql(sqlHealthQuery, []).then((data1) => {
+                //         for (let i = 0; i < data1.rows.length; i++) {
+                //             console.log(data1.rows.item(i))
+                //             let event_json:any = null;
+                //             if (data1.rows.item(i).attribute_name_value != '' && data1.rows.item(i).attribute_name_value != null) {
+                //                 event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
+                //             }
+                //             healthData.push({ 
+                //                 id: data1.rows.item(i).id, 
+                //                 health_id: data1.rows.item(i).health_id, 
+                //                 name: data1.rows.item(i).name, 
+                //                 attribute_name_value: event_json, 
+                //                 user_id: data1.rows.item(i).user_id, 
+                //                 created_at: data1.rows.item(i).created_at, 
+                //                 updated_at: data1.rows.item(i).updated_at 
+                //             });
+                //             if((data1.rows.length-1)==i){
+                //                 setTimeout(()=>{
+                //                     resolve('Hello from a Promise!');  
+                //                 },500)
+                //             }
+                //         }
+                //     })
+                // });
+                let await2 = yield database.executeSql(sqlUserQuery, []).then((data2) => {
                     for (let i = 0; i < data2.rows.length; i++) {
-                        console.log(data2.rows.item(i));
                         let attribute_json = null;
                         if (data2.rows.item(i).user_picture != null) {
                             attribute_json = JSON.parse(data2.rows.item(i).user_picture);
@@ -755,8 +743,7 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
                             delete1: data2.rows.item(i).delete1
                         });
                     }
-                }).catch(res => {
-                    console.log(res);
+                    return userData;
                 });
                 return { policies: healthData, user_info: userData[0], qrcode_image: getQRcode };
             }));
@@ -794,7 +781,6 @@ let DataBaseSummaryProvider = class DataBaseSummaryProvider {
     getEmergencyDeatails() {
         let sqlEmergeQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EMERGENCY_DATA"] + ` WHERE delete1='false'`;
         let sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + ` WHERE (role_id=2 AND delete1='false')`;
-        console.log(sqlUsersQuery);
         return this.databaseService.getDatabase().then((database) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let emergencyContacts = [];
             let careGiverData = [];

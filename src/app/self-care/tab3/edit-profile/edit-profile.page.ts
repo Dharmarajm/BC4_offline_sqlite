@@ -45,6 +45,7 @@ export class EditProfilePage implements OnInit {
   audioFileName:any;
   cdvFilePath1:any;
   isNetwork:any;
+  environment:any;
 
   constructor(private toast: Toast,public actionSheetController: ActionSheetController,private fb: FormBuilder,public sanitizer: DomSanitizer, public route:ActivatedRoute, private file: File, private transfer: FileTransfer, private camera: Camera, private imagePicker: ImagePicker, private webview: WebView, private crop: Crop, public serv:settingsService,public navParams: NavParams,public modalController: ModalController,public toastController: ToastController,private networkProvider: NetworkService,public database:DatabaseProvider) { 
 
@@ -64,7 +65,7 @@ export class EditProfilePage implements OnInit {
   //       }
   //     }
   //   });
-
+   this.environment = environment.ImageUrl;
    this.editprofile=this.navParams.get('pics');
    let globalURL:any=null;
    let localURL:any=null;
@@ -74,7 +75,8 @@ export class EditProfilePage implements OnInit {
     if(gurl==true){
       globalURL = this.webview.convertFileSrc(source);
     }else{
-      globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(source);  
+      let byPassURL = this.environment+source;
+      globalURL = this.sanitizer.bypassSecurityTrustResourceUrl(byPassURL);  
     }
     //this.cdvFilePath1= this.sanitizer.bypassSecurityTrustResourceUrl(source);
    }
@@ -90,7 +92,7 @@ export class EditProfilePage implements OnInit {
 
    if(this.networkProvider.isNetworkOnline){
     this.isNetwork = true;
-    this.cdvFilePath1 = globalURL!=null ? globalURL : localURL 
+    this.cdvFilePath1 = globalURL!=null ? globalURL : localURL;
    }else{
     this.isNetwork = false;
     this.cdvFilePath1 = localURL; 
@@ -167,10 +169,10 @@ export class EditProfilePage implements OnInit {
          this.crop.crop(this.img, { quality: 100 })
           .then(newImage => {
             console.log(newImage)
-          this.cdvFilePath1 = this.webview.convertFileSrc(newImage);
+            this.cdvFilePath1 = this.webview.convertFileSrc(newImage);
 
-          //this.reduceImages(results).then(() => {});
-          this.file.resolveLocalFilesystemUrl(newImage).then((fileEntry: FileEntry) => {
+            //this.reduceImages(results).then(() => {});
+            this.file.resolveLocalFilesystemUrl(newImage).then((fileEntry: FileEntry) => {
             return new Promise((resolve, reject) => {
               fileEntry.file(meta => resolve(meta), error => reject(error));
             });

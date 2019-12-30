@@ -60,10 +60,12 @@ export class AppointmentsPage implements OnInit {
       this.TodayDate= this.datepipe.transform(todayDate,"dd MMM yyyy")
       let tommorrowDate=todayDate.setDate(todayDate.getDate() + 1);
       this.TommorrowDate=this.datepipe.transform(tommorrowDate,"dd MMM yyyy");
-      if(this.selectedSegment=='future')
+      if(this.selectedSegment=='future'){
         this.upcoming();
-      else if(this.selectedSegment =='completed')
+      }else if(this.selectedSegment =='completed'){
         this.Completed();
+      }
+        
     }
     
     upcoming(){
@@ -76,6 +78,7 @@ export class AppointmentsPage implements OnInit {
       this.per_page_offset=0;
       console.log("upcoming")
       this.databaseSummary.getAllEvents('appointment','New',this.per_page_offset).then(res=>{
+        console.log(res)
         this.show_details = res['event_list'];
         console.log(this.show_details)
         this.groupBy(this.show_details);
@@ -93,6 +96,7 @@ export class AppointmentsPage implements OnInit {
       this.completepage_offset=0;
       console.log("Completed")
       this.databaseSummary.getAllEvents('appointment','history',this.completepage_offset).then(res=>{
+        console.log(res)
         this.history_details = res['event_list'];
         console.log(this.history_details)
         this.groupBy1(this.history_details);

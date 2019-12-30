@@ -62,7 +62,9 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.checkEventType(event_type, tab, offset)];
                     case 1:
                         checkEvent = _a.sent();
+                        console.log(checkEvent);
                         sqlEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
+                        console.log(sqlEventQuery);
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
                                 return database.executeSql(sqlEventQuery, []).then(function (data) {
                                     var events = [];
@@ -93,6 +95,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                         });
                                     }
                                     ;
+                                    console.log(data.rows.length, events);
                                     return { count: data.rows.length, event_list: events };
                                 });
                             })];
@@ -155,7 +158,6 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                     case 1:
                         checkEvent = _a.sent();
                         sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
-                        console.log(sqlSearchEventQuery);
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
                                 return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
                                     var events = [];
@@ -202,10 +204,8 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                     case 1:
                         checkEvent = _a.sent();
                         sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + checkEvent;
-                        console.log(sqlSearchEventQuery);
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
                                 return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
-                                    console.log(data);
                                     var events = [];
                                     for (var i = 0; i < data.rows.length; i++) {
                                         var event_json = null;
@@ -246,7 +246,6 @@ var DataBaseSummaryProvider = /** @class */ (function () {
             var data = response['event_list'];
             var value = [];
             var example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (person) { return person['event_name']; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); })).subscribe(function (val) {
-                console.log(val);
                 if (val) {
                     value.push(val[0]['event_name']);
                 }
@@ -270,12 +269,9 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                     return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                         switch (_a.label) {
                                             case 0:
-                                                console.log(data.rows.item(0));
                                                 getUserData = data.rows.item(0);
                                                 joinMonth = getUserData.created_at || null;
-                                                console.log(joinMonth);
                                                 currentDate = new Date();
-                                                console.log(currentDate);
                                                 y = currentDate.getFullYear();
                                                 m = currentDate.getMonth();
                                                 lastDate = currentDate;
@@ -287,25 +283,16 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                                 fy = first_day.getFullYear();
                                                 fm = first_day.getMonth();
                                                 no_of_months = (y * 12 + m) - (fy * 12 + fm);
-                                                console.log(no_of_months);
-                                                console.log(joinMonth != null, joinMonth <= setfirst_month, joinMonth, setfirst_month);
                                                 CurrentMonthStart = currentMonth.toJSON();
-                                                console.log(CurrentMonthStart);
                                                 CurrentMonthEnd = lastDate.toJSON();
-                                                console.log(CurrentMonthEnd);
                                                 sqlCurrentMonthExpQuery = "SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + CurrentMonthStart + "') AND DATE('" + CurrentMonthEnd + "')))";
-                                                console.log(sqlCurrentMonthExpQuery);
                                                 return [4 /*yield*/, this.expenseCalculateValue(sqlCurrentMonthExpQuery)];
                                             case 1:
                                                 getResponseOfMonthExp = _a.sent();
-                                                console.log(getResponseOfMonthExp);
                                                 CurrentMonthExpense = getResponseOfMonthExp.rows.item(0)['SUM(value)'];
                                                 firstDayOfYear = first_day.toJSON();
-                                                console.log(firstDayOfYear);
                                                 lastDayofYear = lastDate.toJSON();
-                                                console.log(lastDayofYear);
                                                 sqlCurrentYearExpQuery = "SELECT SUM(value) FROM events WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + firstDayOfYear + "') AND DATE('" + lastDayofYear + "')))";
-                                                console.log(sqlCurrentYearExpQuery);
                                                 return [4 /*yield*/, this.expenseCalculateValue(sqlCurrentYearExpQuery)];
                                             case 2:
                                                 getResponseOfYearExp = _a.sent();
@@ -356,12 +343,10 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                     case 1:
                         getAllYearData = _a.sent();
                         yearData = getAllYearData['event_list'];
-                        console.log(yearData);
                         return [4 /*yield*/, this.getAllExpenses(currentMonth, last_day)];
                     case 2:
                         getAllCurrentData = _a.sent();
                         MonthData = getAllCurrentData['event_list'];
-                        console.log(MonthData);
                         array = [];
                         dateobject = {};
                         return [4 /*yield*/, Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(MonthData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (person) { return Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(person['event_datetime'], 'yyyy-MM-dd', 'en-US'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["zip"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(group.key), group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])())); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (val) {
@@ -376,7 +361,6 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                     var allArray = [];
                                     var arrayreduce = Array.from(new Set(array[i]['data'].map(function (s) { return s.event_name; }))).map(function (name, index) {
                                         var total = array[i]['data'].reduce(function (accumulator, data1) {
-                                            console.log(accumulator, data1);
                                             if (data1.event_name == name && accumulator != undefined && accumulator != null) {
                                                 return accumulator + Number(data1['value']);
                                             }
@@ -397,11 +381,9 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                 for (var i in array) {
                                     _loop_1();
                                 }
-                                console.log(dateobject);
                             })];
                     case 3:
                         _a.sent();
-                        console.log(dateobject);
                         array1 = [];
                         yearObject = {};
                         return [4 /*yield*/, Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(yearData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (person) { return Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(person['event_datetime'], 'MMMM', 'en-US'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["zip"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(group.key), group.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])())); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (val) {
@@ -416,7 +398,6 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                     var allArray = [];
                                     var arrayreduce = Array.from(new Set(array1[i]['data'].map(function (s) { return s.event_name; }))).map(function (name, index) {
                                         var total = array1[i]['data'].reduce(function (accumulator, data1) {
-                                            console.log(accumulator, data1);
                                             if (data1.event_name == name && accumulator != undefined && accumulator != null) {
                                                 return accumulator + Number(data1['value']);
                                             }
@@ -437,11 +418,9 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                 for (var i in array1) {
                                     _loop_2();
                                 }
-                                console.log(yearObject);
                             })];
                     case 4:
                         _a.sent();
-                        console.log(yearObject);
                         return [4 /*yield*/, yearData.reduce(function (accum, hash) {
                                 return accum + Number(hash['value']);
                             }, 0)];
@@ -467,13 +446,10 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                         endDay.setDate(endDay.getDate() + 1);
                         EndDayOfCurrent = endDay.toJSON();
                         sqlSearchEventQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EVENTS"] + (" WHERE (event_type='expense' AND delete1='false' AND user_id='" + user_id + "' AND (event_datetime BETWEEN DATE('" + startDay + "') AND DATE('" + EndDayOfCurrent + "'))) ORDER BY event_datetime DESC");
-                        console.log(sqlSearchEventQuery);
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) {
                                 return database.executeSql(sqlSearchEventQuery, []).then(function (data) {
-                                    console.log(data);
                                     var events = [];
                                     for (var i = 0; i < data.rows.length; i++) {
-                                        console.log(data.rows.item(i));
                                         var event_json = null;
                                         var eventAssetsJson = null;
                                         if (data.rows.item(i).event_options != null) {
@@ -547,7 +523,6 @@ var DataBaseSummaryProvider = /** @class */ (function () {
             var data = response['event_list'];
             var value = [];
             var example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (person) { return person['event_name']; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); })).subscribe(function (val) {
-                console.log(val);
                 if (val) {
                     value.push(val[0]['event_name']);
                 }
@@ -563,7 +538,6 @@ var DataBaseSummaryProvider = /** @class */ (function () {
             var value = [];
             var vital = {};
             var example = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["groupBy"])(function (person) { return person['event_name']; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["mergeMap"])(function (group) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(group).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["toArray"])()); })).subscribe(function (val) {
-                console.log(val);
                 vital["" + val[0]['event_name']] = val;
             });
             return { from_date: fromDate, end_date: end_date, expense: vital };
@@ -572,7 +546,6 @@ var DataBaseSummaryProvider = /** @class */ (function () {
     DataBaseSummaryProvider.prototype.vitalFilterAnalytics = function (id, paramsOfdata) {
         var params = paramsOfdata;
         return this.getVitalEvents(id, params['from_date'], params['end_date'], 'vital', 'analytics', params['event_name']).then(function (response) {
-            console.log(response);
             var data = response['event_list'];
             // let value = {}
             // const example = from(data).pipe(
@@ -638,23 +611,16 @@ var DataBaseSummaryProvider = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log(from_date, end_date);
                         startDate = null;
                         endDate = null;
                         if (from_date != undefined && end_date != undefined) {
                             string1 = from_date.toString();
-                            console.log(string1);
                             string2 = end_date.toString();
-                            console.log(string2);
                             Date1 = new Date(string1);
-                            console.log(Date1);
                             Date2 = new Date(string2);
                             Date2.setDate(Date2.getDate() + 1);
-                            console.log(Date2);
                             startDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(Date1, 'yyyy-MM-dd', 'en-US');
-                            console.log(startDate);
                             endDate = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(Date2, 'yyyy-MM-dd', 'en-US');
-                            console.log(endDate);
                         }
                         event_nameArray = null;
                         if (event_name != null && event_name.length > 0 && typeof (event_name) == "object") {
@@ -807,7 +773,7 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                         sqlHealthQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_HEALTH_DETAILS"] + " WHERE name='policy'";
                         sqlUserQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + (" WHERE (id='" + user_id + "' AND role_id=1)");
                         return [2 /*return*/, this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
-                                var healthData, userData;
+                                var healthData, userData, await2;
                                 return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                                     switch (_a.label) {
                                         case 0:
@@ -815,12 +781,12 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                             userData = [];
                                             return [4 /*yield*/, database.executeSql(sqlHealthQuery, []).then(function (data1) {
                                                     for (var i = 0; i < data1.rows.length; i++) {
+                                                        console.log(data1.rows.item(i));
+                                                        debugger;
                                                         var event_json = null;
                                                         if (data1.rows.item(i).attribute_name_value != '' && data1.rows.item(i).attribute_name_value != null) {
-                                                            console.log(JSON.parse(data1.rows.item(i).attribute_name_value));
                                                             event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
                                                         }
-                                                        console.log(event_json);
                                                         healthData.push({
                                                             id: data1.rows.item(i).id,
                                                             health_id: data1.rows.item(i).health_id,
@@ -831,15 +797,38 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                                             updated_at: data1.rows.item(i).updated_at
                                                         });
                                                     }
-                                                }).catch(function (res) {
-                                                    console.log(res);
-                                                })];
+                                                    return healthData;
+                                                })
+                                                // let await1 = new Promise(resolve => {
+                                                //     database.executeSql(sqlHealthQuery, []).then((data1) => {
+                                                //         for (let i = 0; i < data1.rows.length; i++) {
+                                                //             console.log(data1.rows.item(i))
+                                                //             let event_json:any = null;
+                                                //             if (data1.rows.item(i).attribute_name_value != '' && data1.rows.item(i).attribute_name_value != null) {
+                                                //                 event_json = JSON.parse(data1.rows.item(i).attribute_name_value);
+                                                //             }
+                                                //             healthData.push({ 
+                                                //                 id: data1.rows.item(i).id, 
+                                                //                 health_id: data1.rows.item(i).health_id, 
+                                                //                 name: data1.rows.item(i).name, 
+                                                //                 attribute_name_value: event_json, 
+                                                //                 user_id: data1.rows.item(i).user_id, 
+                                                //                 created_at: data1.rows.item(i).created_at, 
+                                                //                 updated_at: data1.rows.item(i).updated_at 
+                                                //             });
+                                                //             if((data1.rows.length-1)==i){
+                                                //                 setTimeout(()=>{
+                                                //                     resolve('Hello from a Promise!');  
+                                                //                 },500)
+                                                //             }
+                                                //         }
+                                                //     })
+                                                // });
+                                            ];
                                         case 1:
                                             _a.sent();
                                             return [4 /*yield*/, database.executeSql(sqlUserQuery, []).then(function (data2) {
-                                                    console.log(data2.rows);
                                                     for (var i = 0; i < data2.rows.length; i++) {
-                                                        console.log(data2.rows.item(i));
                                                         var attribute_json = null;
                                                         if (data2.rows.item(i).user_picture != null) {
                                                             attribute_json = JSON.parse(data2.rows.item(i).user_picture);
@@ -864,11 +853,10 @@ var DataBaseSummaryProvider = /** @class */ (function () {
                                                             delete1: data2.rows.item(i).delete1
                                                         });
                                                     }
-                                                }).catch(function (res) {
-                                                    console.log(res);
+                                                    return userData;
                                                 })];
                                         case 2:
-                                            _a.sent();
+                                            await2 = _a.sent();
                                             return [2 /*return*/, { policies: healthData, user_info: userData[0], qrcode_image: getQRcode }];
                                     }
                                 });
@@ -912,7 +900,6 @@ var DataBaseSummaryProvider = /** @class */ (function () {
         var _this = this;
         var sqlEmergeQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_EMERGENCY_DATA"] + " WHERE delete1='false'";
         var sqlUsersQuery = _database_interface__WEBPACK_IMPORTED_MODULE_3__["SQL_SELECT_ALL_USERS"] + " WHERE (role_id=2 AND delete1='false')";
-        console.log(sqlUsersQuery);
         return this.databaseService.getDatabase().then(function (database) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
             var emergencyContacts, careGiverData;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {

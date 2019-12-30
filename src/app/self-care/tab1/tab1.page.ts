@@ -36,7 +36,11 @@ export class Tab1Page {
   }
     ionViewWillEnter(){
       this.loader=true;
-      this.database.Oninit();
+      this.inIt(); 
+    }
+    
+    async inIt(){
+      await this.database.Oninit();
     	// this.service.setting().subscribe(res => {
       //   this.pic = res;
       //   if(this.pic.profile_pic != null){
@@ -116,7 +120,7 @@ export class Tab1Page {
       })
       
       this.statusBar.backgroundColorByHexString('#483df6');
-    }  
+    }
   // test(){
   //  this.router.navigate(['/self-care-tabs/tabs/tab1/health-diary']);
   // }

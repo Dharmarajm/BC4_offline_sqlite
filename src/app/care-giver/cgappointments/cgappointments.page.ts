@@ -67,14 +67,6 @@ export class CgappointmentsPage implements OnInit {
     //   this.history_details = res['event_list'];
     //   this.groupBy1(this.history_details);
     // })
-
-    if(this.selectedSegment=='future'){
-      this.cgUpcoming();
-    }else{
-      this.cgCompleted();
-    }
-        
-
     let todayDate:any=new Date();
     this.TodayDate= this.datepipe.transform(todayDate,"dd MMM yyyy")
     let tommorrowDate=todayDate.setDate(todayDate.getDate() + 1);
@@ -89,6 +81,12 @@ export class CgappointmentsPage implements OnInit {
       this.profile_pic=null;  
     }
     this.user_name=this.profile_details.name;
+    }
+
+    if(this.selectedSegment=='future'){
+      this.cgUpcoming();
+    }else{
+      this.cgCompleted();
     }
   }
 

@@ -133,9 +133,9 @@ export class DatabaseProvider {
             let event_category = getData['event_category']
             let sqlSearchEventQuery = `SELECT * FROM events WHERE (event_type='${event_type}' AND event_name='${event_name}' AND event_category='${event_category}' AND DATE(event_datetime)=DATE('${event_datetime}') AND delete1='false')`;
             return db.executeSql(sqlSearchEventQuery, []).then((data) => {
-                console.log(data)
+               
                 for (let i = 0; i < data.rows.length; i++) {
-                    console.log(data.rows.item(i));
+                    
                 }
                 if(data.rows.length>0){
                     let passData = data.rows.item(0); 
@@ -143,11 +143,11 @@ export class DatabaseProvider {
                     
                     return this.updateAnEvent(passData['event_id'],getData);
                 }else{
-                    console.log(getData)
+                    
                     return this.createAnEvent(getData);
                 }
             }).catch(res=>{
-                console.log(res)
+                
             })
         })
     }
@@ -160,7 +160,7 @@ export class DatabaseProvider {
         }).then((db: SQLiteObject) => {
             let sql = `UPDATE events SET id = ?, event_name = ?, description = ?, value = ?, event_datetime = ?, event_type = ?, event_category = ?, event_assets = ?, event_options = ?, user_id = ?, created_at = ?, updated_at = ?, delete1 = ? WHERE event_id = ?`;
             let updateEventData = [data["id"],data["event_name"],data["description"],data["value"],data["event_datetime"],data["event_type"],data["event_category"],JSON.stringify(data["event_assets"]),JSON.stringify(data["event_options"]),user_id,data["created_at"],new Date().toJSON(),false,id]
-            console.log(data)
+            
             return db.executeSql(sql,updateEventData).then((row: any)=>{
                 return { event_id:row.insertId }
             }).catch(res=>{
@@ -210,12 +210,12 @@ export class DatabaseProvider {
     }
 
     async updateUserAndPolicyData(data){
-      console.log(data)
+     
       let user_id = await this.getuserID();
       let user_data = data['user'];
       let policy_data = data['policy'];
       policy_data["name"]="policy";
-      console.log(policy_data)
+      
       return this.sqlite.create({
         name: DATA_BASE_NAME,
         location: 'default'
@@ -225,20 +225,20 @@ export class DatabaseProvider {
          let updateUserData = [user_data['age'],user_data['blood_group'],new Date().toJSON(),user_id,1];
          await db.executeSql(sql,updateUserData);
          await db.executeSql(`SELECT * FROM health_details WHERE name='${policy_data['name']}'`,[]).then((data)=>{
-           console.log(data)
+           
             if(data.rows.length>0){
              let id = data.rows.item(0).health_id;
-             console.log(policy_data,id)
+             
              return this.updateHealthData(policy_data,id);
            }else{
-            console.log(policy_data)
+            
              return this.updateHealthData(policy_data);
            } 
          },error=>{
-             console.log(error)
+             
          })
       },error=>{
-          console.log(error)
+          
       })     
     }
 
@@ -402,7 +402,7 @@ export class DatabaseProvider {
             return db.executeSql(`SELECT * FROM health_details WHERE name='${data['name']}'`,[]).then((getData)=>{
               let sqlQuery:any;
               let healthData:any;
-              console.log(data)
+              
               if(getData.rows.length>0){
                 sqlQuery = `UPDATE health_details SET id = ?, name = ?, attribute_name_value = ?, user_id = ?, created_at = ?, updated_at = ? WHERE health_id = ?`;
                 healthData = [data["id"],data["name"],JSON.stringify(data["attribute_name_value"]),user_id,data["created_at"],new Date().toJSON(),id]    
@@ -410,17 +410,17 @@ export class DatabaseProvider {
                 sqlQuery = `INSERT INTO health_details VALUES (NULL,NULL,?,?,?,?,?)`;
                 healthData = [data["name"],JSON.stringify(data["attribute_name_value"]),user_id,new Date().toJSON(),new Date().toJSON()];
               }
-              console.log(sqlQuery);
-              console.log(healthData)
+             
+            
               return db.executeSql(sqlQuery,healthData).then((row: any)=>{
-                console.log(row)   
+              
                 return { event_id:row.insertId }
               }).catch(res=>{
-                    console.log(res)  
+                   
                     return res;
               })
             }).catch(res=>{
-                console.log(res);
+                
                 return res;
             })
         })
